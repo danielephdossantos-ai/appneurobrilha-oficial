@@ -15,7 +15,7 @@ export const aula01: AulaGeoV1 = {
   titulo: "Centro Biomédico",
   iconeTrilha: "🫀",
   recompensa: { xp: 160, moedas: 65, medalha: "Biomédico Júnior" },
-  bncc: ["EF09CI13", "EF09CI14"],
+  bncc: [],
   duracaoMin: 45,
 
   cena01_motivacao: {
@@ -38,6 +38,7 @@ export const aula01: AulaGeoV1 = {
       { id: "treino", titulo: "Treina o sistema imune", subtitulo: "com pedaço/versão fraca do micróbio", emoji: "🛡️", cor: "from-emerald-500 to-teal-700" },
       { id: "mata", titulo: "Mata os micróbios direto", subtitulo: "como antibiótico", emoji: "💊", cor: "from-slate-500 to-slate-700" },
       { id: "energia", titulo: "Dá mais energia ao corpo", subtitulo: "como vitamina", emoji: "⚡", cor: "from-red-500 to-rose-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "treino",
     feedbackAcerto:
@@ -85,6 +86,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🦠", titulo: "Antígeno (parte ou versão fraca do micróbio)", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "💊", titulo: "Antibiótico puro", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "⚡", titulo: "Só vitaminas", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. O antígeno treina o sistema imune sem causar a doença.",
         feedbackErro: "Vacina contém ANTÍGENO (não antibiótico nem vitamina)." },
@@ -93,6 +95,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🩸", titulo: "Diabetes", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🦠", titulo: "Gripe", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🦟", titulo: "Dengue", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Sim. Diabetes é crônica: dura anos, é controlável, não infecciosa.",
         feedbackErro: "Gripe e dengue são INFECCIOSAS. Diabetes é CRÔNICA." },
@@ -101,6 +104,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "💉", titulo: "Insulina feita por bactérias modificadas", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🔩", titulo: "Um parafuso de metal", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "📱", titulo: "Uma tela de celular", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. Bactérias com gene humano produzem insulina desde 1982.",
         feedbackErro: "Biotecnologia usa SERES VIVOS. Insulina de bactéria é o exemplo clássico." },
@@ -191,6 +195,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Treina o sistema imune com antígenos, sem infecção real", correta: true },
           { id: "b", texto: "Mata todos os micróbios do corpo instantaneamente" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. Antígeno → linfócitos → anticorpos → memória.",
         feedbackErro: "Vacina TREINA (não mata micróbios como antibiótico)." },
@@ -198,6 +204,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Diabetes, hipertensão, asma", correta: true },
           { id: "b", texto: "Gripe, dengue, catapora" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. Crônicas duram anos e não são contagiosas.",
         feedbackErro: "Gripe/dengue/catapora são INFECCIOSAS. As crônicas são diabetes, hipertensão, asma." },
@@ -205,6 +213,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Insulina humana produzida por bactérias modificadas", correta: true },
           { id: "b", texto: "Uma prótese de metal fabricada em torno mecânico" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Perfeito. Biotecnologia usa SERES VIVOS.",
         feedbackErro: "Prótese de metal é engenharia. Insulina de bactéria é BIOTECNOLOGIA." },

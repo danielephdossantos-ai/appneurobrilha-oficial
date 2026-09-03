@@ -5,7 +5,7 @@ export const aula03_areaCirculo: AulaV4 = {
   slug: "u6-03-area-circulo",
   titulo: "A Superfície Redonda",
   iconeTrilha: "🥧",
-  bncc: ["EF07MA33", "EF07MA30"],
+  bncc: ["EF07MA33"],
   duracaoMin: 30,
   metodologias: ["skemp"],
 

@@ -12,7 +12,7 @@ export const aula01: AulaGeoV1 = {
   titulo: "Árvore da Vida",
   iconeTrilha: "🌳",
   recompensa: { xp: 130, moedas: 50, medalha: "Taxonomista Júnior" },
-  bncc: ["EF07CI08"],
+  bncc: [],
   duracaoMin: 40,
 
   cena01_motivacao: {
@@ -37,6 +37,7 @@ export const aula01: AulaGeoV1 = {
       { id: "bacteria", titulo: "Bactéria", subtitulo: "menor e mais simples", emoji: "🦠", cor: "from-rose-500 to-red-700", fotoUrl: microorgImg },
       { id: "cogumelo", titulo: "Cogumelo (fungo)", subtitulo: "fixo no solo, sem locomoção", emoji: "🍄", cor: "from-emerald-500 to-teal-700", fotoUrl: especiesImg },
       { id: "cachorro", titulo: "Cachorro", subtitulo: "ambos são multicelulares", emoji: "🐕", cor: "from-slate-500 to-slate-700", fotoUrl: especiesImg },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "cogumelo",
     feedbackAcerto:
@@ -88,6 +89,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🦠", titulo: "Bactérias", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🍄", titulo: "Fungos", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🌿", titulo: "Plantas", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Sim. Só bactérias e arqueias são procariontes. Fungos, plantas e animais têm núcleo.",
         feedbackErro: "Fungos e plantas são EUCARIONTES (têm núcleo). Só bactérias/arqueias são procariontes." },
@@ -96,6 +98,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🌿", titulo: "Plantas", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🍄", titulo: "Fungos", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🐆", titulo: "Animais", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. Plantas têm clorofila. Fungos decompõem, animais comem outros seres.",
         feedbackErro: "Fungos decompõem matéria morta. Animais são heterotróficos. Só PLANTAS (e algas) fazem fotossíntese." },
@@ -104,6 +107,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🧬", titulo: "DNA e ancestralidade evolutiva", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "👁️", titulo: "Aparência externa dos animais", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "📏", titulo: "Tamanho do organismo", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Sim. DNA revela parentesco real — o que aparência não mostra.",
         feedbackErro: "Aparência engana (baleia parece peixe, mas é mamífero). Ciência moderna usa DNA." },
@@ -208,6 +212,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Bactérias (são procariontes)", correta: true },
           { id: "b", texto: "Plantas (são eucariontes complexas)" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. Só bactérias e arqueias são procariontes — sem núcleo.",
         feedbackErro: "Plantas TÊM núcleo. Só bactérias/arqueias são procariontes." },
@@ -215,6 +221,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Animais (ancestral comum mais recente)", correta: true },
           { id: "b", texto: "Plantas (porque ambos são fixos no solo)" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. DNA mostra: fungos e animais compartilham ancestral mais recente que fungos e plantas.",
         feedbackErro: "Aparência engana. DNA revela: FUNGOS estão mais próximos de ANIMAIS que de plantas." },
@@ -222,6 +230,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Bactérias (~3,8 bilhões de anos atrás)", correta: true },
           { id: "b", texto: "Plantas (surgiram junto com os animais)" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Exato. Bactérias foram os únicos seres vivos por 2 bilhões de anos.",
         feedbackErro: "Plantas surgiram MUITO depois (~500 milhões). Bactérias vieram primeiro (~3,8 bilhões)." },

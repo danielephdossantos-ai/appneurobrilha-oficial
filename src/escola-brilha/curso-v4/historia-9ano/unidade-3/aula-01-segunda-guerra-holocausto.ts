@@ -8,7 +8,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-segunda-guerra-holocausto",
   titulo: "Segunda Guerra Mundial e Holocausto",
   iconeTrilha: "🕯️",
-  bncc: ["EF09HI07", "EF09HI08", "EF09HI09"],
+  bncc: ["EF09HI13"],
   duracaoMin: 30,
   estilo: "teen",
 
@@ -32,6 +32,8 @@ export const aula01: AulaGeoV1 = {
     opcoes: [
       { id: "hol", titulo: "HOLOCAUSTO E BOMBA ATÔMICA", subtitulo: "extermínio industrial + arma nuclear", emoji: "🕯️", cor: "from-slate-800 to-slate-950" },
       { id: "trin", titulo: "GUERRA DE TRINCHEIRAS", subtitulo: "estilo 1ª Guerra", emoji: "❌", cor: "from-amber-900 to-slate-950" },
+          { id: "extra2", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "extra3", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "hol",
     feedbackAcerto:
@@ -72,9 +74,9 @@ export const aula01: AulaGeoV1 = {
     aurora: "Três perguntas rápidas.",
     instrucao: "Toque no card correto",
     perguntas: [
-      { id: "q1", pergunta: "Em que ano a Alemanha invadiu a Polônia (início da guerra)?", fotoUrl: imgHolo, cards: [{ id: "1939", emoji: "⚔️", titulo: "1939", cor: "from-teal-600 to-slate-900" }, { id: "1929", emoji: "📉", titulo: "1929", cor: "from-amber-600 to-slate-900" }, { id: "1945", emoji: "🕊️", titulo: "1945", cor: "from-slate-600 to-slate-900" }], correta: "1939", feedbackAcerto: "Correto. 1º de setembro de 1939.", feedbackErro: "É 1939. 1929 = Crise; 1945 = FIM da guerra." },
-      { id: "q2", pergunta: "Onde foi lançada a primeira BOMBA ATÔMICA da história?", fotoUrl: imgNormandia, cards: [{ id: "hir", emoji: "☢️", titulo: "Hiroshima (Japão)", cor: "from-teal-600 to-slate-900" }, { id: "ber", emoji: "🇩🇪", titulo: "Berlim (Alemanha)", cor: "from-amber-600 to-slate-900" }, { id: "lon", emoji: "🇬🇧", titulo: "Londres", cor: "from-slate-600 to-slate-900" }], correta: "hir", feedbackAcerto: "Correto. Hiroshima, 6 de agosto de 1945.", feedbackErro: "É Hiroshima (Japão), depois Nagasaki." },
-      { id: "q3", pergunta: "O Brasil lutou na 2ª Guerra ao lado de quem?", fotoUrl: imgHiroshima, cards: [{ id: "al", emoji: "🇺🇸", titulo: "Aliados (EUA, UK, URSS)", cor: "from-teal-600 to-slate-900" }, { id: "ei", emoji: "🇩🇪", titulo: "Eixo (Alemanha, Itália, Japão)", cor: "from-amber-600 to-slate-900" }, { id: "ne", emoji: "🕊️", titulo: "Ficou neutro", cor: "from-slate-600 to-slate-900" }], correta: "al", feedbackAcerto: "Correto. FEB lutou na Itália em 1944–45.", feedbackErro: "É pelos Aliados. Brasil declarou guerra ao Eixo em 1942." },
+      { id: "q1", pergunta: "Em que ano a Alemanha invadiu a Polônia (início da guerra)?", fotoUrl: imgHolo, cards: [{ id: "1939", emoji: "⚔️", titulo: "1939", cor: "from-teal-600 to-slate-900" }, { id: "1929", emoji: "📉", titulo: "1929", cor: "from-amber-600 to-slate-900" }, { id: "1945", emoji: "🕊️", titulo: "1945", cor: "from-slate-600 to-slate-900" }, { id: "extra", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" }], correta: "1939", feedbackAcerto: "Correto. 1º de setembro de 1939.", feedbackErro: "É 1939. 1929 = Crise; 1945 = FIM da guerra." },
+      { id: "q2", pergunta: "Onde foi lançada a primeira BOMBA ATÔMICA da história?", fotoUrl: imgNormandia, cards: [{ id: "hir", emoji: "☢️", titulo: "Hiroshima (Japão)", cor: "from-teal-600 to-slate-900" }, { id: "ber", emoji: "🇩🇪", titulo: "Berlim (Alemanha)", cor: "from-amber-600 to-slate-900" }, { id: "lon", emoji: "🇬🇧", titulo: "Londres", cor: "from-slate-600 to-slate-900" }, { id: "extra", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" }], correta: "hir", feedbackAcerto: "Correto. Hiroshima, 6 de agosto de 1945.", feedbackErro: "É Hiroshima (Japão), depois Nagasaki." },
+      { id: "q3", pergunta: "O Brasil lutou na 2ª Guerra ao lado de quem?", fotoUrl: imgHiroshima, cards: [{ id: "al", emoji: "🇺🇸", titulo: "Aliados (EUA, UK, URSS)", cor: "from-teal-600 to-slate-900" }, { id: "ei", emoji: "🇩🇪", titulo: "Eixo (Alemanha, Itália, Japão)", cor: "from-amber-600 to-slate-900" }, { id: "ne", emoji: "🕊️", titulo: "Ficou neutro", cor: "from-slate-600 to-slate-900" }, { id: "extra", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" }], correta: "al", feedbackAcerto: "Correto. FEB lutou na Itália em 1944–45.", feedbackErro: "É pelos Aliados. Brasil declarou guerra ao Eixo em 1942." },
     ],
     falaFinal: "Você já mapeia a guerra global.",
   },

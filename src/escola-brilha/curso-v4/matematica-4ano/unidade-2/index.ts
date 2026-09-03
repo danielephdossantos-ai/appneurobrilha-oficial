@@ -6,6 +6,7 @@ import { aula04_subtrairSemTrocar } from "./aula-04-subtrair-sem-trocar";
 import { aula05_subtrairComTrocar } from "./aula-05-subtrair-com-trocar";
 import { aula06_problemasMaisMenos } from "./aula-06-problemas-mais-menos";
 import { aula07_missaoFinalU2 } from "./aula-07-missao-final";
+import { aula08_equilibrioIgualdade } from "./aula-08-equilibrio-igualdade";
 
 /**
  * Unidade 2 — "Somar e Subtrair até 10.000"
@@ -28,6 +29,7 @@ export const unidade2: Unidade = {
     aula04_subtrairSemTrocar,
     aula05_subtrairComTrocar,
     aula06_problemasMaisMenos,
+    aula08_equilibrioIgualdade,
     aula07_missaoFinalU2,
   ],
 };

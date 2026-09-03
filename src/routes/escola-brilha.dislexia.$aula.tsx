@@ -42,7 +42,8 @@ function AulaDlxRoute() {
       onSair={() => navigate({ to: "/escola-brilha/dislexia" })}
       onConcluir={() => {
         try {
-          const key = "eb.dislexia.concluidas";
+          const childId = localStorage.getItem("neurobrilha:activeChildId") || "sem-crianca";
+          const key = `eb.dislexia.concluidas.${childId}`;
           const raw = localStorage.getItem(key);
           const list: string[] = raw ? JSON.parse(raw) : [];
           if (!list.includes(aulaSlug)) list.push(aulaSlug);

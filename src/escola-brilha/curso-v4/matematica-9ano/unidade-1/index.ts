@@ -4,6 +4,7 @@ import { aula02_radiciacao } from "./aula-02-radiciacao";
 import { aula03_operacoesRadicais } from "./aula-03-operacoes-radicais";
 import { aula04_racionalizacao } from "./aula-04-racionalizacao";
 import { aula05_potenciasNotacao } from "./aula-05-potencias-notacao";
+import { aulaPorcentagens, aulaUnidadesDigitais } from "../aulas-bncc-complementares";
 
 export const unidade1: Unidade = {
   slug: "unidade-1-numeros-reais",
@@ -19,5 +20,7 @@ export const unidade1: Unidade = {
     aula03_operacoesRadicais,
     aula04_racionalizacao,
     aula05_potenciasNotacao,
+    aulaPorcentagens,
+    aulaUnidadesDigitais,
   ],
 };

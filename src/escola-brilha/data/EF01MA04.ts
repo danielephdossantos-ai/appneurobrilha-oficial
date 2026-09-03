@@ -12,8 +12,8 @@ import { url as bananaImg } from "@/assets/neuro-treino/objetos/banana.png.asset
 /**
  * EF01MA04 — Aula 004 · Biblioteca Pedagógica Escola Brilha
  * Ensino Fundamental I · 1º Ano · Matemática
- * BNCC: Contar a quantidade de objetos de coleções de até 100 unidades,
- * utilizando diferentes estratégias.
+ * BNCC: Contar a quantidade de objetos de coleções de até 100 unidades
+ * e apresentar o resultado por registros verbais e simbólicos.
  *
  * Missão do Dia: "O Mercado da Dona Coruja".
  * Segue o gabarito TRAVADO da EF01MA02.
@@ -40,20 +40,72 @@ const aula: Aula = {
   ],
 
   missao:
-    "Aprender a contar coleções maiores usando estratégias: organizar em filas, colunas ou grupos, apontar enquanto conta e conferir novamente.",
+    "Aprender a contar coleções maiores, organizar em filas, colunas ou grupos e registrar o total com um número.",
 
   objetivos: [
-    "Contar coleções de até 20 objetos sem repetir nenhum.",
+    "Contar coleções de até 100 objetos, começando por quantidades menores e avançando com agrupamentos.",
     "Organizar objetos em filas, colunas ou grupos antes de contar.",
     "Evitar contar o mesmo objeto duas vezes.",
     "Usar estimativa e depois confirmar contando.",
+    "Relacionar a quantidade contada ao algarismo que registra o total.",
   ],
 
   motivacao:
-    "Contar muitas coisas de uma vez é como arrumar o quarto: se você organiza primeiro, encontra tudo mais rápido!",
+    "Contar muitas coisas é como organizar materiais: filas e grupos ajudam a saber o que já foi contado e a registrar o total correto.",
 
   explicacao:
-    "Quando temos poucos objetos, contamos um por um. Mas quando são muitos, fica mais fácil se ORGANIZARMOS antes:\n\n🔵 em FILAS (um do lado do outro)\n🟢 em COLUNAS (um em cima do outro)\n🟡 em GRUPOS (montinhos iguais)\n\nDicas de contador esperto:\n• Aponte com o dedo em cada objeto.\n• Fale o número em voz alta.\n• Marque os que já contou.\n• Confira contando de novo.",
+    "Quando temos poucos objetos, podemos contar um por um. Quando são muitos, organizamos antes:\n\n🔵 em FILAS (um ao lado do outro)\n🟢 em COLUNAS (um abaixo do outro)\n🟡 em GRUPOS IGUAIS (por exemplo, grupos de 10)\n\nAponte ou marque cada objeto uma única vez. Em quatro grupos de 10, contamos 10, 20, 30, 40. Depois registramos o total com algarismos: 40. O número escrito representa a quantidade contada. Por fim, confira para verificar se não pulou nem repetiu objetos.",
+
+  explicacaoAtiva: [
+    {
+      texto: "Primeiro organize os objetos. Assim fica claro o que já foi contado e o que ainda falta contar.",
+      exemplo: "Dezoito blocos podem formar duas filas de nove.",
+      imagem: blocoImg,
+      imagemAlt: "Bloco usado para organizar uma coleção",
+      checagem: {
+        pergunta: "O que ajuda a não pular nem repetir objetos?",
+        opcoes: ["Organizar e marcar", "Misturar tudo", "Escolher qualquer total"],
+        correta: 0,
+        explicacao: "A organização permite acompanhar cada objeto contado.",
+      },
+    },
+    {
+      texto: "Em grupos iguais, conte acumulando. Três grupos de cinco ficam: 5, 10, 15.",
+      exemplo: "5 + 5 + 5 = 15 laranjas.",
+      imagem: laranjaImg,
+      imagemAlt: "Laranja usada em grupos de cinco",
+      checagem: {
+        pergunta: "Três grupos de cinco terminam em qual total?",
+        opcoes: ["10", "15", "20"],
+        correta: 1,
+        explicacao: "Conte os grupos: 5, 10, 15.",
+      },
+    },
+    {
+      texto: "Para coleções maiores, grupos de dez ajudam. Quatro grupos de dez formam quarenta objetos.",
+      exemplo: "10, 20, 30, 40.",
+      imagem: blocoImg,
+      imagemAlt: "Bloco usado em grupos de dez",
+      checagem: {
+        pergunta: "Quatro grupos de dez formam quantos objetos?",
+        opcoes: ["14", "30", "40"],
+        correta: 2,
+        explicacao: "Quatro grupos de 10: 10, 20, 30, 40.",
+      },
+    },
+    {
+      texto: "Depois de contar, registre o total com algarismos. Se contou quinze objetos, escreva 15.",
+      exemplo: "Quantidade falada: quinze. Registro simbólico: 15.",
+      imagem: estrelaImg,
+      imagemAlt: "Estrela usada para relacionar quantidade e número",
+      checagem: {
+        pergunta: "Qual registro representa quinze objetos?",
+        opcoes: ["5", "15", "50"],
+        correta: 1,
+        explicacao: "O algarismo 15 registra a quantidade quinze.",
+      },
+    },
+  ],
 
   explicacoesNiveis: {
     nivel1: "Antes de contar muita coisa, organize em filinhas.",
@@ -87,7 +139,7 @@ const aula: Aula = {
     enunciado:
       "As laranjas foram organizadas em 3 grupos de 5. Toque nos grupos para contar!",
     resposta:
-      "15 laranjas — 3 grupos de 5 dão 15. Pular de 5 em 5 é muito mais rápido.",
+      "15 laranjas — 3 grupos de 5 dão 15. O registro do total é 15.",
     explicacao:
       "Quando os grupos são iguais, dá pra pular de X em X: 5, 10, 15. Isso se chama contagem em grupos.",
     visual: {
@@ -165,9 +217,9 @@ const aula: Aula = {
         },
         {
           pergunta: "Qual estratégia deixa a contagem mais fácil?",
-          opcoes: ["Deixar espalhado", "Organizar em filas ou grupos", "Contar bem rápido"],
+          opcoes: ["Deixar espalhado", "Organizar em filas ou grupos", "Escolher sem conferir"],
           correta: 1,
-          explicacao: "Organizar antes de contar evita erros e é mais rápido.",
+          explicacao: "Organizar antes de contar ajuda a não pular nem repetir objetos.",
         },
       ],
     },
@@ -180,13 +232,13 @@ const aula: Aula = {
       "Fale o número em VOZ ALTA.",
       "CONFIRA contando de novo pra ter certeza.",
     ],
-    dica: "Contagem em grupos iguais é mais rápida — pule de 2 em 2, 5 em 5 ou 10 em 10.",
+    dica: "Em grupos iguais, conte de 2 em 2, 5 em 5 ou 10 em 10 e registre o total com algarismos.",
   },
 
   quiz: [
     {
       pergunta: "Qual é a melhor maneira de contar muitos objetos?",
-      opcoes: ["Misturar tudo", "Organizar primeiro", "Contar bem rápido"],
+      opcoes: ["Misturar tudo", "Organizar primeiro", "Escolher sem contar"],
       correta: 1,
       explicacao: "Organizar em filas, colunas ou grupos evita erros na contagem.",
       visual: {
@@ -231,6 +283,21 @@ const aula: Aula = {
         ],
       },
     },
+    {
+      pergunta: "Quatro grupos de 10 blocos foram contados. Qual número registra o total?",
+      opcoes: ["14", "40", "100"],
+      correta: 1,
+      explicacao: "Conte de 10 em 10: 10, 20, 30, 40. O registro do total é 40.",
+      visual: {
+        tipo: "grupos",
+        grupos: [
+          { imagemUrl: blocoImg, quantidade: 10, rotulo: "Grupo 1", cor: "#60A5FA" },
+          { imagemUrl: blocoImg, quantidade: 10, rotulo: "Grupo 2", cor: "#F472B6" },
+          { imagemUrl: blocoImg, quantidade: 10, rotulo: "Grupo 3", cor: "#FBBF24" },
+          { imagemUrl: blocoImg, quantidade: 10, rotulo: "Grupo 4", cor: "#34D399" },
+        ],
+      },
+    },
   ],
 
   conclusao:
@@ -239,7 +306,7 @@ const aula: Aula = {
   curiosidade: {
     titulo: "Você sabia?",
     texto:
-      "Os caixas dos supermercados usam códigos e organizam os produtos em prateleiras iguais justamente pra contar rápido e sem errar. Até computadores contam melhor quando as coisas estão organizadas!",
+      "Lojas fazem inventários: contam os produtos, organizam os totais e registram os números. Assim conseguem conferir quantos itens realmente há.",
   },
 
   interativas: [
@@ -266,7 +333,7 @@ const aula: Aula = {
       pergunta: "Quantos blocos ao todo?",
       opcoes: ["16", "18", "20"],
       correta: 1,
-      acerto: "Excelente! Organizando em filas fica muito mais fácil.",
+      acerto: "Excelente! As filas ajudaram você a acompanhar todos os blocos.",
       erro: "Conte a Fila 1 e depois some com a Fila 2.",
     },
     {
@@ -281,7 +348,7 @@ const aula: Aula = {
       pergunta: "Quantas laranjas existem ao todo?",
       opcoes: ["12", "15", "18"],
       correta: 1,
-      acerto: "Isso! 5 + 5 + 5 = 15. Pular de 5 em 5 é rapidinho.",
+      acerto: "Isso! 5 + 5 + 5 = 15. O número 15 registra o total.",
       erro: "Cada caixa tem 5. Some as três: 5 + 5 + 5.",
     },
     {
@@ -298,7 +365,7 @@ const aula: Aula = {
     },
     {
       tipo: "contarQuiz",
-      titulo: "Fase 5 · Contagem rápida",
+      titulo: "Fase 5 · Estime e confira",
       instrucao:
         "Olhe as estrelas por 3 segundos e ESTIME. Depois confira contando.",
       grupos: [{ imagemUrl: estrelaImg, quantidade: 20, rotulo: "Estrelas" }],
@@ -426,20 +493,17 @@ const aula: Aula = {
         },
       },
       {
-        pergunta: "Qual estratégia é MAIS ESPERTA pra contar 18 blocos?",
-        opcoes: [
-          "Contar bem rápido de olhos fechados",
-          "Organizar em filas iguais e contar",
-          "Chutar um número",
-        ],
+        pergunta: "Quatro grupos de 10 blocos foram contados. Qual número registra o total?",
+        opcoes: ["14", "40", "100"],
         correta: 1,
-        explicacao: "Organizar em filas iguais evita pular e repetir.",
+        explicacao: "10, 20, 30, 40. O registro simbólico é 40.",
         visual: {
           tipo: "grupos",
           grupos: [
-            { imagemUrl: blocoImg, quantidade: 6, rotulo: "Fila 1", cor: "#60A5FA" },
-            { imagemUrl: blocoImg, quantidade: 6, rotulo: "Fila 2", cor: "#F472B6" },
-            { imagemUrl: blocoImg, quantidade: 6, rotulo: "Fila 3", cor: "#FBBF24" },
+            { imagemUrl: blocoImg, quantidade: 10, rotulo: "Grupo 1", cor: "#60A5FA" },
+            { imagemUrl: blocoImg, quantidade: 10, rotulo: "Grupo 2", cor: "#F472B6" },
+            { imagemUrl: blocoImg, quantidade: 10, rotulo: "Grupo 3", cor: "#FBBF24" },
+            { imagemUrl: blocoImg, quantidade: 10, rotulo: "Grupo 4", cor: "#34D399" },
           ],
         },
       },

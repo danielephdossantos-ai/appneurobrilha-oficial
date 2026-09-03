@@ -4,7 +4,7 @@ export const aula03_divisaoExata: AulaV4 = {
   slug: "u4-03-divisao-exata",
   titulo: "Divisão Exata",
   iconeTrilha: "✅",
-  bncc: ["EF03MA10"],
+  bncc: ["EF03MA08"],
   duracaoMin: 20,
   metodologias: ["skemp", "cpa"],
   momento01_motivacao: {

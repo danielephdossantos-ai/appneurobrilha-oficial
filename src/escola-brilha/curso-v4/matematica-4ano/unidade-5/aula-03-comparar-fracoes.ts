@@ -4,14 +4,14 @@ export const aula03_compararFracoes: AulaV4 = {
   slug: "u5-03-comparar-fracoes",
   titulo: "Comparar frações",
   iconeTrilha: "⚖️",
-  bncc: ["EF04MA10"],
+  bncc: ["EF04MA09"],
   duracaoMin: 20,
   metodologias: ["cpa", "skemp"],
 
   momento01_motivacao: {
     titulo: "Qual pedaço é maior?",
     historia:
-      "{NOME}, comparar frações depende do que muda: se o denominador é IGUAL, compara o numerador. Se o numerador é IGUAL, compara pelo denominador (menor = maior pedaço).",
+      "{NOME}, ao comparar frações do MESMO inteiro: se o denominador é igual, compare os numeradores. Se o numerador é igual, o menor denominador representa partes maiores.",
   },
   momento02_exploracao: {
     instrucao: "Dois casos fáceis.",
@@ -23,7 +23,7 @@ export const aula03_compararFracoes: AulaV4 = {
   momento03_descoberta: {
     perguntaGuia: "Por que 1/4 > 1/8?",
     pista: "Denominador MENOR = partes MAIORES.",
-    revelacao: "Cortar em 4 dá pedaço maior do que cortar em 8. Denominador menor, fração maior (mesmo numerador).",
+    revelacao: "Ao dividir o mesmo inteiro, cortar em 4 dá partes maiores do que cortar em 8. Com numeradores iguais, a fração de menor denominador é maior.",
   },
   momento04_explicacao: {
     titulo: "Regras de comparação",

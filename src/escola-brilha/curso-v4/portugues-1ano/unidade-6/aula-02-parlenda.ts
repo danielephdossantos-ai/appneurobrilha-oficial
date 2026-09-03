@@ -56,7 +56,7 @@ export const aula02: AulaPortuguesV4 = {
     cards: [
       {
         palavra: "parlenda",
-        explicacao: "É um textinho de tradição oral, com rima, que passa de pessoa pra pessoa há muito tempo.",
+        explicacao: "É um texto curto da tradição oral, geralmente ritmado e que pode apresentar rimas.",
         exemplo: "'Um, dois, feijão com arroz' é uma parlenda famosa.",
         imagemUrl: livro,
       },
@@ -187,14 +187,14 @@ export const aula02: AulaPortuguesV4 = {
 
   momento09_revisao: {
     pontos: [
-      "PARLENDA é um textinho de tradição oral com rima.",
+      "PARLENDA é um texto curto da tradição oral, geralmente ritmado e que pode ter rimas.",
       "CIRANDA é uma roda de crianças de mãos dadas, cantando.",
       "A gente memoriza cantigas repetindo e acompanhando o texto escrito.",
     ],
     miniDesafio: {
       pergunta: "O que é uma parlenda?",
       opcoes: [
-        "Um texto de tradição oral, com rima, passado de geração em geração",
+        "Um texto curto e ritmado da tradição oral",
         "Um tipo de comida",
         "Um brinquedo eletrônico",
       ],
@@ -228,14 +228,14 @@ export const aula02: AulaPortuguesV4 = {
       {
         pergunta: "3/5 — O que é uma parlenda?",
         opcoes: [
-          "Um textinho com rima, da tradição oral",
+          "Um texto curto e ritmado, da tradição oral",
           "Uma história com começo, meio e fim",
           "Um bilhete de aviso",
           "Um tipo de bolo",
         ],
         correta: 0,
         feedbackAcerto: "🎉 Isso!",
-        feedbackErro: "Parlenda não conta história nem avisa: é um textinho com RIMA e RITMO, que se aprende de cor.",
+        feedbackErro: "Parlenda é um texto da tradição oral, com ritmo e repetição, que pode também apresentar rimas.",
       },
       {
         pergunta: "4/5 — Na parlenda 'Um, dois, feijão com arroz', o que vem depois de 'três, quatro'?",

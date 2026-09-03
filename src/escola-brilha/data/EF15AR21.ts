@@ -1,0 +1,2 @@
+import { criarAulaArte1 } from "./criarAulaArte1";
+export default criarAulaArte1({ codigo: "EF15AR21", titulo: "Nossa Cena Coletiva", foco: "Criar coletivamente cenas teatrais a partir de textos, imagens, músicas e histórias", objeto: "processo de criação teatral", exemplos: ["Planejar e improvisar uma cena em grupo", "Mandar sem ouvir", "Copiar uma resposta", "Desfazer o trabalho"], resposta: "Combinar ideias, definir personagens, improvisar e revisar a cena com o grupo.", proxima: "EF15AR22" });

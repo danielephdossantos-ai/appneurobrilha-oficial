@@ -6,6 +6,7 @@ import { aula04_simetria } from "./aula-04-simetria";
 import { aula05_localizacao } from "./aula-05-localizacao-espacial";
 import { aula06_congruencia } from "./aula-06-congruencia-semelhanca";
 import { aula07_missaoFinalU6 } from "./aula-07-missao-final";
+import { aula08_comparandoAreas } from "./aula-08-comparando-areas";
 
 export const unidade6: Unidade = {
   slug: "unidade-6-geometria",
@@ -22,6 +23,7 @@ export const unidade6: Unidade = {
     aula04_simetria,
     aula05_localizacao,
     aula06_congruencia,
+    aula08_comparandoAreas,
     aula07_missaoFinalU6,
   ],
 };

@@ -20,7 +20,7 @@ export const aula4: AulaPortuguesV4 = {
   slug: "aula-04-prefixos-e-sufixos",
   titulo: "Prefixos e sufixos",
   iconeTrilha: "🧩",
-  bncc: ["EF05LP08", "EF05LP09"],
+  bncc: ["EF05LP08"],
   duracaoMin: 25,
 
   momento01_motivacao: {

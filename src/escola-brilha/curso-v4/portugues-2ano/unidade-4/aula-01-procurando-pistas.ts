@@ -17,7 +17,7 @@ export const aula01: AulaPortuguesV4 = {
   slug: "aula-01-procurando-pistas",
   titulo: "Procurando Pistas no Texto",
   iconeTrilha: "🔎",
-  bncc: ["EF02LP16", "EF02LP17"],
+  bncc: ["EF15LP02", "EF15LP03", "EF15LP16"],
   duracaoMin: 15,
 
   momento01_motivacao: {

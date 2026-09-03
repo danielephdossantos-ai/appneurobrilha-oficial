@@ -98,9 +98,9 @@ export const aula07_missaoFinalU3: AulaV4 = {
   },
   momento10_avaliacao: {
     perguntas: [
-      { pergunta: "6 × 7 = ?", opcoes: ["42", "36", "48"], correta: 0, feedbackAcerto: "🎉 42.", feedbackErro: "6×7=42." },
-      { pergunta: "Dobro de 45?", opcoes: ["90", "80", "100"], correta: 0, feedbackAcerto: "🎉 90.", feedbackErro: "45+45=90." },
-      { pergunta: "9 × 5 = ?", opcoes: ["45", "40", "50"], correta: 0, feedbackAcerto: "🎉 45.", feedbackErro: "9×5=45." },
+      { pergunta: "6 × 7 = ?", opcoes: ["42", "36", "48"], correta: 0, feedbackAcerto: "🎉 Seis grupos de 7 formam 42.", feedbackErro: "Use 5 × 7 = 35 e acrescente mais 7: 35 + 7 = 42." },
+      { pergunta: "Dobro de 45?", opcoes: ["90", "80", "100"], correta: 0, feedbackAcerto: "🎉 Dobrar 45 é calcular 45 + 45 = 90.", feedbackErro: "Dobre dezenas e unidades: 40 + 40 = 80 e 5 + 5 = 10; total 90." },
+      { pergunta: "9 × 5 = ?", opcoes: ["45", "40", "50"], correta: 0, feedbackAcerto: "🎉 Nove grupos de 5 formam 45.", feedbackErro: "Use 10 × 5 = 50 e retire um grupo de 5: 50 − 5 = 45." },
     ],
   },
   momento11_missaoFamilia: {

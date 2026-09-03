@@ -4,7 +4,7 @@ export const aula06_perimetro: AulaV4 = {
   slug: "u6-06-perimetro",
   titulo: "Perímetro — a volta da figura",
   iconeTrilha: "🟥",
-  bncc: ["EF04MA23"],
+  bncc: ["EF04MA20"],
   duracaoMin: 22,
   metodologias: ["cpa", "skemp"],
 

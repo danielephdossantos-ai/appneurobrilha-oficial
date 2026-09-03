@@ -72,12 +72,41 @@ export const aula01: AulaArteV1 = {
     titulo: "🔍 O Mapa na Parede da Caverna",
     instrucao: "Toca em cada pista pra investigar",
     itens: [
-      { emoji: "🕳️", rotulo: "Caverna de Lascaux (França)", descricao: "Descoberta em 1940 por 4 meninos e um cão. Cheia de bisões, cavalos e cervos em ocre e carvão.", cor: "#78350f", fotoUrl: mapaLascaux },
-      { emoji: "🏞️", rotulo: "Serra da Capivara (Piauí, Brasil)", descricao: "As pinturas mais antigas das Américas — caçadores, danças e árvores em vermelho-ocre.", cor: "#dc2626", fotoUrl: mapaCapivara },
-      { emoji: "🦴", rotulo: "Pincel de osso e pelo", descricao: "Nossos ancestrais usavam pelos de animal amarrados em ossos ou pontas de galho mastigadas.", cor: "#a16207", fotoUrl: mapaPincel },
-      { emoji: "🔥", rotulo: "Carvão da fogueira", descricao: "Depois de queimar madeira, o pedaço preto virava o primeiro lápis da humanidade.", cor: "#1f2937", fotoUrl: mapaCarvao },
+      {
+        emoji: "🕳️",
+        rotulo: "Caverna de Lascaux (França)",
+        descricao:
+          "Descoberta em 1940 por 4 meninos e um cão. Cheia de bisões, cavalos e cervos em ocre e carvão.",
+        cor: "#78350f",
+        fotoUrl: mapaLascaux,
+      },
+      {
+        emoji: "🏞️",
+        rotulo: "Serra da Capivara (Piauí, Brasil)",
+        descricao:
+          "As pinturas mais antigas das Américas — caçadores, danças e árvores em vermelho-ocre.",
+        cor: "#dc2626",
+        fotoUrl: mapaCapivara,
+      },
+      {
+        emoji: "🦴",
+        rotulo: "Pincel de osso e pelo",
+        descricao:
+          "Nossos ancestrais usavam pelos de animal amarrados em ossos ou pontas de galho mastigadas.",
+        cor: "#a16207",
+        fotoUrl: mapaPincel,
+      },
+      {
+        emoji: "🔥",
+        rotulo: "Carvão da fogueira",
+        descricao:
+          "Depois de queimar madeira, o pedaço preto virava o primeiro lápis da humanidade.",
+        cor: "#1f2937",
+        fotoUrl: mapaCarvao,
+      },
     ],
-    falaFinal: "Eles inventaram a PRIMEIRA PALETA da humanidade — as Cores Terrosas: tudo vindo direto do chão.",
+    falaFinal:
+      "Eles inventaram a PRIMEIRA PALETA da humanidade — as Cores Terrosas: tudo vindo direto do chão.",
   },
 
   cena02_previsao: {
@@ -90,6 +119,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Tinta acrílica comprada em loja", correta: false },
           { texto: "Terra, pedras trituradas e carvão", correta: true },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
         feedbackAcerto: "Isso! Os pigmentos vinham DIRETO do chão — minerais e carvão.",
         feedbackErro: "Loja não existia! Eles trituravam MINERAIS e usavam CARVÃO da fogueira.",
@@ -100,9 +132,13 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Azul-neon brilhante", correta: true },
           { texto: "Marrom, ocre e vermelho-escuro", correta: false },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
         feedbackAcerto: "Certo! Não tinha azul-neon. Só cores da terra: marrom, ocre e vermelho.",
-        feedbackErro: "Ao contrário: azul-neon é INVENÇÃO moderna. Na Pré-História só havia tons terrosos.",
+        feedbackErro:
+          "Ao contrário: azul-neon é INVENÇÃO moderna. Na Pré-História só havia tons terrosos.",
       },
       {
         pergunta: "Um dos pincéis pré-históricos era feito de…",
@@ -110,6 +146,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Pelos de animal amarrados em osso", correta: true },
           { texto: "Cerdas plásticas coloridas", correta: false },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
         feedbackAcerto: "Perfeito, arqueólogo! Osso + pelo = primeiro pincel do mundo.",
         feedbackErro: "Plástico só existe há pouco tempo. O pincel deles era OSSO + PELO.",
@@ -121,16 +160,41 @@ export const aula01: AulaArteV1 = {
     tipo: "vocabularioCards",
     aurora: "Palavras da nossa expedição — toca em cada uma pra desbloquear seu diário.",
     cards: [
-      { termo: "Arte Rupestre", definicao: "Pintura ou gravura feita em ROCHAS e cavernas há milhares de anos.", emoji: "🕳️", cor: "#78350f", fotoUrl: vocabRupestre },
-      { termo: "Ocre", definicao: "Cor amarelo-queimado ou vermelho-escuro tirada da TERRA rica em ferro.", emoji: "🟡", cor: "#eab308", fotoUrl: vocabOcre },
-      { termo: "Pigmento", definicao: "PÓ COLORIDO que dá cor à tinta — pode vir de minerais, plantas ou carvão.", emoji: "🎨", cor: "#dc2626", fotoUrl: vocabPigmento },
-      { termo: "Cores Terrosas", definicao: "Cores parecidas com o SOLO: marrom, bege, ocre, terracota.", emoji: "🟤", cor: "#92400e", fotoUrl: vocabTerrosas },
+      {
+        termo: "Arte Rupestre",
+        definicao: "Pintura ou gravura feita em ROCHAS e cavernas há milhares de anos.",
+        emoji: "🕳️",
+        cor: "#78350f",
+        fotoUrl: vocabRupestre,
+      },
+      {
+        termo: "Ocre",
+        definicao: "Cor amarelo-queimado ou vermelho-escuro tirada da TERRA rica em ferro.",
+        emoji: "🟡",
+        cor: "#eab308",
+        fotoUrl: vocabOcre,
+      },
+      {
+        termo: "Pigmento",
+        definicao: "PÓ COLORIDO que dá cor à tinta — pode vir de minerais, plantas ou carvão.",
+        emoji: "🎨",
+        cor: "#dc2626",
+        fotoUrl: vocabPigmento,
+      },
+      {
+        termo: "Cores Terrosas",
+        definicao: "Cores parecidas com o SOLO: marrom, bege, ocre, terracota.",
+        emoji: "🟤",
+        cor: "#92400e",
+        fotoUrl: vocabTerrosas,
+      },
     ],
   },
 
   cena04_leituraGuiada: {
     tipo: "leituraTintas",
-    aurora: "Vou te contar como o primeiro artista da humanidade inventava suas cores. Fica atento à receita!",
+    aurora:
+      "Vou te contar como o primeiro artista da humanidade inventava suas cores. Fica atento à receita!",
     paragrafos: [
       "Há mais de 30 mil anos, os primeiros humanos observaram que a TERRA tinha cores diferentes em cada lugar — vermelha aqui, amarela ali, quase preta lá.",
       "Eles cavavam esses minerais coloridos, TRITURAVAM em pedras planas até virar pó fino e misturavam com ÁGUA e um pouco de GORDURA animal pra grudar melhor.",
@@ -138,10 +202,34 @@ export const aula01: AulaArteV1 = {
       "Depois aplicavam com os DEDOS, com pincéis de pelos ou SOPRAVAM a tinta por dentro de ossos ocos — um dos primeiros 'sprays' da história!",
     ],
     pigmentos: [
-      { nome: "Vermelho-terra", hex: "#b91c1c", fonte: "Óxido de ferro (hematita)", emoji: "🔴", fotoUrl: pigVermelho },
-      { nome: "Ocre amarelo", hex: "#eab308", fonte: "Óxido de ferro amarelo", emoji: "🟡", fotoUrl: pigOcre },
-      { nome: "Preto de carvão", hex: "#1f2937", fonte: "Madeira queimada", emoji: "⚫", fotoUrl: pigCarvao },
-      { nome: "Marrom de argila", hex: "#78350f", fonte: "Barro rico em minerais", emoji: "🟤", fotoUrl: pigArgila },
+      {
+        nome: "Vermelho-terra",
+        hex: "#b91c1c",
+        fonte: "Óxido de ferro (hematita)",
+        emoji: "🔴",
+        fotoUrl: pigVermelho,
+      },
+      {
+        nome: "Ocre amarelo",
+        hex: "#eab308",
+        fonte: "Óxido de ferro amarelo",
+        emoji: "🟡",
+        fotoUrl: pigOcre,
+      },
+      {
+        nome: "Preto de carvão",
+        hex: "#1f2937",
+        fonte: "Madeira queimada",
+        emoji: "⚫",
+        fotoUrl: pigCarvao,
+      },
+      {
+        nome: "Marrom de argila",
+        hex: "#78350f",
+        fonte: "Barro rico em minerais",
+        emoji: "🟤",
+        fotoUrl: pigArgila,
+      },
     ],
   },
 
@@ -155,6 +243,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "De sangue de animal", correta: false },
           { texto: "De minerais com óxido de ferro (hematita)", correta: true },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
         feedbackAcerto: "Sim! É o MESMO ferro que enferruja um portão — só que em pó.",
         feedbackErro: "Não é sangue. É o FERRO da terra oxidado — a hematita — que dá vermelho.",
@@ -165,6 +256,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Água + gordura animal", correta: true },
           { texto: "Cola branca escolar", correta: false },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
         feedbackAcerto: "Certo, arqueólogo! Gordura funcionava como cola natural.",
         feedbackErro: "Cola escolar não existia. Eles usavam ÁGUA + GORDURA de animal.",
@@ -175,6 +269,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Soprando a tinta por um osso oco em volta da mão", correta: true },
           { texto: "Pintando com um rolinho de espuma", correta: false },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
         feedbackAcerto: "Perfeito! Osso oco = primeiro spray da humanidade.",
         feedbackErro: "Nem rolinho, nem spray moderno. Eles SOPRAVAM tinta por um OSSO oco.",
@@ -187,32 +284,44 @@ export const aula01: AulaArteV1 = {
     aurora: "Cada pintura veio de um lugar do planeta. Qual pigmento combina com cada uma?",
     animais: [
       {
-        nome: "Bisão de Lascaux (França)", emoji: "🐃", fotoUrl: animalBisao,
+        nome: "Bisão de Lascaux (França)",
+        emoji: "🐃",
+        fotoUrl: animalBisao,
         corAlvo: { nome: "Ocre vermelho + carvão", hex: "#b45309" },
         opcoes: [
           { nome: "Azul-neon industrial", hex: "#38bdf8" },
           { nome: "Ocre vermelho + carvão", hex: "#b45309" },
           { nome: "Verde-limão sintético", hex: "#84cc16" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Bisão feito em ocre vermelho e contorno de carvão — 17 mil anos atrás!",
       },
       {
-        nome: "Cena de caça — Serra da Capivara (BR)", emoji: "🦌", fotoUrl: animalVeado,
+        nome: "Cena de caça — Serra da Capivara (BR)",
+        emoji: "🦌",
+        fotoUrl: animalVeado,
         corAlvo: { nome: "Vermelho de hematita", hex: "#dc2626" },
         opcoes: [
           { nome: "Rosa-choque moderno", hex: "#ec4899" },
           { nome: "Vermelho de hematita", hex: "#dc2626" },
           { nome: "Roxo de anilina", hex: "#a855f7" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Vermelho de hematita! No Piauí, é a cor MAIS antiga das Américas.",
       },
       {
-        nome: "Mão em negativo (Argentina/Espanha)", emoji: "🖐️", fotoUrl: animalMao,
+        nome: "Mão em negativo (Argentina/Espanha)",
+        emoji: "🖐️",
+        fotoUrl: animalMao,
         corAlvo: { nome: "Ocre soprado por osso", hex: "#c2410c" },
         opcoes: [
           { nome: "Tinta em spray de lata", hex: "#64748b" },
           { nome: "Ocre soprado por osso", hex: "#c2410c" },
           { nome: "Aquarela em tubo", hex: "#3b82f6" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Ocre soprado por osso oco em volta da mão — 'assinatura' pré-histórica.",
       },
@@ -221,13 +330,44 @@ export const aula01: AulaArteV1 = {
 
   cena07_sequencia: {
     tipo: "sequenciaMistura",
-    aurora: "Ordena a receita da tinta pré-histórica — 5 passos que os artistas de Lascaux repetiam.",
+    aurora:
+      "Ordena a receita da tinta pré-histórica — 5 passos que os artistas de Lascaux repetiam.",
     passos: [
-      { id: "p1", texto: "COLETO terra colorida e carvão", emoji: "⛏️", ordem: 1, fotoUrl: u1passo1 },
-      { id: "p2", texto: "TRITURO os minerais até virar pó fino", emoji: "🪨", ordem: 2, fotoUrl: u1passo2 },
-      { id: "p3", texto: "MISTURO o pó com água e gordura", emoji: "🥣", ordem: 3, fotoUrl: u1passo3 },
-      { id: "p4", texto: "APLICO com os dedos ou pincel de pelo", emoji: "🖐️", ordem: 4, fotoUrl: u1passo4 },
-      { id: "p5", texto: "SOPRO pigmento pelo osso oco pro contorno", emoji: "💨", ordem: 5, fotoUrl: u1passo5 },
+      {
+        id: "p1",
+        texto: "COLETO terra colorida e carvão",
+        emoji: "⛏️",
+        ordem: 1,
+        fotoUrl: u1passo1,
+      },
+      {
+        id: "p2",
+        texto: "TRITURO os minerais até virar pó fino",
+        emoji: "🪨",
+        ordem: 2,
+        fotoUrl: u1passo2,
+      },
+      {
+        id: "p3",
+        texto: "MISTURO o pó com água e gordura",
+        emoji: "🥣",
+        ordem: 3,
+        fotoUrl: u1passo3,
+      },
+      {
+        id: "p4",
+        texto: "APLICO com os dedos ou pincel de pelo",
+        emoji: "🖐️",
+        ordem: 4,
+        fotoUrl: u1passo4,
+      },
+      {
+        id: "p5",
+        texto: "SOPRO pigmento pelo osso oco pro contorno",
+        emoji: "💨",
+        ordem: 5,
+        fotoUrl: u1passo5,
+      },
     ],
     falaAcerto: "Sua tinta rupestre está pronta! É a MESMA receita de 30 mil anos atrás.",
   },
@@ -237,10 +377,26 @@ export const aula01: AulaArteV1 = {
     aurora: "Agora VOCÊ lê o diário do explorador. Toca nas palavras coloridas pra ouvir.",
     titulo: "Diário do Explorador do Tempo",
     trechos: [
-      { texto: "Desci na caverna e vi paredes cobertas de arte", palavraDestaque: "rupestre", corDestaque: "#78350f" },
-      { texto: "Os pintores misturavam minerais pra fazer o", palavraDestaque: "pigmento", corDestaque: "#dc2626" },
-      { texto: "A cor amarelo-queimada da terra chama-se", palavraDestaque: "ocre", corDestaque: "#eab308" },
-      { texto: "Só usavam tons da terra: as cores", palavraDestaque: "terrosas", corDestaque: "#92400e" },
+      {
+        texto: "Desci na caverna e vi paredes cobertas de arte",
+        palavraDestaque: "rupestre",
+        corDestaque: "#78350f",
+      },
+      {
+        texto: "Os pintores misturavam minerais pra fazer o",
+        palavraDestaque: "pigmento",
+        corDestaque: "#dc2626",
+      },
+      {
+        texto: "A cor amarelo-queimada da terra chama-se",
+        palavraDestaque: "ocre",
+        corDestaque: "#eab308",
+      },
+      {
+        texto: "Só usavam tons da terra: as cores",
+        palavraDestaque: "terrosas",
+        corDestaque: "#92400e",
+      },
       { texto: "Sou um Explorador do Tempo — a história começa aqui!" },
     ],
   },
@@ -248,7 +404,8 @@ export const aula01: AulaArteV1 = {
   cena09_minijogo: {
     tipo: "cenaTematica",
     variante: "minijogo",
-    aurora: "🧪 Alquimia da Caverna! Toca em CADA ingrediente antes da tocha apagar pra atingir o tom exato do ocre.",
+    aurora:
+      "🧪 Alquimia da Caverna! Toca em CADA ingrediente antes da tocha apagar pra atingir o tom exato do ocre.",
     titulo: "🧪 Alquimia da Caverna",
     instrucao: "Toque em todos os ingredientes antes do tempo acabar!",
     tempoSeg: 35,
@@ -269,13 +426,48 @@ export const aula01: AulaArteV1 = {
     aurora: "Fecha o caderno da expedição repassando cada achado. Toca em cada verbete!",
     titulo: "📓 Caderno da Expedição Rupestre",
     itens: [
-      { emoji: "🕳️", rotulo: "Arte Rupestre", descricao: "Pintura em rocha — a mais antiga da humanidade.", cor: "#78350f" },
-      { emoji: "🟡", rotulo: "Ocre", descricao: "Amarelo/vermelho vindo de óxido de ferro.", cor: "#eab308" },
-      { emoji: "🎨", rotulo: "Pigmento", descricao: "Pó colorido dissolvido em água + gordura.", cor: "#dc2626" },
-      { emoji: "🟤", rotulo: "Cores Terrosas", descricao: "Paleta que imita o solo — marrom, bege, terracota.", cor: "#92400e" },
-      { emoji: "🐃", rotulo: "Lascaux", descricao: "Caverna francesa: bisões em ocre e carvão.", cor: "#b45309" },
-      { emoji: "🦌", rotulo: "Serra da Capivara", descricao: "Piauí, Brasil — arte mais antiga das Américas.", cor: "#dc2626" },
-      { emoji: "🖐️", rotulo: "Mão em negativo", descricao: "Assinatura feita soprando pigmento por osso.", cor: "#c2410c" },
+      {
+        emoji: "🕳️",
+        rotulo: "Arte Rupestre",
+        descricao: "Pintura em rocha — a mais antiga da humanidade.",
+        cor: "#78350f",
+      },
+      {
+        emoji: "🟡",
+        rotulo: "Ocre",
+        descricao: "Amarelo/vermelho vindo de óxido de ferro.",
+        cor: "#eab308",
+      },
+      {
+        emoji: "🎨",
+        rotulo: "Pigmento",
+        descricao: "Pó colorido dissolvido em água + gordura.",
+        cor: "#dc2626",
+      },
+      {
+        emoji: "🟤",
+        rotulo: "Cores Terrosas",
+        descricao: "Paleta que imita o solo — marrom, bege, terracota.",
+        cor: "#92400e",
+      },
+      {
+        emoji: "🐃",
+        rotulo: "Lascaux",
+        descricao: "Caverna francesa: bisões em ocre e carvão.",
+        cor: "#b45309",
+      },
+      {
+        emoji: "🦌",
+        rotulo: "Serra da Capivara",
+        descricao: "Piauí, Brasil — arte mais antiga das Américas.",
+        cor: "#dc2626",
+      },
+      {
+        emoji: "🖐️",
+        rotulo: "Mão em negativo",
+        descricao: "Assinatura feita soprando pigmento por osso.",
+        cor: "#c2410c",
+      },
     ],
     falaFinal: "Primeira página do Atlas dos Exploradores DESBLOQUEADA!",
   },
@@ -284,12 +476,17 @@ export const aula01: AulaArteV1 = {
     tipo: "avaliacaoFinal",
     aurora: "Missão final da expedição, explorador — mostra o que aprendeu!",
     quiz: {
-      pergunta: "De onde os artistas da Pré-História retiravam os pigmentos para fazer as cores terrosas?",
+      pergunta:
+        "De onde os artistas da Pré-História retiravam os pigmentos para fazer as cores terrosas?",
       alternativas: [
         { texto: "Da terra, de rochas trituradas e do carvão", correta: true },
         { texto: "De fábricas de tintas modernas", correta: false },
+
+        { texto: "Não corresponde ao tema", correta: false },
+        { texto: "Outra resposta sem relação", correta: false },
       ],
-      feedback: "Isso! Os pigmentos vinham DIRETO do solo — minerais de ferro pra vermelho/amarelo e carvão pra preto. Sem indústria, sem canetinha.",
+      feedback:
+        "Isso! Os pigmentos vinham DIRETO do solo — minerais de ferro pra vermelho/amarelo e carvão pra preto. Sem indústria, sem canetinha.",
     },
     missaoFamilia:
       "🟤 Tinta de Terra: em família, peguem uma colher de terra do quintal ou de um vaso, misturem com um pouco de água e uma colher de cola branca. Usem essa tinta caseira pra desenhar um animal em papel pardo. Sintam a TEXTURA do solo virar arte.",

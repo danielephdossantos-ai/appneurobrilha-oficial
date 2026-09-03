@@ -4,7 +4,7 @@ export const aula04_divisaoComResto: AulaV4 = {
   slug: "u4-04-divisao-resto",
   titulo: "E Quando Sobra?",
   iconeTrilha: "🍪",
-  bncc: ["EF03MA10"],
+  bncc: ["EF03MA08"],
   duracaoMin: 20,
   metodologias: ["skemp", "cpa"],
   momento01_motivacao: {

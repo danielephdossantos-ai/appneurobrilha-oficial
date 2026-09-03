@@ -21,7 +21,7 @@ export const aula01: AulaGeoV1 = {
   titulo: "Caderno do Pesquisador",
   iconeTrilha: "🔬",
   recompensa: { xp: 120, moedas: 45, medalha: "Pesquisador Júnior" },
-  bncc: ["EF06CI01"],
+  bncc: [],
   duracaoMin: 35,
 
   cena01_motivacao: {
@@ -48,6 +48,7 @@ export const aula01: AulaGeoV1 = {
       { id: "sol", titulo: "Grupo SOL", subtitulo: "luz direta", emoji: "☀️", cor: "from-amber-400 to-orange-600", fotoUrl: experimentoImg },
       { id: "sombra", titulo: "Grupo SOMBRA", subtitulo: "luz difusa", emoji: "🌤️", cor: "from-teal-400 to-emerald-600", fotoUrl: experimentoImg },
       { id: "escuro", titulo: "Grupo ESCURO", subtitulo: "sem luz", emoji: "🌑", cor: "from-slate-500 to-slate-800", fotoUrl: experimentoImg },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "sol",
     feedbackAcerto:
@@ -185,6 +186,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "💭", titulo: "Uma resposta provisória TESTÁVEL por experimento", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🎲", titulo: "Um chute aleatório sobre o resultado", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "📚", titulo: "Uma frase copiada do livro", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "a",
         feedbackAcerto:
@@ -201,6 +203,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "⚖️", titulo: "Pra isolar a variável LUZ como única causa possível", cor: "from-sky-500 to-cyan-700" },
           { id: "b", emoji: "💧", titulo: "Pra economizar água", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🎨", titulo: "Só pra ficar bonito", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "a",
         feedbackAcerto:
@@ -217,6 +220,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "😎", titulo: "'Eu sabia que ia dar isso'", cor: "from-red-500 to-rose-700" },
           { id: "b", emoji: "📊", titulo: "'Os dados EVIDENCIAM que a luz influencia o crescimento'", cor: "from-emerald-500 to-teal-700" },
           { id: "c", emoji: "🤷", titulo: "'Deu diferente, sei lá'", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "b",
         feedbackAcerto:
@@ -454,6 +458,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Pra saber com certeza qual fator causou o resultado", correta: true },
           { id: "b", texto: "Pra economizar material de laboratório" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto:
           "Correto. Se duas variáveis mudam ao mesmo tempo, você não sabe qual delas causou o efeito. Isolar é o que dá VALIDADE.",
@@ -468,6 +474,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "'Os dados do gráfico mostram 28 cm no sol e 4 cm no escuro'", correta: true },
           { id: "b", texto: "'Eu tenho certeza que planta cresce mais no sol'" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto:
           "Sim. Ciência exige EVIDÊNCIA verificável — não convicção pessoal.",
@@ -482,6 +490,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Pra que outros possam REPRODUZIR e verificar", correta: true },
           { id: "b", texto: "Pra ganhar mais curtidas na internet" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto:
           "Isso. Reprodutibilidade é o que separa ciência de anedota. Se ninguém pode conferir, não vale como ciência.",

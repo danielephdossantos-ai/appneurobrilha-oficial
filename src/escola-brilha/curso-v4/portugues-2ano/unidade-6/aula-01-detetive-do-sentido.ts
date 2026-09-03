@@ -20,7 +20,7 @@ export const aula01: AulaPortuguesV4 = {
   slug: "aula-01-detetive-do-sentido",
   titulo: "O Detetive do Sentido",
   iconeTrilha: "🔍",
-  bncc: ["EF02LP26"],
+  bncc: ["EF02LP26", "EF15LP02", "EF15LP16"],
   duracaoMin: 15,
 
   momento01_motivacao: {

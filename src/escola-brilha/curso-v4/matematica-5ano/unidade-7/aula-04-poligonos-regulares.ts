@@ -4,7 +4,7 @@ export const aula04_poligonosRegulares: AulaV4 = {
   slug: "u7-04-poligonos-regulares",
   titulo: "Polígonos regulares",
   iconeTrilha: "🔷",
-  bncc: ["EF05MA16"],
+  bncc: ["EF05MA17"],
   duracaoMin: 20,
   metodologias: ["cpa"],
 

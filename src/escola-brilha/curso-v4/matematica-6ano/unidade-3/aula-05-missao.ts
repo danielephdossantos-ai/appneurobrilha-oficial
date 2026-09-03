@@ -41,7 +41,7 @@ export const aula05_missao: AulaV4 = {
     titulo: "Estratégia integrada",
     etapas: [
       {
-        texto: "Toda vez que aparecer 'juntos', 'ao mesmo tempo', 'ciclo': MMC.",
+        texto: "Quando ciclos periódicos precisam coincidir pela primeira vez, o MMC pode representar esse encontro.",
         exemploReal: {
           contexto: "Dois relógios batem a cada 4 e 6 segundos.",
           visualMat: {
@@ -58,7 +58,7 @@ export const aula05_missao: AulaV4 = {
         },
       },
       {
-        texto: "Toda vez que aparecer 'dividir em partes iguais', 'pedaços máximos': MDC.",
+        texto: "Quando quantidades devem ser divididas em partes iguais do maior tamanho possível, o MDC pode ser adequado.",
         exemploReal: {
           contexto: "Cortar duas fitas de 24 e 36 cm em pedaços iguais e MAIORES possíveis.",
           visualMat: {
@@ -109,20 +109,20 @@ export const aula05_missao: AulaV4 = {
   },
 
   momento08_aplicacao: {
-    contexto: "Uma pizzaria vende pizza de 8 fatias e refri de 12. Comprando quantos combos, sobra zero?",
-    problema: "Mínimo de fatias/latas iguais?",
+    contexto: "Duas luzes começam piscando juntas. Uma pisca a cada 8 segundos e a outra a cada 12 segundos.",
+    problema: "Depois de quantos segundos piscarão juntas novamente?",
     interacao: {
       tipo: "escolhaVisual",
-      pergunta: "MMC?",
-      opcoes: [{ nome: "24" }, { nome: "20" }, { nome: "96" }],
-      respostaCerta: "24",
-      feedbackAcerto: "🎯 MMC(8,12) = 24.",
-      feedbackErro: "8 = 2³, 12 = 2²·3 → MMC = 2³·3 = 24.",
+      pergunta: "Escolha:",
+      opcoes: [{ nome: "24 segundos" }, { nome: "20 segundos" }, { nome: "96 segundos" }],
+      respostaCerta: "24 segundos",
+      feedbackAcerto: "🎯 MMC(8,12) = 24 segundos.",
+      feedbackErro: "Os múltiplos comuns começam em 24: 8×3 e 12×2.",
     },
   },
 
   momento09_revisao: {
-    pontos: ["Você virou Detetive dos Divisores.", "Toda pergunta com 'juntos' ou 'iguais' vem daqui."],
+    pontos: ["Você virou Detetive dos Divisores.", "Escolha MMC ou MDC pela relação entre as quantidades, não por uma palavra isolada."],
   },
 
   momento10_avaliacao: {

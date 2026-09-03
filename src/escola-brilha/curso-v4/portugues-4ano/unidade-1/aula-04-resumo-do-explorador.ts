@@ -22,7 +22,7 @@ export const aula04: AulaPortuguesV4 = {
   slug: "aula-04-resumo-do-explorador",
   titulo: "Resumo do Explorador",
   iconeTrilha: "📜",
-  bncc: ["EF35LP04", "EF04LP11"],
+  bncc: ["EF35LP03", "EF35LP04", "EF15LP03"],
   duracaoMin: 20,
 
   momento01_motivacao: {

@@ -28,7 +28,7 @@ export const aula03: AulaPortuguesV4 = {
   slug: "aula-03-verbete-infografico",
   titulo: "Verbete e Infográfico da Abelha",
   iconeTrilha: "🐝",
-  bncc: ["EF04LP15", "EF04LP17"],
+  bncc: ["EF04LP19", "EF04LP20", "EF04LP22", "EF04LP23", "EF04LP24", "EF35LP17", "EF15LP04"],
   duracaoMin: 22,
 
   momento01_motivacao: {

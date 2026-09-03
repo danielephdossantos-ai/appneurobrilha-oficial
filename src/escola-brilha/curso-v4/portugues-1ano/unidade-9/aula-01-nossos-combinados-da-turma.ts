@@ -87,7 +87,7 @@ export const aula01: AulaPortuguesV4 = {
 
   momento_ensinoVisual: {
     titulo: "Como se escreve um combinado",
-    instrucao: "Ouça: combinado começa com um verbo de ação e é curtinho.",
+    instrucao: "Uma forma clara de escrever combinados é começar com um verbo de ação e usar poucas palavras. Outros formatos claros também são possíveis.",
     blocos: [
       {
         tipo: "fraseComPonto",
@@ -268,7 +268,7 @@ export const aula01: AulaPortuguesV4 = {
   momento09_revisao: {
     pontos: [
       "Combinado é uma regra que a turma faz junto.",
-      "Cada combinado é curtinho e começa com uma ação.",
+      "Um combinado deve ser claro e fácil de compreender; começar com uma ação é uma boa estratégia.",
       "O combinado vale para todo mundo.",
       "A lista de combinados fica no cartaz, para todos verem.",
     ],

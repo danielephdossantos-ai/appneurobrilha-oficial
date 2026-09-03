@@ -243,11 +243,11 @@ export const aula02: AulaPortuguesV4 = {
   momento09_revisao: {
     pontos: [
       "BILHETE é um texto curto pra avisar algo rápido.",
-      "Todo bilhete tem: pra quem é, o recado, e quem escreveu.",
+      "Um bilhete claro costuma indicar pra quem é, trazer o recado e mostrar quem escreveu.",
       "A gente deixa o bilhete num lugar onde a pessoa vai ver.",
     ],
     miniDesafio: {
-      pergunta: "O que sempre aparece no final de um bilhete?",
+      pergunta: "No modelo estudado, o que aparece no final do bilhete?",
       opcoes: ["A assinatura de quem escreveu", "Um desenho", "Uma lista"],
       correta: 0,
       feedbackAcerto: "🎉 Isso! A assinatura mostra quem escreveu.",
@@ -296,7 +296,7 @@ export const aula02: AulaPortuguesV4 = {
         feedbackErro: "O bilhete diz: 'Te espero no parquinho'.",
       },
       {
-        pergunta: "5/5 — O que aparece no final de um bilhete?",
+        pergunta: "5/5 — No bilhete estudado, o que aparece no final?",
         opcoes: [
           "A assinatura de quem escreveu",
           "O nome de quem vai ler",

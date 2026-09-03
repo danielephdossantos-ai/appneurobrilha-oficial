@@ -14,7 +14,7 @@ export const aula04_descobrindoPadroes: AulaV4 = {
   slug: "u7-04-descobrindo-padroes",
   titulo: "Descobrindo Padrões",
   iconeTrilha: "🧩",
-  bncc: ["EF02MA09", "EF02MA10"],
+  bncc: ["EF02MA09", "EF02MA10", "EF02MA11"],
   duracaoMin: 20,
 
   momento01_motivacao: {

@@ -5,7 +5,7 @@ export const aula01_racionais: AulaV4 = {
   slug: "u2-01-racionais",
   titulo: "O Conjunto dos Racionais",
   iconeTrilha: "🧩",
-  bncc: ["EF07MA05"],
+  bncc: ["EF07MA08", "EF07MA10"],
   duracaoMin: 30,
   metodologias: ["skemp"],
 

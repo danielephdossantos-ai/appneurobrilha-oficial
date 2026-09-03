@@ -1,5 +1,6 @@
 import type { UnidadeGeoV1 } from "../../types";
 import { aula01 } from "./aula-01-rotas-maritimas";
+import { aula02 } from "./aula-02-ocupacao-comunicacao";
 
 export const unidade2: UnidadeGeoV1 = {
   slug: "unidade-2",
@@ -9,5 +10,5 @@ export const unidade2: UnidadeGeoV1 = {
   descricao:
     "Brilha e Aurora investigam como bússola, astrolábio e caravelas permitiram aos europeus atravessar oceanos em busca das especiarias. Restaura a Página 2: Os Caminhos do Oceano.",
   corTema: "#0369a1",
-  aulas: [aula01],
+  aulas: [aula01, aula02],
 };

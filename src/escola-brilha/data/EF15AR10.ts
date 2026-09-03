@@ -1,0 +1,2 @@
+import { criarAulaArte1 } from "./criarAulaArte1";
+export default criarAulaArte1({ codigo: "EF15AR10", titulo: "Caminhos do Movimento", foco: "Experimentar direções, níveis, trajetórias e ritmos na dança", objeto: "espaço e ritmo na dança", exemplos: ["Mover alto, baixo, rápido e devagar", "Permanecer sem observar", "Separar sílabas", "Medir uma mesa"], resposta: "Criar movimentos variando direção, nível e velocidade com segurança.", proxima: "EF15AR11" });

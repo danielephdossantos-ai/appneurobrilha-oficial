@@ -9,13 +9,13 @@ import { url as cadeiaImg } from "@/assets/ciencias-4ano/u3-a1/cadeia-diagrama.j
 
 /**
  * Ciências · 4º Ano · Unidade 3 · Aula 01
- * "Cadeia Alimentar e Ecossistemas" — EF04CI04
+ * "Cadeia Alimentar e Ecossistemas" — EF04CI04/05
  */
 export const aula01: AulaGeoV1 = {
   slug: "aula-01-cadeia-alimentar",
   titulo: "Cadeia Alimentar",
   iconeTrilha: "🦌",
-  bncc: ["EF04CI04"],
+  bncc: ["EF04CI04", "EF04CI05"],
   duracaoMin: 30,
 
   cena01_motivacao: {
@@ -38,6 +38,7 @@ export const aula01: AulaGeoV1 = {
       { id: "nada", titulo: "Nada muda", subtitulo: "animais comem uns aos outros", emoji: "🤷", cor: "from-slate-500 to-slate-700" },
       { id: "colapsa", titulo: "COLAPSA tudo", subtitulo: "sem plantas, sem herbívoros, sem carnívoros", emoji: "💀", cor: "from-red-500 to-rose-700" },
       { id: "so-plantas", titulo: "Só as plantas morrem", subtitulo: "animais continuam", emoji: "🐇", cor: "from-amber-500 to-orange-700" },
+      { id: "muda", titulo: "A CADEIA SE DESEQUILIBRA", subtitulo: "as populações são afetadas", emoji: "⚖️", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "colapsa",
     feedbackAcerto:
@@ -155,6 +156,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🌱", titulo: "Plantas (produtores)", cor: "from-green-500 to-emerald-700" },
           { id: "b", emoji: "🐆", titulo: "Carnívoros", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🐰", titulo: "Herbívoros", cor: "from-amber-500 to-orange-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "a",
         feedbackAcerto: "Sim. Plantas fazem fotossíntese — só elas transformam luz em comida.",
@@ -168,6 +170,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "💀", titulo: "Nada morre, tudo bem", cor: "from-slate-500 to-slate-700" },
           { id: "b", emoji: "🗑️", titulo: "Nutrientes ficam presos, solo empobrece", cor: "from-purple-500 to-fuchsia-700" },
           { id: "c", emoji: "🐆", titulo: "Só os carnívoros somem", cor: "from-red-500 to-rose-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "b",
         feedbackAcerto: "Correto. Sem decompositor, matéria morta se acumula e o solo não recebe nutrientes.",
@@ -181,6 +184,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🐰", titulo: "Consumidor primário (herbívoro)", cor: "from-amber-500 to-orange-700" },
           { id: "b", emoji: "🐆", titulo: "Consumidor secundário (carnívoro)", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🌱", titulo: "Produtor", cor: "from-green-500 to-emerald-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "a",
         feedbackAcerto: "Isso. Come planta = herbívoro = consumidor PRIMÁRIO.",
@@ -380,6 +384,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Do sol, absorvido pelas plantas", correta: true },
           { id: "b", texto: "Dos animais maiores" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Certo. Sol → plantas → resto da cadeia.",
         feedbackErro: "Toda energia começa no SOL, entra pela planta.",
@@ -391,6 +397,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Só come plantas", correta: true },
           { id: "b", texto: "Só come outros animais" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. HERBI = planta. Só come vegetais.",
         feedbackErro: "Herbívoro come PLANTAS. Quem come animais é carnívoro.",
@@ -402,6 +410,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Devolver nutrientes ao solo", correta: true },
           { id: "b", texto: "Caçar herbívoros" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. Fecha o ciclo — nutrientes voltam pra planta usar.",
         feedbackErro: "Decompositor não caça. Ele DECOMPÕE matéria morta e devolve nutrientes.",

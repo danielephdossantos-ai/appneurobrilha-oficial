@@ -37,6 +37,7 @@ export const aula01: AulaGeoV1 = {
       { id: "metal", titulo: "Núcleo metálico QUENTÍSSIMO", subtitulo: "ferro e níquel derretidos", emoji: "🔥", cor: "from-red-500 to-orange-700", fotoUrl: camadasImg },
       { id: "vazio", titulo: "Espaço vazio", subtitulo: "buraco no meio", emoji: "⚫", cor: "from-slate-500 to-slate-800", fotoUrl: terraImg },
       { id: "agua", titulo: "Oceano subterrâneo", subtitulo: "água por todo lado", emoji: "💧", cor: "from-sky-500 to-blue-700", fotoUrl: terraImg },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "metal",
     feedbackAcerto:
@@ -84,6 +85,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🔄", titulo: "Rotação da Terra em torno do próprio eixo (24h)", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🌌", titulo: "Translação da Terra ao redor do Sol", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🌙", titulo: "A Lua bloqueando o Sol", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Isso. Rotação = 24h = ciclo dia-noite.",
         feedbackErro: "Translação leva UM ANO (estações). Rotação leva 24h e causa dia/noite." },
@@ -92,6 +94,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🌋", titulo: "Manto (magma sobe até a superfície)", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🪨", titulo: "Crosta (rocha sólida fria)", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🔥", titulo: "Núcleo (muito profundo)", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. Magma nasce no MANTO e sobe por fraturas na crosta.",
         feedbackErro: "Crosta é sólida. Núcleo é muito profundo. Magma vem do MANTO." },
@@ -100,6 +103,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "📐", titulo: "Pela INCLINAÇÃO do eixo da Terra durante a translação", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "☀️", titulo: "Porque a Terra se afasta e aproxima do Sol", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🌡️", titulo: "Porque a temperatura do Sol muda", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Sim. Eixo inclinado a 23,5° faz cada hemisfério receber mais/menos luz em cada época.",
         feedbackErro: "Distância varia POUCO. O que muda é a INCLINAÇÃO — determina quanto sol cada hemisfério recebe." },
@@ -192,6 +196,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Crosta → manto → núcleo externo → núcleo interno", correta: true },
           { id: "b", texto: "Núcleo → crosta → manto → atmosfera" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. Sequência oficial da geofísica.",
         feedbackErro: "Da SUPERFÍCIE ao CENTRO: crosta → manto → núcleo externo → núcleo interno." },
@@ -199,6 +205,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Medindo sombras de varas em cidades distantes ao mesmo tempo", correta: true },
           { id: "b", texto: "Enviando um satélite para o espaço" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. Método brilhante e simples — só precisou de varas, sombras e matemática.",
         feedbackErro: "Sem satélite. Só varas + sombras + raciocínio geométrico." },
@@ -206,6 +214,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "O magma do manto sobe pela crosta em zonas de fraqueza", correta: true },
           { id: "b", texto: "Meteoritos criam buracos que expõem lava" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Exato. Magma vem do MANTO e sobe onde a crosta tem fraturas.",
         feedbackErro: "Não são meteoritos. Vulcões são a saída natural do MAGMA do manto." },

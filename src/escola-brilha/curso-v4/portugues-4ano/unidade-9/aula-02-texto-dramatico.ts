@@ -21,7 +21,7 @@ export const aula02: AulaPortuguesV4 = {
   slug: "aula-02-texto-dramatico",
   titulo: "Os Sinais do Palco",
   iconeTrilha: "🎭",
-  bncc: ["EF04LP27", "EF35LP11", "EF15LP01"],
+  bncc: ["EF04LP27", "EF35LP24", "EF15LP15", "EF15LP16"],
   duracaoMin: 22,
 
   momento01_motivacao: {

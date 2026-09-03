@@ -23,7 +23,10 @@ export function CertificadoFund2({
   const [data] = useState(() =>
     new Date().toLocaleDateString("pt-BR", { day: "2-digit", month: "long", year: "numeric" }),
   );
-  const [codigo] = useState(() => `EB-${Math.random().toString(36).slice(2, 8).toUpperCase()}-6GE`);
+  const [codigo] = useState(() => {
+    const serie = ano.match(/\d+/)?.[0] ?? "EF2";
+    return `EB-${Math.random().toString(36).slice(2, 8).toUpperCase()}-${serie}GE`;
+  });
 
   useEffect(() => {
     const end = Date.now() + 3000;
@@ -101,7 +104,7 @@ export function CertificadoFund2({
             </div>
 
             <p className="text-slate-300 leading-relaxed mb-6 max-w-xl mx-auto print:text-slate-700">
-              concluiu o ciclo integrador do 6º Ano de Geografia, cumprindo com êxito as 7 unidades
+              concluiu o ciclo integrador de {disciplina} do {ano}, cumprindo com êxito as 7 unidades
               curriculares e o desafio crítico final, sendo agraciado(a) com o título de:
             </p>
 

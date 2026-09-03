@@ -23,7 +23,7 @@ export const aula02: AulaPortuguesV4 = {
   slug: "aula-02-quem-fez-esse-alimento",
   titulo: "Quem Fez Esse Alimento?",
   iconeTrilha: "🍅",
-  bncc: ["EF02GE07"],
+  bncc: [],
   duracaoMin: 15,
 
   momento01_motivacao: {
@@ -69,11 +69,11 @@ export const aula02: AulaPortuguesV4 = {
           imagemUrl: mercado,
         },
         { texto: "Sobre desenhar uma casa.", imagemUrl: cidade },
+        { texto: "Sobre outra possibilidade relacionada ao tema.", imagemUrl: campo },
       ],
       respostaCerta: 0,
       feedbackAcerto: "🎉 Isso! Vamos ligar CADA alimento à sua ORIGEM.",
-      feedbackErro:
-        "As pistas mostram PÃO, QUEIJO e OVO — a missão fala da ORIGEM dos alimentos.",
+      feedbackErro: "As pistas mostram PÃO, QUEIJO e OVO — a missão fala da ORIGEM dos alimentos.",
     },
   },
 
@@ -82,8 +82,7 @@ export const aula02: AulaPortuguesV4 = {
     cards: [
       {
         palavra: "origem",
-        explicacao:
-          "É de ONDE uma coisa vem. A ORIGEM do queijo é o LEITE da VACA.",
+        explicacao: "É de ONDE uma coisa vem. A ORIGEM do queijo é o LEITE da VACA.",
         exemplo: "A ORIGEM do pão é o TRIGO plantado no campo.",
         imagemUrl: semente,
       },
@@ -124,7 +123,7 @@ export const aula02: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "De onde vem o PÃO?",
-        opcoes: ["Do trigo plantado no campo", "Da vaca", "Do rio"],
+        opcoes: ["Do trigo plantado no campo", "Da vaca", "Do rio", "Outra possibilidade"],
         correta: 0,
         feedbackAcerto: "🎉 Isso! Do TRIGO.",
         feedbackErro: "O texto diz: 'O agricultor planta TRIGO… A padaria… assar o PÃO'.",
@@ -132,7 +131,7 @@ export const aula02: AulaPortuguesV4 = {
       },
       {
         pergunta: "De onde vem o QUEIJO?",
-        opcoes: ["Da galinha", "Do leite da vaca", "Do tomate"],
+        opcoes: ["Da galinha", "Do leite da vaca", "Do tomate", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 Certo! Do LEITE da VACA.",
         feedbackErro: "O texto diz: 'A VACA dá LEITE. O leite… vira QUEIJO'.",
@@ -140,7 +139,7 @@ export const aula02: AulaPortuguesV4 = {
       },
       {
         pergunta: "De onde vem o MOLHO?",
-        opcoes: ["Do tomate", "Do trigo", "Do ovo"],
+        opcoes: ["Do tomate", "Do trigo", "Do ovo", "Outra possibilidade"],
         correta: 0,
         feedbackAcerto: "🎉 Boa! Do TOMATE.",
         feedbackErro: "O texto diz: 'O MOLHO vem do TOMATE plantado no sítio'.",
@@ -148,7 +147,7 @@ export const aula02: AulaPortuguesV4 = {
       },
       {
         pergunta: "De onde vem o OVO?",
-        opcoes: ["Da vaca", "Da galinha", "Da árvore"],
+        opcoes: ["Da vaca", "Da galinha", "Da árvore", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 Isso! Da GALINHA.",
         feedbackErro: "O texto diz: 'O OVO vem da GALINHA'.",
@@ -162,24 +161,34 @@ export const aula02: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "Onde vive a VACA que dá leite?",
-        opcoes: ["No campo, no pasto", "Dentro do mercado", "Na padaria"],
-        opcoesImagens: [campo, mercado, padaria],
+        opcoes: ["No campo, no pasto", "Dentro do mercado", "Na padaria", "Outra possibilidade"],
+        opcoesImagens: [campo, mercado, padaria, campo],
         correta: 0,
         feedbackAcerto: "🎉 No CAMPO, no PASTO.",
         feedbackErro: "A VACA vive no CAMPO, no pasto.",
       },
       {
         pergunta: "Onde a GALINHA bota o OVO?",
-        opcoes: ["Num prédio da cidade", "No galinheiro (campo)", "Dentro da geladeira"],
-        opcoesImagens: [cidade, galinha, geladeira],
+        opcoes: [
+          "Num prédio da cidade",
+          "No galinheiro (campo)",
+          "Dentro da geladeira",
+          "Outra possibilidade",
+        ],
+        opcoesImagens: [cidade, galinha, geladeira, cidade],
         correta: 1,
         feedbackAcerto: "🎉 No GALINHEIRO, no campo.",
         feedbackErro: "A GALINHA bota o OVO no galinheiro, no CAMPO.",
       },
       {
         pergunta: "Onde o AGRICULTOR planta trigo e tomate?",
-        opcoes: ["Na roça / no sítio (campo)", "No shopping", "Em cima do caminhão"],
-        opcoesImagens: [campo, mercado, cidade],
+        opcoes: [
+          "Na roça / no sítio (campo)",
+          "No shopping",
+          "Em cima do caminhão",
+          "Outra possibilidade",
+        ],
+        opcoesImagens: [campo, mercado, cidade, campo],
         correta: 0,
         feedbackAcerto: "🎉 Na ROÇA / SÍTIO — no CAMPO.",
         feedbackErro: "O AGRICULTOR planta no SÍTIO, no campo.",
@@ -219,8 +228,13 @@ export const aula02: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "De onde vem a MAÇÃ?",
-        opcoes: ["De uma árvore no pomar (campo)", "Do teto do mercado", "Do caminhão"],
-        opcoesImagens: [arvore, mercado, campo],
+        opcoes: [
+          "De uma árvore no pomar (campo)",
+          "Do teto do mercado",
+          "Do caminhão",
+          "Outra possibilidade",
+        ],
+        opcoesImagens: [arvore, mercado, campo, arvore],
         correta: 0,
         feedbackAcerto: "🎉 De uma ÁRVORE no POMAR.",
         feedbackErro: "O texto diz: 'A maçã veio de um POMAR, com árvores…'.",
@@ -228,12 +242,16 @@ export const aula02: AulaPortuguesV4 = {
       },
       {
         pergunta: "Sem os SÍTIOS e POMARES, o que faltaria no mercado?",
-        opcoes: ["Nada — o mercado inventa", "As FRUTAS", "Só os brinquedos"],
-        opcoesImagens: [mercado, maca, cidade],
+        opcoes: [
+          "Nada — o mercado inventa",
+          "As FRUTAS",
+          "Só os brinquedos",
+          "Outra possibilidade",
+        ],
+        opcoesImagens: [mercado, maca, cidade, mercado],
         correta: 1,
         feedbackAcerto: "🎉 Isso! Faltariam as FRUTAS.",
-        feedbackErro:
-          "O texto diz: 'o MERCADO não teria FRUTA nenhuma pra vender'.",
+        feedbackErro: "O texto diz: 'o MERCADO não teria FRUTA nenhuma pra vender'.",
         ondeEstaNoTexto: "…o MERCADO não teria FRUTA nenhuma pra vender…",
       },
     ],
@@ -241,8 +259,7 @@ export const aula02: AulaPortuguesV4 = {
 
   momento_minijogo: {
     titulo: "🎯 Ligue a Origem",
-    instrucao:
-      "Arraste CADA produto do mercado até o seu produtor lá no CAMPO.",
+    instrucao: "Arraste CADA produto do mercado até o seu produtor lá no CAMPO.",
     jogo: {
       tipo: "arrastarParaAlvo",
       titulo: "Arrastar para o Alvo",
@@ -289,8 +306,7 @@ export const aula02: AulaPortuguesV4 = {
           { id: "maca", texto: "🍎 Maçã", alvoId: "arvore", imagemUrl: maca },
           { id: "banana", texto: "🍌 Banana", alvoId: "arvore", imagemUrl: banana },
         ],
-        feedbackAcerto:
-          "🎉 MATCH! Cada produto do mercado tem uma ORIGEM no campo.",
+        feedbackAcerto: "🎉 MATCH! Cada produto do mercado tem uma ORIGEM no campo.",
         feedbackErro:
           "Lembra: queijo/leite ← VACA; pão ← TRIGO; molho ← TOMATE; ovo ← GALINHA; frutas ← ÁRVORES.",
       },
@@ -307,7 +323,7 @@ export const aula02: AulaPortuguesV4 = {
     ],
     miniDesafio: {
       pergunta: "Qual a ORIGEM do QUEIJO?",
-      opcoes: ["A galinha", "O leite da vaca", "O trigo"],
+      opcoes: ["A galinha", "O leite da vaca", "O trigo", "Outra possibilidade"],
       correta: 1,
       feedbackAcerto: "🎉 O LEITE da VACA vira QUEIJO.",
       feedbackErro: "QUEIJO ← LEITE ← VACA.",
@@ -318,28 +334,28 @@ export const aula02: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "1/5 — De onde vem o OVO?",
-        opcoes: ["Da galinha", "Da vaca", "Do trigo"],
+        opcoes: ["Da galinha", "Da vaca", "Do trigo", "Outra possibilidade"],
         correta: 0,
         feedbackAcerto: "🎉 Da GALINHA.",
         feedbackErro: "O OVO vem da GALINHA.",
       },
       {
         pergunta: "2/5 — De onde vem o PÃO?",
-        opcoes: ["Do leite", "Do trigo", "Da banana"],
+        opcoes: ["Do leite", "Do trigo", "Da banana", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 Do TRIGO (vira farinha e depois pão).",
         feedbackErro: "PÃO vem do TRIGO.",
       },
       {
         pergunta: "3/5 — De onde vem o MOLHO de tomate?",
-        opcoes: ["Da árvore", "Do tomate plantado no sítio", "Do ovo"],
+        opcoes: ["Da árvore", "Do tomate plantado no sítio", "Do ovo", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 Do TOMATE.",
         feedbackErro: "MOLHO vem do TOMATE.",
       },
       {
         pergunta: "4/5 — Quem PLANTA e COLHE no campo?",
-        opcoes: ["O agricultor", "O motorista", "O caixa do mercado"],
+        opcoes: ["O agricultor", "O motorista", "O caixa do mercado", "Outra possibilidade"],
         correta: 0,
         feedbackAcerto: "🎉 O AGRICULTOR.",
         feedbackErro: "Quem PLANTA e COLHE é o AGRICULTOR.",
@@ -350,11 +366,11 @@ export const aula02: AulaPortuguesV4 = {
           "Cheio do mesmo jeito",
           "Sem quase nenhum alimento",
           "Mais bonito",
+          "Outra possibilidade",
         ],
         correta: 1,
         feedbackAcerto: "🎉 Sem alimento — o mercado DEPENDE do campo.",
-        feedbackErro:
-          "Sem PRODUÇÃO no campo, o mercado fica SEM ALIMENTOS.",
+        feedbackErro: "Sem PRODUÇÃO no campo, o mercado fica SEM ALIMENTOS.",
       },
     ],
   },
@@ -368,8 +384,7 @@ export const aula02: AulaPortuguesV4 = {
       "3) Desenhe 3 fichinhas ligando o PRODUTO à sua ORIGEM (ex.: 🥛 ← 🐄).",
       "4) Guarda as fichinhas na geladeira!",
     ],
-    registro:
-      "📸 Uma foto das 3 fichinhas de ORIGEM que você desenhou.",
+    registro: "📸 Uma foto das 3 fichinhas de ORIGEM que você desenhou.",
   },
 
   recompensa: {

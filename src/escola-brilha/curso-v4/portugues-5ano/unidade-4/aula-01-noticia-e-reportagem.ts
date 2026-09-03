@@ -21,7 +21,7 @@ export const aula1: AulaPortuguesV4 = {
   slug: "aula-01-noticia-e-reportagem",
   titulo: "Notícia e reportagem",
   iconeTrilha: "📰",
-  bncc: ["EF05LP15", "EF05LP16"],
+  bncc: ["EF05LP15", "EF05LP16", "EF35LP16", "EF15LP01", "EF15LP03", "EF15LP04"],
   duracaoMin: 25,
 
   momento01_motivacao: {

@@ -6,7 +6,7 @@ import { url as imgRoupas } from "@/assets/historia-2ano/roupas-1920.png.asset.j
 import { url as imgFotoAntiga } from "@/assets/historia-2ano/foto-antiga.png.asset.json";
 /**
  * História · 2º Ano · Unidade 6 · Aula 01
- * "Costumes que Mudaram" — EF02HI06 + EF02HI07
+ * "Costumes que Mudaram" — EF02HI03
  *
  * Missão: comparar costumes antigos e de hoje. Sala 6 do museu.
  * Recompensa: Engrenagem de Diamante.
@@ -16,7 +16,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-costumes-que-mudaram",
   titulo: "Costumes que Mudaram",
   iconeTrilha: "🌎",
-  bncc: ["EF02HI06", "EF02HI07"],
+  bncc: ["EF02HI03"],
   duracaoMin: 20,
 
   cena01_motivacao: {
@@ -54,6 +54,8 @@ export const aula01: AulaGeoV1 = {
         cor: "from-amber-400 to-orange-600",
         fotoUrl: imgBrincadeiras,
       },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "tech",
     feedbackAcerto:
@@ -164,6 +166,7 @@ export const aula01: AulaGeoV1 = {
           { id: "v", emoji: "💿", titulo: "Disco de vinil pesado", cor: "from-amber-400 to-orange-600" },
           { id: "s", emoji: "📱", titulo: "Streaming no celular", cor: "from-sky-400 to-indigo-600" },
           { id: "b", emoji: "🎧", titulo: "Fone Bluetooth", cor: "from-emerald-400 to-teal-600" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "v",
         feedbackAcerto: "Isso! Disco de VINIL pesado, tocado numa vitrola.",
@@ -176,6 +179,8 @@ export const aula01: AulaGeoV1 = {
         cards: [
           { id: "t", emoji: "🎯", titulo: "Brincadeiras tradicionais", cor: "from-rose-400 to-red-600" },
           { id: "d", emoji: "🎮", titulo: "Jogos digitais", cor: "from-sky-400 to-indigo-600" },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "t",
         feedbackAcerto: "Combo! Brincadeiras TRADICIONAIS, sem tela.",
@@ -188,6 +193,8 @@ export const aula01: AulaGeoV1 = {
         cards: [
           { id: "c", emoji: "💬", titulo: "O jeito de se comunicar", cor: "from-sky-400 to-indigo-600" },
           { id: "d", emoji: "😴", titulo: "O hábito de dormir de noite", cor: "from-amber-400 to-orange-600" },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "c",
         feedbackAcerto: "Isso! Carta → mensagem instantânea. Comunicação virou coisa de segundos.",
@@ -434,6 +441,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Esperar dias por uma carta virou mensagem instantânea no celular", correta: true },
           { id: "b", texto: "Dormir à noite e ficar acordado de dia" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Isso! A comunicação virou coisa de segundos.",
         feedbackErro: "Dormir de noite todo mundo sempre fez. O que mudou foi COMUNICAÇÃO.",
@@ -445,6 +454,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Em vitrola tocando discos pesados de vinil", correta: true },
           { id: "b", texto: "Num aplicativo do celular" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Combo! Vinil + vitrola era o jeito antigo.",
         feedbackErro: "Aplicativo é MODERNO. Antigamente era vinil.",
@@ -456,6 +467,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Amarelinha, pula-corda e esconde-esconde", correta: true },
           { id: "b", texto: "Realidade virtual em óculos 3D" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Isso! Brincadeiras tradicionais atravessam gerações.",
         feedbackErro: "Óculos 3D é super novo. Tradição é a amarelinha, pula-corda.",

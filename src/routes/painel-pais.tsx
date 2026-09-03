@@ -7,11 +7,13 @@ import { RelatoriosPais } from "@/components/responsible/RelatoriosPais";
 import { PainelPedagogicoFamilia } from "@/components/responsible/PainelPedagogicoFamilia";
 import { NrpPillarsCard } from "@/components/responsible/NrpPillarsCard";
 import { DiarioABC } from "@/components/brilha-vida/DiarioABC";
+import { MoodTimeline } from "@/components/brilha-vida/MoodTimeline";
 import { ConsentGate } from "@/components/legal/ConsentGate";
 import { PrivacyPanel } from "@/components/legal/PrivacyPanel";
 import { useState, useEffect } from "react";
 import { useParentMode } from "@/contexts/ParentModeContext";
 import { AuditLogService } from "@/modules/auth/services/AuditLogService";
+import { TeacherAccessManager } from "@/components/responsible/TeacherAccessManager";
 
 export const Route = createFileRoute("/painel-pais")({ component: () => <ConsentGate><PainelPremium /></ConsentGate> });
 
@@ -53,6 +55,8 @@ function PainelPremium() {
     <div className="space-y-6">
       <PainelPedagogicoFamilia childId={activeChild.id} studentName={activeChild.nome}/>
       <NrpPillarsCard childId={activeChild.id}/>
+      <MoodTimeline childId={activeChild.id} />
+      <TeacherAccessManager childId={activeChild.id} childName={activeChild.nome} />
       <button onClick={()=>setDiarioAberto(true)} className="w-full text-left rounded-2xl border bg-white p-5 hover:border-primary/40"><div className="flex gap-3"><div className="h-11 w-11 rounded-xl bg-teal-100 text-teal-700 grid place-items-center"><BookOpen className="h-5 w-5"/></div><div><p className="text-xs font-bold text-teal-700">Observações da família</p><h3 className="font-black">Diário ABC de {activeChild.nome}</h3><p className="text-sm text-muted-foreground">Registre o que aconteceu antes, durante e depois de uma situação para acompanhar padrões ao longo do tempo.</p></div></div></button>
       <RelatoriosPais childId={activeChild.id}/>
       <PrivacyPanel/>

@@ -22,7 +22,7 @@ export const aula04: AulaPortuguesV4 = {
   slug: "aula-04-revisao-profissional",
   titulo: "Revisão profissional",
   iconeTrilha: "🔍",
-  bncc: ["EF35LP07", "EF04LP19"],
+  bncc: ["EF35LP07", "EF15LP06", "EF15LP07"],
   duracaoMin: 20,
 
   momento01_motivacao: {

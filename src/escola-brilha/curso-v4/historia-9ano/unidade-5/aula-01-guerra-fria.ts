@@ -6,7 +6,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-guerra-fria",
   titulo: "Guerra Fria (1947–1991)",
   iconeTrilha: "🧊",
-  bncc: ["EF09HI13", "EF09HI14"],
+  bncc: [],
   duracaoMin: 30,
   estilo: "teen",
 
@@ -29,6 +29,8 @@ export const aula01: AulaGeoV1 = {
     opcoes: [
       { id: "ten", titulo: "TENSÃO SEM CONFRONTO DIRETO", subtitulo: "corrida armamentista, espionagem, blocos", emoji: "🧊", cor: "from-cyan-800 to-slate-950" },
       { id: "abr", titulo: "GUERRA ABERTA CONTÍNUA", subtitulo: "combates entre EUA e URSS", emoji: "❌", cor: "from-amber-900 to-slate-950" },
+          { id: "extra2", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "extra3", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "ten",
     feedbackAcerto: "Correto. EUA e URSS nunca se atacaram diretamente — a 'guerra' era diplomática, econômica, tecnológica e por procuração.",
@@ -67,9 +69,9 @@ export const aula01: AulaGeoV1 = {
     aurora: "Três perguntas rápidas.",
     instrucao: "Toque no card correto",
     perguntas: [
-      { id: "q1", pergunta: "Quais eram as duas superpotências da Guerra Fria?", fotoUrl: imgLua, cards: [{ id: "eu", emoji: "🇺🇸☭", titulo: "EUA e URSS", cor: "from-cyan-600 to-slate-900" }, { id: "af", emoji: "🇩🇪🇫🇷", titulo: "Alemanha e França", cor: "from-amber-600 to-slate-900" }, { id: "cj", emoji: "🇨🇳🇯🇵", titulo: "China e Japão", cor: "from-slate-600 to-slate-900" }], correta: "eu", feedbackAcerto: "Correto. EUA (capitalista) e URSS (socialista).", feedbackErro: "É EUA × URSS. Os outros eram aliados dos blocos." },
-      { id: "q2", pergunta: "Em que ano CAIU o Muro de Berlim?", fotoUrl: imgMuro, cards: [{ id: "89", emoji: "🧱", titulo: "1989", cor: "from-teal-600 to-slate-900" }, { id: "61", emoji: "🔨", titulo: "1961", cor: "from-amber-600 to-slate-900" }, { id: "45", emoji: "🕊️", titulo: "1945", cor: "from-slate-600 to-slate-900" }], correta: "89", feedbackAcerto: "Correto. 9 de novembro de 1989.", feedbackErro: "É 1989 (queda). 1961 = quando o muro foi CONSTRUÍDO." },
-      { id: "q3", pergunta: "Quem levou o primeiro homem à Lua (1969)?", fotoUrl: imgLua, cards: [{ id: "us", emoji: "🇺🇸", titulo: "EUA", cor: "from-teal-600 to-slate-900" }, { id: "ur", emoji: "☭", titulo: "URSS", cor: "from-amber-600 to-slate-900" }, { id: "cn", emoji: "🇨🇳", titulo: "China", cor: "from-slate-600 to-slate-900" }], correta: "us", feedbackAcerto: "Correto. Missão Apollo 11, com Neil Armstrong.", feedbackErro: "É EUA (Apollo 11). A URSS foi 1º no espaço, mas EUA foi 1º na Lua." },
+      { id: "q1", pergunta: "Quais eram as duas superpotências da Guerra Fria?", fotoUrl: imgLua, cards: [{ id: "eu", emoji: "🇺🇸☭", titulo: "EUA e URSS", cor: "from-cyan-600 to-slate-900" }, { id: "af", emoji: "🇩🇪🇫🇷", titulo: "Alemanha e França", cor: "from-amber-600 to-slate-900" }, { id: "cj", emoji: "🇨🇳🇯🇵", titulo: "China e Japão", cor: "from-slate-600 to-slate-900" }, { id: "extra", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" }], correta: "eu", feedbackAcerto: "Correto. EUA (capitalista) e URSS (socialista).", feedbackErro: "É EUA × URSS. Os outros eram aliados dos blocos." },
+      { id: "q2", pergunta: "Em que ano CAIU o Muro de Berlim?", fotoUrl: imgMuro, cards: [{ id: "89", emoji: "🧱", titulo: "1989", cor: "from-teal-600 to-slate-900" }, { id: "61", emoji: "🔨", titulo: "1961", cor: "from-amber-600 to-slate-900" }, { id: "45", emoji: "🕊️", titulo: "1945", cor: "from-slate-600 to-slate-900" }, { id: "extra", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" }], correta: "89", feedbackAcerto: "Correto. 9 de novembro de 1989.", feedbackErro: "É 1989 (queda). 1961 = quando o muro foi CONSTRUÍDO." },
+      { id: "q3", pergunta: "Quem levou o primeiro homem à Lua (1969)?", fotoUrl: imgLua, cards: [{ id: "us", emoji: "🇺🇸", titulo: "EUA", cor: "from-teal-600 to-slate-900" }, { id: "ur", emoji: "☭", titulo: "URSS", cor: "from-amber-600 to-slate-900" }, { id: "cn", emoji: "🇨🇳", titulo: "China", cor: "from-slate-600 to-slate-900" }, { id: "extra", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" }], correta: "us", feedbackAcerto: "Correto. Missão Apollo 11, com Neil Armstrong.", feedbackErro: "É EUA (Apollo 11). A URSS foi 1º no espaço, mas EUA foi 1º na Lua." },
     ],
     falaFinal: "Você já mapeia os blocos e as vitórias tecnológicas.",
   },

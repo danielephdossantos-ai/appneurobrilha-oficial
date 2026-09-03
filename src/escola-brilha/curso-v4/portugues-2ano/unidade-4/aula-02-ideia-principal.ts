@@ -16,7 +16,7 @@ export const aula02: AulaPortuguesV4 = {
   slug: "aula-02-ideia-principal",
   titulo: "Descobrindo a Ideia Principal",
   iconeTrilha: "🎯",
-  bncc: ["EF02LP16", "EF02LP18"],
+  bncc: ["EF15LP03", "EF15LP16"],
   duracaoMin: 15,
 
   momento01_motivacao: {

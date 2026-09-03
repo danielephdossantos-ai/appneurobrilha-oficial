@@ -60,7 +60,8 @@ function AulaInglesEIRoute() {
         onSair={() => { if (!handleBack(navigate)) navigate({ to: "/escola-brilha/ingles-ei" }); }}
         onConcluir={async () => {
           try {
-            const key = `eb.ei.en.concluidas.${found.curso.slug}`;
+            const childId = localStorage.getItem("neurobrilha:activeChildId") || "sem-crianca";
+            const key = `eb.ei.en.concluidas.${found.curso.slug}.${childId}`;
             const raw = localStorage.getItem(key);
             const list: string[] = raw ? JSON.parse(raw) : [];
             if (!list.includes(aulaSlug)) list.push(aulaSlug);

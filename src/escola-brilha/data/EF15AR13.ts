@@ -1,0 +1,2 @@
+import { criarAulaArte1 } from "./criarAulaArte1";
+export default criarAulaArte1({ codigo: "EF15AR13", titulo: "Músicas de Muitos Mundos", foco: "Experimentar, identificar e apreciar músicas de diferentes contextos e culturas", objeto: "manifestações musicais", exemplos: ["Escutar e comparar músicas diferentes", "Ignorar todos os sons", "Pintar números", "Ordenar formas"], resposta: "Escutar atentamente e perceber diferenças de instrumentos, vozes e ritmos.", proxima: "EF15AR14" });

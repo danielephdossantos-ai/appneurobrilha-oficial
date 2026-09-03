@@ -277,7 +277,7 @@ export const aula07_missaoFinalU2: AulaV4 = {
     "pontos": [
       "Somar: coluna ≥ 10 sobe 1.",
       "Subtrair: se cima < baixo, empresta 10.",
-      "'Ao todo'=soma; 'sobrou'/'a mais'=subtração."
+      "Escolha a operação pela relação entre as quantidades, não por uma palavra isolada."
     ],
     "miniDesafio": {
       "tipo": "escolhaVisual",
@@ -331,7 +331,7 @@ export const aula07_missaoFinalU2: AulaV4 = {
         ],
         "correta": 0,
         "feedbackAcerto": "🏆 CONTADOR OFICIAL! 480+245=725.",
-        "feedbackErro": "'Total' → soma: 725."
+        "feedbackErro": "As duas parcelas formam o total: 480 + 245 = 725."
       }
     ]
   },

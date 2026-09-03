@@ -239,8 +239,8 @@ export function EspagueteEstatua({ onClose }: { onClose: () => void }) {
         </motion.div>
       )}
 
-      <p className="mt-6 text-[10px] text-slate-400 text-center max-w-xs">
-        Base clínica: Relaxamento Muscular Progressivo (Jacobson) — versão infantil de Koeppen.
+      <p className="mt-6 text-sm text-slate-500 text-center max-w-sm">
+        Faça os movimentos sem dor e pare se algo ficar desconfortável.
       </p>
     </div>
   );

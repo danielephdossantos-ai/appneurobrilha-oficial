@@ -159,6 +159,8 @@ export interface LessonMeta {
 
 export interface LessonData {
   slug: string;
+  /** Habilidades BNCC efetivamente desenvolvidas pela aula. Cursos complementares podem omitir. */
+  bnccCodes?: string[];
   meta: LessonMeta;
   VOCAB: Vocab[];
   STORY: StoryPanel[];

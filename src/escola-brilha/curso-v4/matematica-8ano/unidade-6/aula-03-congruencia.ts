@@ -4,7 +4,7 @@ export const aula03_congruencia: AulaV4 = {
   slug: "u6-03-congruencia",
   titulo: "Congruência de triângulos: LAL, LLL, ALA",
   iconeTrilha: "🔺",
-  bncc: ["EF08MA17"],
+  bncc: ["EF08MA14"],
   duracaoMin: 24,
   metodologias: ["skemp"],
   momento01_motivacao: {
@@ -45,7 +45,7 @@ export const aula03_congruencia: AulaV4 = {
     },
   },
   momento04_explicacao: {
-    titulo: "Os 3 casos, um a um",
+    titulo: "Os casos de congruência e a prova em quadriláteros",
     etapas: [
       {
         texto: "Caso LLL — os 3 lados batem.",
@@ -102,6 +102,25 @@ export const aula03_congruencia: AulaV4 = {
             fatorada: "Congruentes por ALA.",
           },
           destaque: "Lado ENTRE os ângulos.",
+        },
+      },
+      {
+        texto: "DEMONSTRAR UMA PROPRIEDADE: trace uma diagonal no paralelogramo. Ela cria dois triângulos congruentes por LAL; daí concluímos que os lados opostos têm a mesma medida.",
+        exemploReal: {
+          contexto: "No paralelogramo ABCD, a diagonal AC separa os triângulos ABC e CDA.",
+          visualMat: {
+            tipo: "trinomioPassoAPasso",
+            trinomio: "ΔABC e ΔCDA",
+            passos: [
+              { expr: "AC = AC", explica: "Lado comum.", status: "neutro" },
+              { expr: "ângulos BAC e DCA são iguais", explica: "Alternos internos, pois AB ∥ CD.", status: "ok" },
+              { expr: "ângulos BCA e DAC são iguais", explica: "Alternos internos, pois BC ∥ AD.", status: "ok" },
+              { expr: "os triângulos são congruentes", explica: "Caso ALA.", status: "ok" },
+              { expr: "AB = CD e BC = AD", explica: "Lados correspondentes de triângulos congruentes.", status: "ok" },
+            ],
+            fatorada: "A congruência demonstra a propriedade do quadrilátero",
+          },
+          destaque: "Uma demonstração explica por que a propriedade sempre vale; não é apenas um exemplo.",
         },
       },
     ],

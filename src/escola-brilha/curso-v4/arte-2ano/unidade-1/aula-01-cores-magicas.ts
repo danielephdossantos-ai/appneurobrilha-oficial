@@ -59,12 +59,27 @@ export const aula01: AulaArteV1 = {
       "Brilha, olha o que eu tenho: três potes de tinta MÁGICA! Vermelho, azul e amarelo. São as cores primárias — cores que nasceram sozinhas. Arrasta DOIS potes para dentro do caldeirão e vamos ver que cor nova nasce!",
     instrucao: "Arraste 2 potes de tinta para dentro do caldeirão",
     misturas: [
-      { id: "verde", primariaA: AZUL, primariaB: AMARELO, resultado: VERDE,
-        falaAcerto: "Uau! Azul mais amarelo nasce VERDE — a cor das folhas da floresta!" },
-      { id: "laranja", primariaA: VERMELHO, primariaB: AMARELO, resultado: LARANJA,
-        falaAcerto: "Olha só! Vermelho mais amarelo nasce LARANJA — a cor do pôr do sol!" },
-      { id: "roxo", primariaA: VERMELHO, primariaB: AZUL, resultado: ROXO,
-        falaAcerto: "Que lindo! Vermelho mais azul nasce ROXO — a cor da uva docinha!" },
+      {
+        id: "verde",
+        primariaA: AZUL,
+        primariaB: AMARELO,
+        resultado: VERDE,
+        falaAcerto: "Uau! Azul mais amarelo nasce VERDE — a cor das folhas da floresta!",
+      },
+      {
+        id: "laranja",
+        primariaA: VERMELHO,
+        primariaB: AMARELO,
+        resultado: LARANJA,
+        falaAcerto: "Olha só! Vermelho mais amarelo nasce LARANJA — a cor do pôr do sol!",
+      },
+      {
+        id: "roxo",
+        primariaA: VERMELHO,
+        primariaB: AZUL,
+        resultado: ROXO,
+        falaAcerto: "Que lindo! Vermelho mais azul nasce ROXO — a cor da uva docinha!",
+      },
     ],
     falaFinal:
       "Você descobriu as três cores secundárias: VERDE, LARANJA e ROXO. Todas nascem misturando duas primárias!",
@@ -77,29 +92,38 @@ export const aula01: AulaArteV1 = {
       "Agora vamos treinar o olho de artista! Antes de misturar, você VAI ADIVINHAR qual cor nasce. Concentra e escolhe!",
     rodadas: [
       {
-        primariaA: AZUL, primariaB: AMARELO,
+        primariaA: AZUL,
+        primariaB: AMARELO,
         opcoes: [
           { nome: "Verde", hex: VERDE.hex, correta: true },
           { nome: "Roxo", hex: ROXO.hex, correta: false },
           { nome: "Laranja", hex: LARANJA.hex, correta: false },
+
+          { nome: "Outra opção", hex: "#94a3b8", correta: false },
         ],
         feedbackAcerto: "Isso! Azul + Amarelo = Verde, a cor da floresta!",
       },
       {
-        primariaA: VERMELHO, primariaB: AMARELO,
+        primariaA: VERMELHO,
+        primariaB: AMARELO,
         opcoes: [
           { nome: "Roxo", hex: ROXO.hex, correta: false },
           { nome: "Laranja", hex: LARANJA.hex, correta: true },
           { nome: "Verde", hex: VERDE.hex, correta: false },
+
+          { nome: "Outra opção", hex: "#94a3b8", correta: false },
         ],
         feedbackAcerto: "Perfeito! Vermelho + Amarelo = Laranja, cor do pôr do sol!",
       },
       {
-        primariaA: VERMELHO, primariaB: AZUL,
+        primariaA: VERMELHO,
+        primariaB: AZUL,
         opcoes: [
           { nome: "Laranja", hex: LARANJA.hex, correta: false },
           { nome: "Verde", hex: VERDE.hex, correta: false },
           { nome: "Roxo", hex: ROXO.hex, correta: true },
+
+          { nome: "Outra opção", hex: "#94a3b8", correta: false },
         ],
         feedbackAcerto: "Boa! Vermelho + Azul = Roxo, cor da uva!",
       },
@@ -111,10 +135,34 @@ export const aula01: AulaArteV1 = {
     tipo: "vocabularioCards",
     aurora: "Toca em cada cartão para ouvir a palavra do ateliê e ver o que ela significa.",
     cards: [
-      { termo: "Primária", definicao: "Cor pura que não vem de mistura: Vermelho, Azul e Amarelo.", emoji: "🎨", cor: "#ef4444", fotoUrl: vocabPrimaria },
-      { termo: "Secundária", definicao: "Cor que nasce misturando DUAS primárias: Verde, Laranja e Roxo.", emoji: "🌈", cor: "#8b5cf6", fotoUrl: vocabSecundaria },
-      { termo: "Mistura", definicao: "É quando duas tintas se juntam e viram uma cor nova.", emoji: "🫙", cor: "#f97316", fotoUrl: vocabMistura },
-      { termo: "Pigmento", definicao: "Pozinho colorido que dá cor à tinta — pode vir de plantas e da terra.", emoji: "🌿", cor: "#22c55e", fotoUrl: vocabPigmento },
+      {
+        termo: "Primária",
+        definicao: "Cor pura que não vem de mistura: Vermelho, Azul e Amarelo.",
+        emoji: "🎨",
+        cor: "#ef4444",
+        fotoUrl: vocabPrimaria,
+      },
+      {
+        termo: "Secundária",
+        definicao: "Cor que nasce misturando DUAS primárias: Verde, Laranja e Roxo.",
+        emoji: "🌈",
+        cor: "#8b5cf6",
+        fotoUrl: vocabSecundaria,
+      },
+      {
+        termo: "Mistura",
+        definicao: "É quando duas tintas se juntam e viram uma cor nova.",
+        emoji: "🫙",
+        cor: "#f97316",
+        fotoUrl: vocabMistura,
+      },
+      {
+        termo: "Pigmento",
+        definicao: "Pozinho colorido que dá cor à tinta — pode vir de plantas e da terra.",
+        emoji: "🌿",
+        cor: "#22c55e",
+        fotoUrl: vocabPigmento,
+      },
     ],
   },
 
@@ -128,10 +176,34 @@ export const aula01: AulaArteV1 = {
       "Cada pigmento era um segredo da natureza. E até hoje, quando misturamos duas cores primárias, a MESMA magia acontece.",
     ],
     pigmentos: [
-      { nome: "Vermelho da terra", hex: "#b91c1c", fonte: "Terra argilosa", emoji: "🟫", fotoUrl: pigVermelho },
-      { nome: "Amarelo do urucum", hex: "#eab308", fonte: "Sementes de urucum", emoji: "🌰", fotoUrl: pigUrucum },
-      { nome: "Verde da folha", hex: "#16a34a", fonte: "Folhas amassadas", emoji: "🍃", fotoUrl: pigFolha },
-      { nome: "Azul do anil", hex: "#1d4ed8", fonte: "Planta anileira", emoji: "🌿", fotoUrl: pigAnil },
+      {
+        nome: "Vermelho da terra",
+        hex: "#b91c1c",
+        fonte: "Terra argilosa",
+        emoji: "🟫",
+        fotoUrl: pigVermelho,
+      },
+      {
+        nome: "Amarelo do urucum",
+        hex: "#eab308",
+        fonte: "Sementes de urucum",
+        emoji: "🌰",
+        fotoUrl: pigUrucum,
+      },
+      {
+        nome: "Verde da folha",
+        hex: "#16a34a",
+        fonte: "Folhas amassadas",
+        emoji: "🍃",
+        fotoUrl: pigFolha,
+      },
+      {
+        nome: "Azul do anil",
+        hex: "#1d4ed8",
+        fonte: "Planta anileira",
+        emoji: "🌿",
+        fotoUrl: pigAnil,
+      },
     ],
   },
 
@@ -145,15 +217,22 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Vermelho, Azul e Amarelo", correta: true },
           { texto: "Verde, Roxo e Laranja", correta: false },
+
+          { texto: "Não combina com a proposta", correta: false },
+          { texto: "Outra ação sem relação", correta: false },
         ],
         feedbackAcerto: "Isso! Primárias são puras, não vêm de mistura nenhuma.",
-        feedbackErro: "Quase! Verde, Roxo e Laranja são SECUNDÁRIAS. As primárias são Vermelho, Azul e Amarelo.",
+        feedbackErro:
+          "Quase! Verde, Roxo e Laranja são SECUNDÁRIAS. As primárias são Vermelho, Azul e Amarelo.",
       },
       {
         pergunta: "Azul + Amarelo faz qual cor?",
         alternativas: [
           { texto: "Roxo", correta: false },
           { texto: "Verde", correta: true },
+
+          { texto: "Não combina com a proposta", correta: false },
+          { texto: "Outra ação sem relação", correta: false },
         ],
         feedbackAcerto: "Verde, cor da folha! Você é craque.",
         feedbackErro: "Roxo nasce de Vermelho + Azul. Azul + Amarelo = Verde.",
@@ -163,6 +242,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Vermelho + Amarelo", correta: true },
           { texto: "Azul + Amarelo", correta: false },
+
+          { texto: "Não combina com a proposta", correta: false },
+          { texto: "Outra ação sem relação", correta: false },
         ],
         feedbackAcerto: "Perfeito! Laranja é vermelho + amarelo, cor do pôr do sol.",
         feedbackErro: "Azul + Amarelo dá Verde. Laranja é Vermelho + Amarelo.",
@@ -177,21 +259,27 @@ export const aula01: AulaArteV1 = {
       "Os animais da floresta perderam o colorido! Escolha a cor SECUNDÁRIA certa para pintar cada um.",
     animais: [
       {
-        nome: "Sapo da folha", emoji: "🐸", fotoUrl: animalSapo,
+        nome: "Sapo da folha",
+        emoji: "🐸",
+        fotoUrl: animalSapo,
         corAlvo: VERDE,
-        opcoes: [VERDE, ROXO, LARANJA],
+        opcoes: [VERDE, ROXO, LARANJA, { nome: "Cinza", hex: "#94a3b8" }],
         falaAcerto: "Verde igual à folha! O sapinho ficou feliz.",
       },
       {
-        nome: "Raposa do pôr do sol", emoji: "🦊", fotoUrl: animalRaposa,
+        nome: "Raposa do pôr do sol",
+        emoji: "🦊",
+        fotoUrl: animalRaposa,
         corAlvo: LARANJA,
-        opcoes: [VERDE, LARANJA, ROXO],
+        opcoes: [VERDE, LARANJA, ROXO, { nome: "Cinza", hex: "#94a3b8" }],
         falaAcerto: "Laranja brilhante! A raposa voltou a correr no fim da tarde.",
       },
       {
-        nome: "Borboleta da uva", emoji: "🦋", fotoUrl: animalBorboleta,
+        nome: "Borboleta da uva",
+        emoji: "🦋",
+        fotoUrl: animalBorboleta,
         corAlvo: ROXO,
-        opcoes: [ROXO, VERDE, LARANJA],
+        opcoes: [ROXO, VERDE, LARANJA, { nome: "Cinza", hex: "#94a3b8" }],
         falaAcerto: "Roxo lindo! A borboleta abriu as asas.",
       },
     ],
@@ -202,9 +290,21 @@ export const aula01: AulaArteV1 = {
     tipo: "sequenciaMistura",
     aurora: "Toca nos passos NA ORDEM CERTA de como fazemos uma mistura mágica.",
     passos: [
-      { id: "p1", texto: "Escolho a primeira tinta primária", emoji: "🫙", ordem: 1, fotoUrl: passo1Img },
+      {
+        id: "p1",
+        texto: "Escolho a primeira tinta primária",
+        emoji: "🫙",
+        ordem: 1,
+        fotoUrl: passo1Img,
+      },
       { id: "p2", texto: "Coloco no caldeirão", emoji: "⚗️", ordem: 2, fotoUrl: passo2Img },
-      { id: "p3", texto: "Escolho a segunda tinta primária", emoji: "🎨", ordem: 3, fotoUrl: passo3Img },
+      {
+        id: "p3",
+        texto: "Escolho a segunda tinta primária",
+        emoji: "🎨",
+        ordem: 3,
+        fotoUrl: passo3Img,
+      },
       { id: "p4", texto: "Misturo bem devagar", emoji: "🥄", ordem: 4, fotoUrl: passo4Img },
       { id: "p5", texto: "A cor secundária aparece!", emoji: "🌈", ordem: 5, fotoUrl: passo5Img },
     ],
@@ -259,10 +359,14 @@ export const aula01: AulaArteV1 = {
     tipo: "avaliacaoFinal",
     aurora: "Última missão, artista! Prova pra mim que ativou o Pincel Mágico.",
     quiz: {
-      pergunta: "Quais são as três cores primárias, aquelas que são puras e não precisam de mistura?",
+      pergunta:
+        "Quais são as três cores primárias, aquelas que são puras e não precisam de mistura?",
       alternativas: [
         { texto: "Vermelho, Azul e Amarelo", correta: true },
         { texto: "Verde, Roxo e Laranja", correta: false },
+
+        { texto: "Não combina com a proposta", correta: false },
+        { texto: "Outra ação sem relação", correta: false },
       ],
       feedback:
         "Isso mesmo! Com Vermelho, Azul e Amarelo você cria TODAS as outras cores do universo!",

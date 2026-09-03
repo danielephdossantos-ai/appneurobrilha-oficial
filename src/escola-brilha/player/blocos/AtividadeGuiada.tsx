@@ -46,6 +46,14 @@ export function AtividadeGuiada({
     );
   }
 
+  if (visual?.tipo === "comparar") {
+    return (
+      <Secao icon={HandHelping} rotulo="Atividade guiada" cor="#34D399">
+        <CompararGuiado visual={visual} explicacao={dados.explicacao} />
+      </Secao>
+    );
+  }
+
   if (visual?.tipo === "cena") {
     return (
       <Secao icon={HandHelping} rotulo="Atividade guiada" cor="#34D399">
@@ -89,6 +97,80 @@ export function AtividadeGuiada({
         </div>
       )}
     </Secao>
+  );
+}
+
+function CompararGuiado({
+  visual,
+  explicacao,
+}: {
+  visual: Extract<NonNullable<Aula["atividadeGuiada"]["visual"]>, { tipo: "comparar" }>;
+  explicacao: string;
+}) {
+  const [resp, setResp] = useState<number | null>(null);
+  const { speak } = useDeviceTTS();
+
+  function escolher(i: number) {
+    if (resp !== null) return;
+    setResp(i);
+    speak(i === visual.correta ? "Muito bem!" : "Forme os pares e observe se sobra algum.");
+  }
+
+  return (
+    <div>
+      <p className="font-black text-lg mb-4 text-center">{visual.pergunta}</p>
+      <div className={`grid gap-3 mb-4 ${visual.lados.length === 2 ? "grid-cols-2" : "grid-cols-1 sm:grid-cols-3"}`}>
+        {visual.lados.map((lado, li) => (
+          <div
+            key={lado.rotulo}
+            className="rounded-2xl border-4 bg-white/10 p-3"
+            style={{ borderColor: lado.cor ?? (li === 0 ? "#60A5FA" : "#FB923C") }}
+          >
+            <div className="text-sm font-black text-center mb-2">{lado.rotulo}</div>
+            <div className="flex flex-wrap justify-center gap-2 min-h-28 items-center">
+              {Array.from({ length: lado.quantidade }).map((_, i) => (
+                <img
+                  key={i}
+                  src={lado.imagemUrl}
+                  alt=""
+                  className="h-14 w-14 sm:h-16 sm:w-16 object-contain drop-shadow"
+                />
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+        {visual.opcoes.map((op, i) => {
+          const respondido = resp !== null;
+          const correta = i === visual.correta;
+          const escolhida = resp === i;
+          const estilo = !respondido
+            ? "bg-white text-[#0d1f55]"
+            : correta
+              ? "bg-emerald-500 text-white"
+              : escolhida
+                ? "bg-rose-500 text-white"
+                : "bg-white/10 text-white/60";
+          return (
+            <button
+              key={op}
+              type="button"
+              onClick={() => escolher(i)}
+              disabled={respondido}
+              className={`min-h-14 px-4 py-3 rounded-2xl font-black text-base active:scale-95 ${estilo}`}
+            >
+              {op}
+            </button>
+          );
+        })}
+      </div>
+      {resp !== null && (
+        <div className={`mt-3 rounded-xl border p-3 text-sm font-black ${resp === visual.correta ? "bg-emerald-500/15 border-emerald-400/40 text-emerald-100" : "bg-amber-500/15 border-amber-400/40 text-amber-100"}`}>
+          {explicacao}
+        </div>
+      )}
+    </div>
   );
 }
 

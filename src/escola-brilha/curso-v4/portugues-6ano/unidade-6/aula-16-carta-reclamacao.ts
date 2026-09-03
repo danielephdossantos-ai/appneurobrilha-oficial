@@ -8,7 +8,7 @@ export const aula16: AulaPortuguesV4 = {
   slug: "aula-16-carta-reclamacao",
   titulo: "Carta de Reclamação",
   iconeTrilha: "✉️",
-  bncc: ["EF67LP15"],
+  bncc: ["EF67LP18"],
   duracaoMin: 25,
   momento01_motivacao: {
     titulo: "Ação de Reparo: A Reclamação Formal",

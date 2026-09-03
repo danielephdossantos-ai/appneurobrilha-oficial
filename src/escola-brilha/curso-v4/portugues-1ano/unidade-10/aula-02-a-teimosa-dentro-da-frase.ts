@@ -7,7 +7,7 @@ import { url as sapo } from "@/assets/neuro-treino/objetos/sapo.png.asset.json";
 import { url as caixa } from "@/assets/neuro-treino/objetos/caixa.png.asset.json";
 
 /**
- * Unidade 10 · Aula 2 — A Teimosa Dentro da Frase
+ * Unidade 10 · Aula 2 — A Palavra Frequente Dentro da Frase
  * -------------------------------------------------------------
  * Fase 9. Segundo lote de palavras de alta frequência: COM, MUITO,
  * HOJE, AQUI, NÃO. Agora a criança não só reconhece a palavra
@@ -17,22 +17,22 @@ import { url as caixa } from "@/assets/neuro-treino/objetos/caixa.png.asset.json
  */
 export const aula02: AulaPortuguesV4 = {
   slug: "aula-02-a-teimosa-dentro-da-frase",
-  titulo: "A Teimosa Dentro da Frase",
+  titulo: "A Palavra Frequente Dentro da Frase",
   iconeTrilha: "🧲",
   bncc: ["EF01LP02", "EF01LP04", "EF01LP12"],
   duracaoMin: 14,
 
   momento01_motivacao: {
-    titulo: "Brilha lê rápido e trava numa palavrinha",
+    titulo: "Brilha lê com atenção uma palavra frequente",
     historia:
-      "Brilha lia bem: 'O sapo pula...' — e então travou em MUITO. Ficou tentando MU-I-TO, MU-I-TO. — Para! — riu Aurora. — Essa também é teimosa. Guarde ela inteira na cabeça, como uma figurinha. Aí ela nunca mais te trava.",
+      "Brilha encontrou a palavra MUITO. Aurora mostrou que a pronúncia pode soar como se houvesse um N, mas a escrita convencional é M-U-I-T-O. Ele leu dentro da frase, comparou fala e escrita e praticou novamente.",
     imagemUrl: brilha,
   },
 
   momento02_previsao: {
     instrucao: "Olhe o título e as pistas. O que vamos fazer hoje?",
     bloco: {
-      titulo: "A Teimosa Dentro da Frase",
+      titulo: "A Palavra Frequente Dentro da Frase",
       capaImagemUrl: livro,
       pistas: [
         { imagemUrl: livro, nome: "Uma frase escrita" },
@@ -40,13 +40,13 @@ export const aula02: AulaPortuguesV4 = {
       ],
       pergunta: "O que a aula vai pedir?",
       hipoteses: [
-        { texto: "Encontrar e usar palavras teimosas nas frases.", imagemUrl: livro },
+        { texto: "Encontrar e usar palavras frequentes nas frases.", imagemUrl: livro },
         { texto: "Desenhar um sapo grande.", imagemUrl: sapo },
         { texto: "Guardar brinquedos na caixa.", imagemUrl: caixa },
       ],
       respostaCerta: 0,
-      feedbackAcerto: "🎉 Isso! Hoje as teimosas entram nas frases.",
-      feedbackErro: "As pistas são uma frase e uma palavra brilhando: vamos achar a teimosa na frase.",
+      feedbackAcerto: "🎉 Isso! Hoje as palavras frequentes entram nas frases.",
+      feedbackErro: "As pistas mostram uma frase e uma palavra destacada: vamos encontrá-la no contexto.",
     },
   },
 
@@ -71,7 +71,7 @@ export const aula02: AulaPortuguesV4 = {
   momento_ensinoVisual: {
     titulo: "Pisca e some",
     instrucao:
-      "Cada teimosa aparece por pouquinho tempo e some. Depois você escolhe qual era. Se errar, tudo bem: olhe de novo com calma.",
+      "Cada palavra frequente aparece por pouco tempo. Depois você escolhe qual era. Se errar, observe novamente com calma.",
     blocos: [
       {
         tipo: "palavraRelampago",
@@ -88,7 +88,7 @@ export const aula02: AulaPortuguesV4 = {
   },
 
   momento04_leituraGuiada: {
-    instrucao: "Leia comigo. Quando aparecer uma teimosa, aponte com o dedo e diga em voz alta.",
+    instrucao: "Leia comigo. Quando aparecer uma palavra frequente, aponte e leia em voz alta.",
     leitura: {
       titulo: "Hoje na Casa da Vovó",
       imagemUrl: caixa,
@@ -183,12 +183,12 @@ export const aula02: AulaPortuguesV4 = {
 
   momento09_revisao: {
     pontos: [
-      "Teimosas de hoje: COM, MUITO, HOJE, AQUI, NÃO.",
-      "Elas não se montam por sílaba — a gente guarda a palavra inteira.",
-      "Reconhecer a teimosa rápido faz a frase inteira sair mais solta.",
+      "Palavras frequentes de hoje: COM, MUITO, HOJE, AQUI, NÃO.",
+      "Observamos letras, sons, acentos e a função de cada palavra na frase.",
+      "Ler com precisão e compreender é mais importante do que correr.",
     ],
     miniDesafio: {
-      pergunta: "'___ eu vou na feira.' Qual teimosa completa?",
+      pergunta: "'___ eu vou na feira.' Qual palavra frequente completa?",
       opcoes: ["HOJE", "MUITO", "AQUI"],
       correta: 0,
       feedbackAcerto: "🎉 Isso! HOJE fala do tempo.",
@@ -227,16 +227,16 @@ export const aula02: AulaPortuguesV4 = {
         feedbackErro: "Dia é HOJE. Bastante é MUITO. Junto é COM. AQUI é o lugar.",
       },
       {
-        pergunta: "5/5 — Por que a gente não junta os sons das teimosas?",
+        pergunta: "5/5 — Como aprendemos palavras frequentes com escrita menos transparente, como NÃO?",
         opcoes: [
-          "Porque juntando os sons não sai a palavra certa",
+          "Observando letras, sons, acento e uso na frase",
           "Porque elas são proibidas",
           "Porque elas são muito grandes",
           "Porque elas não têm letras",
         ],
         correta: 0,
-        feedbackAcerto: "🎉 Isso! Por isso a gente guarda a palavra inteira.",
-        feedbackErro: "Tente juntar N-Ã-O som por som: não sai igual ao que a gente fala. Por isso guardamos inteira.",
+        feedbackAcerto: "🎉 Isso! A prática liga a forma escrita à pronúncia e ao sentido.",
+        feedbackErro: "Observe N, Ã e O, escute a pronúncia e veja como NÃO funciona dentro da frase.",
       },
     ],
   },
@@ -246,17 +246,17 @@ export const aula02: AulaPortuguesV4 = {
     materiais: ["Papel", "Lápis"],
     passos: [
       "1) Escrevam juntos 5 frases sobre o dia de hoje.",
-      "2) Cada frase precisa ter uma teimosa: COM, MUITO, HOJE, AQUI ou NÃO.",
-      "3) A criança circula a teimosa de cada frase.",
+      "2) Cada frase deve usar uma destas palavras frequentes: COM, MUITO, HOJE, AQUI ou NÃO.",
+      "3) A criança circula a palavra frequente em cada frase.",
       "4) Ela lê as 5 frases em voz alta para a família.",
     ],
-    registro: "📸 Foto das 5 frases com as teimosas circuladas.",
+    registro: "📸 Foto das 5 frases com as palavras frequentes circuladas.",
   },
 
   momento_fluencia: {
     titulo: "Ler de novo, mais solto",
     instrucao:
-      "Mesmo texto, três leituras: comigo, sozinho e mais uma. Preste atenção em como fica mais fácil na terceira.",
+      "Faça três leituras: com apoio, sozinho no seu ritmo e mais uma vez com precisão e expressão. O tempo é apenas uma referência; confira também se você entendeu.",
     texto: ["HOJE EU FUI COM A VOVÓ.", "ELA COMPROU MUITO TOMATE.", "AQUI EM CASA NÃO TINHA MAIS."],
     metaSegundos: 22,
   },

@@ -1,5 +1,6 @@
 import { MundoBar, useMundoFundo } from "@/components/worlds/MundoTrilha";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { useNavigationStore } from "@/lib/navigation-context";
 import { useEffect, useMemo, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAppState } from "@/core/store";
@@ -141,12 +142,18 @@ function TrilhaIngles() {
                 <div key={l.slug} className={`flex ${align}`}>
                   <button
                     disabled={!desbloqueada}
-                    onClick={() =>
+                    onClick={() => {
+                      useNavigationStore.getState().setContext({
+                        originRoute: window.location.pathname,
+                        originModule: "escola-brilha",
+                        originParams: { serie },
+                        timestamp: Date.now(),
+                      });
                       navigate({
                         to: "/escola-brilha/ingles-v1/$curso/$aula",
                         params: { curso: `ingles-${serie}`, aula: l.slug },
-                      })
-                    }
+                      });
+                    }}
                     className={`group relative w-40 h-40 rounded-full grid place-items-center transition ${
                       desbloqueada
                         ? "text-[#0d1f55] shadow-xl hover:scale-105"

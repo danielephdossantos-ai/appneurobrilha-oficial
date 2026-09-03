@@ -23,7 +23,7 @@ export const aula02: AulaPortuguesV4 = {
   slug: "aula-02-linguagem-figurada",
   titulo: "Linguagem figurada na literatura",
   iconeTrilha: "💎",
-  bncc: ["EF35LP27", "EF35LP28"],
+  bncc: ["EF35LP27", "EF35LP31", "EF15LP16"],
   duracaoMin: 20,
 
   momento01_motivacao: {

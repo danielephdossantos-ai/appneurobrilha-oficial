@@ -17,7 +17,7 @@ export const aula01: AulaGeoV1 = {
   titulo: "Laboratório de Química",
   iconeTrilha: "⚗️",
   recompensa: { xp: 140, moedas: 55, medalha: "Químico Júnior" },
-  bncc: ["EF08CI03", "EF08CI04"],
+  bncc: [],
   duracaoMin: 45,
 
   cena01_motivacao: {
@@ -42,6 +42,7 @@ export const aula01: AulaGeoV1 = {
       { id: "quimica", titulo: "Transformação QUÍMICA", subtitulo: "novas substâncias aparecem (gás)", emoji: "🧪", cor: "from-emerald-500 to-teal-700", fotoUrl: transformacoesImg },
       { id: "fisica", titulo: "Só transformação FÍSICA", subtitulo: "as substâncias continuam iguais", emoji: "💧", cor: "from-red-500 to-rose-700", fotoUrl: transformacoesImg },
       { id: "nenhuma", titulo: "Nada de especial", subtitulo: "coincidência", emoji: "❌", cor: "from-slate-500 to-slate-700", fotoUrl: transformacoesImg },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "quimica",
     feedbackAcerto:
@@ -92,6 +93,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🔬", titulo: "Cerca de 118", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🌍", titulo: "Milhões", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🔟", titulo: "Só 10", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Sim. 118 elementos organizados na tabela periódica.",
         feedbackErro: "Existem MILHÕES de moléculas, mas só ~118 elementos. Diferentes combinações geram infinitas substâncias." },
@@ -100,6 +102,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🔗", titulo: "Molécula (2 H + 1 O)", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "⚛️", titulo: "Átomo", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "💎", titulo: "Elemento", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. União de átomos = molécula. H₂O = água.",
         feedbackErro: "Átomo é só UM. Elemento é o tipo. União de átomos = MOLÉCULA." },
@@ -108,6 +111,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "⚖️", titulo: "Lavoisier (conservação da massa)", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🍎", titulo: "Newton", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🧬", titulo: "Darwin", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Sim. Lavoisier, séc. XVIII — pai da química moderna.",
         feedbackErro: "Newton = física. Darwin = biologia. Massa em química = LAVOISIER." },
@@ -209,6 +213,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "O número de PRÓTONS no núcleo", correta: true },
           { id: "b", texto: "O tamanho da molécula" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. Prótons definem o elemento. H = 1, O = 8, Au = 79.",
         feedbackErro: "Elemento é definido pelo número de PRÓTONS. Tamanho da molécula varia." },
@@ -216,6 +222,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Liberação de gás, mudança de cor, calor ou precipitado", correta: true },
           { id: "b", texto: "Apenas cheiro forte" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. Esses quatro sinais indicam substâncias novas.",
         feedbackErro: "Cheiro pode indicar, mas os quatro sinais clássicos são gás, cor, calor e precipitado." },
@@ -223,6 +231,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Se conserva (massa dos reagentes = massa dos produtos)", correta: true },
           { id: "b", texto: "Sempre diminui — parte da matéria some" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Perfeito. Lei de Lavoisier: massa se conserva sempre.",
         feedbackErro: "Matéria NUNCA some. Se parece que sumiu, virou gás. Lavoisier: massa se conserva." },

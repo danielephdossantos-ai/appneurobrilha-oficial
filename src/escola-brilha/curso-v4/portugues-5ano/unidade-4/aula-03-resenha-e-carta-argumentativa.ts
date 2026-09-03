@@ -21,7 +21,7 @@ export const aula3: AulaPortuguesV4 = {
   slug: "aula-03-resenha-e-carta-argumentativa",
   titulo: "Resenha e carta argumentativa",
   iconeTrilha: "✍️",
-  bncc: ["EF05LP17", "EF05LP23"],
+  bncc: ["EF05LP14", "EF35LP15", "EF15LP01", "EF15LP05", "EF15LP06"],
   duracaoMin: 25,
 
   momento01_motivacao: {

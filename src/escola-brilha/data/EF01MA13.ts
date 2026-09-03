@@ -62,7 +62,7 @@ const aula: Aula = {
     "Quase tudo ao nosso redor tem uma forma! Aprender geometria ajuda arquitetos, engenheiros e designers a construir casas, brinquedos e até bolas de futebol.",
 
   explicacao:
-    "🟦 CUBO — tem 6 lados iguais. Parece um DADO.\n\n⚽ ESFERA — é redondinha de todos os lados. Parece uma BOLA.\n\n🥫 CILINDRO — reto em pé, com tampa e fundo redondos. Parece uma LATA.\n\n🍦 CONE — pontudo em cima, redondo embaixo. Parece a CASQUINHA de sorvete.",
+    "CUBO — tem 6 faces planas quadradas, além de arestas e vértices. Parece um dado.\n\nESFERA — possui superfície curva e pode rolar em várias direções. Parece uma bola.\n\nCILINDRO — tem duas bases circulares paralelas e uma superfície curva. Pode ficar em pé ou deitado. Parece uma lata.\n\nCONE — tem uma base circular, uma superfície curva e um vértice. Pode aparecer em qualquer orientação. Parece uma casquinha de sorvete.",
 
   explicacoesNiveis: {
     nivel1:
@@ -92,7 +92,7 @@ const aula: Aula = {
       "Olhe a imagem: o Brilha achou um DADO. Que forma geométrica ele tem?",
     resposta: "CUBO.",
     explicacao:
-      "O dado tem 6 lados iguais e planos — essa é a forma do CUBO.",
+      "O dado tem 6 faces planas quadradas — essa é a forma do CUBO.",
     visual: {
       tipo: "cena",
       pergunta: "O dado tem forma de…",
@@ -107,10 +107,10 @@ const aula: Aula = {
   },
 
   exercicios: [
-    { enunciado: "🎲 Dado parece qual forma?", resposta: "Cubo", dica: "6 lados iguais." },
+    { enunciado: "🎲 Dado parece qual forma?", resposta: "Cubo", dica: "6 faces quadradas." },
     { enunciado: "⚽ Bola parece qual forma?", resposta: "Esfera", dica: "Redondinha." },
-    { enunciado: "🥫 Lata parece qual forma?", resposta: "Cilindro", dica: "Reta em pé." },
-    { enunciado: "🍦 Casquinha parece qual forma?", resposta: "Cone", dica: "Pontuda em cima." },
+    { enunciado: "🥫 Lata parece qual forma?", resposta: "Cilindro", dica: "Duas bases circulares e superfície curva." },
+    { enunciado: "🍦 Casquinha parece qual forma?", resposta: "Cone", dica: "Uma base circular e um vértice." },
     { enunciado: "🕯 Vela parece qual forma?", resposta: "Cilindro", dica: "Também é reta em pé." },
   ],
 
@@ -125,7 +125,7 @@ const aula: Aula = {
           pergunta: "O DADO tem forma de…",
           opcoes: ["Cubo", "Esfera", "Cone"],
           correta: 0,
-          explicacao: "Dado = 6 lados iguais = CUBO.",
+          explicacao: "Dado = 6 faces quadradas = CUBO.",
           visual: {
             tipo: "grupos",
             grupos: [
@@ -149,7 +149,7 @@ const aula: Aula = {
           pergunta: "A LATA tem forma de…",
           opcoes: ["Cone", "Cubo", "Cilindro"],
           correta: 2,
-          explicacao: "Reta em pé com tampa redonda = CILINDRO.",
+          explicacao: "Duas bases circulares e uma superfície curva = CILINDRO.",
           visual: {
             tipo: "grupos",
             grupos: [
@@ -161,7 +161,7 @@ const aula: Aula = {
           pergunta: "A CASQUINHA de sorvete tem forma de…",
           opcoes: ["Cone", "Esfera", "Cubo"],
           correta: 0,
-          explicacao: "Pontuda em cima, redonda embaixo = CONE.",
+          explicacao: "Uma base circular e um vértice = CONE.",
           visual: {
             tipo: "grupos",
             grupos: [
@@ -175,7 +175,7 @@ const aula: Aula = {
 
   revisao: {
     pontos: [
-      "🟦 CUBO — 6 lados iguais. Exemplo: dado.",
+      "🟦 CUBO — 6 faces quadradas. Exemplo: dado.",
       "⚽ ESFERA — redondinha em todo lado. Exemplo: bola.",
       "🥫 CILINDRO — reto em pé, tampa redonda. Exemplo: lata, vela.",
       "🍦 CONE — pontudo em cima. Exemplo: casquinha, chapéu de festa.",
@@ -189,7 +189,7 @@ const aula: Aula = {
       pergunta: "Qual forma tem o DADO?",
       opcoes: ["Esfera", "Cubo", "Cilindro"],
       correta: 1,
-      explicacao: "6 lados iguais = CUBO.",
+      explicacao: "6 faces quadradas = CUBO.",
       visual: {
         tipo: "grupos",
         grupos: [
@@ -215,7 +215,7 @@ const aula: Aula = {
       pergunta: "Uma LATA tem forma de…",
       opcoes: ["Cilindro", "Cubo", "Esfera"],
       correta: 0,
-      explicacao: "Reta em pé, tampa redonda = CILINDRO.",
+      explicacao: "Duas bases circulares e uma superfície curva = CILINDRO.",
       visual: {
         tipo: "grupos",
         grupos: [
@@ -228,7 +228,7 @@ const aula: Aula = {
       pergunta: "A CASQUINHA de sorvete lembra qual forma?",
       opcoes: ["Cubo", "Cilindro", "Cone"],
       correta: 2,
-      explicacao: "Pontuda em cima = CONE.",
+      explicacao: "Uma base circular e um vértice = CONE.",
       visual: {
         tipo: "grupos",
         grupos: [
@@ -354,7 +354,7 @@ const aula: Aula = {
         pergunta: "Qual forma tem o DADO?",
         opcoes: ["Esfera", "Cubo", "Cone"],
         correta: 1,
-        explicacao: "6 lados iguais = CUBO.",
+        explicacao: "6 faces quadradas = CUBO.",
         visual: {
           tipo: "grupos",
           grupos: [
@@ -382,7 +382,7 @@ const aula: Aula = {
         pergunta: "Uma LATA tem forma de…",
         opcoes: ["Cilindro", "Cubo", "Cone"],
         correta: 0,
-        explicacao: "Reta em pé, tampa redonda = CILINDRO.",
+        explicacao: "Duas bases circulares e superfície curva = CILINDRO.",
         visual: {
           tipo: "grupos",
           grupos: [
@@ -395,7 +395,7 @@ const aula: Aula = {
         pergunta: "E a CASQUINHA de sorvete?",
         opcoes: ["Cubo", "Cone", "Esfera"],
         correta: 1,
-        explicacao: "Pontuda em cima = CONE.",
+        explicacao: "Base circular e um vértice = CONE.",
         visual: {
           tipo: "grupos",
           grupos: [
@@ -410,7 +410,7 @@ const aula: Aula = {
         pergunta: "Olhe a VELA. Qual forma ela tem?",
         opcoes: ["Cone", "Cilindro", "Esfera"],
         correta: 1,
-        explicacao: "Reta em pé como uma lata = CILINDRO.",
+        explicacao: "Como uma lata, possui duas bases circulares = CILINDRO.",
         visual: {
           tipo: "grupos",
           grupos: [
@@ -423,7 +423,7 @@ const aula: Aula = {
         pergunta: "Qual desses NÃO é um cilindro?",
         opcoes: ["Lata", "Vela", "Dado"],
         correta: 2,
-        explicacao: "Dado tem 6 lados iguais = CUBO, não cilindro.",
+        explicacao: "Dado tem 6 faces quadradas = CUBO, não cilindro.",
         visual: {
           tipo: "grupos",
           grupos: [

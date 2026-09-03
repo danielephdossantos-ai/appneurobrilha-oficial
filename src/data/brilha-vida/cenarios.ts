@@ -44,8 +44,8 @@ export const HISTORIAS: Historia[] = [
     ]},
   { titulo: "Lanche da escola", cena: "Um colega esqueceu o lanche e está com fome.", img: imgTriste,
     opcoes: [
-      { texto: "Divido o meu lanche com ele.", certo: true, feedback: "Dividir comida é dividir carinho. 🍎" },
-      { texto: "Como bem rápido pra ele não pedir.", certo: false, feedback: "Esconder do amigo dói. Dividir une." },
+      { texto: "Aviso um adulto da escola para ajudar.", certo: true, feedback: "Um adulto pode conseguir alimento seguro e verificar alergias. 🍎" },
+      { texto: "Dou meu lanche sem perguntar a ninguém.", certo: false, feedback: "Antes de dividir comida, um adulto precisa verificar alergias e regras da escola." },
       { texto: "Falo que o lanche dele é feio.", certo: false, feedback: "Zombar magoa demais." },
     ]},
   { titulo: "Erro do colega", cena: "Um colega errou a resposta e a turma riu.", img: imgTriste,
@@ -87,7 +87,7 @@ export const HISTORIAS: Historia[] = [
   { titulo: "Brincadeira pesada", cena: "Os amigos estão chamando alguém de apelido feio.", img: imgBravo,
     opcoes: [
       { texto: "Falo que não tá legal e peço pra parar.", certo: true, feedback: "Defender quem sofre é ato de coragem." },
-      { texto: "Fico quieto pra não brigar com eles.", certo: false, feedback: "Quem cala diante da injustiça também magoa." },
+      { texto: "Procuro um adulto de confiança e conto o que está acontecendo.", certo: true, feedback: "Pedir ajuda é uma forma segura de proteger alguém." },
       { texto: "Invento outro apelido pior.", certo: false, feedback: "Piorar nunca resolve." },
     ]},
   { titulo: "Sala bagunçada", cena: "Você terminou de brincar e a sala está cheia de brinquedos.", img: imgConfuso,
@@ -104,15 +104,15 @@ export const HISTORIAS: Historia[] = [
     ]},
   { titulo: "Brinquedo do mercado", cena: "Você queria muito um brinquedo no mercado, mas hoje não pode.", img: imgBravo,
     opcoes: [
-      { texto: "Respiro fundo e digo: 'tudo bem, fica pra outro dia'.", certo: true, feedback: "Saber esperar é um superpoder." },
-      { texto: "Faço birra no chão.", certo: false, feedback: "Birra cansa todo mundo e não compra nada." },
+      { texto: "Digo que fiquei triste e pergunto se pode ficar para outro dia.", certo: true, feedback: "Falar sobre a frustração ajuda o adulto a entender." },
+      { texto: "Grito até alguém comprar.", certo: false, feedback: "Gritar não resolve. Posso pedir uma pausa e conversar quando estiver pronto." },
       { texto: "Escondo o brinquedo no carrinho.", certo: false, feedback: "Pegar sem pagar é errado." },
     ]},
-  { titulo: "Segredo de amigo", cena: "Um amigo te contou um segredo importante.", img: imgConfuso,
+  { titulo: "Segredo ou pedido de ajuda", cena: "Um amigo contou algo que deixou você preocupado ou com medo.", img: imgConfuso,
     opcoes: [
-      { texto: "Guardo o segredo com cuidado.", certo: true, feedback: "Confiança é tesouro." },
-      { texto: "Conto pra turma pra ser popular.", certo: false, feedback: "Quebrar confiança machuca pra valer." },
-      { texto: "Conto só pra uma pessoa.", certo: false, feedback: "Uma vira muitas. Segredo é segredo." },
+      { texto: "Conto a um adulto de confiança para pedir ajuda.", certo: true, feedback: "Segredos que causam medo, perigo ou sofrimento devem ser contados a um adulto seguro." },
+      { texto: "Conto para toda a turma.", certo: false, feedback: "Expor o amigo não ajuda. Procure apenas um adulto de confiança." },
+      { texto: "Prometo nunca contar, mesmo se alguém estiver em perigo.", certo: false, feedback: "Segurança vem primeiro. Pedir ajuda não é trair a amizade." },
     ]},
   { titulo: "Vencer o jogo", cena: "Você venceu o jogo e os colegas perderam.", img: imgFeliz,
     opcoes: [
@@ -164,15 +164,15 @@ export const HISTORIAS: Historia[] = [
     ]},
   { titulo: "Comida diferente", cena: "Na casa de um amigo serviram um prato que você nunca viu.", img: imgConfuso,
     opcoes: [
-      { texto: "Provo com educação e agradeço.", certo: true, feedback: "Tentar e agradecer é gentileza." },
+      { texto: "Agradeço e digo com educação se quero provar ou não.", certo: true, feedback: "Você pode respeitar quem preparou e também respeitar seus limites e alergias." },
       { texto: "Falo 'eca' alto.", certo: false, feedback: "'Eca' magoa quem fez com carinho." },
       { texto: "Empurro o prato pra longe.", certo: false, feedback: "Falta de respeito com a comida." },
     ]},
-  { titulo: "Choro do bebê", cena: "O bebê da família está chorando e a mãe está ocupada.", img: imgTriste,
+  { titulo: "Choro do bebê", cena: "O bebê da família está chorando e o adulto responsável está em outro cômodo.", img: imgTriste,
     opcoes: [
-      { texto: "Fico perto, falo baixinho ou peço ajuda.", certo: true, feedback: "Cuidar dos pequenos é cuidar do amor." },
+      { texto: "Aviso o adulto responsável e aguardo orientação.", certo: true, feedback: "O cuidado do bebê é responsabilidade do adulto. Avisar já é ajudar." },
       { texto: "Grito 'mãe, vem rápido!' várias vezes.", certo: false, feedback: "Gritos assustam ainda mais o bebê." },
-      { texto: "Tampo os ouvidos.", certo: false, feedback: "Ignorar não acalma ninguém." },
+      { texto: "Vou para um lugar mais quieto sem avisar ninguém.", certo: false, feedback: "Se o som incomodar, avise um adulto antes de se afastar." },
     ]},
   { titulo: "Brincar na chuva", cena: "Você quer pular nas poças, mas seu colega tem medo.", img: imgConfuso,
     opcoes: [

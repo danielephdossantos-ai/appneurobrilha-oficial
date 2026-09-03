@@ -30,7 +30,7 @@ export const aula02: AulaPortuguesV4 = {
   slug: "aula-02-tempos-verbais",
   titulo: "Tempos verbais na narrativa",
   iconeTrilha: "⏳",
-  bncc: ["EF04LP07", "EF04LP08", "EF35LP12"],
+  bncc: ["EF04LP06", "EF35LP07"],
   duracaoMin: 20,
 
   momento01_motivacao: {

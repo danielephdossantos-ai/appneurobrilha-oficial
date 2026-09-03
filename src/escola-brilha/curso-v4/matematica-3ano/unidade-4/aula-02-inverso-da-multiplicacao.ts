@@ -4,7 +4,7 @@ export const aula02_inversoMult: AulaV4 = {
   slug: "u4-02-inverso-mult",
   titulo: "Divisão é o Inverso",
   iconeTrilha: "🔁",
-  bncc: ["EF03MA10"],
+  bncc: ["EF03MA08"],
   duracaoMin: 20,
   metodologias: ["skemp", "cpa"],
   momento01_motivacao: {

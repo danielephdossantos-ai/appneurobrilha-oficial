@@ -15,7 +15,7 @@ export const aula02: AulaPortuguesV4 = {
   slug: "aula-02-paragrafo",
   titulo: "Parágrafo: cada ideia no seu lugar",
   iconeTrilha: "📐",
-  bncc: ["EF03LP24", "EF35LP07"],
+  bncc: ["EF35LP07", "EF35LP08", "EF35LP09"],
   duracaoMin: 18,
 
   momento01_motivacao: {

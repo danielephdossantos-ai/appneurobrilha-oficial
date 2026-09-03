@@ -37,6 +37,7 @@ export const aula04: AulaGeoV1 = {
       { id: "somemtudo", titulo: "Todos os empregos somem", subtitulo: "robôs substituem 100%", emoji: "❌", cor: "from-rose-500 to-red-700", fotoUrl: laboratorioImg },
       { id: "mudamfuncao", titulo: "Empregos mudam de função", subtitulo: "menos operação manual, mais manutenção e programação", emoji: "🔧", cor: "from-emerald-500 to-teal-700", fotoUrl: transformacoesImg },
       { id: "nadamuda", titulo: "Nada muda no trabalho", subtitulo: "robôs só ajudam sem afetar cargos", emoji: "🟰", cor: "from-slate-500 to-slate-700", fotoUrl: laboratorioImg },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "mudamfuncao",
     feedbackAcerto:
@@ -92,6 +93,7 @@ export const aula04: AulaGeoV1 = {
           { id: "a", emoji: "🤖", titulo: "Máquinas executando tarefas antes feitas por humanos", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "📚", titulo: "Ensinar novas profissões aos trabalhadores", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🧪", titulo: "Criar novos materiais em laboratório", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. Automação = máquinas/sistemas fazendo tarefas manuais ou repetitivas.",
         feedbackErro: "Requalificação é aprender novas habilidades; novo material é química aplicada. AUTOMAÇÃO é substituir tarefa humana por máquina." },
@@ -100,6 +102,7 @@ export const aula04: AulaGeoV1 = {
           { id: "a", emoji: "🔗", titulo: "Molécula gigante feita de unidades repetidas ligadas", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "⚛️", titulo: "Um único átomo isolado", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🤖", titulo: "Um tipo de robô industrial", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Sim. Polímero = cadeia de monômeros repetidos, como no plástico PET.",
         feedbackErro: "Polímero não é átomo isolado nem robô. É uma CADEIA de moléculas repetidas." },
@@ -108,6 +111,7 @@ export const aula04: AulaGeoV1 = {
           { id: "a", emoji: "🔧", titulo: "Surgem novas funções técnicas, exigindo requalificação", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "❌", titulo: "Nenhum emprego novo é criado, sempre", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🟰", titulo: "A quantidade total de trabalho no mundo é fixa", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. Historicamente, novas tecnologias criam funções técnicas novas — mas exigem aprendizado.",
         feedbackErro: "A automação também CRIA funções (manutenção, programação). O desafio real é a REQUALIFICAÇÃO de quem perdeu a função antiga." },
@@ -209,6 +213,8 @@ export const aula04: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Pesquisa em química que combina átomos para criar propriedades específicas", correta: true },
           { id: "b", texto: "Acaso, sem nenhuma pesquisa científica envolvida" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. Materiais novos surgem de estudo deliberado de estrutura atômica e molecular.",
         feedbackErro: "Não é acaso — é PESQUISA CIENTÍFICA deliberada em química de materiais." },
@@ -216,6 +222,8 @@ export const aula04: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Surjam funções técnicas novas exigindo requalificação dos trabalhadores", correta: true },
           { id: "b", texto: "Nenhuma outra função seja criada em lugar da antiga" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. Historicamente automação cria novas funções técnicas, mas exige aprendizado.",
         feedbackErro: "A história mostra que novas funções SURGEM — o desafio é a REQUALIFICAÇÃO de quem perdeu a função antiga." },
@@ -223,6 +231,8 @@ export const aula04: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Difícil de automatizar totalmente", correta: true },
           { id: "b", texto: "Igualmente fácil de automatizar que uma tarefa repetitiva" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. Empatia e criatividade original ainda são domínio predominantemente humano.",
         feedbackErro: "Não é igual — tarefas com regra fixa são fáceis; tarefas com empatia/criatividade são DIFÍCEIS de automatizar." },

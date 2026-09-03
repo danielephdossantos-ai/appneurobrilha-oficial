@@ -5,6 +5,7 @@ import { aula03_pm } from "./aula-03-pm";
 import { aula04_prob } from "./aula-04-prob";
 import { aula05_media } from "./aula-05-media";
 import { aula06_missao } from "./aula-06-missao";
+import { aulaPesquisaEstatistica } from "../aulas-bncc-complementares";
 
 export const unidade7: Unidade = {
   slug: "unidade-7-areas-volumes-probabilidade",
@@ -14,5 +15,5 @@ export const unidade7: Unidade = {
   descricao:
     "Brilha calcula áreas de polígonos, volumes de prismas, conta possibilidades, calcula probabilidades e mede tendência central. Fecha o 8º ano com a missão final.",
   corTema: "#0ea5e9",
-  aulas: [aula01_areas, aula02_volumes, aula03_pm, aula04_prob, aula05_media, aula06_missao],
+  aulas: [aula01_areas, aula02_volumes, aula03_pm, aula04_prob, aula05_media, aulaPesquisaEstatistica, aula06_missao],
 };

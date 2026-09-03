@@ -13,8 +13,8 @@ import { url as estrela } from "@/assets/neuro-treino/objetos/estrela.png.asset.
  * Unidade 7 · Aula 2 — Quebrando a Palavra
  * -------------------------------------------------------------
  * CONSCIÊNCIA FONÊMICA — segmentação.
- * A criança escuta a palavra e a quebra em sons, batendo palma
- * para cada fonema. Estímulo sonoro primeiro, letra só como apoio.
+ * A criança escuta a palavra e move uma ficha para cada fonema.
+ * Estímulo sonoro primeiro, letra só como apoio.
  *
  * BNCC: EF01LP04 · EF01LP05 · EF01LP07
  */
@@ -28,7 +28,7 @@ export const aula02: AulaPortuguesV4 = {
   momento01_motivacao: {
     titulo: "O tambor da Coruja",
     historia:
-      "A Coruja Ouvidão pegou um tambor. — Toda palavra pode ser quebrada em pedacinhos de som! Escute: SOL tem três sons: /s/ /o/ /l/. Uma batida para cada som! Vamos bater junto?",
+      "A Coruja Ouvidão pegou fichas sonoras. Na pronúncia brasileira mais comum, SOL soa como /s/ /ó/ /u/. Vamos mover uma ficha para cada som?",
     imagemUrl: tambor,
   },
 
@@ -50,7 +50,7 @@ export const aula02: AulaPortuguesV4 = {
       ],
       respostaCerta: 0,
       feedbackAcerto: "🎉 Isso! Cada batida é UM som da palavra.",
-      feedbackErro: "Olhe: SOL = 3. Fale devagar /s/ /o/ /l/ — são 3 sons!",
+      feedbackErro: "Escute a pronúncia brasileira mais comum: /s/ /ó/ /u/. São três sons.",
     },
   },
 
@@ -65,8 +65,8 @@ export const aula02: AulaPortuguesV4 = {
       },
       {
         palavra: "batida",
-        explicacao: "É uma palma ou toque no tambor para cada som que a gente escuta.",
-        exemplo: "SOL tem 3 batidas: /s/ /o/ /l/.",
+        explicacao: "É mover uma ficha ou fazer um toque para cada som, sem confundir com as palmas das sílabas.",
+        exemplo: "SOL tem 3 sons na pronúncia brasileira mais comum: /s/ /ó/ /u/.",
         imagemUrl: tambor,
       },
     ],
@@ -75,15 +75,15 @@ export const aula02: AulaPortuguesV4 = {
   momento_ensinoVisual: {
     titulo: "Quebre cada palavra em sons",
     instrucao:
-      "Toque em “Quebrar”. Cada quadradinho que acender é UM som — bata uma palma junto! Depois toque em cada som sozinho para repetir com a boca.",
+      "Toque em “Quebrar”. Cada quadradinho representa UM som — mova uma ficha ou levante um dedo. Use palmas somente para contar sílabas.",
     blocos: [
       {
         tipo: "segmentarFonemas",
         itens: [
-          { palavra: "SOL", fonemas: ["s", "o", "l"], imagemUrl: sol },
+          { palavra: "SOL", fonemas: ["s", "ó", "u"], imagemUrl: sol },
           { palavra: "LUA", fonemas: ["l", "u", "a"], imagemUrl: lua },
           { palavra: "PATO", fonemas: ["p", "a", "t", "o"], imagemUrl: pato },
-          { palavra: "CASA", fonemas: ["c", "a", "s", "a"], imagemUrl: casa },
+          { palavra: "CASA", fonemas: ["k", "a", "z", "a"], imagemUrl: casa },
           { palavra: "BOLA", fonemas: ["b", "o", "l", "a"], imagemUrl: bola },
         ],
       },
@@ -99,7 +99,7 @@ export const aula02: AulaPortuguesV4 = {
       destacar: ["SOL", "SONS", "BATIDAS"],
       paragrafos: [
         "A Coruja bateu o tambor três vezes: tum, tum, tum.",
-        "— Isso é o SOL! Ele tem três SONS: /s/ /o/ /l/.",
+        "— Isso é o SOL! Na pronúncia brasileira mais comum, ouvimos /s/ /ó/ /u/.",
         "Depois ela bateu quatro vezes: tum, tum, tum, tum. — Isso é o PATO!",
       ],
     },
@@ -112,9 +112,9 @@ export const aula02: AulaPortuguesV4 = {
         pergunta: "Quantas batidas tem a palavra SOL?",
         opcoes: ["Duas", "Três", "Quatro"],
         correta: 1,
-        feedbackAcerto: "🎉 Três: /s/ /o/ /l/.",
+        feedbackAcerto: "🎉 Três: /s/ /ó/ /u/.",
         feedbackErro: "Está escrito: 'bateu o tambor três vezes'.",
-        ondeEstaNoTexto: "Ele tem três SONS: /s/ /o/ /l/.",
+        ondeEstaNoTexto: "Na pronúncia brasileira mais comum, ouvimos /s/ /ó/ /u/.",
       },
       {
         pergunta: "Qual palavra tem quatro batidas no texto?",
@@ -153,7 +153,7 @@ export const aula02: AulaPortuguesV4 = {
       instrucao: "Começo → meio → fim.",
       itens: [
         { id: "p1", texto: "Escutar a palavra inteira: SOL.", imagemUrl: coruja },
-        { id: "p2", texto: "Falar devagar cada som: /s/ /o/ /l/.", imagemUrl: tambor },
+        { id: "p2", texto: "Escutar cada som: /s/ /ó/ /u/.", imagemUrl: tambor },
         { id: "p3", texto: "Contar as batidas: 3 sons!", imagemUrl: estrela },
       ],
       ordemCerta: ["p1", "p2", "p3"],
@@ -213,7 +213,7 @@ export const aula02: AulaPortuguesV4 = {
     pontos: [
       "Toda palavra é feita de sons colados.",
       "Falar devagar ajuda a escutar cada som separado.",
-      "Uma palma para cada som: SOL = /s/ /o/ /l/ = 3 palmas.",
+      "Uma ficha para cada som: SOL = /s/ /ó/ /u/ = 3 fichas. Palmas ficam para as sílabas.",
     ],
     miniDesafio: {
       pergunta: "Quantos sons tem a palavra BOLA?",
@@ -230,10 +230,10 @@ export const aula02: AulaPortuguesV4 = {
         pergunta: "1/5 — Quantos sons tem SOL?",
         opcoes: ["2", "3", "4", "5"],
         correta: 1,
-        feedbackAcerto: "🎉 /s/ /o/ /l/.",
+        feedbackAcerto: "🎉 /s/ /ó/ /u/.",
         feedbackErro: "Conte nos dedos falando devagar.",
-        dica: "Fale s… o… l… e levante um dedo por som.",
-        reensino: "SOL = /s/ + /o/ + /l/. São 3 sons, 3 palmas.",
+        dica: "Diga SOL naturalmente: s… ó… u… e levante um dedo por som.",
+        reensino: "Na pronúncia brasileira mais comum, SOL = /s/ + /ó/ + /u/. São 3 sons e 3 fichas.",
       },
       {
         pergunta: "2/5 — Quantos sons tem PATO?",
@@ -241,23 +241,23 @@ export const aula02: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 /p/ /a/ /t/ /o/.",
         feedbackErro: "Fale devagar: p… a… t… o.",
-        dica: "Bata uma palma para cada pedacinho de som.",
+        dica: "Mova uma ficha para cada som. Reserve as palmas para as sílabas.",
         reensino: "PATO = /p/ /a/ /t/ /o/ = 4 sons.",
       },
       {
-        pergunta: "3/5 — Qual é o ÚLTIMO som de SOL?",
-        opcoes: ["/s/", "/o/", "/l/", "/a/"],
+        pergunta: "3/5 — Na pronúncia brasileira mais comum, qual é o último som de SOL?",
+        opcoes: ["/s/", "/ó/", "/u/", "/a/"],
         correta: 2,
-        feedbackAcerto: "🎉 Isso! Termina com /l/.",
-        feedbackErro: "Fale a palavra e pare no finalzinho: so-lll.",
-        dica: "O último som é o que fica no fim, quando a boca vai fechar.",
-        reensino: "Em SOL, o último som é /l/: sss-óóó-lll.",
+        feedbackAcerto: "🎉 Isso! O L final costuma soar como /u/ no português brasileiro.",
+        feedbackErro: "Diga SOL naturalmente: sóu. A escrita termina com L, mas o som final costuma parecer /u/.",
+        dica: "Escute o final da palavra falada, não o nome da última letra escrita.",
+        reensino: "Na pronúncia brasileira mais comum, SOL soa como /s/ /ó/ /u/.",
       },
       {
         pergunta: "4/5 — Qual palavra tem MAIS sons?",
         opcoes: ["LUA", "SOL", "CASA", "PÉ"],
         correta: 2,
-        feedbackAcerto: "🎉 CASA tem 4: /c/ /a/ /s/ /a/.",
+        feedbackAcerto: "🎉 CASA tem 4 sons: /k/ /a/ /z/ /a/.",
         feedbackErro: "Conte cada uma: LUA=3, SOL=3, CASA=4, PÉ=2.",
         dica: "Quebre todas em sons e compare os números.",
         reensino: "LUA=3, SOL=3, PÉ=2 e CASA=4. CASA é a maior em sons.",
@@ -279,7 +279,7 @@ export const aula02: AulaPortuguesV4 = {
     materiais: ["Só as suas mãos"],
     passos: [
       "1) Peça a um adulto para falar 5 palavras do dia a dia.",
-      "2) Fale cada palavra devagar e bata uma palma para cada som.",
+      "2) Fale cada palavra e mova uma ficha para cada som. Use palmas apenas para sílabas.",
       "3) Diga quantos sons deu.",
       "4) Depois é a sua vez de falar as palavras e o adulto bater as palmas!",
     ],

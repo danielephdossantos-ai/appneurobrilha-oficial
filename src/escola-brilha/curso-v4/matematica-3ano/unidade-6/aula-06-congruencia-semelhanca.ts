@@ -4,7 +4,7 @@ export const aula06_congruencia: AulaV4 = {
   slug: "u6-06-congruencia",
   titulo: "Iguais ou Parecidas?",
   iconeTrilha: "🔗",
-  bncc: ["EF03MA13"],
+  bncc: ["EF03MA16"],
   duracaoMin: 20,
   metodologias: ["skemp", "cpa"],
   momento01_motivacao: {

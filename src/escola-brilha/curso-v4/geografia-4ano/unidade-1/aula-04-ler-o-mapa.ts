@@ -35,8 +35,7 @@ export const aula04: AulaGeoV1 = {
     imagemDestaqueUrl: mapaLegenda,
     aurora:
       "Explorador, todo mapa é como um LIVRO cheio de pistas. Verde = mata. Azul = rio. Vermelho = estrada. Um quadradinho pode ser uma escola, uma cruz pode ser um hospital. Bora aprender a LER o mapa!",
-    falaFinal:
-      "4 chaves abrem qualquer mapa: TÍTULO, LEGENDA, ESCALA e ROSA DOS VENTOS.",
+    falaFinal: "4 chaves abrem qualquer mapa: TÍTULO, LEGENDA, ESCALA e ROSA DOS VENTOS.",
   },
 
   cena02_previsao: {
@@ -59,20 +58,31 @@ export const aula04: AulaGeoV1 = {
         emoji: "🏷️",
         cor: "from-amber-400 to-yellow-600",
       },
+
+      {
+        id: "extra-1",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
+      {
+        id: "extra-2",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
     ],
     respostaCerta: "legenda",
     feedbackAcerto:
       "Isso! A LEGENDA é a 'chave secreta' do mapa — mostra o que cada cor e cada símbolo significa.",
     feedbackErro:
       "Repensa: o TÍTULO só diz o assunto do mapa. Quem explica os SÍMBOLOS é a LEGENDA.",
-    falaFinal:
-      "Guarda essa: legenda = tradutor. Bora abrir os 4 cadernos dos elementos do mapa.",
+    falaFinal: "Guarda essa: legenda = tradutor. Bora abrir os 4 cadernos dos elementos do mapa.",
   },
 
   cena03_vocabulario: {
     tipo: "cadernosCampo",
-    aurora:
-      "Todo bom mapa tem 4 elementos. Abre cada caderno pra descobrir pra que serve cada um.",
+    aurora: "Todo bom mapa tem 4 elementos. Abre cada caderno pra descobrir pra que serve cada um.",
     instrucao: "Toque em cada caderno pra abrir",
     cadernos: [
       {
@@ -82,8 +92,7 @@ export const aula04: AulaGeoV1 = {
         cor: "from-amber-400 to-yellow-600",
         conteudo:
           "TÍTULO é o nome do mapa. Fica em cima, com letra grande. Diz de que ASSUNTO o mapa está falando.",
-        exemplo:
-          "Ex.: 'Mapa Político do Brasil', 'Mapa das Chuvas', 'Mapa Turístico do Rio'.",
+        exemplo: "Ex.: 'Mapa Político do Brasil', 'Mapa das Chuvas', 'Mapa Turístico do Rio'.",
         fotoUrl: mapaEstados,
       },
       {
@@ -93,8 +102,7 @@ export const aula04: AulaGeoV1 = {
         cor: "from-emerald-500 to-green-700",
         conteudo:
           "LEGENDA é o quadradinho lateral que explica o que cada COR e cada SÍMBOLO significam. É a chave que traduz o mapa.",
-        exemplo:
-          "Ex.: 🌳 = parque · 🏫 = escola · ✝️ = igreja · 🍴 = restaurante.",
+        exemplo: "Ex.: 🌳 = parque · 🏫 = escola · ✝️ = igreja · 🍴 = restaurante.",
         fotoUrl: legendaSimbolos,
       },
       {
@@ -104,8 +112,7 @@ export const aula04: AulaGeoV1 = {
         cor: "from-sky-500 to-blue-700",
         conteudo:
           "ESCALA mostra quantos QUILÔMETROS de verdade cabem em 1 centímetro do mapa. Sem ela, você não sabe se um caminho é curto ou gigante.",
-        exemplo:
-          "Ex.: 'escala 1:100.000' quer dizer que 1 cm no mapa = 1 km no mundo real.",
+        exemplo: "Ex.: 'escala 1:100.000' quer dizer que 1 cm no mapa = 1 km no mundo real.",
         fotoUrl: escalaMapa,
       },
       {
@@ -120,8 +127,7 @@ export const aula04: AulaGeoV1 = {
         fotoUrl: rosaDosVentos,
       },
     ],
-    falaFinal:
-      "TÍTULO + LEGENDA + ESCALA + ROSA DOS VENTOS. Todo mapa completo tem esses 4.",
+    falaFinal: "TÍTULO + LEGENDA + ESCALA + ROSA DOS VENTOS. Todo mapa completo tem esses 4.",
   },
 
   cena04_leituraGuiada: {
@@ -138,8 +144,7 @@ export const aula04: AulaGeoV1 = {
         emoji: "🏫",
         cor: "from-sky-500 to-blue-700",
         titulo: "🏫 — ESCOLA",
-        texto:
-          "Significa ESCOLA. Mostra no mapa onde as crianças estudam.",
+        texto: "Significa ESCOLA. Mostra no mapa onde as crianças estudam.",
         fotoUrl: simboloEscola,
       },
       {
@@ -160,8 +165,7 @@ export const aula04: AulaGeoV1 = {
         emoji: "🌳",
         cor: "from-emerald-500 to-green-700",
         titulo: "🌳 — PARQUE / ÁREA VERDE",
-        texto:
-          "Marca parques, praças e áreas de mata: lugares de natureza pra passear e brincar.",
+        texto: "Marca parques, praças e áreas de mata: lugares de natureza pra passear e brincar.",
         fotoUrl: simboloParque,
       },
       {
@@ -171,8 +175,7 @@ export const aula04: AulaGeoV1 = {
         emoji: "🌊",
         cor: "from-cyan-500 to-blue-700",
         titulo: "🌊 — RIO / ÁGUA",
-        texto:
-          "Representa ÁGUA: rios, lagos e mar. Quanto mais grossa a marcação, maior é o rio.",
+        texto: "Representa ÁGUA: rios, lagos e mar. Quanto mais grossa a marcação, maior é o rio.",
         fotoUrl: simboloRio,
       },
     ],
@@ -182,8 +185,7 @@ export const aula04: AulaGeoV1 = {
 
   cena05_compreensao: {
     tipo: "quizRadar",
-    aurora:
-      "Radar ligado! 3 perguntas rápidas sobre os elementos do mapa.",
+    aurora: "Radar ligado! 3 perguntas rápidas sobre os elementos do mapa.",
     instrucao: "Toque no card certo pra o radar pousar",
     perguntas: [
       {
@@ -194,6 +196,13 @@ export const aula04: AulaGeoV1 = {
           { id: "titulo", emoji: "🏷️", titulo: "Título", cor: "from-amber-400 to-yellow-600" },
           { id: "legenda", emoji: "🔑", titulo: "Legenda", cor: "from-emerald-500 to-green-700" },
           { id: "escala", emoji: "📏", titulo: "Escala", cor: "from-sky-500 to-blue-700" },
+
+          {
+            id: "extra-3",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "legenda",
         feedbackAcerto: "Isso! LEGENDA = tradutor das cores e símbolos.",
@@ -204,9 +213,21 @@ export const aula04: AulaGeoV1 = {
         pergunta: "Qual elemento mostra QUANTOS KM cabem em 1 cm do mapa?",
         fotoUrl: escalaMapa,
         cards: [
-          { id: "rosa", emoji: "🧭", titulo: "Rosa dos Ventos", cor: "from-purple-500 to-indigo-700" },
+          {
+            id: "rosa",
+            emoji: "🧭",
+            titulo: "Rosa dos Ventos",
+            cor: "from-purple-500 to-indigo-700",
+          },
           { id: "escala", emoji: "📏", titulo: "Escala", cor: "from-sky-500 to-blue-700" },
           { id: "legenda", emoji: "🔑", titulo: "Legenda", cor: "from-emerald-500 to-green-700" },
+
+          {
+            id: "extra-4",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "escala",
         feedbackAcerto: "Perfeito! ESCALA = régua do mapa. Diz o tamanho real das coisas.",
@@ -220,14 +241,20 @@ export const aula04: AulaGeoV1 = {
           { id: "estrada", emoji: "🛣️", titulo: "Estrada", cor: "from-slate-400 to-slate-600" },
           { id: "rio", emoji: "🌊", titulo: "Rio", cor: "from-cyan-500 to-blue-700" },
           { id: "fronteira", emoji: "📍", titulo: "Fronteira", cor: "from-red-500 to-rose-700" },
+
+          {
+            id: "extra-5",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "rio",
         feedbackAcerto: "Boa! Linha AZUL = ÁGUA. Rio, lago ou mar.",
         feedbackErro: "Estrada geralmente é vermelha/amarela. Azul quase sempre é ÁGUA (rio).",
       },
     ],
-    falaFinal:
-      "Radar afiado! Legenda, escala e cores — você já sabe traduzir.",
+    falaFinal: "Radar afiado! Legenda, escala e cores — você já sabe traduzir.",
   },
 
   cena06_personagensLugar: {
@@ -280,8 +307,7 @@ export const aula04: AulaGeoV1 = {
         },
       ],
     },
-    falaFinal:
-      "5 cores, 5 regiões. Isso é uma LEGENDA em ação — cor + região = mapa lido!",
+    falaFinal: "5 cores, 5 regiões. Isso é uma LEGENDA em ação — cor + região = mapa lido!",
   },
 
   cena07_sequencia: {
@@ -327,8 +353,7 @@ export const aula04: AulaGeoV1 = {
       "Mapa completo! Você seguiu a ordem certa e agora sabe MONTAR um mapa de verdade.",
     feedbackErro:
       "Essa não é a próxima etapa. Lembra: TÍTULO → DESENHO → SÍMBOLOS → LEGENDA → ESCALA/ROSA.",
-    falaFinal:
-      "5 passos, 1 mapa. É assim que os cartógrafos trabalham há séculos.",
+    falaFinal: "5 passos, 1 mapa. É assim que os cartógrafos trabalham há séculos.",
   },
 
   cena08_voceLe: {
@@ -363,8 +388,7 @@ export const aula04: AulaGeoV1 = {
         chaves: ["mapa", "político", "físico", "turístico"],
       },
     ],
-    falaFinal:
-      "Você leu sozinho e já sabe traduzir qualquer mapa. Bora pro minijogo final!",
+    falaFinal: "Você leu sozinho e já sabe traduzir qualquer mapa. Bora pro minijogo final!",
   },
 
   cena09_minijogo: {
@@ -393,7 +417,11 @@ export const aula04: AulaGeoV1 = {
       },
       {
         id: "r2",
-        municipioA: { nome: "Mancha verde grande", emoji: "🌳", cor: "from-emerald-500 to-green-700" },
+        municipioA: {
+          nome: "Mancha verde grande",
+          emoji: "🌳",
+          cor: "from-emerald-500 to-green-700",
+        },
         municipioB: { nome: "Área de árvores", emoji: "🌲", cor: "from-lime-400 to-emerald-600" },
         contexto: "Área verde no mapa geralmente representa...",
         pecaCertaId: "parque",
@@ -402,8 +430,16 @@ export const aula04: AulaGeoV1 = {
       },
       {
         id: "r3",
-        municipioA: { nome: "Linha azul serpenteando", emoji: "🌊", cor: "from-cyan-500 to-blue-700" },
-        municipioB: { nome: "Aquilo que corre no chão", emoji: "💧", cor: "from-blue-400 to-cyan-600" },
+        municipioA: {
+          nome: "Linha azul serpenteando",
+          emoji: "🌊",
+          cor: "from-cyan-500 to-blue-700",
+        },
+        municipioB: {
+          nome: "Aquilo que corre no chão",
+          emoji: "💧",
+          cor: "from-blue-400 to-cyan-600",
+        },
         contexto: "Linha azul torta no mapa é...",
         pecaCertaId: "rio",
         feedbackAcerto: "Combo! Azul serpenteando = RIO.",
@@ -411,8 +447,16 @@ export const aula04: AulaGeoV1 = {
       },
       {
         id: "r4",
-        municipioA: { nome: "Prédio com bandeirinha", emoji: "🏫", cor: "from-sky-500 to-blue-700" },
-        municipioB: { nome: "Onde as crianças estudam", emoji: "📚", cor: "from-blue-400 to-indigo-600" },
+        municipioA: {
+          nome: "Prédio com bandeirinha",
+          emoji: "🏫",
+          cor: "from-sky-500 to-blue-700",
+        },
+        municipioB: {
+          nome: "Onde as crianças estudam",
+          emoji: "📚",
+          cor: "from-blue-400 to-indigo-600",
+        },
         contexto: "Prédio com bandeirinha e livros no mapa é...",
         pecaCertaId: "escola",
         feedbackAcerto: "Isso! Bandeirinha + livros = ESCOLA.",
@@ -420,8 +464,16 @@ export const aula04: AulaGeoV1 = {
       },
       {
         id: "r5",
-        municipioA: { nome: "Linha grossa amarela", emoji: "🛣️", cor: "from-yellow-400 to-orange-600" },
-        municipioB: { nome: "Onde os carros passam", emoji: "🚗", cor: "from-amber-400 to-yellow-600" },
+        municipioA: {
+          nome: "Linha grossa amarela",
+          emoji: "🛣️",
+          cor: "from-yellow-400 to-orange-600",
+        },
+        municipioB: {
+          nome: "Onde os carros passam",
+          emoji: "🚗",
+          cor: "from-amber-400 to-yellow-600",
+        },
         contexto: "Linha grossa amarela/vermelha no mapa é...",
         pecaCertaId: "estrada",
         feedbackAcerto: "Boa! Linha grossa amarela = ESTRADA / rodovia.",
@@ -429,7 +481,11 @@ export const aula04: AulaGeoV1 = {
       },
       {
         id: "r6",
-        municipioA: { nome: "Prédio com cruz em cima", emoji: "⛪", cor: "from-purple-500 to-indigo-700" },
+        municipioA: {
+          nome: "Prédio com cruz em cima",
+          emoji: "⛪",
+          cor: "from-purple-500 to-indigo-700",
+        },
         municipioB: { nome: "Onde tem missa", emoji: "🕊️", cor: "from-violet-400 to-purple-600" },
         contexto: "Prédio pequeno com cruz no telhado é...",
         pecaCertaId: "igreja",
@@ -437,14 +493,12 @@ export const aula04: AulaGeoV1 = {
         feedbackErro: "Cruz no telhado = IGREJA.",
       },
     ],
-    falaFinal:
-      "6 símbolos dominados! Você agora lê qualquer mapa turístico do Brasil.",
+    falaFinal: "6 símbolos dominados! Você agora lê qualquer mapa turístico do Brasil.",
   },
 
   cena10_revisao: {
     tipo: "pizzaMunicipio",
-    aurora:
-      "Pizza dos TIPOS DE MAPA! Cada fatia mostra um mapa diferente que existe.",
+    aurora: "Pizza dos TIPOS DE MAPA! Cada fatia mostra um mapa diferente que existe.",
     instrucao: "Toque em cada fatia pra ouvir a explicação",
     fatias: [
       {
@@ -485,6 +539,8 @@ export const aula04: AulaGeoV1 = {
           { id: "a", texto: "Título", correta: false },
           { id: "b", texto: "Legenda", correta: true },
           { id: "c", texto: "Escala", correta: false },
+
+          { id: "extra-6", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Isso! A LEGENDA é a chave que traduz os símbolos.",
         feedbackErro: "Repensa: título só diz o assunto. Quem explica símbolos é a LEGENDA.",
@@ -496,6 +552,8 @@ export const aula04: AulaGeoV1 = {
           { id: "a", texto: "Uma estrada", correta: false },
           { id: "b", texto: "Um rio", correta: true },
           { id: "c", texto: "Uma fronteira", correta: false },
+
+          { id: "extra-7", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Perfeito! Linha AZUL = ÁGUA (rio, lago).",
         feedbackErro: "Azul quase sempre é ÁGUA. É um RIO.",
@@ -507,11 +565,11 @@ export const aula04: AulaGeoV1 = {
           { id: "a", texto: "Rosa dos Ventos", correta: false },
           { id: "b", texto: "Escala", correta: true },
           { id: "c", texto: "Legenda", correta: false },
+
+          { id: "extra-8", texto: "Outra possibilidade", correta: false },
         ],
-        feedbackAcerto:
-          "Isso! A ESCALA é a régua do mapa — traduz cm de papel em km de verdade.",
-        feedbackErro:
-          "Rosa dos ventos aponta direção. Quem mede distância é a ESCALA.",
+        feedbackAcerto: "Isso! A ESCALA é a régua do mapa — traduz cm de papel em km de verdade.",
+        feedbackErro: "Rosa dos ventos aponta direção. Quem mede distância é a ESCALA.",
       },
     ],
     selo: {

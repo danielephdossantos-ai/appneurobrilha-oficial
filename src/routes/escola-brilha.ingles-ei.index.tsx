@@ -35,7 +35,7 @@ function IndiceInglesEI() {
     <div className={`min-h-screen text-white ${fundoMundo.className}`} style={fundoMundo.style}>
       <MundoBar />
       <div className="max-w-3xl mx-auto px-4 py-6">
-        <Link to="/" className="text-white/80 text-sm">◂ Voltar</Link>
+        <Link to="/escola-brilha" className="text-white/80 text-sm">◂ Voltar</Link>
         <header className="text-center mt-3 mb-6">
           <p className="text-yellow-300 font-bold text-xs tracking-wider">
             EDUCAÇÃO INFANTIL · MÉTODO SPEB
@@ -101,7 +101,8 @@ function TrilhaCurso({ curso }: { curso: CursoIng }) {
 
   useEffect(() => {
     try {
-      const raw = localStorage.getItem(`eb.ei.en.concluidas.${curso.slug}`);
+      const childId = localStorage.getItem("neurobrilha:activeChildId") || "sem-crianca";
+      const raw = localStorage.getItem(`eb.ei.en.concluidas.${curso.slug}.${childId}`);
       const list: string[] = raw ? JSON.parse(raw) : [];
       setConcluidas(new Set(list));
     } catch {

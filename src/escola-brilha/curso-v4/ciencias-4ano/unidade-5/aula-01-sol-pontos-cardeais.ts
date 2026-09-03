@@ -38,6 +38,7 @@ export const aula01: AulaGeoV1 = {
       { id: "leste", titulo: "LESTE", subtitulo: "sempre nasce por ali", emoji: "🌅", cor: "from-amber-500 to-orange-700" },
       { id: "oeste", titulo: "OESTE", subtitulo: "onde se põe", emoji: "🌇", cor: "from-red-500 to-purple-700" },
       { id: "norte", titulo: "NORTE", subtitulo: "onde a bússola aponta", emoji: "⬆️", cor: "from-cyan-500 to-sky-700" },
+      { id: "sul", titulo: "SUL", subtitulo: "direção oposta ao norte", emoji: "⬇️", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "leste",
     feedbackAcerto:
@@ -155,6 +156,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🌅", titulo: "Leste", cor: "from-amber-500 to-orange-700" },
           { id: "b", emoji: "🌇", titulo: "Oeste", cor: "from-red-500 to-purple-700" },
           { id: "c", emoji: "⬆️", titulo: "Norte", cor: "from-cyan-500 to-sky-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "a",
         feedbackAcerto: "Sim. Sol nasce no LESTE — sempre.",
@@ -168,6 +170,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "⬆️", titulo: "Norte magnético", cor: "from-cyan-500 to-sky-700" },
           { id: "b", emoji: "☀️", titulo: "Sol", cor: "from-amber-500 to-orange-700" },
           { id: "c", emoji: "🌍", titulo: "Onde você está", cor: "from-emerald-500 to-green-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "a",
         feedbackAcerto: "Correto. Bússola aponta pro NORTE magnético da Terra.",
@@ -181,6 +184,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🕐", titulo: "Curta", cor: "from-yellow-500 to-orange-700" },
           { id: "b", emoji: "🌆", titulo: "Longa", cor: "from-slate-600 to-slate-900" },
           { id: "c", emoji: "🚫", titulo: "Não tem sombra", cor: "from-red-500 to-rose-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "a",
         feedbackAcerto: "Sim. Sol no alto do céu = sombra CURTA.",
@@ -378,6 +382,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Oeste", correta: true },
           { id: "b", texto: "Norte" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. Sempre OESTE.",
         feedbackErro: "Pôr do sol = OESTE, sempre.",
@@ -389,6 +395,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Curta (sol no alto)", correta: true },
           { id: "b", texto: "Longa (sol baixo)" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. Sol no alto = sombra CURTA.",
         feedbackErro: "Meio-dia = sol bem no alto = sombra CURTA.",
@@ -400,6 +408,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Norte", correta: true },
           { id: "b", texto: "Onde o sol está" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. NORTE magnético.",
         feedbackErro: "Bússola SEMPRE aponta pro NORTE.",

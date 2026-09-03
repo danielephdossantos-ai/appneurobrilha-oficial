@@ -3,6 +3,9 @@ import { aula01 } from "./aula-01-central-de-rotas";
 import { aula02 } from "./aula-02-seguranca-no-transito";
 import { aula03 } from "./aula-03-comunicacao-ontem-hoje";
 import { aula04 } from "./aula-04-atlas-conectado";
+import { aula05 } from "./aula-05-mapas-lugares";
+import { aula06 } from "./aula-06-visoes-representacoes";
+import { aula07 } from "./aula-07-localizacao-referencias";
 
 /**
  * Geografia 2º Ano — Unidade 4
@@ -20,5 +23,5 @@ export const unidade4: UnidadePortugues = {
   descricao:
     "Brilha vira Guardião das Rotas: descobre o melhor transporte pra cada trajeto, treina segurança no trânsito, faz o upgrade da comunicação de ontem pra hoje e conecta tudo no Atlas do Município.",
   corTema: "#F59E0B",
-  aulas: [aula01, aula02, aula03, aula04],
+  aulas: [aula01, aula02, aula03, aula04, aula05, aula06, aula07],
 };

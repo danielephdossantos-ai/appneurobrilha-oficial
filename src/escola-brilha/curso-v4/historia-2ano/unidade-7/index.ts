@@ -1,5 +1,6 @@
 import type { UnidadeGeoV1 } from "../../types";
 import { aula01 } from "./aula-01-grandes-historiadores";
+import { aula02 } from "./aula-02-comunidades-convivencia";
 
 export const unidade7: UnidadeGeoV1 = {
   slug: "unidade-7",
@@ -9,5 +10,5 @@ export const unidade7: UnidadeGeoV1 = {
   descricao:
     "Revisão final: juntar todas as pistas do ano, ativar o Relógio do Tempo e inaugurar a exposição do Museu Digital.",
   corTema: "#b45309",
-  aulas: [aula01],
+  aulas: [aula01, aula02],
 };

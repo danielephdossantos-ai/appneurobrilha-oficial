@@ -7,7 +7,7 @@ export const aula01_pesquisaAmostragem: AulaV4 = {
   slug: "u7-01-pesquisa-amostragem",
   titulo: "O Instituto Brilha de Pesquisas",
   iconeTrilha: "🔎",
-  bncc: ["EF09MA21", "EF09MA23"],
+  bncc: ["EF09MA23"],
   duracaoMin: 30,
   metodologias: ["vergnaud", "skemp"],
 

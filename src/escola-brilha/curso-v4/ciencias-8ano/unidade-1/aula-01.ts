@@ -19,7 +19,7 @@ export const aula01: AulaGeoV1 = {
   titulo: "Laboratório de Biologia Celular",
   iconeTrilha: "🧬",
   recompensa: { xp: 140, moedas: 55, medalha: "Citologista Júnior" },
-  bncc: ["EF08CI06", "EF08CI07"],
+  bncc: [],
   duracaoMin: 45,
 
   cena01_motivacao: {
@@ -44,6 +44,7 @@ export const aula01: AulaGeoV1 = {
       { id: "novas", titulo: "Células antigas se DIVIDEM", subtitulo: "cada uma vira duas idênticas", emoji: "🧬", cor: "from-emerald-500 to-teal-700", fotoUrl: celulaAnimalImg },
       { id: "crescem", titulo: "Células ficam maiores", subtitulo: "sem dividir, só incham", emoji: "📈", cor: "from-slate-500 to-slate-700", fotoUrl: celulaAnimalImg },
       { id: "aparecem", titulo: "Surgem do nada", subtitulo: "geração espontânea", emoji: "❌", cor: "from-red-500 to-rose-700", fotoUrl: celulaAnimalImg },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "novas",
     feedbackAcerto:
@@ -95,6 +96,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🧬", titulo: "No núcleo (organizado em cromossomos)", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🔋", titulo: "Na mitocôndria (só ali)", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🛡️", titulo: "Grudado na membrana", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. Núcleo delimitado = eucarionte. Ali fica quase todo o DNA.",
         feedbackErro: "Há um pouco de DNA na mitocôndria, mas a MAIOR PARTE fica no NÚCLEO." },
@@ -103,6 +105,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🧬", titulo: "Duas células idênticas à mãe", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🌱", titulo: "Uma célula vegetal e uma animal", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "❓", titulo: "Quatro células diferentes", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Sim. Mitose = 2 filhas IDÊNTICAS. (Meiose sim gera 4 diferentes.)",
         feedbackErro: "Mitose gera SEMPRE 2 idênticas. Meiose (só nos gametas) gera 4 diferentes." },
@@ -111,6 +114,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🧪", titulo: "Louis Pasteur (1861)", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🍎", titulo: "Isaac Newton", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🌍", titulo: "Charles Darwin", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. Pasteur mostrou com os frascos 'pescoço de cisne' que microrganismos vêm do ar.",
         feedbackErro: "Pasteur, 1861. Newton = física; Darwin = evolução." },
@@ -213,6 +217,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Todo ser vivo é feito de células; célula é unidade funcional; toda célula vem de outra célula", correta: true },
           { id: "b", texto: "Toda vida vem do sol; célula é como um tijolo; DNA existe só em animais" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. Schleiden, Schwann e Virchow (séc. XIX).",
         feedbackErro: "São: (1) todo vivo = células, (2) célula = unidade funcional, (3) célula vem de célula." },
@@ -220,6 +226,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Trecho de DNA com a receita para uma característica ou proteína", correta: true },
           { id: "b", texto: "Uma organela dentro da mitocôndria" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. Gene = pedaço de DNA com informação para uma proteína.",
         feedbackErro: "Gene NÃO é organela — é um trecho de DNA com uma receita." },
@@ -227,6 +235,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Mitose gera 2 células idênticas; meiose gera 4 células diferentes (gametas)", correta: true },
           { id: "b", texto: "Mitose acontece só em plantas; meiose só em animais" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Perfeito. Mitose = crescimento/reparo (2 iguais). Meiose = reprodução (4 gametas diferentes).",
         feedbackErro: "As duas acontecem em plantas e animais. Diferença: mitose = 2 iguais; meiose = 4 diferentes." },

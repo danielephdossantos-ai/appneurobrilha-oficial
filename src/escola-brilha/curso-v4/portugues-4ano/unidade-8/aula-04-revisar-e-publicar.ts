@@ -20,7 +20,7 @@ export const aula04: AulaPortuguesV4 = {
   slug: "aula-04-revisar-e-publicar",
   titulo: "A Roda de Revisão e a Grande Publicação",
   iconeTrilha: "📣",
-  bncc: ["EF35LP23", "EF35LP24", "EF15LP09"],
+  bncc: ["EF15LP06", "EF15LP07", "EF15LP08"],
   duracaoMin: 22,
 
   momento01_motivacao: {

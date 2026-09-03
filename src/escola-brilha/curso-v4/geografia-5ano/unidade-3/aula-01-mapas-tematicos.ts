@@ -9,7 +9,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-mapas-tematicos",
   titulo: "Mapas Temáticos e Diferenças Regionais",
   iconeTrilha: "🗺️",
-  bncc: ["EF05GE05", "EF05GE09"],
+  bncc: ["EF05GE09"],
   duracaoMin: 22,
 
   cena01_motivacao: {
@@ -24,8 +24,7 @@ export const aula01: AulaGeoV1 = {
 
   cena02_previsao: {
     tipo: "votoExplorador",
-    aurora:
-      "Palpite: num mapa de POLUIÇÃO, o que uma mancha VERMELHA ESCURA representa?",
+    aurora: "Palpite: num mapa de POLUIÇÃO, o que uma mancha VERMELHA ESCURA representa?",
     pergunta: "Vermelho escuro = ?",
     opcoes: [
       {
@@ -42,10 +41,22 @@ export const aula01: AulaGeoV1 = {
         emoji: "🟢",
         cor: "from-emerald-500 to-green-700",
       },
+
+      {
+        id: "extra-1",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
+      {
+        id: "extra-2",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
     ],
     respostaCerta: "muito",
-    feedbackAcerto:
-      "Isso! Cores FORTES (vermelho) = concentração ALTA do que o mapa está medindo.",
+    feedbackAcerto: "Isso! Cores FORTES (vermelho) = concentração ALTA do que o mapa está medindo.",
     feedbackErro: "Áreas limpas costumam ser VERDES. VERMELHO ESCURO = alerta, alta concentração.",
     falaFinal: "Cores forte = muito. Cores frias/claras = pouco. Regra do mapa.",
   },
@@ -154,8 +165,20 @@ export const aula01: AulaGeoV1 = {
         fotoUrl: mapaTematico,
         cards: [
           { id: "alta", emoji: "🔴", titulo: "Alta poluição", cor: "from-red-500 to-rose-700" },
-          { id: "baixa", emoji: "🟢", titulo: "Baixa poluição", cor: "from-emerald-500 to-green-700" },
+          {
+            id: "baixa",
+            emoji: "🟢",
+            titulo: "Baixa poluição",
+            cor: "from-emerald-500 to-green-700",
+          },
           { id: "nula", emoji: "⚪", titulo: "Sem poluição", cor: "from-slate-400 to-gray-600" },
+
+          {
+            id: "extra-3",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "alta",
         feedbackAcerto: "Isso! Vermelho escuro = ALTA concentração — alerta.",
@@ -167,7 +190,19 @@ export const aula01: AulaGeoV1 = {
         cards: [
           { id: "ti", emoji: "📌", titulo: "Título", cor: "from-sky-500 to-blue-700" },
           { id: "le", emoji: "🔑", titulo: "Legenda", cor: "from-amber-500 to-orange-700" },
-          { id: "es", emoji: "📏", titulo: "Escala numérica", cor: "from-purple-500 to-fuchsia-700" },
+          {
+            id: "es",
+            emoji: "📏",
+            titulo: "Escala numérica",
+            cor: "from-purple-500 to-fuchsia-700",
+          },
+
+          {
+            id: "extra-4",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "le",
         feedbackAcerto: "Perfeito! LEGENDA é a chave do mapa.",
@@ -178,9 +213,21 @@ export const aula01: AulaGeoV1 = {
         pergunta: "Regiões do Brasil com acessos diferentes a escola e saúde mostra:",
         fotoUrl: desigualdade,
         cards: [
-          { id: "de", emoji: "⚖️", titulo: "Desigualdade regional", cor: "from-emerald-500 to-green-700" },
+          {
+            id: "de",
+            emoji: "⚖️",
+            titulo: "Desigualdade regional",
+            cor: "from-emerald-500 to-green-700",
+          },
           { id: "cl", emoji: "☀️", titulo: "Clima diferente", cor: "from-amber-500 to-orange-700" },
           { id: "re", emoji: "⛰️", titulo: "Relevo diferente", cor: "from-slate-500 to-gray-700" },
+
+          {
+            id: "extra-5",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "de",
         feedbackAcerto: "Isso! DESIGUALDADE REGIONAL — diferenças entre regiões.",
@@ -276,8 +323,7 @@ export const aula01: AulaGeoV1 = {
       },
       {
         id: "p2",
-        texto:
-          "A LEGENDA é a CHAVE do mapa. Ela explica o que cada cor significa.",
+        texto: "A LEGENDA é a CHAVE do mapa. Ela explica o que cada cor significa.",
         chaves: ["legenda", "chave"],
       },
       {
@@ -389,8 +435,7 @@ export const aula01: AulaGeoV1 = {
         emoji: "👁️",
         percentual: 40,
         cor: "#8b5cf6",
-        descricao:
-          "Depois é observar CORES e comparar REGIÕES pra tirar conclusões.",
+        descricao: "Depois é observar CORES e comparar REGIÕES pra tirar conclusões.",
         exemplos: ["⚖️ Comparar", "💡 Concluir", "🌍 Regiões"],
       },
     ],
@@ -409,6 +454,8 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Área com pouquíssima poluição", correta: false },
           { id: "b", texto: "Área com grande concentração de poluição", correta: true },
           { id: "c", texto: "Área sem informação", correta: false },
+
+          { id: "extra-6", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Isso! Cores fortes marcam alta concentração — precisa de investimento.",
         feedbackErro: "Vermelho escuro = MUITA poluição, área crítica.",
@@ -420,6 +467,8 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "O título", correta: false },
           { id: "b", texto: "A legenda", correta: true },
           { id: "c", texto: "A escala numérica", correta: false },
+
+          { id: "extra-7", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Perfeito! LEGENDA é a chave do mapa.",
         feedbackErro: "Título diz o tema, escala diz tamanho. Cores = LEGENDA.",
@@ -431,6 +480,8 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Clima igual", correta: false },
           { id: "b", texto: "Desigualdade regional", correta: true },
           { id: "c", texto: "Mesmo bioma", correta: false },
+
+          { id: "extra-8", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Isso! DESIGUALDADE REGIONAL fica clara no mapa temático.",
         feedbackErro: "Clima e bioma são físicos. Diferença de renda = DESIGUALDADE.",

@@ -5,7 +5,7 @@ export const aula04_volumeCapacidade: AulaV4 = {
   slug: "u6-04-volume-capacidade",
   titulo: "Espaço de Dentro",
   iconeTrilha: "🧊",
-  bncc: ["EF07MA30", "EF07MA32"],
+  bncc: ["EF07MA30"],
   duracaoMin: 30,
   metodologias: ["skemp"],
 

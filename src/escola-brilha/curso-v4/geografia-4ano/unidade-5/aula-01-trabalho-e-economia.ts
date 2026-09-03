@@ -43,12 +43,24 @@ export const aula01: AulaGeoV1 = {
         emoji: "🏭",
         cor: "from-slate-500 to-gray-700",
       },
+
+      {
+        id: "extra-1",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
+      {
+        id: "extra-2",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
     ],
     respostaCerta: "primario",
     feedbackAcerto:
       "Isso! Tirar direto da NATUREZA (plantar, criar animal, pescar) é setor PRIMÁRIO.",
-    feedbackErro:
-      "Fábrica é SECUNDÁRIO. Colher direto do pé é da NATUREZA — setor PRIMÁRIO.",
+    feedbackErro: "Fábrica é SECUNDÁRIO. Colher direto do pé é da NATUREZA — setor PRIMÁRIO.",
     falaFinal: "Primário = natureza. Bora ver os outros.",
   },
 
@@ -72,8 +84,7 @@ export const aula01: AulaGeoV1 = {
         capa: "2. Setor Secundário",
         emoji: "🏭",
         cor: "from-slate-500 to-gray-700",
-        conteudo:
-          "SETOR SECUNDÁRIO — TRANSFORMA matéria-prima em produto. Fábricas e indústrias.",
+        conteudo: "SETOR SECUNDÁRIO — TRANSFORMA matéria-prima em produto. Fábricas e indústrias.",
         exemplo: "Ex.: operário de montadora de carro, padeiro na indústria, costureira.",
         fotoUrl: secundario,
       },
@@ -114,8 +125,7 @@ export const aula01: AulaGeoV1 = {
         emoji: "🌾",
         cor: "from-emerald-500 to-green-700",
         titulo: "Agricultor (Centro-Oeste)",
-        texto:
-          "Planta soja e milho no cerrado. Setor PRIMÁRIO — tira direto da terra.",
+        texto: "Planta soja e milho no cerrado. Setor PRIMÁRIO — tira direto da terra.",
         fotoUrl: primario,
       },
       {
@@ -125,8 +135,7 @@ export const aula01: AulaGeoV1 = {
         emoji: "🏭",
         cor: "from-slate-500 to-gray-700",
         titulo: "Operário (Sudeste)",
-        texto:
-          "Monta carros numa fábrica em SP. Setor SECUNDÁRIO — transforma peças em produto.",
+        texto: "Monta carros numa fábrica em SP. Setor SECUNDÁRIO — transforma peças em produto.",
         fotoUrl: secundario,
       },
       {
@@ -136,8 +145,7 @@ export const aula01: AulaGeoV1 = {
         emoji: "🏥",
         cor: "from-sky-500 to-blue-700",
         titulo: "Médica (qualquer cidade)",
-        texto:
-          "Atende pacientes num hospital. Setor TERCIÁRIO — presta um serviço.",
+        texto: "Atende pacientes num hospital. Setor TERCIÁRIO — presta um serviço.",
         fotoUrl: terciario,
       },
       {
@@ -147,8 +155,7 @@ export const aula01: AulaGeoV1 = {
         emoji: "🎣",
         cor: "from-cyan-500 to-blue-700",
         titulo: "Pescador (Nordeste)",
-        texto:
-          "Sai de barco e traz peixe do mar. Setor PRIMÁRIO — tira da natureza.",
+        texto: "Sai de barco e traz peixe do mar. Setor PRIMÁRIO — tira da natureza.",
       },
     ],
     falaFinal: "4 profissões, 3 setores. Todo trabalho cabe em algum.",
@@ -167,6 +174,13 @@ export const aula01: AulaGeoV1 = {
           { id: "p", emoji: "🌾", titulo: "Primário", cor: "from-emerald-500 to-green-700" },
           { id: "s", emoji: "🏭", titulo: "Secundário", cor: "from-slate-500 to-gray-700" },
           { id: "t", emoji: "🏥", titulo: "Terciário", cor: "from-sky-500 to-blue-700" },
+
+          {
+            id: "extra-3",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "t",
         feedbackAcerto: "Isso! Professor PRESTA SERVIÇO = TERCIÁRIO.",
@@ -180,6 +194,13 @@ export const aula01: AulaGeoV1 = {
           { id: "s", emoji: "🏭", titulo: "Secundário", cor: "from-slate-500 to-gray-700" },
           { id: "p", emoji: "🌾", titulo: "Primário", cor: "from-emerald-500 to-green-700" },
           { id: "t", emoji: "🏥", titulo: "Terciário", cor: "from-sky-500 to-blue-700" },
+
+          {
+            id: "extra-4",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "s",
         feedbackAcerto: "Perfeito! Fábrica TRANSFORMA = SECUNDÁRIO.",
@@ -193,6 +214,13 @@ export const aula01: AulaGeoV1 = {
           { id: "p", emoji: "🌾", titulo: "Primário", cor: "from-emerald-500 to-green-700" },
           { id: "s", emoji: "🏭", titulo: "Secundário", cor: "from-slate-500 to-gray-700" },
           { id: "t", emoji: "🏥", titulo: "Terciário", cor: "from-sky-500 to-blue-700" },
+
+          {
+            id: "extra-5",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "p",
         feedbackAcerto: "Boa! Extrair minério direto da natureza = PRIMÁRIO.",
@@ -204,8 +232,7 @@ export const aula01: AulaGeoV1 = {
 
   cena06_personagensLugar: {
     tipo: "mapaBrasilInterativo",
-    aurora:
-      "Cada região do Brasil tem uma atividade FORTE. Toque nos estados e sinta a economia.",
+    aurora: "Cada região do Brasil tem uma atividade FORTE. Toque nos estados e sinta a economia.",
     instrucao: "Toque em cada estado — cores = atividade dominante",
     missao: {
       tipo: "grupos",
@@ -304,14 +331,12 @@ export const aula01: AulaGeoV1 = {
       },
       {
         id: "p2",
-        texto:
-          "AGRICULTOR, pescador e minerador são do PRIMÁRIO. Tiram coisas direto da natureza.",
+        texto: "AGRICULTOR, pescador e minerador são do PRIMÁRIO. Tiram coisas direto da natureza.",
         chaves: ["agricultor", "primário", "natureza"],
       },
       {
         id: "p3",
-        texto:
-          "Operário de FÁBRICA é do SECUNDÁRIO. Transforma matéria-prima em produto pronto.",
+        texto: "Operário de FÁBRICA é do SECUNDÁRIO. Transforma matéria-prima em produto pronto.",
         chaves: ["fábrica", "secundário", "produto"],
       },
       {
@@ -346,7 +371,11 @@ export const aula01: AulaGeoV1 = {
       },
       {
         id: "r2",
-        municipioA: { nome: "Operário de montadora", emoji: "🏭", cor: "from-slate-500 to-gray-700" },
+        municipioA: {
+          nome: "Operário de montadora",
+          emoji: "🏭",
+          cor: "from-slate-500 to-gray-700",
+        },
         municipioB: { nome: "Monta carros", emoji: "🚗", cor: "from-red-500 to-rose-700" },
         contexto: "Quem monta carro na fábrica é setor...",
         pecaCertaId: "secundario",
@@ -355,7 +384,11 @@ export const aula01: AulaGeoV1 = {
       },
       {
         id: "r3",
-        municipioA: { nome: "Motorista de aplicativo", emoji: "🚕", cor: "from-yellow-400 to-amber-600" },
+        municipioA: {
+          nome: "Motorista de aplicativo",
+          emoji: "🚕",
+          cor: "from-yellow-400 to-amber-600",
+        },
         municipioB: { nome: "Leva passageiros", emoji: "🗺️", cor: "from-orange-500 to-amber-700" },
         contexto: "Motorista que leva você pra escola é setor...",
         pecaCertaId: "terciario",
@@ -364,7 +397,11 @@ export const aula01: AulaGeoV1 = {
       },
       {
         id: "r4",
-        municipioA: { nome: "Vaqueiro no sertão", emoji: "🐄", cor: "from-amber-600 to-orange-800" },
+        municipioA: {
+          nome: "Vaqueiro no sertão",
+          emoji: "🐄",
+          cor: "from-amber-600 to-orange-800",
+        },
         municipioB: { nome: "Cuida do gado", emoji: "🌾", cor: "from-emerald-500 to-green-700" },
         contexto: "Vaqueiro que cuida do rebanho é setor...",
         pecaCertaId: "primario",
@@ -373,8 +410,16 @@ export const aula01: AulaGeoV1 = {
       },
       {
         id: "r5",
-        municipioA: { nome: "Padeira na panificadora industrial", emoji: "🍞", cor: "from-amber-500 to-orange-700" },
-        municipioB: { nome: "Faz pão em série na fábrica", emoji: "🥖", cor: "from-yellow-500 to-amber-700" },
+        municipioA: {
+          nome: "Padeira na panificadora industrial",
+          emoji: "🍞",
+          cor: "from-amber-500 to-orange-700",
+        },
+        municipioB: {
+          nome: "Faz pão em série na fábrica",
+          emoji: "🥖",
+          cor: "from-yellow-500 to-amber-700",
+        },
         contexto: "Trabalha na FÁBRICA de pão é setor...",
         pecaCertaId: "secundario",
         feedbackAcerto: "Isso! Transformar trigo em pão na indústria = SECUNDÁRIO.",
@@ -382,7 +427,11 @@ export const aula01: AulaGeoV1 = {
       },
       {
         id: "r6",
-        municipioA: { nome: "Enfermeira no hospital", emoji: "🏥", cor: "from-red-500 to-rose-700" },
+        municipioA: {
+          nome: "Enfermeira no hospital",
+          emoji: "🏥",
+          cor: "from-red-500 to-rose-700",
+        },
         municipioB: { nome: "Cuida de pacientes", emoji: "💉", cor: "from-pink-500 to-rose-700" },
         contexto: "Enfermeira que atende no hospital é setor...",
         pecaCertaId: "terciario",
@@ -434,6 +483,8 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Primário", correta: false },
           { id: "b", texto: "Terciário (serviços)", correta: true },
           { id: "c", texto: "Secundário", correta: false },
+
+          { id: "extra-6", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Isso! Educação e saúde são SERVIÇOS = TERCIÁRIO.",
         feedbackErro: "Ensinar e cuidar de gente é SERVIÇO = TERCIÁRIO.",
@@ -445,6 +496,8 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Primário", correta: true },
           { id: "b", texto: "Secundário", correta: false },
           { id: "c", texto: "Terciário", correta: false },
+
+          { id: "extra-7", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Perfeito! Pesca tira da natureza = PRIMÁRIO.",
         feedbackErro: "Tirar da NATUREZA = PRIMÁRIO.",
@@ -456,6 +509,8 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Primário", correta: false },
           { id: "b", texto: "Secundário", correta: true },
           { id: "c", texto: "Terciário", correta: false },
+
+          { id: "extra-8", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Isso! Fábrica que transforma = SECUNDÁRIO.",
         feedbackErro: "Fábrica que TRANSFORMA matéria-prima = SECUNDÁRIO.",
@@ -467,8 +522,7 @@ export const aula01: AulaGeoV1 = {
       emoji: "🏭",
       cor: "from-slate-500 to-gray-700",
     },
-    falaFinal:
-      "PARABÉNS, SUPERVISOR ECONÔMICO! Você entende como o Brasil produz suas riquezas.",
+    falaFinal: "PARABÉNS, SUPERVISOR ECONÔMICO! Você entende como o Brasil produz suas riquezas.",
   },
 
   recompensa: { xp: 400, moedas: 300, medalha: "Supervisor Econômico" },

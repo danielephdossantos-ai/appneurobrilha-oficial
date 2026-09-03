@@ -23,7 +23,7 @@ export const aula01: AulaPortuguesV4 = {
   slug: "aula-01-construtor-palavras",
   titulo: "O Construtor de Palavras",
   iconeTrilha: "🔤",
-  bncc: ["EF02LP06", "EF02LP07", "EF02LP08"],
+  bncc: ["EF02LP02", "EF02LP04", "EF02LP08"],
   duracaoMin: 15,
 
   momento01_motivacao: {

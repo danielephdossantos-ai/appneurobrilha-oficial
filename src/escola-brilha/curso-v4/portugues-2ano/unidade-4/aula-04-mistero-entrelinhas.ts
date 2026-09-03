@@ -18,7 +18,7 @@ export const aula04: AulaPortuguesV4 = {
   slug: "aula-04-mistero-entrelinhas",
   titulo: "O Mistério das Entrelinhas",
   iconeTrilha: "🕵️",
-  bncc: ["EF02LP17", "EF02LP18", "EF02LP20"],
+  bncc: ["EF15LP02", "EF15LP03", "EF15LP16"],
   duracaoMin: 15,
 
   momento01_motivacao: {

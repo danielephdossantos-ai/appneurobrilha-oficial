@@ -15,7 +15,7 @@ export const aula04_somaDiferenteDenom: AulaV4 = {
   momento02_exploracao: {
     instrucao: "Passos.",
     cenas: [
-      { tipo: "texto", texto: "1º Ache o MMC dos denominadores.", destaque: true },
+      { tipo: "texto", texto: "1º Encontre um múltiplo comum dos denominadores. O menor deles é chamado mínimo múltiplo comum (MMC).", destaque: true },
       { tipo: "texto", texto: "2º Converta cada fração pra ter esse denominador." },
       { tipo: "texto", texto: "3º Some os numeradores." },
     ],
@@ -28,7 +28,7 @@ export const aula04_somaDiferenteDenom: AulaV4 = {
   momento04_explicacao: {
     titulo: "Ponto crucial: converter",
     etapas: [
-      { texto: "2/5 + 1/2. MMC(5,2)=10. 2/5=4/10. 1/2=5/10. Soma: 9/10." },
+      { texto: "2/5 + 1/2. Múltiplos de 5: 5, 10... Múltiplos de 2: 2, 4, 6, 8, 10... O primeiro comum é 10. Então 2/5=4/10 e 1/2=5/10. Soma: 9/10." },
       { texto: "3/4 − 1/6. MMC(4,6)=12. 9/12 − 2/12 = 7/12." },
     ],
   },

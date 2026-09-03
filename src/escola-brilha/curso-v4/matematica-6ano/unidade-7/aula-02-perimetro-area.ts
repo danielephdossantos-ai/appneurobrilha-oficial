@@ -4,7 +4,7 @@ export const aula02_perimetroArea: AulaV4 = {
   slug: "u7-02-perimetro-area",
   titulo: "Perímetro e área",
   iconeTrilha: "📏",
-  bncc: ["EF06MA24"],
+  bncc: ["EF06MA24", "EF06MA29"],
   duracaoMin: 24,
   metodologias: ["cpa"],
 
@@ -35,10 +35,10 @@ export const aula02_perimetroArea: AulaV4 = {
   },
 
   momento04_explicacao: {
-    titulo: "Fórmulas essenciais",
+    titulo: "Construindo as relações pela contagem",
     etapas: [
       {
-        texto: "Retângulo: P = 2·(b + h) · A = b · h.",
+        texto: "No retângulo, o perímetro soma os quatro lados; a área conta as unidades quadradas organizadas em linhas e colunas.",
         exemploReal: {
           contexto: "Retângulo 6×4",
           visualMat: {
@@ -50,7 +50,7 @@ export const aula02_perimetroArea: AulaV4 = {
         },
       },
       {
-        texto: "Quadrado: P = 4·l · A = l².",
+        texto: "No quadrado, os quatro lados têm a mesma medida e a superfície forma uma malha de lado por lado.",
         exemploReal: {
           contexto: "Quadrado de lado 8 cm — vamos montar as duas contas.",
           visualMat: {
@@ -75,7 +75,7 @@ export const aula02_perimetroArea: AulaV4 = {
         },
       },
       {
-        texto: "Triângulo: A = (base × altura) ÷ 2.",
+        texto: "Dois triângulos iguais podem formar um retângulo; por isso cada triângulo ocupa metade da área desse retângulo.",
         exemploReal: {
           contexto: "Triângulo de base 10 cm e altura 6 cm — dois passos: multiplico e divido por 2.",
           visualMat: {
@@ -96,6 +96,21 @@ export const aula02_perimetroArea: AulaV4 = {
             ],
           },
           destaque: "A = (10 × 6) ÷ 2 = 60 ÷ 2 = 30 cm².",
+        },
+      },
+      {
+        texto: "Ao multiplicar o lado de um quadrado por um fator, o perímetro muda pelo mesmo fator, mas a área muda pelo quadrado desse fator.",
+        exemploReal: {
+          contexto: "Quadrado de lado 3 ampliado para lado 6: fator 2.",
+          visualMat: {
+            tipo: "tabela",
+            cabecalhos: ["Quadrado", "Lado", "Perímetro", "Área"],
+            linhas: [
+              { rotulo: "Original", valores: ["3", "12", "9"] },
+              { rotulo: "Ampliado", valores: ["6", "24", "36"] },
+            ],
+          },
+          destaque: "O lado dobrou, o perímetro dobrou e a área ficou 4 vezes maior.",
         },
       },
     ],

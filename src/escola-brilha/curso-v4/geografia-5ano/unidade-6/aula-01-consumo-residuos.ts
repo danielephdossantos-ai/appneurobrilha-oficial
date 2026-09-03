@@ -10,7 +10,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-consumo-residuos",
   titulo: "Consumo, Resíduos e Tecnologia",
   iconeTrilha: "♻️",
-  bncc: ["EF05GE11", "EF05GE12"],
+  bncc: ["EF05GE11"],
   duracaoMin: 22,
 
   cena01_motivacao: {
@@ -25,8 +25,7 @@ export const aula01: AulaGeoV1 = {
 
   cena02_previsao: {
     tipo: "votoExplorador",
-    aurora:
-      "Palpite: qual é o MELHOR destino pros restos de comida da cozinha?",
+    aurora: "Palpite: qual é o MELHOR destino pros restos de comida da cozinha?",
     pergunta: "Casca de banana, resto de arroz — melhor destino?",
     opcoes: [
       {
@@ -42,6 +41,19 @@ export const aula01: AulaGeoV1 = {
         subtitulo: "junto com todo o lixo",
         emoji: "🗑️",
         cor: "from-red-400 to-rose-600",
+      },
+
+      {
+        id: "extra-1",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
+      {
+        id: "extra-2",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
       },
     ],
     respostaCerta: "composto",
@@ -122,8 +134,7 @@ export const aula01: AulaGeoV1 = {
         emoji: "🏗️",
         cor: "from-emerald-500 to-green-700",
         titulo: "ATERRO — certo",
-        texto:
-          "Lixo em camadas, coberto, sem contato com chuva. Gás captado vira energia.",
+        texto: "Lixo em camadas, coberto, sem contato com chuva. Gás captado vira energia.",
       },
       {
         id: "reciclagem",
@@ -142,8 +153,7 @@ export const aula01: AulaGeoV1 = {
         emoji: "🌱",
         cor: "from-amber-500 to-yellow-600",
         titulo: "COMPOSTAGEM",
-        texto:
-          "Restos orgânicos viram adubo em 3 meses. Reduz peso do lixo pela metade.",
+        texto: "Restos orgânicos viram adubo em 3 meses. Reduz peso do lixo pela metade.",
       },
     ],
     falaFinal: "4 destinos: 1 errado, 3 certos. Escolha os 3.",
@@ -159,9 +169,21 @@ export const aula01: AulaGeoV1 = {
         pergunta: "Onde tem o TRATAMENTO CORRETO do lixo?",
         fotoUrl: aterro,
         cards: [
-          { id: "at", emoji: "🏗️", titulo: "Aterro sanitário", cor: "from-emerald-500 to-green-700" },
+          {
+            id: "at",
+            emoji: "🏗️",
+            titulo: "Aterro sanitário",
+            cor: "from-emerald-500 to-green-700",
+          },
           { id: "li", emoji: "🗑️", titulo: "Lixão", cor: "from-red-500 to-rose-700" },
           { id: "ri", emoji: "🌊", titulo: "Rio da cidade", cor: "from-sky-500 to-blue-700" },
+
+          {
+            id: "extra-3",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "at",
         feedbackAcerto: "Isso! ATERRO SANITÁRIO trata direito, sem poluir.",
@@ -172,21 +194,66 @@ export const aula01: AulaGeoV1 = {
         pergunta: "O que fazer com PILHAS e CELULARES velhos?",
         fotoUrl: logistica,
         cards: [
-          { id: "rev", emoji: "🔄", titulo: "Entregar em ponto de logística reversa", cor: "from-purple-500 to-fuchsia-700" },
-          { id: "jog", emoji: "🗑️", titulo: "Jogar no lixo comum", cor: "from-red-500 to-rose-700" },
-          { id: "en", emoji: "🕳️", titulo: "Enterrar no quintal", cor: "from-amber-500 to-orange-700" },
+          {
+            id: "rev",
+            emoji: "🔄",
+            titulo: "Entregar em ponto de logística reversa",
+            cor: "from-purple-500 to-fuchsia-700",
+          },
+          {
+            id: "jog",
+            emoji: "🗑️",
+            titulo: "Jogar no lixo comum",
+            cor: "from-red-500 to-rose-700",
+          },
+          {
+            id: "en",
+            emoji: "🕳️",
+            titulo: "Enterrar no quintal",
+            cor: "from-amber-500 to-orange-700",
+          },
+
+          {
+            id: "extra-4",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "rev",
         feedbackAcerto: "Perfeito! LOGÍSTICA REVERSA — empresa reciclar.",
-        feedbackErro: "Pilha no lixo comum ou enterrada CONTAMINA o solo. Ponto de LOGÍSTICA REVERSA.",
+        feedbackErro:
+          "Pilha no lixo comum ou enterrada CONTAMINA o solo. Ponto de LOGÍSTICA REVERSA.",
       },
       {
         id: "q3",
         pergunta: "Restos de comida podem virar...",
         cards: [
-          { id: "co", emoji: "🌱", titulo: "Adubo (compostagem)", cor: "from-emerald-500 to-green-700" },
-          { id: "en", emoji: "⚡", titulo: "Só energia elétrica", cor: "from-amber-500 to-yellow-600" },
-          { id: "na", emoji: "🚯", titulo: "Nada — vai pro lixão", cor: "from-red-500 to-rose-700" },
+          {
+            id: "co",
+            emoji: "🌱",
+            titulo: "Adubo (compostagem)",
+            cor: "from-emerald-500 to-green-700",
+          },
+          {
+            id: "en",
+            emoji: "⚡",
+            titulo: "Só energia elétrica",
+            cor: "from-amber-500 to-yellow-600",
+          },
+          {
+            id: "na",
+            emoji: "🚯",
+            titulo: "Nada — vai pro lixão",
+            cor: "from-red-500 to-rose-700",
+          },
+
+          {
+            id: "extra-5",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "co",
         feedbackAcerto: "Isso! COMPOSTAGEM vira adubo natural pras plantas.",
@@ -260,14 +327,12 @@ export const aula01: AulaGeoV1 = {
     paragrafos: [
       {
         id: "p1",
-        texto:
-          "LIXÕES são o destino ERRADO — poluem solo, água e ar. Precisam ser fechados.",
+        texto: "LIXÕES são o destino ERRADO — poluem solo, água e ar. Precisam ser fechados.",
         chaves: ["lixões", "poluem"],
       },
       {
         id: "p2",
-        texto:
-          "ATERROS SANITÁRIOS tratam o lixo em camadas cobertas, sem contaminação.",
+        texto: "ATERROS SANITÁRIOS tratam o lixo em camadas cobertas, sem contaminação.",
         chaves: ["aterros", "tratam"],
       },
       {
@@ -348,7 +413,11 @@ export const aula01: AulaGeoV1 = {
       {
         id: "r6",
         municipioA: { nome: "Roupa ainda boa", emoji: "👕", cor: "from-purple-400 to-fuchsia-600" },
-        municipioB: { nome: "Não te serve mais", emoji: "🎁", cor: "from-emerald-400 to-green-600" },
+        municipioB: {
+          nome: "Não te serve mais",
+          emoji: "🎁",
+          cor: "from-emerald-400 to-green-600",
+        },
         contexto: "Roupa em bom estado que não usa. Destino?",
         pecaCertaId: "doar",
         feedbackAcerto: "Perfeito! DOAR pra quem precisa — melhor que jogar fora.",
@@ -369,8 +438,7 @@ export const aula01: AulaGeoV1 = {
         emoji: "♻️",
         percentual: 65,
         cor: "#10b981",
-        descricao:
-          "65% do lixo pode ser RECICLADO ou COMPOSTADO — só precisa separar em casa.",
+        descricao: "65% do lixo pode ser RECICLADO ou COMPOSTADO — só precisa separar em casa.",
         exemplos: ["🍌 Restos", "🧴 Plástico", "📦 Papel"],
       },
       {
@@ -379,8 +447,7 @@ export const aula01: AulaGeoV1 = {
         emoji: "🗑️",
         percentual: 35,
         cor: "#ef4444",
-        descricao:
-          "Só 35% é REJEITO mesmo — vai pro aterro. O resto poderia ter destino melhor.",
+        descricao: "Só 35% é REJEITO mesmo — vai pro aterro. O resto poderia ter destino melhor.",
         exemplos: ["🧷 Fraldas", "🧻 Papel usado", "🚬 Bitucas"],
       },
     ],
@@ -399,6 +466,8 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Jogar em saco plástico junto com lixo comum", correta: false },
           { id: "b", texto: "Compostagem — virar adubo natural", correta: true },
           { id: "c", texto: "Jogar no rio", correta: false },
+
+          { id: "extra-6", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Isso! COMPOSTAGEM enriquece o solo e reduz lixo.",
         feedbackErro: "Plástico e rio ATRAPALHAM. Compostagem transforma em ADUBO.",
@@ -410,6 +479,8 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Nenhuma — são a mesma coisa", correta: false },
           { id: "b", texto: "Lixão polui; aterro trata corretamente", correta: true },
           { id: "c", texto: "Aterro é céu aberto e lixão é coberto", correta: false },
+
+          { id: "extra-7", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Perfeito! LIXÃO polui; ATERRO trata em camadas seladas.",
         feedbackErro: "É o contrário: LIXÃO céu aberto polui. ATERRO trata direito.",
@@ -421,6 +492,8 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Coleta eletrônicos e pilhas pra reciclar", correta: true },
           { id: "b", texto: "Entrega comida em casa", correta: false },
           { id: "c", texto: "Leva lixo pro rio", correta: false },
+
+          { id: "extra-8", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Isso! Empresa recolhe seus produtos velhos pra reciclar.",
         feedbackErro: "Comida é delivery. Rio é crime. LOGÍSTICA REVERSA = reciclar eletrônicos.",

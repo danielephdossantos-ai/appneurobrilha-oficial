@@ -8,7 +8,7 @@ export const aula02_teoremaDeTales: AulaV4 = {
   slug: "u4-02-teorema-de-tales",
   titulo: "O Feixe de Paralelas de Tales",
   iconeTrilha: "📐",
-  bncc: ["EF09MA08"],
+  bncc: ["EF09MA14"],
   duracaoMin: 30,
   metodologias: ["vergnaud", "skemp"],
 

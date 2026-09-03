@@ -9,7 +9,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-materia-transformacao",
   titulo: "Matéria em Transformação",
   iconeTrilha: "🧪",
-  bncc: ["EF05CI02"],
+  bncc: [],
   duracaoMin: 30,
 
   cena01_motivacao: {
@@ -30,6 +30,7 @@ export const aula01: AulaGeoV1 = {
       { id: "cima", titulo: "SOBE", subtitulo: "menos denso", emoji: "⬆️", cor: "from-amber-400 to-orange-700" },
       { id: "mistura", titulo: "MISTURA", subtitulo: "vira homogêneo", emoji: "🌀", cor: "from-slate-400 to-slate-700" },
       { id: "some", titulo: "SOME", subtitulo: "desaparece", emoji: "❓", cor: "from-red-400 to-rose-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "cima",
     feedbackAcerto: "Certo. Óleo é MENOS DENSO que a água — flutua acima dela.",
@@ -97,6 +98,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "☀️", titulo: "Evaporação (líquido → gás)", cor: "from-cyan-500 to-sky-700" },
           { id: "b", emoji: "🧊", titulo: "Solidificação (líquido → sólido)", cor: "from-slate-500 to-slate-700" },
           { id: "c", emoji: "💧", titulo: "Condensação (gás → líquido)", cor: "from-red-500 to-rose-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Sim. Água quente vira vapor — é EVAPORAÇÃO.",
         feedbackErro: "Líquido virando gás por calor é EVAPORAÇÃO." },
@@ -106,6 +108,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🌀", titulo: "Homogênea (uma fase só)", cor: "from-red-500 to-rose-700" },
           { id: "b", emoji: "🥗", titulo: "Heterogênea (duas fases visíveis)", cor: "from-emerald-500 to-green-700" },
           { id: "c", emoji: "❓", titulo: "Não é mistura", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "b",
         feedbackAcerto: "Correto. Dá pra ver duas camadas separadas — é HETEROGÊNEA.",
         feedbackErro: "Se dá pra ver duas fases distintas, a mistura é HETEROGÊNEA." },
@@ -115,6 +118,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🌍", titulo: "A terra (partícula grande)", cor: "from-amber-500 to-orange-700" },
           { id: "b", emoji: "💧", titulo: "A água (partícula pequena)", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "❌", titulo: "Nada", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Isso. Partículas grandes não passam pelo papel — água atravessa, terra fica.",
         feedbackErro: "Água atravessa o filtro. A terra (sólido) fica retida." },
@@ -266,6 +270,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Sólido para líquido", correta: true },
           { id: "b", texto: "Gasoso para líquido" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. Fusão = SÓLIDO → LÍQUIDO.",
         feedbackErro: "Gelo é sólido, água é líquida. Derreter = SÓLIDO → LÍQUIDO." },
@@ -274,6 +280,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Heterogênea (dá pra ver as partes)", correta: true },
           { id: "b", texto: "Homogênea (parece uma coisa só)" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. Areia visível na água = HETEROGÊNEA.",
         feedbackErro: "Se você VÊ os componentes, é HETEROGÊNEA." },
@@ -282,6 +290,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Filtração", correta: true },
           { id: "b", texto: "Congelamento" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Isso. FILTRAÇÃO — sólido fica no papel, líquido passa.",
         feedbackErro: "Congelar não separa. FILTRAÇÃO é o método correto." },

@@ -49,6 +49,19 @@ export const aula02: AulaGeoV1 = {
         emoji: "🌍",
         cor: "from-emerald-400 to-sky-500",
       },
+
+      {
+        id: "extra-1",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
+      {
+        id: "extra-2",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
     ],
     respostaCerta: "muitos-grupos",
     feedbackAcerto:
@@ -168,9 +181,31 @@ export const aula02: AulaGeoV1 = {
         id: "q1",
         pergunta: "Quem deixou a MANDIOCA e o nome dos rios como herança pro nosso município?",
         cards: [
-          { id: "indigena", emoji: "🪶", titulo: "Povos Indígenas", cor: "from-emerald-400 to-lime-600" },
-          { id: "italiana", emoji: "🍕", titulo: "Imigrantes Italianos", cor: "from-red-500 to-amber-500" },
-          { id: "portuguesa", emoji: "⛪", titulo: "Portugueses", cor: "from-blue-400 to-indigo-600" },
+          {
+            id: "indigena",
+            emoji: "🪶",
+            titulo: "Povos Indígenas",
+            cor: "from-emerald-400 to-lime-600",
+          },
+          {
+            id: "italiana",
+            emoji: "🍕",
+            titulo: "Imigrantes Italianos",
+            cor: "from-red-500 to-amber-500",
+          },
+          {
+            id: "portuguesa",
+            emoji: "⛪",
+            titulo: "Portugueses",
+            cor: "from-blue-400 to-indigo-600",
+          },
+
+          {
+            id: "extra-3",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "indigena",
         feedbackAcerto:
@@ -183,8 +218,20 @@ export const aula02: AulaGeoV1 = {
         pergunta: "De qual grupo veio a PIZZA e o jeito de plantar UVA na nossa região?",
         cards: [
           { id: "africana", emoji: "🥁", titulo: "Africanos", cor: "from-orange-500 to-red-600" },
-          { id: "italiana", emoji: "🍕", titulo: "Imigrantes Italianos", cor: "from-red-500 to-amber-500" },
+          {
+            id: "italiana",
+            emoji: "🍕",
+            titulo: "Imigrantes Italianos",
+            cor: "from-red-500 to-amber-500",
+          },
           { id: "indigena", emoji: "🪶", titulo: "Indígenas", cor: "from-emerald-400 to-lime-600" },
+
+          {
+            id: "extra-4",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "italiana",
         feedbackAcerto:
@@ -194,11 +241,24 @@ export const aula02: AulaGeoV1 = {
       },
       {
         id: "q3",
-        pergunta: "Qual é a LÍNGUA que a gente fala hoje, herança dos primeiros europeus que chegaram aqui?",
+        pergunta:
+          "Qual é a LÍNGUA que a gente fala hoje, herança dos primeiros europeus que chegaram aqui?",
         cards: [
           { id: "portugues", emoji: "🇵🇹", titulo: "Português", cor: "from-blue-400 to-indigo-600" },
           { id: "italiano", emoji: "🇮🇹", titulo: "Italiano", cor: "from-red-500 to-amber-500" },
-          { id: "indigena", emoji: "🪶", titulo: "Só línguas indígenas", cor: "from-emerald-400 to-lime-600" },
+          {
+            id: "indigena",
+            emoji: "🪶",
+            titulo: "Só línguas indígenas",
+            cor: "from-emerald-400 to-lime-600",
+          },
+
+          {
+            id: "extra-5",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "portugues",
         feedbackAcerto:
@@ -270,13 +330,15 @@ export const aula02: AulaGeoV1 = {
         id: "cantina",
         emoji: "🍕",
         rotulo: "Abre a cantina",
-        descricao: "Anos depois, os filhos abrem uma cantina e vendem a pizza da vovó pros vizinhos.",
+        descricao:
+          "Anos depois, os filhos abrem uma cantina e vendem a pizza da vovó pros vizinhos.",
       },
       {
         id: "festa",
         emoji: "🎉",
         rotulo: "Vira festa da cidade",
-        descricao: "Hoje a pizza faz parte do sábado de MUITAS famílias — virou herança do município.",
+        descricao:
+          "Hoje a pizza faz parte do sábado de MUITAS famílias — virou herança do município.",
       },
     ],
     ordemCerta: ["italia", "navio", "chegada", "cantina", "festa"],
@@ -353,8 +415,7 @@ export const aula02: AulaGeoV1 = {
         pecaCertaId: "indigena",
         feedbackAcerto:
           "Combo! Mandioca e cesto de palha são herança INDÍGENA — dos primeiros habitantes.",
-        feedbackErro:
-          "Quase! Mandioca e cesto de palha vêm dos povos INDÍGENAS 🪶.",
+        feedbackErro: "Quase! Mandioca e cesto de palha vêm dos povos INDÍGENAS 🪶.",
       },
       {
         id: "r2",
@@ -373,8 +434,7 @@ export const aula02: AulaGeoV1 = {
         pecaCertaId: "africana",
         feedbackAcerto:
           "Boa! Tambor, samba e feijoada são heranças AFRICANAS 🥁 fortíssimas no Brasil.",
-        feedbackErro:
-          "Repara: tambor + feijoada é marca AFRICANA 🥁.",
+        feedbackErro: "Repara: tambor + feijoada é marca AFRICANA 🥁.",
       },
       {
         id: "r3",
@@ -393,8 +453,7 @@ export const aula02: AulaGeoV1 = {
         pecaCertaId: "italiana",
         feedbackAcerto:
           "Isso! Macarrão da nonna e uva pra vinho são clássicos da imigração ITALIANA 🍕.",
-        feedbackErro:
-          "Ops! Macarrão + uva pra vinho é marca ITALIANA 🍕.",
+        feedbackErro: "Ops! Macarrão + uva pra vinho é marca ITALIANA 🍕.",
       },
       {
         id: "r4",
@@ -435,7 +494,11 @@ export const aula02: AulaGeoV1 = {
         cor: "#a855f7",
         descricao:
           "Herança CULTURAL: metade das marcas do município. É comida típica, música, dança, festa, palavra, jeito de rezar, brincadeira de rua — tudo que faz a alma do lugar.",
-        exemplos: ["Feijoada, pizza e mandioca", "Samba, tambor e forró", "Festa junina e padroeiro"],
+        exemplos: [
+          "Feijoada, pizza e mandioca",
+          "Samba, tambor e forró",
+          "Festa junina e padroeiro",
+        ],
       },
       {
         id: "economica",
@@ -463,22 +526,36 @@ export const aula02: AulaGeoV1 = {
         pergunta: "O que é uma HERANÇA cultural do município?",
         opcoes: [
           { id: "a", texto: "Um objeto caro que a família guarda no cofre." },
-          { id: "b", texto: "Comida, música, festa ou jeito de viver deixado por um grupo pra quem vem depois.", correta: true },
+          {
+            id: "b",
+            texto:
+              "Comida, música, festa ou jeito de viver deixado por um grupo pra quem vem depois.",
+            correta: true,
+          },
           { id: "c", texto: "Uma lei nova que o prefeito criou." },
+
+          { id: "extra-6", texto: "Outra possibilidade", correta: false },
         ],
-        feedbackAcerto: "Isso! Herança cultural é tudo que um grupo DEIXA pros próximos: comida, música, festa, jeito.",
-        feedbackErro: "Quase! Herança é o que um grupo DEIXA pros próximos — comida, música, festa, jeito de viver.",
+        feedbackAcerto:
+          "Isso! Herança cultural é tudo que um grupo DEIXA pros próximos: comida, música, festa, jeito.",
+        feedbackErro:
+          "Quase! Herança é o que um grupo DEIXA pros próximos — comida, música, festa, jeito de viver.",
       },
       {
         id: "p2",
-        pergunta: "Quem deixou a MANDIOCA, o CESTO de palha e vários nomes de rio no nosso município?",
+        pergunta:
+          "Quem deixou a MANDIOCA, o CESTO de palha e vários nomes de rio no nosso município?",
         opcoes: [
           { id: "a", texto: "Os imigrantes italianos." },
           { id: "b", texto: "Os povos indígenas — os primeiros habitantes.", correta: true },
           { id: "c", texto: "Os portugueses que chegaram de navio." },
+
+          { id: "extra-7", texto: "Outra possibilidade", correta: false },
         ],
-        feedbackAcerto: "Perfeito! Mandioca, cesto e nomes de rio são herança INDÍGENA — os primeiros aqui.",
-        feedbackErro: "Ops! Mandioca, cesto de palha e nomes de rio são herança dos povos INDÍGENAS.",
+        feedbackAcerto:
+          "Perfeito! Mandioca, cesto e nomes de rio são herança INDÍGENA — os primeiros aqui.",
+        feedbackErro:
+          "Ops! Mandioca, cesto de palha e nomes de rio são herança dos povos INDÍGENAS.",
       },
       {
         id: "p3",
@@ -486,10 +563,19 @@ export const aula02: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Só cultural, porque é comida." },
           { id: "b", texto: "Só econômica, porque vende pizza." },
-          { id: "c", texto: "Cultural E econômica ao mesmo tempo — a receita é cultura, o negócio é economia.", correta: true },
+          {
+            id: "c",
+            texto:
+              "Cultural E econômica ao mesmo tempo — a receita é cultura, o negócio é economia.",
+            correta: true,
+          },
+
+          { id: "extra-8", texto: "Outra possibilidade", correta: false },
         ],
-        feedbackAcerto: "Exato! Toda cantina traz OS DOIS lados: a receita (cultura) e o negócio (economia).",
-        feedbackErro: "Repensa: a cantina traz a receita da nonna (cultura) E o negócio que gera dinheiro (economia). São os DOIS.",
+        feedbackAcerto:
+          "Exato! Toda cantina traz OS DOIS lados: a receita (cultura) e o negócio (economia).",
+        feedbackErro:
+          "Repensa: a cantina traz a receita da nonna (cultura) E o negócio que gera dinheiro (economia). São os DOIS.",
       },
     ],
     selo: {

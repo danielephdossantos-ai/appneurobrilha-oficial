@@ -35,6 +35,7 @@ export const aula01: AulaGeoV1 = {
       { id: "cabeca", titulo: "Na cabeça", subtitulo: "no rosto", emoji: "😊", cor: "from-pink-400 to-rose-600" },
       { id: "mao", titulo: "Nas mãos", subtitulo: "nos dedos", emoji: "✋", cor: "from-amber-400 to-orange-600" },
       { id: "pe", titulo: "Nos pés", subtitulo: "embaixo", emoji: "🦶", cor: "from-emerald-400 to-green-700" },
+      { id: "outra", titulo: "Outra opção", subtitulo: "não combina", emoji: "❓", cor: "from-blue-400 to-indigo-700" },
     ],
     respostaCerta: "cabeca",
     feedbackAcerto: "Isso! Olhos, nariz e boca ficam no ROSTO — que fica na CABEÇA.",
@@ -66,7 +67,7 @@ export const aula01: AulaGeoV1 = {
     pontos: [
       { id: "cabeca", x: 50, y: 15, emoji: "🙂", cor: "from-pink-400 to-rose-600", titulo: "Cabeça", texto: "Rosto, cérebro, olhos, orelhas. É o comando do corpo!", fotoUrl: cabecaImg },
       { id: "tronco", x: 50, y: 45, emoji: "🫁", cor: "from-orange-400 to-red-600", titulo: "Tronco", texto: "Peito e barriga. Guarda o coração e o estômago.", fotoUrl: corpoImg },
-      { id: "bracos", x: 25, y: 45, emoji: "💪", cor: "from-amber-500 to-orange-700", titulo: "Braços", texto: "2 braços — pra abraçar, escrever e brincar.", fotoUrl: bracosImg },
+      { id: "bracos", x: 25, y: 45, emoji: "💪", cor: "from-amber-500 to-orange-700", titulo: "Braços", texto: "Braços podem ajudar a abraçar, escrever e brincar. Há corpos diferentes, e todos merecem respeito.", fotoUrl: bracosImg },
       { id: "maos", x: 15, y: 65, emoji: "✋", cor: "from-yellow-400 to-amber-600", titulo: "Mãos", texto: "Cada mão tem 5 dedos. Servem pra pegar e sentir.", fotoUrl: maosImg },
       { id: "pernas", x: 50, y: 85, emoji: "🦵", cor: "from-emerald-500 to-green-700", titulo: "Pernas e pés", texto: "Levam você de um lugar pro outro.", fotoUrl: pernasImg },
     ],
@@ -78,9 +79,9 @@ export const aula01: AulaGeoV1 = {
     aurora: "3 perguntas.",
     instrucao: "Toque no card certo",
     perguntas: [
-      { id: "q1", pergunta: "Você pensa com:", fotoUrl: cabecaImg, cards: [{ id: "a", emoji: "🧠", titulo: "A cabeça", cor: "from-pink-400 to-rose-600" }, { id: "b", emoji: "🦶", titulo: "O pé", cor: "from-emerald-400 to-green-700" }, { id: "c", emoji: "✋", titulo: "A mão", cor: "from-yellow-400 to-amber-600" }], correta: "a", feedbackAcerto: "CABEÇA — o cérebro fica lá!", feedbackErro: "O cérebro fica na CABEÇA." },
-      { id: "q2", pergunta: "Você anda com:", fotoUrl: pernasImg, cards: [{ id: "a", emoji: "🦵", titulo: "As pernas", cor: "from-emerald-500 to-green-700" }, { id: "b", emoji: "💪", titulo: "Os braços", cor: "from-amber-500 to-orange-700" }, { id: "c", emoji: "🙂", titulo: "A cabeça", cor: "from-pink-400 to-rose-600" }], correta: "a", feedbackAcerto: "Isso! PERNAS te levam pra todo lado.", feedbackErro: "Braços abraçam. Quem anda são as PERNAS." },
-      { id: "q3", pergunta: "Quantos dedos tem em uma mão?", fotoUrl: maosImg, cards: [{ id: "a", emoji: "5️⃣", titulo: "5 dedos", cor: "from-yellow-400 to-amber-600" }, { id: "b", emoji: "3️⃣", titulo: "3 dedos", cor: "from-slate-400 to-slate-700" }, { id: "c", emoji: "🔟", titulo: "10 dedos", cor: "from-purple-400 to-fuchsia-600" }], correta: "a", feedbackAcerto: "5 dedos! (2 mãos = 10 dedos)", feedbackErro: "Conta na sua mão: são 5!" },
+      { id: "q1", pergunta: "Você pensa com:", fotoUrl: cabecaImg, cards: [{ id: "a", emoji: "🧠", titulo: "A cabeça", cor: "from-pink-400 to-rose-600" }, { id: "b", emoji: "🦶", titulo: "O pé", cor: "from-emerald-400 to-green-700" }, { id: "c", emoji: "✋", titulo: "A mão", cor: "from-yellow-400 to-amber-600" }, { id: "d", emoji: "❓", titulo: "Outra resposta", cor: "from-blue-400 to-indigo-700" }], correta: "a", feedbackAcerto: "CABEÇA — o cérebro fica lá!", feedbackErro: "O cérebro fica na CABEÇA." },
+      { id: "q2", pergunta: "Você anda com:", fotoUrl: pernasImg, cards: [{ id: "a", emoji: "🦵", titulo: "As pernas", cor: "from-emerald-500 to-green-700" }, { id: "b", emoji: "💪", titulo: "Os braços", cor: "from-amber-500 to-orange-700" }, { id: "c", emoji: "🙂", titulo: "A cabeça", cor: "from-pink-400 to-rose-600" }, { id: "d", emoji: "❓", titulo: "Outra resposta", cor: "from-blue-400 to-indigo-700" }], correta: "a", feedbackAcerto: "Isso! PERNAS te levam pra todo lado.", feedbackErro: "Braços abraçam. Quem anda são as PERNAS." },
+      { id: "q3", pergunta: "Quantos dedos tem em uma mão?", fotoUrl: maosImg, cards: [{ id: "a", emoji: "5️⃣", titulo: "5 dedos", cor: "from-yellow-400 to-amber-600" }, { id: "b", emoji: "3️⃣", titulo: "3 dedos", cor: "from-slate-400 to-slate-700" }, { id: "c", emoji: "🔟", titulo: "10 dedos", cor: "from-purple-400 to-fuchsia-600" }, { id: "d", emoji: "❓", titulo: "Outra resposta", cor: "from-blue-400 to-indigo-700" }], correta: "a", feedbackAcerto: "5 dedos! (2 mãos = 10 dedos)", feedbackErro: "Conta na sua mão: são 5!" },
     ],
     falaFinal: "Já é anatomista mirim!",
   },
@@ -111,7 +112,7 @@ export const aula01: AulaGeoV1 = {
     ordemCerta: ["cabeca", "tronco", "pernas", "pes"],
     feedbackAcerto: "De cima pra baixo — corpo montado!",
     feedbackErro: "Cabeça em cima, pé embaixo!",
-    falaFinal: "Todo corpo humano segue essa ordem!",
+    falaFinal: "Essas são partes comuns do corpo; cada pessoa tem características próprias!",
   },
 
   cena08_voceLe: {
@@ -164,9 +165,9 @@ export const aula01: AulaGeoV1 = {
     instrucao: "3 perguntas",
     fotoUrl: brilhaImg,
     perguntas: [
-      { id: "q1", pergunta: "Você pensa com a:", fotoUrl: cabecaImg, opcoes: [{ id: "a", texto: "Cabeça", correta: true }, { id: "b", texto: "Perna" }], feedbackAcerto: "Isso!", feedbackErro: "É a CABEÇA." },
-      { id: "q2", pergunta: "Anda com as:", fotoUrl: pernasImg, opcoes: [{ id: "a", texto: "Pernas", correta: true }, { id: "b", texto: "Mãos" }], feedbackAcerto: "Certo!", feedbackErro: "São as PERNAS." },
-      { id: "q3", pergunta: "Cada mão tem quantos dedos?", fotoUrl: maosImg, opcoes: [{ id: "a", texto: "5", correta: true }, { id: "b", texto: "10" }], feedbackAcerto: "PERFEITO!", feedbackErro: "São 5 dedos por mão." },
+      { id: "q1", pergunta: "Você pensa com a:", fotoUrl: cabecaImg, opcoes: [{ id: "a", texto: "Cabeça", correta: true }, { id: "b", texto: "Perna" }, { id: "c", texto: "Outra resposta" }, { id: "d", texto: "Nenhuma das anteriores" }], feedbackAcerto: "Isso!", feedbackErro: "É a CABEÇA." },
+      { id: "q2", pergunta: "Anda com as:", fotoUrl: pernasImg, opcoes: [{ id: "a", texto: "Pernas", correta: true }, { id: "b", texto: "Mãos" }, { id: "c", texto: "Outra resposta" }, { id: "d", texto: "Nenhuma das anteriores" }], feedbackAcerto: "Certo!", feedbackErro: "São as PERNAS." },
+      { id: "q3", pergunta: "Cada mão tem quantos dedos?", fotoUrl: maosImg, opcoes: [{ id: "a", texto: "5", correta: true }, { id: "b", texto: "10" }, { id: "c", texto: "Outra resposta" }, { id: "d", texto: "Nenhuma das anteriores" }], feedbackAcerto: "PERFEITO!", feedbackErro: "São 5 dedos por mão." },
     ],
     selo: { nome: "Cristal do Corpo", subtitulo: "2º cristal desbloqueado!", emoji: "💎", cor: "from-pink-400 via-rose-500 to-red-600" },
     falaFinal: "Cristal do Corpo recuperado!",

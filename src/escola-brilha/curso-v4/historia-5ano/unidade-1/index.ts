@@ -1,5 +1,6 @@
 import type { UnidadeGeoV1 } from "../../types";
 import { aula01 } from "./aula-01-cidadania-antiguidade";
+import { aula02 } from "./aula-02-povos-identidades";
 
 export const unidade1: UnidadeGeoV1 = {
   slug: "unidade-1",
@@ -9,5 +10,5 @@ export const unidade1: UnidadeGeoV1 = {
   descricao:
     "Piloto do 5º Ano de História. Brilha e Aurora acendem a primeira Tocha da Justiça no Memorial da Cidadania: A Chama da Democracia. O aluno investiga como a ideia de cidadania nasceu em Atenas e Roma e como foi ampliada até a Constituição de 1988.",
   corTema: "#b45309",
-  aulas: [aula01],
+  aulas: [aula01, aula02],
 };

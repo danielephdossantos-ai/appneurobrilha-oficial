@@ -17,8 +17,9 @@ export const aula01_contagemAteMilhao: AulaV4 = {
     instrucao: "Repare como os números pulam de 100.000 em 100.000.",
     cenas: [
       { tipo: "texto", texto: "100.000 · 200.000 · 300.000 · 400.000 · 500.000 · 600.000 · 700.000 · 800.000 · 900.000 · 1.000.000.", destaque: true },
-      { tipo: "texto", texto: "10 saltos de 100 mil = 1 milhão. Aparecem 2 casas novas à esquerda: Dezena de Milhar (DM) e Centena de Milhar (CM)." },
+      { tipo: "texto", texto: "10 grupos de 100 mil formam 1 milhão. Em relação aos números de quatro algarismos, aparecem a Dezena de Milhar (DM) e a Centena de Milhar (CM)." },
       { tipo: "texto", texto: "Um número até 999.999 mora em 6 casas: CM · DM · UM · C · D · U.", destaque: true },
+      { tipo: "texto", texto: "1.000.000 tem 7 algarismos e inicia a classe dos milhões: 1 unidade de milhão e 0 nas demais ordens." },
     ],
   },
   momento03_descoberta: {

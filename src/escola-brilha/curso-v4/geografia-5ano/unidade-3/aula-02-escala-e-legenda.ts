@@ -13,7 +13,7 @@ export const aula02: AulaGeoV1 = {
   slug: "aula-02-escala-e-legenda",
   titulo: "Cartógrafo Mestre: Escala e Legenda",
   iconeTrilha: "🗺️",
-  bncc: ["EF05GE09"],
+  bncc: [],
   duracaoMin: 22,
 
   cena01_motivacao: {
@@ -44,6 +44,19 @@ export const aula02: AulaGeoV1 = {
         subtitulo: "pra ficar bonitinho",
         emoji: "🎨",
         cor: "from-pink-400 to-rose-600",
+      },
+
+      {
+        id: "extra-1",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
+      {
+        id: "extra-2",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
       },
     ],
     respostaCerta: "escala",
@@ -112,7 +125,8 @@ export const aula02: AulaGeoV1 = {
         emoji: "📌",
         cor: "from-red-500 to-rose-700",
         titulo: "TÍTULO",
-        texto: "Diz o que o mapa mostra. Ex.: 'Mapa Político do Brasil'. Sem título, você não sabe o assunto.",
+        texto:
+          "Diz o que o mapa mostra. Ex.: 'Mapa Político do Brasil'. Sem título, você não sabe o assunto.",
       },
       {
         id: "escala",
@@ -159,6 +173,13 @@ export const aula02: AulaGeoV1 = {
           { id: "leg", emoji: "🔑", titulo: "Legenda", cor: "from-amber-500 to-orange-700" },
           { id: "esc", emoji: "📏", titulo: "Escala", cor: "from-purple-500 to-fuchsia-700" },
           { id: "tit", emoji: "📌", titulo: "Título", cor: "from-red-500 to-rose-700" },
+
+          {
+            id: "extra-3",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "leg",
         feedbackAcerto: "Isso! LEGENDA explica as cores.",
@@ -172,6 +193,13 @@ export const aula02: AulaGeoV1 = {
           { id: "n", emoji: "⬆️", titulo: "Norte", cor: "from-sky-500 to-blue-700" },
           { id: "s", emoji: "⬇️", titulo: "Sul", cor: "from-amber-500 to-orange-700" },
           { id: "l", emoji: "➡️", titulo: "Leste", cor: "from-red-500 to-rose-700" },
+
+          {
+            id: "extra-4",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "n",
         feedbackAcerto: "Perfeito! Rosa dos ventos aponta o NORTE.",
@@ -184,6 +212,13 @@ export const aula02: AulaGeoV1 = {
           { id: "km", emoji: "🏙️", titulo: "1 km real", cor: "from-emerald-500 to-green-700" },
           { id: "cm", emoji: "📏", titulo: "1 cm real", cor: "from-red-500 to-rose-700" },
           { id: "m", emoji: "📐", titulo: "1 metro real", cor: "from-sky-500 to-blue-700" },
+
+          {
+            id: "extra-5",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "km",
         feedbackAcerto: "Isso! 100.000 cm = 1 km. Cabeça matemática!",
@@ -195,7 +230,8 @@ export const aula02: AulaGeoV1 = {
 
   cena06_personagensLugar: {
     tipo: "mapaBrasilInterativo",
-    aurora: "Localize os 4 pontos cardeais do Brasil. O estado mais ao Norte, ao Sul, Leste e Oeste.",
+    aurora:
+      "Localize os 4 pontos cardeais do Brasil. O estado mais ao Norte, ao Sul, Leste e Oeste.",
     instrucao: "Acenda os estados dos 4 extremos do Brasil",
     missao: {
       tipo: "selecionar",
@@ -271,7 +307,8 @@ export const aula02: AulaGeoV1 = {
       },
       {
         id: "p4",
-        texto: "Mapas podem ser POLÍTICOS (países), FÍSICOS (relevo) ou TEMÁTICOS (clima, economia).",
+        texto:
+          "Mapas podem ser POLÍTICOS (países), FÍSICOS (relevo) ou TEMÁTICOS (clima, economia).",
         chaves: ["político", "físico", "temático"],
       },
     ],
@@ -280,7 +317,8 @@ export const aula02: AulaGeoV1 = {
 
   cena09_minijogo: {
     tipo: "construtorMarcos",
-    aurora: "Minijogo CARTÓGRAFO! Cada rodada, escolha o TIPO DE MAPA certo pra resolver o problema.",
+    aurora:
+      "Minijogo CARTÓGRAFO! Cada rodada, escolha o TIPO DE MAPA certo pra resolver o problema.",
     instrucao: "⏱️ Qual mapa usar?",
     duracaoSegundos: 12,
     pecas: [
@@ -389,6 +427,8 @@ export const aula02: AulaGeoV1 = {
           { id: "a", texto: "Deixar o mapa mais bonito", correta: false },
           { id: "b", texto: "Mostrar a redução proporcional da realidade", correta: true },
           { id: "c", texto: "Contar quantos habitantes tem o país", correta: false },
+
+          { id: "extra-6", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Isso! Escala = REDUÇÃO PROPORCIONAL.",
         feedbackErro: "Escala é REDUÇÃO PROPORCIONAL do real.",
@@ -400,6 +440,8 @@ export const aula02: AulaGeoV1 = {
           { id: "a", texto: "Explicar cores, linhas e símbolos do mapa", correta: true },
           { id: "b", texto: "Contar uma história antiga", correta: false },
           { id: "c", texto: "Mostrar a escala", correta: false },
+
+          { id: "extra-7", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Perfeito! Legenda TRADUZ os símbolos.",
         feedbackErro: "Legenda é a CHAVE dos símbolos.",
@@ -409,8 +451,14 @@ export const aula02: AulaGeoV1 = {
         pergunta: "Mapa temático é aquele que:",
         opcoes: [
           { id: "a", texto: "Mostra só as fronteiras políticas", correta: false },
-          { id: "b", texto: "Mostra um TEMA específico: clima, população, economia", correta: true },
+          {
+            id: "b",
+            texto: "Mostra um TEMA específico: clima, população, economia",
+            correta: true,
+          },
           { id: "c", texto: "Mostra só as montanhas", correta: false },
+
+          { id: "extra-8", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Isso! TEMÁTICO = foco num TEMA.",
         feedbackErro: "TEMÁTICO = tem um TEMA específico (clima, gente, dinheiro).",

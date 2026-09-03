@@ -72,7 +72,7 @@ export const aula03_comparando: AulaV4 = {
       },
       {
         texto:
-          "Etapa 4 — Sempre subtraia o MENOR do MAIOR.",
+          "Etapa 4 — Para descobrir a diferença entre duas quantidades, subtraia a menor da maior. Em outros problemas, a ordem depende da história.",
         exemplo: "9 flores − 5 flores = 4 flores de diferença.",
         contaArmada: {
           a: 9,

@@ -21,7 +21,7 @@ export const aula04: AulaPortuguesV4 = {
   slug: "aula-04-palavras-que-enganam",
   titulo: "As Palavras que Enganam",
   iconeTrilha: "⚡",
-  bncc: ["EF03LP01", "EF03LP03", "EF03LP06"],
+  bncc: ["EF03LP01", "EF35LP13"],
   duracaoMin: 18,
 
   momento01_motivacao: {

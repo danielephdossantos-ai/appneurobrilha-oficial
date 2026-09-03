@@ -35,10 +35,7 @@ const aula: Aula = {
     convite: "Bora com o Brilha descobrir as três formas de fazer arte?",
   },
 
-  conhecimentosPrevios: [
-    "Já ter desenhado sozinho.",
-    "Já ter brincado em grupo.",
-  ],
+  conhecimentosPrevios: ["Já ter desenhado sozinho.", "Já ter brincado em grupo."],
 
   missao:
     "Experimentar a criação em artes visuais de modo individual, coletivo e colaborativo, em diferentes espaços da escola e da comunidade.",
@@ -50,8 +47,7 @@ const aula: Aula = {
     "Identificar espaços onde a arte acontece: sala, escola, praça, museu.",
   ],
 
-  motivacao:
-    "Arte é ainda mais legal quando a gente cria junto — cada um coloca um pedacinho seu!",
+  motivacao: "Arte é ainda mais legal quando a gente cria junto — cada um coloca um pedacinho seu!",
 
   explicacao:
     "🙋 INDIVIDUAL — você cria SOZINHO, do seu jeito.\n👫 COLETIVO — você cria COM A TURMA, todos juntos.\n🤝 COLABORATIVO — você cria COM A COMUNIDADE (família, bairro).\n🏫 Espaços: SALA, PÁTIO, ESCOLA, PRAÇA, MUSEU.",
@@ -84,6 +80,7 @@ const aula: Aula = {
         { nome: "grupo", imagemUrl: criancasGrupoImg },
         { nome: "menino-sozinho", imagemUrl: meninoImg },
         { nome: "artista-sozinho", imagemUrl: artistaImg },
+        { nome: "menina-sozinha", imagemUrl: meninaImg },
       ],
       respostaCerta: "grupo",
     },
@@ -114,35 +111,35 @@ const aula: Aula = {
       perguntas: [
         {
           pergunta: "Uma criança desenhando SOZINHA é:",
-          opcoes: ["🙋 INDIVIDUAL", "👫 COLETIVA", "🤝 COLABORATIVA"],
+          opcoes: ["🙋 INDIVIDUAL", "👫 COLETIVA", "🤝 COLABORATIVA", "Outra opção"],
           correta: 0,
           explicacao: "Sozinho = individual.",
           visual: { tipo: "itens", imagemUrl: meninoImg, quantidade: 1, rotulo: "🙋" },
         },
         {
           pergunta: "A TURMA pintando junto é:",
-          opcoes: ["👫 COLETIVA", "🙋 INDIVIDUAL", "🎨 SÓ MENINO"],
+          opcoes: ["👫 COLETIVA", "🙋 INDIVIDUAL", "🎨 SÓ MENINO", "Outra opção"],
           correta: 0,
           explicacao: "Turma = coletiva.",
           visual: { tipo: "itens", imagemUrl: criancasGrupoImg, quantidade: 1, rotulo: "👫" },
         },
         {
           pergunta: "Um mural na PRAÇA feito pela comunidade é:",
-          opcoes: ["🤝 COLABORATIVA", "🙋 INDIVIDUAL", "🎨 PARTICULAR"],
+          opcoes: ["🤝 COLABORATIVA", "🙋 INDIVIDUAL", "🎨 PARTICULAR", "Outra opção"],
           correta: 0,
           explicacao: "Comunidade toda = colaborativa.",
           visual: { tipo: "itens", imagemUrl: muralImg, quantidade: 1, rotulo: "🤝" },
         },
         {
           pergunta: "Onde a artista Ana guarda obras?",
-          opcoes: ["🏛️ NO MUSEU", "🏫 NA COZINHA", "🚗 NO CARRO"],
+          opcoes: ["🏛️ NO MUSEU", "🏫 NA COZINHA", "🚗 NO CARRO", "Outra opção"],
           correta: 0,
           explicacao: "Museu guarda obras.",
           visual: { tipo: "itens", imagemUrl: museuImg, quantidade: 1, rotulo: "🏛️" },
         },
         {
           pergunta: "Um lugar aberto pra fazer arte fora da escola é:",
-          opcoes: ["🌳 A PRAÇA", "🛏️ O QUARTO", "🚿 O BANHEIRO"],
+          opcoes: ["🌳 A PRAÇA", "🛏️ O QUARTO", "🚿 O BANHEIRO", "Outra opção"],
           correta: 0,
           explicacao: "Praça é da comunidade.",
           visual: { tipo: "itens", imagemUrl: pracaImg, quantidade: 1, rotulo: "🌳" },
@@ -164,35 +161,35 @@ const aula: Aula = {
   quiz: [
     {
       pergunta: "Uma criança desenhando sozinha é:",
-      opcoes: ["Individual", "Coletiva", "Colaborativa"],
+      opcoes: ["Individual", "Coletiva", "Colaborativa", "Outra opção"],
       correta: 0,
       explicacao: "1 pessoa = individual.",
       visual: { tipo: "itens", imagemUrl: meninoImg, quantidade: 1, rotulo: "🙋" },
     },
     {
       pergunta: "A turma pintando um cartaz juntos é:",
-      opcoes: ["Coletiva", "Individual", "Nenhuma"],
+      opcoes: ["Coletiva", "Individual", "Nenhuma", "Outra opção"],
       correta: 0,
       explicacao: "Turma = coletiva.",
       visual: { tipo: "itens", imagemUrl: criancasGrupoImg, quantidade: 1, rotulo: "👫" },
     },
     {
       pergunta: "Um mural feito pela comunidade da praça é:",
-      opcoes: ["Colaborativa", "Individual", "Museu"],
+      opcoes: ["Colaborativa", "Individual", "Museu", "Outra opção"],
       correta: 0,
       explicacao: "Comunidade = colaborativa.",
       visual: { tipo: "itens", imagemUrl: muralImg, quantidade: 1, rotulo: "🤝" },
     },
     {
       pergunta: "Onde a arte acontece fora da sala de aula?",
-      opcoes: ["Pátio, praça, museu", "Só na sala", "Só na TV"],
+      opcoes: ["Pátio, praça, museu", "Só na sala", "Só na TV", "Outra opção"],
       correta: 0,
       explicacao: "Muitos espaços recebem arte.",
       visual: { tipo: "itens", imagemUrl: escolaImg, quantidade: 1, rotulo: "🏫" },
     },
     {
       pergunta: "Fazer arte JUNTO é melhor porque:",
-      opcoes: ["Cada um coloca um pedacinho seu", "Ninguém ajuda", "É proibido"],
+      opcoes: ["Cada um coloca um pedacinho seu", "Ninguém ajuda", "É proibido", "Outra opção"],
       correta: 0,
       explicacao: "Coletivo une várias ideias.",
       visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "❤️" },
@@ -219,6 +216,7 @@ const aula: Aula = {
         { nome: "MENINO", imagemUrl: meninoImg, rotulo: "🙋 SOZINHO" },
         { nome: "GRUPO", imagemUrl: criancasGrupoImg, rotulo: "👫 GRUPO" },
         { nome: "MURAL", imagemUrl: muralImg, rotulo: "🤝 MURAL" },
+        { nome: "OUTRA-OPCAO", imagemUrl: quadroImg, rotulo: "🔎 OUTRA OPÇÃO" },
       ],
       correta: 0,
       acerto: "🙋 Isso! Uma pessoa sozinha = individual.",
@@ -235,6 +233,7 @@ const aula: Aula = {
         { nome: "GRUPO", imagemUrl: criancasGrupoImg, rotulo: "👫 GRUPO" },
         { nome: "MENINA", imagemUrl: meninaImg, rotulo: "🙋 SOZINHA" },
         { nome: "ARTISTA", imagemUrl: artistaImg, rotulo: "🎨 ARTISTA SÓ" },
+        { nome: "OUTRA-OPCAO", imagemUrl: quadroImg, rotulo: "🔎 OUTRA OPÇÃO" },
       ],
       correta: 0,
       acerto: "👫 Isso! Turma junta = coletiva.",
@@ -278,29 +277,25 @@ const aula: Aula = {
           nome: "Menina desenhando",
           imagemUrl: meninaImg,
           rotulo: "🎨 INDIVIDUAL",
-          descoberta:
-            "SOZINHA — a menina escolhe cores e figuras dela mesma. Cada obra é única!",
+          descoberta: "SOZINHA — a menina escolhe cores e figuras dela mesma. Cada obra é única!",
         },
         {
           nome: "Turma",
           imagemUrl: criancasGrupoImg,
           rotulo: "👫 COLETIVA",
-          descoberta:
-            "COM A TURMA — cada um pinta uma parte. Um cartaz coletivo tem várias mãos.",
+          descoberta: "COM A TURMA — cada um pinta uma parte. Um cartaz coletivo tem várias mãos.",
         },
         {
           nome: "Escola",
           imagemUrl: escolaImg,
           rotulo: "🏫 ESCOLA",
-          descoberta:
-            "NA ESCOLA — na sala, no pátio, nas paredes. A escola inteira vira ateliê!",
+          descoberta: "NA ESCOLA — na sala, no pátio, nas paredes. A escola inteira vira ateliê!",
         },
         {
           nome: "Praça",
           imagemUrl: pracaImg,
           rotulo: "🌳 PRAÇA",
-          descoberta:
-            "NA PRAÇA — arte da comunidade! Todo mundo do bairro pode ajudar a pintar.",
+          descoberta: "NA PRAÇA — arte da comunidade! Todo mundo do bairro pode ajudar a pintar.",
         },
         {
           nome: "Mural",
@@ -343,21 +338,21 @@ const aula: Aula = {
     facil: [
       {
         pergunta: "1 criança desenhando é criação:",
-        opcoes: ["Individual", "Coletiva", "Colaborativa"],
+        opcoes: ["Individual", "Coletiva", "Colaborativa", "Outra opção"],
         correta: 0,
         explicacao: "1 = individual.",
         visual: { tipo: "itens", imagemUrl: meninoImg, quantidade: 1, rotulo: "🙋" },
       },
       {
         pergunta: "A turma pintando junto é:",
-        opcoes: ["Coletiva", "Individual", "Só do professor"],
+        opcoes: ["Coletiva", "Individual", "Só do professor", "Outra opção"],
         correta: 0,
         explicacao: "Turma junta = coletiva.",
         visual: { tipo: "itens", imagemUrl: criancasGrupoImg, quantidade: 1, rotulo: "👫" },
       },
       {
         pergunta: "Um mural feito por muita gente é:",
-        opcoes: ["Colaborativa", "Individual", "Nada"],
+        opcoes: ["Colaborativa", "Individual", "Nada", "Outra opção"],
         correta: 0,
         explicacao: "Muita gente = colaborativa.",
         visual: { tipo: "itens", imagemUrl: muralImg, quantidade: 1, rotulo: "🤝" },
@@ -366,21 +361,21 @@ const aula: Aula = {
     medio: [
       {
         pergunta: "Onde a comunidade pode fazer arte junta?",
-        opcoes: ["Na praça", "No armário", "No fogão"],
+        opcoes: ["Na praça", "No armário", "No fogão", "Outra opção"],
         correta: 0,
         explicacao: "Praça = espaço da comunidade.",
         visual: { tipo: "itens", imagemUrl: pracaImg, quantidade: 1, rotulo: "🌳" },
       },
       {
         pergunta: "Onde guardamos obras pra todos verem?",
-        opcoes: ["No museu", "No banheiro", "Na geladeira"],
+        opcoes: ["No museu", "No banheiro", "Na geladeira", "Outra opção"],
         correta: 0,
         explicacao: "Museu guarda obras.",
         visual: { tipo: "itens", imagemUrl: museuImg, quantidade: 1, rotulo: "🏛️" },
       },
       {
         pergunta: "Fazer arte em GRUPO é bom porque:",
-        opcoes: ["Une várias ideias", "Ninguém trabalha", "É triste"],
+        opcoes: ["Une várias ideias", "Ninguém trabalha", "É triste", "Outra opção"],
         correta: 0,
         explicacao: "Grupo = mais ideias.",
         visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "❤️" },
@@ -389,21 +384,21 @@ const aula: Aula = {
     dificil: [
       {
         pergunta: "Individual, coletiva e colaborativa: quantas formas de criar?",
-        opcoes: ["Três", "Uma", "Dez"],
+        opcoes: ["Três", "Uma", "Dez", "Outra opção"],
         correta: 0,
         explicacao: "3 formas.",
         visual: { tipo: "itens", imagemUrl: paletaImg, quantidade: 1, rotulo: "🎨" },
       },
       {
         pergunta: "Um cartaz feito pela turma inteira é:",
-        opcoes: ["Coletiva", "Individual", "Colaborativa da cidade"],
+        opcoes: ["Coletiva", "Individual", "Colaborativa da cidade", "Outra opção"],
         correta: 0,
         explicacao: "Turma = coletiva.",
         visual: { tipo: "itens", imagemUrl: quadroImg, quantidade: 1, rotulo: "🖼️" },
       },
       {
         pergunta: "Uma obra criada por artistas + moradores do bairro é:",
-        opcoes: ["Colaborativa", "Individual", "Nenhuma"],
+        opcoes: ["Colaborativa", "Individual", "Nenhuma", "Outra opção"],
         correta: 0,
         explicacao: "Comunidade + artistas = colaborativa.",
         visual: { tipo: "itens", imagemUrl: muralImg, quantidade: 1, rotulo: "🤝" },

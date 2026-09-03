@@ -26,7 +26,7 @@ export const aula04: AulaPortuguesV4 = {
   slug: "aula-04-atlas-conectado",
   titulo: "Atlas Conectado do Município",
   iconeTrilha: "🗺️",
-  bncc: ["EF02GE07", "EF02GE08"],
+  bncc: [],
   duracaoMin: 15,
 
   momento01_motivacao: {
@@ -63,18 +63,16 @@ export const aula04: AulaPortuguesV4 = {
       pergunta: "O que esta aula final vai celebrar?",
       hipoteses: [
         {
-          texto:
-            "Que TRANSPORTES e COMUNICAÇÃO fazem o município FUNCIONAR.",
+          texto: "Que TRANSPORTES e COMUNICAÇÃO fazem o município FUNCIONAR.",
           imagemUrl: cidade,
         },
         { texto: "Que a gente deve morar em uma árvore.", imagemUrl: campo },
         { texto: "Que carro anda debaixo d'água.", imagemUrl: navio },
+        { texto: "Sobre outra possibilidade relacionada ao tema.", imagemUrl: cidade },
       ],
       respostaCerta: 0,
-      feedbackAcerto:
-        "🎉 Isso! Sem transportes e sem comunicação, o município não funciona.",
-      feedbackErro:
-        "Olhe as pistas: ônibus, celular, cidade. A aula fala que TUDO se conecta.",
+      feedbackAcerto: "🎉 Isso! Sem transportes e sem comunicação, o município não funciona.",
+      feedbackErro: "Olhe as pistas: ônibus, celular, cidade. A aula fala que TUDO se conecta.",
     },
   },
 
@@ -99,8 +97,7 @@ export const aula04: AulaPortuguesV4 = {
         palavra: "rede",
         explicacao:
           "É um CONJUNTO de coisas ligadas: rede de ruas, rede de escolas, rede de internet. Tudo trabalhando junto.",
-        exemplo:
-          "A REDE de ruas do bairro leva a gente pra todo canto.",
+        exemplo: "A REDE de ruas do bairro leva a gente pra todo canto.",
         imagemUrl: mapaPercurso,
       },
     ],
@@ -112,15 +109,7 @@ export const aula04: AulaPortuguesV4 = {
       titulo: "O município conectado",
       imagemUrl: cidade,
       legendaImagem: "Rotas + antenas = município que funciona.",
-      destacar: [
-        "rotas",
-        "ônibus",
-        "caminhão",
-        "ambulância",
-        "celular",
-        "antenas",
-        "conectado",
-      ],
+      destacar: ["rotas", "ônibus", "caminhão", "ambulância", "celular", "antenas", "conectado"],
       paragrafos: [
         "O município tem uma REDE DE ROTAS: ônibus levam crianças pra escola, caminhões levam alimento pro mercado, ambulâncias correm pro hospital.",
         "E tem também uma REDE de COMUNICAÇÃO: celulares, rádios, TVs e antenas espalhadas pelo bairro.",
@@ -139,39 +128,35 @@ export const aula04: AulaPortuguesV4 = {
           "Levam crianças pra escola",
           "Ficam parados no rio",
           "Voam pelo céu",
+          "Outra possibilidade",
         ],
         correta: 0,
         feedbackAcerto: "🎉 Isso!",
-        feedbackErro:
-          "O texto diz: 'ônibus levam crianças pra escola'.",
+        feedbackErro: "O texto diz: 'ônibus levam crianças pra escola'.",
         ondeEstaNoTexto: "…ônibus levam crianças pra escola…",
       },
       {
         pergunta: "Quem CORRE quando alguém está doente?",
-        opcoes: ["Caminhão", "Ambulância", "Navio"],
+        opcoes: ["Caminhão", "Ambulância", "Navio", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 A AMBULÂNCIA.",
-        feedbackErro:
-          "O texto diz: 'ambulâncias correm pro hospital'.",
+        feedbackErro: "O texto diz: 'ambulâncias correm pro hospital'.",
         ondeEstaNoTexto: "…ambulâncias correm pro hospital…",
       },
       {
-        pergunta:
-          "Sem COMUNICAÇÃO, o que ninguém consegue?",
-        opcoes: ["Comer", "Saber (avisar)", "Dormir"],
+        pergunta: "Sem COMUNICAÇÃO, o que ninguém consegue?",
+        opcoes: ["Comer", "Saber (avisar)", "Dormir", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 SABER/AVISAR.",
-        feedbackErro:
-          "O texto diz: 'Sem comunicação, ninguém SABE'.",
+        feedbackErro: "O texto diz: 'Sem comunicação, ninguém SABE'.",
         ondeEstaNoTexto: "…Sem comunicação, ninguém SABE…",
       },
       {
         pergunta: "Sem TRANSPORTE, o que ninguém consegue?",
-        opcoes: ["Chegar", "Falar", "Escutar rádio"],
+        opcoes: ["Chegar", "Falar", "Escutar rádio", "Outra possibilidade"],
         correta: 0,
         feedbackAcerto: "🎉 CHEGAR.",
-        feedbackErro:
-          "O texto diz: 'Sem transporte, ninguém CHEGA'.",
+        feedbackErro: "O texto diz: 'Sem transporte, ninguém CHEGA'.",
         ondeEstaNoTexto: "…Sem transporte, ninguém CHEGA…",
       },
     ],
@@ -186,18 +171,17 @@ export const aula04: AulaPortuguesV4 = {
           "Manda uma carta",
           "LIGA no celular chamando ajuda",
           "Espera até amanhã",
+          "Outra possibilidade",
         ],
-        opcoesImagens: [telefoneAntigo, celular, radioAntigo],
+        opcoesImagens: [telefoneAntigo, celular, radioAntigo, telefoneAntigo],
         correta: 1,
-        feedbackAcerto:
-          "🎉 LIGA no celular — comunicação chama a ambulância.",
-        feedbackErro:
-          "Em emergência, primeiro se COMUNICA (ligação) pra pedir a AMBULÂNCIA.",
+        feedbackAcerto: "🎉 LIGA no celular — comunicação chama a ambulância.",
+        feedbackErro: "Em emergência, primeiro se COMUNICA (ligação) pra pedir a AMBULÂNCIA.",
       },
       {
         pergunta: "📢 O MUNICÍPIO quer avisar TODO MUNDO sobre uma chuva forte. Usa...",
-        opcoes: ["Só um bilhete", "Rádio, TV e celular", "Só a bicicleta"],
-        opcoesImagens: [mapa, tvModerna, bicicletaModerna],
+        opcoes: ["Só um bilhete", "Rádio, TV e celular", "Só a bicicleta", "Outra possibilidade"],
+        opcoesImagens: [mapa, tvModerna, bicicletaModerna, mapa],
         correta: 1,
         feedbackAcerto: "🎉 RÁDIO, TV e CELULAR alcançam MUITA gente.",
         feedbackErro:
@@ -205,22 +189,19 @@ export const aula04: AulaPortuguesV4 = {
       },
       {
         pergunta: "🚌 Chegar na ESCOLA que fica longe é...",
-        opcoes: ["Comunicação", "Transporte", "Nenhum dos dois"],
-        opcoesImagens: [celular, pontoOnibus, escola],
+        opcoes: ["Comunicação", "Transporte", "Nenhum dos dois", "Outra possibilidade"],
+        opcoesImagens: [celular, pontoOnibus, escola, celular],
         correta: 1,
         feedbackAcerto: "🎉 TRANSPORTE.",
-        feedbackErro:
-          "CHEGAR num lugar é TRANSPORTE (ônibus escolar, por exemplo).",
+        feedbackErro: "CHEGAR num lugar é TRANSPORTE (ônibus escolar, por exemplo).",
       },
       {
-        pergunta:
-          "📱 Mandar áudio pro primo é...",
-        opcoes: ["Transporte", "Comunicação", "Comida"],
-        opcoesImagens: [pontoOnibus, celular, mercado],
+        pergunta: "📱 Mandar áudio pro primo é...",
+        opcoes: ["Transporte", "Comunicação", "Comida", "Outra possibilidade"],
+        opcoesImagens: [pontoOnibus, celular, mercado, pontoOnibus],
         correta: 1,
         feedbackAcerto: "🎉 COMUNICAÇÃO.",
-        feedbackErro:
-          "Mandar mensagem/áudio é COMUNICAÇÃO — é passar RECADO.",
+        feedbackErro: "Mandar mensagem/áudio é COMUNICAÇÃO — é passar RECADO.",
       },
     ],
   },
@@ -237,8 +218,7 @@ export const aula04: AulaPortuguesV4 = {
         { id: "s5", texto: "5) Doente é atendido no HOSPITAL.", imagemUrl: postoSaude },
       ],
       ordemCerta: ["s1", "s2", "s3", "s4", "s5"],
-      feedbackAcerto:
-        "🎉 Rede completa! Comunicação + transporte SALVAM vidas.",
+      feedbackAcerto: "🎉 Rede completa! Comunicação + transporte SALVAM vidas.",
       feedbackErro:
         "Primeiro alguém passa mal, aí a família LIGA, a central AVISA, a ambulância VAI e o hospital ATENDE.",
     },
@@ -258,16 +238,11 @@ export const aula04: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "Por onde a PREFEITURA avisou da chuva?",
-        opcoes: [
-          "Só por carta",
-          "Rádio, TV e celular",
-          "Ninguém avisou",
-        ],
-        opcoesImagens: [telefoneAntigo, tvModerna, mapa],
+        opcoes: ["Só por carta", "Rádio, TV e celular", "Ninguém avisou", "Outra possibilidade"],
+        opcoesImagens: [telefoneAntigo, tvModerna, mapa, telefoneAntigo],
         correta: 1,
         feedbackAcerto: "🎉 Isso! RÁDIO, TV e CELULAR.",
-        feedbackErro:
-          "O texto diz: 'avisou pelo RÁDIO, TV e CELULAR'.",
+        feedbackErro: "O texto diz: 'avisou pelo RÁDIO, TV e CELULAR'.",
         ondeEstaNoTexto: "…RÁDIO, TV e CELULAR…",
       },
       {
@@ -276,13 +251,12 @@ export const aula04: AulaPortuguesV4 = {
           "Comunicação e transporte juntos",
           "Só a chuva",
           "Só o rádio",
+          "Outra possibilidade",
         ],
-        opcoesImagens: [cidade, campo, radioAntigo],
+        opcoesImagens: [cidade, campo, radioAntigo, cidade],
         correta: 0,
-        feedbackAcerto:
-          "🎉 COMUNICAÇÃO + TRANSPORTE juntos.",
-        feedbackErro:
-          "O texto diz: 'em SEGURANÇA — graças à comunicação e ao transporte'.",
+        feedbackAcerto: "🎉 COMUNICAÇÃO + TRANSPORTE juntos.",
+        feedbackErro: "O texto diz: 'em SEGURANÇA — graças à comunicação e ao transporte'.",
         ondeEstaNoTexto: "…graças à comunicação e ao transporte.",
       },
     ],
@@ -290,8 +264,7 @@ export const aula04: AulaPortuguesV4 = {
 
   momento_minijogo: {
     titulo: "🗺️ Atlas Conectado: transporte × comunicação",
-    instrucao:
-      "Cada CARTELA é um objeto do dia a dia. Coloque em TRANSPORTE ou COMUNICAÇÃO.",
+    instrucao: "Cada CARTELA é um objeto do dia a dia. Coloque em TRANSPORTE ou COMUNICAÇÃO.",
     jogo: {
       tipo: "arrastarParaAlvo",
       titulo: "Arrastar para o Alvo",
@@ -321,8 +294,7 @@ export const aula04: AulaPortuguesV4 = {
           { id: "i7", texto: "Rádio", alvoId: "comunicacao", imagemUrl: radioAntigo },
           { id: "i8", texto: "Telefone antigo", alvoId: "comunicacao", imagemUrl: telefoneAntigo },
         ],
-        feedbackAcerto:
-          "🎉 Atlas conectado! Você separou os que LEVAM dos que MANDAM MENSAGEM.",
+        feedbackAcerto: "🎉 Atlas conectado! Você separou os que LEVAM dos que MANDAM MENSAGEM.",
         feedbackErro:
           "Ônibus, ambulância, bicicleta e barco = TRANSPORTE. Celular, TV, rádio e telefone = COMUNICAÇÃO.",
       },
@@ -338,18 +310,16 @@ export const aula04: AulaPortuguesV4 = {
       "Rede de rotas + rede de antenas = MUNICÍPIO CONECTADO.",
     ],
     miniDesafio: {
-      pergunta:
-        "Numa EMERGÊNCIA, quem trabalha JUNTO pra salvar?",
+      pergunta: "Numa EMERGÊNCIA, quem trabalha JUNTO pra salvar?",
       opcoes: [
         "Só o ônibus",
         "Comunicação (ligação) + transporte (ambulância)",
         "Só a carta",
+        "Outra possibilidade",
       ],
       correta: 1,
-      feedbackAcerto:
-        "🎉 Isso! LIGAÇÃO chama, AMBULÂNCIA leva.",
-      feedbackErro:
-        "Comunicação AVISA e transporte LEVA — juntos salvam.",
+      feedbackAcerto: "🎉 Isso! LIGAÇÃO chama, AMBULÂNCIA leva.",
+      feedbackErro: "Comunicação AVISA e transporte LEVA — juntos salvam.",
     },
   },
 
@@ -357,46 +327,43 @@ export const aula04: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "1/5 — Ônibus escolar é...",
-        opcoes: ["Comunicação", "Transporte", "Comida"],
+        opcoes: ["Comunicação", "Transporte", "Comida", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 TRANSPORTE.",
         feedbackErro: "Ônibus LEVA pessoas → é TRANSPORTE.",
       },
       {
         pergunta: "2/5 — Celular é...",
-        opcoes: ["Transporte", "Comunicação", "Roupa"],
+        opcoes: ["Transporte", "Comunicação", "Roupa", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 COMUNICAÇÃO.",
-        feedbackErro:
-          "Celular passa mensagem → COMUNICAÇÃO.",
+        feedbackErro: "Celular passa mensagem → COMUNICAÇÃO.",
       },
       {
         pergunta: "3/5 — Sem TRANSPORTE, ninguém...",
-        opcoes: ["Chega", "Fala", "Dorme"],
+        opcoes: ["Chega", "Fala", "Dorme", "Outra possibilidade"],
         correta: 0,
         feedbackAcerto: "🎉 CHEGA.",
         feedbackErro: "Sem transporte, ninguém CHEGA nos lugares.",
       },
       {
         pergunta: "4/5 — Sem COMUNICAÇÃO, ninguém...",
-        opcoes: ["Come", "Sabe/avisa", "Anda"],
+        opcoes: ["Come", "Sabe/avisa", "Anda", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 SABE/AVISA.",
-        feedbackErro:
-          "Sem comunicação, ninguém SABE de nada.",
+        feedbackErro: "Sem comunicação, ninguém SABE de nada.",
       },
       {
-        pergunta:
-          "5/5 — Numa EMERGÊNCIA, comunicação e transporte...",
+        pergunta: "5/5 — Numa EMERGÊNCIA, comunicação e transporte...",
         opcoes: [
           "Não se ligam",
           "Trabalham JUNTOS pra salvar",
           "Atrapalham",
+          "Outra possibilidade",
         ],
         correta: 1,
         feedbackAcerto: "🎉 TRABALHAM JUNTOS.",
-        feedbackErro:
-          "Em emergência, LIGAÇÃO chama e AMBULÂNCIA leva — trabalham JUNTOS.",
+        feedbackErro: "Em emergência, LIGAÇÃO chama e AMBULÂNCIA leva — trabalham JUNTOS.",
       },
     ],
   },
@@ -410,8 +377,7 @@ export const aula04: AulaPortuguesV4 = {
       "3) Desenhe 2 MEIOS DE COMUNICAÇÃO que existem em casa (celular, TV, rádio).",
       "4) Escreva em cima: 'MEU ATLAS CONECTADO'.",
     ],
-    registro:
-      "📸 Uma foto do Atlas Conectado do seu bairro.",
+    registro: "📸 Uma foto do Atlas Conectado do seu bairro.",
   },
 
   recompensa: {

@@ -8,7 +8,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-crise-totalitarismo",
   titulo: "Crise de 1929 e a Ascensão dos Totalitarismos",
   iconeTrilha: "📉",
-  bncc: ["EF09HI04", "EF09HI05", "EF09HI06"],
+  bncc: ["EF09HI12"],
   duracaoMin: 30,
   estilo: "teen",
 
@@ -44,6 +44,8 @@ export const aula01: AulaGeoV1 = {
         emoji: "🗳️",
         cor: "from-teal-800 to-slate-950",
       },
+          { id: "extra2", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "extra3", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "aut",
     feedbackAcerto:
@@ -124,9 +126,9 @@ export const aula01: AulaGeoV1 = {
     aurora: "Três perguntas rápidas.",
     instrucao: "Toque no card correto",
     perguntas: [
-      { id: "q1", pergunta: "Em que ano quebrou a Bolsa de Nova York?", fotoUrl: imgTot, cards: [{ id: "1929", emoji: "📉", titulo: "1929", cor: "from-teal-600 to-slate-900" }, { id: "1917", emoji: "☭", titulo: "1917", cor: "from-amber-600 to-slate-900" }, { id: "1945", emoji: "🕊️", titulo: "1945", cor: "from-slate-600 to-slate-900" }], correta: "1929", feedbackAcerto: "Correto. Outubro de 1929.", feedbackErro: "É 1929. 1917 = Rev. Russa, 1945 = fim da 2ª Guerra." },
-      { id: "q2", pergunta: "Quem liderou o NEW DEAL nos EUA?", fotoUrl: imgFila, cards: [{ id: "r", emoji: "🏗️", titulo: "Roosevelt", cor: "from-teal-600 to-slate-900" }, { id: "h", emoji: "⛓️", titulo: "Hitler", cor: "from-amber-600 to-slate-900" }, { id: "m", emoji: "🎖️", titulo: "Mussolini", cor: "from-slate-600 to-slate-900" }], correta: "r", feedbackAcerto: "Correto. Roosevelt, presidente dos EUA a partir de 1933.", feedbackErro: "É Roosevelt. Hitler = Alemanha, Mussolini = Itália." },
-      { id: "q3", pergunta: "O NAZISMO nasceu em qual país?", fotoUrl: imgComicio, cards: [{ id: "al", emoji: "🇩🇪", titulo: "Alemanha", cor: "from-teal-600 to-slate-900" }, { id: "it", emoji: "🇮🇹", titulo: "Itália", cor: "from-amber-600 to-slate-900" }, { id: "es", emoji: "🇪🇸", titulo: "Espanha", cor: "from-slate-600 to-slate-900" }], correta: "al", feedbackAcerto: "Correto. Alemanha, com Hitler (1933).", feedbackErro: "É Alemanha. Itália = Fascismo (Mussolini); Espanha = Franquismo (Franco)." },
+      { id: "q1", pergunta: "Em que ano quebrou a Bolsa de Nova York?", fotoUrl: imgTot, cards: [{ id: "1929", emoji: "📉", titulo: "1929", cor: "from-teal-600 to-slate-900" }, { id: "1917", emoji: "☭", titulo: "1917", cor: "from-amber-600 to-slate-900" }, { id: "1945", emoji: "🕊️", titulo: "1945", cor: "from-slate-600 to-slate-900" }, { id: "extra", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" }], correta: "1929", feedbackAcerto: "Correto. Outubro de 1929.", feedbackErro: "É 1929. 1917 = Rev. Russa, 1945 = fim da 2ª Guerra." },
+      { id: "q2", pergunta: "Quem liderou o NEW DEAL nos EUA?", fotoUrl: imgFila, cards: [{ id: "r", emoji: "🏗️", titulo: "Roosevelt", cor: "from-teal-600 to-slate-900" }, { id: "h", emoji: "⛓️", titulo: "Hitler", cor: "from-amber-600 to-slate-900" }, { id: "m", emoji: "🎖️", titulo: "Mussolini", cor: "from-slate-600 to-slate-900" }, { id: "extra", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" }], correta: "r", feedbackAcerto: "Correto. Roosevelt, presidente dos EUA a partir de 1933.", feedbackErro: "É Roosevelt. Hitler = Alemanha, Mussolini = Itália." },
+      { id: "q3", pergunta: "O NAZISMO nasceu em qual país?", fotoUrl: imgComicio, cards: [{ id: "al", emoji: "🇩🇪", titulo: "Alemanha", cor: "from-teal-600 to-slate-900" }, { id: "it", emoji: "🇮🇹", titulo: "Itália", cor: "from-amber-600 to-slate-900" }, { id: "es", emoji: "🇪🇸", titulo: "Espanha", cor: "from-slate-600 to-slate-900" }, { id: "extra", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" }], correta: "al", feedbackAcerto: "Correto. Alemanha, com Hitler (1933).", feedbackErro: "É Alemanha. Itália = Fascismo (Mussolini); Espanha = Franquismo (Franco)." },
     ],
     falaFinal: "Você já mapeia crise → totalitarismos.",
   },

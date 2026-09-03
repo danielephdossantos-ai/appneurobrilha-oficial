@@ -48,7 +48,7 @@ export const aula02_multiplicacao: AulaV4 = {
         },
       },
       {
-        texto: "Multiplique 245 pela DEZENA (1) — resultado desloca 1 casa pra esquerda (colocando 0 na unidade).",
+        texto: "Multiplique 245 por 1 dezena, isto é, por 10. Cada unidade do produto passa a valer uma dezena.",
         exemploReal: {
           contexto: "245 × 10",
           contaPassoAPasso: {
@@ -66,7 +66,7 @@ export const aula02_multiplicacao: AulaV4 = {
         },
       },
       {
-        texto: "Multiplicar por 100 = acrescentar 2 zeros. Por 1.000 = 3 zeros.",
+        texto: "Ao multiplicar por 100 ou 1.000, cada algarismo muda duas ou três casas para a esquerda na tabela de valor posicional.",
         exemploReal: {
           contexto: "37 × 1.000",
           contaPassoAPasso: {
@@ -79,7 +79,7 @@ export const aula02_multiplicacao: AulaV4 = {
               { coluna: "DM", fala: "1 × 3 = 3. Escrevo 3 na dezena de milhar.", digito: 3 },
             ],
           },
-          destaque: "37 × 1.000 = 37.000 porque o 37 desloca três casas para a esquerda.",
+          destaque: "37 × 1.000 = 37.000: 3 dezenas tornam-se 3 dezenas de milhar e 7 unidades tornam-se 7 unidades de milhar.",
         },
       },
     ],
@@ -151,7 +151,7 @@ export const aula02_multiplicacao: AulaV4 = {
 
   momento10_avaliacao: {
     perguntas: [
-      { pergunta: "45 × 100 =", opcoes: ["4.500", "450", "45.000"], correta: 0, feedbackAcerto: "🎉", feedbackErro: "×100 acrescenta 2 zeros." },
+      { pergunta: "45 × 100 =", opcoes: ["4.500", "450", "45.000"], correta: 0, feedbackAcerto: "🎉", feedbackErro: "Ao multiplicar por 100, os algarismos mudam duas casas de posição." },
       { pergunta: "12 × 15 =", opcoes: ["180", "170", "160"], correta: 0, feedbackAcerto: "🎉", feedbackErro: "12 × 5 + 12 × 10." },
       { pergunta: "125 × 8 =", opcoes: ["1.000", "900", "1.125"], correta: 0, feedbackAcerto: "🎉", feedbackErro: "125 × 8 = 1.000." },
     ],

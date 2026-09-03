@@ -8,7 +8,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-haiti-hispanoamerica",
   titulo: "Haiti e as Independências Hispano-Americanas",
   iconeTrilha: "🗽",
-  bncc: ["EF08HI10", "EF08HI11"],
+  bncc: ["EF08HI08", "EF08HI09", "EF08HI10", "EF08HI11"],
   duracaoMin: 30,
   estilo: "teen",
 
@@ -32,6 +32,8 @@ export const aula01: AulaGeoV1 = {
     opcoes: [
       { id: "cri", titulo: "CRISE NA ESPANHA + IDEIAS ILUMINISTAS", subtitulo: "Napoleão invade a Espanha (1808)", emoji: "💥", cor: "from-teal-800 to-slate-950" },
       { id: "esp", titulo: "A ESPANHA LIBERTOU AS COLÔNIAS", subtitulo: "concedeu independência pacífica", emoji: "❌", cor: "from-amber-900 to-slate-950" },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "cri",
     feedbackAcerto:

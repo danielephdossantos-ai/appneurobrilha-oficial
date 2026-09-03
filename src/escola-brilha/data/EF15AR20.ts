@@ -1,0 +1,2 @@
+import { criarAulaArte1 } from "./criarAulaArte1";
+export default criarAulaArte1({ codigo: "EF15AR20", titulo: "Faz de Conta em Cena", foco: "Experimentar o trabalho teatral com corpo, voz e transformação imaginativa de objetos", objeto: "elementos teatrais", exemplos: ["Transformar uma caixa em barco na cena", "Usar objeto sem imaginar", "Fazer uma lista de números", "Repetir uma legenda"], resposta: "Usar corpo, voz e imaginação para dar novos sentidos a objetos e situações.", proxima: "EF15AR21" });

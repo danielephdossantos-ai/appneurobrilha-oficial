@@ -46,12 +46,41 @@ export const aula01: AulaArteV1 = {
     titulo: "🗿 O Círculo de Pedra",
     instrucao: "Toca em cada pista sobre os monumentos megalíticos",
     itens: [
-      { emoji: "🪨", rotulo: "Stonehenge (Inglaterra)", descricao: "Círculo de pedras enormes erguido há cerca de 5 mil anos, sem cimento ou ferramentas de metal. Cada bloco pesa toneladas e foi transportado de dezenas de quilômetros.", cor: "#78716c", fotoUrl: stonehengeGeral },
-      { emoji: "🧭", rotulo: "Alinhamentos de Carnac (França)", descricao: "Milhares de menires (pedras verticais) organizados em fileiras retas por quilômetros. Ninguém sabe o propósito exato, mas o alinhamento geométrico é perfeito.", cor: "#a8a29e", fotoUrl: carnacAlinhamento },
-      { emoji: "☀️", rotulo: "Alinhamento com o solstício", descricao: "Em Stonehenge, no dia do solstício de verão, o sol nasce exatamente entre duas pedras específicas. O monumento funciona como um CALENDÁRIO astronômico de pedra.", cor: "#f59e0b", fotoUrl: solsticio },
-      { emoji: "⚖️", rotulo: "Sistema trilítico", descricao: "Dois pilares verticais + uma viga horizontal por cima, encaixada por entalhes — sem cola, sem cimento. A física da gravidade é que segura tudo firme.", cor: "#dc2626", fotoUrl: trilito },
+      {
+        emoji: "🪨",
+        rotulo: "Stonehenge (Inglaterra)",
+        descricao:
+          "Círculo de pedras enormes erguido há cerca de 5 mil anos, sem cimento ou ferramentas de metal. Cada bloco pesa toneladas e foi transportado de dezenas de quilômetros.",
+        cor: "#78716c",
+        fotoUrl: stonehengeGeral,
+      },
+      {
+        emoji: "🧭",
+        rotulo: "Alinhamentos de Carnac (França)",
+        descricao:
+          "Milhares de menires (pedras verticais) organizados em fileiras retas por quilômetros. Ninguém sabe o propósito exato, mas o alinhamento geométrico é perfeito.",
+        cor: "#a8a29e",
+        fotoUrl: carnacAlinhamento,
+      },
+      {
+        emoji: "☀️",
+        rotulo: "Alinhamento com o solstício",
+        descricao:
+          "Em Stonehenge, no dia do solstício de verão, o sol nasce exatamente entre duas pedras específicas. O monumento funciona como um CALENDÁRIO astronômico de pedra.",
+        cor: "#f59e0b",
+        fotoUrl: solsticio,
+      },
+      {
+        emoji: "⚖️",
+        rotulo: "Sistema trilítico",
+        descricao:
+          "Dois pilares verticais + uma viga horizontal por cima, encaixada por entalhes — sem cola, sem cimento. A física da gravidade é que segura tudo firme.",
+        cor: "#dc2626",
+        fotoUrl: trilito,
+      },
     ],
-    falaFinal: "Sua missão nesta página: decifrar como a geometria transformou pedra bruta em espaço sagrado.",
+    falaFinal:
+      "Sua missão nesta página: decifrar como a geometria transformou pedra bruta em espaço sagrado.",
   },
 
   cena02_previsao: {
@@ -59,34 +88,61 @@ export const aula01: AulaArteV1 = {
     aurora: "Calibra o olhar de arquiteto megalítico antes de construir!",
     perguntas: [
       {
-        pergunta: "Como os povos megalíticos conseguiam erguer pedras de várias toneladas SEM máquinas modernas?",
+        pergunta:
+          "Como os povos megalíticos conseguiam erguer pedras de várias toneladas SEM máquinas modernas?",
         fotoUrl: stonehengeGeral,
         alternativas: [
-          { texto: "Usando cálculo, rampas, alavancas, cordas e MUITA gente trabalhando em equipe coordenada", correta: true },
+          {
+            texto:
+              "Usando cálculo, rampas, alavancas, cordas e MUITA gente trabalhando em equipe coordenada",
+            correta: true,
+          },
           { texto: "Foi mágica, não existe explicação física para isso", correta: false },
+
+          { texto: "Não corresponde à análise", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
-        feedbackAcerto: "Exato! Engenharia coletiva: rampas de terra, troncos como roletes, alavancas e cordas — física pura aplicada com organização social.",
-        feedbackErro: "Nada de mágica! Arqueólogos comprovaram: rampas, alavancas, roletes de madeira e centenas de pessoas coordenadas resolvem o problema com física.",
+        feedbackAcerto:
+          "Exato! Engenharia coletiva: rampas de terra, troncos como roletes, alavancas e cordas — física pura aplicada com organização social.",
+        feedbackErro:
+          "Nada de mágica! Arqueólogos comprovaram: rampas, alavancas, roletes de madeira e centenas de pessoas coordenadas resolvem o problema com física.",
       },
       {
         pergunta: "O que é o SISTEMA TRILÍTICO usado em Stonehenge?",
         fotoUrl: trilito,
         alternativas: [
-          { texto: "Dois pilares verticais sustentando uma viga horizontal encaixada por cima, como um portal", correta: true },
+          {
+            texto:
+              "Dois pilares verticais sustentando uma viga horizontal encaixada por cima, como um portal",
+            correta: true,
+          },
           { texto: "Três pedras empilhadas uma sobre a outra em linha reta", correta: false },
+
+          { texto: "Não corresponde à análise", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
-        feedbackAcerto: "Isso! Trilítico = três pedras: 2 de pé (pilares) + 1 deitada (viga/lintel) por cima, formando um arco retangular.",
-        feedbackErro: "Não é empilhamento em linha. É uma estrutura de PORTAL: dois pilares verticais + uma viga horizontal encaixada no topo.",
+        feedbackAcerto:
+          "Isso! Trilítico = três pedras: 2 de pé (pilares) + 1 deitada (viga/lintel) por cima, formando um arco retangular.",
+        feedbackErro:
+          "Não é empilhamento em linha. É uma estrutura de PORTAL: dois pilares verticais + uma viga horizontal encaixada no topo.",
       },
       {
         pergunta: "Por que Stonehenge é considerado também um instrumento ASTRONÔMICO?",
         fotoUrl: solsticio,
         alternativas: [
-          { texto: "Porque suas pedras estão alinhadas para marcar o nascer do sol nos solstícios", correta: true },
+          {
+            texto: "Porque suas pedras estão alinhadas para marcar o nascer do sol nos solstícios",
+            correta: true,
+          },
           { texto: "Porque foi construído dentro de um observatório espacial", correta: false },
+
+          { texto: "Não corresponde à análise", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
-        feedbackAcerto: "Perfeito! O monumento marca com precisão os solstícios de verão e inverno — um calendário de pedra que organizava plantio, colheita e rituais.",
-        feedbackErro: "Nada de observatório espacial! O alinhamento é geométrico e solar: as pedras marcam onde o sol nasce nos solstícios.",
+        feedbackAcerto:
+          "Perfeito! O monumento marca com precisão os solstícios de verão e inverno — um calendário de pedra que organizava plantio, colheita e rituais.",
+        feedbackErro:
+          "Nada de observatório espacial! O alinhamento é geométrico e solar: as pedras marcam onde o sol nasce nos solstícios.",
       },
     ],
   },
@@ -95,11 +151,46 @@ export const aula01: AulaArteV1 = {
     tipo: "vocabularioCards",
     aurora: "Vocabulário do arquiteto megalítico. Toca em cada verbete!",
     cards: [
-      { termo: "Megalitismo", definicao: "Cultura pré-histórica que construiu monumentos com pedras enormes (mega = grande, lithos = pedra), sem cimento ou metal.", emoji: "🗿", cor: "#78716c", fotoUrl: stonehengeGeral },
-      { termo: "Menir", definicao: "Pedra única, vertical, fincada isoladamente no chão. Pode marcar um território, um túmulo ou um ponto sagrado.", emoji: "🪨", cor: "#a8a29e", fotoUrl: menir },
-      { termo: "Dólmen", definicao: "Câmara feita de pedras verticais cobertas por uma laje horizontal — geralmente usada como túmulo. É um trilítico em forma de mesa.", emoji: "⛩️", cor: "#7c2d12", fotoUrl: dolmen },
-      { termo: "Sistema Trilítico", definicao: "Técnica de construção: dois pilares verticais sustentam uma viga horizontal encaixada por cima, distribuindo o peso pela gravidade.", emoji: "⚖️", cor: "#dc2626", fotoUrl: trilito },
-      { termo: "Cromlech", definicao: "Conjunto de menires organizados em CÍRCULO, como Stonehenge. Frestas entre as pedras marcam a posição do sol em datas específicas.", emoji: "⭕", cor: "#0ea5e9", fotoUrl: cromlech },
+      {
+        termo: "Megalitismo",
+        definicao:
+          "Cultura pré-histórica que construiu monumentos com pedras enormes (mega = grande, lithos = pedra), sem cimento ou metal.",
+        emoji: "🗿",
+        cor: "#78716c",
+        fotoUrl: stonehengeGeral,
+      },
+      {
+        termo: "Menir",
+        definicao:
+          "Pedra única, vertical, fincada isoladamente no chão. Pode marcar um território, um túmulo ou um ponto sagrado.",
+        emoji: "🪨",
+        cor: "#a8a29e",
+        fotoUrl: menir,
+      },
+      {
+        termo: "Dólmen",
+        definicao:
+          "Câmara feita de pedras verticais cobertas por uma laje horizontal — geralmente usada como túmulo. É um trilítico em forma de mesa.",
+        emoji: "⛩️",
+        cor: "#7c2d12",
+        fotoUrl: dolmen,
+      },
+      {
+        termo: "Sistema Trilítico",
+        definicao:
+          "Técnica de construção: dois pilares verticais sustentam uma viga horizontal encaixada por cima, distribuindo o peso pela gravidade.",
+        emoji: "⚖️",
+        cor: "#dc2626",
+        fotoUrl: trilito,
+      },
+      {
+        termo: "Cromlech",
+        definicao:
+          "Conjunto de menires organizados em CÍRCULO, como Stonehenge. Frestas entre as pedras marcam a posição do sol em datas específicas.",
+        emoji: "⭕",
+        cor: "#0ea5e9",
+        fotoUrl: cromlech,
+      },
     ],
   },
 
@@ -114,10 +205,34 @@ export const aula01: AulaArteV1 = {
       "Na França, os Alinhamentos de Carnac reúnem milhares de menires em fileiras retas por quilômetros de extensão — prova de que esses povos dominavam GEOMETRIA aplicada em larga escala, décadas antes de qualquer escrita conhecida. Estudar essas construções é decifrar como o ser humano transformou pedra bruta em espaço sagrado através do cálculo.",
     ],
     pigmentos: [
-      { nome: "Pedra de Stonehenge", hex: "#78716c", fonte: "Arenito local (sarsen), Inglaterra", emoji: "🪨", fotoUrl: stonehengeGeral },
-      { nome: "Menir de Carnac", hex: "#a8a29e", fonte: "Granito bretão, França", emoji: "🗿", fotoUrl: carnacAlinhamento },
-      { nome: "Luz do solstício", hex: "#f59e0b", fonte: "Alinhamento solar sagrado", emoji: "☀️", fotoUrl: solsticio },
-      { nome: "Encaixe trilítico", hex: "#dc2626", fonte: "Engenharia por gravidade", emoji: "⚖️", fotoUrl: trilito },
+      {
+        nome: "Pedra de Stonehenge",
+        hex: "#78716c",
+        fonte: "Arenito local (sarsen), Inglaterra",
+        emoji: "🪨",
+        fotoUrl: stonehengeGeral,
+      },
+      {
+        nome: "Menir de Carnac",
+        hex: "#a8a29e",
+        fonte: "Granito bretão, França",
+        emoji: "🗿",
+        fotoUrl: carnacAlinhamento,
+      },
+      {
+        nome: "Luz do solstício",
+        hex: "#f59e0b",
+        fonte: "Alinhamento solar sagrado",
+        emoji: "☀️",
+        fotoUrl: solsticio,
+      },
+      {
+        nome: "Encaixe trilítico",
+        hex: "#dc2626",
+        fonte: "Engenharia por gravidade",
+        emoji: "⚖️",
+        fotoUrl: trilito,
+      },
     ],
   },
 
@@ -129,41 +244,90 @@ export const aula01: AulaArteV1 = {
         pergunta: "Qual é a diferença entre um MENIR e um DÓLMEN?",
         fotoUrl: menir,
         alternativas: [
-          { texto: "Menir é uma pedra única vertical; dólmen é uma câmara com pedras verticais + uma laje horizontal por cima", correta: true },
-          { texto: "São exatamente a mesma coisa, só com nomes diferentes em países diferentes", correta: false },
+          {
+            texto:
+              "Menir é uma pedra única vertical; dólmen é uma câmara com pedras verticais + uma laje horizontal por cima",
+            correta: true,
+          },
+          {
+            texto: "São exatamente a mesma coisa, só com nomes diferentes em países diferentes",
+            correta: false,
+          },
+
+          { texto: "Não corresponde à análise", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
-        feedbackAcerto: "Isso mesmo! Menir = uma pedra isolada. Dólmen = estrutura de câmara, geralmente funerária, com teto de pedra.",
-        feedbackErro: "Não são a mesma coisa: o MENIR é uma pedra solitária vertical; o DÓLMEN é uma câmara com teto de laje horizontal.",
+        feedbackAcerto:
+          "Isso mesmo! Menir = uma pedra isolada. Dólmen = estrutura de câmara, geralmente funerária, com teto de pedra.",
+        feedbackErro:
+          "Não são a mesma coisa: o MENIR é uma pedra solitária vertical; o DÓLMEN é uma câmara com teto de laje horizontal.",
       },
       {
         pergunta: "Por que o SISTEMA TRILÍTICO se mantém de pé há milhares de anos sem cimento?",
         fotoUrl: trilito,
         alternativas: [
-          { texto: "Porque o peso da viga horizontal é distribuído pela gravidade entre os dois pilares encaixados", correta: true },
-          { texto: "Porque os povos antigos usavam um tipo de cola secreta que ninguém mais conhece", correta: false },
+          {
+            texto:
+              "Porque o peso da viga horizontal é distribuído pela gravidade entre os dois pilares encaixados",
+            correta: true,
+          },
+          {
+            texto:
+              "Porque os povos antigos usavam um tipo de cola secreta que ninguém mais conhece",
+            correta: false,
+          },
+
+          { texto: "Não corresponde à análise", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
-        feedbackAcerto: "Exato! Física pura: a gravidade empurra a viga pra baixo, travando o encaixe nos dois pilares — sem precisar de cola nenhuma.",
-        feedbackErro: "Sem colas secretas! É engenharia por GRAVIDADE: o peso da viga trava o encaixe nos dois pilares verticais.",
+        feedbackAcerto:
+          "Exato! Física pura: a gravidade empurra a viga pra baixo, travando o encaixe nos dois pilares — sem precisar de cola nenhuma.",
+        feedbackErro:
+          "Sem colas secretas! É engenharia por GRAVIDADE: o peso da viga trava o encaixe nos dois pilares verticais.",
       },
       {
         pergunta: "O que torna Stonehenge, além de monumento, um instrumento científico?",
         fotoUrl: cromlech,
         alternativas: [
-          { texto: "O alinhamento do cromlech marca com precisão os solstícios de verão e inverno, como um calendário solar", correta: true },
-          { texto: "Ele tem números escritos nas pedras indicando as datas do ano", correta: false },
+          {
+            texto:
+              "O alinhamento do cromlech marca com precisão os solstícios de verão e inverno, como um calendário solar",
+            correta: true,
+          },
+          {
+            texto: "Ele tem números escritos nas pedras indicando as datas do ano",
+            correta: false,
+          },
+
+          { texto: "Não corresponde à análise", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
-        feedbackAcerto: "Isso mesmo! O cromlech de Stonehenge é alinhado para marcar o nascer do sol nos solstícios — funciona como calendário.",
-        feedbackErro: "Não há números escritos. O que marca as datas é o ALINHAMENTO GEOMÉTRICO das pedras com o nascer do sol.",
+        feedbackAcerto:
+          "Isso mesmo! O cromlech de Stonehenge é alinhado para marcar o nascer do sol nos solstícios — funciona como calendário.",
+        feedbackErro:
+          "Não há números escritos. O que marca as datas é o ALINHAMENTO GEOMÉTRICO das pedras com o nascer do sol.",
       },
       {
         pergunta: "O que os Alinhamentos de Carnac provam sobre a geometria dos povos neolíticos?",
         fotoUrl: carnacAlinhamento,
         alternativas: [
-          { texto: "Que dominavam cálculo geométrico em larga escala, organizando milhares de menires em fileiras retas", correta: true },
-          { texto: "Que foram posicionados aleatoriamente sem nenhum planejamento", correta: false },
+          {
+            texto:
+              "Que dominavam cálculo geométrico em larga escala, organizando milhares de menires em fileiras retas",
+            correta: true,
+          },
+          {
+            texto: "Que foram posicionados aleatoriamente sem nenhum planejamento",
+            correta: false,
+          },
+
+          { texto: "Não corresponde à análise", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
-        feedbackAcerto: "Correto! Fileiras retas por quilômetros exigem planejamento geométrico avançado — nada de acaso.",
-        feedbackErro: "Não é aleatório: as fileiras retas por quilômetros só existem com planejamento geométrico muito preciso.",
+        feedbackAcerto:
+          "Correto! Fileiras retas por quilômetros exigem planejamento geométrico avançado — nada de acaso.",
+        feedbackErro:
+          "Não é aleatório: as fileiras retas por quilômetros só existem com planejamento geométrico muito preciso.",
       },
     ],
   },
@@ -173,49 +337,94 @@ export const aula01: AulaArteV1 = {
     aurora: "Classifica cada estrutura megalítica no quadrante certo do canteiro de obras.",
     animais: [
       {
-        nome: "Pedra única fincada isolada", emoji: "🪨", fotoUrl: menir,
+        nome: "Pedra única fincada isolada",
+        emoji: "🪨",
+        fotoUrl: menir,
         corAlvo: { nome: "Menir", hex: "#a8a29e" },
         opcoes: [
           { nome: "Menir", hex: "#a8a29e" },
           { nome: "Dólmen", hex: "#7c2d12" },
           { nome: "Cromlech", hex: "#0ea5e9" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Isso! Uma pedra vertical solitária = Menir.",
       },
       {
-        nome: "Câmara de pedras com laje por cima", emoji: "⛩️", fotoUrl: dolmen,
+        nome: "Câmara de pedras com laje por cima",
+        emoji: "⛩️",
+        fotoUrl: dolmen,
         corAlvo: { nome: "Dólmen", hex: "#7c2d12" },
         opcoes: [
           { nome: "Dólmen", hex: "#7c2d12" },
           { nome: "Menir", hex: "#a8a29e" },
           { nome: "Cromlech", hex: "#0ea5e9" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Perfeito! Câmara com teto de pedra = Dólmen, geralmente um túmulo.",
       },
       {
-        nome: "Círculo de pedras alinhado ao sol", emoji: "⭕", fotoUrl: cromlech,
+        nome: "Círculo de pedras alinhado ao sol",
+        emoji: "⭕",
+        fotoUrl: cromlech,
         corAlvo: { nome: "Cromlech", hex: "#0ea5e9" },
         opcoes: [
           { nome: "Cromlech", hex: "#0ea5e9" },
           { nome: "Menir", hex: "#a8a29e" },
           { nome: "Dólmen", hex: "#7c2d12" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
-        falaAcerto: "Correto! Círculo de menires alinhado astronomicamente = Cromlech, como Stonehenge.",
+        falaAcerto:
+          "Correto! Círculo de menires alinhado astronomicamente = Cromlech, como Stonehenge.",
       },
     ],
   },
 
   cena07_sequencia: {
     tipo: "sequenciaMistura",
-    aurora: "Ordena os 5 passos pra construir um monumento megalítico como os arquitetos da pré-história.",
+    aurora:
+      "Ordena os 5 passos pra construir um monumento megalítico como os arquitetos da pré-história.",
     passos: [
-      { id: "p1", texto: "ESCOLHO o local sagrado observando por onde o sol nasce no solstício", emoji: "🧭", ordem: 1, fotoUrl: solsticio },
-      { id: "p2", texto: "TRANSPORTO os blocos de pedra usando rampas, roletes de madeira e cordas", emoji: "🪨", ordem: 2, fotoUrl: blocosConstrucao },
-      { id: "p3", texto: "ENTALHO encaixes nos pilares verticais para travar a viga horizontal", emoji: "🔨", ordem: 3, fotoUrl: trilito },
-      { id: "p4", texto: "ERGO os dois pilares verticais usando alavancas e força coletiva", emoji: "⚖️", ordem: 4, fotoUrl: dolmen },
-      { id: "p5", texto: "ENCAIXO a viga horizontal por cima, deixando a gravidade travar tudo", emoji: "🗿", ordem: 5, fotoUrl: stonehengeGeral },
+      {
+        id: "p1",
+        texto: "ESCOLHO o local sagrado observando por onde o sol nasce no solstício",
+        emoji: "🧭",
+        ordem: 1,
+        fotoUrl: solsticio,
+      },
+      {
+        id: "p2",
+        texto: "TRANSPORTO os blocos de pedra usando rampas, roletes de madeira e cordas",
+        emoji: "🪨",
+        ordem: 2,
+        fotoUrl: blocosConstrucao,
+      },
+      {
+        id: "p3",
+        texto: "ENTALHO encaixes nos pilares verticais para travar a viga horizontal",
+        emoji: "🔨",
+        ordem: 3,
+        fotoUrl: trilito,
+      },
+      {
+        id: "p4",
+        texto: "ERGO os dois pilares verticais usando alavancas e força coletiva",
+        emoji: "⚖️",
+        ordem: 4,
+        fotoUrl: dolmen,
+      },
+      {
+        id: "p5",
+        texto: "ENCAIXO a viga horizontal por cima, deixando a gravidade travar tudo",
+        emoji: "🗿",
+        ordem: 5,
+        fotoUrl: stonehengeGeral,
+      },
     ],
-    falaAcerto: "Você acabou de erguer um monumento trilítico — geometria e gravidade trabalhando juntas!",
+    falaAcerto:
+      "Você acabou de erguer um monumento trilítico — geometria e gravidade trabalhando juntas!",
   },
 
   cena08_voceLe: {
@@ -224,17 +433,28 @@ export const aula01: AulaArteV1 = {
     titulo: "Diário do Arqueólogo Megalítico",
     trechos: [
       { texto: "Sou arqueólogo. Estudo o", palavraDestaque: "megalitismo", corDestaque: "#78716c" },
-      { texto: "através dos menires, dólmens e do", palavraDestaque: "sistema trilítico", corDestaque: "#dc2626" },
+      {
+        texto: "através dos menires, dólmens e do",
+        palavraDestaque: "sistema trilítico",
+        corDestaque: "#dc2626",
+      },
       { texto: "Descobri que um", palavraDestaque: "cromlech", corDestaque: "#0ea5e9" },
-      { texto: "como Stonehenge não é só arte — é calendário solar de pedra, alinhado aos solstícios." },
-      { texto: "Sem cimento, sem metal, só GEOMETRIA e GRAVIDADE. A engenharia mais antiga do mundo ainda está de pé." },
+      {
+        texto:
+          "como Stonehenge não é só arte — é calendário solar de pedra, alinhado aos solstícios.",
+      },
+      {
+        texto:
+          "Sem cimento, sem metal, só GEOMETRIA e GRAVIDADE. A engenharia mais antiga do mundo ainda está de pé.",
+      },
     ],
   },
 
   cena09_minijogo: {
     tipo: "cenaTematica",
     variante: "minijogo",
-    aurora: "🎯 O Alinhamento dos Solstícios! Move os blocos megalíticos alinhando as sombras com os raios solares antes do tempo acabar.",
+    aurora:
+      "🎯 O Alinhamento dos Solstícios! Move os blocos megalíticos alinhando as sombras com os raios solares antes do tempo acabar.",
     titulo: "☀️ O Alinhamento dos Solstícios",
     instrucao: "Alinhe cada bloco de pedra com o raio de sol certo!",
     tempoSeg: 35,
@@ -246,7 +466,8 @@ export const aula01: AulaArteV1 = {
       { emoji: "☀️", rotulo: "Raio de sol do solstício de inverno", cor: "#f59e0b" },
       { emoji: "🧭", rotulo: "Bloco geometricamente alinhado", cor: "#78716c" },
     ],
-    falaFinal: "Alinhamento completo! Você calculou a geometria sagrada como os arquitetos neolíticos.",
+    falaFinal:
+      "Alinhamento completo! Você calculou a geometria sagrada como os arquitetos neolíticos.",
   },
 
   cena10_revisao: {
@@ -255,28 +476,96 @@ export const aula01: AulaArteV1 = {
     aurora: "Fecha a terceira página do Códice. Toca em cada verbete!",
     titulo: "📓 Caderno da Geometria dos Monumentos",
     itens: [
-      { emoji: "🗿", rotulo: "Megalitismo", descricao: "Cultura pré-histórica que construiu monumentos de pedra enorme, sem cimento ou metal.", cor: "#78716c", fotoUrl: stonehengeGeral },
-      { emoji: "🪨", rotulo: "Menir", descricao: "Pedra única vertical fincada isoladamente, marcando território ou ponto sagrado.", cor: "#a8a29e", fotoUrl: menir },
-      { emoji: "⛩️", rotulo: "Dólmen", descricao: "Câmara com pedras verticais cobertas por laje horizontal, usada como túmulo.", cor: "#7c2d12", fotoUrl: dolmen },
-      { emoji: "⚖️", rotulo: "Sistema Trilítico", descricao: "Dois pilares verticais + viga horizontal encaixada. A gravidade distribui o peso e trava a estrutura.", cor: "#dc2626", fotoUrl: trilito },
-      { emoji: "⭕", rotulo: "Cromlech", descricao: "Círculo de menires alinhado ao sol, como Stonehenge — calendário astronômico de pedra.", cor: "#0ea5e9", fotoUrl: cromlech },
-      { emoji: "☀️", rotulo: "Alinhamento astronômico", descricao: "Frestas entre pedras marcam o nascer do sol nos solstícios de verão e inverno.", cor: "#f59e0b", fotoUrl: solsticio },
-      { emoji: "🕵️", rotulo: "Arqueólogo megalítico", descricao: "Sua recompensa: Nível de Bolha e Prumo de Pedra, ferramentas do arqueólogo de campo.", cor: "#a8a29e", fotoUrl: arqueologo },
-      { emoji: "🗺️", rotulo: "Mapa dos Alinhamentos Sagrados", descricao: "Sua página restaurada: mapa global dos monumentos megalíticos e seus alinhamentos solares.", cor: "#7c2d12", fotoUrl: carnacAlinhamento },
+      {
+        emoji: "🗿",
+        rotulo: "Megalitismo",
+        descricao:
+          "Cultura pré-histórica que construiu monumentos de pedra enorme, sem cimento ou metal.",
+        cor: "#78716c",
+        fotoUrl: stonehengeGeral,
+      },
+      {
+        emoji: "🪨",
+        rotulo: "Menir",
+        descricao:
+          "Pedra única vertical fincada isoladamente, marcando território ou ponto sagrado.",
+        cor: "#a8a29e",
+        fotoUrl: menir,
+      },
+      {
+        emoji: "⛩️",
+        rotulo: "Dólmen",
+        descricao: "Câmara com pedras verticais cobertas por laje horizontal, usada como túmulo.",
+        cor: "#7c2d12",
+        fotoUrl: dolmen,
+      },
+      {
+        emoji: "⚖️",
+        rotulo: "Sistema Trilítico",
+        descricao:
+          "Dois pilares verticais + viga horizontal encaixada. A gravidade distribui o peso e trava a estrutura.",
+        cor: "#dc2626",
+        fotoUrl: trilito,
+      },
+      {
+        emoji: "⭕",
+        rotulo: "Cromlech",
+        descricao:
+          "Círculo de menires alinhado ao sol, como Stonehenge — calendário astronômico de pedra.",
+        cor: "#0ea5e9",
+        fotoUrl: cromlech,
+      },
+      {
+        emoji: "☀️",
+        rotulo: "Alinhamento astronômico",
+        descricao: "Frestas entre pedras marcam o nascer do sol nos solstícios de verão e inverno.",
+        cor: "#f59e0b",
+        fotoUrl: solsticio,
+      },
+      {
+        emoji: "🕵️",
+        rotulo: "Arqueólogo megalítico",
+        descricao:
+          "Sua recompensa: Nível de Bolha e Prumo de Pedra, ferramentas do arqueólogo de campo.",
+        cor: "#a8a29e",
+        fotoUrl: arqueologo,
+      },
+      {
+        emoji: "🗺️",
+        rotulo: "Mapa dos Alinhamentos Sagrados",
+        descricao:
+          "Sua página restaurada: mapa global dos monumentos megalíticos e seus alinhamentos solares.",
+        cor: "#7c2d12",
+        fotoUrl: carnacAlinhamento,
+      },
     ],
-    falaFinal: "Terceira página do Códice dos Impérios Perdidos RESTAURADA — Mapa dos Alinhamentos Sagrados desbloqueado!",
+    falaFinal:
+      "Terceira página do Códice dos Impérios Perdidos RESTAURADA — Mapa dos Alinhamentos Sagrados desbloqueado!",
   },
 
   cena11_avaliacao: {
     tipo: "avaliacaoFinal",
     aurora: "Desafio do Detetive, arqueólogo megalítico!",
     quiz: {
-      pergunta: "Por que o SISTEMA TRILÍTICO de Stonehenge (dois pilares + uma viga horizontal) se mantém firme há milhares de anos SEM nenhum tipo de cimento ou cola?",
+      pergunta:
+        "Por que o SISTEMA TRILÍTICO de Stonehenge (dois pilares + uma viga horizontal) se mantém firme há milhares de anos SEM nenhum tipo de cimento ou cola?",
       alternativas: [
-        { texto: "Porque a viga horizontal é encaixada por entalhes e o próprio peso, puxado pela gravidade, trava a estrutura contra os dois pilares", correta: true },
-        { texto: "Porque as pedras foram derretidas e coladas por um processo químico secreto dos povos antigos", correta: false },
+        {
+          texto:
+            "Porque a viga horizontal é encaixada por entalhes e o próprio peso, puxado pela gravidade, trava a estrutura contra os dois pilares",
+          correta: true,
+        },
+        {
+          texto:
+            "Porque as pedras foram derretidas e coladas por um processo químico secreto dos povos antigos",
+          correta: false,
+        },
+
+        { texto: "Não corresponde à análise", correta: false },
+        { texto: "Outra resposta sem relação", correta: false },
       ],
-      feedback: "Perfeito! O segredo é FÍSICA pura: entalhes de encaixe + gravidade. Quanto mais peso empurra a viga pra baixo, mais firme ela trava nos pilares. Nada de química secreta — é geometria e engenharia aplicadas há 5 mil anos.",
+      feedback:
+        "Perfeito! O segredo é FÍSICA pura: entalhes de encaixe + gravidade. Quanto mais peso empurra a viga pra baixo, mais firme ela trava nos pilares. Nada de química secreta — é geometria e engenharia aplicadas há 5 mil anos.",
     },
     missaoFamilia:
       "🌞 Missão Relógio de Sol de Stonehenge: Com a família, finque um bastão bem vertical num local ensolarado do quintal ou varanda. A cada 2 horas durante o dia, marque com uma pedrinha onde a SOMBRA da ponta do bastão cai no chão. No fim do dia, observe: as pedrinhas formam uma curva que mostra o caminho do sol — exatamente o princípio usado pelos povos megalíticos para alinhar seus monumentos! Registre no app uma foto do seu relógio de sol com as pedrinhas.",

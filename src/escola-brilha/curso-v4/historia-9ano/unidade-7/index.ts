@@ -6,6 +6,8 @@ import { aula07 } from "./aula-07-onu-organismos";
 import { aula02 } from "./aula-02-brasil-pos-1989";
 import { aula03 } from "./aula-03-sociedade-civil";
 import { aula04 } from "./aula-04-violencia-marginalizados";
+import { aula08 } from "./aula-08-terrorismo-migracoes";
+import { aula09 } from "./aula-09-diversidades";
 
 export const unidade7: UnidadeGeoV1 = {
   slug: "unidade-7",
@@ -15,5 +17,5 @@ export const unidade7: UnidadeGeoV1 = {
   descricao:
     "Fim da URSS, internet, redes sociais, pandemia, IA. A Teia toda desemboca no presente — e vocês são o próximo capítulo.",
   corTema: "#0891b2",
-  aulas: [aula01, aula05, aula06, aula07, aula02, aula03, aula04],
+  aulas: [aula01, aula02, aula03, aula04, aula05, aula06, aula07, aula08, aula09],
 };

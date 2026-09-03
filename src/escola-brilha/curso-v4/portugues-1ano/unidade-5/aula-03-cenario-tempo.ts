@@ -77,7 +77,7 @@ export const aula03: AulaPortuguesV4 = {
 
   momento_ensinoVisual: {
     titulo: "Onde e quando: as pistas do texto",
-    instrucao: "Veja como o texto sempre dá pistas de lugar e de tempo.",
+    instrucao: "Veja como este texto dá pistas de lugar e de tempo. Em algumas histórias, essas pistas podem ficar implícitas.",
     blocos: [
       {
         tipo: "fraseComPonto",

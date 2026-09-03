@@ -4,7 +4,7 @@ export const aula03_arredondar: AulaV4 = {
   slug: "u1-03-arredondar",
   titulo: "Arredondar e estimar",
   iconeTrilha: "🎯",
-  bncc: ["EF06MA02"],
+  bncc: ["EF06MA03", "EF06MA12"],
   duracaoMin: 20,
   metodologias: ["skemp"],
 

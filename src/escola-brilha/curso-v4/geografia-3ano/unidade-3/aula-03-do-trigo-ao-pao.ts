@@ -18,7 +18,7 @@ export const aula03: AulaGeoV1 = {
   slug: "aula-03-do-trigo-ao-pao",
   titulo: "Do Trigo ao Pão",
   iconeTrilha: "🥖",
-  bncc: ["EF03GE03"],
+  bncc: [],
   duracaoMin: 22,
 
   cena01_motivacao: {
@@ -53,14 +53,26 @@ export const aula03: AulaGeoV1 = {
         emoji: "🏭",
         cor: "from-amber-500 to-orange-700",
       },
+
+      {
+        id: "extra-1",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
+      {
+        id: "extra-2",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
     ],
     respostaCerta: "moinho",
     feedbackAcerto:
       "Isso! O trigo é DURO — precisa ser moído no moinho pra virar farinha. Só depois o padeiro faz o pão.",
     feedbackErro:
       "Pensa: você já mordeu um grão de trigo cru? É durinho! Precisa passar no MOINHO pra virar farinha macia.",
-    falaFinal:
-      "Guarda esse palpite. Bora ver cada parada do trigo até o pão.",
+    falaFinal: "Guarda esse palpite. Bora ver cada parada do trigo até o pão.",
   },
 
   cena03_vocabulario: {
@@ -76,8 +88,7 @@ export const aula03: AulaGeoV1 = {
         cor: "from-yellow-500 to-amber-700",
         conteudo:
           "É a PLANTAÇÃO de trigo no CAMPO. O agricultor prepara a terra, planta as sementes e espera meses até o trigo ficar DOURADO. Aí uma máquina colheitadeira colhe tudo.",
-        exemplo:
-          "Uma lavoura pequena colhe cerca de 3 toneladas de trigo por hectare.",
+        exemplo: "Uma lavoura pequena colhe cerca de 3 toneladas de trigo por hectare.",
         fotoUrl: lavoura,
       },
       {
@@ -87,8 +98,7 @@ export const aula03: AulaGeoV1 = {
         cor: "from-slate-500 to-zinc-700",
         conteudo:
           "É o TANQUE GIGANTE de metal que ARMAZENA o trigo colhido, protegido da chuva e dos ratos. Um caminhão bem grande vem buscar o trigo e leva pro moinho.",
-        exemplo:
-          "Um silo grande guarda até 10 mil toneladas de grão de uma vez.",
+        exemplo: "Um silo grande guarda até 10 mil toneladas de grão de uma vez.",
         fotoUrl: silo,
       },
       {
@@ -98,8 +108,7 @@ export const aula03: AulaGeoV1 = {
         cor: "from-amber-500 to-orange-700",
         conteudo:
           "É a FÁBRICA da farinha. Máquinas enormes MOEM os grãos de trigo até virar pó branco: a FARINHA. Trabalhadores de branco enchem sacos e mandam pra cidade.",
-        exemplo:
-          "Um moinho médio produz 200 toneladas de farinha por dia.",
+        exemplo: "Um moinho médio produz 200 toneladas de farinha por dia.",
         fotoUrl: moinho,
       },
       {
@@ -109,8 +118,7 @@ export const aula03: AulaGeoV1 = {
         cor: "from-rose-500 to-red-700",
         conteudo:
           "É onde o PADEIRO recebe a farinha, mistura com água, sal e fermento, e ASSA no forno. De manhã cedo, a padaria enche de gente comprando pão quentinho.",
-        exemplo:
-          "Uma padaria de bairro assa uns 3 mil pãezinhos por dia.",
+        exemplo: "Uma padaria de bairro assa uns 3 mil pãezinhos por dia.",
         fotoUrl: padaria,
       },
     ],
@@ -188,44 +196,65 @@ export const aula03: AulaGeoV1 = {
           { id: "lavoura", emoji: "🌾", titulo: "Lavoura", cor: "from-yellow-500 to-amber-700" },
           { id: "moinho", emoji: "🏭", titulo: "Moinho", cor: "from-amber-500 to-orange-700" },
           { id: "padaria", emoji: "🥖", titulo: "Padaria", cor: "from-rose-500 to-red-700" },
+
+          {
+            id: "extra-3",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "lavoura",
         feedbackAcerto:
           "Isso! Tudo começa na LAVOURA 🌾 — é lá que o trigo cresce dourado no campo.",
-        feedbackErro:
-          "Repara: trigo é planta. Planta cresce na TERRA da LAVOURA 🌾, no campo.",
+        feedbackErro: "Repara: trigo é planta. Planta cresce na TERRA da LAVOURA 🌾, no campo.",
       },
       {
         id: "q2",
-        pergunta:
-          "Em qual FÁBRICA o trigo é MOÍDO e vira farinha branquinha?",
+        pergunta: "Em qual FÁBRICA o trigo é MOÍDO e vira farinha branquinha?",
         fotoUrl: moinho,
         cards: [
           { id: "silo", emoji: "🏗️", titulo: "Silo", cor: "from-slate-500 to-zinc-700" },
           { id: "moinho", emoji: "🏭", titulo: "Moinho", cor: "from-amber-500 to-orange-700" },
           { id: "padaria", emoji: "🥖", titulo: "Padaria", cor: "from-rose-500 to-red-700" },
+
+          {
+            id: "extra-4",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "moinho",
         feedbackAcerto:
           "Perfeito! O MOINHO 🏭 é a fábrica que transforma o grão duro em farinha macia.",
-        feedbackErro:
-          "Pensa: fábrica que MÓI grão pra virar pó é o MOINHO 🏭.",
+        feedbackErro: "Pensa: fábrica que MÓI grão pra virar pó é o MOINHO 🏭.",
       },
       {
         id: "q3",
-        pergunta:
-          "Quem MISTURA a farinha com água e sal e ASSA o pãozinho quente?",
+        pergunta: "Quem MISTURA a farinha com água e sal e ASSA o pãozinho quente?",
         fotoUrl: padaria,
         cards: [
-          { id: "agricultor", emoji: "🌾", titulo: "Agricultor", cor: "from-yellow-500 to-amber-700" },
+          {
+            id: "agricultor",
+            emoji: "🌾",
+            titulo: "Agricultor",
+            cor: "from-yellow-500 to-amber-700",
+          },
           { id: "moleiro", emoji: "🏭", titulo: "Moleiro", cor: "from-amber-500 to-orange-700" },
           { id: "padeiro", emoji: "🥖", titulo: "Padeiro", cor: "from-rose-500 to-red-700" },
+
+          {
+            id: "extra-5",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "padeiro",
         feedbackAcerto:
           "Exato! O PADEIRO 🥖 é quem faz a massa e assa o pão fresquinho de cada manhã.",
-        feedbackErro:
-          "Repensa: quem trabalha no forno da PADARIA é o PADEIRO 🥖.",
+        feedbackErro: "Repensa: quem trabalha no forno da PADARIA é o PADEIRO 🥖.",
       },
     ],
     falaFinal:
@@ -280,8 +309,7 @@ export const aula03: AulaGeoV1 = {
         id: "s2-colheita",
         emoji: "🌾",
         rotulo: "Colheita dourada",
-        descricao:
-          "Quando o trigo fica dourado, a colheitadeira corta tudo em um dia só.",
+        descricao: "Quando o trigo fica dourado, a colheitadeira corta tudo em um dia só.",
       },
       {
         id: "s3-silo",
@@ -294,8 +322,7 @@ export const aula03: AulaGeoV1 = {
         id: "s4-moinho",
         emoji: "🏭",
         rotulo: "Moinho na cidade",
-        descricao:
-          "Máquinas enormes moem os grãos até virarem farinha branquinha. Sacos e sacos!",
+        descricao: "Máquinas enormes moem os grãos até virarem farinha branquinha. Sacos e sacos!",
       },
       {
         id: "s5-padaria",
@@ -371,8 +398,7 @@ export const aula03: AulaGeoV1 = {
           "Prepara a terra, planta as sementes e cuida da lavoura de trigo por meses. Quem é?",
         pecaCertaId: "agricultor",
         feedbackAcerto: "Boa! É o AGRICULTOR 🌾 — o começo de toda a rota.",
-        feedbackErro:
-          "Repara: quem planta e cuida da terra é o AGRICULTOR 🌾, no campo.",
+        feedbackErro: "Repara: quem planta e cuida da terra é o AGRICULTOR 🌾, no campo.",
       },
       {
         id: "r2",
@@ -381,58 +407,63 @@ export const aula03: AulaGeoV1 = {
         contexto:
           "Enche o baú do caminhão com trigo no silo e leva pra cidade, pro moinho. Quem é?",
         pecaCertaId: "caminhoneiro",
-        feedbackAcerto:
-          "Perfeito! É o CAMINHONEIRO 🚛 — a ponte entre silo e moinho.",
-        feedbackErro:
-          "Pensa: quem dirige o caminhão graneleiro é o CAMINHONEIRO 🚛.",
+        feedbackAcerto: "Perfeito! É o CAMINHONEIRO 🚛 — a ponte entre silo e moinho.",
+        feedbackErro: "Pensa: quem dirige o caminhão graneleiro é o CAMINHONEIRO 🚛.",
       },
       {
         id: "r3",
-        municipioA: { nome: "Uniforme branco e touca", emoji: "🥽", cor: "from-amber-500 to-orange-700" },
-        municipioB: { nome: "Máquinas do moinho", emoji: "⚙️", cor: "from-orange-400 to-amber-600" },
+        municipioA: {
+          nome: "Uniforme branco e touca",
+          emoji: "🥽",
+          cor: "from-amber-500 to-orange-700",
+        },
+        municipioB: {
+          nome: "Máquinas do moinho",
+          emoji: "⚙️",
+          cor: "from-orange-400 to-amber-600",
+        },
         contexto:
           "Trabalha na fábrica que MOÍ o trigo, controla as máquinas e ensaca farinha. Quem é?",
         pecaCertaId: "moleiro",
-        feedbackAcerto:
-          "Isso! É o MOLEIRO 🏭 — quem opera as máquinas do moinho.",
-        feedbackErro:
-          "Ops: quem trabalha dentro do moinho, ensacando farinha, é o MOLEIRO 🏭.",
+        feedbackAcerto: "Isso! É o MOLEIRO 🏭 — quem opera as máquinas do moinho.",
+        feedbackErro: "Ops: quem trabalha dentro do moinho, ensacando farinha, é o MOLEIRO 🏭.",
       },
       {
         id: "r4",
         municipioA: { nome: "Avental branco", emoji: "🥖", cor: "from-rose-500 to-red-700" },
         municipioB: { nome: "Forno quente", emoji: "🔥", cor: "from-red-400 to-rose-600" },
-        contexto:
-          "Acorda às 4h da manhã, mistura a massa e assa o pão pra vender às 6h. Quem é?",
+        contexto: "Acorda às 4h da manhã, mistura a massa e assa o pão pra vender às 6h. Quem é?",
         pecaCertaId: "padeiro",
-        feedbackAcerto:
-          "Perfeito! É o PADEIRO 🥖 — quem enche o bairro de cheiro de pão fresco.",
-        feedbackErro:
-          "Repensa: quem faz o pão na padaria do bairro é o PADEIRO 🥖.",
+        feedbackAcerto: "Perfeito! É o PADEIRO 🥖 — quem enche o bairro de cheiro de pão fresco.",
+        feedbackErro: "Repensa: quem faz o pão na padaria do bairro é o PADEIRO 🥖.",
       },
       {
         id: "r5",
-        municipioA: { nome: "Colheitadeira gigante", emoji: "🚜", cor: "from-yellow-500 to-amber-700" },
+        municipioA: {
+          nome: "Colheitadeira gigante",
+          emoji: "🚜",
+          cor: "from-yellow-500 to-amber-700",
+        },
         municipioB: { nome: "Trigo dourado", emoji: "🌾", cor: "from-lime-400 to-yellow-600" },
         contexto:
           "Sobe na colheitadeira quando o trigo está pronto e colhe hectares por dia. Quem é?",
         pecaCertaId: "agricultor",
-        feedbackAcerto:
-          "Combo! O AGRICULTOR 🌾 também dirige a colheitadeira na hora da colheita.",
-        feedbackErro:
-          "Pensa: quem opera a colheitadeira no campo é o AGRICULTOR 🌾.",
+        feedbackAcerto: "Combo! O AGRICULTOR 🌾 também dirige a colheitadeira na hora da colheita.",
+        feedbackErro: "Pensa: quem opera a colheitadeira no campo é o AGRICULTOR 🌾.",
       },
       {
         id: "r6",
-        municipioA: { nome: "Balança de ensacar", emoji: "⚖️", cor: "from-amber-500 to-orange-700" },
+        municipioA: {
+          nome: "Balança de ensacar",
+          emoji: "⚖️",
+          cor: "from-amber-500 to-orange-700",
+        },
         municipioB: { nome: "Sacos de farinha", emoji: "🧂", cor: "from-orange-400 to-amber-600" },
-        contexto:
-          "Confere o peso de cada saco de farinha antes de sair do moinho. Quem é?",
+        contexto: "Confere o peso de cada saco de farinha antes de sair do moinho. Quem é?",
         pecaCertaId: "moleiro",
         feedbackAcerto:
           "Perfeito! O MOLEIRO 🏭 garante que cada saco tenha o peso certo antes de virar pão.",
-        feedbackErro:
-          "Atenção: quem controla a produção dentro do moinho é o MOLEIRO 🏭.",
+        feedbackErro: "Atenção: quem controla a produção dentro do moinho é o MOLEIRO 🏭.",
       },
     ],
     falaFinal:
@@ -478,15 +509,18 @@ export const aula03: AulaGeoV1 = {
     perguntas: [
       {
         id: "av1",
-        pergunta:
-          "Por que o trigo do campo NÃO vai direto pra padaria virar pão?",
+        pergunta: "Por que o trigo do campo NÃO vai direto pra padaria virar pão?",
         opcoes: [
           { id: "a", texto: "Porque a padaria é longe demais do campo." },
           {
             id: "b",
-            texto: "Porque o grão é duro. Precisa passar no MOINHO pra ser moído e virar farinha antes.",
+            texto:
+              "Porque o grão é duro. Precisa passar no MOINHO pra ser moído e virar farinha antes.",
             correta: true,
           },
+
+          { id: "extra-6", texto: "Outra possibilidade", correta: false },
+          { id: "extra-7", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto:
           "Exato! Grão de trigo cru é durinho — só depois do moinho vira farinha e o padeiro pode fazer a massa.",
@@ -504,6 +538,9 @@ export const aula03: AulaGeoV1 = {
             correta: true,
           },
           { id: "b", texto: "Nada muda, porque a padaria fabrica a própria farinha." },
+
+          { id: "extra-8", texto: "Outra possibilidade", correta: false },
+          { id: "extra-9", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto:
           "Isso! Padaria não fabrica farinha — só assa. Sem campo, sem trigo, sem pão. Tudo começa na lavoura.",
@@ -512,15 +549,21 @@ export const aula03: AulaGeoV1 = {
       },
       {
         id: "av3",
-        pergunta:
-          "Qual frase explica MELHOR a rota do pão?",
+        pergunta: "Qual frase explica MELHOR a rota do pão?",
         opcoes: [
-          { id: "a", texto: "O pão nasce pronto na padaria, sem precisar de campo nem de fábrica." },
+          {
+            id: "a",
+            texto: "O pão nasce pronto na padaria, sem precisar de campo nem de fábrica.",
+          },
           {
             id: "b",
-            texto: "O pão é uma parceria: CAMPO produz o trigo, INDÚSTRIA vira farinha, PADARIA assa e vende.",
+            texto:
+              "O pão é uma parceria: CAMPO produz o trigo, INDÚSTRIA vira farinha, PADARIA assa e vende.",
             correta: true,
           },
+
+          { id: "extra-10", texto: "Outra possibilidade", correta: false },
+          { id: "extra-11", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto:
           "Perfeito! Toda mordida de pão passou por três lugares e muitas mãos. É parceria pura.",

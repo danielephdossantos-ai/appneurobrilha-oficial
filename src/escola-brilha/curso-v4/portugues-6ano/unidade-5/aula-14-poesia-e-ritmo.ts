@@ -8,7 +8,7 @@ export const aula14: AulaPortuguesV4 = {
   slug: "aula-14-poesia-e-ritmo",
   titulo: "Poesia e Ritmo",
   iconeTrilha: "✨",
-  bncc: ["EF67LP27", "EF67LP28"],
+  bncc: ["EF67LP31"],
   duracaoMin: 25,
   momento01_motivacao: {
     titulo: "Sinfonia de Dados: A Linguagem Poética",

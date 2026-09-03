@@ -8,7 +8,7 @@ export const aula11: AulaPortuguesV4 = {
   slug: "aula-11-propaganda-persuasao",
   titulo: "Propaganda e Persuasão",
   iconeTrilha: "📢",
-  bncc: ["EF67LP01", "EF67LP02", "EF67LP13"],
+  bncc: ["EF67LP13"],
   duracaoMin: 25,
   momento01_motivacao: {
     titulo: "Sinais de Influência: O Poder do Convencimento",

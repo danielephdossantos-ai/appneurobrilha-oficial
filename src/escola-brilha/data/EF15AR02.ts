@@ -35,8 +35,7 @@ const aula: Aula = {
       "Brilha voltou ao museu e a artista Ana mostrou uma coisa incrível: TODO desenho é feito de pedacinhos pequenos escondidos — pontos, linhas, formas e cores!",
     problema:
       "'Preciso de um detetive esperto pra encontrar esses pedacinhos em cada obra', disse Ana. 'Sem eles, nada existiria!'",
-    convite:
-      "Bora com o Brilha descobrir os SEGREDOS que se escondem em cada desenho?",
+    convite: "Bora com o Brilha descobrir os SEGREDOS que se escondem em cada desenho?",
   },
 
   conhecimentosPrevios: [
@@ -90,6 +89,7 @@ const aula: Aula = {
         { nome: "circulo", imagemUrl: circuloImg },
         { nome: "quadrado", imagemUrl: quadradoImg },
         { nome: "triangulo", imagemUrl: trianguloImg },
+        { nome: "estrela", imagemUrl: estrelaImg },
       ],
       respostaCerta: "circulo",
     },
@@ -120,35 +120,35 @@ const aula: Aula = {
       perguntas: [
         {
           pergunta: "Uma marquinha bem pequena é:",
-          opcoes: ["🔴 PONTO", "➰ LINHA", "🔵 FORMA"],
+          opcoes: ["🔴 PONTO", "➰ LINHA", "🔵 FORMA", "Outra opção"],
           correta: 0,
           explicacao: "Ponto = menor elemento.",
           visual: { tipo: "itens", imagemUrl: pontoImg, quantidade: 1, rotulo: "🔴" },
         },
         {
           pergunta: "Um risco comprido no papel é:",
-          opcoes: ["➰ LINHA", "🔴 PONTO", "🌈 COR"],
+          opcoes: ["➰ LINHA", "🔴 PONTO", "🌈 COR", "Outra opção"],
           correta: 0,
           explicacao: "Linha = vários pontos em fila.",
           visual: { tipo: "itens", imagemUrl: linhaImg, quantidade: 1, rotulo: "➰" },
         },
         {
           pergunta: "Uma figura redonda e fechada é:",
-          opcoes: ["🔵 CÍRCULO", "🔺 TRIÂNGULO", "🟦 QUADRADO"],
+          opcoes: ["🔵 CÍRCULO", "🔺 TRIÂNGULO", "🟦 QUADRADO", "Outra opção"],
           correta: 0,
           explicacao: "Círculo = redondo.",
           visual: { tipo: "itens", imagemUrl: circuloImg, quantidade: 1, rotulo: "🔵" },
         },
         {
           pergunta: "Uma forma com 3 pontas é:",
-          opcoes: ["🔺 TRIÂNGULO", "🔵 CÍRCULO", "🟦 QUADRADO"],
+          opcoes: ["🔺 TRIÂNGULO", "🔵 CÍRCULO", "🟦 QUADRADO", "Outra opção"],
           correta: 0,
           explicacao: "Triângulo = 3 lados.",
           visual: { tipo: "itens", imagemUrl: trianguloImg, quantidade: 1, rotulo: "🔺" },
         },
         {
           pergunta: "Vermelho, azul e amarelo são:",
-          opcoes: ["🌈 CORES", "🔴 PONTOS", "🟦 FORMAS"],
+          opcoes: ["🌈 CORES", "🔴 PONTOS", "🟦 FORMAS", "Outra opção"],
           correta: 0,
           explicacao: "Cores primárias.",
           visual: { tipo: "itens", imagemUrl: arcoIrisImg, quantidade: 1, rotulo: "🌈" },
@@ -171,35 +171,35 @@ const aula: Aula = {
   quiz: [
     {
       pergunta: "Qual é o menor elemento das artes visuais?",
-      opcoes: ["Ponto", "Escultura", "Museu"],
+      opcoes: ["Ponto", "Escultura", "Museu", "Outra opção"],
       correta: 0,
       explicacao: "Ponto = a menor marquinha.",
       visual: { tipo: "itens", imagemUrl: pontoImg, quantidade: 1, rotulo: "🔴" },
     },
     {
       pergunta: "Uma LINHA é:",
-      opcoes: ["Vários pontos em fila", "Uma pedra dura", "Uma cor forte"],
+      opcoes: ["Vários pontos em fila", "Uma pedra dura", "Uma cor forte", "Outra opção"],
       correta: 0,
       explicacao: "Linha = pontos juntos.",
       visual: { tipo: "itens", imagemUrl: linhaImg, quantidade: 1, rotulo: "➰" },
     },
     {
       pergunta: "Um CÍRCULO é uma forma:",
-      opcoes: ["Redonda e fechada", "Com 3 pontas", "Com 4 lados iguais"],
+      opcoes: ["Redonda e fechada", "Com 3 pontas", "Com 4 lados iguais", "Outra opção"],
       correta: 0,
       explicacao: "Círculo = redondo.",
       visual: { tipo: "itens", imagemUrl: circuloImg, quantidade: 1, rotulo: "🔵" },
     },
     {
       pergunta: "As cores PRIMÁRIAS são:",
-      opcoes: ["Vermelho, azul e amarelo", "Preto e cinza", "Só rosa"],
+      opcoes: ["Vermelho, azul e amarelo", "Preto e cinza", "Só rosa", "Outra opção"],
       correta: 0,
       explicacao: "Vermelho, azul e amarelo = primárias.",
       visual: { tipo: "itens", imagemUrl: paletaImg, quantidade: 1, rotulo: "🎨" },
     },
     {
       pergunta: "O QUADRADO tem quantos lados?",
-      opcoes: ["4 lados iguais", "3 lados", "É redondo"],
+      opcoes: ["4 lados iguais", "3 lados", "É redondo", "Outra opção"],
       correta: 0,
       explicacao: "Quadrado tem 4 lados iguais.",
       visual: { tipo: "itens", imagemUrl: quadradoImg, quantidade: 1, rotulo: "🟦" },
@@ -226,6 +226,7 @@ const aula: Aula = {
         { nome: "PONTO", imagemUrl: pontoImg, rotulo: "🔴 PONTO" },
         { nome: "LINHA", imagemUrl: linhaImg, rotulo: "➰ LINHA" },
         { nome: "CIRCULO", imagemUrl: circuloImg, rotulo: "🔵 CÍRCULO" },
+        { nome: "OUTRA-OPCAO", imagemUrl: estrelaImg, rotulo: "🔎 OUTRA OPÇÃO" },
       ],
       correta: 0,
       acerto: "🔴 Isso! O ponto é a menor marquinha.",
@@ -242,6 +243,7 @@ const aula: Aula = {
         { nome: "LINHA", imagemUrl: linhaImg, rotulo: "➰ LINHA" },
         { nome: "QUADRADO", imagemUrl: quadradoImg, rotulo: "🟦 QUADRADO" },
         { nome: "PONTO", imagemUrl: pontoImg, rotulo: "🔴 PONTO" },
+        { nome: "OUTRA-OPCAO", imagemUrl: estrelaImg, rotulo: "🔎 OUTRA OPÇÃO" },
       ],
       correta: 0,
       acerto: "➰ Isso! A linha é comprida, feita de vários pontos.",
@@ -300,8 +302,7 @@ const aula: Aula = {
           nome: "Quadrado",
           imagemUrl: quadradoImg,
           rotulo: "🟦 QUADRADO",
-          descoberta:
-            "Este é o QUADRADO — tem 4 lados iguais e 4 cantinhos. Parece uma janela.",
+          descoberta: "Este é o QUADRADO — tem 4 lados iguais e 4 cantinhos. Parece uma janela.",
         },
         {
           nome: "Triângulo",
@@ -345,21 +346,21 @@ const aula: Aula = {
     facil: [
       {
         pergunta: "PONTO é:",
-        opcoes: ["Uma marquinha pequena", "Um risco comprido", "Uma cor forte"],
+        opcoes: ["Uma marquinha pequena", "Um risco comprido", "Uma cor forte", "Outra opção"],
         correta: 0,
         explicacao: "Ponto = menor marca.",
         visual: { tipo: "itens", imagemUrl: pontoImg, quantidade: 1, rotulo: "🔴" },
       },
       {
         pergunta: "CÍRCULO é uma forma:",
-        opcoes: ["Redonda", "De 3 pontas", "De 4 lados"],
+        opcoes: ["Redonda", "De 3 pontas", "De 4 lados", "Outra opção"],
         correta: 0,
         explicacao: "Círculo = redondo.",
         visual: { tipo: "itens", imagemUrl: circuloImg, quantidade: 1, rotulo: "🔵" },
       },
       {
         pergunta: "As COREs no arco-íris são:",
-        opcoes: ["Muitas e coloridas", "Só preto", "Só branco"],
+        opcoes: ["Muitas e coloridas", "Só preto", "Só branco", "Outra opção"],
         correta: 0,
         explicacao: "Arco-íris tem várias cores.",
         visual: { tipo: "itens", imagemUrl: arcoIrisImg, quantidade: 1, rotulo: "🌈" },
@@ -368,21 +369,21 @@ const aula: Aula = {
     medio: [
       {
         pergunta: "TRIÂNGULO tem quantos lados?",
-        opcoes: ["3", "4", "Nenhum"],
+        opcoes: ["3", "4", "Nenhum", "Outra opção"],
         correta: 0,
         explicacao: "Triângulo = 3 lados.",
         visual: { tipo: "itens", imagemUrl: trianguloImg, quantidade: 1, rotulo: "🔺" },
       },
       {
         pergunta: "QUADRADO tem quantos lados iguais?",
-        opcoes: ["4", "3", "1"],
+        opcoes: ["4", "3", "1", "Outra opção"],
         correta: 0,
         explicacao: "Quadrado = 4 lados iguais.",
         visual: { tipo: "itens", imagemUrl: quadradoImg, quantidade: 1, rotulo: "🟦" },
       },
       {
         pergunta: "LINHA é feita de:",
-        opcoes: ["Vários pontos em fila", "Só cor", "Só forma"],
+        opcoes: ["Vários pontos em fila", "Só cor", "Só forma", "Outra opção"],
         correta: 0,
         explicacao: "Linha = pontos juntos.",
         visual: { tipo: "itens", imagemUrl: linhaImg, quantidade: 1, rotulo: "➰" },
@@ -391,14 +392,14 @@ const aula: Aula = {
     dificil: [
       {
         pergunta: "Quando a LINHA se fecha, ela vira:",
-        opcoes: ["Uma forma", "Um ponto", "Uma cor"],
+        opcoes: ["Uma forma", "Um ponto", "Uma cor", "Outra opção"],
         correta: 0,
         explicacao: "Linha fechada = forma.",
         visual: { tipo: "itens", imagemUrl: circuloImg, quantidade: 1, rotulo: "🔵" },
       },
       {
         pergunta: "Cores PRIMÁRIAS são:",
-        opcoes: ["Vermelho, azul e amarelo", "Preto e branco", "Só cinza"],
+        opcoes: ["Vermelho, azul e amarelo", "Preto e branco", "Só cinza", "Outra opção"],
         correta: 0,
         explicacao: "Vermelho, azul, amarelo.",
         visual: { tipo: "itens", imagemUrl: paletaImg, quantidade: 1, rotulo: "🎨" },
@@ -409,6 +410,7 @@ const aula: Aula = {
           "Ponto, linha, forma ou cor",
           "Só música",
           "Só palavras",
+          "Uma resposta sem relação com a arte",
         ],
         correta: 0,
         explicacao: "Os 4 elementos visuais são a base.",
@@ -420,8 +422,7 @@ const aula: Aula = {
   minijogo: {
     tipo: "esteira",
     titulo: "Fábrica dos Elementos",
-    objetivo:
-      "Os elementos passam na esteira. Toque na bandeja certa antes que caiam!",
+    objetivo: "Os elementos passam na esteira. Toque na bandeja certa antes que caiam!",
     tempoSegundos: 90,
     minAcertos: 10,
     categorias: [

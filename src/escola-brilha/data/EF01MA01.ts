@@ -116,9 +116,9 @@ const aula: Aula = {
 
   desafio: {
     enunciado:
-      "Desafio Brilha: arraste cada item para o lugar correto — Quantidade, Ordem ou Identificação. Itens: 8 bananas · Casa 72 · 2º lugar · Camisa 10 · 5 gatos · Senha 43.",
+      "Desafio Brilha: arraste cada item para o lugar correto — Quantidade, Ordem ou Identificação. Itens: 8 bananas · Casa 72 · 2º lugar · Camisa 10 · 5 gatos · Ônibus 43.",
     resposta:
-      "Quantidade: 8 bananas e 5 gatos. Ordem: 2º lugar. Identificação: Casa 72, Camisa 10 e Senha 43.",
+      "Quantidade: 8 bananas e 5 gatos. Ordem: 2º lugar. Identificação: Casa 72, Camisa 10 e Ônibus 43.",
   },
 
   revisao: {
@@ -184,7 +184,7 @@ const aula: Aula = {
         { item: "2º lugar", alvo: "Ordem" },
         { item: "Casa 72", alvo: "Identificação" },
         { item: "Camisa 10", alvo: "Identificação" },
-        { item: "Senha 43", alvo: "Identificação" },
+        { item: "Ônibus 43", alvo: "Identificação" },
       ],
     },
     {
@@ -255,10 +255,10 @@ const aula: Aula = {
         explicacao: "O 8 diz QUANTAS bananas existem.",
       },
       {
-        pergunta: "Senha 43 na padaria — o número indica:",
+        pergunta: "Ônibus 43 — o número indica:",
         opcoes: ["Quantidade", "Ordem", "Identificação"],
         correta: 2,
-        explicacao: "A senha só identifica a sua vez.",
+        explicacao: "O 43 identifica qual é a linha do ônibus; não informa quantos passageiros há.",
       },
       {
         pergunta: "Maria ficou em 2º lugar — o número indica:",

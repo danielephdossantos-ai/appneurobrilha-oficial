@@ -29,7 +29,7 @@ export const aula01: AulaPortuguesV4 = {
   slug: "aula-01-noticia-quem-o-que",
   titulo: "Manchete Quente!",
   iconeTrilha: "📰",
-  bncc: ["EF03LP18", "EF03LP19", "EF35LP15"],
+  bncc: ["EF03LP18", "EF35LP16", "EF15LP01", "EF15LP03", "EF15LP04"],
   duracaoMin: 20,
 
   momento01_motivacao: {

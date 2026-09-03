@@ -76,7 +76,7 @@ export const aula02: AulaPortuguesV4 = {
       {
         tipo: "fraseComPonto",
         frases: [
-          { texto: "O menino chuta a bola.", explicacao: "Quem faz vem primeiro, depois a ação, depois o quê." },
+          { texto: "O menino chuta a bola.", explicacao: "Uma ordem comum é: quem faz, ação e complemento." },
           { texto: "O cachorro late alto.", explicacao: "Sujeito + ação + como." },
           { texto: "A menina rega a flor.", explicacao: "Cada palavra no lugar certo forma sentido." },
         ],
@@ -139,7 +139,7 @@ export const aula02: AulaPortuguesV4 = {
         opcoes: ["bola a chuta menino o", "O menino chuta a bola.", "chuta bola o menino a"],
         correta: 1,
         feedbackAcerto: "🎉 Isso! Ela segue a ordem que faz sentido.",
-        feedbackErro: "As outras estão embaralhadas. A ordem certa começa por quem faz a ação: 'O menino'.",
+        feedbackErro: "Neste exercício, use a ordem direta: quem faz, ação e complemento.",
       },
     ],
   },
@@ -155,7 +155,7 @@ export const aula02: AulaPortuguesV4 = {
       ],
       ordemCerta: ["p1", "p2", "p3"],
       feedbackAcerto: "🎉 Perfeito! 'A menina rega a flor.' faz todo sentido!",
-      feedbackErro: "Pense: primeiro quem faz (a menina), depois a ação (rega), depois o quê (a flor).",
+      feedbackErro: "Use a ordem direta deste exercício: quem faz, ação e complemento.",
     },
   },
 
@@ -174,7 +174,7 @@ export const aula02: AulaPortuguesV4 = {
         ],
         ordemCerta: ["c1", "c2", "c3"],
         feedbackAcerto: "🎉 Muito bem! 'O cachorro late alto.' está certinha!",
-        feedbackErro: "Pense: quem faz a ação vem primeiro. Depois a ação. Depois como ela é feita.",
+        feedbackErro: "Use a ordem direta deste exercício: quem faz, ação e como ela acontece.",
       },
     },
   },
@@ -215,7 +215,7 @@ export const aula02: AulaPortuguesV4 = {
   // ------------------------------------------------------------
   momento_escrita: {
     titulo: "Escrever na ordem certa",
-    instrucao: "Primeiro quem faz, depois o que faz. Escreva frases na ordem certa.",
+    instrucao: "Para começar, use uma ordem comum: quem faz, ação e complemento.",
     blocos: [
       {
         tipo: "tracadoLetra",
@@ -235,7 +235,7 @@ export const aula02: AulaPortuguesV4 = {
         tipo: "escritaReal",
         formato: "lista",
         titulo: "Frases na ordem",
-        comando: "Escreva 3 frases começando por quem faz a ação.",
+        comando: "Escreva 3 frases usando a ordem direta: quem faz, ação e complemento.",
         linhas: 3,
         modelo: ["Léo pega a bola.", "O cachorro corre.", "Rafa empurra o carrinho."],
         checklist: ["Comecei com letra maiúscula?", "Deixei espaço entre as palavras?", "Coloquei o ponto no final?"],
@@ -247,7 +247,7 @@ export const aula02: AulaPortuguesV4 = {
     pontos: [
       "As palavras precisam estar na ORDEM certa para formar sentido.",
       "Trocar a ordem pode mudar completamente o significado da frase.",
-      "Geralmente: primeiro quem faz, depois a ação, depois o quê.",
+      "Uma ordem comum para começar é: quem faz, ação e complemento.",
       "Frases embaralhadas não têm sentido — precisamos arrumá-las.",
     ],
     miniDesafio: {
@@ -255,7 +255,7 @@ export const aula02: AulaPortuguesV4 = {
       opcoes: ["flor a menina rega", "A menina rega a flor.", "rega flor menina a"],
       correta: 1,
       feedbackAcerto: "🎉 Isso! A ordem certa forma sentido completo.",
-      feedbackErro: "Pense: quem faz vem primeiro — 'A menina'.",
+      feedbackErro: "Neste exercício, use a ordem direta: 'A menina rega a flor'.",
     },
   },
 
@@ -283,7 +283,7 @@ export const aula02: AulaPortuguesV4 = {
         ],
         correta: 1,
         feedbackAcerto: "🎉 Isso!",
-        feedbackErro: "A frase certa começa por QUEM faz a ação: o menino. A bola não chuta ninguém.",
+        feedbackErro: "Pelo sentido da cena, o menino pratica a ação e a bola recebe a ação.",
       },
       {
         pergunta: "3/5 — O que Léo pegou na história?",
@@ -300,11 +300,11 @@ export const aula02: AulaPortuguesV4 = {
         feedbackErro: "No texto: 'O carrinho azul corre bem rápido.'",
       },
       {
-        pergunta: "5/5 — Geralmente, o que vem primeiro numa frase?",
+        pergunta: "5/5 — Na ordem direta estudada nesta aula, o que aparece primeiro?",
         opcoes: ["A ação", "Quem faz a ação", "O ponto final", "A última palavra"],
         correta: 1,
-        feedbackAcerto: "🎉 Isso! Primeiro vem quem faz.",
-        feedbackErro: "Em 'O menino chuta a bola', primeiro vem QUEM (o menino) e depois a ação (chuta).",
+        feedbackAcerto: "🎉 Isso! Na ordem direta, primeiro vem quem faz.",
+        feedbackErro: "Na ordem direta usada aqui, primeiro aparece quem faz. Outras ordens podem existir em outros textos.",
       },
     ],
   },

@@ -4,7 +4,7 @@ export const aula03_zeroNoQuociente: AulaV4 = {
   slug: "u4-03-zero-no-quociente",
   titulo: "Zero no quociente",
   iconeTrilha: "0️⃣",
-  bncc: ["EF05MA07"],
+  bncc: ["EF05MA08"],
   duracaoMin: 20,
   metodologias: ["skemp"],
 

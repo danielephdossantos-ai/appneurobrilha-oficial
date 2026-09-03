@@ -14,12 +14,13 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-passaporte-brasil",
   titulo: "Passaporte Brasil: Toda a Jornada",
   iconeTrilha: "📘",
-  bncc: ["EF04GE01", "EF04GE02", "EF04GE04", "EF04GE05", "EF04GE06", "EF04GE07"],
+  bncc: [],
   duracaoMin: 22,
 
   cena01_motivacao: {
     tipo: "mesaCartografo",
-    instrucao: "Toque no passaporte. Aurora vai carimbar cada continente do Brasil que você já explorou.",
+    instrucao:
+      "Toque no passaporte. Aurora vai carimbar cada continente do Brasil que você já explorou.",
     mapaUrl: passaporte,
     imagemDestaqueUrl: passaporte,
     aurora:
@@ -46,6 +47,19 @@ export const aula01: AulaGeoV1 = {
         emoji: "🏛️",
         cor: "from-amber-400 to-yellow-600",
       },
+
+      {
+        id: "extra-1",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
+      {
+        id: "extra-2",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
     ],
     respostaCerta: "todos",
     feedbackAcerto:
@@ -65,8 +79,7 @@ export const aula01: AulaGeoV1 = {
         capa: "1. Regiões (U1)",
         emoji: "🗺️",
         cor: "from-blue-500 to-indigo-700",
-        conteudo:
-          "O Brasil é dividido em 5 REGIÕES: Norte, Nordeste, Centro-Oeste, Sudeste e Sul.",
+        conteudo: "O Brasil é dividido em 5 REGIÕES: Norte, Nordeste, Centro-Oeste, Sudeste e Sul.",
         exemplo: "IBGE = quem organiza essa divisão.",
         fotoUrl: mapaEstados,
       },
@@ -75,8 +88,7 @@ export const aula01: AulaGeoV1 = {
         capa: "2. População (U2)",
         emoji: "👥",
         cor: "from-pink-500 to-rose-700",
-        conteudo:
-          "Nossa gente veio de MUITOS lugares: indígenas, africanos, europeus, asiáticos.",
+        conteudo: "Nossa gente veio de MUITOS lugares: indígenas, africanos, europeus, asiáticos.",
         exemplo: "Migração interna = mudar dentro do Brasil.",
         fotoUrl: diversidade,
       },
@@ -85,8 +97,7 @@ export const aula01: AulaGeoV1 = {
         capa: "3. Relevo (U3)",
         emoji: "⛰️",
         cor: "from-orange-500 to-red-700",
-        conteudo:
-          "PLANALTO (alto plano), PLANÍCIE (baixo plano), DEPRESSÃO (rebaixado).",
+        conteudo: "PLANALTO (alto plano), PLANÍCIE (baixo plano), DEPRESSÃO (rebaixado).",
         exemplo: "Brasil = país de planaltos = país de hidrelétricas.",
         fotoUrl: relevo,
       },
@@ -95,8 +106,7 @@ export const aula01: AulaGeoV1 = {
         capa: "4. Bioma (U4)",
         emoji: "🌱",
         cor: "from-emerald-500 to-green-700",
-        conteudo:
-          "6 biomas: Amazônia, Caatinga, Cerrado, Mata Atlântica, Pampa e Pantanal.",
+        conteudo: "6 biomas: Amazônia, Caatinga, Cerrado, Mata Atlântica, Pampa e Pantanal.",
         exemplo: "Caatinga só existe no Brasil.",
         fotoUrl: caatinga,
       },
@@ -105,8 +115,7 @@ export const aula01: AulaGeoV1 = {
         capa: "5. Setores (U5)",
         emoji: "🏭",
         cor: "from-slate-500 to-gray-700",
-        conteudo:
-          "3 setores: PRIMÁRIO (natureza), SECUNDÁRIO (fábrica), TERCIÁRIO (serviços).",
+        conteudo: "3 setores: PRIMÁRIO (natureza), SECUNDÁRIO (fábrica), TERCIÁRIO (serviços).",
         exemplo: "70% dos brasileiros trabalham em SERVIÇOS.",
         fotoUrl: primario,
       },
@@ -137,8 +146,7 @@ export const aula01: AulaGeoV1 = {
         emoji: "🌳",
         cor: "from-emerald-600 to-green-800",
         titulo: "NORTE — Floresta Amazônica",
-        texto:
-          "Bioma Amazônia, rio Amazonas, povos indígenas, extrativismo. Pulmão do planeta.",
+        texto: "Bioma Amazônia, rio Amazonas, povos indígenas, extrativismo. Pulmão do planeta.",
       },
       {
         id: "nordeste",
@@ -147,8 +155,7 @@ export const aula01: AulaGeoV1 = {
         emoji: "🏖️",
         cor: "from-amber-400 to-yellow-600",
         titulo: "NORDESTE — Praia + Sertão",
-        texto:
-          "Litoral com turismo. Interior com caatinga. Herança africana forte na cultura.",
+        texto: "Litoral com turismo. Interior com caatinga. Herança africana forte na cultura.",
       },
       {
         id: "centro",
@@ -157,8 +164,7 @@ export const aula01: AulaGeoV1 = {
         emoji: "🌾",
         cor: "from-yellow-500 to-amber-700",
         titulo: "CENTRO-OESTE — Cerrado + Agro",
-        texto:
-          "Bioma cerrado, agricultura de soja e pecuária. Brasília, a capital do país.",
+        texto: "Bioma cerrado, agricultura de soja e pecuária. Brasília, a capital do país.",
       },
       {
         id: "sudeste",
@@ -167,8 +173,7 @@ export const aula01: AulaGeoV1 = {
         emoji: "🏙️",
         cor: "from-red-500 to-rose-700",
         titulo: "SUDESTE — Metrópoles + Indústria",
-        texto:
-          "Região mais populosa e industrializada. SP, RJ, MG e ES.",
+        texto: "Região mais populosa e industrializada. SP, RJ, MG e ES.",
       },
       {
         id: "sul",
@@ -177,8 +182,7 @@ export const aula01: AulaGeoV1 = {
         emoji: "🍇",
         cor: "from-sky-500 to-blue-700",
         titulo: "SUL — Serra + Pampa",
-        texto:
-          "Clima mais frio, imigração europeia, vinhos e Oktoberfest.",
+        texto: "Clima mais frio, imigração europeia, vinhos e Oktoberfest.",
       },
     ],
     falaFinal: "5 regiões, 5 carimbos. Passaporte completo.",
@@ -196,6 +200,13 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🌳", titulo: "Amazônia", cor: "from-emerald-600 to-green-800" },
           { id: "b", emoji: "🌵", titulo: "Caatinga", cor: "from-amber-500 to-orange-700" },
           { id: "c", emoji: "🐎", titulo: "Pampa", cor: "from-teal-500 to-emerald-700" },
+
+          {
+            id: "extra-3",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "a",
         feedbackAcerto: "Isso! Norte = AMAZÔNIA.",
@@ -208,6 +219,13 @@ export const aula01: AulaGeoV1 = {
           { id: "p", emoji: "🌾", titulo: "Primário", cor: "from-emerald-500 to-green-700" },
           { id: "s", emoji: "🏭", titulo: "Secundário", cor: "from-slate-500 to-gray-700" },
           { id: "t", emoji: "🏥", titulo: "Terciário", cor: "from-sky-500 to-blue-700" },
+
+          {
+            id: "extra-4",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "p",
         feedbackAcerto: "Perfeito! Agricultura = PRIMÁRIO.",
@@ -220,6 +238,13 @@ export const aula01: AulaGeoV1 = {
           { id: "t", emoji: "🏖️", titulo: "Turismo", cor: "from-sky-500 to-blue-700" },
           { id: "m", emoji: "🚚", titulo: "Migração interna", cor: "from-amber-500 to-orange-700" },
           { id: "i", emoji: "✈️", titulo: "Imigração", cor: "from-emerald-500 to-green-700" },
+
+          {
+            id: "extra-5",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "m",
         feedbackAcerto: "Boa! MIGRAÇÃO INTERNA.",
@@ -231,8 +256,7 @@ export const aula01: AulaGeoV1 = {
 
   cena06_personagensLugar: {
     tipo: "mapaBrasilInterativo",
-    aurora:
-      "DESAFIO FINAL! Acenda TODOS os 27 estados do Brasil. Você já conhece cada um.",
+    aurora: "DESAFIO FINAL! Acenda TODOS os 27 estados do Brasil. Você já conhece cada um.",
     instrucao: "Toque em cada estado — as 5 cores mostram as regiões",
     missao: {
       tipo: "grupos",
@@ -357,8 +381,7 @@ export const aula01: AulaGeoV1 = {
       },
       {
         id: "p4",
-        texto:
-          "Proteger o Brasil é dever de TODOS. Cada cidadão CUIDANDO do seu pedaço.",
+        texto: "Proteger o Brasil é dever de TODOS. Cada cidadão CUIDANDO do seu pedaço.",
         chaves: ["proteger", "todos", "cuidando"],
       },
     ],
@@ -381,7 +404,11 @@ export const aula01: AulaGeoV1 = {
     rodadas: [
       {
         id: "r1",
-        municipioA: { nome: "Rio Amazonas + onça", emoji: "🌊", cor: "from-emerald-600 to-green-800" },
+        municipioA: {
+          nome: "Rio Amazonas + onça",
+          emoji: "🌊",
+          cor: "from-emerald-600 to-green-800",
+        },
         municipioB: { nome: "Maior floresta", emoji: "🌳", cor: "from-green-500 to-emerald-700" },
         contexto: "Rio Amazonas, onça-pintada e floresta imensa. Qual região?",
         pecaCertaId: "norte",
@@ -390,8 +417,16 @@ export const aula01: AulaGeoV1 = {
       },
       {
         id: "r2",
-        municipioA: { nome: "Mandacaru + sertão", emoji: "🌵", cor: "from-amber-500 to-orange-700" },
-        municipioB: { nome: "Semiárido brasileiro", emoji: "☀️", cor: "from-yellow-500 to-orange-700" },
+        municipioA: {
+          nome: "Mandacaru + sertão",
+          emoji: "🌵",
+          cor: "from-amber-500 to-orange-700",
+        },
+        municipioB: {
+          nome: "Semiárido brasileiro",
+          emoji: "☀️",
+          cor: "from-yellow-500 to-orange-700",
+        },
         contexto: "Mandacaru, sertão e forró vêm de qual região?",
         pecaCertaId: "nordeste",
         feedbackAcerto: "Perfeito! NORDESTE = Caatinga + cultura forte.",
@@ -400,7 +435,11 @@ export const aula01: AulaGeoV1 = {
       {
         id: "r3",
         municipioA: { nome: "SP + fábricas", emoji: "🏭", cor: "from-red-500 to-rose-700" },
-        municipioB: { nome: "Maior indústria do país", emoji: "🏙️", cor: "from-rose-500 to-red-700" },
+        municipioB: {
+          nome: "Maior indústria do país",
+          emoji: "🏙️",
+          cor: "from-rose-500 to-red-700",
+        },
         contexto: "SP, RJ, MG concentram indústria. Qual região?",
         pecaCertaId: "sudeste",
         feedbackAcerto: "Boa! SUDESTE = indústria + metrópole.",
@@ -408,8 +447,16 @@ export const aula01: AulaGeoV1 = {
       },
       {
         id: "r4",
-        municipioA: { nome: "Uva + Oktoberfest", emoji: "🍇", cor: "from-purple-500 to-fuchsia-700" },
-        municipioB: { nome: "Serra + imigração alemã/italiana", emoji: "🏔️", cor: "from-sky-500 to-blue-700" },
+        municipioA: {
+          nome: "Uva + Oktoberfest",
+          emoji: "🍇",
+          cor: "from-purple-500 to-fuchsia-700",
+        },
+        municipioB: {
+          nome: "Serra + imigração alemã/italiana",
+          emoji: "🏔️",
+          cor: "from-sky-500 to-blue-700",
+        },
         contexto: "Uva, serra, frio e Oktoberfest são de qual região?",
         pecaCertaId: "sul",
         feedbackAcerto: "Combo! SUL = imigração europeia.",
@@ -417,7 +464,11 @@ export const aula01: AulaGeoV1 = {
       },
       {
         id: "r5",
-        municipioA: { nome: "Brasília + soja + cerrado", emoji: "🌾", cor: "from-yellow-500 to-amber-700" },
+        municipioA: {
+          nome: "Brasília + soja + cerrado",
+          emoji: "🌾",
+          cor: "from-yellow-500 to-amber-700",
+        },
         municipioB: { nome: "Capital do Brasil", emoji: "🏛️", cor: "from-orange-500 to-amber-700" },
         contexto: "Brasília, cerrado e soja são de qual região?",
         pecaCertaId: "centro",
@@ -426,8 +477,16 @@ export const aula01: AulaGeoV1 = {
       },
       {
         id: "r6",
-        municipioA: { nome: "Quem cuida do Brasil?", emoji: "🇧🇷", cor: "from-emerald-500 to-green-700" },
-        municipioB: { nome: "Todos os brasileiros", emoji: "🤝", cor: "from-yellow-500 to-green-700" },
+        municipioA: {
+          nome: "Quem cuida do Brasil?",
+          emoji: "🇧🇷",
+          cor: "from-emerald-500 to-green-700",
+        },
+        municipioB: {
+          nome: "Todos os brasileiros",
+          emoji: "🤝",
+          cor: "from-yellow-500 to-green-700",
+        },
         contexto: "Quem é responsável por proteger o território brasileiro?",
         pecaCertaId: "todos",
         feedbackAcerto: "Perfeito! TODOS NÓS somos responsáveis.",
@@ -468,7 +527,8 @@ export const aula01: AulaGeoV1 = {
 
   cena11_avaliacao: {
     tipo: "seloAtlas",
-    aurora: "PROVA FINAL. 3 perguntas — se acertar, ganha a insígnia máxima: Embaixador do Território.",
+    aurora:
+      "PROVA FINAL. 3 perguntas — se acertar, ganha a insígnia máxima: Embaixador do Território.",
     instrucao: "Responda as 3",
     perguntas: [
       {
@@ -478,6 +538,8 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "3 regiões", correta: false },
           { id: "b", texto: "5 regiões", correta: true },
           { id: "c", texto: "27 regiões", correta: false },
+
+          { id: "extra-6", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Isso! 5 REGIÕES: Norte, Nordeste, Centro-Oeste, Sudeste e Sul.",
         feedbackErro: "27 são os ESTADOS. Regiões são 5.",
@@ -489,6 +551,8 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Amazônia", correta: false },
           { id: "b", texto: "Caatinga", correta: true },
           { id: "c", texto: "Cerrado", correta: false },
+
+          { id: "extra-7", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Perfeito! CAATINGA — exclusiva do Brasil.",
         feedbackErro: "Amazônia está em outros países. Só a CAATINGA é exclusiva.",
@@ -500,6 +564,8 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Todos nós — cada cidadão", correta: true },
           { id: "b", texto: "Só o presidente", correta: false },
           { id: "c", texto: "Só quem mora em Brasília", correta: false },
+
+          { id: "extra-8", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Isso! O Globo das Descobertas do 4º ano está oficialmente RESTAURADO.",
         feedbackErro: "É de TODOS. Cada cidadão cuidando do seu pedaço.",

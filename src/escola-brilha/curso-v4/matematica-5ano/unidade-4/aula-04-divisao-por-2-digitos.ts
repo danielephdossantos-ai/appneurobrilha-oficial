@@ -4,7 +4,7 @@ export const aula04_divisaoPor2Digitos: AulaV4 = {
   slug: "u4-04-divisao-por-2-digitos",
   titulo: "Divisão por 2 dígitos",
   iconeTrilha: "➗",
-  bncc: ["EF05MA07"],
+  bncc: ["EF05MA08"],
   duracaoMin: 24,
   metodologias: ["skemp"],
 
@@ -15,8 +15,8 @@ export const aula04_divisaoPor2Digitos: AulaV4 = {
   momento02_exploracao: {
     instrucao: "Passo estimar → testar → ajustar.",
     cenas: [
-      { tipo: "texto", texto: "Estime: use a 1ª casa do divisor.", destaque: true },
-      { tipo: "texto", texto: "Multiplica. Se passar do dividendo parcial, diminui 1 no quociente." },
+      { tipo: "texto", texto: "Estime usando múltiplos do divisor inteiro próximos do dividendo parcial.", destaque: true },
+      { tipo: "texto", texto: "Multiplique o palpite pelo divisor. Se ultrapassar o dividendo parcial, reduza o palpite; se ainda couber outro divisor, aumente." },
     ],
   },
   momento03_descoberta: {

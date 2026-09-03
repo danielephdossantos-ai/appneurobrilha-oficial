@@ -55,10 +55,37 @@ export const aula01: AulaArteV1 = {
     titulo: "🔊 O Laboratório de Sons",
     instrucao: "Toca em cada pista pra investigar",
     itens: [
-      { emoji: "📏", rotulo: "Régua vibrando", descricao: "Ponta na beira da mesa, tapa em cima: vibra tão rápido que quase some. Som AGUDO, fino.", cor: "#0ea5e9", fotoUrl: mapaRegua },
-      { emoji: "🥛", rotulo: "3 copos de vidro", descricao: "Cheio, meio e vazio. Batidos com lápis, cada um solta uma nota diferente — do grave ao agudo.", cor: "#f59e0b", fotoUrl: mapaCopos },
-      { emoji: "🏭", rotulo: "Russolo (1913)", descricao: "O italiano Luigi Russolo construiu os Intonarumori — caixas que imitavam ruídos de máquina e viraram MÚSICA.", cor: "#78350f", fotoUrl: mapaRussolo },
-      { emoji: "🎋", rotulo: "Uakti brasileiro", descricao: "Grupo mineiro que afina tubos de PVC e vira orquestra. Cano vira instrumento!", cor: "#22c55e", fotoUrl: mapaUakti },
+      {
+        emoji: "📏",
+        rotulo: "Régua vibrando",
+        descricao:
+          "Ponta na beira da mesa, tapa em cima: vibra tão rápido que quase some. Som AGUDO, fino.",
+        cor: "#0ea5e9",
+        fotoUrl: mapaRegua,
+      },
+      {
+        emoji: "🥛",
+        rotulo: "3 copos de vidro",
+        descricao:
+          "Cheio, meio e vazio. Batidos com lápis, cada um solta uma nota diferente — do grave ao agudo.",
+        cor: "#f59e0b",
+        fotoUrl: mapaCopos,
+      },
+      {
+        emoji: "🏭",
+        rotulo: "Russolo (1913)",
+        descricao:
+          "O italiano Luigi Russolo construiu os Intonarumori — caixas que imitavam ruídos de máquina e viraram MÚSICA.",
+        cor: "#78350f",
+        fotoUrl: mapaRussolo,
+      },
+      {
+        emoji: "🎋",
+        rotulo: "Uakti brasileiro",
+        descricao: "Grupo mineiro que afina tubos de PVC e vira orquestra. Cano vira instrumento!",
+        cor: "#22c55e",
+        fotoUrl: mapaUakti,
+      },
     ],
     falaFinal: "Você vai transformar qualquer coisa em instrumento — igual os grandes!",
   },
@@ -73,6 +100,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Mais devagar que um som agudo", correta: true },
           { texto: "Mais rápido que um som agudo", correta: false },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
         feedbackAcerto: "Isso! Vibração LENTA = grave. Vibração RÁPIDA = agudo.",
         feedbackErro: "Ao contrário: grave = vibra devagar; agudo = vibra rápido.",
@@ -83,6 +113,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "O copo VAZIO (vibra mais rápido)", correta: true },
           { texto: "O copo CHEIO de água", correta: false },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
         feedbackAcerto: "Correto! Menos água = vibração mais rápida = som mais agudo.",
         feedbackErro: "O cheio vibra devagar (grave). O VAZIO vibra rápido (agudo).",
@@ -93,6 +126,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Pelo TIMBRE — o formato da onda é diferente", correta: true },
           { texto: "Pela altura da nota — é a mesma", correta: false },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
         feedbackAcerto: "Isso! Timbre é a assinatura da fonte sonora.",
         feedbackErro: "Se é a mesma nota, altura é igual. O que muda é o TIMBRE.",
@@ -104,10 +140,36 @@ export const aula01: AulaArteV1 = {
     tipo: "vocabularioCards",
     aurora: "Vocabulário da física do som. Toca em cada card!",
     cards: [
-      { termo: "Altura (Frequência)", definicao: "Se o som é GRAVE (grosso, vibração lenta) ou AGUDO (fino, vibração rápida).", emoji: "📈", cor: "#0ea5e9", fotoUrl: vocabFrequencia },
-      { termo: "Timbre", definicao: "O 'formato' da onda sonora. É o que diferencia uma flauta de uma colher tocando a mesma nota.", emoji: "🎨", cor: "#a855f7", fotoUrl: vocabTimbre },
-      { termo: "Instrumento Não-Convencional", definicao: "Objeto que não foi feito pra ser instrumento, mas vira música (canos, chaves, panelas, copos).", emoji: "🎋", cor: "#22c55e", fotoUrl: vocabNaoConv },
-      { termo: "Vibração", definicao: "Movimento rápido de ida-e-volta que empurra o ar e cria ondas sonoras.", emoji: "〰️", cor: "#f59e0b", fotoUrl: mapaRegua },
+      {
+        termo: "Altura (Frequência)",
+        definicao: "Se o som é GRAVE (grosso, vibração lenta) ou AGUDO (fino, vibração rápida).",
+        emoji: "📈",
+        cor: "#0ea5e9",
+        fotoUrl: vocabFrequencia,
+      },
+      {
+        termo: "Timbre",
+        definicao:
+          "O 'formato' da onda sonora. É o que diferencia uma flauta de uma colher tocando a mesma nota.",
+        emoji: "🎨",
+        cor: "#a855f7",
+        fotoUrl: vocabTimbre,
+      },
+      {
+        termo: "Instrumento Não-Convencional",
+        definicao:
+          "Objeto que não foi feito pra ser instrumento, mas vira música (canos, chaves, panelas, copos).",
+        emoji: "🎋",
+        cor: "#22c55e",
+        fotoUrl: vocabNaoConv,
+      },
+      {
+        termo: "Vibração",
+        definicao: "Movimento rápido de ida-e-volta que empurra o ar e cria ondas sonoras.",
+        emoji: "〰️",
+        cor: "#f59e0b",
+        fotoUrl: mapaRegua,
+      },
     ],
   },
 
@@ -121,10 +183,34 @@ export const aula01: AulaArteV1 = {
       "Em 1913, Luigi Russolo publicou 'A Arte dos Ruídos' e construiu os Intonarumori. No Brasil, o grupo Uakti afina tubos de PVC. Qualquer objeto pode virar instrumento — é só entender a física.",
     ],
     pigmentos: [
-      { nome: "Caixa + elásticos", hex: "#c2410c", fonte: "Elástico grosso = grave. Fino = agudo.", emoji: "📦", fotoUrl: matCaixa },
-      { nome: "Tubos de PVC", hex: "#e5e7eb", fonte: "Base do som Uakti — cano vira nota.", emoji: "🎋", fotoUrl: matTubos },
-      { nome: "Chaveiro", hex: "#78350f", fonte: "Metal batendo em metal — timbre único.", emoji: "🔑", fotoUrl: matChaves },
-      { nome: "Copos com água", hex: "#0ea5e9", fonte: "Escala musical líquida — muda a água, muda a nota.", emoji: "🥛", fotoUrl: mapaCopos },
+      {
+        nome: "Caixa + elásticos",
+        hex: "#c2410c",
+        fonte: "Elástico grosso = grave. Fino = agudo.",
+        emoji: "📦",
+        fotoUrl: matCaixa,
+      },
+      {
+        nome: "Tubos de PVC",
+        hex: "#e5e7eb",
+        fonte: "Base do som Uakti — cano vira nota.",
+        emoji: "🎋",
+        fotoUrl: matTubos,
+      },
+      {
+        nome: "Chaveiro",
+        hex: "#78350f",
+        fonte: "Metal batendo em metal — timbre único.",
+        emoji: "🔑",
+        fotoUrl: matChaves,
+      },
+      {
+        nome: "Copos com água",
+        hex: "#0ea5e9",
+        fonte: "Escala musical líquida — muda a água, muda a nota.",
+        emoji: "🥛",
+        fotoUrl: mapaCopos,
+      },
     ],
   },
 
@@ -138,6 +224,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Altura (frequência)", correta: true },
           { texto: "Cor", correta: false },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
         feedbackAcerto: "Isso! Altura = frequência = grave/agudo.",
         feedbackErro: "Som não tem cor 😄. É ALTURA (frequência) que define grave/agudo.",
@@ -148,6 +237,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Pelo TIMBRE", correta: true },
           { texto: "Pelo volume apenas", correta: false },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
         feedbackAcerto: "Correto! Timbre = identidade da fonte sonora.",
         feedbackErro: "Volume é intensidade. A diferença é o TIMBRE.",
@@ -158,6 +250,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Instrumento não-convencional", correta: true },
           { texto: "Instrumento clássico da orquestra", correta: false },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
         feedbackAcerto: "Fantástico! PVC não foi feito pra tocar, mas vira música.",
         feedbackErro: "Orquestra clássica usa violino, flauta, etc. PVC é NÃO-CONVENCIONAL.",
@@ -170,32 +265,44 @@ export const aula01: AulaArteV1 = {
     aurora: "Cada objeto vira som por uma razão. Combina certinho!",
     animais: [
       {
-        nome: "Copo VAZIO batido", emoji: "🥛", fotoUrl: mapaCopos,
+        nome: "Copo VAZIO batido",
+        emoji: "🥛",
+        fotoUrl: mapaCopos,
         corAlvo: { nome: "Som AGUDO — vibra rápido", hex: "#dc2626" },
         opcoes: [
           { nome: "Som AGUDO — vibra rápido", hex: "#dc2626" },
           { nome: "Som GRAVE — vibra devagar", hex: "#1e3a8a" },
           { nome: "Sem som", hex: "#78350f" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Vazio = pouca massa vibrando = frequência ALTA = agudo.",
       },
       {
-        nome: "Caixa de papelão batida", emoji: "📦", fotoUrl: matCaixa,
+        nome: "Caixa de papelão batida",
+        emoji: "📦",
+        fotoUrl: matCaixa,
         corAlvo: { nome: "Som GRAVE — vibra devagar", hex: "#1e3a8a" },
         opcoes: [
           { nome: "Som GRAVE — vibra devagar", hex: "#1e3a8a" },
           { nome: "Som AGUDO como apito", hex: "#dc2626" },
           { nome: "Som de flauta", hex: "#a855f7" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Caixa grande = muita massa = vibração lenta = som GRAVE.",
       },
       {
-        nome: "Tubos afinados do Uakti", emoji: "🎋", fotoUrl: mapaUakti,
+        nome: "Tubos afinados do Uakti",
+        emoji: "🎋",
+        fotoUrl: mapaUakti,
         corAlvo: { nome: "Instrumento não-convencional", hex: "#22c55e" },
         opcoes: [
           { nome: "Instrumento não-convencional", hex: "#22c55e" },
           { nome: "Ponto de fuga central", hex: "#78350f" },
           { nome: "Persistência retiniana", hex: "#dc2626" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "PVC virou instrumento — é a arte dos ruídos brasileira.",
       },
@@ -206,11 +313,41 @@ export const aula01: AulaArteV1 = {
     tipo: "sequenciaMistura",
     aurora: "Ordena os 5 passos pra montar teu Intonarumori caseiro!",
     passos: [
-      { id: "p1", texto: "SEPARO uma caixa de papelão vazia (leite, cereal, sapato)", emoji: "📦", ordem: 1, fotoUrl: passo1 },
-      { id: "p2", texto: "CONFIRO se está sem tampa, virada de boca pra cima como violão", emoji: "🎸", ordem: 2, fotoUrl: passo2 },
-      { id: "p3", texto: "ESTICO 1 elástico GROSSO em volta — vai dar som GRAVE", emoji: "➖", ordem: 3, fotoUrl: passo3 },
-      { id: "p4", texto: "ESTICO 1 elástico FINO ao lado — vai dar som AGUDO", emoji: "〰️", ordem: 4, fotoUrl: passo4 },
-      { id: "p5", texto: "DEDILHO os elásticos e escuto grave × agudo — meu Intonarumori funciona!", emoji: "🎶", ordem: 5, fotoUrl: passo5 },
+      {
+        id: "p1",
+        texto: "SEPARO uma caixa de papelão vazia (leite, cereal, sapato)",
+        emoji: "📦",
+        ordem: 1,
+        fotoUrl: passo1,
+      },
+      {
+        id: "p2",
+        texto: "CONFIRO se está sem tampa, virada de boca pra cima como violão",
+        emoji: "🎸",
+        ordem: 2,
+        fotoUrl: passo2,
+      },
+      {
+        id: "p3",
+        texto: "ESTICO 1 elástico GROSSO em volta — vai dar som GRAVE",
+        emoji: "➖",
+        ordem: 3,
+        fotoUrl: passo3,
+      },
+      {
+        id: "p4",
+        texto: "ESTICO 1 elástico FINO ao lado — vai dar som AGUDO",
+        emoji: "〰️",
+        ordem: 4,
+        fotoUrl: passo4,
+      },
+      {
+        id: "p5",
+        texto: "DEDILHO os elásticos e escuto grave × agudo — meu Intonarumori funciona!",
+        emoji: "🎶",
+        ordem: 5,
+        fotoUrl: passo5,
+      },
     ],
     falaAcerto: "Você acabou de construir um instrumento futurista de 1913!",
   },
@@ -221,9 +358,21 @@ export const aula01: AulaArteV1 = {
     titulo: "Diário da Engenheira Acústica",
     trechos: [
       { texto: "Todo som nasce de uma", palavraDestaque: "vibração", corDestaque: "#f59e0b" },
-      { texto: "Se vibra rápido, é AGUDO; se vibra devagar, é GRAVE — isso é a", palavraDestaque: "frequência", corDestaque: "#0ea5e9" },
-      { texto: "Flauta e colher na mesma nota soam diferente por causa do", palavraDestaque: "timbre", corDestaque: "#a855f7" },
-      { texto: "Cano de PVC virou música — é um instrumento", palavraDestaque: "não-convencional", corDestaque: "#22c55e" },
+      {
+        texto: "Se vibra rápido, é AGUDO; se vibra devagar, é GRAVE — isso é a",
+        palavraDestaque: "frequência",
+        corDestaque: "#0ea5e9",
+      },
+      {
+        texto: "Flauta e colher na mesma nota soam diferente por causa do",
+        palavraDestaque: "timbre",
+        corDestaque: "#a855f7",
+      },
+      {
+        texto: "Cano de PVC virou música — é um instrumento",
+        palavraDestaque: "não-convencional",
+        corDestaque: "#22c55e",
+      },
       { texto: "Sou engenheira acústica — qualquer coisa pode ser instrumento!" },
     ],
   },
@@ -231,7 +380,8 @@ export const aula01: AulaArteV1 = {
   cena09_minijogo: {
     tipo: "cenaTematica",
     variante: "minijogo",
-    aurora: "🎛️ Sintetizador de Sucata! Toca em CADA tubo e objeto antes do tempo acabar pra afinar a orquestra.",
+    aurora:
+      "🎛️ Sintetizador de Sucata! Toca em CADA tubo e objeto antes do tempo acabar pra afinar a orquestra.",
     titulo: "🎛️ Sintetizador de Sucata",
     instrucao: "Toque em todos os componentes antes do tempo acabar!",
     tempoSeg: 35,
@@ -252,13 +402,55 @@ export const aula01: AulaArteV1 = {
     aurora: "Fecha o caderno da física do som. Toca em cada verbete!",
     titulo: "📓 Caderno da Engenharia do Som",
     itens: [
-      { emoji: "〰️", rotulo: "Vibração", descricao: "Todo som vem de algo vibrando.", cor: "#f59e0b", fotoUrl: mapaRegua },
-      { emoji: "📈", rotulo: "Altura (Frequência)", descricao: "Rápido = agudo. Lento = grave.", cor: "#0ea5e9", fotoUrl: vocabFrequencia },
-      { emoji: "🎨", rotulo: "Timbre", descricao: "Assinatura da fonte — flauta ≠ colher.", cor: "#a855f7", fotoUrl: vocabTimbre },
-      { emoji: "🥛", rotulo: "Copos afinados", descricao: "Cheio = grave. Vazio = agudo.", cor: "#78350f", fotoUrl: mapaCopos },
-      { emoji: "🏭", rotulo: "Russolo (1913)", descricao: "Intonarumori — ruído virou música.", cor: "#7c2d12", fotoUrl: mapaRussolo },
-      { emoji: "🎋", rotulo: "Uakti / PVC", descricao: "Brasil: cano vira orquestra.", cor: "#22c55e", fotoUrl: mapaUakti },
-      { emoji: "📦", rotulo: "Instrumento caseiro", descricao: "Caixa + elástico grosso/fino = grave/agudo.", cor: "#c2410c", fotoUrl: matCaixa },
+      {
+        emoji: "〰️",
+        rotulo: "Vibração",
+        descricao: "Todo som vem de algo vibrando.",
+        cor: "#f59e0b",
+        fotoUrl: mapaRegua,
+      },
+      {
+        emoji: "📈",
+        rotulo: "Altura (Frequência)",
+        descricao: "Rápido = agudo. Lento = grave.",
+        cor: "#0ea5e9",
+        fotoUrl: vocabFrequencia,
+      },
+      {
+        emoji: "🎨",
+        rotulo: "Timbre",
+        descricao: "Assinatura da fonte — flauta ≠ colher.",
+        cor: "#a855f7",
+        fotoUrl: vocabTimbre,
+      },
+      {
+        emoji: "🥛",
+        rotulo: "Copos afinados",
+        descricao: "Cheio = grave. Vazio = agudo.",
+        cor: "#78350f",
+        fotoUrl: mapaCopos,
+      },
+      {
+        emoji: "🏭",
+        rotulo: "Russolo (1913)",
+        descricao: "Intonarumori — ruído virou música.",
+        cor: "#7c2d12",
+        fotoUrl: mapaRussolo,
+      },
+      {
+        emoji: "🎋",
+        rotulo: "Uakti / PVC",
+        descricao: "Brasil: cano vira orquestra.",
+        cor: "#22c55e",
+        fotoUrl: mapaUakti,
+      },
+      {
+        emoji: "📦",
+        rotulo: "Instrumento caseiro",
+        descricao: "Caixa + elástico grosso/fino = grave/agudo.",
+        cor: "#c2410c",
+        fotoUrl: matCaixa,
+      },
     ],
     falaFinal: "Quinta página do Atlas do Laboratório Óptico DESBLOQUEADA!",
   },
@@ -272,6 +464,9 @@ export const aula01: AulaArteV1 = {
       alternativas: [
         { texto: "O Timbre", correta: true },
         { texto: "A Intensidade", correta: false },
+
+        { texto: "Não corresponde ao tema", correta: false },
+        { texto: "Outra resposta sem relação", correta: false },
       ],
       feedback:
         "Sensacional! O timbre é a assinatura digital — a 'cor' — de cada fonte sonora. É por isso que reconhecemos a voz de quem amamos sem precisar ver.",

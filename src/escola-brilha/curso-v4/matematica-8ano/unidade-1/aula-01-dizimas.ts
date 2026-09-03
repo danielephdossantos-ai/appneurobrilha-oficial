@@ -8,7 +8,7 @@ export const aula01_dizimas: AulaV4 = {
   slug: "u1-01-dizimas",
   titulo: "Dízimas periódicas e fração geratriz",
   iconeTrilha: "🔧",
-  bncc: ["EF08MA01"],
+  bncc: ["EF08MA05"],
   duracaoMin: 24,
   metodologias: ["skemp"],
 

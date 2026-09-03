@@ -1,5 +1,7 @@
 import type { UnidadeGeoV1 } from "../../types";
 import { aula01 } from "./aula-01-era-vargas";
+import { aula02 } from "./aula-02-republica-pos-abolicao";
+import { aula03 } from "./aula-03-urbanizacao-diversidade-direitos";
 
 export const unidade4: UnidadeGeoV1 = {
   slug: "unidade-4",
@@ -9,5 +11,5 @@ export const unidade4: UnidadeGeoV1 = {
   descricao:
     "Getúlio Vargas: 15 anos de poder, CLT, voto feminino, industrialização — e Estado Novo, censura e perseguição. O gigante ambíguo do Brasil do século XX.",
   corTema: "#0f766e",
-  aulas: [aula01],
+  aulas: [aula01, aula02, aula03],
 };

@@ -3,6 +3,7 @@ import { aula01 } from "./aula-01-maquina-do-tempo-da-paisagem";
 import { aula02 } from "./aula-02-quem-mudou-a-paisagem";
 import { aula03 } from "./aula-03-protetor-da-natureza";
 import { aula04 } from "./aula-04-guardiao-das-paisagens";
+import { aula05 } from "./aula-05-solo-agua";
 
 /**
  * Geografia 2º Ano — Unidade 5
@@ -21,5 +22,5 @@ export const unidade5: UnidadePortugues = {
   descricao:
     "Brilha vira Viajante do Tempo, Detetive das Mudanças e Protetor(a) da Natureza. Descobre que a paisagem muda pela natureza e pelas pessoas — e que a gente pode transformar cuidando.",
   corTema: "#10B981",
-  aulas: [aula01, aula02, aula03, aula04],
+  aulas: [aula01, aula02, aula03, aula04, aula05],
 };

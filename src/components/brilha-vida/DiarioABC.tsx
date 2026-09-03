@@ -1,17 +1,14 @@
 import { useEffect, useState } from "react";
-import { X, Plus, Trash2, FileDown, Sparkles, Loader2, Volume2 } from "lucide-react";
+import { X, Plus, Trash2, FileDown } from "lucide-react";
 import { VozGuia } from "./shared/VozGuia";
 import { useAppState } from "@/core/store";
-import { callNeuroBrilhaAI } from "@/services/api/neurobrilha-ai.functions";
-import { usePipVoice } from "@/hooks/usePipVoice";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
+import { supabase } from "@/database/supabase/client";
 
 /**
- * Diário ABC (Antecedente-Comportamento-Consequência) — padrão-ouro em ABA
- * para o cuidador identificar a FUNÇÃO do comportamento. Salva local,
- * exporta PDF para levar ao terapeuta, e pede análise da IA terapêutica
- * (que já conhece o perfil da criança) para sugerir plano prático.
+ * Registro descritivo da família: o que veio antes, o que foi observado e o
+ * que aconteceu depois. Não conclui função, diagnóstico ou tratamento.
  */
 type Registro = {
   id: string;
@@ -20,88 +17,110 @@ type Registro = {
   comportamento: string;
   consequencia: string;
   hipotese: string;
+  at: string;
 };
 
 const funcaoLabel: Record<string, string> = {
-  atencao: "🙋 Buscar atenção",
-  fuga: "🏃 Fugir/evitar tarefa",
-  tangivel: "🎁 Obter item/atividade",
-  sensorial: "🌈 Autoestimulação sensorial",
+  nao_sei: "❔ Ainda não sei",
+  atencao: "🙋 Procurou contato ou atenção",
+  fuga: "⏸️ Tentou evitar ou pausar",
+  tangivel: "🎁 Buscou um objeto ou atividade",
+  sensorial: "🌈 Buscou uma sensação ou movimento",
 };
 
 export function DiarioABC({ onClose }: { onClose: () => void }) {
   const { activeChild } = useAppState();
-  const { speak, stop } = usePipVoice();
-  const chave = `brilha-vida:diario-abc:${activeChild?.id ?? "anon"}`;
+  const childId = activeChild?.id ?? null;
+  const chave = childId ? `brilha-vida:diario-abc:${childId}` : null;
   const [registros, setRegistros] = useState<Registro[]>([]);
   const [rascunho, setRascunho] = useState({
     antecedente: "",
     comportamento: "",
     consequencia: "",
-    hipotese: "atencao",
+    hipotese: "nao_sei",
   });
-  const [analise, setAnalise] = useState<string>("");
-  const [carregandoIA, setCarregandoIA] = useState(false);
-  const [erroIA, setErroIA] = useState<string>("");
 
   useEffect(() => {
     try {
+      if (!chave || !childId) return;
       const raw = localStorage.getItem(chave);
-      if (raw) setRegistros(JSON.parse(raw));
-      const rawAn = localStorage.getItem(`${chave}:analise`);
-      if (rawAn) setAnalise(rawAn);
+      const locais = raw ? (JSON.parse(raw) as Array<Registro & { at?: string }>).map((r) => ({
+        ...r,
+        at: r.at || new Date().toISOString(),
+        hipotese: r.hipotese || "nao_sei",
+      })) : [];
+      setRegistros(locais);
+      void supabase
+        .from("brilha_vida_abc_entries" as any)
+        .select("id,antecedent,observed_behavior,consequence,family_hypothesis,created_at")
+        .eq("child_id", childId)
+        .order("created_at", { ascending: false })
+        .then(({ data }) => {
+          const remotos = ((data as any[]) ?? []).map((r) => ({
+            id: String(r.id), data: new Date(r.created_at).toLocaleString("pt-BR"), at: String(r.created_at),
+            antecedente: String(r.antecedent), comportamento: String(r.observed_behavior),
+            consequencia: String(r.consequence ?? ""), hipotese: String(r.family_hypothesis ?? "nao_sei"),
+          })) as Registro[];
+          const unidos = new Map<string, Registro>();
+          for (const registro of [...remotos, ...locais]) unidos.set(registro.id, registro);
+          const lista = [...unidos.values()].sort((a, b) => b.at.localeCompare(a.at));
+          setRegistros(lista);
+          localStorage.setItem(chave, JSON.stringify(lista));
+          for (const registro of locais) void salvarRemoto(registro, childId);
+        });
     } catch {}
-  }, [chave]);
+  }, [chave, childId]);
 
-  useEffect(() => () => stop(), [stop]);
+  const salvarRemoto = (registro: Registro, idCrianca: string) => supabase
+    .from("brilha_vida_abc_entries" as any)
+    .upsert({ id: registro.id, child_id: idCrianca, antecedent: registro.antecedente,
+      observed_behavior: registro.comportamento, consequence: registro.consequencia,
+      family_hypothesis: registro.hipotese, created_at: registro.at } as any);
 
   const salvar = (novos: Registro[]) => {
     setRegistros(novos);
     try {
-      localStorage.setItem(chave, JSON.stringify(novos));
-    } catch {}
-  };
-
-  const salvarAnalise = (texto: string) => {
-    setAnalise(texto);
-    try {
-      localStorage.setItem(`${chave}:analise`, texto);
+      if (chave) localStorage.setItem(chave, JSON.stringify(novos));
     } catch {}
   };
 
   const adicionar = () => {
-    if (!rascunho.antecedente || !rascunho.comportamento) return;
+    if (!rascunho.antecedente || !rascunho.comportamento || !childId) return;
+    const agora = new Date();
     const novo: Registro = {
       id: crypto.randomUUID(),
-      data: new Date().toLocaleString("pt-BR"),
+      data: agora.toLocaleString("pt-BR"),
+      at: agora.toISOString(),
       ...rascunho,
     };
     salvar([novo, ...registros]);
-    setRascunho({ antecedente: "", comportamento: "", consequencia: "", hipotese: "atencao" });
+    void salvarRemoto(novo, childId);
+    setRascunho({ antecedente: "", comportamento: "", consequencia: "", hipotese: "nao_sei" });
   };
 
-  const remover = (id: string) => salvar(registros.filter((r) => r.id !== id));
+  const remover = (id: string) => {
+    salvar(registros.filter((r) => r.id !== id));
+    if (childId) void supabase.from("brilha_vida_abc_entries" as any).delete().eq("id", id).eq("child_id", childId);
+  };
 
   const gerarPDF = () => {
     const doc = new jsPDF();
     const nome = activeChild?.nome ?? "Criança";
     const idade = activeChild?.idade ? `${activeChild.idade} anos` : "";
-    const perfil = String((activeChild as any)?.diagnostico ?? (activeChild as any)?.perfil_neuro ?? "não especificado");
 
     doc.setFontSize(18);
     doc.setTextColor(20, 148, 156);
-    doc.text("Diário ABC — Relatório para Terapeuta", 14, 20);
+    doc.text("Diário ABC — Registro da Família", 14, 20);
 
     doc.setFontSize(11);
     doc.setTextColor(80, 80, 80);
     doc.text(`Criança: ${nome} ${idade}`, 14, 30);
-    doc.text(`Perfil neurológico: ${perfil}`, 14, 36);
-    doc.text(`Gerado em: ${new Date().toLocaleString("pt-BR")}`, 14, 42);
-    doc.text(`Total de registros: ${registros.length}`, 14, 48);
+    doc.text(`Gerado em: ${new Date().toLocaleString("pt-BR")}`, 14, 36);
+    doc.text(`Total de registros: ${registros.length}`, 14, 42);
 
     autoTable(doc, {
-      startY: 55,
-      head: [["Data", "Antecedente (A)", "Comportamento (B)", "Consequência (C)", "Função"]],
+      startY: 49,
+      head: [["Data", "Antes (A)", "Observação (B)", "Depois (C)", "Hipótese da família"]],
       body: registros.map((r) => [
         r.data,
         r.antecedente,
@@ -120,21 +139,10 @@ export function DiarioABC({ onClose }: { onClose: () => void }) {
       },
     });
 
-    if (analise) {
-      const y = (doc as any).lastAutoTable.finalY + 10;
-      doc.setFontSize(13);
-      doc.setTextColor(20, 148, 156);
-      doc.text("Análise da IA terapêutica", 14, y);
-      doc.setFontSize(10);
-      doc.setTextColor(50, 50, 50);
-      const linhas = doc.splitTextToSize(analise, 180);
-      doc.text(linhas, 14, y + 7);
-    }
-
     doc.setFontSize(8);
     doc.setTextColor(140, 140, 140);
     doc.text(
-      "Base clínica: Cooper, Heron & Heward — Applied Behavior Analysis (2020). Documento gerado pelo app Neuro Brilha, sem substituir avaliação profissional.",
+      "Registro descritivo da família. Não apresenta diagnóstico nem substitui avaliação profissional.",
       14,
       285,
     );
@@ -142,61 +150,12 @@ export function DiarioABC({ onClose }: { onClose: () => void }) {
     doc.save(`diario-abc-${nome.toLowerCase().replace(/\s+/g, "-")}-${Date.now()}.pdf`);
   };
 
-  const pedirAnaliseIA = async () => {
-    if (registros.length < 2 || !activeChild) return;
-    setCarregandoIA(true);
-    setErroIA("");
-    stop();
-    try {
-      const linhas = registros
-        .slice(0, 20)
-        .map(
-          (r, i) =>
-            `${i + 1}. [${r.data}]\n   A: ${r.antecedente}\n   B: ${r.comportamento}\n   C: ${r.consequencia}\n   Hipótese do cuidador: ${funcaoLabel[r.hipotese]}`,
-        )
-        .join("\n\n");
-
-      const mensagem = `Sou o cuidador de ${activeChild.nome ?? "uma criança"} (${activeChild.idade ?? "?"} anos, perfil ${String((activeChild as any).diagnostico ?? (activeChild as any).perfil_neuro ?? "não especificado")}). Registrei ${registros.length} episódios no Diário ABC:
-
-${linhas}
-
-Por favor, com base em ABA (Cooper 2020) e prática clínica:
-1) Identifique o PADRÃO / função provável mais frequente do comportamento.
-2) Sugira 3 estratégias PROATIVAS (antes do comportamento) específicas para essa criança.
-3) Sugira 2 respostas REATIVAS (o que fazer no momento) que NÃO reforcem o comportamento indesejado.
-4) Sugira 1 plano para o CUIDADOR se cuidar nesta semana.
-
-Responda em português claro, com títulos e frases curtas. Sem markdown pesado. Máximo 400 palavras.`;
-
-      const resposta = await callNeuroBrilhaAI({
-        data: {
-          mode: "terapeuta",
-          child: activeChild as any,
-          mascot: null,
-          message: mensagem,
-          chatHistory: [],
-        },
-      });
-
-      const texto = String(resposta ?? "").trim();
-      if (!texto) throw new Error("Resposta vazia");
-      salvarAnalise(texto);
-    } catch (e) {
-      console.error("[DiarioABC] erro IA:", e);
-      setErroIA(
-        "A IA terapêutica não respondeu agora. Tente de novo em alguns minutos ou exporte o PDF para o profissional.",
-      );
-    } finally {
-      setCarregandoIA(false);
-    }
-  };
-
   return (
     <div className="min-h-screen bg-slate-50 p-4 pb-24">
       <div className="max-w-3xl mx-auto">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <p className="text-xs font-black tracking-wider text-teal-600">FERRAMENTA CLÍNICA</p>
+            <p className="text-sm font-black tracking-wider text-teal-700">REGISTRO DA FAMÍLIA</p>
             <h1 className="text-2xl font-black text-slate-800">Diário ABC</h1>
             <p className="text-sm text-slate-500">Antecedente → Comportamento → Consequência</p>
           </div>
@@ -206,7 +165,7 @@ Responda em português claro, com títulos e frases curtas. Sem markdown pesado.
         </div>
 
         <div className="mb-4 flex justify-end">
-          <VozGuia texto="Registre o que aconteceu antes, o comportamento em si e o que veio depois. Em 3 a 5 registros você vai enxergar o padrão. Depois pode pedir análise da IA ou baixar o PDF para o terapeuta." />
+          <VozGuia texto="Registre apenas o que você observou antes, durante e depois. Evite concluir diagnósticos. O relatório pode ser compartilhado com um profissional habilitado." />
         </div>
 
         <div className="bg-white rounded-3xl border-2 border-slate-100 p-5 mb-6 space-y-3">
@@ -241,7 +200,7 @@ Responda em português claro, com títulos e frases curtas. Sem markdown pesado.
             />
           </div>
           <div>
-            <label className="text-xs font-bold text-slate-500 uppercase">Função provável</label>
+            <label className="text-sm font-bold text-slate-600">O que a família acha que a criança buscava? (opcional)</label>
             <div className="grid grid-cols-2 gap-2 mt-1">
               {Object.entries(funcaoLabel).map(([k, v]) => (
                 <button
@@ -267,63 +226,15 @@ Responda em português claro, com títulos e frases curtas. Sem markdown pesado.
           </button>
         </div>
 
-        {/* Ações: IA + PDF */}
+        {/* Exportação do registro — sem interpretação automática. */}
         {registros.length > 0 && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
-            <button
-              onClick={pedirAnaliseIA}
-              disabled={carregandoIA || registros.length < 2}
-              className="py-3 px-4 rounded-2xl bg-gradient-to-r from-purple-500 to-pink-500 text-white font-black shadow-lg disabled:opacity-40 inline-flex items-center justify-center gap-2"
-            >
-              {carregandoIA ? (
-                <>
-                  <Loader2 size={18} className="animate-spin" /> Analisando padrão…
-                </>
-              ) : (
-                <>
-                  <Sparkles size={18} /> Pedir análise da IA terapêutica
-                </>
-              )}
-            </button>
+          <div className="mb-6">
             <button
               onClick={gerarPDF}
-              className="py-3 px-4 rounded-2xl bg-slate-800 text-white font-black shadow-lg inline-flex items-center justify-center gap-2"
+              className="w-full py-3 px-4 rounded-2xl bg-slate-800 text-white font-black shadow-lg inline-flex items-center justify-center gap-2"
             >
-              <FileDown size={18} /> Baixar PDF para o terapeuta
+              <FileDown size={18} /> Baixar registro em PDF
             </button>
-          </div>
-        )}
-
-        {registros.length > 0 && registros.length < 2 && (
-          <p className="text-xs text-center text-slate-500 -mt-4 mb-4">
-            Registre pelo menos 2 episódios para a IA identificar padrão.
-          </p>
-        )}
-
-        {erroIA && (
-          <div className="mb-6 p-4 rounded-2xl bg-red-50 border-2 border-red-200 text-sm text-red-700">
-            {erroIA}
-          </div>
-        )}
-
-        {analise && (
-          <div className="mb-6 p-5 rounded-3xl bg-gradient-to-br from-purple-50 to-pink-50 border-2 border-purple-200">
-            <div className="flex items-center justify-between mb-3">
-              <h3 className="font-black text-purple-700 inline-flex items-center gap-2">
-                <Sparkles size={18} /> Análise da IA terapêutica
-              </h3>
-              <button
-                onClick={() => speak(analise)}
-                className="p-2 rounded-full bg-white shadow text-purple-600"
-                aria-label="Ouvir análise"
-              >
-                <Volume2 size={16} />
-              </button>
-            </div>
-            <p className="text-sm text-slate-700 whitespace-pre-wrap leading-relaxed">{analise}</p>
-            <p className="mt-3 text-[10px] text-purple-500 italic">
-              Sugestões geradas por IA. Não substituem avaliação com profissional habilitado.
-            </p>
           </div>
         )}
 
@@ -332,7 +243,7 @@ Responda em português claro, com títulos e frases curtas. Sem markdown pesado.
         </h2>
         {registros.length === 0 ? (
           <p className="text-sm text-slate-500 bg-white p-4 rounded-2xl">
-            Ainda sem registros. Após 3 a 5 entradas, aparece um padrão da função do comportamento.
+            Ainda sem registros. Descreva somente o que foi observado, sem tentar fechar diagnóstico.
           </p>
         ) : (
           <ul className="space-y-2">
@@ -365,8 +276,8 @@ Responda em português claro, com títulos e frases curtas. Sem markdown pesado.
           </ul>
         )}
 
-        <p className="mt-6 text-center text-xs text-slate-400">
-          Base: Cooper, Heron & Heward — <i>Applied Behavior Analysis</i> (2020)
+        <p className="mt-6 text-center text-sm text-slate-500">
+          Registro de observação familiar. A interpretação deve ser feita com cautela e, quando necessário, por profissional habilitado.
         </p>
       </div>
     </div>

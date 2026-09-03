@@ -15,7 +15,7 @@ export const aula01: AulaGeoV1 = {
   titulo: "Laboratório de Física",
   iconeTrilha: "⚙️",
   recompensa: { xp: 140, moedas: 55, medalha: "Físico Júnior" },
-  bncc: ["EF08CI01", "EF08CI02"],
+  bncc: [],
   duracaoMin: 45,
 
   cena01_motivacao: {
@@ -40,6 +40,7 @@ export const aula01: AulaGeoV1 = {
       { id: "rampa", titulo: "Rampa exige menos força", subtitulo: "mas percorre mais distância", emoji: "📐", cor: "from-emerald-500 to-teal-700", fotoUrl: rampaImg },
       { id: "levantar", titulo: "Levantar direto é melhor", subtitulo: "menos distância = menos esforço", emoji: "💪", cor: "from-red-500 to-rose-700", fotoUrl: forcasImg },
       { id: "igual", titulo: "Dá exatamente igual", subtitulo: "a caixa é a mesma", emoji: "🟰", cor: "from-slate-500 to-slate-700", fotoUrl: forcasImg },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "rampa",
     feedbackAcerto:
@@ -90,6 +91,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "⚖️", titulo: "Newton (N)", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "⚡", titulo: "Joule (J)", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "⏱️", titulo: "Segundo (s)", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Sim. Newton = kg·m/s². Joule é energia; segundo é tempo.",
         feedbackErro: "Joule = energia. Segundo = tempo. Força = NEWTON." },
@@ -98,6 +100,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "📏", titulo: "Área menor → pressão maior", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "💪", titulo: "É mais pesada", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🔥", titulo: "Fica mais quente", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. Mesma força, área bem menor → pressão muito maior.",
         feedbackErro: "P = F/A. Área menor → pressão maior. Por isso agulha e faca cortam." },
@@ -106,6 +109,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "⚖️", titulo: "Alavanca", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🎡", titulo: "Roldana", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🔩", titulo: "Parafuso", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Sim. Barra rígida com ponto de apoio central = alavanca.",
         feedbackErro: "Gangorra tem BARRA e PONTO DE APOIO — é ALAVANCA." },
@@ -208,6 +212,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "T = F · d (força vezes deslocamento)", correta: true },
           { id: "b", texto: "T = m · v (massa vezes velocidade)" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. Trabalho em joules = força (N) × distância (m).",
         feedbackErro: "m · v é quantidade de movimento. TRABALHO = F · d." },
@@ -215,6 +221,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Porque a área da ponta é minúscula → pressão gigante", correta: true },
           { id: "b", texto: "Porque a agulha é magnética" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. P = F/A. Área quase zero → pressão altíssima.",
         feedbackErro: "Não é magnetismo. É PRESSÃO — área minúscula concentra a força." },
@@ -222,6 +230,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Não. Elas apenas trocam menos força por mais distância", correta: true },
           { id: "b", texto: "Sim, fabricam energia do nada" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Perfeito. Energia se CONSERVA — máquina só redistribui.",
         feedbackErro: "Energia NUNCA é criada. Só muda de forma ou se redistribui. Máquina simples ajuda humanos a aplicar força." },

@@ -39,6 +39,7 @@ export const aula01: AulaGeoV1 = {
       { id: "madeira", titulo: "Madeira", subtitulo: "colher de pau", emoji: "🪵", cor: "from-amber-600 to-yellow-800" },
       { id: "metal", titulo: "Metal", subtitulo: "chave", emoji: "🔑", cor: "from-slate-400 to-slate-700" },
       { id: "plastico", titulo: "Plástico", subtitulo: "patinho", emoji: "🦆", cor: "from-yellow-400 to-amber-500" },
+      { id: "outra", titulo: "Outra opção", subtitulo: "não combina", emoji: "❓", cor: "from-blue-400 to-indigo-700" },
     ],
     respostaCerta: "metal",
     feedbackAcerto:
@@ -127,6 +128,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🫙", titulo: "Vidro", cor: "from-cyan-400 to-sky-600" },
           { id: "b", emoji: "🪵", titulo: "Madeira", cor: "from-amber-600 to-yellow-800" },
           { id: "c", emoji: "🔑", titulo: "Metal", cor: "from-slate-400 to-slate-600" },
+          { id: "d", emoji: "🧵", titulo: "Tecido", cor: "from-pink-400 to-rose-600" },
         ],
         correta: "a",
         feedbackAcerto: "Isso! Só o VIDRO deixa a gente ver através.",
@@ -140,6 +142,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🧻", titulo: "Papel", cor: "from-orange-300 to-amber-500" },
           { id: "b", emoji: "🔑", titulo: "Metal", cor: "from-slate-400 to-slate-700" },
           { id: "c", emoji: "🫙", titulo: "Vidro", cor: "from-cyan-400 to-sky-600" },
+          { id: "d", emoji: "🧵", titulo: "Tecido", cor: "from-pink-400 to-rose-600" },
         ],
         correta: "b",
         feedbackAcerto: "Certo! METAL aguenta o fogo do fogão.",
@@ -153,6 +156,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🦆", titulo: "Patinho", cor: "from-yellow-400 to-amber-500" },
           { id: "b", emoji: "🍶", titulo: "Garrafa PET", cor: "from-cyan-300 to-sky-600" },
           { id: "c", emoji: "🌳", titulo: "Tronco", cor: "from-amber-700 to-yellow-900" },
+          { id: "d", emoji: "🧴", titulo: "Pote plástico", cor: "from-purple-400 to-fuchsia-600" },
         ],
         correta: "c",
         feedbackAcerto: "Perfeito! Tronco é MADEIRA, vem da árvore.",
@@ -354,6 +358,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Vidro", correta: true },
           { id: "b", texto: "Madeira" },
+          { id: "c", texto: "Tecido" },
+          { id: "d", texto: "Papelão" },
         ],
         feedbackAcerto: "Isso! Só VIDRO é transparente.",
         feedbackErro: "Madeira não deixa ver através. É VIDRO.",
@@ -365,6 +371,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Metal", correta: true },
           { id: "b", texto: "Plástico" },
+          { id: "c", texto: "Papel" },
+          { id: "d", texto: "Tecido" },
         ],
         feedbackAcerto: "Certo! METAL aguenta o fogo.",
         feedbackErro: "Plástico derreteria. Panela é METAL.",
@@ -376,6 +384,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Madeira", correta: true },
           { id: "b", texto: "Vidro" },
+          { id: "c", texto: "Metal" },
+          { id: "d", texto: "Plástico" },
         ],
         feedbackAcerto: "PERFEITO! MADEIRA é ótima porque não esquenta.",
         feedbackErro: "Colher 'de pau' — pau é MADEIRA.",

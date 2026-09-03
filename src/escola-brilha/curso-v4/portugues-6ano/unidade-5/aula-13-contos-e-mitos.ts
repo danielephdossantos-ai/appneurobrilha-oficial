@@ -8,7 +8,7 @@ export const aula13: AulaPortuguesV4 = {
   slug: "aula-13-contos-e-mitos",
   titulo: "Contos e Mitos",
   iconeTrilha: "🎭",
-  bncc: ["EF67LP28", "EF67LP30"],
+  bncc: ["EF67LP30"],
   duracaoMin: 25,
   momento01_motivacao: {
     titulo: "Arquivos de Imaginação: O Poder do Símbolo",

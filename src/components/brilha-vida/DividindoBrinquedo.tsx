@@ -15,8 +15,8 @@ const ACOES: Acao[] = [
   { texto: "Dou um para o amigo e fico com outro.", pts: 2, feedback: "Dividir é cuidar do outro. 💛" },
   { texto: "Brincamos juntos com os dois.", pts: 3, feedback: "Brincar junto é ainda mais divertido!" },
   { texto: "Combinamos um tempo pra cada um.", pts: 2, feedback: "Combinar regras evita briga." },
-  { texto: "Fico com todos. Depois ele brinca.", pts: 0, feedback: "Esperar muito deixa o amigo triste." },
-  { texto: "Escondo pra ele não pegar.", pts: -1, feedback: "Esconder machuca a amizade." },
+  { texto: "Digo que não quero dividir agora e ofereço outro brinquedo.", pts: 1, feedback: "Você pode colocar limites com respeito e procurar outra solução." },
+  { texto: "Escondo sem explicar e digo que não vi.", pts: -1, feedback: "É melhor falar a verdade e combinar um jeito justo." },
 ];
 
 export function DividindoBrinquedo({ onClose }: { onClose: () => void }) {
@@ -61,14 +61,14 @@ export function DividindoBrinquedo({ onClose }: { onClose: () => void }) {
         <Heart className="text-pink-500 fill-pink-500" /> Dividindo o Brinquedo
       </h2>
       <p className="text-sm text-slate-600 font-medium mb-4 text-center max-w-md">
-        Encha o medidor da amizade escolhendo boas atitudes.
+        Veja como diferentes combinações podem cuidar das duas pessoas.
       </p>
 
       {/* Medidor */}
       <div className="w-full max-w-md mb-6">
         <div className="flex justify-between text-xs font-black text-slate-500 mb-1">
           <span>😞</span>
-          <span>Medidor da Amizade</span>
+          <span>Medidor de Acordos</span>
           <span>💖</span>
         </div>
         <div className="h-4 bg-slate-200 rounded-full overflow-hidden">
@@ -147,12 +147,12 @@ export function DividindoBrinquedo({ onClose }: { onClose: () => void }) {
         >
           <div className="text-6xl mb-2">{venceu ? "💖" : "💔"}</div>
           <h3 className="font-black text-xl text-slate-800 mb-2">
-            {venceu ? "Vocês são grandes amigos!" : "Vamos tentar de novo"}
+            {venceu ? "Vocês encontraram bons acordos!" : "Vamos procurar outras soluções"}
           </h3>
           <p className="text-sm text-slate-600 font-medium">
             {venceu
-              ? "Dividir e brincar juntos fortalece a amizade de verdade."
-              : "Algumas atitudes machucam quem amamos. Toda hora dá pra começar de novo."}
+              ? "Conversar, alternar e respeitar limites ajuda a brincar junto."
+              : "Uma escolha não define se alguém é um bom amigo. Podemos aprender e tentar outra solução."}
           </p>
         </motion.div>
       )}

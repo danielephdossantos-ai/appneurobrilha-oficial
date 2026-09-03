@@ -98,9 +98,9 @@ export const aula02_tabuadaDo2: AulaV4 = {
   },
   momento10_avaliacao: {
     perguntas: [
-      { pergunta: "4 × 2 = ?", opcoes: ["8", "6", "10"], correta: 0, feedbackAcerto: "🎉 8.", feedbackErro: "4+4=8." },
-      { pergunta: "7 × 2 = ?", opcoes: ["14", "12", "16"], correta: 0, feedbackAcerto: "🎉 14.", feedbackErro: "7+7=14." },
-      { pergunta: "10 × 2 = ?", opcoes: ["20", "18", "22"], correta: 0, feedbackAcerto: "🎉 20.", feedbackErro: "10+10=20." },
+      { pergunta: "4 × 2 = ?", opcoes: ["8", "6", "10"], correta: 0, feedbackAcerto: "🎉 Dobrar 4 é somar 4 + 4, resultando em 8.", feedbackErro: "Multiplicar por 2 é dobrar: 4 + 4 = 8." },
+      { pergunta: "7 × 2 = ?", opcoes: ["14", "12", "16"], correta: 0, feedbackAcerto: "🎉 Dobrar 7 é somar 7 + 7, resultando em 14.", feedbackErro: "Use o dobro: 7 + 7 = 14." },
+      { pergunta: "10 × 2 = ?", opcoes: ["20", "18", "22"], correta: 0, feedbackAcerto: "🎉 Dois grupos de 10 formam 20.", feedbackErro: "Multiplicar 10 por 2 é calcular 10 + 10 = 20." },
     ],
   },
   momento11_missaoFamilia: {

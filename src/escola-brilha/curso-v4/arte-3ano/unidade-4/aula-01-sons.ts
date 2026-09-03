@@ -43,10 +43,40 @@ export const aula01: AulaArteV1 = {
     titulo: "🔍 A Cidade dos Sons Invisíveis",
     instrucao: "Toca em cada pista pra investigar",
     itens: [
-      { emoji: "🌳", rotulo: "Praça pela manhã", descricao: "Pássaros cantando, folhas ao vento, crianças brincando — sons NATURAIS e HUMANOS misturados.", cor: "#16a34a", fotoUrl: mapaPraca, somUrl: "https://actions.google.com/sounds/v1/ambiences/kids_playing.ogg" },
-      { emoji: "🦜", rotulo: "Floresta amazônica", descricao: "Só sons da natureza: chuva, macacos, insetos, rio. É chamada BIOFONIA.", cor: "#15803d", fotoUrl: mapaFloresta, somUrl: "https://actions.google.com/sounds/v1/ambiences/jungle_atmosphere_morning.ogg" },
-      { emoji: "🚗", rotulo: "Avenida movimentada", descricao: "Carros, buzinas, motores, ambulâncias — sons ARTIFICIAIS feitos pelas máquinas.", cor: "#4b5563", fotoUrl: mapaCidade, somUrl: "https://actions.google.com/sounds/v1/transportation/city_traffic.ogg" },
-      { emoji: "🎙️", rotulo: "Artista com gravador", descricao: "Ele CAPTURA os sons do mundo pra transformar em ARTE — uma paisagem sonora.", cor: "#7c3aed", fotoUrl: mapaGravador, somUrl: "https://actions.google.com/sounds/v1/foley/cassette_tape_play.ogg" },
+      {
+        emoji: "🌳",
+        rotulo: "Praça pela manhã",
+        descricao:
+          "Pássaros cantando, folhas ao vento, crianças brincando — sons NATURAIS e HUMANOS misturados.",
+        cor: "#16a34a",
+        fotoUrl: mapaPraca,
+        somUrl: "https://actions.google.com/sounds/v1/ambiences/kids_playing.ogg",
+      },
+      {
+        emoji: "🦜",
+        rotulo: "Floresta amazônica",
+        descricao: "Só sons da natureza: chuva, macacos, insetos, rio. É chamada BIOFONIA.",
+        cor: "#15803d",
+        fotoUrl: mapaFloresta,
+        somUrl: "https://actions.google.com/sounds/v1/ambiences/jungle_atmosphere_morning.ogg",
+      },
+      {
+        emoji: "🚗",
+        rotulo: "Avenida movimentada",
+        descricao:
+          "Carros, buzinas, motores, ambulâncias — sons ARTIFICIAIS feitos pelas máquinas.",
+        cor: "#4b5563",
+        fotoUrl: mapaCidade,
+        somUrl: "https://actions.google.com/sounds/v1/transportation/city_traffic.ogg",
+      },
+      {
+        emoji: "🎙️",
+        rotulo: "Artista com gravador",
+        descricao: "Ele CAPTURA os sons do mundo pra transformar em ARTE — uma paisagem sonora.",
+        cor: "#7c3aed",
+        fotoUrl: mapaGravador,
+        somUrl: "https://actions.google.com/sounds/v1/foley/cassette_tape_play.ogg",
+      },
     ],
     falaFinal: "Cada lugar tem SUA paisagem sonora — a assinatura invisível de onde você está.",
   },
@@ -61,6 +91,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "O canto de um pássaro na floresta", correta: true },
           { texto: "A buzina de um carro", correta: false },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
         feedbackAcerto: "Isso! Pássaro = natureza. Sons naturais vêm sem esforço humano.",
         feedbackErro: "Buzina foi feita por gente e máquina. Pássaro é NATUREZA pura.",
@@ -71,6 +104,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "O motor de um ônibus", correta: true },
           { texto: "O barulho da chuva caindo", correta: false },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
         feedbackAcerto: "Certo! Motor foi INVENTADO por gente — é artificial.",
         feedbackErro: "Chuva é natural. O motor foi feito por humanos = artificial.",
@@ -81,6 +117,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Grande INTENSIDADE (volume alto)", correta: true },
           { texto: "Pouca intensidade", correta: false },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
         feedbackAcerto: "Perfeito! Intensidade = quão alto ou baixo o som é.",
         feedbackErro: "Pouca intensidade seria SUSSURRO. Grito tem MUITA intensidade.",
@@ -92,10 +131,34 @@ export const aula01: AulaArteV1 = {
     tipo: "vocabularioCards",
     aurora: "Palavras do artista sonoro — toca em cada uma pra desbloquear seu diário.",
     cards: [
-      { termo: "Paisagem Sonora", definicao: "TUDO que você OUVE num lugar — como uma foto feita de sons.", emoji: "🎧", cor: "#7c3aed", fotoUrl: vocabPaisagem },
-      { termo: "Som Natural", definicao: "Vem da natureza: vento, água, animais, chuva, trovão.", emoji: "🌿", cor: "#16a34a", fotoUrl: vocabNatural },
-      { termo: "Som Artificial", definicao: "Feito por gente ou máquinas: carro, sino, celular, sirene.", emoji: "🚗", cor: "#4b5563", fotoUrl: vocabArtificial },
-      { termo: "Intensidade", definicao: "O VOLUME do som: fraco (sussurro) ou forte (grito).", emoji: "🔊", cor: "#dc2626", fotoUrl: vocabIntensidade },
+      {
+        termo: "Paisagem Sonora",
+        definicao: "TUDO que você OUVE num lugar — como uma foto feita de sons.",
+        emoji: "🎧",
+        cor: "#7c3aed",
+        fotoUrl: vocabPaisagem,
+      },
+      {
+        termo: "Som Natural",
+        definicao: "Vem da natureza: vento, água, animais, chuva, trovão.",
+        emoji: "🌿",
+        cor: "#16a34a",
+        fotoUrl: vocabNatural,
+      },
+      {
+        termo: "Som Artificial",
+        definicao: "Feito por gente ou máquinas: carro, sino, celular, sirene.",
+        emoji: "🚗",
+        cor: "#4b5563",
+        fotoUrl: vocabArtificial,
+      },
+      {
+        termo: "Intensidade",
+        definicao: "O VOLUME do som: fraco (sussurro) ou forte (grito).",
+        emoji: "🔊",
+        cor: "#dc2626",
+        fotoUrl: vocabIntensidade,
+      },
     ],
   },
 
@@ -109,10 +172,34 @@ export const aula01: AulaArteV1 = {
       "Cada som tem INTENSIDADE (alto ou baixo), DURAÇÃO (curto ou longo) e ALTURA (grave ou agudo). Juntando tudo, o artista faz música com o mundo!",
     ],
     pigmentos: [
-      { nome: "Azul da água", hex: "#0284c7", fonte: "Som líquido: rio, chuva, mar", emoji: "💧", fotoUrl: nosOndas },
-      { nome: "Verde da mata", hex: "#15803d", fonte: "Som vivo: pássaros, folhas, bichos", emoji: "🌿", fotoUrl: mapaFloresta },
-      { nome: "Cinza-metálico", hex: "#6b7280", fonte: "Som mecânico: motor, sirene, martelo", emoji: "⚙️", fotoUrl: mapaCidade },
-      { nome: "Amarelo elétrico", hex: "#facc15", fonte: "Som agudo: sino, apito, alarme", emoji: "⚡", fotoUrl: quizTrovao },
+      {
+        nome: "Azul da água",
+        hex: "#0284c7",
+        fonte: "Som líquido: rio, chuva, mar",
+        emoji: "💧",
+        fotoUrl: nosOndas,
+      },
+      {
+        nome: "Verde da mata",
+        hex: "#15803d",
+        fonte: "Som vivo: pássaros, folhas, bichos",
+        emoji: "🌿",
+        fotoUrl: mapaFloresta,
+      },
+      {
+        nome: "Cinza-metálico",
+        hex: "#6b7280",
+        fonte: "Som mecânico: motor, sirene, martelo",
+        emoji: "⚙️",
+        fotoUrl: mapaCidade,
+      },
+      {
+        nome: "Amarelo elétrico",
+        hex: "#facc15",
+        fonte: "Som agudo: sino, apito, alarme",
+        emoji: "⚡",
+        fotoUrl: quizTrovao,
+      },
     ],
   },
 
@@ -126,6 +213,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Um artista/compositor chamado Murray Schafer", correta: true },
           { texto: "Por um pintor famoso", correta: false },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
         feedbackAcerto: "Isso! Schafer foi o pai da ideia — som como paisagem.",
         feedbackErro: "Pintor mexe com cor. Schafer inventou a arte de OUVIR o mundo.",
@@ -136,6 +226,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "NATURAL — vem do céu, da tempestade", correta: true },
           { texto: "Artificial — feito por máquina", correta: false },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
         feedbackAcerto: "Certo! Trovão é da natureza pura, ninguém liga o interruptor dele.",
         feedbackErro: "Ninguém faz trovão com máquina. É da natureza = NATURAL.",
@@ -146,6 +239,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "DURAÇÃO", correta: true },
           { texto: "Cor", correta: false },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
         feedbackAcerto: "Perfeito! Duração = quanto tempo o som fica no ar.",
         feedbackErro: "Som não tem cor. Se dura muito, tem grande DURAÇÃO.",
@@ -158,32 +254,44 @@ export const aula01: AulaArteV1 = {
     aurora: "Cada paisagem sonora tem uma 'cor' emocional. Descobre a cor certa pra cada lugar!",
     animais: [
       {
-        nome: "Praia com ondas quebrando", emoji: "🌊", fotoUrl: nosOndas,
+        nome: "Praia com ondas quebrando",
+        emoji: "🌊",
+        fotoUrl: nosOndas,
         corAlvo: { nome: "Azul-turquesa calmo", hex: "#06b6d4" },
         opcoes: [
           { nome: "Vermelho de alarme", hex: "#dc2626" },
           { nome: "Azul-turquesa calmo", hex: "#06b6d4" },
           { nome: "Preto pesado", hex: "#1f2937" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Isso! Ondas passam sensação de CALMA — azul-turquesa suave.",
       },
       {
-        nome: "Lancha rápida a motor", emoji: "🚤", fotoUrl: nosLancha,
+        nome: "Lancha rápida a motor",
+        emoji: "🚤",
+        fotoUrl: nosLancha,
         corAlvo: { nome: "Laranja vibrante (som forte)", hex: "#ea580c" },
         opcoes: [
           { nome: "Rosa-bebê pastel", hex: "#f9a8d4" },
           { nome: "Laranja vibrante (som forte)", hex: "#ea580c" },
           { nome: "Verde-oliva fosco", hex: "#65a30d" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Perfeito! Motor rápido = alta intensidade = laranja quente.",
       },
       {
-        nome: "Gaivotas no céu", emoji: "🕊️", fotoUrl: nosGaivotas,
+        nome: "Gaivotas no céu",
+        emoji: "🕊️",
+        fotoUrl: nosGaivotas,
         corAlvo: { nome: "Branco-azulado leve", hex: "#e0f2fe" },
         opcoes: [
           { nome: "Marrom-terra", hex: "#78350f" },
           { nome: "Branco-azulado leve", hex: "#e0f2fe" },
           { nome: "Roxo-escuro", hex: "#581c87" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Certo! Gritos agudos e leves — branco quase transparente.",
       },
@@ -194,10 +302,34 @@ export const aula01: AulaArteV1 = {
     tipo: "sequenciaMistura",
     aurora: "Ordena os 4 passos pra criar TUA paisagem sonora do bairro — com o celular!",
     passos: [
-      { id: "p1", texto: "ESCOLHO um lugar interessante (praça, mercado, quintal)", emoji: "📍", ordem: 1, fotoUrl: mapaPraca },
-      { id: "p2", texto: "GRAVO 1 minuto de sons no gravador do celular", emoji: "🎙️", ordem: 2, fotoUrl: mapaGravador },
-      { id: "p3", texto: "LISTO os sons: quais são naturais? Quais são artificiais?", emoji: "📝", ordem: 3, fotoUrl: vocabPaisagem },
-      { id: "p4", texto: "COMPARTILHO com a turma e adivinhamos o lugar de cada um!", emoji: "🎧", ordem: 4, fotoUrl: mapaCidade },
+      {
+        id: "p1",
+        texto: "ESCOLHO um lugar interessante (praça, mercado, quintal)",
+        emoji: "📍",
+        ordem: 1,
+        fotoUrl: mapaPraca,
+      },
+      {
+        id: "p2",
+        texto: "GRAVO 1 minuto de sons no gravador do celular",
+        emoji: "🎙️",
+        ordem: 2,
+        fotoUrl: mapaGravador,
+      },
+      {
+        id: "p3",
+        texto: "LISTO os sons: quais são naturais? Quais são artificiais?",
+        emoji: "📝",
+        ordem: 3,
+        fotoUrl: vocabPaisagem,
+      },
+      {
+        id: "p4",
+        texto: "COMPARTILHO com a turma e adivinhamos o lugar de cada um!",
+        emoji: "🎧",
+        ordem: 4,
+        fotoUrl: mapaCidade,
+      },
     ],
     falaAcerto: "Sua paisagem sonora está PRONTA! Cada lugar do bairro tem um som único.",
   },
@@ -207,10 +339,22 @@ export const aula01: AulaArteV1 = {
     aurora: "Agora VOCÊ lê o diário do explorador sonoro. Toca nas palavras coloridas pra ouvir.",
     titulo: "Diário do Explorador — Manhã na Praça",
     trechos: [
-      { texto: "Cheguei na praça e gravei toda a", palavraDestaque: "paisagem", corDestaque: "#7c3aed" },
+      {
+        texto: "Cheguei na praça e gravei toda a",
+        palavraDestaque: "paisagem",
+        corDestaque: "#7c3aed",
+      },
       { texto: "Ouvi passarinho — som", palavraDestaque: "natural", corDestaque: "#16a34a" },
-      { texto: "E ouvi buzina de ônibus — som", palavraDestaque: "artificial", corDestaque: "#4b5563" },
-      { texto: "A ambulância passou com muita", palavraDestaque: "intensidade", corDestaque: "#dc2626" },
+      {
+        texto: "E ouvi buzina de ônibus — som",
+        palavraDestaque: "artificial",
+        corDestaque: "#4b5563",
+      },
+      {
+        texto: "A ambulância passou com muita",
+        palavraDestaque: "intensidade",
+        corDestaque: "#dc2626",
+      },
       { texto: "Sou um Explorador do Tempo — a página 4 está sendo restaurada!" },
     ],
   },
@@ -218,7 +362,8 @@ export const aula01: AulaArteV1 = {
   cena09_minijogo: {
     tipo: "cenaTematica",
     variante: "minijogo",
-    aurora: "🎧 Caça-Sons! Toca em CADA fonte sonora e classifica como natural ou artificial antes do tempo acabar.",
+    aurora:
+      "🎧 Caça-Sons! Toca em CADA fonte sonora e classifica como natural ou artificial antes do tempo acabar.",
     titulo: "🎧 Caça-Sons do Bairro",
     instrucao: "Toque em cada fonte sonora e identifique!",
     tempoSeg: 40,
@@ -239,13 +384,55 @@ export const aula01: AulaArteV1 = {
     aurora: "Fecha o caderno da expedição repassando cada achado. Toca em cada verbete!",
     titulo: "📓 Caderno da Expedição Sonora",
     itens: [
-      { emoji: "🎧", rotulo: "Paisagem Sonora", descricao: "Tudo que se ouve num lugar.", cor: "#7c3aed", fotoUrl: vocabPaisagem },
-      { emoji: "🌿", rotulo: "Som Natural", descricao: "Da natureza: chuva, pássaro, trovão.", cor: "#16a34a", fotoUrl: vocabNatural },
-      { emoji: "🚗", rotulo: "Som Artificial", descricao: "De gente ou máquina: carro, sino, TV.", cor: "#4b5563", fotoUrl: vocabArtificial },
-      { emoji: "🔊", rotulo: "Intensidade", descricao: "Volume: fraco ou forte.", cor: "#dc2626", fotoUrl: vocabIntensidade },
-      { emoji: "🎙️", rotulo: "Gravador", descricao: "Ferramenta pra capturar sons do mundo.", cor: "#78350f", fotoUrl: mapaGravador },
-      { emoji: "🌳", rotulo: "Praça", descricao: "Mistura sons naturais e artificiais.", cor: "#16a34a", fotoUrl: mapaPraca },
-      { emoji: "⚡", rotulo: "Trovão", descricao: "Som natural muito intenso.", cor: "#facc15", fotoUrl: quizTrovao },
+      {
+        emoji: "🎧",
+        rotulo: "Paisagem Sonora",
+        descricao: "Tudo que se ouve num lugar.",
+        cor: "#7c3aed",
+        fotoUrl: vocabPaisagem,
+      },
+      {
+        emoji: "🌿",
+        rotulo: "Som Natural",
+        descricao: "Da natureza: chuva, pássaro, trovão.",
+        cor: "#16a34a",
+        fotoUrl: vocabNatural,
+      },
+      {
+        emoji: "🚗",
+        rotulo: "Som Artificial",
+        descricao: "De gente ou máquina: carro, sino, TV.",
+        cor: "#4b5563",
+        fotoUrl: vocabArtificial,
+      },
+      {
+        emoji: "🔊",
+        rotulo: "Intensidade",
+        descricao: "Volume: fraco ou forte.",
+        cor: "#dc2626",
+        fotoUrl: vocabIntensidade,
+      },
+      {
+        emoji: "🎙️",
+        rotulo: "Gravador",
+        descricao: "Ferramenta pra capturar sons do mundo.",
+        cor: "#78350f",
+        fotoUrl: mapaGravador,
+      },
+      {
+        emoji: "🌳",
+        rotulo: "Praça",
+        descricao: "Mistura sons naturais e artificiais.",
+        cor: "#16a34a",
+        fotoUrl: mapaPraca,
+      },
+      {
+        emoji: "⚡",
+        rotulo: "Trovão",
+        descricao: "Som natural muito intenso.",
+        cor: "#facc15",
+        fotoUrl: quizTrovao,
+      },
     ],
     falaFinal: "Página 4 do Atlas dos Exploradores DESBLOQUEADA — O Compositor das Ruas!",
   },
@@ -258,8 +445,12 @@ export const aula01: AulaArteV1 = {
       alternativas: [
         { texto: "Todo o conjunto de sons que se ouve num lugar num momento", correta: true },
         { texto: "Uma pintura de um lugar", correta: false },
+
+        { texto: "Não corresponde ao tema", correta: false },
+        { texto: "Outra resposta sem relação", correta: false },
       ],
-      feedback: "Excelente! Paisagem sonora é como uma FOTO feita de sons — capturada com o ouvido em vez do olho. Foi um artista chamado Murray Schafer que inventou a ideia.",
+      feedback:
+        "Excelente! Paisagem sonora é como uma FOTO feita de sons — capturada com o ouvido em vez do olho. Foi um artista chamado Murray Schafer que inventou a ideia.",
     },
     missaoFamilia:
       "🎧 Detetives do Som: em família, escolham 1 lugar (cozinha, quintal, praça) e gravem 30 segundos com o celular. Depois ouçam JUNTOS e listem cada som: natural ou artificial? Fraco ou forte?",

@@ -105,9 +105,9 @@ export const aula04_tabuadas4e5: AulaV4 = {
   },
   momento10_avaliacao: {
     perguntas: [
-      { pergunta: "5 × 4 = ?", opcoes: ["20", "16", "24"], correta: 0, feedbackAcerto: "🎉 20.", feedbackErro: "5×4=20." },
-      { pergunta: "6 × 5 = ?", opcoes: ["30", "25", "35"], correta: 0, feedbackAcerto: "🎉 30.", feedbackErro: "6×5=30." },
-      { pergunta: "9 × 4 = ?", opcoes: ["36", "32", "40"], correta: 0, feedbackAcerto: "🎉 36.", feedbackErro: "9×4=36." },
+      { pergunta: "5 × 4 = ?", opcoes: ["20", "16", "24"], correta: 0, feedbackAcerto: "🎉 Cinco grupos de 4 formam 20.", feedbackErro: "Some 4 cinco vezes: 4 + 4 + 4 + 4 + 4 = 20." },
+      { pergunta: "6 × 5 = ?", opcoes: ["30", "25", "35"], correta: 0, feedbackAcerto: "🎉 Seis grupos de 5 formam 30.", feedbackErro: "Conte de 5 em 5 seis vezes até chegar a 30." },
+      { pergunta: "9 × 4 = ?", opcoes: ["36", "32", "40"], correta: 0, feedbackAcerto: "🎉 Nove grupos de 4 formam 36.", feedbackErro: "Use 10 × 4 = 40 e retire um grupo de 4: 40 − 4 = 36." },
     ],
   },
   momento11_missaoFamilia: {

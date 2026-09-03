@@ -23,7 +23,7 @@ export const aula01: AulaPortuguesV4 = {
   slug: "aula-01-comeco-conflito-desfecho",
   titulo: "Começo, conflito e desfecho",
   iconeTrilha: "🧩",
-  bncc: ["EF35LP25", "EF35LP26"],
+  bncc: ["EF35LP25", "EF35LP26", "EF35LP29"],
   duracaoMin: 18,
 
   momento01_motivacao: {

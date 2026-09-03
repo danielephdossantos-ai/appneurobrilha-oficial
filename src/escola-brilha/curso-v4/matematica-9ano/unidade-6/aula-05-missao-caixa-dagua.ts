@@ -4,7 +4,7 @@ export const aula05_missaoCaixaDagua: AulaV4 = {
   slug: "u6-05-missao-caixa-dagua",
   titulo: "Missão: A Caixa-d'Água e a Praça do Bairro",
   iconeTrilha: "🚰",
-  bncc: ["EF09MA19", "EF09MA20"],
+  bncc: ["EF09MA19"],
   duracaoMin: 35,
   metodologias: ["skemp", "vergnaud"],
 

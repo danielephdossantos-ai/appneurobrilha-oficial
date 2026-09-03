@@ -34,8 +34,7 @@ export const aula01: AulaPortuguesV4 = {
   },
 
   momento02_previsao: {
-    instrucao:
-      "Aurora deixou o mapa da viagem. Olhe as pistas e escolha.",
+    instrucao: "Aurora deixou o mapa da viagem. Olhe as pistas e escolha.",
     bloco: {
       titulo: "Missão: A Rota do Leite",
       capaImagemUrl: mapaPercurso,
@@ -66,12 +65,12 @@ export const aula01: AulaPortuguesV4 = {
         },
         { texto: "Sobre voar de balão pra Lua.", imagemUrl: cidade },
         { texto: "Sobre fazer um bolo em casa.", imagemUrl: padaria },
+        { texto: "Sobre outra possibilidade relacionada ao tema.", imagemUrl: mapaPercurso },
       ],
       respostaCerta: 0,
       feedbackAcerto:
         "🎉 Isso! Vamos seguir a rota do leite: campo → caminhão → fábrica → mercado.",
-      feedbackErro:
-        "Olhe as pistas: VACA, CAMINHÃO e MERCADO. A missão fala do CAMINHO do leite.",
+      feedbackErro: "Olhe as pistas: VACA, CAMINHÃO e MERCADO. A missão fala do CAMINHO do leite.",
     },
   },
 
@@ -108,14 +107,7 @@ export const aula01: AulaPortuguesV4 = {
       titulo: "A viagem da caixinha de leite",
       imagemUrl: mapaPercurso,
       legendaImagem: "Do campo até a mesa: 4 etapas.",
-      destacar: [
-        "campo",
-        "vaca",
-        "caminhão",
-        "fábrica",
-        "mercado",
-        "cidade",
-      ],
+      destacar: ["campo", "vaca", "caminhão", "fábrica", "mercado", "cidade"],
       paragrafos: [
         "Tudo começa no CAMPO, na fazenda. A VACA come pasto e dá LEITE bem cedinho.",
         "O leite entra num CAMINHÃO grande, gelado por dentro, e viaja pela ESTRADA até a cidade.",
@@ -130,7 +122,7 @@ export const aula01: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "Onde COMEÇA a viagem do leite?",
-        opcoes: ["Na fábrica", "No campo (fazenda)", "No mercado"],
+        opcoes: ["Na fábrica", "No campo (fazenda)", "No mercado", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 Isso! Começa no CAMPO, com a VACA.",
         feedbackErro: "O texto diz: 'Tudo começa no CAMPO, na fazenda'.",
@@ -138,11 +130,10 @@ export const aula01: AulaPortuguesV4 = {
       },
       {
         pergunta: "Quem TRANSPORTA o leite do campo até a cidade?",
-        opcoes: ["Um avião", "Um caminhão gelado", "A própria vaca"],
+        opcoes: ["Um avião", "Um caminhão gelado", "A própria vaca", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 Certo! Um CAMINHÃO gelado.",
-        feedbackErro:
-          "O texto diz: 'O leite entra num CAMINHÃO grande, gelado por dentro'.",
+        feedbackErro: "O texto diz: 'O leite entra num CAMINHÃO grande, gelado por dentro'.",
         ondeEstaNoTexto: "…O leite entra num CAMINHÃO grande…",
       },
       {
@@ -151,46 +142,52 @@ export const aula01: AulaPortuguesV4 = {
           "Ele é aquecido e colocado na caixinha",
           "Ele vira sorvete de chocolate",
           "Ele volta pra fazenda",
+          "Outra possibilidade",
         ],
         correta: 0,
         feedbackAcerto: "🎉 Isso! Aquecido e colocado na CAIXINHA.",
-        feedbackErro:
-          "O texto diz: 'o leite é AQUECIDO… e é colocado dentro da CAIXINHA'.",
-        ondeEstaNoTexto:
-          "…o leite é AQUECIDO pra ficar seguro e é colocado dentro da CAIXINHA…",
+        feedbackErro: "O texto diz: 'o leite é AQUECIDO… e é colocado dentro da CAIXINHA'.",
+        ondeEstaNoTexto: "…o leite é AQUECIDO pra ficar seguro e é colocado dentro da CAIXINHA…",
       },
       {
         pergunta: "Onde a família COMPRA a caixinha de leite?",
-        opcoes: ["Na fazenda", "No mercado da cidade", "Dentro do caminhão"],
+        opcoes: ["Na fazenda", "No mercado da cidade", "Dentro do caminhão", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 Boa! No MERCADO da cidade.",
-        feedbackErro:
-          "O texto diz: 'As caixinhas chegam ao MERCADO da CIDADE'.",
+        feedbackErro: "O texto diz: 'As caixinhas chegam ao MERCADO da CIDADE'.",
         ondeEstaNoTexto: "…chegam ao MERCADO da CIDADE…",
       },
     ],
   },
 
   momento06_personagensCenario: {
-    instrucao:
-      "Cada etapa da viagem acontece em um LUGAR. Descubra onde.",
+    instrucao: "Cada etapa da viagem acontece em um LUGAR. Descubra onde.",
     perguntas: [
       {
         pergunta: "Onde a VACA vive e dá leite?",
-        opcoes: ["No campo (zona rural)", "Dentro do mercado", "No caminhão"],
-        opcoesImagens: [campo, mercado, carro],
+        opcoes: [
+          "No campo (zona rural)",
+          "Dentro do mercado",
+          "No caminhão",
+          "Outra possibilidade",
+        ],
+        opcoesImagens: [campo, mercado, carro, campo],
         correta: 0,
         feedbackAcerto: "🎉 Isso! VACA vive no CAMPO.",
         feedbackErro: "A vaca vive na fazenda, no CAMPO (zona rural).",
       },
       {
         pergunta: "Onde fica a FÁBRICA e o MERCADO?",
-        opcoes: ["No meio do pasto", "Na cidade (zona urbana)", "Em cima de uma árvore"],
-        opcoesImagens: [vaca, cidade, campo],
+        opcoes: [
+          "No meio do pasto",
+          "Na cidade (zona urbana)",
+          "Em cima de uma árvore",
+          "Outra possibilidade",
+        ],
+        opcoesImagens: [vaca, cidade, campo, vaca],
         correta: 1,
         feedbackAcerto: "🎉 Certo! Fábrica e mercado ficam na CIDADE.",
-        feedbackErro:
-          "FÁBRICA e MERCADO ficam na CIDADE (zona urbana).",
+        feedbackErro: "FÁBRICA e MERCADO ficam na CIDADE (zona urbana).",
       },
       {
         pergunta: "O CAMINHÃO liga esses dois lugares por qual caminho?",
@@ -198,19 +195,18 @@ export const aula01: AulaPortuguesV4 = {
           "Por uma estrada",
           "Por dentro do rio nadando",
           "Por baixo da terra",
+          "Outra possibilidade",
         ],
-        opcoesImagens: [ponte, campo, mercado],
+        opcoesImagens: [ponte, campo, mercado, ponte],
         correta: 0,
         feedbackAcerto: "🎉 Boa! O caminhão vai pela ESTRADA.",
-        feedbackErro:
-          "O caminhão usa a ESTRADA pra ligar o campo à cidade.",
+        feedbackErro: "O caminhão usa a ESTRADA pra ligar o campo à cidade.",
       },
     ],
   },
 
   momento07_sequencia: {
-    instrucao:
-      "Coloca em ORDEM a viagem da caixinha de leite: do primeiro até o último passo.",
+    instrucao: "Coloca em ORDEM a viagem da caixinha de leite: do primeiro até o último passo.",
     bloco: {
       instrucao: "Do primeiro → último.",
       itens: [
@@ -221,8 +217,7 @@ export const aula01: AulaPortuguesV4 = {
         { id: "s5", texto: "5) Em CASA, a gente toma o leite.", imagemUrl: geladeira },
       ],
       ordemCerta: ["s1", "s2", "s3", "s4", "s5"],
-      feedbackAcerto:
-        "🎉 Perfeito! Vaca → caminhão → fábrica → mercado → casa. É essa a rota!",
+      feedbackAcerto: "🎉 Perfeito! Vaca → caminhão → fábrica → mercado → casa. É essa a rota!",
       feedbackErro:
         "Pense do começo: primeiro a VACA dá o leite, depois vem o CAMINHÃO, a FÁBRICA, o MERCADO e por último a CASA.",
     },
@@ -242,12 +237,11 @@ export const aula01: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "Onde os TOMATES são plantados?",
-        opcoes: ["No sítio, no campo", "Dentro do mercado", "Na cozinha"],
-        opcoesImagens: [campo, mercado, geladeira],
+        opcoes: ["No sítio, no campo", "Dentro do mercado", "Na cozinha", "Outra possibilidade"],
+        opcoesImagens: [campo, mercado, geladeira, campo],
         correta: 0,
         feedbackAcerto: "🎉 Isso! No SÍTIO, no CAMPO.",
-        feedbackErro:
-          "O texto diz: 'planta TOMATE no sítio dela, no campo'.",
+        feedbackErro: "O texto diz: 'planta TOMATE no sítio dela, no campo'.",
         ondeEstaNoTexto: "…planta TOMATE no sítio dela, no campo…",
       },
       {
@@ -256,13 +250,12 @@ export const aula01: AulaPortuguesV4 = {
           "Nasce direto no supermercado",
           "É feito na fábrica com os tomates do campo",
           "Cai da nuvem",
+          "Outra possibilidade",
         ],
-        opcoesImagens: [mercado, campo, cidade],
+        opcoesImagens: [mercado, campo, cidade, mercado],
         correta: 1,
-        feedbackAcerto:
-          "🎉 Boa! A FÁBRICA usa os tomates do campo pra fazer molho.",
-        feedbackErro:
-          "O texto diz: 'uma fábrica pega alguns e faz MOLHO em vidrinho'.",
+        feedbackAcerto: "🎉 Boa! A FÁBRICA usa os tomates do campo pra fazer molho.",
+        feedbackErro: "O texto diz: 'uma fábrica pega alguns e faz MOLHO em vidrinho'.",
         ondeEstaNoTexto: "…uma fábrica pega alguns e faz MOLHO em vidrinho…",
       },
     ],
@@ -334,12 +327,11 @@ export const aula01: AulaPortuguesV4 = {
         "Mercado → caminhão → campo → casa",
         "Campo → caminhão → mercado → casa",
         "Casa → mercado → campo → caminhão",
+        "Outra possibilidade",
       ],
       correta: 1,
-      feedbackAcerto:
-        "🎉 Isso! CAMPO → CAMINHÃO → MERCADO → CASA.",
-      feedbackErro:
-        "Começa no CAMPO (produção), o CAMINHÃO leva, o MERCADO vende e vai pra CASA.",
+      feedbackAcerto: "🎉 Isso! CAMPO → CAMINHÃO → MERCADO → CASA.",
+      feedbackErro: "Começa no CAMPO (produção), o CAMINHÃO leva, o MERCADO vende e vai pra CASA.",
     },
   },
 
@@ -347,26 +339,29 @@ export const aula01: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "1/5 — Onde o LEITE começa a viagem?",
-        opcoes: ["No mercado", "No campo, com a vaca", "Na fábrica"],
+        opcoes: ["No mercado", "No campo, com a vaca", "Na fábrica", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 No CAMPO, com a VACA.",
         feedbackErro: "A viagem COMEÇA no CAMPO, com a VACA.",
       },
       {
         pergunta: "2/5 — Quem faz o TRANSPORTE do alimento?",
-        opcoes: ["O caminhão", "A geladeira", "O prefeito"],
+        opcoes: ["O caminhão", "A geladeira", "O prefeito", "Outra possibilidade"],
         correta: 0,
         feedbackAcerto: "🎉 O CAMINHÃO.",
-        feedbackErro:
-          "Quem TRANSPORTA o alimento pela estrada é o CAMINHÃO.",
+        feedbackErro: "Quem TRANSPORTA o alimento pela estrada é o CAMINHÃO.",
       },
       {
         pergunta: "3/5 — Onde ficam a FÁBRICA e o MERCADO?",
-        opcoes: ["No campo (zona rural)", "Na cidade (zona urbana)", "Dentro do rio"],
+        opcoes: [
+          "No campo (zona rural)",
+          "Na cidade (zona urbana)",
+          "Dentro do rio",
+          "Outra possibilidade",
+        ],
         correta: 1,
         feedbackAcerto: "🎉 Na CIDADE (zona urbana).",
-        feedbackErro:
-          "FÁBRICA e MERCADO ficam na CIDADE.",
+        feedbackErro: "FÁBRICA e MERCADO ficam na CIDADE.",
       },
       {
         pergunta: "4/5 — CONSUMO é...",
@@ -374,11 +369,11 @@ export const aula01: AulaPortuguesV4 = {
           "Plantar o alimento",
           "Usar, comer ou beber o alimento",
           "Guardar o caminhão",
+          "Outra possibilidade",
         ],
         correta: 1,
         feedbackAcerto: "🎉 CONSUMO = usar/comer/beber.",
-        feedbackErro:
-          "CONSUMO é quando a gente USA/COME/BEBE o alimento em casa.",
+        feedbackErro: "CONSUMO é quando a gente USA/COME/BEBE o alimento em casa.",
       },
       {
         pergunta: "5/5 — Sem o CAMPO, o que acontece no mercado?",
@@ -386,12 +381,11 @@ export const aula01: AulaPortuguesV4 = {
           "Nada — o mercado fabrica sozinho",
           "As prateleiras ficam SEM alimentos frescos",
           "O mercado vira uma fazenda",
+          "Outra possibilidade",
         ],
         correta: 1,
-        feedbackAcerto:
-          "🎉 Isso! Sem CAMPO, não tem alimento fresco no mercado.",
-        feedbackErro:
-          "O mercado DEPENDE do campo. Sem campo → sem alimentos frescos.",
+        feedbackAcerto: "🎉 Isso! Sem CAMPO, não tem alimento fresco no mercado.",
+        feedbackErro: "O mercado DEPENDE do campo. Sem campo → sem alimentos frescos.",
       },
     ],
   },
@@ -405,8 +399,7 @@ export const aula01: AulaPortuguesV4 = {
       "3) Pergunte: 'De onde isso veio antes de chegar aqui?'",
       "4) Desenhe a ROTA em 4 quadrinhos: CAMPO → CAMINHÃO → MERCADO → CASA.",
     ],
-    registro:
-      "📸 Uma foto do seu desenho da rota do alimento (4 quadrinhos).",
+    registro: "📸 Uma foto do seu desenho da rota do alimento (4 quadrinhos).",
   },
 
   recompensa: {

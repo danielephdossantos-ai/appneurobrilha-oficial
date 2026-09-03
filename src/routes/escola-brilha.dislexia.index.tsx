@@ -313,7 +313,8 @@ function DislexiaIndex() {
 function getConcluidas(): string[] {
   if (typeof window === "undefined") return [];
   try {
-    return JSON.parse(localStorage.getItem("eb.dislexia.concluidas") ?? "[]");
+    const childId = localStorage.getItem("neurobrilha:activeChildId") || "sem-crianca";
+    return JSON.parse(localStorage.getItem(`eb.dislexia.concluidas.${childId}`) ?? "[]");
   } catch {
     return [];
   }

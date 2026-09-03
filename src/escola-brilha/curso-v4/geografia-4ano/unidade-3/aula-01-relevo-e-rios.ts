@@ -13,7 +13,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-relevo-e-rios",
   titulo: "Relevo e Rios: A Cara do Brasil",
   iconeTrilha: "⛰️",
-  bncc: ["EF04GE04"],
+  bncc: ["EF04GE11"],
   duracaoMin: 22,
 
   cena01_motivacao: {
@@ -45,6 +45,19 @@ export const aula01: AulaGeoV1 = {
         subtitulo: "transporte de carga",
         emoji: "🚢",
         cor: "from-sky-500 to-blue-700",
+      },
+
+      {
+        id: "extra-1",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
+      {
+        id: "extra-2",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
       },
     ],
     respostaCerta: "energia",
@@ -116,8 +129,7 @@ export const aula01: AulaGeoV1 = {
         emoji: "🌊",
         cor: "from-sky-500 to-blue-700",
         titulo: "Rio Amazonas",
-        texto:
-          "O MAIOR rio do mundo em volume de água. Corre pela Planície Amazônica, no Norte.",
+        texto: "O MAIOR rio do mundo em volume de água. Corre pela Planície Amazônica, no Norte.",
         fotoUrl: norte,
       },
       {
@@ -148,8 +160,7 @@ export const aula01: AulaGeoV1 = {
         emoji: "⛰️",
         cor: "from-purple-500 to-indigo-700",
         titulo: "Serra Gaúcha",
-        texto:
-          "Parte alta e fria do Sul, com vinhedos e neve raríssima no inverno.",
+        texto: "Parte alta e fria do Sul, com vinhedos e neve raríssima no inverno.",
         fotoUrl: sul,
       },
     ],
@@ -169,6 +180,13 @@ export const aula01: AulaGeoV1 = {
           { id: "plan", emoji: "⛰️", titulo: "Planalto", cor: "from-orange-500 to-red-700" },
           { id: "plani", emoji: "🌾", titulo: "Planície", cor: "from-emerald-500 to-green-700" },
           { id: "dep", emoji: "🕳️", titulo: "Depressão", cor: "from-amber-600 to-orange-800" },
+
+          {
+            id: "extra-3",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "plan",
         feedbackAcerto: "Isso! PLANALTO = área alta e plana no topo.",
@@ -182,6 +200,13 @@ export const aula01: AulaGeoV1 = {
           { id: "nav", emoji: "🚢", titulo: "Navegar", cor: "from-sky-500 to-blue-700" },
           { id: "en", emoji: "⚡", titulo: "Gerar energia", cor: "from-yellow-400 to-amber-600" },
           { id: "pes", emoji: "🎣", titulo: "Só pescar", cor: "from-emerald-500 to-green-700" },
+
+          {
+            id: "extra-4",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "en",
         feedbackAcerto: "Perfeito! Queda d'água = HIDRELÉTRICA.",
@@ -195,6 +220,13 @@ export const aula01: AulaGeoV1 = {
           { id: "sf", emoji: "💧", titulo: "São Francisco", cor: "from-cyan-500 to-blue-700" },
           { id: "am", emoji: "🌊", titulo: "Amazonas", cor: "from-sky-500 to-blue-700" },
           { id: "par", emoji: "🏞️", titulo: "Paraná", cor: "from-blue-500 to-indigo-700" },
+
+          {
+            id: "extra-5",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "am",
         feedbackAcerto: "Boa! O AMAZONAS é o maior do mundo em volume de água.",
@@ -214,8 +246,7 @@ export const aula01: AulaGeoV1 = {
       siglas: ["AM", "PA", "MT", "MG", "BA"],
       pergunta: "Quais são os 5 MAIORES estados em área?",
     },
-    falaFinal:
-      "Amazonas é gigante — quase o dobro de MG. Territórios enormes, relevos diferentes.",
+    falaFinal: "Amazonas é gigante — quase o dobro de MG. Territórios enormes, relevos diferentes.",
   },
 
   cena07_sequencia: {
@@ -312,7 +343,11 @@ export const aula01: AulaGeoV1 = {
       {
         id: "r1",
         municipioA: { nome: "Chapada Diamantina", emoji: "⛰️", cor: "from-orange-500 to-red-700" },
-        municipioB: { nome: "Área alta e plana no topo", emoji: "🏞️", cor: "from-amber-500 to-orange-700" },
+        municipioB: {
+          nome: "Área alta e plana no topo",
+          emoji: "🏞️",
+          cor: "from-amber-500 to-orange-700",
+        },
         contexto: "Chapada com topo achatado em cima é...",
         pecaCertaId: "planalto",
         feedbackAcerto: "Isso! Chapada = PLANALTO.",
@@ -320,7 +355,11 @@ export const aula01: AulaGeoV1 = {
       },
       {
         id: "r2",
-        municipioA: { nome: "Beira do rio Amazonas", emoji: "🌾", cor: "from-emerald-500 to-green-700" },
+        municipioA: {
+          nome: "Beira do rio Amazonas",
+          emoji: "🌾",
+          cor: "from-emerald-500 to-green-700",
+        },
         municipioB: { nome: "Plano e baixo", emoji: "🍃", cor: "from-lime-500 to-emerald-700" },
         contexto: "Área baixa e plana às margens do rio é...",
         pecaCertaId: "planicie",
@@ -347,7 +386,11 @@ export const aula01: AulaGeoV1 = {
       },
       {
         id: "r5",
-        municipioA: { nome: "Serra Gaúcha (RS)", emoji: "🏔️", cor: "from-purple-500 to-indigo-700" },
+        municipioA: {
+          nome: "Serra Gaúcha (RS)",
+          emoji: "🏔️",
+          cor: "from-purple-500 to-indigo-700",
+        },
         municipioB: { nome: "Vinhedos e frio", emoji: "🍇", cor: "from-fuchsia-500 to-purple-700" },
         contexto: "Área alta e recortada com vinhedos no Sul:",
         pecaCertaId: "serra",
@@ -356,8 +399,16 @@ export const aula01: AulaGeoV1 = {
       },
       {
         id: "r6",
-        municipioA: { nome: "Depressão Sertaneja", emoji: "🕳️", cor: "from-amber-600 to-orange-800" },
-        municipioB: { nome: "Mais baixa que o entorno", emoji: "🏜️", cor: "from-yellow-500 to-orange-700" },
+        municipioA: {
+          nome: "Depressão Sertaneja",
+          emoji: "🕳️",
+          cor: "from-amber-600 to-orange-800",
+        },
+        municipioB: {
+          nome: "Mais baixa que o entorno",
+          emoji: "🏜️",
+          cor: "from-yellow-500 to-orange-700",
+        },
         contexto: "Área REBAIXADA em relação ao que está em volta:",
         pecaCertaId: "depressao",
         feedbackAcerto: "Perfeito! É uma DEPRESSÃO.",
@@ -408,6 +459,8 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Planície", correta: false },
           { id: "b", texto: "Planalto", correta: true },
           { id: "c", texto: "Depressão", correta: false },
+
+          { id: "extra-6", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Isso! PLANALTO = alto e plano no topo.",
         feedbackErro: "Planície é BAIXA. Alta e plana = PLANALTO.",
@@ -419,11 +472,11 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Porque tem rios que descem de planaltos com força.", correta: true },
           { id: "b", texto: "Porque não tem sol nem vento pra outras fontes.", correta: false },
           { id: "c", texto: "Porque tem muitos vulcões.", correta: false },
+
+          { id: "extra-7", texto: "Outra possibilidade", correta: false },
         ],
-        feedbackAcerto:
-          "Perfeito! Rio + queda + volume de água = ENERGIA. É a nossa maior fonte.",
-        feedbackErro:
-          "Não é falta de sol nem vulcão. É porque rios descem de PLANALTOS com força.",
+        feedbackAcerto: "Perfeito! Rio + queda + volume de água = ENERGIA. É a nossa maior fonte.",
+        feedbackErro: "Não é falta de sol nem vulcão. É porque rios descem de PLANALTOS com força.",
       },
       {
         id: "av3",
@@ -432,6 +485,8 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Rio São Francisco", correta: false },
           { id: "b", texto: "Rio Amazonas", correta: true },
           { id: "c", texto: "Rio Paraná", correta: false },
+
+          { id: "extra-8", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Isso! O AMAZONAS carrega mais água que qualquer outro rio da Terra.",
         feedbackErro: "É o AMAZONAS — o maior do planeta em volume de água.",

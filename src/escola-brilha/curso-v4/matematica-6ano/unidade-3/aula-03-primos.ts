@@ -114,15 +114,15 @@ export const aula03_primos: AulaV4 = {
   },
 
   momento08_aplicacao: {
-    contexto: "Criptografia usa primos GIGANTES para proteger senhas.",
+    contexto: "Alguns sistemas de criptografia utilizam propriedades de números primos.",
     problema: "Por quê? Porque fatorar um produto de primos enormes é MUITO difícil, mesmo pro computador.",
     interacao: {
       tipo: "escolhaVisual",
       pergunta: "Isso mostra que primos são:",
-      opcoes: [{ nome: "Fundamentais na tecnologia" }, { nome: "Sem uso real" }, { nome: "Só de escola" }],
-      respostaCerta: "Fundamentais na tecnologia",
+      opcoes: [{ nome: "Podem ser usados em tecnologias de segurança" }, { nome: "Não possuem aplicação" }, { nome: "Servem apenas para exercícios" }],
+      respostaCerta: "Podem ser usados em tecnologias de segurança",
       feedbackAcerto: "🎯 RSA, Pix, bancos: tudo usa primos.",
-      feedbackErro: "Sem primos não existiria internet segura.",
+      feedbackErro: "Números primos participam de alguns métodos de criptografia, além de terem outras aplicações.",
     },
   },
 

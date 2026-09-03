@@ -214,8 +214,14 @@ function NeuroAtividade() {
     const p: any = variation.payload ?? {};
     const extra = p.letra
       ? ` A letra é ${p.letra}.`
-      : p.palavra
+        : p.palavra
         ? ` A palavra é ${p.palavra}.`
+        : p.pista
+          ? ` Ouça com atenção: ${p.pista}.`
+        : p.som
+          ? ` O som é ${p.som}.`
+        : p.instrucao
+          ? ` ${p.instrucao}.`
         : p.alvo
           ? ` Procure ${p.alvo}.`
           : p.target
@@ -384,7 +390,7 @@ function NeuroAtividade() {
           <button
             onClick={replay}
             disabled={!voiceOn || isSpeaking}
-            className="flex items-center gap-2 text-xs font-black rounded-full bg-primary/10 border border-primary/30 px-4 py-2 hover:bg-primary/20 disabled:opacity-50 transition-all shadow-sm active:scale-95"
+            className="flex items-center gap-2 text-sm font-black rounded-full bg-primary/10 border border-primary/30 px-4 py-3 hover:bg-primary/20 disabled:opacity-50 transition-all shadow-sm active:scale-95"
           >
             <Volume2 size={16} className={isSpeaking ? "animate-pulse" : ""} />
             {isSpeaking ? "OUVINDO..." : "OUVIR PIP"}
@@ -411,7 +417,7 @@ function NeuroAtividade() {
 
       {/* PROGRESSO E INFOS (RODAPÉ DISCRETO) */}
       <div className="mt-6 flex flex-col items-center gap-3">
-        <div className="flex items-center gap-4 text-[10px] font-black uppercase tracking-widest text-muted-foreground">
+        <div className="flex flex-wrap items-center justify-center gap-3 text-sm font-black uppercase tracking-wide text-muted-foreground">
           <span>{meta.nome}</span>
           <span className="w-1 h-1 rounded-full bg-muted-foreground/30" />
           <span>Exercício {(index % vars.length) + 1} de {vars.length}</span>
@@ -428,14 +434,14 @@ function NeuroAtividade() {
                 navigate({ to: "/neuro-treino" });
               }
             }}
-            className="flex items-center gap-1 text-xs font-bold text-muted-foreground hover:text-foreground transition-colors"
+            className="flex items-center gap-1 min-h-11 px-3 text-sm font-bold text-muted-foreground hover:text-foreground transition-colors"
           >
             <ArrowLeft size={14} /> Sair
           </button>
           
           <button
             onClick={toggleVoice}
-            className={`flex items-center gap-1 text-[9px] font-black uppercase tracking-tighter rounded-full border px-2 py-0.5 transition ${voiceOn ? "bg-success/10 border-success/40 text-success" : "bg-muted border-border text-muted-foreground"}`}
+            className={`flex items-center gap-1 min-h-11 text-sm font-black uppercase rounded-full border px-4 py-2 transition ${voiceOn ? "bg-success/10 border-success/40 text-success" : "bg-muted border-border text-muted-foreground"}`}
           >
             Voz {voiceOn ? "ON" : "OFF"}
           </button>
@@ -567,6 +573,8 @@ function MechanicRenderer({
       return <SonsCorpo p={variation.payload} onDone={onConcluir} />;
     case "tracado-letras":
       return <TracadoLetras p={variation.payload} onDone={onConcluir} promptLevel={promptLevel} />;
+    case "direcao-letras-numeros":
+      return <DirecaoLetrasNumeros p={variation.payload} onDone={onConcluir} />;
     case "triagem-categorias":
       return <TriagemCategorias p={variation.payload} onDone={onConcluir} />;
     case "expressao-emocao":
@@ -1850,6 +1858,7 @@ function RitmoSopro({ p, onDone }: any) {
   const blowMsRef = useRef<number>(0); // tempo acumulado soprando
   const lastTickRef = useRef<number>(0);
   const doneRef = useRef(false);
+  const manualTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const meta = p.holdSeconds * 1000; // ms necessários soprando
 
@@ -1863,7 +1872,33 @@ function RitmoSopro({ p, onDone }: any) {
     analyserRef.current = null;
   };
 
-  useEffect(() => () => stop(), []);
+  const pararManual = () => {
+    if (manualTimerRef.current) clearInterval(manualTimerRef.current);
+    manualTimerRef.current = null;
+  };
+
+  const iniciarManual = () => {
+    if (doneRef.current || manualTimerRef.current) return;
+    setErro(null);
+    manualTimerRef.current = setInterval(() => {
+      setLevel(0.65);
+      setProgress((atual) => {
+        const proximo = Math.min(100, atual + 100 / (p.holdSeconds * 10));
+        if (proximo >= 100 && !doneRef.current) {
+          doneRef.current = true;
+          pararManual();
+          setLevel(0);
+          setTimeout(() => onDone(true), 500);
+        }
+        return proximo;
+      });
+    }, 100);
+  };
+
+  useEffect(() => () => {
+    stop();
+    pararManual();
+  }, []);
 
   const iniciar = async () => {
     setErro(null);
@@ -1961,6 +1996,19 @@ function RitmoSopro({ p, onDone }: any) {
         <div className="text-xs text-coral bg-coral/10 rounded-lg p-2 max-w-md mx-auto flex items-center gap-2 justify-center mb-3">
           <AlertCircle size={14} /> {erro}
         </div>
+      )}
+
+      {erro && (
+        <button
+          type="button"
+          onPointerDown={iniciarManual}
+          onPointerUp={() => { pararManual(); setLevel(0); }}
+          onPointerCancel={() => { pararManual(); setLevel(0); }}
+          onPointerLeave={() => { pararManual(); setLevel(0); }}
+          className="mb-3 min-h-14 rounded-2xl bg-success px-6 py-3 text-base font-black text-white shadow-md touch-none"
+        >
+          Segure enquanto sopra
+        </button>
       )}
 
       {!micOn ? (
@@ -2139,6 +2187,52 @@ const CORES_DIR = [
   { nome: "Cinza",   hex: "#94a3b8" },
   { nome: "Pêssego", hex: "#fdba74" },
 ];
+
+function DirecaoLetrasNumeros({ p, onDone }: any) {
+  const [etapa, setEtapa] = useState<"observar" | "escolher">("observar");
+  const opcoes = p.espelhadaPrimeiro ? [true, false] : [false, true];
+
+  if (etapa === "observar") {
+    return (
+      <div className="mx-auto max-w-xl text-center space-y-5">
+        <p className="text-lg sm:text-xl font-bold text-slate-700">Veja onde começa e para onde o traço vai.</p>
+        <div className="relative mx-auto flex h-52 w-52 items-center justify-center rounded-[2rem] border-4 border-sky-200 bg-white shadow-lg">
+          <span className="absolute left-6 top-5 h-6 w-6 rounded-full bg-emerald-500 ring-4 ring-emerald-100" aria-label="Ponto inicial" />
+          <span className="text-9xl font-black text-slate-800" aria-label={`Símbolo ${p.simbolo}`}>{p.simbolo}</span>
+          <ArrowRight className="absolute bottom-5 right-6 h-10 w-10 text-sky-600" aria-hidden="true" />
+        </div>
+        <div className="rounded-2xl bg-sky-50 p-4 text-base sm:text-lg font-semibold text-slate-700">
+          Comece {p.inicio}: {p.sentido}.
+        </div>
+        <button type="button" onClick={() => setEtapa("escolher")} className="min-h-14 rounded-2xl bg-primary px-8 py-3 text-lg font-black text-primary-foreground shadow-md btn-tap">
+          Agora eu escolho
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="mx-auto max-w-xl text-center space-y-5">
+      <p className="text-xl sm:text-2xl font-black text-slate-800">Qual está no caminho certo?</p>
+      <div className="grid grid-cols-2 gap-4 sm:gap-6">
+        {opcoes.map((espelhada, i) => (
+          <button
+            type="button"
+            key={`${espelhada}-${i}`}
+            aria-label={espelhada ? "Forma espelhada" : "Forma correta"}
+            onClick={() => onDone(!espelhada)}
+            className="min-h-48 rounded-[2rem] border-4 border-slate-200 bg-white p-5 shadow-md transition-colors hover:border-primary focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/30"
+          >
+            <span className="inline-block text-8xl sm:text-9xl font-black text-slate-800" style={{ transform: espelhada ? "scaleX(-1)" : "none" }}>
+              {p.simbolo}
+            </span>
+          </button>
+        ))}
+      </div>
+      <p className="text-sm sm:text-base font-semibold text-muted-foreground">Sem pressa. Lembre do ponto verde e do caminho mostrado.</p>
+    </div>
+  );
+}
 
 function TracadoLetras({ p, onDone, promptLevel }: any) {
   const [cor, setCor] = useState<string>(CORES_ESQ[0].hex);
@@ -2467,6 +2561,9 @@ function TriagemCategorias({ p, onDone }: any) {
   const slotEmoji = sens.largerTargets ? "w-12 h-12" : "w-10 h-10";
   return (
     <div className="text-center">
+      <div className="text-base font-bold text-muted-foreground mb-4">
+        Toque em uma figura e depois toque na caixa certa.
+      </div>
       <div className="flex gap-3 justify-center mb-4 flex-wrap">
         {p.itens.map((it: any, i: number) => {
           if (assigned[i]) return null;
@@ -2475,7 +2572,8 @@ function TriagemCategorias({ p, onDone }: any) {
               key={i}
               draggable
               onDragStart={() => setDragging(i)}
-              className={`p-2 bg-card border-2 border-border rounded-xl cursor-grab active:cursor-grabbing ${itemSize} flex items-center justify-center`}
+              onClick={() => setDragging(i)}
+              className={`p-2 bg-card border-4 rounded-xl cursor-pointer ${itemSize} flex items-center justify-center ${dragging === i ? "border-primary ring-4 ring-primary/20" : "border-border"}`}
             >
               <RenderEmoji e={it.e} className="w-full h-full" />
             </div>
@@ -2488,7 +2586,8 @@ function TriagemCategorias({ p, onDone }: any) {
             key={c.nome}
             onDragOver={(e) => e.preventDefault()}
             onDrop={() => drop(c.nome)}
-            className="min-h-[140px] bg-lilac/10 border-2 border-dashed border-lilac rounded-2xl p-3"
+            onClick={() => drop(c.nome)}
+            className="min-h-[140px] bg-lilac/10 border-2 border-dashed border-lilac rounded-2xl p-3 cursor-pointer active:scale-[0.98] transition-transform"
           >
             <div className="font-black mb-2 flex items-center justify-center gap-2">
               <RenderEmoji e={c.emoji} label={c.nome} className={slotEmoji} />
@@ -2547,6 +2646,7 @@ function ExpressaoEmocao({ p, onDone }: any) {
 // 24. DISCRIMINAÇÃO AUDITIVA — par mínimo: vê/ouve palavra → escolhe figura
 function DiscriminacaoAuditiva({ p, onDone }: any) {
   const { effective: sens } = useSensoryProfile();
+  const { speak } = usePipVoice();
   const [escolhida, setEscolhida] = useState<string | null>(null);
   const handleClick = (palavra: string) => {
     if (escolhida) return;
@@ -2558,9 +2658,17 @@ function DiscriminacaoAuditiva({ p, onDone }: any) {
   return (
     <div className="text-center space-y-6">
       <div className="bg-gradient-to-br from-rose/20 to-rose/5 border-2 border-rose/30 rounded-3xl p-6">
-        <div className="text-xs uppercase text-muted-foreground mb-1">Ouça e escolha</div>
-        <div className="text-4xl font-black tracking-wide text-rose-600">{p.pista}</div>
-        <div className="text-sm text-muted-foreground mt-2">Qual figura tem o nome certo?</div>
+        <div className="text-sm uppercase font-bold text-muted-foreground mb-3">Ouça e escolha</div>
+        <button
+          type="button"
+          onClick={() => speak(`Ouça: ${p.pista}.`)}
+          className="mx-auto min-h-14 rounded-2xl bg-rose-600 px-6 py-3 text-lg font-black text-white shadow-md transition-transform active:scale-95 flex items-center justify-center gap-3"
+          aria-label="Ouvir a palavra novamente"
+        >
+          <Volume2 className="h-7 w-7" />
+          Ouvir de novo
+        </button>
+        <div className="text-base font-semibold text-muted-foreground mt-3">Qual figura você ouviu?</div>
       </div>
       <div className="grid grid-cols-2 gap-4">
         {p.ordem.map((palavra: string, i: number) => {
@@ -2576,7 +2684,7 @@ function DiscriminacaoAuditiva({ p, onDone }: any) {
             <button
               key={i}
               onClick={() => handleClick(palavra)}
-              className={`rounded-3xl border-2 p-5 flex flex-col items-center gap-3 transition-all font-black text-lg ${bg}`}
+              className={`rounded-3xl border-2 min-h-36 p-5 flex flex-col items-center justify-center gap-3 transition-all font-black text-lg ${bg}`}
             >
               <RenderEmoji e={emoji} label={palavra} className={imgSize} />
               <span>{palavra}</span>
@@ -2731,16 +2839,16 @@ function ArticulacaoSons({ p, onDone, promptLevel }: any) {
         </div>
       )}
       <button
-        onClick={gravar}
-        disabled={done || isListening || !supported}
+        onClick={supported ? gravar : celebrarPalavra}
+        disabled={done || isListening}
         className={`w-full py-5 rounded-3xl text-white font-black text-xl ${press} transition-all shadow-lg disabled:opacity-60 flex items-center justify-center gap-3 ${isListening ? `bg-emerald-500 ${pulseCls}` : "bg-rose-500"}`}
       >
         <Mic className="w-7 h-7" />
-        {done ? "Muito bem!" : isListening ? "Ouvindo..." : "Falar 🎤"}
+        {done ? "Muito bem!" : isListening ? "Ouvindo..." : supported ? "Falar 🎤" : "Terminei de falar"}
       </button>
       {!supported && (
         <div className="text-xs text-amber-600">
-          Seu navegador não permite reconhecimento de voz. Use Chrome, Edge ou Safari recentes.
+          O reconhecimento de voz não está disponível. Ouça o modelo, fale no seu ritmo e toque em “Terminei de falar”.
         </div>
       )}
     </div>
@@ -4226,16 +4334,24 @@ function SinalVerdeVermelho({ p, onDone }: any) {
   const [fase, setFase] = useState<"ready" | "show" | "wait">("ready");
   const [feedback, setFeedback] = useState<"hit" | "miss" | "wrong" | null>(null);
   const [acertos, setAcertos] = useState(0);
+  const acertosRef = useRef(0);
   const timerRef = useRef<any>(null);
   const clickedRef = useRef(false);
 
   const total = p.seq.length;
 
+  useEffect(() => () => clearTimeout(timerRef.current), []);
+
+  const registrarAcerto = () => {
+    acertosRef.current += 1;
+    setAcertos(acertosRef.current);
+  };
+
   const proximo = (idx: number) => {
     if (idx >= total) {
       // Fim do jogo: calcular se passou no critério
       // No Go/No-Go clínico, a criança precisa de alta precisão (geralmente >80%)
-      const score = (acertos / total);
+      const score = acertosRef.current / total;
       onDone(score >= 0.8);
       return;
     }
@@ -4255,7 +4371,7 @@ function SinalVerdeVermelho({ p, onDone }: any) {
       }
       // Se era vermelho e não clicou = hit (acerto por inibição)
       if (current.tipo === "vermelho" && !clickedRef.current) {
-        setAcertos(a => a + 1);
+        registrarAcerto();
         setFeedback("hit");
       }
       
@@ -4273,7 +4389,7 @@ function SinalVerdeVermelho({ p, onDone }: any) {
 
     const current = p.seq[index];
     if (current.tipo === "verde") {
-      setAcertos(a => a + 1);
+      registrarAcerto();
       setFeedback("hit");
     } else {
       setFeedback("wrong"); // Clicou no vermelho = erro de comissão
@@ -4336,9 +4452,34 @@ function SinalVerdeVermelho({ p, onDone }: any) {
 
 // ============== NOVAS MECÂNICAS IMPLEMENTADAS ==============
 
+const NEURO_TONE_FREQUENCIES: Record<string, number> = {
+  do: 261.63,
+  re: 293.66,
+  mi: 329.63,
+  sol: 392,
+  la: 440,
+};
+
+function playNeuroTone(sound: string, volume = 0.35) {
+  if (typeof window === "undefined") return;
+  const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
+  if (!AudioContextClass) return;
+  const context = new AudioContextClass();
+  const oscillator = context.createOscillator();
+  const gain = context.createGain();
+  oscillator.type = "sine";
+  oscillator.frequency.value = NEURO_TONE_FREQUENCIES[sound] ?? 330;
+  gain.gain.setValueAtTime(Math.min(0.45, Math.max(0.12, volume)), context.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.001, context.currentTime + 0.45);
+  oscillator.connect(gain);
+  gain.connect(context.destination);
+  oscillator.start();
+  oscillator.stop(context.currentTime + 0.45);
+  oscillator.addEventListener("ended", () => void context.close());
+}
+
 // 43. PARES SONOROS
 function ParesSonoros({ p, onDone }: any) {
-  const { speak } = usePipVoice();
   const [virados, setVirados] = useState<number[]>([]);
   const [paresEncontrados, setParesEncontrados] = useState<string[]>([]);
   const [cartas, setCartas] = useState<any[]>([]);
@@ -4354,7 +4495,7 @@ function ParesSonoros({ p, onDone }: any) {
   const handleCarta = (idx: number) => {
     if (virados.length === 2 || virados.includes(idx) || paresEncontrados.includes(cartas[idx].som)) return;
     
-    speak(cartas[idx].som, { volume: cartas[idx].volume });
+    playNeuroTone(cartas[idx].som, cartas[idx].volume * 0.4);
     const novos = [...virados, idx];
 
     setVirados(novos);
@@ -4384,7 +4525,7 @@ function ParesSonoros({ p, onDone }: any) {
             onClick={() => handleCarta(i)}
             className={`h-32 rounded-3xl border-4 transition-all flex items-center justify-center ${isVirada ? 'bg-white border-primary shadow-inner' : 'bg-primary/20 border-primary/40 shadow-lg'}`}
           >
-            {isVirada ? <RenderEmoji e={c.som} className="w-16 h-16" /> : <div className="text-4xl">🔔</div>}
+            <Volume2 className={`h-12 w-12 ${isVirada ? "text-primary" : "text-primary/50"}`} />
           </button>
         );
       })}
@@ -4394,12 +4535,12 @@ function ParesSonoros({ p, onDone }: any) {
 
 // 44. SEQUÊNCIA AUDITIVA
 function SequenciaAuditiva({ p, onDone }: any) {
-  const { speak } = usePipVoice();
-  const [fase, setFase] = useState<"ouvir" | "repetir">("ouvir");
+  const [fase, setFase] = useState<"pronto" | "ouvir" | "repetir">("pronto");
   const [selecionados, setSelecionados] = useState<string[]>([]);
   const [tocandoIdx, setTocandoIdx] = useState(-1);
 
   useEffect(() => {
+    if (fase !== "ouvir") return;
     let i = 0;
     const interval = setInterval(() => {
       if (i >= p.seq.length) {
@@ -4409,14 +4550,13 @@ function SequenciaAuditiva({ p, onDone }: any) {
         return;
       }
       setTocandoIdx(i);
-      // Adicionar variabilidade de volume baseada no nível
-      const vol = p.nivel === 1 ? 1.0 : p.nivel === 2 ? 0.8 : 0.6;
-      speak(p.seq[i], { volume: vol });
+      const vol = p.nivel === 1 ? 0.4 : p.nivel === 2 ? 0.32 : 0.25;
+      playNeuroTone(p.seq[i], vol);
 
       i++;
     }, 1200);
     return () => clearInterval(interval);
-  }, [p.seq, speak]);
+  }, [fase, p.nivel, p.seq]);
 
   const handleItem = (som: string) => {
     if (fase !== "repetir") return;
@@ -4430,20 +4570,32 @@ function SequenciaAuditiva({ p, onDone }: any) {
 
   return (
     <div className="text-center py-8 space-y-8">
-      <div className="text-xl font-black text-primary uppercase">{fase === "ouvir" ? "OUÇA COM ATENÇÃO!" : "AGORA REPITA!"}</div>
+      <div className="text-xl font-black text-primary uppercase">
+        {fase === "pronto" ? "PREPARE-SE PARA OUVIR" : fase === "ouvir" ? "OUÇA COM ATENÇÃO!" : "AGORA REPITA!"}
+      </div>
+      {fase === "pronto" && (
+        <button
+          type="button"
+          onClick={() => setFase("ouvir")}
+          className="mx-auto min-h-14 rounded-2xl bg-primary px-7 py-3 text-lg font-black text-primary-foreground shadow-md active:scale-95 flex items-center gap-3"
+        >
+          <Volume2 className="h-7 w-7" /> Ouvir sequência
+        </button>
+      )}
       <div className="flex justify-center gap-4">
         {p.seq.map((s: any, i: number) => (
           <div key={i} className={`w-20 h-20 rounded-2xl border-4 flex items-center justify-center transition-all ${tocandoIdx === i ? 'bg-yellow-100 border-yellow-400 scale-110' : 'bg-white border-border'}`}>
-             {tocandoIdx === i && <RenderEmoji e={s} className="w-12 h-12" />}
-             {fase === "repetir" && selecionados[i] && <RenderEmoji e={selecionados[i]} className="w-12 h-12" />}
+             {tocandoIdx === i && <Volume2 className="h-10 w-10 text-yellow-700" />}
+             {fase === "repetir" && selecionados[i] && <span className="text-lg font-black">{i + 1}</span>}
           </div>
         ))}
       </div>
       {fase === "repetir" && (
         <div className="flex flex-wrap justify-center gap-4 mt-8">
-          {Array.from(new Set(p.seq)).map((s: any, i: number) => (
-            <button key={i} onClick={() => handleItem(s as string)} className="w-24 h-24 bg-card rounded-3xl border-2 border-border shadow-md hover:scale-105 active:scale-95 flex items-center justify-center text-4xl">
-              <RenderEmoji e={s as string} />
+          {(p.opcoes ?? Array.from(new Set(p.seq))).map((s: string, i: number) => (
+            <button key={s} onClick={() => { playNeuroTone(s); handleItem(s); }} className="w-20 h-20 sm:w-24 sm:h-24 bg-card rounded-3xl border-2 border-border shadow-md hover:scale-105 active:scale-95 flex flex-col items-center justify-center gap-1">
+              <Volume2 className="h-8 w-8 text-primary" />
+              <span className="text-sm font-black">Som {i + 1}</span>
             </button>
           ))}
         </div>
@@ -4456,7 +4608,7 @@ function SequenciaAuditiva({ p, onDone }: any) {
 function BanqueteDinos({ p, onDone }: any) {
   const options = useMemo(() => {
     // p.opts já vem do builder, mas vamos garantir 3 opções reais
-    const base = p.opts || [];
+    const base = [...(p.opts || [])];
     if (!base.includes(p.qtd)) base.push(p.qtd);
     return [...new Set(base)].sort((a: any, b: any) => a - b);
   }, [p.opts, p.qtd]);
@@ -4549,8 +4701,8 @@ function TrocaRegras({ p, onDone }: any) {
   const [alvo, setAlvo] = useState<any>(null);
   const [opts, setOpts] = useState<any[]>([]);
 
-  const gerarRound = () => {
-    const r = p.regras[Math.floor(Math.random() * p.regras.length)];
+  const gerarRound = (roundAtual: number) => {
+    const r = p.sequenciaRegras?.[roundAtual] ?? p.regras[roundAtual % p.regras.length];
     setRegra(r);
     const cores = ["🔴", "🔵", "🟢", "🟡"];
     const formas = ["🔺", "🟦", "🟢", "⭐"];
@@ -4563,7 +4715,7 @@ function TrocaRegras({ p, onDone }: any) {
   };
 
   useEffect(() => {
-    gerarRound();
+    gerarRound(0);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -4575,8 +4727,9 @@ function TrocaRegras({ p, onDone }: any) {
     if (round + 1 >= p.rounds) {
       onDone(novosAcertos >= p.rounds * 0.8);
     } else {
-      setRound((r: number) => r + 1);
-      gerarRound();
+      const proximaRodada = round + 1;
+      setRound(proximaRodada);
+      gerarRound(proximaRodada);
     }
   };
 
@@ -4629,8 +4782,12 @@ function PonteBlocos({ p, onDone }: any) {
         <div className="h-24 w-12 bg-slate-300 rounded-t-2xl shadow-inner border-r-4 border-slate-400"></div>
         
         {/* Área da Ponte (Target) */}
-        <div className="flex-1 max-w-[200px] h-20 border-4 border-dashed border-white/80 rounded-[2rem] flex items-center justify-center bg-white/20 animate-pulse">
-           <div className="text-6xl opacity-20 grayscale">{p.target}</div>
+        <div className="flex-1 min-h-24 border-4 border-dashed border-white/80 rounded-[2rem] flex flex-wrap items-center justify-center gap-2 bg-white/20 px-3">
+          {p.ponte.map((bloco: string, index: number) => (
+            <div key={index} className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-white/70 flex items-center justify-center text-4xl shadow-sm">
+              {index === p.lacuna ? "?" : bloco}
+            </div>
+          ))}
         </div>
         
         {/* Pilar Direito */}
@@ -4641,7 +4798,7 @@ function PonteBlocos({ p, onDone }: any) {
         {p.opts.map((o: any, i: number) => (
           <button 
             key={i} 
-            onClick={() => onDone(o === p.target)} 
+            onClick={() => onDone(o === p.correta)} 
             className={`w-28 h-28 bg-white rounded-[2.5rem] shadow-xl transition-all text-6xl flex items-center justify-center border-4 border-white/50 ${press}`}
           >
             {o}
@@ -4650,7 +4807,7 @@ function PonteBlocos({ p, onDone }: any) {
       </div>
       
       <div className="text-sm font-black text-white/60 uppercase tracking-widest">
-        Escolha o bloco para completar a ponte!
+        Observe a sequência e escolha o bloco que falta.
       </div>
     </div>
   );
@@ -4670,12 +4827,14 @@ function QuebraCabecaMagico({ p, onDone }: any) {
   
   const [pecasEncaixadas, setPecasEncaixadas] = useState<number[]>([]);
   const [pecasDisponiveis, setPecasDisponiveis] = useState<number[]>([]);
+  const [pecaSelecionada, setPecaSelecionada] = useState<number | null>(null);
   const [gameKey, setGameKey] = useState(0);
 
   // Reiniciar jogo ao trocar imagem ou dificuldade
   useEffect(() => {
     setPecasEncaixadas([]);
     setPecasDisponiveis(range(total).sort(() => Math.random() - 0.5));
+    setPecaSelecionada(null);
     setGameKey(prev => prev + 1);
   }, [selectedImage, dificuldade, total]);
 
@@ -4686,10 +4845,7 @@ function QuebraCabecaMagico({ p, onDone }: any) {
     setPecasEncaixadas(novasEncaixadas);
     setPecasDisponiveis(prev => prev.filter(pIdx => pIdx !== idx));
     
-    // Som de encaixe (feedback)
-    const audio = new Audio("https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3");
-    audio.volume = 0.3;
-    audio.play().catch(() => {});
+    playNeuroTone("mi", 0.2);
 
     if (novasEncaixadas.length === total) {
       confetti({
@@ -4700,13 +4856,13 @@ function QuebraCabecaMagico({ p, onDone }: any) {
       });
       
       setTimeout(() => {
-        if (dificuldade < 32) {
+        if (dificuldade < 12) {
           toast.success("Incrível! Que tal um desafio maior?", {
             description: `Você completou ${dificuldade} peças!`,
             action: {
               label: "Aumentar Nível",
               onClick: () => {
-                const niveis = [4, 6, 9, 12, 16, 24, 32];
+                const niveis = [4, 6, 9, 12];
                 const next = niveis.find(n => n > dificuldade);
                 if (next) setDificuldade(next);
               }
@@ -4722,7 +4878,7 @@ function QuebraCabecaMagico({ p, onDone }: any) {
     <div className="py-2 text-center w-full max-w-5xl mx-auto flex flex-col items-center gap-6">
       {/* Controles Superiores */}
       <div className="flex flex-wrap justify-center gap-2 mb-2">
-        {[4, 6, 9, 12, 16, 24, 32].map(n => (
+        {[4, 6, 9, 12].map(n => (
           <button
             key={n}
             onClick={() => setDificuldade(n)}
@@ -4737,13 +4893,17 @@ function QuebraCabecaMagico({ p, onDone }: any) {
         ))}
       </div>
 
+      <p className="text-base font-bold text-muted-foreground">
+        Escolha uma peça e depois toque no lugar correto do desenho.
+      </p>
+
       <div className="flex flex-col lg:flex-row gap-8 items-center justify-center w-full">
         {/* Tabuleiro */}
         <div 
           className="relative bg-slate-200/50 rounded-[2.5rem] border-[12px] border-white shadow-2xl overflow-hidden touch-none"
           style={{ 
-            width: 340, 
-            height: 340,
+            width: "min(340px, calc(100vw - 48px))",
+            aspectRatio: "1 / 1",
             display: 'grid',
             gridTemplateColumns: `repeat(${cols}, 1fr)`,
             gridTemplateRows: `repeat(${rows}, 1fr)`
@@ -4759,6 +4919,12 @@ function QuebraCabecaMagico({ p, onDone }: any) {
             return (
               <div 
                 key={`${gameKey}-${idx}`}
+                onClick={() => {
+                  if (pecaSelecionada === idx) {
+                    handleSnap(idx);
+                    setPecaSelecionada(null);
+                  }
+                }}
                 className="relative border border-white/30 flex items-center justify-center overflow-hidden"
               >
                 <AnimatePresence>
@@ -4788,21 +4954,9 @@ function QuebraCabecaMagico({ p, onDone }: any) {
           {pecasDisponiveis.map((idx) => (
             <motion.div
               key={`${gameKey}-avail-${idx}`}
-              drag
-              dragConstraints={{ left: -1000, right: 1000, top: -1000, bottom: 1000 }}
-              dragElastic={0.1}
-              onDragEnd={(_, info) => {
-                // Snap magnético: se soltar sobre o tabuleiro
-                // O tabuleiro está centralizado, mas para facilitar para a criança, 
-                // se a distância do drop for pequena em relação à origem, ou se o offset indicar movimento pro tabuleiro
-                // Snap magnético: se soltar sobre o tabuleiro (estimativa de offset)
-                if (Math.abs(info.offset.y) > 100 || Math.abs(info.offset.x) > 100) {
-                   handleSnap(idx);
-                }
-
-              }}
+              onTap={() => setPecaSelecionada(idx)}
               whileTap={{ scale: 1.2, zIndex: 50 }}
-              className="w-20 h-20 bg-white rounded-2xl shadow-lg border-2 border-primary/10 flex items-center justify-center cursor-grab active:cursor-grabbing overflow-hidden shrink-0"
+              className={`w-20 h-20 bg-white rounded-2xl shadow-lg border-4 flex items-center justify-center cursor-pointer overflow-hidden shrink-0 ${pecaSelecionada === idx ? "border-primary ring-4 ring-primary/20" : "border-primary/10"}`}
             >
                <RenderPiece 
                   image={selectedImage} 
@@ -4896,8 +5050,6 @@ function MediaCarousel({ category, onSelect, selected }: any) {
     if (category === 'mascotes') {
       return [
         { id: 'brilha', img: MASCOTES.brilha, label: 'Brilha' },
-        { id: 'pip', img: "https://img.icons8.com/color/512/frog.png", label: 'Pip' },
-        { id: 'pipa', img: "https://img.icons8.com/color/512/butterfly.png", label: 'Pipa' }
       ];
     }
     if (category === 'mundos') {
@@ -5268,6 +5420,3 @@ function EstudioArteContorno({ onDone }: any) {
     </div>
   );
 }
-
-
-

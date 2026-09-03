@@ -1,5 +1,6 @@
 import type { UnidadeGeoV1 } from "../../types";
 import { aula01 } from "./aula-01-segunda-guerra-holocausto";
+import { aula02 } from "./aula-02-colonialismo-resistencias";
 
 export const unidade3: UnidadeGeoV1 = {
   slug: "unidade-3",
@@ -9,5 +10,5 @@ export const unidade3: UnidadeGeoV1 = {
   descricao:
     "Blitzkrieg, Stalingrado, Pearl Harbor, Auschwitz, Hiroshima. 70 milhões de mortos e o nascimento da ONU e dos Direitos Humanos.",
   corTema: "#334155",
-  aulas: [aula01],
+  aulas: [aula01, aula02],
 };

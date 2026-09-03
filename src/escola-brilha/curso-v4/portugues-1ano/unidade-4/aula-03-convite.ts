@@ -25,7 +25,7 @@ export const aula03: AulaPortuguesV4 = {
   momento01_motivacao: {
     titulo: "Uma festa chegando pelo correio",
     historia:
-      "A caixinha de correio da casa do Brilha estava cheia! Chegou um papel colorido, cheio de balões desenhados. Era um CONVITE! Um convite avisa sobre uma festa: QUANDO ela vai ser, ONDE e QUEM está chamando a gente.",
+      "A caixinha de correio da casa do Brilha estava cheia! Chegou um papel colorido, cheio de balões desenhados. Era um CONVITE! Um convite chama alguém para uma festa ou outro evento e informa o que acontecerá, quando e onde.",
     imagemUrl: festa,
   },
 
@@ -200,7 +200,7 @@ export const aula03: AulaPortuguesV4 = {
       },
       {
         tipo: "escritaReal",
-        formato: "bilhete",
+        formato: "convite",
         titulo: "Meu convite",
         comando: "Escreva um convite de verdade: quem está convidando, pra quê, que dia e onde.",
         campos: [
@@ -242,7 +242,7 @@ export const aula03: AulaPortuguesV4 = {
   momento09_revisao: {
     pontos: [
       "CONVITE é um texto que chama a gente pra uma festa ou evento.",
-      "Todo convite tem: quando (dia e hora), onde (local) e quem convida.",
+      "Um convite claro informa o evento, quando acontecerá, onde será e quem está convidando.",
       "É importante ler o convite com atenção pra não chegar no lugar ou hora errada.",
     ],
     miniDesafio: {

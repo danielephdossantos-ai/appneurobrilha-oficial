@@ -4,7 +4,7 @@ export const aula06_revisao: AulaV4 = {
   slug: "u1-06-revisao",
   titulo: "Revisão da Unidade 1",
   iconeTrilha: "📖",
-  bncc: ["EF05MA01", "EF05MA02", "EF05MA10"],
+  bncc: ["EF05MA01"],
   duracaoMin: 18,
   metodologias: ["skemp"],
 
@@ -29,7 +29,7 @@ export const aula06_revisao: AulaV4 = {
     titulo: "Uma passada rápida em cada tópico",
     etapas: [
       { texto: "Ler: 321.480 = trezentos e vinte e um mil, quatrocentos e oitenta." },
-      { texto: "Comparar: 87.500 < 87.800 (D: 0 < 8 depois de olhar C? não, C = 5 vs 8 → 5 < 8)." },
+      { texto: "Comparar: 87.500 < 87.800. As dezenas de milhar e unidades de milhar empatam; na centena, 5 < 8." },
       { texto: "Arredondar 43.780 pra DM: vizinho 3 (UM) < 5 → 40.000." },
       { texto: "Sequência: 250 · 500 · 750 · 1.000 → salto +250." },
     ],

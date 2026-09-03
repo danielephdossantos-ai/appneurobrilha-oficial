@@ -12,7 +12,7 @@ export const aula01: AulaGeoV1 = {
   titulo: "Máquina Humana",
   iconeTrilha: "🫀",
   recompensa: { xp: 140, moedas: 55, medalha: "Fisiologista Júnior" },
-  bncc: ["EF07CI09"],
+  bncc: [],
   duracaoMin: 40,
 
   cena01_motivacao: {
@@ -37,6 +37,7 @@ export const aula01: AulaGeoV1 = {
       { id: "digestivo", titulo: "Só o digestivo", subtitulo: "estômago faz tudo", emoji: "🍽️", cor: "from-slate-500 to-slate-700", fotoUrl: digestorioImg },
       { id: "integrado", titulo: "Digestivo + circulatório + respiratório", subtitulo: "trabalham juntos", emoji: "🔗", cor: "from-emerald-500 to-teal-700", fotoUrl: circulatorioImg },
       { id: "nervoso", titulo: "Só o sistema nervoso", subtitulo: "cérebro comanda tudo", emoji: "🧠", cor: "from-rose-500 to-red-700", fotoUrl: respiratorioImg },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "integrado",
     feedbackAcerto:
@@ -93,6 +94,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🌿", titulo: "Intestino delgado", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🍽️", titulo: "Estômago", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "👄", titulo: "Boca", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. Vilosidades do intestino delgado fazem a absorção.",
         feedbackErro: "Estômago QUEBRA proteína. Boca inicia digestão. ABSORÇÃO é no intestino delgado." },
@@ -101,6 +103,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "💨", titulo: "O₂ entra no sangue e CO₂ sai", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🍔", titulo: "Nutrientes entram no sangue", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "💧", titulo: "Água é filtrada", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Sim. Alvéolos = troca gasosa. O₂ entra, CO₂ sai.",
         feedbackErro: "Nutrientes = intestino. Filtro de água = rim. Alvéolos = O₂ e CO₂." },
@@ -109,6 +112,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🔋", titulo: "Mitocôndria", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🧬", titulo: "Núcleo", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🛡️", titulo: "Membrana", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. Mitocôndria = respiração celular = ATP.",
         feedbackErro: "Núcleo guarda DNA. Membrana protege. MITOCÔNDRIA produz ATP." },
@@ -212,6 +216,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Nas mitocôndrias das células", correta: true },
           { id: "b", texto: "No estômago apenas" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. Mitocôndria = respiração celular = ATP.",
         feedbackErro: "Estômago apenas digere. ATP é produzido nas MITOCÔNDRIAS." },
@@ -219,6 +225,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Artéria (parede grossa, alta pressão)", correta: true },
           { id: "b", texto: "Veia (traz sangue de volta ao coração)" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. Artéria SAI do coração levando O₂. Veia VOLTA com CO₂.",
         feedbackErro: "Veia TRAZ sangue com CO₂. ARTÉRIA leva sangue oxigenado do coração." },
@@ -226,6 +234,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Músculos precisam de mais O₂ e glicose para produzir ATP", correta: true },
           { id: "b", texto: "É apenas coincidência do sistema nervoso" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Exato. Mais esforço = mais ATP = mais O₂ + mais transporte.",
         feedbackErro: "Não é coincidência. Músculos EXIGEM mais combustível — coração e pulmões respondem." },

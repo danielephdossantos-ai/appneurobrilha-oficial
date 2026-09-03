@@ -82,7 +82,7 @@ const aula: Aula = {
     "Saber a ordem das coisas ajuda a se organizar, chegar na hora e não esquecer nada — que nem gente grande faz!",
 
   explicacao:
-    "🌅 MANHÃ — acordamos, tomamos café e vamos à escola.\n\n🌞 TARDE — almoçamos, estudamos e brincamos.\n\n🌙 NOITE — jantamos, tomamos banho e dormimos.\n\nExemplo de ordem: 🛏️ acordar → 🪥 escovar → 🍞 café → 🏫 escola.",
+    "Acontecimentos podem ser relatados em ordem usando antes, durante e depois. Rotinas variam entre pessoas: uma criança pode estudar de manhã e outra à tarde. Por isso, leia a situação apresentada em vez de decorar uma rotina única. O relógio analógico mostra horas com ponteiros; quando o ponteiro dos minutos está no 12, o ponteiro menor indica uma hora exata. O relógio digital registra essa mesma hora com números, como 8:00.",
 
   explicacoesNiveis: {
     nivel1:
@@ -110,10 +110,10 @@ const aula: Aula = {
 
   atividadeGuiada: {
     enunciado:
-      "O que costuma acontecer DEPOIS do 🍽️ almoço na escola?",
-    resposta: "Brincar 🎮.",
+      "Nesta rotina, a sequência é almoço → recreio → aula. O que vem depois do almoço?",
+    resposta: "Recreio.",
     explicacao:
-      "Depois do almoço vem o recreio — hora de brincar 🎮. Só à noite 🌙 é que vamos dormir.",
+      "Na sequência apresentada, o recreio vem logo depois do almoço.",
     visual: {
       tipo: "cena",
       pergunta: "O que vem depois do almoço?",
@@ -121,7 +121,7 @@ const aula: Aula = {
       referenciaImg: almocoImg,
       referenciaLabel: "Almoço 🍽️",
       sujeitoImg: brincarImg,
-      sujeitoLabel: "Brincar 🎮",
+      sujeitoLabel: "Recreio",
       opcoes: ["Dormir", "Brincar"],
       correta: 1,
     },

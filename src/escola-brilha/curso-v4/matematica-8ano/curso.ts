@@ -19,26 +19,26 @@ import { unidade7 } from "./unidade-7";
  *  U1 · Números Reais na Oficina                   ✅
  *       dízimas periódicas, potência com expoente inteiro,
  *       notação científica (grandes e pequenos), operações NC
- *       BNCC: EF08MA01, EF08MA02
+ *       BNCC: EF08MA01, EF08MA02, EF08MA05
  *
  *  U2 · Expressões Algébricas e Produtos Notáveis  ✅
  *       valor numérico, monômios/polinômios, (a+b)², (a−b)²,
  *       (a+b)(a−b)
- *       BNCC: EF08MA06, EF08MA07
+ *       BNCC: EF08MA06
  *
  *  U3 · Fatoração                                   ✅
  *       fator comum, agrupamento, trinômio quadrado perfeito,
  *       diferença de quadrados
- *       BNCC: EF08MA06, EF08MA07
+ *       BNCC: EF08MA06
  *
  *  U4 · Equações e Sistemas 2×2                     ✅
  *       equação do 1º grau, problemas, substituição, adição
- *       BNCC: EF08MA07, EF08MA08
+ *       BNCC: EF08MA07–11
  *
  *  U5 · Porcentagem, Juros e Proporcionalidade      ✅
  *       aumento/desconto sucessivos, juros simples,
  *       grandezas direta e inversamente proporcionais
- *       BNCC: EF08MA04, EF08MA05, EF08MA12, EF08MA13
+ *       BNCC: EF08MA04, EF08MA12, EF08MA13
  *
  *  U6 · Geometria: Ângulos, Congruência, Transformações ✅
  *       retas paralelas + transversal, ângulos internos de
@@ -50,8 +50,7 @@ import { unidade7 } from "./unidade-7";
  *       áreas de polígonos, volume de prismas, princípio
  *       multiplicativo, probabilidade, medidas de tendência
  *       central + missão final
- *       BNCC: EF08MA19, EF08MA20, EF08MA22, EF08MA23, EF08MA25,
- *             EF08MA27
+ *       BNCC: EF08MA03, EF08MA19–27
  */
 const curso: Curso = {
   slug: "matematica-8ano",

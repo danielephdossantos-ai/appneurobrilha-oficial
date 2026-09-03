@@ -4,7 +4,7 @@ export const aula06_missaoFinal: AulaV4 = {
   slug: "u3-06-missao-final",
   titulo: "Missão Final — Mestre da Multiplicação",
   iconeTrilha: "🏅",
-  bncc: ["EF05MA07", "EF05MA08"],
+  bncc: ["EF05MA08"],
   duracaoMin: 22,
   metodologias: ["skemp"],
 
@@ -14,12 +14,12 @@ export const aula06_missaoFinal: AulaV4 = {
   },
   momento02_exploracao: {
     instrucao: "Um problema por vez.",
-    cenas: [{ tipo: "texto", texto: "Use o método que quiser: algoritmo, distributiva ou truque dos zeros.", destaque: true }],
+    cenas: [{ tipo: "texto", texto: "Use o método que compreender melhor: algoritmo, propriedade distributiva ou decomposição por valor posicional.", destaque: true }],
   },
   momento03_descoberta: {
     perguntaGuia: "Qual método é melhor?",
     pista: "Depende dos números.",
-    revelacao: "Números redondos → zeros. Números perto de 100 → distributiva. Resto → algoritmo.",
+    revelacao: "Fatores múltiplos de 10 podem ser decompostos pelo valor posicional. Números próximos de uma centena combinam com a distributiva. O algoritmo funciona como estratégia geral.",
   },
   momento04_explicacao: {
     titulo: "Escolha a estratégia",
@@ -28,7 +28,7 @@ export const aula06_missaoFinal: AulaV4 = {
   momento05_modelagem: {
     enunciado: "40 × 250.",
     resposta: "10.000",
-    passos: ["4 × 25 = 100.", "Junte 2 zeros: 10.000."],
+    passos: ["40 = 4 × 10 e 250 = 25 × 10.", "(4 × 25) × (10 × 10) = 100 × 100.", "Resultado: 10.000."],
   },
   momento06_praticaGuiada: {
     enunciado: "Desafio 1: 6 × 199 (dica: 199 = 200 − 1).",

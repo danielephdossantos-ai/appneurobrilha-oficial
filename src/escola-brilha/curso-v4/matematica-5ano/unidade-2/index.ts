@@ -5,6 +5,7 @@ import { aula03_subtracaoSimples } from "./aula-03-subtracao-simples";
 import { aula04_subtracaoComTroca } from "./aula-04-subtracao-com-troca";
 import { aula05_problemas } from "./aula-05-problemas";
 import { aula06_missaoFinal } from "./aula-06-missao-final";
+import { aula07_principioMultiplicativo, aula08_equivalenciaIgualdade, aula09_termoDesconhecido, aula10_proporcionalidadeDireta, aula11_partilhaDesigual } from "./aulas-07-a-11-algebra";
 
 export const unidade2: Unidade = {
   slug: "unidade-2-somar-subtrair-grandes",
@@ -21,5 +22,10 @@ export const unidade2: Unidade = {
     aula04_subtracaoComTroca,
     aula05_problemas,
     aula06_missaoFinal,
+    aula07_principioMultiplicativo,
+    aula08_equivalenciaIgualdade,
+    aula09_termoDesconhecido,
+    aula10_proporcionalidadeDireta,
+    aula11_partilhaDesigual,
   ],
 };

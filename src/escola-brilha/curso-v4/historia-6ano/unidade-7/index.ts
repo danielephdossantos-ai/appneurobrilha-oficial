@@ -1,5 +1,7 @@
 import type { UnidadeGeoV1 } from "../../types";
 import { aula01 } from "./aula-01-povos-pre-colombianos";
+import { aula02 } from "./aula-02-cidades-trabalho";
+import { aula03 } from "./aula-03-cristianismo-mulheres";
 
 export const unidade7: UnidadeGeoV1 = {
   slug: "unidade-7",
@@ -9,5 +11,5 @@ export const unidade7: UnidadeGeoV1 = {
   descricao:
     "Brilha e Aurora atravessam Iucatã, o Vale do México e a Cordilheira dos Andes — decifrando civilizações que colonizadores tentaram apagar. Fragmento 7: O Códice Decifrado.",
   corTema: "#065f46",
-  aulas: [aula01],
+  aulas: [aula01, aula02, aula03],
 };

@@ -4,18 +4,18 @@ export const aula02_multPor10100: AulaV4 = {
   slug: "u3-02-mult-por-10-100-1000",
   titulo: "Multiplicar por 10, 100 e 1.000",
   iconeTrilha: "0️⃣",
-  bncc: ["EF05MA07"],
+  bncc: ["EF05MA08"],
   duracaoMin: 18,
   metodologias: ["skemp"],
 
   momento01_motivacao: {
-    titulo: "O truque dos zeros",
-    historia: "{NOME}, multiplicar por 10, 100 ou 1.000 é o truque mais rápido da matemática: só acrescentar zeros.",
+    titulo: "Cada algarismo muda de ordem",
+    historia: "{NOME}, multiplicar por 10, 100 ou 1.000 ajuda a enxergar como o valor de cada algarismo muda no sistema decimal.",
   },
   momento02_exploracao: {
-    instrucao: "Cada zero desloca uma casa pra esquerda.",
+    instrucao: "Observe quantas ordens cada algarismo se desloca para a esquerda.",
     cenas: [
-      { tipo: "texto", texto: "× 10 → +1 zero. × 100 → +2 zeros. × 1.000 → +3 zeros.", destaque: true },
+      { tipo: "texto", texto: "Ao multiplicar um número natural por 10, 100 ou 1.000, cada algarismo passa a valer 10, 100 ou 1.000 vezes mais e se desloca 1, 2 ou 3 ordens para a esquerda.", destaque: true },
     ],
   },
   momento03_descoberta: {
@@ -24,16 +24,16 @@ export const aula02_multPor10100: AulaV4 = {
     revelacao: "347 vira 34.700.",
   },
   momento04_explicacao: {
-    titulo: "Regra dos zeros",
+    titulo: "Valor posicional e potências de 10",
     etapas: [
-      { texto: "25 × 10 = 250 · 25 × 100 = 2.500 · 25 × 1.000 = 25.000." },
-      { texto: "Se tiver 2 fatores redondos: 40 × 200 = 4 × 2 seguido dos zeros → 8.000." },
+      { texto: "Em 25 × 10, as 2 dezenas passam a 2 centenas e as 5 unidades passam a 5 dezenas: 250. Do mesmo modo, 25 × 100 = 2.500 e 25 × 1.000 = 25.000." },
+      { texto: "Em 40 × 200, decomponha: (4 × 10) × (2 × 100) = (4 × 2) × (10 × 100) = 8 × 1.000 = 8.000." },
     ],
   },
   momento05_modelagem: {
     enunciado: "60 × 300.",
     resposta: "18.000",
-    passos: ["6 × 3 = 18.", "Junte 3 zeros (1 + 2).", "= 18.000."],
+    passos: ["60 = 6 × 10 e 300 = 3 × 100.", "(6 × 3) × (10 × 100) = 18 × 1.000.", "Resultado: 18.000."],
   },
   momento06_praticaGuiada: {
     enunciado: "Juntos: 425 × 100.",
@@ -44,7 +44,7 @@ export const aula02_multPor10100: AulaV4 = {
       opcoes: [{ nome: "42.500" }, { nome: "4.250" }, { nome: "425.000" }],
       respostaCerta: "42.500",
       feedbackAcerto: "🎯",
-      feedbackErro: "425 + 2 zeros = 42.500.",
+      feedbackErro: "Cada algarismo de 425 se desloca duas ordens para a esquerda: 42.500.",
     },
   },
   momento07_praticaIndependente: {
@@ -54,7 +54,7 @@ export const aula02_multPor10100: AulaV4 = {
       pergunta: "Resultado?",
       opcoes: [{ nome: "40.000" }, { nome: "4.000" }, { nome: "400.000" }],
       respostaCerta: "40.000",
-      feedbackAcerto: "🎯 8×5=40, +3 zeros.",
+      feedbackAcerto: "🎯 (8×10)×(5×100)=40×1.000=40.000.",
       feedbackErro: "40.000.",
     },
   },
@@ -66,24 +66,24 @@ export const aula02_multPor10100: AulaV4 = {
       pergunta: "Escolha:",
       opcoes: [{ nome: "10.500" }, { nome: "1.050" }, { nome: "105.000" }],
       respostaCerta: "10.500",
-      feedbackAcerto: "🎯 35×3=105, +2 zeros.",
+      feedbackAcerto: "🎯 (35×10)×(3×10)=105×100=10.500.",
       feedbackErro: "350 × 30 = 10.500.",
     },
   },
   momento09_revisao: {
-    pontos: ["Conte zeros dos dois fatores.", "Multiplique só os dígitos não-zero.", "Acrescente os zeros no fim."],
+    pontos: ["Decomponha os múltiplos de 10.", "Multiplique os fatores básicos e as potências de 10.", "Confira como cada algarismo mudou de ordem."],
   },
   momento10_avaliacao: {
     perguntas: [
       { pergunta: "27 × 100 = ?", opcoes: ["2.700", "270", "27.000"], correta: 0, feedbackAcerto: "🎉", feedbackErro: "2.700." },
       { pergunta: "9 × 1.000 = ?", opcoes: ["9.000", "900", "90.000"], correta: 0, feedbackAcerto: "🎉", feedbackErro: "9.000." },
-      { pergunta: "50 × 400 = ?", opcoes: ["20.000", "2.000", "200.000"], correta: 0, feedbackAcerto: "🎉", feedbackErro: "5×4=20, +3 zeros → 20.000." },
+      { pergunta: "50 × 400 = ?", opcoes: ["20.000", "2.000", "200.000"], correta: 0, feedbackAcerto: "🎉", feedbackErro: "(5×10)×(4×100)=20×1.000=20.000." },
     ],
   },
   momento11_missaoFamilia: {
-    titulo: "Truque dos zeros",
+    titulo: "Deslocamento de ordens",
     materiais: ["Papel"],
-    passos: ["Invente 5 contas × 10, 100 ou 1.000.", "Confira em segundos."],
+    passos: ["Invente 5 contas × 10, 100 ou 1.000.", "Explique como cada algarismo mudou de ordem e confira os resultados."],
     registro: "📸 Foto.",
   },
   recompensa: { xp: 130, moedas: 70 },

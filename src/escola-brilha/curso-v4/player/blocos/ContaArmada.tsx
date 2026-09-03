@@ -81,8 +81,10 @@ export function ContaArmada({ a, b, resultado, itemPlural = "", operacao = "soma
         </div>
         <div className="flex gap-2">
           <button
+            type="button"
             onClick={resolver}
             disabled={contando}
+            aria-label="Resolver a conta passo a passo"
             className="h-9 px-3 rounded-xl bg-amber-400 text-[#0d1f55] font-black flex items-center gap-1 active:scale-95 disabled:opacity-50"
           >
             <Play className="h-4 w-4" />

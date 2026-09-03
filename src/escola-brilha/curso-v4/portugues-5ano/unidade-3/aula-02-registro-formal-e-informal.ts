@@ -20,7 +20,7 @@ export const aula2: AulaPortuguesV4 = {
   slug: "aula-02-registro-formal-e-informal",
   titulo: "Registro formal e informal",
   iconeTrilha: "🎩",
-  bncc: ["EF05LP02", "EF05LP04"],
+  bncc: ["EF35LP10", "EF35LP11", "EF15LP01", "EF15LP09", "EF15LP13"],
   duracaoMin: 25,
 
   momento01_motivacao: {

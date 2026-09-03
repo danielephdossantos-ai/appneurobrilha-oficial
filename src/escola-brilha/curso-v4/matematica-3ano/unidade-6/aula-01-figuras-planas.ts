@@ -4,7 +4,7 @@ export const aula01_figurasPlanas: AulaV4 = {
   slug: "u6-01-figuras-planas",
   titulo: "Figuras Planas",
   iconeTrilha: "⬛",
-  bncc: ["EF03MA13"],
+  bncc: ["EF03MA15"],
   duracaoMin: 20,
   metodologias: ["skemp", "cpa"],
   momento01_motivacao: {
@@ -108,9 +108,9 @@ export const aula01_figurasPlanas: AulaV4 = {
   },
   momento10_avaliacao: {
     perguntas: [
-      { pergunta: "Quantos lados o quadrado tem?", opcoes: ["4", "3", "5"], correta: 0, feedbackAcerto: "🎉 4.", feedbackErro: "4 lados iguais." },
+      { pergunta: "Quantos lados o quadrado tem?", opcoes: ["4", "3", "5"], correta: 0, feedbackAcerto: "🎉 O quadrado tem quatro lados e quatro vértices.", feedbackErro: "Percorra o contorno e conte os quatro segmentos que formam os lados." },
       { pergunta: "Placa de PARE?", opcoes: ["Octógono", "Círculo", "Triângulo"], correta: 0, feedbackAcerto: "🎉 Octógono (8 lados).", feedbackErro: "PARE tem 8 lados." },
-      { pergunta: "Triângulo tem quantos vértices?", opcoes: ["3", "4", "5"], correta: 0, feedbackAcerto: "🎉 3.", feedbackErro: "3 lados = 3 vértices." },
+      { pergunta: "Triângulo tem quantos vértices?", opcoes: ["3", "4", "5"], correta: 0, feedbackAcerto: "🎉 Os três lados do triângulo se encontram em três vértices.", feedbackErro: "Conte os pontos em que dois lados se encontram: são três." },
     ],
   },
   momento11_missaoFamilia: {

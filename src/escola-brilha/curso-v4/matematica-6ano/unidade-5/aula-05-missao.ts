@@ -4,7 +4,7 @@ export const aula05_missao: AulaV4 = {
   slug: "u5-05-missao",
   titulo: "Missão — Mestre dos Decimais",
   iconeTrilha: "🏅",
-  bncc: ["EF06MA08", "EF06MA13"],
+  bncc: ["EF06MA07", "EF06MA08", "EF06MA11", "EF06MA13"],
   duracaoMin: 22,
   metodologias: ["skemp"],
 
@@ -74,7 +74,7 @@ export const aula05_missao: AulaV4 = {
         },
       },
       {
-        texto: "Multiplicação de decimais: some as casas.",
+        texto: "Na multiplicação decimal, use o valor posicional e uma estimativa para conferir a posição da vírgula.",
         exemploReal: {
           contexto: "0,4 × 0,3",
           visualMat: {
@@ -86,7 +86,7 @@ export const aula05_missao: AulaV4 = {
               { rotulo: "3", valores: ["põe vírgula", "0,12"] },
             ],
           },
-          destaque: "0,4 × 0,3 = 0,12.",
+          destaque: "4 décimos × 3 décimos = 12 centésimos = 0,12.",
         },
       },
     ],

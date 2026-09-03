@@ -12,7 +12,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-sociedades-justas",
   titulo: "Sociedades Justas",
   iconeTrilha: "🌐",
-  bncc: ["EF09ER07"],
+  bncc: ["EF09ER06"],
   duracaoMin: 25,
 
   cena01_motivacao: {

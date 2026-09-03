@@ -11,7 +11,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-sentido-vida",
   titulo: "O Sentido da Vida",
   iconeTrilha: "🌅",
-  bncc: ["EF09ER05"],
+  bncc: ["EF09ER03"],
   duracaoMin: 22,
 
   cena01_motivacao: {
@@ -52,16 +52,16 @@ export const aula01: AulaGeoV1 = {
 
   cena04_leituraGuiada: {
     tipo: "narrarMapa",
-    aurora: "6 grandes respostas ao 'pra que vivemos?'.",
+    aurora: "Mitos fundantes são narrativas de origem que ajudam comunidades a explicar de onde vem a vida, como viver e o que significa morrer. Compare seis leituras sem tratá-las como relatos científicos.",
     instrucao: "Toque em cada balão",
     mapaUrl: sentido,
     pontos: [
-      { id: "cristao", x: 15, y: 20, emoji: "✝️", cor: "from-sky-500 to-blue-700", titulo: "Cristianismo: amar e servir", texto: "Sentido = amar a Deus, amar o próximo, servir aos pequenos. Vida é dom que se retribui em amor.", fotoUrl: cuidado },
-      { id: "islam", x: 50, y: 20, emoji: "☪️", cor: "from-green-500 to-emerald-700", titulo: "Islamismo: submissão consciente", texto: "'Islam' significa 'submissão a Allah'. Sentido = alinhar a vida à vontade divina, servir aos irmãos.", fotoUrl: sentido },
-      { id: "budista", x: 85, y: 20, emoji: "☸️", cor: "from-orange-500 to-red-700", titulo: "Budismo: iluminação", texto: "Sentido = despertar. Ver a natureza real das coisas, libertar-se do sofrimento e ajudar os outros a libertarem-se.", fotoUrl: sentido },
-      { id: "afro", x: 20, y: 75, emoji: "🥁", cor: "from-amber-500 to-orange-700", titulo: "Afro-brasileira: axé", texto: "Sentido = alimentar o axé (força vital) da comunidade — através dos rituais, do respeito aos ancestrais, do cuidado coletivo.", fotoUrl: projeto },
-      { id: "hindu", x: 50, y: 75, emoji: "🕉️", cor: "from-red-500 to-orange-700", titulo: "Hinduísmo: dharma", texto: "Sentido = seguir o dharma — o dever cósmico específico de cada pessoa segundo seu contexto e sua natureza.", fotoUrl: sentido },
-      { id: "sec", x: 82, y: 75, emoji: "🌍", cor: "from-emerald-500 to-green-700", titulo: "Humanismo secular: construir junto", texto: "Sentido não vem pronto — a gente constrói junto, no relacionamento, na arte, no trabalho, na luta por justiça.", fotoUrl: projeto },
+      { id: "cristao", x: 15, y: 20, emoji: "✝️", cor: "from-sky-500 to-blue-700", titulo: "Narrativas bíblicas da criação", texto: "A vida é apresentada como criação e dom; viver envolve responsabilidade, cuidado e relação com Deus, o próximo e o mundo.", fotoUrl: cuidado },
+      { id: "islam", x: 50, y: 20, emoji: "☪️", cor: "from-green-500 to-emerald-700", titulo: "Narrativas islâmicas da criação", texto: "A humanidade é criada por Allah e recebe responsabilidade moral; viver significa orientar escolhas, justiça e cuidado segundo essa relação.", fotoUrl: sentido },
+      { id: "budista", x: 85, y: 20, emoji: "☸️", cor: "from-orange-500 to-red-700", titulo: "Narrativas sobre o despertar", texto: "Relatos ligados à trajetória do Buda explicam sofrimento, transformação e despertar; viver é aprender e agir com compaixão.", fotoUrl: sentido },
+      { id: "afro", x: 20, y: 75, emoji: "🥁", cor: "from-amber-500 to-orange-700", titulo: "Narrativas afro-brasileiras", texto: "Itãs e outras narrativas preservam memórias de orixás, ancestralidade e axé; vida e morte integram relações comunitárias e continuidade ancestral.", fotoUrl: projeto },
+      { id: "hindu", x: 50, y: 75, emoji: "🕉️", cor: "from-red-500 to-orange-700", titulo: "Narrativas hindus", texto: "Narrativas de criação, ciclos cósmicos e dever apresentam a vida dentro de uma ordem ampla; viver envolve dharma e transformação.", fotoUrl: sentido },
+      { id: "sec", x: 82, y: 75, emoji: "🌿", cor: "from-emerald-500 to-green-700", titulo: "Narrativas indígenas", texto: "Diferentes povos narram origens e relações entre território, seres humanos, outros seres e ancestrais; não existe uma única narrativa indígena.", fotoUrl: projeto },
     ],
     falaFinal: "6 propostas fortes. Cada uma coerente por dentro.",
   },
@@ -122,8 +122,8 @@ export const aula01: AulaGeoV1 = {
     tituloLivro: "📔 Diário do Curador",
     subtitulo: "Página 5 — O sentido da vida",
     paragrafos: [
-      { id: "p1", texto: "SENTIDO DA VIDA é a resposta pessoal pra pergunta 'por que estou aqui?'. Cada tradição religiosa e cada visão secular oferece propostas fortes — nenhuma dá a resposta pronta.", chaves: ["sentido", "resposta pessoal"] },
-      { id: "p2", texto: "Cristianismo propõe AMAR E SERVIR. Islamismo propõe SUBMISSÃO CONSCIENTE. Budismo propõe ILUMINAR-SE. Hinduísmo propõe SEGUIR O DHARMA. Afro propõe ALIMENTAR O AXÉ. Humanismo propõe CONSTRUIR SENTIDO JUNTO.", chaves: ["seis propostas"] },
+      { id: "p1", texto: "MITOS FUNDANTES são narrativas de origem que organizam sentidos sobre viver, morrer, comunidade e mundo. Não são explicações científicas e devem ser estudados dentro de seus contextos.", chaves: ["mitos fundantes", "contextos"] },
+      { id: "p2", texto: "Narrativas bíblicas, islâmicas, budistas, hindus, afro-brasileiras e indígenas relacionam origem, responsabilidade, transformação, ancestralidade e continuidade de modos diferentes.", chaves: ["origem", "ancestralidade"] },
       { id: "p3", texto: "TRANSCENDÊNCIA é o comum: dar sentido significa conectar-se com algo MAIOR que si — Deus, humanidade, natureza, comunidade, uma causa.", chaves: ["transcendência", "algo maior"] },
       { id: "p4", texto: "Na adolescência, a pergunta bate forte. Ninguém constrói sentido só pensando: precisa explorar, experimentar, refletir e assumir compromisso. Sentido consolida-se AGINDO. Você pode redecidir — mas precisa começar a decidir.", chaves: ["explorar", "compromisso"] },
     ],

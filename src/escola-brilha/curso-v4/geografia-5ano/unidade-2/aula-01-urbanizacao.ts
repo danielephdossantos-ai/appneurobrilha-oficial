@@ -10,7 +10,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-urbanizacao",
   titulo: "A Urbanização e as Grandes Cidades",
   iconeTrilha: "🏙️",
-  bncc: ["EF05GE03", "EF05GE04"],
+  bncc: ["EF05GE03"],
   duracaoMin: 22,
 
   cena01_motivacao: {
@@ -42,6 +42,19 @@ export const aula01: AulaGeoV1 = {
         subtitulo: "viagem de descanso",
         emoji: "🏖️",
         cor: "from-sky-400 to-blue-600",
+      },
+
+      {
+        id: "extra-1",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
+      {
+        id: "extra-2",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
       },
     ],
     respostaCerta: "exodo",
@@ -121,8 +134,7 @@ export const aula01: AulaGeoV1 = {
         emoji: "🌫️",
         cor: "from-slate-500 to-gray-700",
         titulo: "POLUIÇÃO DO AR",
-        texto:
-          "Fumaça de carros e fábricas polui o céu. Crianças com asma, gente doente.",
+        texto: "Fumaça de carros e fábricas polui o céu. Crianças com asma, gente doente.",
       },
       {
         id: "moradia",
@@ -131,8 +143,7 @@ export const aula01: AulaGeoV1 = {
         emoji: "🏚️",
         cor: "from-amber-500 to-orange-700",
         titulo: "FALTA DE MORADIA",
-        texto:
-          "Não tem casa pra todos. Aparecem favelas e ocupações sem estrutura.",
+        texto: "Não tem casa pra todos. Aparecem favelas e ocupações sem estrutura.",
       },
       {
         id: "saneamento",
@@ -141,8 +152,7 @@ export const aula01: AulaGeoV1 = {
         emoji: "🚰",
         cor: "from-emerald-500 to-green-700",
         titulo: "SANEAMENTO",
-        texto:
-          "Bairros novos crescem sem esgoto tratado. Doenças aumentam.",
+        texto: "Bairros novos crescem sem esgoto tratado. Doenças aumentam.",
       },
     ],
     falaFinal: "Cidade grande = oportunidade + desafios. Precisa PLANEJAR.",
@@ -161,6 +171,13 @@ export const aula01: AulaGeoV1 = {
           { id: "ex", emoji: "🚚", titulo: "Êxodo rural", cor: "from-amber-500 to-orange-700" },
           { id: "tur", emoji: "🏖️", titulo: "Turismo", cor: "from-sky-500 to-blue-700" },
           { id: "im", emoji: "✈️", titulo: "Imigração", cor: "from-emerald-500 to-green-700" },
+
+          {
+            id: "extra-3",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "ex",
         feedbackAcerto: "Isso! ÊXODO RURAL — saída em massa do campo.",
@@ -174,6 +191,13 @@ export const aula01: AulaGeoV1 = {
           { id: "vil", emoji: "🏡", titulo: "Vila", cor: "from-emerald-500 to-green-700" },
           { id: "met", emoji: "🌆", titulo: "Metrópole", cor: "from-purple-500 to-fuchsia-700" },
           { id: "faz", emoji: "🚜", titulo: "Fazenda", cor: "from-amber-500 to-orange-700" },
+
+          {
+            id: "extra-4",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "met",
         feedbackAcerto: "Perfeito! METRÓPOLE puxa várias cidades ao redor.",
@@ -183,9 +207,21 @@ export const aula01: AulaGeoV1 = {
         id: "q3",
         pergunta: "Água tratada + esgoto + coleta de lixo é...",
         cards: [
-          { id: "san", emoji: "🚰", titulo: "Saneamento básico", cor: "from-emerald-500 to-green-700" },
+          {
+            id: "san",
+            emoji: "🚰",
+            titulo: "Saneamento básico",
+            cor: "from-emerald-500 to-green-700",
+          },
           { id: "tra", emoji: "🚗", titulo: "Trânsito", cor: "from-red-500 to-rose-700" },
           { id: "pol", emoji: "🌫️", titulo: "Poluição", cor: "from-slate-500 to-gray-700" },
+
+          {
+            id: "extra-5",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "san",
         feedbackAcerto: "Isso! SANEAMENTO BÁSICO — direito de todo cidadão.",
@@ -259,8 +295,7 @@ export const aula01: AulaGeoV1 = {
     paragrafos: [
       {
         id: "p1",
-        texto:
-          "URBANIZAÇÃO é quando MAIS pessoas passam a morar em CIDADES do que no campo.",
+        texto: "URBANIZAÇÃO é quando MAIS pessoas passam a morar em CIDADES do que no campo.",
         chaves: ["urbanização", "cidades"],
       },
       {
@@ -271,14 +306,12 @@ export const aula01: AulaGeoV1 = {
       },
       {
         id: "p3",
-        texto:
-          "METRÓPOLES são cidades GIGANTES como SP, RJ e BH — puxam gente e economia.",
+        texto: "METRÓPOLES são cidades GIGANTES como SP, RJ e BH — puxam gente e economia.",
         chaves: ["metrópoles", "gigantes", "sp"],
       },
       {
         id: "p4",
-        texto:
-          "Crescimento sem planejamento traz TRÂNSITO, POLUIÇÃO e falta de SANEAMENTO.",
+        texto: "Crescimento sem planejamento traz TRÂNSITO, POLUIÇÃO e falta de SANEAMENTO.",
         chaves: ["trânsito", "poluição", "saneamento"],
       },
     ],
@@ -346,7 +379,11 @@ export const aula01: AulaGeoV1 = {
       },
       {
         id: "r6",
-        municipioA: { nome: "Bicicleta esquecida", emoji: "🚲", cor: "from-emerald-400 to-green-600" },
+        municipioA: {
+          nome: "Bicicleta esquecida",
+          emoji: "🚲",
+          cor: "from-emerald-400 to-green-600",
+        },
         municipioB: { nome: "Curta distância", emoji: "📍", cor: "from-sky-400 to-blue-600" },
         contexto: "Bairro com trajetos curtos. Solução limpa?",
         pecaCertaId: "ciclovia",
@@ -398,6 +435,8 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Ruas limpas e sem carros", correta: false },
           { id: "b", texto: "Falta de saneamento, trânsito e poluição", correta: true },
           { id: "c", texto: "Menos habitantes", correta: false },
+
+          { id: "extra-6", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Isso! Sem planejamento = trânsito, poluição, sem esgoto.",
         feedbackErro: "Ruas limpas exigem planejamento. Sem ele = trânsito e poluição.",
@@ -409,6 +448,8 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Turismo", correta: false },
           { id: "b", texto: "Êxodo rural", correta: true },
           { id: "c", texto: "Imigração internacional", correta: false },
+
+          { id: "extra-7", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Perfeito! ÊXODO RURAL = saída em massa do campo.",
         feedbackErro: "Turismo é passeio. Imigração é entre países. Massa do campo = ÊXODO RURAL.",
@@ -420,6 +461,8 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Vila", correta: false },
           { id: "b", texto: "Metrópole", correta: true },
           { id: "c", texto: "Sítio", correta: false },
+
+          { id: "extra-8", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Isso! METRÓPOLE — puxa economia e gente ao redor.",
         feedbackErro: "Vila e sítio são pequenos. Gigante = METRÓPOLE.",

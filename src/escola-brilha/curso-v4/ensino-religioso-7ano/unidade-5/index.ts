@@ -5,7 +5,7 @@ export const unidade5: UnidadeGeoV1 = {
   slug: "unidade-5",
   numero: 5,
   titulo: "O Sagrado: Perto ou Distante?",
-  subtitulo: "Imanência e transcendência (EF07ER05)",
+  subtitulo: "Aprofundamento complementar: imanência e transcendência",
   descricao: "Algumas tradições veem o sagrado dentro da natureza; outras, além dela. Duas visões, um mesmo respeito.",
   corTema: "#0ea5e9",
   aulas: [aula01],

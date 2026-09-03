@@ -22,7 +22,7 @@ export const aula3: AulaPortuguesV4 = {
   slug: "aula-03-fato-e-opiniao",
   titulo: "Fato e Opinião",
   iconeTrilha: "⚖️",
-  bncc: ["EF05LP17", "EF05LP23"],
+  bncc: ["EF05LP16", "EF35LP15", "EF15LP03"],
   duracaoMin: 25,
 
   momento01_motivacao: {

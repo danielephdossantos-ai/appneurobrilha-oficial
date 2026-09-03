@@ -27,7 +27,7 @@ export const aula4: AulaPortuguesV4 = {
   slug: "aula-04-resumo-do-detetive",
   titulo: "O Resumo do Detetive",
   iconeTrilha: "📝",
-  bncc: ["EF05LP02", "EF15LP03"],
+  bncc: ["EF35LP03", "EF35LP06", "EF15LP03"],
   duracaoMin: 25,
 
   momento01_motivacao: {

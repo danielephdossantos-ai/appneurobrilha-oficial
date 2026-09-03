@@ -1,0 +1,2 @@
+import { criarAulaArte1 } from "./criarAulaArte1";
+export default criarAulaArte1({ codigo: "EF15AR15", titulo: "Caçadores de Sons", foco: "Explorar fontes sonoras do corpo, da natureza, de objetos e instrumentos", objeto: "fontes sonoras", exemplos: ["Produzir sons com palmas e objetos", "Quebrar objetos", "Ficar em silêncio sem investigar", "Escrever uma divisão"], resposta: "Investigar como diferentes fontes produzem sons e usá-las com cuidado.", proxima: "EF15AR16" });

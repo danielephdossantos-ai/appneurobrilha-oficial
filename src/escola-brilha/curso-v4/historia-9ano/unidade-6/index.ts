@@ -5,6 +5,7 @@ import { aula03 } from "./aula-03-resistencias-reorganizacao";
 import { aula04 } from "./aula-04-indigenas-quilombolas-desenvolvimentismo";
 import { aula05 } from "./aula-05-diretas-ja";
 import { aula06 } from "./aula-06-cf88-direitos";
+import { aula07 } from "./aula-07-brasil-1946-1964";
 
 export const unidade6: UnidadeGeoV1 = {
   slug: "unidade-6",
@@ -14,5 +15,5 @@ export const unidade6: UnidadeGeoV1 = {
   descricao:
     "Do golpe aos anos de chumbo, das Diretas Já à Constituição de 1988. A democracia brasileira que vivemos foi conquistada nas ruas.",
   corTema: "#059669",
-  aulas: [aula01, aula02, aula03, aula04, aula05, aula06],
+  aulas: [aula01, aula02, aula03, aula04, aula05, aula06, aula07],
 };

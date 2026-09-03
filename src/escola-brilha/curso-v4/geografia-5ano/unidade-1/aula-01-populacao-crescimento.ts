@@ -10,7 +10,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-populacao-crescimento",
   titulo: "A Dinâmica Populacional e Crescimento",
   iconeTrilha: "👥",
-  bncc: ["EF05GE01", "EF05GE02"],
+  bncc: ["EF05GE01"],
   duracaoMin: 22,
 
   cena01_motivacao: {
@@ -25,8 +25,7 @@ export const aula01: AulaGeoV1 = {
 
   cena02_previsao: {
     tipo: "votoExplorador",
-    aurora:
-      "Palpite rápido: pra que serve o governo saber quantas pessoas moram em cada cidade?",
+    aurora: "Palpite rápido: pra que serve o governo saber quantas pessoas moram em cada cidade?",
     pergunta: "Por que fazer o Censo?",
     opcoes: [
       {
@@ -42,6 +41,19 @@ export const aula01: AulaGeoV1 = {
         subtitulo: "saber os nomes mais comuns",
         emoji: "🤔",
         cor: "from-slate-400 to-gray-600",
+      },
+
+      {
+        id: "extra-1",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
+      {
+        id: "extra-2",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
       },
     ],
     respostaCerta: "planejar",
@@ -163,6 +175,13 @@ export const aula01: AulaGeoV1 = {
           { id: "ibge", emoji: "📋", titulo: "IBGE", cor: "from-sky-500 to-blue-700" },
           { id: "esc", emoji: "🏫", titulo: "Escolas", cor: "from-amber-500 to-orange-700" },
           { id: "tv", emoji: "📺", titulo: "TV Globo", cor: "from-red-500 to-rose-700" },
+
+          {
+            id: "extra-3",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "ibge",
         feedbackAcerto: "Isso! O IBGE é o órgão oficial que conta a população.",
@@ -176,6 +195,13 @@ export const aula01: AulaGeoV1 = {
           { id: "lit", emoji: "🌊", titulo: "Perto do litoral", cor: "from-sky-500 to-blue-700" },
           { id: "flor", emoji: "🌳", titulo: "Na floresta", cor: "from-emerald-500 to-green-700" },
           { id: "des", emoji: "🏜️", titulo: "No deserto", cor: "from-amber-500 to-orange-700" },
+
+          {
+            id: "extra-4",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "lit",
         feedbackAcerto: "Perfeito! A maioria vive na faixa litorânea.",
@@ -188,6 +214,13 @@ export const aula01: AulaGeoV1 = {
           { id: "ad", emoji: "📊", titulo: "Alta densidade", cor: "from-red-500 to-rose-700" },
           { id: "bd", emoji: "🌵", titulo: "Baixa densidade", cor: "from-amber-500 to-orange-700" },
           { id: "mig", emoji: "🚚", titulo: "Migração", cor: "from-emerald-500 to-green-700" },
+
+          {
+            id: "extra-5",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "ad",
         feedbackAcerto: "Isso! ALTA densidade = muita gente por km².",
@@ -261,8 +294,7 @@ export const aula01: AulaGeoV1 = {
     paragrafos: [
       {
         id: "p1",
-        texto:
-          "O CENSO é a contagem oficial da população feita pelo IBGE de 10 em 10 anos.",
+        texto: "O CENSO é a contagem oficial da população feita pelo IBGE de 10 em 10 anos.",
         chaves: ["censo", "ibge"],
       },
       {
@@ -304,7 +336,11 @@ export const aula01: AulaGeoV1 = {
       {
         id: "r1",
         municipioA: { nome: "Bairro de bebês", emoji: "🍼", cor: "from-pink-400 to-rose-600" },
-        municipioB: { nome: "Muitos recém-nascidos", emoji: "👶", cor: "from-amber-400 to-orange-600" },
+        municipioB: {
+          nome: "Muitos recém-nascidos",
+          emoji: "👶",
+          cor: "from-amber-400 to-orange-600",
+        },
         contexto: "Censo mostrou explosão de bebês num bairro. O que construir?",
         pecaCertaId: "creches",
         feedbackAcerto: "Isso! Muitos bebês = precisa de CRECHES.",
@@ -313,7 +349,11 @@ export const aula01: AulaGeoV1 = {
       {
         id: "r2",
         municipioA: { nome: "Idosos", emoji: "👵", cor: "from-purple-400 to-indigo-600" },
-        municipioB: { nome: "Muita gente velhinha", emoji: "🧓", cor: "from-slate-400 to-gray-600" },
+        municipioB: {
+          nome: "Muita gente velhinha",
+          emoji: "🧓",
+          cor: "from-slate-400 to-gray-600",
+        },
         contexto: "Cidade com maioria de idosos. O que priorizar?",
         pecaCertaId: "hospitais",
         feedbackAcerto: "Perfeito! Idosos precisam de HOSPITAIS e postos de saúde.",
@@ -380,8 +420,7 @@ export const aula01: AulaGeoV1 = {
         emoji: "🌾",
         percentual: 15,
         cor: "#10b981",
-        descricao:
-          "Só 15% mora no CAMPO — mas produz boa parte da comida que abastece a cidade.",
+        descricao: "Só 15% mora no CAMPO — mas produz boa parte da comida que abastece a cidade.",
         exemplos: ["🚜 Fazendas", "🐄 Pecuária", "🌱 Agricultura"],
       },
     ],
@@ -400,6 +439,8 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Saber nomes mais comuns do país", correta: false },
           { id: "b", texto: "Planejar escolas, hospitais e moradia", correta: true },
           { id: "c", texto: "Escolher o presidente", correta: false },
+
+          { id: "extra-6", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Isso! Censo = ferramenta pra PLANEJAR o país.",
         feedbackErro: "Censo serve pra saber quantos somos e PLANEJAR o futuro.",
@@ -411,6 +452,8 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Amazônia", correta: false },
           { id: "b", texto: "Perto do litoral", correta: true },
           { id: "c", texto: "Deserto do Nordeste", correta: false },
+
+          { id: "extra-7", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Perfeito! Litoral concentra a maior parte da população.",
         feedbackErro: "Amazônia é vazia. Nordeste tem sertão. Litoral = maioria.",
@@ -422,6 +465,8 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Baixa densidade", correta: false },
           { id: "b", texto: "Alta densidade demográfica", correta: true },
           { id: "c", texto: "Migração", correta: false },
+
+          { id: "extra-8", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Isso! Amontoado = ALTA DENSIDADE demográfica.",
         feedbackErro: "Migração é mudança de lugar. Amontoado = ALTA DENSIDADE.",

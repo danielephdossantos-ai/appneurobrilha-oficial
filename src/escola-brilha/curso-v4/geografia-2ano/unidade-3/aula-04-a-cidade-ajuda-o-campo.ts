@@ -25,7 +25,7 @@ export const aula04: AulaPortuguesV4 = {
   slug: "aula-04-a-cidade-ajuda-o-campo",
   titulo: "A Cidade Ajuda o Campo",
   iconeTrilha: "🤝",
-  bncc: ["EF02GE08"],
+  bncc: [],
   duracaoMin: 15,
 
   momento01_motivacao: {
@@ -67,10 +67,10 @@ export const aula04: AulaPortuguesV4 = {
         },
         { texto: "Sobre colher fruta na árvore.", imagemUrl: campo },
         { texto: "Sobre viajar de foguete.", imagemUrl: carro },
+        { texto: "Sobre outra possibilidade relacionada ao tema.", imagemUrl: cidade },
       ],
       respostaCerta: 0,
-      feedbackAcerto:
-        "🎉 Isso! A ajuda vai nos DOIS sentidos: campo→cidade E cidade→campo.",
+      feedbackAcerto: "🎉 Isso! A ajuda vai nos DOIS sentidos: campo→cidade E cidade→campo.",
       feedbackErro:
         "As pistas mostram FERRAMENTAS, POSTO e ESCOLA — a missão fala de como a CIDADE ajuda o CAMPO.",
     },
@@ -83,24 +83,21 @@ export const aula04: AulaPortuguesV4 = {
         palavra: "interdependência",
         explicacao:
           "Palavra grande e importante: dois lugares que DEPENDEM UM DO OUTRO. Campo e cidade têm INTERDEPENDÊNCIA.",
-        exemplo:
-          "Campo e cidade vivem em INTERDEPENDÊNCIA.",
+        exemplo: "Campo e cidade vivem em INTERDEPENDÊNCIA.",
         imagemUrl: mapaPercurso,
       },
       {
         palavra: "indústria",
         explicacao:
           "É uma FÁBRICA GRANDE, geralmente na cidade. A indústria faz TRATOR, REMÉDIO pra animal, FERRAMENTA — coisas que o campo precisa.",
-        exemplo:
-          "A INDÚSTRIA faz o trator que o agricultor usa.",
+        exemplo: "A INDÚSTRIA faz o trator que o agricultor usa.",
         imagemUrl: padaria,
       },
       {
         palavra: "serviço",
         explicacao:
           "É a AJUDA que uma pessoa faz pra outra: médico atender, professor ensinar, banco emprestar. A cidade oferece SERVIÇOS pro campo.",
-        exemplo:
-          "O HOSPITAL da cidade presta SERVIÇO pra quem mora no campo.",
+        exemplo: "O HOSPITAL da cidade presta SERVIÇO pra quem mora no campo.",
         imagemUrl: postoSaude,
       },
     ],
@@ -127,21 +124,23 @@ export const aula04: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "Quem FAZ o trator, a enxada e as ferramentas do agricultor?",
-        opcoes: ["A indústria da cidade", "A vaca", "O rio"],
+        opcoes: ["A indústria da cidade", "A vaca", "O rio", "Outra possibilidade"],
         correta: 0,
         feedbackAcerto: "🎉 A INDÚSTRIA da CIDADE.",
-        feedbackErro:
-          "O texto diz: 'FERRAMENTAS… são feitas na INDÚSTRIA da CIDADE'.",
-        ondeEstaNoTexto:
-          "…FERRAMENTAS que o agricultor usa… são feitas na INDÚSTRIA da CIDADE…",
+        feedbackErro: "O texto diz: 'FERRAMENTAS… são feitas na INDÚSTRIA da CIDADE'.",
+        ondeEstaNoTexto: "…FERRAMENTAS que o agricultor usa… são feitas na INDÚSTRIA da CIDADE…",
       },
       {
         pergunta: "Quando alguém do campo fica DOENTE, muitas vezes vai a onde?",
-        opcoes: ["A um HOSPITAL na cidade", "A uma árvore alta", "Ao caminhão"],
+        opcoes: [
+          "A um HOSPITAL na cidade",
+          "A uma árvore alta",
+          "Ao caminhão",
+          "Outra possibilidade",
+        ],
         correta: 0,
         feedbackAcerto: "🎉 Ao HOSPITAL da cidade.",
-        feedbackErro:
-          "O texto diz: 'vem pro HOSPITAL da cidade'.",
+        feedbackErro: "O texto diz: 'vem pro HOSPITAL da cidade'.",
         ondeEstaNoTexto: "…vem pro HOSPITAL da cidade…",
       },
       {
@@ -150,13 +149,13 @@ export const aula04: AulaPortuguesV4 = {
           "Só embaixo da árvore",
           "Em ESCOLAS na cidade ou no caminho",
           "Não estudam",
+          "Outra possibilidade",
         ],
         correta: 1,
         feedbackAcerto: "🎉 Em ESCOLAS na cidade ou no caminho.",
         feedbackErro:
           "O texto diz: 'estudam em ESCOLAS que ficam na cidade ou no meio do caminho'.",
-        ondeEstaNoTexto:
-          "…estudam em ESCOLAS que ficam na cidade ou no meio do caminho…",
+        ondeEstaNoTexto: "…estudam em ESCOLAS que ficam na cidade ou no meio do caminho…",
       },
       {
         pergunta: "O que quer dizer INTERDEPENDÊNCIA?",
@@ -164,11 +163,11 @@ export const aula04: AulaPortuguesV4 = {
           "Um lugar só depende do outro",
           "Os dois DEPENDEM UM DO OUTRO",
           "Ninguém depende de ninguém",
+          "Outra possibilidade",
         ],
         correta: 1,
         feedbackAcerto: "🎉 Os DOIS dependem UM DO OUTRO.",
-        feedbackErro:
-          "INTERDEPENDÊNCIA = os DOIS lados PRECISAM UM DO OUTRO.",
+        feedbackErro: "INTERDEPENDÊNCIA = os DOIS lados PRECISAM UM DO OUTRO.",
       },
     ],
   },
@@ -178,24 +177,24 @@ export const aula04: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "O TRATOR do agricultor é feito onde?",
-        opcoes: ["Na indústria da cidade", "Dentro do pasto", "No galinheiro"],
-        opcoesImagens: [padaria, campo, vaca],
+        opcoes: [
+          "Na indústria da cidade",
+          "Dentro do pasto",
+          "No galinheiro",
+          "Outra possibilidade",
+        ],
+        opcoesImagens: [padaria, campo, vaca, padaria],
         correta: 0,
         feedbackAcerto: "🎉 Na INDÚSTRIA da CIDADE.",
         feedbackErro: "TRATOR vem da INDÚSTRIA — que fica na CIDADE.",
       },
       {
         pergunta: "O REMÉDIO pra vaca doente vem de onde?",
-        opcoes: [
-          "De uma fábrica na cidade",
-          "Da própria vaca",
-          "Da chuva",
-        ],
-        opcoesImagens: [postoSaude, vaca, campo],
+        opcoes: ["De uma fábrica na cidade", "Da própria vaca", "Da chuva", "Outra possibilidade"],
+        opcoesImagens: [postoSaude, vaca, campo, postoSaude],
         correta: 0,
         feedbackAcerto: "🎉 De uma FÁBRICA na CIDADE.",
-        feedbackErro:
-          "REMÉDIO (pra gente E pra animal) vem de FÁBRICAS na cidade.",
+        feedbackErro: "REMÉDIO (pra gente E pra animal) vem de FÁBRICAS na cidade.",
       },
       {
         pergunta: "O CELULAR que o agricultor usa pra saber o preço do tomate...",
@@ -203,8 +202,9 @@ export const aula04: AulaPortuguesV4 = {
           "É feito na cidade (indústria)",
           "Nasce no pé",
           "Cai do céu",
+          "Outra possibilidade",
         ],
-        opcoesImagens: [celular, campo, cidade],
+        opcoesImagens: [celular, campo, cidade, celular],
         correta: 0,
         feedbackAcerto: "🎉 É feito na CIDADE.",
         feedbackErro: "CELULAR e TABLET são feitos em INDÚSTRIAS na cidade.",
@@ -224,8 +224,7 @@ export const aula04: AulaPortuguesV4 = {
         { id: "s5", texto: "5) A CIDADE come — e a amizade continua.", imagemUrl: mercado },
       ],
       ordemCerta: ["s1", "s2", "s3", "s4", "s5"],
-      feedbackAcerto:
-        "🎉 Perfeito! É um CICLO: cidade dá ferramenta → campo produz → cidade come.",
+      feedbackAcerto: "🎉 Perfeito! É um CICLO: cidade dá ferramenta → campo produz → cidade come.",
       feedbackErro:
         "Primeiro a CIDADE fabrica, o campo usa, colhe, o caminhão volta e a cidade come.",
     },
@@ -245,8 +244,13 @@ export const aula04: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "O TRATOR que o vovô usa foi feito onde?",
-        opcoes: ["Numa fábrica da cidade", "Debaixo da árvore", "Dentro da vaca"],
-        opcoesImagens: [padaria, campo, vaca],
+        opcoes: [
+          "Numa fábrica da cidade",
+          "Debaixo da árvore",
+          "Dentro da vaca",
+          "Outra possibilidade",
+        ],
+        opcoesImagens: [padaria, campo, vaca, padaria],
         correta: 0,
         feedbackAcerto: "🎉 Numa FÁBRICA da CIDADE.",
         feedbackErro: "O texto diz: 'TRATOR (feito numa fábrica da cidade)'.",
@@ -254,8 +258,8 @@ export const aula04: AulaPortuguesV4 = {
       },
       {
         pergunta: "O filho do vovô estuda ONDE?",
-        opcoes: ["Na cidade", "No meio do rio", "No topo do trator"],
-        opcoesImagens: [escola, campo, carro],
+        opcoes: ["Na cidade", "No meio do rio", "No topo do trator", "Outra possibilidade"],
+        opcoesImagens: [escola, campo, carro, escola],
         correta: 0,
         feedbackAcerto: "🎉 Na CIDADE.",
         feedbackErro: "O texto diz: 'ESCOLA — que fica na cidade'.",
@@ -299,8 +303,7 @@ export const aula04: AulaPortuguesV4 = {
           { id: "banco", texto: "🏦 Banco", alvoId: "cidade_of", imagemUrl: moeda },
           { id: "tab", texto: "💻 Tablet", alvoId: "cidade_of", imagemUrl: tablet },
         ],
-        feedbackAcerto:
-          "🎉 Isso! O CAMPO manda ALIMENTO; a CIDADE manda INDÚSTRIA e SERVIÇOS.",
+        feedbackAcerto: "🎉 Isso! O CAMPO manda ALIMENTO; a CIDADE manda INDÚSTRIA e SERVIÇOS.",
         feedbackErro:
           "Lembra: comida → CAMPO. Ferramenta, hospital, escola grande, celular, banco → CIDADE.",
       },
@@ -321,12 +324,11 @@ export const aula04: AulaPortuguesV4 = {
         "Só o campo ajuda a cidade",
         "Só a cidade ajuda o campo",
         "OS DOIS se ajudam (interdependência)",
+        "Outra possibilidade",
       ],
       correta: 2,
-      feedbackAcerto:
-        "🎉 Isso! Os DOIS se ajudam — INTERDEPENDÊNCIA.",
-      feedbackErro:
-        "É de MÃO DUPLA: campo alimenta a cidade E a cidade oferece indústria/serviço.",
+      feedbackAcerto: "🎉 Isso! Os DOIS se ajudam — INTERDEPENDÊNCIA.",
+      feedbackErro: "É de MÃO DUPLA: campo alimenta a cidade E a cidade oferece indústria/serviço.",
     },
   },
 
@@ -334,18 +336,14 @@ export const aula04: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "1/5 — O TRATOR do agricultor é feito ONDE?",
-        opcoes: ["Na indústria da cidade", "No pasto", "Na copa da árvore"],
+        opcoes: ["Na indústria da cidade", "No pasto", "Na copa da árvore", "Outra possibilidade"],
         correta: 0,
         feedbackAcerto: "🎉 Na INDÚSTRIA da CIDADE.",
         feedbackErro: "TRATOR vem da INDÚSTRIA — na CIDADE.",
       },
       {
         pergunta: "2/5 — REMÉDIOS pros animais vêm de onde?",
-        opcoes: [
-          "De fábricas na cidade",
-          "Da chuva",
-          "Do próprio animal",
-        ],
+        opcoes: ["De fábricas na cidade", "Da chuva", "Do próprio animal", "Outra possibilidade"],
         correta: 0,
         feedbackAcerto: "🎉 De FÁBRICAS na CIDADE.",
         feedbackErro: "REMÉDIO vem de FÁBRICA — normalmente na cidade.",
@@ -356,11 +354,11 @@ export const aula04: AulaPortuguesV4 = {
           "Trator e celular",
           "Alimento e matéria-prima",
           "Hospital e banco",
+          "Outra possibilidade",
         ],
         correta: 1,
         feedbackAcerto: "🎉 ALIMENTO e MATÉRIA-PRIMA.",
-        feedbackErro:
-          "CAMPO oferece ALIMENTO (leite, carne, fruta) e MATÉRIA-PRIMA.",
+        feedbackErro: "CAMPO oferece ALIMENTO (leite, carne, fruta) e MATÉRIA-PRIMA.",
       },
       {
         pergunta: "4/5 — A CIDADE oferece PRO CAMPO...",
@@ -368,11 +366,11 @@ export const aula04: AulaPortuguesV4 = {
           "Fruta e leite",
           "Indústria, hospital, escola e serviços",
           "Nada",
+          "Outra possibilidade",
         ],
         correta: 1,
         feedbackAcerto: "🎉 Indústria, hospital, escola e serviços.",
-        feedbackErro:
-          "CIDADE oferece INDÚSTRIA, HOSPITAL, ESCOLA e SERVIÇOS pro campo.",
+        feedbackErro: "CIDADE oferece INDÚSTRIA, HOSPITAL, ESCOLA e SERVIÇOS pro campo.",
       },
       {
         pergunta: "5/5 — INTERDEPENDÊNCIA quer dizer que...",
@@ -380,11 +378,11 @@ export const aula04: AulaPortuguesV4 = {
           "Ninguém precisa de ninguém",
           "Os DOIS lados PRECISAM um do outro",
           "Só o campo é importante",
+          "Outra possibilidade",
         ],
         correta: 1,
         feedbackAcerto: "🎉 Os DOIS PRECISAM um do outro.",
-        feedbackErro:
-          "INTERDEPENDÊNCIA = os DOIS lados PRECISAM um do outro.",
+        feedbackErro: "INTERDEPENDÊNCIA = os DOIS lados PRECISAM um do outro.",
       },
     ],
   },
@@ -398,8 +396,7 @@ export const aula04: AulaPortuguesV4 = {
       "3) No meio, desenhe uma SETA de mão dupla ↔.",
       "4) Escreva embaixo: 'CAMPO E CIDADE SÃO AMIGOS'.",
     ],
-    registro:
-      "📸 Uma foto do seu cartaz da INTERDEPENDÊNCIA.",
+    registro: "📸 Uma foto do seu cartaz da INTERDEPENDÊNCIA.",
   },
 
   recompensa: {

@@ -13,7 +13,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-movimentos-inclusao",
   titulo: "Movimentos Sociais e Inclusão",
   iconeTrilha: "🤝",
-  bncc: ["EF05HI08", "EF05HI09"],
+  bncc: [],
   duracaoMin: 25,
 
   cena01_motivacao: {
@@ -34,6 +34,8 @@ export const aula01: AulaGeoV1 = {
     opcoes: [
       { id: "mov", titulo: "Movimento Social", subtitulo: "união pra reivindicar direitos", emoji: "✊", cor: "from-emerald-600 to-teal-800", fotoUrl: imgInfo },
       { id: "emp", titulo: "Empresa comercial", subtitulo: "vende produtos e serviços", emoji: "🏢", cor: "from-slate-500 to-slate-700", fotoUrl: imgRampa },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "mov",
     feedbackAcerto: "Correto. MOVIMENTO SOCIAL é a união organizada de cidadãos pra cobrar direitos e mudanças ao governo.",

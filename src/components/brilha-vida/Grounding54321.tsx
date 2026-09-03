@@ -55,8 +55,8 @@ const ETAPAS: Etapa[] = [
   {
     n: 2,
     sentido: "cheirar",
-    instrucao: "Respire fundo e sinta 2 cheiros no ar",
-    narracao: "Respira fundo pelo nariz. Sinta dois cheiros. O cheiro do lugar, da sua roupa, das suas mãos.",
+    instrucao: "Perceba 2 cheiros que já estão no ambiente",
+    narracao: "Sem aproximar produtos do rosto, perceba dois cheiros que já estão no ambiente, como o lugar ou a sua roupa.",
     demo: "grounding-cheirar",
     icone: <Coffee className="w-8 h-8" />,
     cor: "from-amber-300 to-amber-500",
@@ -65,8 +65,8 @@ const ETAPAS: Etapa[] = [
   {
     n: 1,
     sentido: "provar",
-    instrucao: "Sinta 1 sabor na sua boca (ou tome um gole de água)",
-    narracao: "Por último, sinta um sabor na sua boca. Pode tomar um golinho de água bem gelada. Repare no sabor.",
+    instrucao: "Perceba o gosto da sua boca agora",
+    narracao: "Por último, perceba o gosto que já está na sua boca. Não precisa comer nem beber nada.",
     demo: "grounding-provar",
     icone: <Wind className="w-8 h-8" />,
     cor: "from-rose-300 to-rose-500",
@@ -192,9 +192,9 @@ export function Grounding54321({ onClose }: { onClose: () => void }) {
           className="text-center bg-white rounded-3xl p-8 border-2 border-emerald/20 shadow-xl max-w-sm"
         >
           <div className="text-6xl mb-3">🌟</div>
-          <div className="text-2xl font-black text-slate-800 mb-2">Você voltou pro agora</div>
-          <p className="text-sm text-slate-600 mb-5">
-            Percebeu como o corpo já respira mais devagar? Você usou seus sentidos pra sair da tempestade.
+          <div className="text-2xl font-black text-slate-800 mb-2">Você terminou a observação</div>
+          <p className="text-base text-slate-600 mb-5">
+            Perceba como seu corpo está agora. Se ainda estiver difícil, chame um adulto de confiança.
           </p>
           <div className="flex gap-2">
             <button
@@ -213,8 +213,8 @@ export function Grounding54321({ onClose }: { onClose: () => void }) {
         </motion.div>
       )}
 
-      <p className="mt-6 text-[10px] text-slate-400 text-center max-w-xs">
-        Base clínica: técnica 5-4-3-2-1 (grounding sensorial), trauma-informed care.
+      <p className="mt-6 text-sm text-slate-500 text-center max-w-sm">
+        Atividade educativa de atenção aos sentidos. Não substitui atendimento profissional.
       </p>
     </div>
   );

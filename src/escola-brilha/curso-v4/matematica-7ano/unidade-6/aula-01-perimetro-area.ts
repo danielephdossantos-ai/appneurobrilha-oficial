@@ -5,7 +5,7 @@ export const aula01_perimetroArea: AulaV4 = {
   slug: "u6-01-perimetro-area",
   titulo: "Contorno e Superfície",
   iconeTrilha: "📐",
-  bncc: ["EF07MA30", "EF07MA31"],
+  bncc: ["EF07MA31", "EF07MA32"],
   duracaoMin: 30,
   metodologias: ["skemp"],
 

@@ -16,7 +16,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-ciencia-da-historia",
   titulo: "A Ciência da História e o Ofício do Historiador",
   iconeTrilha: "🔍",
-  bncc: ["EF06HI01", "EF06HI02"],
+  bncc: ["EF06HI02"],
   duracaoMin: 30,
   estilo: "teen",
 
@@ -53,6 +53,8 @@ export const aula01: AulaGeoV1 = {
         emoji: "❌",
         cor: "from-amber-900 to-slate-950",
       },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "cruzar",
     feedbackAcerto:
@@ -188,6 +190,7 @@ export const aula01: AulaGeoV1 = {
           { id: "m", emoji: "⚱️", titulo: "Material", cor: "from-teal-600 to-slate-900" },
           { id: "o", emoji: "🎙️", titulo: "Oral", cor: "from-cyan-600 to-slate-900" },
           { id: "d", emoji: "❓", titulo: "Digital", cor: "from-slate-600 to-slate-900" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "m",
         feedbackAcerto:
@@ -204,6 +207,7 @@ export const aula01: AulaGeoV1 = {
           { id: "o", emoji: "🎙️", titulo: "Oral", cor: "from-cyan-600 to-slate-900" },
           { id: "e", emoji: "📜", titulo: "Escrita", cor: "from-amber-600 to-slate-900" },
           { id: "m", emoji: "⚱️", titulo: "Material", cor: "from-teal-600 to-slate-900" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "o",
         feedbackAcerto:
@@ -235,6 +239,7 @@ export const aula01: AulaGeoV1 = {
             titulo: "Ignorar as duas",
             cor: "from-slate-600 to-slate-900",
           },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "c",
         feedbackAcerto:
@@ -523,6 +528,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Fake news do passado.", correta: false },
           { id: "b", texto: "Fontes históricas.", correta: true },
           { id: "c", texto: "Suposições mitológicas.", correta: false },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto:
           "Correto. FONTES HISTÓRICAS — sem elas, não existe ciência histórica.",
@@ -537,6 +543,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Fonte oral.", correta: false },
           { id: "b", texto: "Fonte material.", correta: true },
           { id: "c", texto: "Fonte digital.", correta: false },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto:
           "Correto. Objeto físico = MATERIAL. Também servia como propaganda política.",
@@ -551,6 +558,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Cruzar as duas fontes e buscar mais evidências.", correta: true },
           { id: "b", texto: "Escolher a que soa mais bonita.", correta: false },
           { id: "c", texto: "Ignorar completamente as duas.", correta: false },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto:
           "Correto. CRUZAMENTO DE FONTES é o método científico.",

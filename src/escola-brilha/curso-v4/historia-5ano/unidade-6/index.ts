@@ -1,5 +1,6 @@
 import type { UnidadeGeoV1 } from "../../types";
 import { aula01 } from "./aula-01-movimentos-inclusao";
+import { aula02 } from "./aula-02-temas-contemporaneos";
 
 export const unidade6: UnidadeGeoV1 = {
   slug: "unidade-6",
@@ -9,5 +10,5 @@ export const unidade6: UnidadeGeoV1 = {
   descricao:
     "Brilha e Aurora acendem a sexta Tocha: A Roda da Inclusão. O aluno investiga os movimentos sociais contemporâneos e as conquistas por inclusão de grupos historicamente excluídos.",
   corTema: "#1e40af",
-  aulas: [aula01],
+  aulas: [aula01, aula02],
 };

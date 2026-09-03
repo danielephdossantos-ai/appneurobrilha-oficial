@@ -155,7 +155,7 @@ function Layout({ children }: { children: React.ReactNode }) {
     <div className={`min-h-screen text-white ${fundoMundo.className}`} style={fundoMundo.style}>
       <MundoBar />
       <div className="max-w-3xl mx-auto px-4 py-6">
-        <Link to="/" className="text-white/80 text-sm">◂ Voltar</Link>
+        <Link to="/escola-brilha" className="text-white/80 text-sm">◂ Voltar</Link>
         <header className="text-center mt-3 mb-6">
           <p className="text-yellow-300 font-bold text-xs tracking-wider">
             EDUCAÇÃO INFANTIL · BNCC
@@ -428,8 +428,7 @@ function countConcluidas(curso: CursoEI, childId: string): number {
   try {
     if (typeof window === "undefined") return 0;
     const key = `eb.ei.pt.concluidas.${curso.slug}.${childId}`;
-    const legacy = `eb.ei.pt.concluidas.${curso.slug}`;
-    const raw = localStorage.getItem(key) ?? localStorage.getItem(legacy);
+    const raw = localStorage.getItem(key);
     if (!raw) return 0;
     const arr = JSON.parse(raw) as string[];
     const slugs = new Set(curso.unidades.flatMap((u) => u.aulas.map((a) => a.slug)));
@@ -443,13 +442,12 @@ function countConcluidas(curso: CursoEI, childId: string): number {
 
 function TrilhaSerie({ curso, childId }: { curso: CursoEI; childId: string }) {
   const key = `eb.ei.pt.concluidas.${curso.slug}.${childId}`;
-  const legacy = `eb.ei.pt.concluidas.${curso.slug}`;
   const concluidas = new Set<string>(
     (() => {
       try {
         const raw =
           typeof window !== "undefined"
-            ? localStorage.getItem(key) ?? localStorage.getItem(legacy)
+            ? localStorage.getItem(key)
             : null;
         return raw ? (JSON.parse(raw) as string[]) : [];
       } catch {

@@ -55,14 +55,26 @@ export const aula03: AulaGeoV1 = {
         emoji: "🌇",
         cor: "from-purple-500 to-indigo-700",
       },
+
+      {
+        id: "extra-1",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
+      {
+        id: "extra-2",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
     ],
     respostaCerta: "leste",
     feedbackAcerto:
       "Isso! O sol NASCE no LESTE (L). Se você olha pro nascer do sol, sua frente aponta pro leste — e suas costas ficam pro OESTE.",
     feedbackErro:
       "Repensa: o sol NASCE no LESTE e SE PÕE no OESTE. Olhando pro nascer, você está de frente pro LESTE.",
-    falaFinal:
-      "Guarda essa dica: NASCE no L, morre no O. Bora abrir os cadernos das 4 direções.",
+    falaFinal: "Guarda essa dica: NASCE no L, morre no O. Bora abrir os cadernos das 4 direções.",
   },
 
   cena03_vocabulario: {
@@ -174,8 +186,7 @@ export const aula03: AulaGeoV1 = {
 
   cena05_compreensao: {
     tipo: "quizRadar",
-    aurora:
-      "Radar ligado! 3 perguntas pra ver se a rosa dos ventos ficou clara.",
+    aurora: "Radar ligado! 3 perguntas pra ver se a rosa dos ventos ficou clara.",
     instrucao: "Toque no card certo pra o radar pousar",
     perguntas: [
       {
@@ -186,6 +197,13 @@ export const aula03: AulaGeoV1 = {
           { id: "norte", emoji: "⬆️", titulo: "Norte", cor: "from-emerald-500 to-green-700" },
           { id: "leste", emoji: "🌅", titulo: "Leste", cor: "from-amber-400 to-yellow-600" },
           { id: "oeste", emoji: "🌇", titulo: "Oeste", cor: "from-purple-500 to-indigo-700" },
+
+          {
+            id: "extra-3",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "leste",
         feedbackAcerto: "Perfeito! O sol NASCE no LESTE (L) e SE PÕE no OESTE (O).",
@@ -199,6 +217,13 @@ export const aula03: AulaGeoV1 = {
           { id: "cima", emoji: "⬆️", titulo: "Em cima", cor: "from-emerald-500 to-green-700" },
           { id: "baixo", emoji: "⬇️", titulo: "Embaixo", cor: "from-sky-500 to-blue-700" },
           { id: "direita", emoji: "➡️", titulo: "À direita", cor: "from-amber-400 to-yellow-600" },
+
+          {
+            id: "extra-4",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "cima",
         feedbackAcerto: "Isso! Por convenção, o NORTE sempre aparece PRA CIMA nos mapas.",
@@ -212,14 +237,20 @@ export const aula03: AulaGeoV1 = {
           { id: "norte", emoji: "⬆️", titulo: "Norte", cor: "from-emerald-500 to-green-700" },
           { id: "sul", emoji: "⬇️", titulo: "Sul", cor: "from-sky-500 to-blue-700" },
           { id: "leste", emoji: "➡️", titulo: "Leste", cor: "from-amber-400 to-yellow-600" },
+
+          {
+            id: "extra-5",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "sul",
         feedbackAcerto: "Boa! Porto Alegre está ABAIXO de Brasília no mapa. Rumo SUL!",
         feedbackErro: "Repensa: Porto Alegre é lá embaixo no mapa — direção SUL.",
       },
     ],
-    falaFinal:
-      "Radar afinado! Você já sabe usar as 4 direções pra descrever qualquer viagem.",
+    falaFinal: "Radar afinado! Você já sabe usar as 4 direções pra descrever qualquer viagem.",
   },
 
   cena06_personagensLugar: {
@@ -287,12 +318,10 @@ export const aula03: AulaGeoV1 = {
       },
     ],
     ordemCerta: ["manaus", "brasilia", "sp", "portoalegre"],
-    feedbackAcerto:
-      "Viagem completa! Você desceu do NORTE ao SUL usando a rosa dos ventos.",
+    feedbackAcerto: "Viagem completa! Você desceu do NORTE ao SUL usando a rosa dos ventos.",
     feedbackErro:
       "Essa não é a próxima parada. Lembra: Manaus (N) → Brasília (Centro) → SP → Porto Alegre (S).",
-    falaFinal:
-      "Do topo do mapa pro fim: N → S. A rosa dos ventos te guiou o Brasil inteiro.",
+    falaFinal: "Do topo do mapa pro fim: N → S. A rosa dos ventos te guiou o Brasil inteiro.",
   },
 
   cena08_voceLe: {
@@ -382,7 +411,11 @@ export const aula03: AulaGeoV1 = {
       },
       {
         id: "r5",
-        municipioA: { nome: "Litoral do Nordeste", emoji: "🏖️", cor: "from-amber-400 to-yellow-600" },
+        municipioA: {
+          nome: "Litoral do Nordeste",
+          emoji: "🏖️",
+          cor: "from-amber-400 to-yellow-600",
+        },
         municipioB: { nome: "Rumo ao mar", emoji: "🌊", cor: "from-yellow-400 to-orange-500" },
         contexto: "Saindo de Brasília rumo a Recife, você vai pra qual direção?",
         pecaCertaId: "leste",
@@ -391,7 +424,11 @@ export const aula03: AulaGeoV1 = {
       },
       {
         id: "r6",
-        municipioA: { nome: "Fronteira com o Peru", emoji: "🌄", cor: "from-purple-500 to-indigo-700" },
+        municipioA: {
+          nome: "Fronteira com o Peru",
+          emoji: "🌄",
+          cor: "from-purple-500 to-indigo-700",
+        },
         municipioB: { nome: "Acre e Rondônia", emoji: "⬅️", cor: "from-violet-400 to-purple-600" },
         contexto: "Acre e Rondônia ficam em qual direção do Brasil?",
         pecaCertaId: "oeste",
@@ -399,14 +436,12 @@ export const aula03: AulaGeoV1 = {
         feedbackErro: "Fronteira com Peru = OESTE do Brasil.",
       },
     ],
-    falaFinal:
-      "6 rodadas, 4 direções dominadas. Você agora é um verdadeiro navegador!",
+    falaFinal: "6 rodadas, 4 direções dominadas. Você agora é um verdadeiro navegador!",
   },
 
   cena10_revisao: {
     tipo: "pizzaMunicipio",
-    aurora:
-      "Pizza da NAVEGAÇÃO! Duas fatias mostram COMO a humanidade se orienta hoje em dia.",
+    aurora: "Pizza da NAVEGAÇÃO! Duas fatias mostram COMO a humanidade se orienta hoje em dia.",
     instrucao: "Toque em cada fatia pra ouvir a explicação",
     fatias: [
       {
@@ -436,8 +471,7 @@ export const aula03: AulaGeoV1 = {
 
   cena11_avaliacao: {
     tipo: "seloAtlas",
-    aurora:
-      "Última etapa! 3 perguntas pra ganhar a insígnia: Navegador das 4 Direções.",
+    aurora: "Última etapa! 3 perguntas pra ganhar a insígnia: Navegador das 4 Direções.",
     instrucao: "Responda as 3 e ganhe seu selo",
     perguntas: [
       {
@@ -447,6 +481,8 @@ export const aula03: AulaGeoV1 = {
           { id: "a", texto: "Sul (S)", correta: false },
           { id: "b", texto: "Norte (N)", correta: true },
           { id: "c", texto: "Leste (L)", correta: false },
+
+          { id: "extra-6", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Isso! Por convenção, o NORTE sempre aparece PRA CIMA.",
         feedbackErro: "Repensa: N em cima, S embaixo. A resposta é NORTE.",
@@ -458,6 +494,8 @@ export const aula03: AulaGeoV1 = {
           { id: "a", texto: "Leste (L)", correta: true },
           { id: "b", texto: "Oeste (O)", correta: false },
           { id: "c", texto: "Norte (N)", correta: false },
+
+          { id: "extra-7", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Perfeito! O sol nasce no LESTE e se põe no OESTE.",
         feedbackErro: "Lembra: 'nasce no L, morre no O'. Resposta: LESTE.",
@@ -469,11 +507,12 @@ export const aula03: AulaGeoV1 = {
           { id: "a", texto: "GPS", correta: false },
           { id: "b", texto: "Bússola", correta: true },
           { id: "c", texto: "Régua", correta: false },
+
+          { id: "extra-8", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto:
           "Isso! A BÚSSOLA usa um ponteiro magnético que aponta pro Norte — não precisa de bateria.",
-        feedbackErro:
-          "GPS é moderno (satélite). O instrumento antigo com ímã é a BÚSSOLA.",
+        feedbackErro: "GPS é moderno (satélite). O instrumento antigo com ímã é a BÚSSOLA.",
       },
     ],
     selo: {
@@ -482,8 +521,7 @@ export const aula03: AulaGeoV1 = {
       emoji: "🧭",
       cor: "from-amber-400 to-orange-600",
     },
-    falaFinal:
-      "PARABÉNS, Navegador! Com N, S, L e O você não se perde mais em mapa nenhum.",
+    falaFinal: "PARABÉNS, Navegador! Com N, S, L e O você não se perde mais em mapa nenhum.",
   },
 
   recompensa: {

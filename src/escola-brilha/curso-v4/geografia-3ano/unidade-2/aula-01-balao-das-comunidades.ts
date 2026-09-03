@@ -20,7 +20,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-balao-das-comunidades",
   titulo: "O Balão das Comunidades",
   iconeTrilha: "🎈",
-  bncc: ["EF03GE03"],
+  bncc: [],
   duracaoMin: 22,
 
   cena01_motivacao: {
@@ -54,6 +54,19 @@ export const aula01: AulaGeoV1 = {
         subtitulo: "comida, cultura, saber",
         emoji: "🤝",
         cor: "from-emerald-400 to-sky-500",
+      },
+
+      {
+        id: "extra-1",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
+      {
+        id: "extra-2",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
       },
     ],
     respostaCerta: "trocam",
@@ -108,11 +121,11 @@ export const aula01: AulaGeoV1 = {
         cor: "from-sky-500 to-blue-700",
         conteudo:
           "É quando o produto ou o saber da comunidade chega na cidade — e o dinheiro, a escola e o remédio da cidade voltam pra comunidade. Os dois ganham.",
-        exemplo: "O mel quilombola vai pra feira da cidade e volta remédio e material escolar pra comunidade.",
+        exemplo:
+          "O mel quilombola vai pra feira da cidade e volta remédio e material escolar pra comunidade.",
       },
     ],
-    falaFinal:
-      "4 palavras no diário. Agora sim: bora pousar o balão na primeira comunidade!",
+    falaFinal: "4 palavras no diário. Agora sim: bora pousar o balão na primeira comunidade!",
   },
 
   cena04_leituraGuiada: {
@@ -172,11 +185,24 @@ export const aula01: AulaGeoV1 = {
         fotoUrl: fotoIndigena,
         cards: [
           { id: "indigena", emoji: "🪶", titulo: "Indígena", cor: "from-emerald-400 to-lime-600" },
-          { id: "quilombola", emoji: "🥁", titulo: "Quilombola", cor: "from-orange-500 to-red-600" },
+          {
+            id: "quilombola",
+            emoji: "🥁",
+            titulo: "Quilombola",
+            cor: "from-orange-500 to-red-600",
+          },
           { id: "ribeirinha", emoji: "🛶", titulo: "Ribeirinha", cor: "from-sky-500 to-blue-700" },
+
+          {
+            id: "extra-3",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "indigena",
-        feedbackAcerto: "Isso! Mandioca sem veneno e cesto de palha são marca dos povos INDÍGENAS 🪶.",
+        feedbackAcerto:
+          "Isso! Mandioca sem veneno e cesto de palha são marca dos povos INDÍGENAS 🪶.",
         feedbackErro: "Quase! Mandioca e cesto de palha são a mão dos povos INDÍGENAS 🪶.",
       },
       {
@@ -185,8 +211,20 @@ export const aula01: AulaGeoV1 = {
         fotoUrl: fotoQuilombola,
         cards: [
           { id: "ribeirinha", emoji: "🛶", titulo: "Ribeirinha", cor: "from-sky-500 to-blue-700" },
-          { id: "quilombola", emoji: "🥁", titulo: "Quilombola", cor: "from-orange-500 to-red-600" },
+          {
+            id: "quilombola",
+            emoji: "🥁",
+            titulo: "Quilombola",
+            cor: "from-orange-500 to-red-600",
+          },
           { id: "indigena", emoji: "🪶", titulo: "Indígena", cor: "from-emerald-400 to-lime-600" },
+
+          {
+            id: "extra-4",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "quilombola",
         feedbackAcerto: "Boa! Mutirão + jongo + mel = comunidade QUILOMBOLA 🥁.",
@@ -198,8 +236,20 @@ export const aula01: AulaGeoV1 = {
         fotoUrl: fotoRibeirinha,
         cards: [
           { id: "indigena", emoji: "🪶", titulo: "Indígena", cor: "from-emerald-400 to-lime-600" },
-          { id: "quilombola", emoji: "🥁", titulo: "Quilombola", cor: "from-orange-500 to-red-600" },
+          {
+            id: "quilombola",
+            emoji: "🥁",
+            titulo: "Quilombola",
+            cor: "from-orange-500 to-red-600",
+          },
           { id: "ribeirinha", emoji: "🛶", titulo: "Ribeirinha", cor: "from-sky-500 to-blue-700" },
+
+          {
+            id: "extra-5",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "ribeirinha",
         feedbackAcerto: "Exato! Palafita + canoa + rio = comunidade RIBEIRINHA 🛶.",
@@ -257,13 +307,15 @@ export const aula01: AulaGeoV1 = {
         id: "colheita",
         emoji: "🍯",
         rotulo: "Mutirão de colheita",
-        descricao: "A família quilombola faz mutirão e retira o mel com cuidado, sem prejudicar as abelhas.",
+        descricao:
+          "A família quilombola faz mutirão e retira o mel com cuidado, sem prejudicar as abelhas.",
       },
       {
         id: "envase",
         emoji: "🫙",
         rotulo: "Envase artesanal",
-        descricao: "Em casa, o mel é filtrado e colocado em potes de vidro com etiqueta da comunidade.",
+        descricao:
+          "Em casa, o mel é filtrado e colocado em potes de vidro com etiqueta da comunidade.",
       },
       {
         id: "feira",
@@ -275,11 +327,13 @@ export const aula01: AulaGeoV1 = {
         id: "mesa",
         emoji: "🍞",
         rotulo: "Mesa da família",
-        descricao: "Uma família compra o pote e coloca o mel no pão do café da manhã — pura troca campo-cidade.",
+        descricao:
+          "Uma família compra o pote e coloca o mel no pão do café da manhã — pura troca campo-cidade.",
       },
     ],
     ordemCerta: ["colmeia", "colheita", "envase", "feira", "mesa"],
-    feedbackAcerto: "Rota completa! Da colmeia até o pão da cidade, sem pular etapa. Isso é MERCADO DE TROCAS.",
+    feedbackAcerto:
+      "Rota completa! Da colmeia até o pão da cidade, sem pular etapa. Isso é MERCADO DE TROCAS.",
     feedbackErro:
       "Essa não é a próxima parada. Pensa: o mel nasce na COLMEIA, é retirado em MUTIRÃO, envasado, levado à FEIRA e só depois chega na MESA.",
     falaFinal:
@@ -362,17 +416,23 @@ export const aula01: AulaGeoV1 = {
           "Chegou um caixote de PEIXE fresco pescado com rede de mão, trazido de canoa. Quem trouxe?",
         pecaCertaId: "ribeirinha",
         feedbackAcerto: "Isso! Peixe pescado de canoa é da comunidade RIBEIRINHA 🛶.",
-        feedbackErro: "Atenção: peixe pescado com rede de mão e canoa é da comunidade RIBEIRINHA 🛶.",
+        feedbackErro:
+          "Atenção: peixe pescado com rede de mão e canoa é da comunidade RIBEIRINHA 🛶.",
       },
       {
         id: "r4",
         municipioA: { nome: "Feira Cultural", emoji: "🏙️", cor: "from-sky-500 to-indigo-700" },
-        municipioB: { nome: "Farinha de mandioca", emoji: "🌾", cor: "from-amber-500 to-orange-600" },
+        municipioB: {
+          nome: "Farinha de mandioca",
+          emoji: "🌾",
+          cor: "from-amber-500 to-orange-600",
+        },
         contexto:
           "Chegou um saco de FARINHA de mandioca feita com receita antiga passada dos avós africanos. De qual comunidade?",
         pecaCertaId: "quilombola",
         feedbackAcerto: "Combo perfeito! Farinha de receita dos avós africanos é QUILOMBOLA 🥁.",
-        feedbackErro: "Repara: farinha de receita dos avós africanos é da comunidade QUILOMBOLA 🥁.",
+        feedbackErro:
+          "Repara: farinha de receita dos avós africanos é da comunidade QUILOMBOLA 🥁.",
       },
     ],
     falaFinal:
@@ -393,7 +453,11 @@ export const aula01: AulaGeoV1 = {
         cor: "#16a34a",
         descricao:
           "Riqueza da NATUREZA PROTEGIDA: mata em pé, rio limpo, solo fértil, ar puro e bichos vivos. As comunidades tradicionais cuidam desses tesouros que o município INTEIRO precisa pra viver.",
-        exemplos: ["Floresta guardada pelos indígenas", "Rio cuidado pelos ribeirinhos", "Terra fértil dos quilombos"],
+        exemplos: [
+          "Floresta guardada pelos indígenas",
+          "Rio cuidado pelos ribeirinhos",
+          "Terra fértil dos quilombos",
+        ],
       },
       {
         id: "cultura-viva",
@@ -403,7 +467,11 @@ export const aula01: AulaGeoV1 = {
         cor: "#a855f7",
         descricao:
           "Riqueza da CULTURA VIVA: dança, música, artesanato, comida típica, história e saber passado dos avós. Sem essas comunidades, o município perderia a alma dele.",
-        exemplos: ["Jongo e mutirão quilombola", "Grafismo e mandioca indígena", "Canoa e ciclo do rio"],
+        exemplos: [
+          "Jongo e mutirão quilombola",
+          "Grafismo e mandioca indígena",
+          "Canoa e ciclo do rio",
+        ],
       },
     ],
     falaFinal:
@@ -422,8 +490,15 @@ export const aula01: AulaGeoV1 = {
           "Uma grande empresa quer CORTAR as árvores de uma área onde uma comunidade tradicional coleta castanha pra viver. Por que proteger a terra dessa comunidade é importante pra TODO o município?",
         opcoes: [
           { id: "a", texto: "Porque a cidade não precisa de florestas pra viver." },
-          { id: "b", texto: "Porque eles cuidam da natureza, preservam as florestas e mantêm viva a história do nosso país.", correta: true },
+          {
+            id: "b",
+            texto:
+              "Porque eles cuidam da natureza, preservam as florestas e mantêm viva a história do nosso país.",
+            correta: true,
+          },
           { id: "c", texto: "Porque a empresa não pode ganhar dinheiro." },
+
+          { id: "extra-6", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto:
           "Isso! Proteger a comunidade é proteger a FLORESTA e a CULTURA — e disso o município inteiro depende pra viver bem.",
@@ -435,19 +510,35 @@ export const aula01: AulaGeoV1 = {
         pergunta: "O que caracteriza um MODO DE VIDA tradicional?",
         opcoes: [
           { id: "a", texto: "Ter carro do ano e casa nova." },
-          { id: "b", texto: "Manter os saberes dos antepassados sobre plantar, pescar, festejar e cuidar da natureza.", correta: true },
+          {
+            id: "b",
+            texto:
+              "Manter os saberes dos antepassados sobre plantar, pescar, festejar e cuidar da natureza.",
+            correta: true,
+          },
           { id: "c", texto: "Morar em prédio no centro da cidade." },
+
+          { id: "extra-7", texto: "Outra possibilidade", correta: false },
         ],
-        feedbackAcerto: "Perfeito! Modo de vida tradicional é MANTER vivo o saber dos antepassados.",
-        feedbackErro: "Quase! Tradicional é MANTER vivo o saber dos avós — plantar, pescar, festejar do jeito antigo.",
+        feedbackAcerto:
+          "Perfeito! Modo de vida tradicional é MANTER vivo o saber dos antepassados.",
+        feedbackErro:
+          "Quase! Tradicional é MANTER vivo o saber dos avós — plantar, pescar, festejar do jeito antigo.",
       },
       {
         id: "p3",
         pergunta: "Como a comunidade tradicional e a cidade se AJUDAM?",
         opcoes: [
-          { id: "a", texto: "A comunidade dá alimento, artesanato e cultura; a cidade oferece escola, remédio e mercado." , correta: true },
+          {
+            id: "a",
+            texto:
+              "A comunidade dá alimento, artesanato e cultura; a cidade oferece escola, remédio e mercado.",
+            correta: true,
+          },
           { id: "b", texto: "Elas não têm nada a ver uma com a outra." },
           { id: "c", texto: "A cidade manda ordens e a comunidade obedece." },
+
+          { id: "extra-8", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto:
           "Exato! Mercado de trocas: cada uma OFERECE o que sabe fazer melhor. Os dois lados ganham.",

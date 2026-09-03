@@ -85,7 +85,7 @@ export const aula01: AulaPortuguesV4 = {
 
   momento_ensinoVisual: {
     titulo: "Como se monta uma curiosidade",
-    instrucao: "Ouça cada parte. Toda curiosidade tem as mesmas 3 partes.",
+    instrucao: "Ouça um modelo possível. Textos de curiosidade podem ter formatos diferentes, mas precisam apresentar informação clara e verificável.",
     blocos: [
       {
         tipo: "fraseComPonto",
@@ -146,9 +146,9 @@ export const aula01: AulaPortuguesV4 = {
         pergunta: "Onde fica o título de uma curiosidade?",
         opcoes: ["Em cima, bem grande", "No meio", "Escondido no fim"],
         correta: 0,
-        feedbackAcerto: "🎉 Isso! O título vem sempre em cima.",
+        feedbackAcerto: "🎉 Isso! Neste cartão, o título aparece em cima.",
         feedbackErro: "Olhe o cartão do Brilha: o nome do texto está lá em cima.",
-        reensino: "Todo texto de curiosidade começa pelo TÍTULO, escrito em cima e em letra grande.",
+        reensino: "Neste modelo, o título abre o texto e aparece em destaque.",
       },
       {
         pergunta: "Uma curiosidade conta...",
@@ -156,7 +156,7 @@ export const aula01: AulaPortuguesV4 = {
         correta: 1,
         feedbackAcerto: "🎉 Isso! Curiosidade é fato de verdade.",
         feedbackErro: "Curiosidade não é história inventada: é fato.",
-        reensino: "História = inventada. Curiosidade = verdadeira, ensina algo do mundo real.",
+        reensino: "Uma curiosidade apresenta informação sobre o mundo real. Histórias podem ser inventadas ou baseadas em fatos.",
       },
     ],
   },
@@ -234,7 +234,7 @@ export const aula01: AulaPortuguesV4 = {
         checklist: [
           "Escrevi o título em cima?",
           "Escrevi 'Você sabia?'",
-          "O que escrevi é verdade mesmo?",
+          "Conferi a informação com um adulto, livro ou fonte confiável?",
         ],
       },
     ],
@@ -255,8 +255,8 @@ export const aula01: AulaPortuguesV4 = {
           { id: "f3", texto: "A joaninha tem pintinhas.", correto: true, imagemUrl: joaninha },
           { id: "f4", texto: "A borboleta dirige carro.", correto: false, imagemUrl: borboleta },
         ],
-        feedbackAcerto: "🎉 Isso! Repórter só escreve o que é verdade.",
-        feedbackErro: "Pergunte: isso acontece de verdade no mundo? Se não, é invenção.",
+        feedbackAcerto: "🎉 Isso! Antes de publicar, o repórter confere a informação em uma fonte confiável.",
+        feedbackErro: "Não basta parecer verdade: confira com um adulto, livro ou fonte confiável.",
       },
     },
   },
@@ -264,8 +264,8 @@ export const aula01: AulaPortuguesV4 = {
   momento09_revisao: {
     pontos: [
       "Curiosidade é um texto curtinho que ensina uma coisa verdadeira.",
-      "Ela tem título em cima, uma pergunta e o fato.",
-      "Fato é o que acontece de verdade; invenção é história.",
+      "O modelo estudado usa título, uma pergunta de abertura e a informação principal.",
+      "Fato é uma informação que pode ser conferida em fontes confiáveis.",
       "Repórter pesquisa antes de escrever.",
     ],
     miniDesafio: {

@@ -4,7 +4,7 @@ export const aula04_equacoes: AulaV4 = {
   slug: "u6-04-equacoes",
   titulo: "Primeiras equações — a balança",
   iconeTrilha: "⚖️",
-  bncc: ["EF06MA14", "EF06MA15"],
+  bncc: ["EF06MA14"],
   duracaoMin: 26,
   metodologias: ["skemp"],
 
@@ -40,7 +40,7 @@ export const aula04_equacoes: AulaV4 = {
     titulo: "Resolvendo passo a passo",
     etapas: [
       {
-        texto: "Isole o x com operações inversas.",
+        texto: "Mantenha a igualdade fazendo a mesma operação nos dois membros.",
         exemploReal: {
           contexto: "x + 8 = 20",
           visualMat: {
@@ -55,7 +55,7 @@ export const aula04_equacoes: AulaV4 = {
         },
       },
       {
-        texto: "Multiplicação: use divisão pra isolar.",
+        texto: "Divida os dois membros pelo mesmo número não nulo para manter a igualdade.",
         exemploReal: {
           contexto: "3x = 21",
           visualMat: {
@@ -70,7 +70,7 @@ export const aula04_equacoes: AulaV4 = {
         },
       },
       {
-        texto: "Duas etapas: cuide primeiro do que está SOMANDO/SUBTRAINDO, depois do que está MULTIPLICANDO.",
+        texto: "Em duas etapas, registre a mesma transformação nos dois membros até determinar o valor desconhecido.",
         exemploReal: {
           contexto: "2x + 3 = 15",
           visualMat: {

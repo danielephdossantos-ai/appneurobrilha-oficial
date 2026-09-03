@@ -6,6 +6,7 @@ import { aula04_poligonosRegulares } from "./aula-04-poligonos-regulares";
 import { aula05_graficos } from "./aula-05-graficos";
 import { aula06_probabilidade } from "./aula-06-probabilidade";
 import { aula07_missaoFinalMestre } from "./aula-07-missao-final-mestre";
+import { aula08_planificacoes } from "./aula-08-planificacoes";
 
 export const unidade7: Unidade = {
   slug: "unidade-7-geometria-dados-missao",
@@ -23,5 +24,6 @@ export const unidade7: Unidade = {
     aula05_graficos,
     aula06_probabilidade,
     aula07_missaoFinalMestre,
+    aula08_planificacoes,
   ],
 };

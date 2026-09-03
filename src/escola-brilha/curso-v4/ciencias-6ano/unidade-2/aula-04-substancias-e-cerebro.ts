@@ -39,6 +39,7 @@ export const aula04: AulaGeoV1 = {
       { id: "snc", titulo: "No sistema nervoso central", subtitulo: "desacelera as sinapses", emoji: "🧠", cor: "from-red-500 to-rose-700", fotoUrl: sistemasImg },
       { id: "musculo", titulo: "Só nos músculos", subtitulo: "sem envolver o cérebro", emoji: "💪", cor: "from-amber-500 to-orange-700", fotoUrl: bancadaImg },
       { id: "nada", titulo: "Não afeta nada do corpo", subtitulo: "é só impressão", emoji: "❌", cor: "from-slate-500 to-slate-800", fotoUrl: bancadaImg },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "snc",
     feedbackAcerto:
@@ -87,6 +88,7 @@ export const aula04: AulaGeoV1 = {
           { id: "a", emoji: "🐢", titulo: "Diminui a atividade nervosa e as reações", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "⚡", titulo: "Aumenta a energia e a frequência cardíaca", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🍬", titulo: "Não afeta o cérebro de forma alguma", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Isso. Depressora DIMINUI a velocidade das sinapses — como o álcool.",
         feedbackErro: "Aumentar energia é ESTIMULANTE. Depressora faz o CONTRÁRIO: diminui a atividade nervosa." },
@@ -95,6 +97,7 @@ export const aula04: AulaGeoV1 = {
           { id: "a", emoji: "🧠", titulo: "Porque ainda está em desenvolvimento até os 25 anos", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🦴", titulo: "Porque os ossos ainda crescem", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "💪", titulo: "Porque os músculos são menores", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. O CÉREBRO em formação sofre efeitos mais intensos e duradouros das substâncias.",
         feedbackErro: "Ossos e músculos não são o foco aqui. É o CÉREBRO, ainda em desenvolvimento, que sofre mais." },
@@ -103,6 +106,7 @@ export const aula04: AulaGeoV1 = {
           { id: "a", emoji: "🔗", titulo: "O cérebro se adapta e passa a exigir a substância", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "☕", titulo: "Gostar muito do sabor de uma bebida", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🎲", titulo: "Um efeito aleatório sem explicação", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Perfeito. Dependência é uma ADAPTAÇÃO cerebral que gera necessidade de uso repetido.",
         feedbackErro: "Não é sobre sabor nem acaso. DEPENDÊNCIA é a adaptação do cérebro que exige uso contínuo." },
@@ -196,6 +200,8 @@ export const aula04: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Diminui a velocidade das sinapses (efeito depressor)", correta: true },
           { id: "b", texto: "Acelera os reflexos e a atenção" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. O álcool é DEPRESSOR — desacelera a comunicação entre neurônios.",
         feedbackErro: "Não acelera reflexos. O álcool é DEPRESSOR e desacelera as sinapses." },
@@ -203,6 +209,8 @@ export const aula04: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Porque aumenta a atividade do sistema nervoso e a frequência cardíaca", correta: true },
           { id: "b", texto: "Porque causa sono profundo" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. Nicotina AUMENTA a atividade nervosa, ao contrário de substâncias depressoras.",
         feedbackErro: "Sono profundo é efeito de depressora. Nicotina AUMENTA a atividade nervosa." },
@@ -210,6 +218,8 @@ export const aula04: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Porque o cérebro ainda está em desenvolvimento até cerca de 25 anos", correta: true },
           { id: "b", texto: "Porque têm mais músculos que adultos" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Exato. O CÉREBRO em formação sofre efeitos mais intensos e duradouros.",
         feedbackErro: "Músculo não tem relação. O que importa é o CÉREBRO ainda em desenvolvimento." },

@@ -29,11 +29,16 @@ export const aula02_decompondo: AulaV4 = {
       "Etapa 1 — Aqui está o 34 montado: 3 caixotes de 10 e 4 estrelinhas. Toque em cada PEÇA pra contar:",
     cenas: [],
     interacao: {
-      tipo: "tapContar",
-      imagemUrl: bloco,
-      quantidade: 34,
-      itemPlural: "peças",
-      pergunta: "Quantas peças ao todo?",
+      tipo: "contarQuiz",
+      grupos: [
+        { imagemUrl: bloco, quantidade: 3, rotulo: "3 dezenas" },
+        { imagemUrl: estrela, quantidade: 4, rotulo: "4 unidades" },
+      ],
+      pergunta: "3 dezenas e 4 unidades formam qual número?",
+      opcoes: ["30", "34", "43"],
+      correta: 1,
+      feedbackAcerto: "Isso! 30 + 4 = 34.",
+      feedbackErro: "Três dezenas valem 30; com 4 unidades, formam 34.",
     },
   },
 

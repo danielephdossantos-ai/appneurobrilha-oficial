@@ -17,7 +17,7 @@ export const aula01: AulaGeoV1 = {
   titulo: "Centro Biomédico Virtual",
   iconeTrilha: "🧠",
   recompensa: { xp: 140, moedas: 55, medalha: "Fisiologista Júnior" },
-  bncc: ["EF08CI08", "EF08CI09", "EF08CI10"],
+  bncc: ["EF08CI08"],
   duracaoMin: 45,
 
   cena01_motivacao: {
@@ -42,6 +42,7 @@ export const aula01: AulaGeoV1 = {
       { id: "hormonio", titulo: "Um hormônio no sangue", subtitulo: "avisa o músculo", emoji: "💧", cor: "from-slate-500 to-slate-700", fotoUrl: glandulasImg },
       { id: "reflexo", titulo: "Arco reflexo medular", subtitulo: "sinal vai à medula e volta ao músculo", emoji: "⚡", cor: "from-emerald-500 to-teal-700", fotoUrl: arcoReflexoImg },
       { id: "vontade", titulo: "Sua consciência pensou rápido", subtitulo: "cérebro decidiu", emoji: "🤔", cor: "from-red-500 to-rose-700", fotoUrl: cerebroImg },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "reflexo",
     feedbackAcerto:
@@ -92,6 +93,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "⚡", titulo: "Sistema nervoso (milissegundos)", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "💧", titulo: "Sistema endócrino (minutos)", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🫁", titulo: "Sistema respiratório", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Sim. Impulso nervoso viaja a até 120 m/s. Hormônio precisa circular pelo sangue.",
         feedbackErro: "Nervoso = ELÉTRICO (rápido). Endócrino = QUÍMICO pelo sangue (lento)." },
@@ -100,6 +102,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "💉", titulo: "Insulina (pâncreas)", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🎯", titulo: "Adrenalina", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🌙", titulo: "Melatonina", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Sim. Insulina baixa o açúcar; glucagon (também do pâncreas) sobe.",
         feedbackErro: "Adrenalina = luta/fuga. Melatonina = sono. Açúcar = INSULINA." },
@@ -108,6 +111,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🎛️", titulo: "Hormônios da hipófise agindo em testículos/ovários", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🍎", titulo: "Alimentação sozinha", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🏃", titulo: "Exercício físico", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Sim. Hipófise → FSH/LH → gônadas → testosterona/estrogênio.",
         feedbackErro: "Alimentação e exercício ajudam a saúde geral, mas quem DISPARA é o eixo hipófise-gônadas." },
@@ -158,7 +162,7 @@ export const aula01: AulaGeoV1 = {
     subtitulo: "Como hormônios remodelam o corpo do adolescente",
     paragrafos: [
       { id: "p1", texto: "PROBLEMA: entre 9 e 14 anos, o corpo passa por transformações rápidas: crescimento acelerado, mudança de voz, pelos, maturação sexual. Quem comanda tudo isso?", chaves: ["maturação sexual"], definicoes: { "maturação sexual": "Desenvolvimento dos órgãos reprodutores." }, fotoUrl: adolescentesImg },
-      { id: "p2", texto: "MECANISMO: a HIPÓFISE (no cérebro) libera FSH e LH. Esses hormônios chegam pelo sangue aos TESTÍCULOS (que produzem testosterona) ou aos OVÁRIOS (que produzem estrogênio). Testosterona e estrogênio geram as mudanças físicas.", chaves: ["hipófise", "testosterona", "estrogênio"], definicoes: { hipófise: "Glândula-mestre do sistema endócrino.", testosterona: "Hormônio sexual masculino.", estrogênio: "Hormônio sexual feminino." }, fotoUrl: glandulasImg },
+      { id: "p2", texto: "MECANISMO: a HIPÓFISE libera FSH e LH, que atuam nas gônadas. Todos os corpos possuem hormônios como testosterona e estrogênio em proporções diferentes; eles participam das mudanças da puberdade, que variam em ritmo e intensidade entre as pessoas.", chaves: ["hipófise", "testosterona", "estrogênio"], definicoes: { hipófise: "Glândula que coordena outras glândulas endócrinas.", testosterona: "Hormônio presente em diferentes níveis nos corpos humanos.", estrogênio: "Grupo de hormônios presente em diferentes níveis nos corpos humanos." }, fotoUrl: glandulasImg },
       { id: "p3", texto: "SAÚDE INTEGRAL: hormônios influenciam também HUMOR, SONO e ENERGIA. Por isso a adolescência exige atenção à saúde EMOCIONAL (conversar, procurar apoio) e FÍSICA (sono de qualidade, alimentação, atividade). Prevenção de IST e uso de preservativo são fundamentais na vida sexual.", chaves: ["IST"], definicoes: { IST: "Infecções sexualmente transmissíveis." }, fotoUrl: circulatorioImg },
     ],
     falaFinal:
@@ -210,6 +214,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Hipófise (comanda tireoide, suprarrenais e gônadas)", correta: true },
           { id: "b", texto: "Pâncreas" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. Hipófise fica na base do cérebro e é a chefe do sistema.",
         feedbackErro: "Pâncreas é importante (insulina), mas quem COMANDA as outras é a HIPÓFISE." },
@@ -217,6 +223,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Não. Vai só até a medula e volta. Cérebro é avisado depois.", correta: true },
           { id: "b", texto: "Sim. O cérebro decide puxar a mão." },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. Por isso é tão rápido — atalho medular.",
         feedbackErro: "Se passasse pelo cérebro seria lento demais. Vai só na medula." },
@@ -224,6 +232,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Testículos, estimulados pela hipófise", correta: true },
           { id: "b", texto: "Estômago" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. Hipófise → LH → testículos → testosterona.",
         feedbackErro: "Estômago digere alimento. Testosterona vem dos TESTÍCULOS." },

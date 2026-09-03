@@ -1,12 +1,12 @@
 import type { UnidadeGeoV1 } from "../../types";
-import { aula01 } from "./aula-01-mitos-ritos-simbolos";
+import { aulaEF05ER06 as aula01 } from "../aulas-corrigidas";
 
 export const unidade6: UnidadeGeoV1 = {
   slug: "unidade-6",
   numero: 6,
-  titulo: "As 4 Linguagens do Sagrado",
-  subtitulo: "Mitos, ritos, símbolos e textos (EF05ER06)",
-  descricao: "Aurora e Brilha mostram as quatro grandes formas que as tradições religiosas usam para expressar o sagrado.",
+  titulo: "Sábios e Anciãos: Guardiões da Memória",
+  subtitulo: "Papel dos sábios e anciãos na tradição oral (EF05ER06)",
+  descricao: "Reconhecer como sábios, anciãos e lideranças comunicam e preservam memórias e conhecimentos entre gerações.",
   corTema: "#8b5cf6",
   aulas: [aula01],
 };

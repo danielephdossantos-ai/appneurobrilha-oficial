@@ -30,7 +30,7 @@ export const aula04: AulaPortuguesV4 = {
   slug: "aula-04-carta-leitor-anuncio",
   titulo: "A Praça que Precisa de Voz",
   iconeTrilha: "📣",
-  bncc: ["EF35LP17", "EF04LP17"],
+  bncc: ["EF04LP10", "EF04LP11", "EF04LP15", "EF35LP15", "EF15LP01", "EF15LP04", "EF15LP05"],
   duracaoMin: 22,
 
   momento01_motivacao: {

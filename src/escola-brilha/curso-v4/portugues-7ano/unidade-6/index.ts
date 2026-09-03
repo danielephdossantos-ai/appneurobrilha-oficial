@@ -6,6 +6,7 @@ import { aula30 } from "./aula-30-coesao-referencial";
 
 export const unidade6 = {
   id: "unidade-6",
+  slug: "unidade-6",
   numero: 6,
   titulo: "Gramática Aplicada",
   aulas: [aula26, aula27, aula28, aula29, aula30],

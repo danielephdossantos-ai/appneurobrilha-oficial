@@ -5,7 +5,7 @@ export const aula03_graficosLeituraCritica: AulaV4 = {
   slug: "u7-03-graficos-leitura-critica",
   titulo: "Gráficos Podem Enganar",
   iconeTrilha: "📈",
-  bncc: ["EF09MA22", "EF09MA23"],
+  bncc: ["EF09MA21", "EF09MA22"],
   duracaoMin: 30,
   metodologias: ["vergnaud", "skemp"],
 

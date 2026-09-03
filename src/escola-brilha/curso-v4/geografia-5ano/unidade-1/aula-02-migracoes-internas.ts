@@ -13,7 +13,7 @@ export const aula02: AulaGeoV1 = {
   slug: "aula-02-migracoes-internas",
   titulo: "Migrações Internas: O Brasil em Movimento",
   iconeTrilha: "🧳",
-  bncc: ["EF05GE02"],
+  bncc: [],
   duracaoMin: 22,
 
   cena01_motivacao: {
@@ -44,6 +44,19 @@ export const aula02: AulaGeoV1 = {
         subtitulo: "conhecer praias novas",
         emoji: "🏖️",
         cor: "from-sky-400 to-blue-600",
+      },
+
+      {
+        id: "extra-1",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
+      {
+        id: "extra-2",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
       },
     ],
     respostaCerta: "trabalho",
@@ -159,7 +172,19 @@ export const aula02: AulaGeoV1 = {
         cards: [
           { id: "dentro", emoji: "🇧🇷", titulo: "Dentro do país", cor: "from-sky-500 to-blue-700" },
           { id: "fora", emoji: "✈️", titulo: "Pra outro país", cor: "from-red-500 to-rose-700" },
-          { id: "ferias", emoji: "🏖️", titulo: "Férias curtas", cor: "from-amber-500 to-orange-700" },
+          {
+            id: "ferias",
+            emoji: "🏖️",
+            titulo: "Férias curtas",
+            cor: "from-amber-500 to-orange-700",
+          },
+
+          {
+            id: "extra-3",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "dentro",
         feedbackAcerto: "Isso! Interna = dentro do Brasil.",
@@ -170,9 +195,31 @@ export const aula02: AulaGeoV1 = {
         pergunta: "'Êxodo rural' é a saída de gente...",
         fotoUrl: IMG_ESTRADA,
         cards: [
-          { id: "cc", emoji: "🚚", titulo: "Do campo pra cidade", cor: "from-amber-500 to-orange-700" },
-          { id: "cf", emoji: "🌳", titulo: "Da cidade pro campo", cor: "from-emerald-500 to-green-700" },
-          { id: "int", emoji: "🌊", titulo: "Do país pro exterior", cor: "from-sky-500 to-blue-700" },
+          {
+            id: "cc",
+            emoji: "🚚",
+            titulo: "Do campo pra cidade",
+            cor: "from-amber-500 to-orange-700",
+          },
+          {
+            id: "cf",
+            emoji: "🌳",
+            titulo: "Da cidade pro campo",
+            cor: "from-emerald-500 to-green-700",
+          },
+          {
+            id: "int",
+            emoji: "🌊",
+            titulo: "Do país pro exterior",
+            cor: "from-sky-500 to-blue-700",
+          },
+
+          {
+            id: "extra-4",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "cc",
         feedbackAcerto: "Perfeito! Êxodo RURAL = sai do rural (campo) pra cidade.",
@@ -185,6 +232,13 @@ export const aula02: AulaGeoV1 = {
           { id: "ret", emoji: "👨‍👩‍👧", titulo: "Retirante", cor: "from-amber-500 to-orange-700" },
           { id: "tur", emoji: "📷", titulo: "Turista", cor: "from-sky-500 to-blue-700" },
           { id: "vend", emoji: "🛒", titulo: "Vendedor", cor: "from-emerald-500 to-green-700" },
+
+          {
+            id: "extra-5",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "ret",
         feedbackAcerto: "Isso! RETIRANTE = quem se retira, foge da seca.",
@@ -257,12 +311,14 @@ export const aula02: AulaGeoV1 = {
     paragrafos: [
       {
         id: "p1",
-        texto: "MIGRAÇÃO INTERNA é mudar de estado dentro do Brasil. EXTERNA é sair pra outro país.",
+        texto:
+          "MIGRAÇÃO INTERNA é mudar de estado dentro do Brasil. EXTERNA é sair pra outro país.",
         chaves: ["migração", "interna", "externa"],
       },
       {
         id: "p2",
-        texto: "ÊXODO RURAL foi o maior movimento do século 20: milhões saíram do CAMPO pra CIDADE.",
+        texto:
+          "ÊXODO RURAL foi o maior movimento do século 20: milhões saíram do CAMPO pra CIDADE.",
         chaves: ["êxodo", "campo", "cidade"],
       },
       {
@@ -272,7 +328,8 @@ export const aula02: AulaGeoV1 = {
       },
       {
         id: "p4",
-        texto: "Hoje existe a MIGRAÇÃO DE RETORNO: gente voltando pra terra natal porque o Nordeste melhorou.",
+        texto:
+          "Hoje existe a MIGRAÇÃO DE RETORNO: gente voltando pra terra natal porque o Nordeste melhorou.",
         chaves: ["retorno", "nordeste"],
       },
     ],
@@ -313,7 +370,11 @@ export const aula02: AulaGeoV1 = {
       },
       {
         id: "r3",
-        municipioA: { nome: "Rio Grande do Sul", emoji: "🐴", cor: "from-emerald-400 to-green-600" },
+        municipioA: {
+          nome: "Rio Grande do Sul",
+          emoji: "🐴",
+          cor: "from-emerald-400 to-green-600",
+        },
         municipioB: { nome: "Mato Grosso", emoji: "🌾", cor: "from-amber-400 to-orange-600" },
         contexto: "Gaúcho vai pro MT abrir fazenda enorme. Motivo?",
         pecaCertaId: "soja",
@@ -390,6 +451,8 @@ export const aula02: AulaGeoV1 = {
           { id: "a", texto: "Mudar dentro do próprio país", correta: true },
           { id: "b", texto: "Passar férias em outro estado", correta: false },
           { id: "c", texto: "Ir morar em outro país", correta: false },
+
+          { id: "extra-6", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Isso! Interna = dentro do Brasil.",
         feedbackErro: "Outro país é externa. Férias é curto. Interna = MUDAR dentro do país.",
@@ -401,6 +464,8 @@ export const aula02: AulaGeoV1 = {
           { id: "a", texto: "Cidade → campo, buscando ar puro", correta: false },
           { id: "b", texto: "Campo → cidade, buscando emprego", correta: true },
           { id: "c", texto: "Estrangeiros pro Brasil", correta: false },
+
+          { id: "extra-7", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Perfeito! Campo pra cidade, buscando trabalho.",
         feedbackErro: "É CAMPO → CIDADE, atrás de emprego.",
@@ -412,6 +477,8 @@ export const aula02: AulaGeoV1 = {
           { id: "a", texto: "Turismo", correta: false },
           { id: "b", texto: "Migração de retorno", correta: true },
           { id: "c", texto: "Êxodo rural", correta: false },
+
+          { id: "extra-8", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Isso! Voltar pra terra natal = MIGRAÇÃO DE RETORNO.",
         feedbackErro: "É MIGRAÇÃO DE RETORNO — voltar pra terra de origem.",

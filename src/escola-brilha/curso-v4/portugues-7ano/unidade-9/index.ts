@@ -7,6 +7,7 @@ import { aula42 } from "./aula-42-apresentacao-final";
 export const unidade9: any = {
   numero: 9,
   id: "unidade-9",
+  slug: "unidade-9",
   titulo: "Vozes do Futuro",
   aulas: [aula19, aula39, aula40, aula41, aula42],
 };

@@ -4,7 +4,7 @@ export const aula06_partesFrac: AulaV4 = {
   slug: "u4-06-partes-fracoes",
   titulo: "Metade, Terça e Quarta Parte",
   iconeTrilha: "🍕",
-  bncc: ["EF03MA10"],
+  bncc: ["EF03MA09"],
   duracaoMin: 20,
   metodologias: ["skemp", "cpa"],
   momento01_motivacao: {

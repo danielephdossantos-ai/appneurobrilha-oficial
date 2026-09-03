@@ -29,7 +29,7 @@ export const aula02: AulaPortuguesV4 = {
   momento01_motivacao: {
     titulo: "A parlenda que quase se perdeu",
     historia:
-      "A vovó do Brilha cantava uma parlenda quando era criança. Um dia, ela quase esqueceu! Brilha correu com o lápis e ESCREVEU a parlenda no caderno. Registrar é isso: guardar no papel o que a boca canta, para nunca mais se perder.",
+      "A vovó do Brilha cantava uma parlenda quando era criança. Um dia, ela quase esqueceu! Brilha escreveu a parlenda no caderno. Registrar ajuda a preservar o texto e permite consultá-lo depois.",
     imagemUrl: avoMulher,
   },
 
@@ -54,7 +54,7 @@ export const aula02: AulaPortuguesV4 = {
         { texto: "Para fazer uma conta.", imagemUrl: mural },
       ],
       respostaCerta: 0,
-      feedbackAcerto: "🎉 Isso! Escrever guarda a parlenda para sempre.",
+      feedbackAcerto: "🎉 Isso! Escrever ajuda a preservar e consultar a parlenda depois.",
       feedbackErro:
         "A parlenda estava só na boca da vovó. No papel, ela fica guardada.",
     },
@@ -275,7 +275,7 @@ export const aula02: AulaPortuguesV4 = {
       opcoes: ["Esquecer", "Guardar e não perder", "Apagar"],
       correta: 1,
       feedbackAcerto: "🎉 Isso!",
-      feedbackErro: "No papel, a parlenda fica guardada para sempre.",
+      feedbackErro: "O registro ajuda a guardar e recuperar a parlenda depois.",
     },
   },
 

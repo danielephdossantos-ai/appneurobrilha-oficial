@@ -40,6 +40,7 @@ export const aula01: AulaGeoV1 = {
       { id: "celulas", titulo: "Todas têm células", subtitulo: "unidade básica", emoji: "🧫", cor: "from-emerald-500 to-teal-700", fotoUrl: celulaImg },
       { id: "cor", titulo: "Todas têm cor", subtitulo: "pigmento visível", emoji: "🎨", cor: "from-rose-500 to-pink-700", fotoUrl: bancadaImg },
       { id: "nada", titulo: "Nada em comum", subtitulo: "são muito diferentes", emoji: "❌", cor: "from-slate-500 to-slate-800", fotoUrl: bancadaImg },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "celulas",
     feedbackAcerto:
@@ -138,6 +139,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🧫", titulo: "Todo ser vivo é feito de células", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🌱", titulo: "Só plantas têm células", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🦠", titulo: "Bactérias não são vivas", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "a",
         feedbackAcerto: "Isso. É o princípio unificador da biologia — tudo que vive é feito de células.",
@@ -149,6 +151,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🧱", titulo: "Parede celular", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🛡️", titulo: "Membrana plasmática", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🧬", titulo: "Núcleo", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "a",
         feedbackAcerto: "Correto. Parede celular só em plantas, fungos e bactérias — animais têm apenas membrana.",
@@ -160,6 +163,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🧬", titulo: "No núcleo", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🛡️", titulo: "Na membrana", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🧱", titulo: "Na parede celular", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "a",
         feedbackAcerto: "Perfeito. Núcleo = cofre do DNA em células eucariontes (plantas, animais, fungos).",
@@ -285,6 +289,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Toda célula vem de outra célula pré-existente", correta: true },
           { id: "b", texto: "Células surgem espontaneamente do nada" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. É o segundo pilar da Teoria Celular — descartou a geração espontânea.",
         feedbackErro: "Geração espontânea foi REFUTADA no séc. XIX. Toda célula vem de outra célula." },
@@ -292,6 +298,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Parede celular de celulose", correta: true },
           { id: "b", texto: "Membrana plasmática" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. Parede rígida de celulose é marca da célula vegetal.",
         feedbackErro: "Membrana existe em TODAS as células. Só PAREDE é exclusiva de plantas." },
@@ -299,6 +307,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Célula → tecido → órgão → sistema → organismo", correta: true },
           { id: "b", texto: "Organismo → sistema → célula direto" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Exato. Cada nível é feito do anterior — hierarquia biológica.",
         feedbackErro: "Ordem correta é do MENOR ao MAIOR: célula → tecido → órgão → sistema → organismo." },

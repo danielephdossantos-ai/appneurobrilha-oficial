@@ -5,7 +5,7 @@ export const aula02_paralelasTransversal: AulaV4 = {
   slug: "u5-02-paralelas-transversal",
   titulo: "O Cruzamento das Paralelas",
   iconeTrilha: "🛤️",
-  bncc: ["EF07MA23", "EF07MA24"],
+  bncc: ["EF07MA23"],
   duracaoMin: 30,
   metodologias: ["skemp"],
 

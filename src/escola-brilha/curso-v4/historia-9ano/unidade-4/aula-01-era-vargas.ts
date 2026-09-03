@@ -8,7 +8,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-era-vargas",
   titulo: "Era Vargas (1930–1945)",
   iconeTrilha: "🏭",
-  bncc: ["EF09HI10", "EF09HI11", "EF09HI12"],
+  bncc: ["EF09HI02", "EF09HI06"],
   duracaoMin: 30,
   estilo: "teen",
 
@@ -31,6 +31,8 @@ export const aula01: AulaGeoV1 = {
     opcoes: [
       { id: "pop", titulo: "POPULISTA E AUTORITÁRIO", subtitulo: "concentra poder + dá benefícios aos trabalhadores", emoji: "📣", cor: "from-amber-800 to-slate-950" },
       { id: "dem", titulo: "DEMOCRACIA PARLAMENTAR", subtitulo: "muitos partidos, imprensa livre", emoji: "❌", cor: "from-teal-800 to-slate-950" },
+          { id: "extra2", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "extra3", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "pop",
     feedbackAcerto: "Correto. POPULISMO: liderança forte que fala direto ao povo, entrega benefícios, mas concentra poder e cala oposição.",
@@ -69,9 +71,9 @@ export const aula01: AulaGeoV1 = {
     aurora: "Três perguntas rápidas.",
     instrucao: "Toque no card correto",
     perguntas: [
-      { id: "q1", pergunta: "Em que ano Vargas assumiu pela primeira vez?", fotoUrl: imgTrab, cards: [{ id: "1930", emoji: "🔫", titulo: "1930", cor: "from-teal-600 to-slate-900" }, { id: "1889", emoji: "👑", titulo: "1889", cor: "from-amber-600 to-slate-900" }, { id: "1945", emoji: "🕊️", titulo: "1945", cor: "from-slate-600 to-slate-900" }], correta: "1930", feedbackAcerto: "Correto. Revolução de 1930.", feedbackErro: "É 1930. 1889 = Proclamação da República; 1945 = QUEDA de Vargas." },
-      { id: "q2", pergunta: "O ESTADO NOVO (ditadura de Vargas) começou em:", fotoUrl: imgRadio, cards: [{ id: "37", emoji: "⛓️", titulo: "1937", cor: "from-teal-600 to-slate-900" }, { id: "43", emoji: "📄", titulo: "1943", cor: "from-amber-600 to-slate-900" }, { id: "50", emoji: "🗳️", titulo: "1950", cor: "from-slate-600 to-slate-900" }], correta: "37", feedbackAcerto: "Correto. Golpe do Estado Novo em novembro de 1937.", feedbackErro: "É 1937 (Estado Novo). 1943 = CLT. 1950 = Vargas volta democraticamente." },
-      { id: "q3", pergunta: "A CLT (leis trabalhistas) foi criada por Vargas em:", fotoUrl: imgEstadoNovo, cards: [{ id: "43", emoji: "📄", titulo: "1943", cor: "from-teal-600 to-slate-900" }, { id: "30", emoji: "🔫", titulo: "1930", cor: "from-amber-600 to-slate-900" }, { id: "88", emoji: "📜", titulo: "1988", cor: "from-slate-600 to-slate-900" }], correta: "43", feedbackAcerto: "Correto. 1943, em pleno Estado Novo.", feedbackErro: "É 1943. 1988 é a Constituição Cidadã (bem depois)." },
+      { id: "q1", pergunta: "Em que ano Vargas assumiu pela primeira vez?", fotoUrl: imgTrab, cards: [{ id: "1930", emoji: "🔫", titulo: "1930", cor: "from-teal-600 to-slate-900" }, { id: "1889", emoji: "👑", titulo: "1889", cor: "from-amber-600 to-slate-900" }, { id: "1945", emoji: "🕊️", titulo: "1945", cor: "from-slate-600 to-slate-900" }, { id: "extra", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" }], correta: "1930", feedbackAcerto: "Correto. Revolução de 1930.", feedbackErro: "É 1930. 1889 = Proclamação da República; 1945 = QUEDA de Vargas." },
+      { id: "q2", pergunta: "O ESTADO NOVO (ditadura de Vargas) começou em:", fotoUrl: imgRadio, cards: [{ id: "37", emoji: "⛓️", titulo: "1937", cor: "from-teal-600 to-slate-900" }, { id: "43", emoji: "📄", titulo: "1943", cor: "from-amber-600 to-slate-900" }, { id: "50", emoji: "🗳️", titulo: "1950", cor: "from-slate-600 to-slate-900" }, { id: "extra", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" }], correta: "37", feedbackAcerto: "Correto. Golpe do Estado Novo em novembro de 1937.", feedbackErro: "É 1937 (Estado Novo). 1943 = CLT. 1950 = Vargas volta democraticamente." },
+      { id: "q3", pergunta: "A CLT (leis trabalhistas) foi criada por Vargas em:", fotoUrl: imgEstadoNovo, cards: [{ id: "43", emoji: "📄", titulo: "1943", cor: "from-teal-600 to-slate-900" }, { id: "30", emoji: "🔫", titulo: "1930", cor: "from-amber-600 to-slate-900" }, { id: "88", emoji: "📜", titulo: "1988", cor: "from-slate-600 to-slate-900" }, { id: "extra", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" }], correta: "43", feedbackAcerto: "Correto. 1943, em pleno Estado Novo.", feedbackErro: "É 1943. 1988 é a Constituição Cidadã (bem depois)." },
     ],
     falaFinal: "Você já mapeia a linha do tempo da Era Vargas.",
   },

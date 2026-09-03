@@ -32,7 +32,7 @@ export const aula03: AulaPortuguesV4 = {
   slug: "aula-03-transportes-e-comunicacao",
   titulo: "Como me movo e me comunico",
   iconeTrilha: "🚌",
-  bncc: ["EF02GE07"],
+  bncc: ["EF02GE03"],
   duracaoMin: 15,
 
   momento01_motivacao: {
@@ -76,12 +76,11 @@ export const aula03: AulaPortuguesV4 = {
         },
         { texto: "Sobre plantar milho no sítio.", imagemUrl: campo },
         { texto: "Sobre pintar quadros na escola.", imagemUrl: escola },
+        { texto: "Sobre outra possibilidade relacionada ao tema.", imagemUrl: mapaPercurso },
       ],
       respostaCerta: 0,
-      feedbackAcerto:
-        "🎉 Isso! Como a gente se MOVE (transporte) e se FALA (comunicação).",
-      feedbackErro:
-        "As pistas são carro, ônibus e celular. Fala de TRANSPORTE e COMUNICAÇÃO.",
+      feedbackAcerto: "🎉 Isso! Como a gente se MOVE (transporte) e se FALA (comunicação).",
+      feedbackErro: "As pistas são carro, ônibus e celular. Fala de TRANSPORTE e COMUNICAÇÃO.",
     },
   },
 
@@ -118,14 +117,7 @@ export const aula03: AulaPortuguesV4 = {
       titulo: "Os caminhos e as vozes do município",
       imagemUrl: mapaPercurso,
       legendaImagem: "Cada família se move e se comunica de um jeito.",
-      destacar: [
-        "transporte",
-        "ônibus",
-        "bicicleta",
-        "comunicação",
-        "carta",
-        "celular",
-      ],
+      destacar: ["transporte", "ônibus", "bicicleta", "comunicação", "carta", "celular"],
       paragrafos: [
         "Pra ir na ESCOLA, Brilha vai A PÉ, porque mora perto. Já a Aurora pega o ÔNIBUS. E o primo, que mora no sítio, vai de BICICLETA na estrada de terra. Tudo isso é MEIO DE TRANSPORTE.",
         "Quando o município é grande, as famílias usam TREM, METRÔ ou até BARCO (em cidade de rio). Em cada LUGAR, o transporte muda um pouco.",
@@ -140,16 +132,15 @@ export const aula03: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "Como o Brilha vai pra escola?",
-        opcoes: ["De trem", "A pé, porque mora perto", "De avião"],
+        opcoes: ["De trem", "A pé, porque mora perto", "De avião", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 A PÉ, porque mora perto.",
-        feedbackErro:
-          "O texto diz: 'Brilha vai A PÉ, porque mora perto'.",
+        feedbackErro: "O texto diz: 'Brilha vai A PÉ, porque mora perto'.",
         ondeEstaNoTexto: "…Brilha vai A PÉ, porque mora perto…",
       },
       {
         pergunta: "O que a Aurora pega pra ir pra escola?",
-        opcoes: ["Bicicleta", "Ônibus", "Barco"],
+        opcoes: ["Bicicleta", "Ônibus", "Barco", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 Aurora pega o ÔNIBUS.",
         feedbackErro: "O texto diz: 'Aurora pega o ÔNIBUS'.",
@@ -157,12 +148,10 @@ export const aula03: AulaPortuguesV4 = {
       },
       {
         pergunta: "Antigamente, pra falar com quem morava longe, usavam…",
-        opcoes: ["Carta no correio", "TikTok", "Videochamada"],
+        opcoes: ["Carta no correio", "TikTok", "Videochamada", "Outra possibilidade"],
         correta: 0,
-        feedbackAcerto:
-          "🎉 CARTA — demorava semanas pra chegar!",
-        feedbackErro:
-          "O texto diz: 'a família mandava uma CARTA no correio'.",
+        feedbackAcerto: "🎉 CARTA — demorava semanas pra chegar!",
+        feedbackErro: "O texto diz: 'a família mandava uma CARTA no correio'.",
         ondeEstaNoTexto: "…mandava uma CARTA no correio…",
       },
       {
@@ -171,14 +160,12 @@ export const aula03: AulaPortuguesV4 = {
           "Demora semanas, igual carta",
           "Rápido — dá pra falar em segundos",
           "Não funciona",
+          "Outra possibilidade",
         ],
         correta: 1,
-        feedbackAcerto:
-          "🎉 RÁPIDO — em segundos a mensagem chega.",
-        feedbackErro:
-          "O texto diz: 'dá pra falar em segundos com alguém do outro lado do mundo'.",
-        ondeEstaNoTexto:
-          "…dá pra falar em segundos com alguém do outro lado do mundo…",
+        feedbackAcerto: "🎉 RÁPIDO — em segundos a mensagem chega.",
+        feedbackErro: "O texto diz: 'dá pra falar em segundos com alguém do outro lado do mundo'.",
+        ondeEstaNoTexto: "…dá pra falar em segundos com alguém do outro lado do mundo…",
       },
     ],
   },
@@ -188,29 +175,27 @@ export const aula03: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "Em uma CIDADE GRANDE, muitas pessoas usam…",
-        opcoes: ["Ônibus e metrô", "Só barco a remo", "Só cavalo"],
-        opcoesImagens: [pontoOnibus, navio, campo],
+        opcoes: ["Ônibus e metrô", "Só barco a remo", "Só cavalo", "Outra possibilidade"],
+        opcoesImagens: [pontoOnibus, navio, campo, pontoOnibus],
         correta: 0,
         feedbackAcerto: "🎉 Isso! ÔNIBUS e METRÔ na cidade grande.",
-        feedbackErro:
-          "Na cidade grande, o mais comum é ÔNIBUS/METRÔ.",
+        feedbackErro: "Na cidade grande, o mais comum é ÔNIBUS/METRÔ.",
       },
       {
         pergunta: "Numa cidade com muito RIO, também usa muito…",
-        opcoes: ["Barco", "Trem", "Avião"],
-        opcoesImagens: [navio, trem, mapa],
+        opcoes: ["Barco", "Trem", "Avião", "Outra possibilidade"],
+        opcoesImagens: [navio, trem, mapa, navio],
         correta: 0,
         feedbackAcerto: "🎉 BARCO! O rio vira o 'caminho'.",
         feedbackErro: "Cidade com muito RIO usa BARCO.",
       },
       {
         pergunta: "Pra dar um recado RÁPIDO pra vovó em outra cidade, HOJE:",
-        opcoes: ["Manda carta", "Liga no celular", "Grita da janela"],
-        opcoesImagens: [telefoneAntigo, celular, cidade],
+        opcoes: ["Manda carta", "Liga no celular", "Grita da janela", "Outra possibilidade"],
+        opcoesImagens: [telefoneAntigo, celular, cidade, telefoneAntigo],
         correta: 1,
         feedbackAcerto: "🎉 Isso! HOJE, CELULAR é o mais rápido.",
-        feedbackErro:
-          "Hoje o mais rápido é o CELULAR — chega em segundos.",
+        feedbackErro: "Hoje o mais rápido é o CELULAR — chega em segundos.",
       },
     ],
   },
@@ -223,13 +208,15 @@ export const aula03: AulaPortuguesV4 = {
         { id: "s1", texto: "1) Carta no correio (só papel).", imagemUrl: cameraAntiga },
         { id: "s2", texto: "2) Telefone com fio (dentro de casa).", imagemUrl: telefoneAntigo },
         { id: "s3", texto: "3) TV em casa (imagem + som).", imagemUrl: tvModerna },
-        { id: "s4", texto: "4) Celular / videochamada (imagem ao vivo em segundos).", imagemUrl: celular },
+        {
+          id: "s4",
+          texto: "4) Celular / videochamada (imagem ao vivo em segundos).",
+          imagemUrl: celular,
+        },
       ],
       ordemCerta: ["s1", "s2", "s3", "s4"],
-      feedbackAcerto:
-        "🎉 Perfeito! Carta → telefone com fio → TV → celular.",
-      feedbackErro:
-        "Pense: no tempo dos bisavós era CARTA; hoje é CELULAR.",
+      feedbackAcerto: "🎉 Perfeito! Carta → telefone com fio → TV → celular.",
+      feedbackErro: "Pense: no tempo dos bisavós era CARTA; hoje é CELULAR.",
     },
   },
 
@@ -251,15 +238,14 @@ export const aula03: AulaPortuguesV4 = {
           "De plástico, sem cesta",
           "Antiga, de ferro, pesada, com cesta",
           "Voadora",
+          "Outra possibilidade",
         ],
-        opcoesImagens: [bicicletaModerna, bicicletaAntiga, mapa],
+        opcoesImagens: [bicicletaModerna, bicicletaAntiga, mapa, bicicletaModerna],
         correta: 1,
-        feedbackAcerto:
-          "🎉 Antiga, de FERRO, pesada, com cesta.",
+        feedbackAcerto: "🎉 Antiga, de FERRO, pesada, com cesta.",
         feedbackErro:
           "O texto diz: 'uma BICICLETA ANTIGA, toda de FERRO, bem pesada, com uma cestinha'.",
-        ondeEstaNoTexto:
-          "…BICICLETA ANTIGA, toda de FERRO, bem pesada, com uma cestinha…",
+        ondeEstaNoTexto: "…BICICLETA ANTIGA, toda de FERRO, bem pesada, com uma cestinha…",
       },
       {
         pergunta: "A bicicleta antiga e a moderna são a MESMA coisa?",
@@ -267,15 +253,13 @@ export const aula03: AulaPortuguesV4 = {
           "Sim — as duas são BICICLETAS, só de tempos diferentes",
           "Não — a antiga não é bicicleta",
           "O texto não diz",
+          "Outra possibilidade",
         ],
-        opcoesImagens: [bicicletaAntiga, carro, mapaPercurso],
+        opcoesImagens: [bicicletaAntiga, carro, mapaPercurso, bicicletaAntiga],
         correta: 0,
-        feedbackAcerto:
-          "🎉 As duas são BICICLETAS — o tempo é que é diferente.",
-        feedbackErro:
-          "O texto diz: 'As duas são BICICLETAS — só que de tempos diferentes'.",
-        ondeEstaNoTexto:
-          "…As duas são BICICLETAS — só que de tempos diferentes…",
+        feedbackAcerto: "🎉 As duas são BICICLETAS — o tempo é que é diferente.",
+        feedbackErro: "O texto diz: 'As duas são BICICLETAS — só que de tempos diferentes'.",
+        ondeEstaNoTexto: "…As duas são BICICLETAS — só que de tempos diferentes…",
       },
     ],
   },
@@ -296,13 +280,13 @@ export const aula03: AulaPortuguesV4 = {
               nome: "Ônibus no ponto",
               emojiLugar: "🚌",
               emojiMorador: "🧍",
-              pista:
-                "Ele leva gente de um bairro pro outro. Isso é transporte ou comunicação?",
+              pista: "Ele leva gente de um bairro pro outro. Isso é transporte ou comunicação?",
             },
             opcoes: [
               { id: "transporte", nome: "TRANSPORTE", imagemUrl: pontoOnibus },
               { id: "comunicacao", nome: "COMUNICAÇÃO", imagemUrl: celular },
               { id: "escola", nome: "Escola", imagemUrl: escola },
+              { id: "outra-opcao-2", nome: "Outra possibilidade", imagemUrl: pontoOnibus },
             ],
             correta: "transporte",
             feedbackAcerto: "🎉 Ônibus LEVA gente — é TRANSPORTE.",
@@ -314,13 +298,13 @@ export const aula03: AulaPortuguesV4 = {
               nome: "Celular tocando",
               emojiLugar: "📱",
               emojiMorador: "💬",
-              pista:
-                "Ele manda mensagem, faz ligação, videochamada. Transporte ou comunicação?",
+              pista: "Ele manda mensagem, faz ligação, videochamada. Transporte ou comunicação?",
             },
             opcoes: [
               { id: "comunicacao", nome: "COMUNICAÇÃO", imagemUrl: celular },
               { id: "transporte", nome: "TRANSPORTE", imagemUrl: carro },
               { id: "ponte", nome: "Ponte", imagemUrl: ponte },
+              { id: "outra-opcao-3", nome: "Outra possibilidade", imagemUrl: celular },
             ],
             correta: "comunicacao",
             feedbackAcerto: "🎉 Celular MANDA recado — é COMUNICAÇÃO.",
@@ -338,6 +322,7 @@ export const aula03: AulaPortuguesV4 = {
               { id: "transporte", nome: "TRANSPORTE", imagemUrl: bicicletaModerna },
               { id: "comunicacao", nome: "COMUNICAÇÃO", imagemUrl: tvModerna },
               { id: "posto", nome: "Ponto de ônibus", imagemUrl: pontoOnibus },
+              { id: "outra-opcao-4", nome: "Outra possibilidade", imagemUrl: bicicletaModerna },
             ],
             correta: "transporte",
             feedbackAcerto: "🎉 Bicicleta LEVA pessoa — TRANSPORTE.",
@@ -349,19 +334,17 @@ export const aula03: AulaPortuguesV4 = {
               nome: "Carta no correio",
               emojiLugar: "✉️",
               emojiMorador: "📮",
-              pista:
-                "Envelope de papel escrito à mão, com selo. Transporte ou comunicação?",
+              pista: "Envelope de papel escrito à mão, com selo. Transporte ou comunicação?",
             },
             opcoes: [
               { id: "comunicacao", nome: "COMUNICAÇÃO", imagemUrl: telefoneAntigo },
               { id: "transporte", nome: "TRANSPORTE", imagemUrl: carro },
               { id: "trem", nome: "Trem", imagemUrl: trem },
+              { id: "outra-opcao-5", nome: "Outra possibilidade", imagemUrl: telefoneAntigo },
             ],
             correta: "comunicacao",
-            feedbackAcerto:
-              "🎉 CARTA leva RECADO — é COMUNICAÇÃO (antiga).",
-            feedbackErro:
-              "A carta manda um RECADO escrito. É COMUNICAÇÃO.",
+            feedbackAcerto: "🎉 CARTA leva RECADO — é COMUNICAÇÃO (antiga).",
+            feedbackErro: "A carta manda um RECADO escrito. É COMUNICAÇÃO.",
           },
           {
             id: "r5",
@@ -376,11 +359,11 @@ export const aula03: AulaPortuguesV4 = {
               { id: "transporte", nome: "TRANSPORTE", imagemUrl: trem },
               { id: "comunicacao", nome: "COMUNICAÇÃO", imagemUrl: radioAntigo },
               { id: "tv", nome: "TV", imagemUrl: tvModerna },
+              { id: "outra-opcao-6", nome: "Outra possibilidade", imagemUrl: trem },
             ],
             correta: "transporte",
             feedbackAcerto: "🎉 Trem LEVA pessoas — TRANSPORTE.",
-            feedbackErro:
-              "Trem carrega passageiros. É TRANSPORTE.",
+            feedbackErro: "Trem carrega passageiros. É TRANSPORTE.",
           },
         ],
         feedbackFinal:
@@ -399,7 +382,7 @@ export const aula03: AulaPortuguesV4 = {
     miniDesafio: {
       pergunta:
         "Uma família que mora numa cidade com muito RIO costuma usar muito qual transporte?",
-      opcoes: ["Metrô", "Barco", "Trem-bala"],
+      opcoes: ["Metrô", "Barco", "Trem-bala", "Outra possibilidade"],
       correta: 1,
       feedbackAcerto: "🎉 BARCO! O rio vira o caminho.",
       feedbackErro: "Onde tem muito RIO, o BARCO é o principal transporte.",
@@ -414,34 +397,29 @@ export const aula03: AulaPortuguesV4 = {
           "Um jeito de mandar recado",
           "Qualquer jeito de MOVER pessoa ou coisa (ônibus, bici, barco)",
           "Um tipo de comida",
+          "Outra possibilidade",
         ],
         correta: 1,
-        feedbackAcerto:
-          "🎉 TRANSPORTE = leva PESSOA/coisa de um lugar pro outro.",
-        feedbackErro:
-          "TRANSPORTE = jeito de mover pessoas ou coisas.",
+        feedbackAcerto: "🎉 TRANSPORTE = leva PESSOA/coisa de um lugar pro outro.",
+        feedbackErro: "TRANSPORTE = jeito de mover pessoas ou coisas.",
       },
       {
         pergunta: "2/5 — O CELULAR é meio de…",
-        opcoes: ["Transporte", "Comunicação", "Nenhum"],
+        opcoes: ["Transporte", "Comunicação", "Nenhum", "Outra possibilidade"],
         correta: 1,
-        feedbackAcerto:
-          "🎉 COMUNICAÇÃO — manda ligação, mensagem, vídeo.",
-        feedbackErro:
-          "Celular manda RECADO. É COMUNICAÇÃO.",
+        feedbackAcerto: "🎉 COMUNICAÇÃO — manda ligação, mensagem, vídeo.",
+        feedbackErro: "Celular manda RECADO. É COMUNICAÇÃO.",
       },
       {
         pergunta: "3/5 — ANTIGAMENTE, pra dar recado pra alguém longe, usava:",
-        opcoes: ["Carta no correio", "Videochamada", "TikTok"],
+        opcoes: ["Carta no correio", "Videochamada", "TikTok", "Outra possibilidade"],
         correta: 0,
-        feedbackAcerto:
-          "🎉 CARTA no correio — demorava semanas.",
-        feedbackErro:
-          "Antigamente era CARTA no correio.",
+        feedbackAcerto: "🎉 CARTA no correio — demorava semanas.",
+        feedbackErro: "Antigamente era CARTA no correio.",
       },
       {
         pergunta: "4/5 — Uma pessoa que mora perto da escola, o transporte mais simples é:",
-        opcoes: ["De avião", "A pé", "De navio"],
+        opcoes: ["De avião", "A pé", "De navio", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 A PÉ — se é perto.",
         feedbackErro: "Perto se vai A PÉ.",
@@ -452,12 +430,11 @@ export const aula03: AulaPortuguesV4 = {
           "São duas coisas totalmente diferentes",
           "As duas são BICICLETAS, só de tempos diferentes",
           "A antiga não é bicicleta",
+          "Outra possibilidade",
         ],
         correta: 1,
-        feedbackAcerto:
-          "🎉 As duas são BICICLETAS — o tempo é que muda.",
-        feedbackErro:
-          "As duas são BICICLETAS, uma antiga e outra moderna.",
+        feedbackAcerto: "🎉 As duas são BICICLETAS — o tempo é que muda.",
+        feedbackErro: "As duas são BICICLETAS, uma antiga e outra moderna.",
       },
     ],
   },
@@ -471,8 +448,7 @@ export const aula03: AulaPortuguesV4 = {
       "3) Pergunte: 'Como você falava com um parente que morava LONGE?' — Anote a resposta (carta, telefone com fio, rádio…).",
       "4) Conte pro adulto como VOCÊ fala hoje (celular, vídeo, mensagem).",
     ],
-    registro:
-      "📸 Uma foto do papel comparando ANTES × HOJE (transporte e comunicação).",
+    registro: "📸 Uma foto do papel comparando ANTES × HOJE (transporte e comunicação).",
   },
 
   recompensa: {

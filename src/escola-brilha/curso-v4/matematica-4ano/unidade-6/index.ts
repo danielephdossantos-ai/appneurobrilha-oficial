@@ -6,12 +6,14 @@ import { aula04_tempo } from "./aula-04-tempo";
 import { aula05_dinheiro } from "./aula-05-dinheiro";
 import { aula06_perimetro } from "./aula-06-perimetro";
 import { aula07_missaoFinalU6 } from "./aula-07-missao-final";
+import { aula08_compararAreas } from "./aula-08-comparar-areas";
+import { aula09_temperatura } from "./aula-09-temperatura";
 
 export const unidade6: Unidade = {
   slug: "unidade-6-medidas",
   numero: 6,
   titulo: "Medidas do Reino",
-  subtitulo: "Comprimento, massa, capacidade, tempo, dinheiro e perímetro",
+  subtitulo: "Comprimento, massa, capacidade, tempo, dinheiro, perímetro, área e temperatura",
   descricao:
     "Brilha vira Medidor(a) do Reino: régua, balança, jarra, relógio e cédulas. Aprende a converter e a operar com medidas reais.",
   corTema: "#0891b2",
@@ -23,5 +25,7 @@ export const unidade6: Unidade = {
     aula05_dinheiro,
     aula06_perimetro,
     aula07_missaoFinalU6,
+    aula08_compararAreas,
+    aula09_temperatura,
   ],
 };

@@ -23,7 +23,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-o-que-e-municipio",
   titulo: "O que é o meu Município?",
   iconeTrilha: "🏛️",
-  bncc: ["EF03HI01", "EF03HI02"],
+  bncc: [],
   duracaoMin: 22,
 
   cena01_motivacao: {
@@ -61,6 +61,8 @@ export const aula01: AulaGeoV1 = {
         cor: "from-slate-500 to-slate-700",
         fotoUrl: imgCidade,
       },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "urbano-rural",
     feedbackAcerto:
@@ -182,6 +184,7 @@ export const aula01: AulaGeoV1 = {
           { id: "u", emoji: "🏢", titulo: "Zona urbana", cor: "from-slate-500 to-slate-700" },
           { id: "r", emoji: "🌾", titulo: "Zona rural", cor: "from-emerald-500 to-emerald-700" },
           { id: "f", emoji: "🛣️", titulo: "Fora do município", cor: "from-rose-500 to-rose-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "r",
         feedbackAcerto:
@@ -196,6 +199,8 @@ export const aula01: AulaGeoV1 = {
         cards: [
           { id: "s", emoji: "★", titulo: "Na sede municipal", cor: "from-amber-500 to-orange-700" },
           { id: "z", emoji: "🌾", titulo: "Numa fazenda", cor: "from-emerald-500 to-emerald-700" },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "s",
         feedbackAcerto: "Exato. A prefeitura fica sempre na SEDE — o principal núcleo urbano do município.",
@@ -209,6 +214,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🔢", titulo: "27", cor: "from-slate-500 to-slate-700" },
           { id: "b", emoji: "🔢", titulo: "5.570", cor: "from-emerald-500 to-teal-700" },
           { id: "c", emoji: "🔢", titulo: "1.000.000", cor: "from-rose-500 to-rose-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "b",
         feedbackAcerto:
@@ -492,6 +498,8 @@ export const aula01: AulaGeoV1 = {
             id: "b",
             texto: "Apenas o centro da cidade, sem incluir o campo em volta.",
           },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto:
           "Certificado. Município é o TODO: sede + zona urbana + zona rural, com governo próprio.",
@@ -512,6 +520,8 @@ export const aula01: AulaGeoV1 = {
             id: "b",
             texto: "Não. Quem mora no campo está fora do município.",
           },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto:
           "Correto. Ambas dependem da mesma prefeitura, mesmo prefeito e mesmos limites.",
@@ -533,6 +543,8 @@ export const aula01: AulaGeoV1 = {
             id: "b",
             texto: "Porque é a única parte onde as pessoas podem morar.",
           },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto:
           "Certificação concluída. A sede é o centro administrativo — o coração institucional do município.",

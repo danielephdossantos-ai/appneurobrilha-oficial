@@ -4,7 +4,7 @@ export const aula03_angulosTransferidor: AulaV4 = {
   slug: "u7-03-angulos-transferidor",
   titulo: "Ângulos: reto, agudo, obtuso, raso",
   iconeTrilha: "📐",
-  bncc: ["EF05MA15"],
+  bncc: ["EF05MA17"],
   duracaoMin: 20,
   metodologias: ["cpa"],
 

@@ -5,7 +5,7 @@ export const aula02_compararRacionais: AulaV4 = {
   slug: "u2-02-comparar-racionais",
   titulo: "Quem é Maior?",
   iconeTrilha: "⚖️",
-  bncc: ["EF07MA05"],
+  bncc: ["EF07MA08", "EF07MA10"],
   duracaoMin: 28,
   metodologias: ["skemp"],
 

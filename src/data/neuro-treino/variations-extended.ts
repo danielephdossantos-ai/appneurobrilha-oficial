@@ -11,30 +11,38 @@ export const range = (n: number) => Array.from({ length: n }, (_, i) => i);
 // GRUPO 1: FONO CLÍNICO (4 categorias)
 // ──────────────────────────────────────────────
 
-// F1. DISCRIMINAÇÃO AUDITIVA — par mínimo: duas palavras parecidas, escolher a certa
+// F1. DISCRIMINAÇÃO AUDITIVA — 15 contrastes fonológicos, nas duas direções.
+// A criança ouve o alvo e escolhe a figura; a palavra-alvo não deve ficar visível.
 const DISCR_BANK = [
-  { pista: "Gato", par1: "GATO", par2: "PATO", correta: "GATO", emoji1: "🐱", emoji2: "🦆" },
-  { pista: "Pato", par1: "PATO", par2: "RATO", correta: "PATO", emoji1: "🦆", emoji2: "🐭" },
-  { pista: "Rato", par1: "RATO", par2: "GATO", correta: "RATO", emoji1: "🐭", emoji2: "🐱" },
-  { pista: "Bola", par1: "BOLA", par2: "BOLO", correta: "BOLA", emoji1: "⚽", emoji2: "🎂" },
-  { pista: "Bolo", par1: "BOLO", par2: "BOLA", correta: "BOLO", emoji1: "🎂", emoji2: "⚽" },
-  { pista: "Vaca", par1: "VACA", par2: "CASA", correta: "VACA", emoji1: "🐮", emoji2: "🏠" },
-  { pista: "Casa", par1: "CASA", par2: "VACA", correta: "CASA", emoji1: "🏠", emoji2: "🐮" },
-  { pista: "Sol", par1: "SOL", par2: "LUA", correta: "SOL", emoji1: "☀️", emoji2: "🌙" },
-  { pista: "Lua", par1: "LUA", par2: "SOL", correta: "LUA", emoji1: "🌙", emoji2: "☀️" },
-  { pista: "Galo", par1: "GALO", par2: "GATO", correta: "GALO", emoji1: "🐓", emoji2: "🐱" },
-  { pista: "Sapo", par1: "SAPO", par2: "PEIXE", correta: "SAPO", emoji1: "🐸", emoji2: "🐟" },
-  { pista: "Coelho", par1: "COELHO", par2: "COROA", correta: "COELHO", emoji1: "🐰", emoji2: "👑" },
-  { pista: "Carro", par1: "CARRO", par2: "TREM", correta: "CARRO", emoji1: "🚗", emoji2: "🚂" },
-  { pista: "Maçã", par1: "MAÇÃ", par2: "BANANA", correta: "MAÇÃ", emoji1: "🍎", emoji2: "🍌" },
-  { pista: "Flor", par1: "FLOR", par2: "FOGO", correta: "FLOR", emoji1: "🌸", emoji2: "🔥" },
+  { par1: "GATO", par2: "PATO", emoji1: "🐱", emoji2: "🦆" },
+  { par1: "PATO", par2: "RATO", emoji1: "🦆", emoji2: "🐭" },
+  { par1: "GATO", par2: "RATO", emoji1: "🐱", emoji2: "🐭" },
+  { par1: "BOLA", par2: "MOLA", emoji1: "⚽", emoji2: "🌀" },
+  { par1: "BOLO", par2: "BOCA", emoji1: "🎂", emoji2: "👄" },
+  { par1: "VACA", par2: "FACA", emoji1: "🐮", emoji2: "🔪" },
+  { par1: "COLA", par2: "GOLA", emoji1: "🧴", emoji2: "👕" },
+  { par1: "CÃO", par2: "PÃO", emoji1: "🐶", emoji2: "🍞" },
+  { par1: "MÃO", par2: "PÃO", emoji1: "✋", emoji2: "🍞" },
+  { par1: "GALO", par2: "GATO", emoji1: "🐓", emoji2: "🐱" },
+  { par1: "SACO", par2: "SAPO", emoji1: "🎒", emoji2: "🐸" },
+  { par1: "CAMA", par2: "LAMA", emoji1: "🛏️", emoji2: "🟫" },
+  { par1: "TELA", par2: "VELA", emoji1: "📺", emoji2: "🕯️" },
+  { par1: "PICO", par2: "BICO", emoji1: "⛰️", emoji2: "🐦" },
+  { par1: "FILA", par2: "VILA", emoji1: "👫", emoji2: "🏘️" },
 ];
 
 export const DISCRIMINACAO_AUDITIVA_VARS: Variation[] = range(30).map((i) => {
   const b = DISCR_BANK[i % DISCR_BANK.length];
+  const correta = i < DISCR_BANK.length ? b.par1 : b.par2;
   return {
     id: `da-${i + 1}`,
-    payload: { ...b, ordem: i % 2 === 0 ? [b.par1, b.par2] : [b.par2, b.par1] },
+    payload: {
+      ...b,
+      pista: correta.toLocaleLowerCase("pt-BR"),
+      correta,
+      ordem: i % 2 === 0 ? [b.par1, b.par2] : [b.par2, b.par1],
+      nivel: 1 + Math.floor(i / 10),
+    },
   };
 });
 
@@ -384,12 +392,13 @@ export const TOQUE_SEQUENCIA_VARS: Variation[] = TS_NIVEIS.map((nv, i) => {
 });
 
 // C2. RITMO DE BATIDAS — tambor: criança bate N vezes conforme o comando
-const RITMO_BANK: number[] = [2, 3, 1, 4, 2, 3, 5, 4, 2, 6];
 export const RITMO_BATIDAS_VARS: Variation[] = range(30).map((i) => {
-  const batidas = RITMO_BANK[i % RITMO_BANK.length];
+  const nivel = 1 + Math.floor(i / 10);
+  const bancos = [[1, 2, 3], [3, 4], [4, 5, 6]];
+  const batidas = bancos[nivel - 1][i % bancos[nivel - 1].length];
   return {
     id: `rb-${i + 1}`,
-    payload: { batidas, comando: `Bata ${batidas} ${batidas === 1 ? "vez" : "vezes"}!` },
+    payload: { batidas, comando: `Bata ${batidas} ${batidas === 1 ? "vez" : "vezes"}!`, nivel },
   };
 });
 
@@ -431,9 +440,10 @@ const TEMAS_ALVO = [
 ];
 export const ALVO_MOVEL_VARS: Variation[] = range(30).map((i) => {
   const t = TEMAS_ALVO[i % TEMAS_ALVO.length];
-  const velocidade = 0.4 + (i % 6) * 0.08;
-  const rounds = 3 + (i % 4);
-  return { id: `am-${i + 1}`, payload: { ...t, velocidade, rounds } };
+  const nivel = 1 + Math.floor(i / 10);
+  const velocidade = [0.4, 0.58, 0.76][nivel - 1];
+  const rounds = [3, 4, 5][nivel - 1];
+  return { id: `am-${i + 1}`, payload: { ...t, velocidade, rounds, nivel } };
 });
 
 // ──────────────────────────────────────────────
@@ -476,26 +486,27 @@ const DIFER_BANK = [
 ];
 export const ACHAR_DIFERENTE_VARS: Variation[] = range(30).map((i) => {
   const b = DIFER_BANK[i % DIFER_BANK.length];
-  const tam = 9 + (i % 4) * 3;
+  const nivel = 1 + Math.floor(i / 10);
+  const tam = [6, 9, 12][nivel - 1];
   const posAlvo = (i * 7) % tam;
   const grid = Array(tam).fill(b.maioria);
   grid[posAlvo] = b.diferente;
-  return { id: `ad-${i + 1}`, payload: { ...b, grid, posAlvo, colunas: 3 + (i % 2) } };
+  return { id: `ad-${i + 1}`, payload: { ...b, grid, posAlvo, colunas: nivel === 3 ? 4 : 3, nivel } };
 });
 
 // A2. MEMÓRIA VISUAL — flash de grade colorida; 10 fáceis, 10 médias, 10 difíceis.
 export const MEMORIA_VISUAL_VARS: Variation[] = range(30).map((i) => {
   const cores = ["#ef4444", "#3b82f6", "#22c55e", "#facc15", "#a855f7", "#f97316"];
-  // Faixa: 0-9 fácil (2x2), 10-19 médio (3x3), 20-29 difícil (4x4)
   const faixa = Math.floor(i / 10); // 0,1,2
   const nivel = faixa + 1; // 1,2,3
-  const cols = 2 + faixa; // 2, 3, 4
-  const rows = 2 + faixa; // 2, 3, 4
-  // Dentro de cada faixa, pequenas variações em flash e padrão.
+  // Faixa adequada até 7 anos: lembrar 3, 4 ou 5 posições, sem saltar para 16.
+  const quantidade = 3 + faixa;
+  const cols = quantidade;
+  const rows = 1;
   const passo = i % 10;
-  const grid = range(rows * cols).map((k) => cores[(i * 3 + k) % cores.length]);
-  const flashMsBase = [2200, 1700, 1300][faixa];
-  const flashMs = Math.max(700, flashMsBase - passo * 80);
+  const grid = range(quantidade).map((k) => cores[(i * 3 + k * 2) % cores.length]);
+  const flashMsBase = [4000, 4500, 5000][faixa];
+  const flashMs = Math.max(3000, flashMsBase - passo * 80);
   return { id: `mv-${i + 1}`, payload: { grid, rows, cols, flashMs, nivel } };
 });
 
@@ -571,7 +582,7 @@ export const SEGUIR_INSTRUCAO_VARS: Variation[] = range(30).map((i) => {
   const shuffled = [...b.itens].sort(() => (i % 2 ? -1 : 1));
   return {
     id: `si2-${i + 1}`,
-    payload: { instrucao: b.instrucao, itens: shuffled, correta: b.correta },
+    payload: { instrucao: b.instrucao, itens: shuffled, correta: b.correta, nivel: 1 + Math.floor(i / 10) },
   };
 });
 
@@ -746,17 +757,17 @@ const PALAVRAIMAGEM_BANK = [
   { emoji: "🐱", correta: "GATO", outras: ["PATO", "RATO", "GADO"] },
   { emoji: "⚽", correta: "BOLA", outras: ["COLA", "BODA", "BALA"] },
   { emoji: "🏠", correta: "CASA", outras: ["CAMA", "CARA", "CAÇA"] },
-  { emoji: "🌸", correta: "FLOR", outras: ["FLAUTA", "FAVOR", "FALOR"] },
-  { emoji: "🌙", correta: "LUA", outras: ["RUA", "LUA", "LUZ"] },
-  { emoji: "🚗", correta: "CARRO", outras: ["BARRO", "GARRO", "FARRO"] },
+  { emoji: "🌸", correta: "FLOR", outras: ["COR", "DOR", "MAR"] },
+  { emoji: "🌙", correta: "LUA", outras: ["RUA", "LUZ", "UVA"] },
+  { emoji: "🚗", correta: "CARRO", outras: ["BARRO", "JARRO", "CARGO"] },
   { emoji: "🍎", correta: "MAÇÃ", outras: ["MASSA", "MOÇA", "MAÇA"] },
-  { emoji: "🐶", correta: "CÃO", outras: ["MÃO", "PÃO", "RÃO"] },
-  { emoji: "🌊", correta: "MAR", outras: ["BAR", "FAR", "PAR"] },
-  { emoji: "☀️", correta: "SOL", outras: ["MOL", "GOL", "COL"] },
+  { emoji: "🐶", correta: "CÃO", outras: ["MÃO", "PÃO", "CHÃO"] },
+  { emoji: "🌊", correta: "MAR", outras: ["BAR", "LAR", "PAR"] },
+  { emoji: "☀️", correta: "SOL", outras: ["GOL", "SAL", "SUL"] },
   { emoji: "🍌", correta: "BANANA", outras: ["CABANA", "SAVANA", "CAMPANA"] },
-  { emoji: "🦋", correta: "BORBOLETA", outras: ["BOLACHA", "BORRACHA", "BORBULHA"] },
-  { emoji: "🐸", correta: "SAPO", outras: ["CAPO", "RAPO", "TAPO"] },
-  { emoji: "🚂", correta: "TREM", outras: ["BREM", "FREM", "GREM"] },
+  { emoji: "🦋", correta: "BORBOLETA", outras: ["BOLACHA", "BORRACHA", "BONECA"] },
+  { emoji: "🐸", correta: "SAPO", outras: ["SACO", "PATO", "GATO"] },
+  { emoji: "🚂", correta: "TREM", outras: ["TEM", "TRÊS", "TETO"] },
   { emoji: "🦆", correta: "PATO", outras: ["GATO", "RATO", "BATO"] },
 ];
 export const PALAVRA_IMAGEM_VARS: Variation[] = range(30).map((i) => {
@@ -829,8 +840,8 @@ const COMPLETAR_BANK = [
   { palavra: "MA_Ã", letra: "Ç", outras: ["S", "T", "R"], resultado: "MAÇÃ", emoji: "🍎" },
   { palavra: "PA_O", letra: "T", outras: ["G", "R", "N"], resultado: "PATO", emoji: "🦆" },
   { palavra: "_UZ", letra: "L", outras: ["M", "R", "N"], resultado: "LUZ", emoji: "💡" },
-  { palavra: "CI_U", letra: "C", outras: ["S", "T", "P"], resultado: "CICU", emoji: "🎪" },
-  { palavra: "_ANA", letra: "B", outras: ["F", "C", "G"], resultado: "BANA", emoji: "🍌" },
+  { palavra: "CI_CO", letra: "R", outras: ["S", "T", "P"], resultado: "CIRCO", emoji: "🎪" },
+  { palavra: "_ANANA", letra: "B", outras: ["F", "C", "G"], resultado: "BANANA", emoji: "🍌" },
   { palavra: "PE_XE", letra: "I", outras: ["A", "U", "E"], resultado: "PEIXE", emoji: "🐟" },
   { palavra: "CA_RO", letra: "R", outras: ["L", "M", "N"], resultado: "CARRO", emoji: "🚗" },
   { palavra: "T_EM", letra: "R", outras: ["L", "N", "M"], resultado: "TREM", emoji: "🚂" },
@@ -886,7 +897,9 @@ export const SINAL_VERDE_VERMELHO_VARS: Variation[] = range(30).map((i) => {
   
   const seq = range(rounds).map((k) => {
     // 30% chance de ser sinal vermelho (No-Go) em níveis altos, 20% no baixo
-    const isNoGo = (i * 13 + k * 7) % 10 < (faixa === 0 ? 2 : 3);
+    // O índice garantido impede sessões sem nenhum estímulo de inibição.
+    const noGoGarantido = (i * 3 + 1) % rounds;
+    const isNoGo = k === noGoGarantido || (i * 13 + k * 7) % 10 < (faixa === 0 ? 2 : 3);
     return {
       tipo: isNoGo ? "vermelho" : "verde",
       emoji: isNoGo ? "🛑" : "🟢",
@@ -908,22 +921,25 @@ export const SINAL_VERDE_VERMELHO_VARS: Variation[] = range(30).map((i) => {
 export const PARES_SONOROS_VARS: Variation[] = range(30).map((i) => {
   const faixa = Math.floor(i / 10);
   const numPares = 2 + faixa;
-  const sons = ["🔔", "🎹", "🥁", "🎻", "🎷", "🎺", "🎸", "🪕"].slice(0, numPares);
+  const bancoSons = ["do", "re", "mi", "sol", "la"];
+  const inicio = i % (bancoSons.length - numPares + 1);
+  const sons = bancoSons.slice(inicio, inicio + numPares);
   return { id: `ps-${i + 1}`, payload: { sons, numPares, nivel: faixa + 1 } };
 });
 
 export const SEQUENCIA_AUDITIVA_VARS: Variation[] = range(30).map((i) => {
   const faixa = Math.floor(i / 10);
   const qtd = 2 + faixa + (i % 2);
-  const sons = ["🐶", "🐱", "🐮", "🐷", "🦆", "🐔", "🐸", "🦁"];
-  const seq = range(qtd).map(k => sons[(i + k) % sons.length]);
-  return { id: `sa-${i + 1}`, payload: { seq, nivel: faixa + 1, flashMs: 1000 + qtd * 500 } };
+  const sons = ["do", "re", "mi", "sol", "la"];
+  const seq = range(qtd).map(k => sons[(i * 2 + k * 3) % sons.length]);
+  return { id: `sa-${i + 1}`, payload: { seq, opcoes: sons, nivel: faixa + 1 } };
 });
 
 // FASE 3C - MATEMÁTICA
 export const BANQUETE_DINOS_VARS: Variation[] = range(30).map((i) => {
   const faixa = Math.floor(i / 10);
-  const qtd = 1 + faixa * 2 + (i % 3);
+  // Subitização adequada à faixa etária: 1–3, 2–4 e 3–5 elementos.
+  const qtd = 1 + faixa + (i % 3);
   const dino = ["🦖", "🦕", "🐉"][faixa % 3];
   const comida = ["🍎", "🥩", "🌿", "🦴"][i % 4];
   const opts = range(4).map(k => qtd - 2 + k).filter(k => k > 0).slice(0, 3);
@@ -943,16 +959,22 @@ export const TREM_NUMERICO_VARS: Variation[] = range(30).map((i) => {
 // FASE 3D - FLEXIBILIDADE
 export const TROCA_REGRAS_VARS: Variation[] = range(30).map((i) => {
   const faixa = Math.floor(i / 10);
-  const regras = ["cor", "forma"];
-  return { id: `tr-${i + 1}`, payload: { regras, rounds: 5 + faixa * 2, nivel: faixa + 1 } };
+  const rounds = 6 + faixa * 2;
+  const bloco = [3, 2, 1][faixa];
+  const sequenciaRegras = range(rounds).map((round) => Math.floor(round / bloco) % 2 === 0 ? "cor" : "forma");
+  return { id: `tr-${i + 1}`, payload: { regras: ["cor", "forma"], sequenciaRegras, rounds, nivel: faixa + 1 } };
 });
 
 // FASE 3F - PLANEJAMENTO
 export const PONTE_BLOCOS_VARS: Variation[] = range(30).map((i) => {
   const faixa = Math.floor(i / 10);
   const shapes = ["🟥", "🟦", "🟩", "🟨", "🟧"];
-  const target = shapes[i % shapes.length];
-  return { id: `pb-${i + 1}`, payload: { target, opts: shapes.slice(0, 3 + faixa), nivel: faixa + 1 } };
+  const tamanho = 3 + faixa;
+  const ponte = range(tamanho).map((k) => shapes[(i + k) % shapes.length]);
+  const lacuna = 1 + (i % (tamanho - 2));
+  const correta = ponte[lacuna];
+  const opts = [correta, shapes[(shapes.indexOf(correta) + 1) % shapes.length], shapes[(shapes.indexOf(correta) + 2) % shapes.length]];
+  return { id: `pb-${i + 1}`, payload: { ponte, lacuna, correta, opts, nivel: faixa + 1 } };
 });
 
 // FASE 4 - COORDENAÇÃO FINA & ESPACIAL
@@ -1016,4 +1038,3 @@ export const ESTUDIO_ARTE_CONTORNO_VARS: Variation[] = range(50).map((i) => {
     }
   };
 });
-

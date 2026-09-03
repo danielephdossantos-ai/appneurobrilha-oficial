@@ -63,10 +63,38 @@ export const aula01: AulaArteV1 = {
     titulo: "🎥 A Física do Cinema Nasce",
     instrucao: "Toca em cada pista pra investigar",
     itens: [
-      { emoji: "🎡", rotulo: "Taumatrópio (1825)", descricao: "Disquinho com desenho de um lado e outro do outro. Girado por barbantes, as duas imagens se fundem numa só.", cor: "#b45309", fotoUrl: mapaTaumatropio },
-      { emoji: "⚙️", rotulo: "Fenacistoscópio", descricao: "Disco com dançarinos desenhados em volta. Girando frente ao espelho, os dançarinos ganham VIDA.", cor: "#78350f", fotoUrl: mapaFenacistoscopio },
-      { emoji: "📓", rotulo: "Flipbook caseiro", descricao: "Bloquinho com um rabisco por página. Folheado rápido com o dedão, o boneco anda, pula e voa.", cor: "#0ea5e9", fotoUrl: mapaFlipbook },
-      { emoji: "👁️", rotulo: "O olho humano", descricao: "A retina no fundo do olho GUARDA a imagem por 1/16 de segundo. É esse atraso que engana o cérebro.", cor: "#dc2626", fotoUrl: mapaOlho },
+      {
+        emoji: "🎡",
+        rotulo: "Taumatrópio (1825)",
+        descricao:
+          "Disquinho com desenho de um lado e outro do outro. Girado por barbantes, as duas imagens se fundem numa só.",
+        cor: "#b45309",
+        fotoUrl: mapaTaumatropio,
+      },
+      {
+        emoji: "⚙️",
+        rotulo: "Fenacistoscópio",
+        descricao:
+          "Disco com dançarinos desenhados em volta. Girando frente ao espelho, os dançarinos ganham VIDA.",
+        cor: "#78350f",
+        fotoUrl: mapaFenacistoscopio,
+      },
+      {
+        emoji: "📓",
+        rotulo: "Flipbook caseiro",
+        descricao:
+          "Bloquinho com um rabisco por página. Folheado rápido com o dedão, o boneco anda, pula e voa.",
+        cor: "#0ea5e9",
+        fotoUrl: mapaFlipbook,
+      },
+      {
+        emoji: "👁️",
+        rotulo: "O olho humano",
+        descricao:
+          "A retina no fundo do olho GUARDA a imagem por 1/16 de segundo. É esse atraso que engana o cérebro.",
+        cor: "#dc2626",
+        fotoUrl: mapaOlho,
+      },
     ],
     falaFinal: "Você vai ser o primeiro cineasta da história — sem câmera, só papel!",
   },
@@ -81,9 +109,14 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Fotos separadas (frames) exibidas bem rápido", correta: true },
           { texto: "Uma única imagem gigante em movimento", correta: false },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
-        feedbackAcerto: "Isso! Cada frame é uma foto parada — a velocidade cria a ilusão de movimento.",
-        feedbackErro: "Não existe imagem que se mexe sozinha. O filme é feito de FRAMES parados exibidos rápido.",
+        feedbackAcerto:
+          "Isso! Cada frame é uma foto parada — a velocidade cria a ilusão de movimento.",
+        feedbackErro:
+          "Não existe imagem que se mexe sozinha. O filme é feito de FRAMES parados exibidos rápido.",
       },
       {
         pergunta: "Quando o taumatrópio gira rápido, o pássaro APARECE dentro da gaiola porque…",
@@ -91,8 +124,12 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "O olho junta as duas imagens (persistência retiniana)", correta: true },
           { texto: "O pássaro voou pra dentro de verdade", correta: false },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
-        feedbackAcerto: "Perfeito! A retina retém a 1ª imagem por 1/16 seg, o cérebro sobrepõe com a 2ª.",
+        feedbackAcerto:
+          "Perfeito! A retina retém a 1ª imagem por 1/16 seg, o cérebro sobrepõe com a 2ª.",
         feedbackErro: "É desenho, não pássaro vivo 😄. O olho é que JUNTA as duas imagens.",
       },
       {
@@ -101,9 +138,13 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Um pouquinho diferente da anterior", correta: true },
           { texto: "Exatamente igual à anterior", correta: false },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
         feedbackAcerto: "Isso! Pequenas mudanças entre páginas = ilusão de movimento fluido.",
-        feedbackErro: "Se fossem iguais, ficaria parado. A mágica está nas PEQUENAS mudanças entre páginas.",
+        feedbackErro:
+          "Se fossem iguais, ficaria parado. A mágica está nas PEQUENAS mudanças entre páginas.",
       },
     ],
   },
@@ -112,10 +153,37 @@ export const aula01: AulaArteV1 = {
     tipo: "vocabularioCards",
     aurora: "Vocabulário do cinema primitivo. Toca em cada card!",
     cards: [
-      { termo: "Persistência Retiniana", definicao: "O olho retém a imagem por cerca de 1/16 de segundo. Isso permite fundir imagens em sequência.", emoji: "👁️", cor: "#dc2626", fotoUrl: vocabPersistencia },
-      { termo: "Taumatrópio", definicao: "Disco com desenhos dos dois lados, girado por barbantes. As imagens se fundem numa só.", emoji: "🎡", cor: "#b45309", fotoUrl: vocabTaumatropio },
-      { termo: "Frame (Quadro)", definicao: "Cada imagem estática individual que compõe uma cena de animação ou filme.", emoji: "🎞️", cor: "#1f2937", fotoUrl: vocabFrame },
-      { termo: "FPS (Frames por Segundo)", definicao: "Velocidade da animação. Cinema tradicional = 24 fps. Quanto mais fps, mais suave o movimento.", emoji: "⏱️", cor: "#a855f7", fotoUrl: vocabFps },
+      {
+        termo: "Persistência Retiniana",
+        definicao:
+          "O olho retém a imagem por cerca de 1/16 de segundo. Isso permite fundir imagens em sequência.",
+        emoji: "👁️",
+        cor: "#dc2626",
+        fotoUrl: vocabPersistencia,
+      },
+      {
+        termo: "Taumatrópio",
+        definicao:
+          "Disco com desenhos dos dois lados, girado por barbantes. As imagens se fundem numa só.",
+        emoji: "🎡",
+        cor: "#b45309",
+        fotoUrl: vocabTaumatropio,
+      },
+      {
+        termo: "Frame (Quadro)",
+        definicao: "Cada imagem estática individual que compõe uma cena de animação ou filme.",
+        emoji: "🎞️",
+        cor: "#1f2937",
+        fotoUrl: vocabFrame,
+      },
+      {
+        termo: "FPS (Frames por Segundo)",
+        definicao:
+          "Velocidade da animação. Cinema tradicional = 24 fps. Quanto mais fps, mais suave o movimento.",
+        emoji: "⏱️",
+        cor: "#a855f7",
+        fotoUrl: vocabFps,
+      },
     ],
   },
 
@@ -129,10 +197,34 @@ export const aula01: AulaArteV1 = {
       "Cada imagem parada é um FRAME. O cinema tradicional exibe 24 frames por segundo (24 fps). O desenho animado da TV, geralmente 12 fps. É essa VELOCIDADE que transforma papel em vida.",
     ],
     pigmentos: [
-      { nome: "Bloquinho de post-it", hex: "#facc15", fonte: "Suporte perfeito pra flipbook", emoji: "📒", fotoUrl: matBloco },
-      { nome: "Cartão + elástico", hex: "#c2410c", fonte: "Base do taumatrópio", emoji: "🎡", fotoUrl: matCartao },
-      { nome: "Câmera de celular", hex: "#1f2937", fonte: "Grava stop-motion caseiro", emoji: "📱", fotoUrl: matCamera },
-      { nome: "Lápis, tesoura, canetinha", hex: "#ec4899", fonte: "Ferramentas do cineasta manual", emoji: "✂️", fotoUrl: matTesoura },
+      {
+        nome: "Bloquinho de post-it",
+        hex: "#facc15",
+        fonte: "Suporte perfeito pra flipbook",
+        emoji: "📒",
+        fotoUrl: matBloco,
+      },
+      {
+        nome: "Cartão + elástico",
+        hex: "#c2410c",
+        fonte: "Base do taumatrópio",
+        emoji: "🎡",
+        fotoUrl: matCartao,
+      },
+      {
+        nome: "Câmera de celular",
+        hex: "#1f2937",
+        fonte: "Grava stop-motion caseiro",
+        emoji: "📱",
+        fotoUrl: matCamera,
+      },
+      {
+        nome: "Lápis, tesoura, canetinha",
+        hex: "#ec4899",
+        fonte: "Ferramentas do cineasta manual",
+        emoji: "✂️",
+        fotoUrl: matTesoura,
+      },
     ],
   },
 
@@ -141,14 +233,19 @@ export const aula01: AulaArteV1 = {
     aurora: "Verifica o que ficou no caderno do cineasta!",
     perguntas: [
       {
-        pergunta: "Qual é o nome do fenômeno do olho que retém a imagem por 1/16 seg e permite o cinema?",
+        pergunta:
+          "Qual é o nome do fenômeno do olho que retém a imagem por 1/16 seg e permite o cinema?",
         fotoUrl: vocabPersistencia,
         alternativas: [
           { texto: "Persistência Retiniana", correta: true },
           { texto: "Refração Luminosa", correta: false },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
         feedbackAcerto: "Fantástico! Sem ela não haveria cinema nem desenho animado.",
-        feedbackErro: "Refração é a luz mudando de direção. O truque do cinema é a PERSISTÊNCIA RETINIANA.",
+        feedbackErro:
+          "Refração é a luz mudando de direção. O truque do cinema é a PERSISTÊNCIA RETINIANA.",
       },
       {
         pergunta: "O cinema tradicional exibe quantos frames por segundo (fps)?",
@@ -156,6 +253,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "24 fps", correta: true },
           { texto: "2 fps", correta: false },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
         feedbackAcerto: "Isso! 24 fps é o padrão que engana o olho e cria movimento fluido.",
         feedbackErro: "2 fps ficaria parecendo diapositivo. O cinema usa 24 FPS.",
@@ -166,6 +266,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Milhares de fotos paradas exibidas muito rápido", correta: true },
           { texto: "Personagens vivos filmados pequenininhos", correta: false },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
         feedbackAcerto: "Correto! O cinema É frame em cima de frame — velocidade cria vida.",
         feedbackErro: "Não existe gente pequenininha na tela 😄. São FRAMES exibidos rápido.",
@@ -178,32 +281,44 @@ export const aula01: AulaArteV1 = {
     aurora: "Cada invenção usa um princípio óptico. Combina certinho!",
     animais: [
       {
-        nome: "Taumatrópio girando", emoji: "🎡", fotoUrl: qTaumaGirando,
+        nome: "Taumatrópio girando",
+        emoji: "🎡",
+        fotoUrl: qTaumaGirando,
         corAlvo: { nome: "Sobreposição de 2 imagens", hex: "#b45309" },
         opcoes: [
           { nome: "Sobreposição de 2 imagens", hex: "#b45309" },
           { nome: "Ponto de fuga central", hex: "#dc2626" },
           { nome: "Mistura de pigmentos", hex: "#0ea5e9" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Taumatrópio funde 2 lados do disco em UMA imagem sobreposta.",
       },
       {
-        nome: "Bloquinho folheado (flipbook)", emoji: "📓", fotoUrl: qFlipbook,
+        nome: "Bloquinho folheado (flipbook)",
+        emoji: "📓",
+        fotoUrl: qFlipbook,
         corAlvo: { nome: "Sequência rápida de frames", hex: "#0ea5e9" },
         opcoes: [
           { nome: "Sequência rápida de frames", hex: "#0ea5e9" },
           { nome: "Cor-luz RGB", hex: "#dc2626" },
           { nome: "Chiaroscuro", hex: "#1f2937" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Flipbook = FRAMES em sequência rápida no dedão.",
       },
       {
-        nome: "Tela de cinema", emoji: "🎬", fotoUrl: qCinema,
+        nome: "Tela de cinema",
+        emoji: "🎬",
+        fotoUrl: qCinema,
         corAlvo: { nome: "24 frames por segundo", hex: "#a855f7" },
         opcoes: [
           { nome: "24 frames por segundo", hex: "#a855f7" },
           { nome: "Linhas de fuga", hex: "#78350f" },
           { nome: "Vitral translúcido", hex: "#f59e0b" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Isso! Cinema tradicional roda a 24 FPS — velocidade que engana o olho.",
       },
@@ -214,11 +329,42 @@ export const aula01: AulaArteV1 = {
     tipo: "sequenciaMistura",
     aurora: "Ordena os 5 passos pra construir seu próprio TAUMATRÓPIO.",
     passos: [
-      { id: "p1", texto: "RECORTO um círculo de papelão resistente", emoji: "✂️", ordem: 1, fotoUrl: passo1 },
-      { id: "p2", texto: "DESENHO um vaso vazio de um lado do círculo", emoji: "🏺", ordem: 2, fotoUrl: passo2 },
-      { id: "p3", texto: "VIRO o círculo e desenho flores COLORIDAS do outro lado (de ponta-cabeça pro alinhamento dar certo)", emoji: "🌸", ordem: 3, fotoUrl: passo3 },
-      { id: "p4", texto: "FURO os dois lados e passo elásticos ou barbantes", emoji: "🔗", ordem: 4, fotoUrl: passo4 },
-      { id: "p5", texto: "GIRO os barbantes pra enrolar e PUXO — flores brotam dentro do vaso!", emoji: "🌈", ordem: 5, fotoUrl: passo5 },
+      {
+        id: "p1",
+        texto: "RECORTO um círculo de papelão resistente",
+        emoji: "✂️",
+        ordem: 1,
+        fotoUrl: passo1,
+      },
+      {
+        id: "p2",
+        texto: "DESENHO um vaso vazio de um lado do círculo",
+        emoji: "🏺",
+        ordem: 2,
+        fotoUrl: passo2,
+      },
+      {
+        id: "p3",
+        texto:
+          "VIRO o círculo e desenho flores COLORIDAS do outro lado (de ponta-cabeça pro alinhamento dar certo)",
+        emoji: "🌸",
+        ordem: 3,
+        fotoUrl: passo3,
+      },
+      {
+        id: "p4",
+        texto: "FURO os dois lados e passo elásticos ou barbantes",
+        emoji: "🔗",
+        ordem: 4,
+        fotoUrl: passo4,
+      },
+      {
+        id: "p5",
+        texto: "GIRO os barbantes pra enrolar e PUXO — flores brotam dentro do vaso!",
+        emoji: "🌈",
+        ordem: 5,
+        fotoUrl: passo5,
+      },
     ],
     falaAcerto: "Seu taumatrópio funciona igualzinho ao de 1825!",
   },
@@ -228,10 +374,26 @@ export const aula01: AulaArteV1 = {
     aurora: "Agora VOCÊ lê o diário do cineasta. Toca nas palavras coloridas.",
     titulo: "Diário do Cineasta Primitivo",
     trechos: [
-      { texto: "Meu olho retém imagens por 1/16 segundo — isso é", palavraDestaque: "persistência retiniana", corDestaque: "#dc2626" },
-      { texto: "Cada imagem parada do filme se chama", palavraDestaque: "frame", corDestaque: "#1f2937" },
-      { texto: "O cinema exibe 24 desses por segundo, ou seja, 24", palavraDestaque: "fps", corDestaque: "#a855f7" },
-      { texto: "Em 1825 nasceu o disquinho girante chamado", palavraDestaque: "taumatrópio", corDestaque: "#b45309" },
+      {
+        texto: "Meu olho retém imagens por 1/16 segundo — isso é",
+        palavraDestaque: "persistência retiniana",
+        corDestaque: "#dc2626",
+      },
+      {
+        texto: "Cada imagem parada do filme se chama",
+        palavraDestaque: "frame",
+        corDestaque: "#1f2937",
+      },
+      {
+        texto: "O cinema exibe 24 desses por segundo, ou seja, 24",
+        palavraDestaque: "fps",
+        corDestaque: "#a855f7",
+      },
+      {
+        texto: "Em 1825 nasceu o disquinho girante chamado",
+        palavraDestaque: "taumatrópio",
+        corDestaque: "#b45309",
+      },
       { texto: "Sou cineasta — invento vida com papel e velocidade!" },
     ],
   },
@@ -239,7 +401,8 @@ export const aula01: AulaArteV1 = {
   cena09_minijogo: {
     tipo: "cenaTematica",
     variante: "minijogo",
-    aurora: "🎬 Estúdio de Stop-Motion! Toca em CADA elemento do estúdio antes do tempo acabar pra gravar tua animação.",
+    aurora:
+      "🎬 Estúdio de Stop-Motion! Toca em CADA elemento do estúdio antes do tempo acabar pra gravar tua animação.",
     titulo: "🎬 Estúdio de Stop-Motion",
     instrucao: "Toque em todos os componentes antes do tempo acabar!",
     tempoSeg: 35,
@@ -260,13 +423,55 @@ export const aula01: AulaArteV1 = {
     aurora: "Fecha o caderno do cinema primitivo. Toca em cada verbete!",
     titulo: "📓 Caderno do Cinema Primitivo",
     itens: [
-      { emoji: "👁️", rotulo: "Persistência Retiniana", descricao: "O olho retém a imagem por 1/16 seg — a base de tudo.", cor: "#dc2626", fotoUrl: vocabPersistencia },
-      { emoji: "🎡", rotulo: "Taumatrópio (1825)", descricao: "Disco girado por barbantes que funde 2 imagens.", cor: "#b45309", fotoUrl: mapaTaumatropio },
-      { emoji: "⚙️", rotulo: "Fenacistoscópio", descricao: "Disco com sequência de figuras girado frente a espelho.", cor: "#78350f", fotoUrl: mapaFenacistoscopio },
-      { emoji: "📓", rotulo: "Flipbook", descricao: "Bloquinho com desenhos folheado rápido com o dedão.", cor: "#0ea5e9", fotoUrl: mapaFlipbook },
-      { emoji: "🎞️", rotulo: "Frame", descricao: "Cada imagem estática que compõe a animação.", cor: "#1f2937", fotoUrl: vocabFrame },
-      { emoji: "⏱️", rotulo: "FPS", descricao: "Frames por segundo. Cinema tradicional = 24 fps.", cor: "#a855f7", fotoUrl: vocabFps },
-      { emoji: "🎬", rotulo: "Cinema hoje", descricao: "Mesma física de 1825 — só que digital.", cor: "#ec4899", fotoUrl: qCinema },
+      {
+        emoji: "👁️",
+        rotulo: "Persistência Retiniana",
+        descricao: "O olho retém a imagem por 1/16 seg — a base de tudo.",
+        cor: "#dc2626",
+        fotoUrl: vocabPersistencia,
+      },
+      {
+        emoji: "🎡",
+        rotulo: "Taumatrópio (1825)",
+        descricao: "Disco girado por barbantes que funde 2 imagens.",
+        cor: "#b45309",
+        fotoUrl: mapaTaumatropio,
+      },
+      {
+        emoji: "⚙️",
+        rotulo: "Fenacistoscópio",
+        descricao: "Disco com sequência de figuras girado frente a espelho.",
+        cor: "#78350f",
+        fotoUrl: mapaFenacistoscopio,
+      },
+      {
+        emoji: "📓",
+        rotulo: "Flipbook",
+        descricao: "Bloquinho com desenhos folheado rápido com o dedão.",
+        cor: "#0ea5e9",
+        fotoUrl: mapaFlipbook,
+      },
+      {
+        emoji: "🎞️",
+        rotulo: "Frame",
+        descricao: "Cada imagem estática que compõe a animação.",
+        cor: "#1f2937",
+        fotoUrl: vocabFrame,
+      },
+      {
+        emoji: "⏱️",
+        rotulo: "FPS",
+        descricao: "Frames por segundo. Cinema tradicional = 24 fps.",
+        cor: "#a855f7",
+        fotoUrl: vocabFps,
+      },
+      {
+        emoji: "🎬",
+        rotulo: "Cinema hoje",
+        descricao: "Mesma física de 1825 — só que digital.",
+        cor: "#ec4899",
+        fotoUrl: qCinema,
+      },
     ],
     falaFinal: "Quarta página do Atlas do Laboratório Óptico DESBLOQUEADA!",
   },
@@ -275,12 +480,17 @@ export const aula01: AulaArteV1 = {
     tipo: "avaliacaoFinal",
     aurora: "Missão final, cineasta primitivo!",
     quiz: {
-      pergunta: "Qual é o nome do fenômeno do olho humano que retém a imagem por uma fração de segundo e possibilita a ilusão do cinema?",
+      pergunta:
+        "Qual é o nome do fenômeno do olho humano que retém a imagem por uma fração de segundo e possibilita a ilusão do cinema?",
       alternativas: [
         { texto: "Persistência Retiniana", correta: true },
         { texto: "Refração Luminosa", correta: false },
+
+        { texto: "Não corresponde ao tema", correta: false },
+        { texto: "Outra resposta sem relação", correta: false },
       ],
-      feedback: "Fantástico! É graças à Persistência Retiniana que conseguimos assistir a filmes e desenhos animados até hoje. Sem esse pequeno atraso no olho, o cinema simplesmente não existiria.",
+      feedback:
+        "Fantástico! É graças à Persistência Retiniana que conseguimos assistir a filmes e desenhos animados até hoje. Sem esse pequeno atraso no olho, o cinema simplesmente não existiria.",
     },
     missaoFamilia:
       "📓 Desafio do Bloco Flipbook: peguem um bloquinho de post-it em casa. Começando pela ÚLTIMA página, desenhem uma bolinha caindo. Na página anterior, a bola um pouquinho mais em cima. Continuem até a primeira. Folheiem rápido em família — assistam à animação caseira de uma bola quicando!",

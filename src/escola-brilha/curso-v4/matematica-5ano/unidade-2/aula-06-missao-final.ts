@@ -35,7 +35,7 @@ export const aula06_missaoFinal: AulaV4 = {
       resultado: 21788,
       passos: [
         { coluna: "U", fala: "6 < 8 → pede à D. 16 − 8 = 8.", digito: 8 },
-        { coluna: "D", fala: "D 7 vira 7 (não emprestou de novo). 7 − 9? não. Pede à C. 17 − 9 = 8.", digito: 8 },
+        { coluna: "D", fala: "A dezena 8 cedeu 1 para a unidade e ficou 7. Como 7 < 9, troca 1 centena por 10 dezenas: 17 − 9 = 8.", digito: 8 },
         { coluna: "C", fala: "C 5 vira 4. 4 < 7 → pede à UM. 14 − 7 = 7.", digito: 7 },
         { coluna: "UM", fala: "UM 7 vira 6. 6 − 5 = 1.", digito: 1 },
         { coluna: "DM", fala: "4 − 2 = 2.", digito: 2 },

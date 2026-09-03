@@ -4,7 +4,7 @@ export const aula04_tempo: AulaV4 = {
   slug: "u5-04-tempo",
   titulo: "Horas e Minutos",
   iconeTrilha: "⏰",
-  bncc: ["EF03MA22"],
+  bncc: ["EF03MA22", "EF03MA23"],
   duracaoMin: 20,
   metodologias: ["skemp", "cpa"],
   momento01_motivacao: {
@@ -95,9 +95,9 @@ export const aula04_tempo: AulaV4 = {
   },
   momento10_avaliacao: {
     perguntas: [
-      { pergunta: "1 h e meia = ? min", opcoes: ["90", "60", "120"], correta: 0, feedbackAcerto: "🎉 90.", feedbackErro: "60+30=90." },
-      { pergunta: "120 min = ? h", opcoes: ["2", "1", "3"], correta: 0, feedbackAcerto: "🎉 2 horas.", feedbackErro: "2×60=120." },
-      { pergunta: "1 quarto de hora = ?", opcoes: ["15 min", "30 min", "45 min"], correta: 0, feedbackAcerto: "🎉 15 min.", feedbackErro: "60÷4=15." },
+      { pergunta: "1 h e meia = ? min", opcoes: ["90", "60", "120"], correta: 0, feedbackAcerto: "🎉 Uma hora tem 60 minutos e meia hora tem 30: 60 + 30 = 90.", feedbackErro: "Converta cada parte: 1 h = 60 min e meia hora = 30 min; total 90 min." },
+      { pergunta: "120 min = ? h", opcoes: ["2", "1", "3"], correta: 0, feedbackAcerto: "🎉 Em 120 minutos cabem dois períodos de 60 minutos, portanto 2 horas.", feedbackErro: "Agrupe os minutos de 60 em 60: 120 ÷ 60 = 2 horas." },
+      { pergunta: "1 quarto de hora = ?", opcoes: ["15 min", "30 min", "45 min"], correta: 0, feedbackAcerto: "🎉 Dividir os 60 minutos da hora em quatro partes dá 15 minutos.", feedbackErro: "Um quarto é uma de quatro partes iguais: 60 ÷ 4 = 15 minutos." },
     ],
   },
   momento11_missaoFamilia: {

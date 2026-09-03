@@ -1,0 +1,2 @@
+import { criarAulaArte1 } from "./criarAulaArte1";
+export default criarAulaArte1({ codigo: "EF15AR14", titulo: "Segredos da Música", foco: "Perceber e explorar altura, intensidade, timbre, melodia e ritmo", objeto: "elementos da música", exemplos: ["Comparar som forte e fraco", "Comparar só cores", "Contar moedas", "Nomear ruas"], resposta: "Ouvir, comparar e produzir sons variando suas características.", proxima: "EF15AR15" });

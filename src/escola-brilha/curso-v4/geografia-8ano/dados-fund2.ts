@@ -6,6 +6,169 @@
 
 import type { UnidadeFund2 } from "../geografia-6ano/dados-fund2";
 
+type Tema8 = [string, string, string, string];
+const criar8 = (t: Tema8, i: number): UnidadeFund2 => ({
+  unidade: i + 8,
+  slug: `unidade-${i + 8}-${t[0].toLowerCase()}`,
+  titulo: t[1],
+  habilidade: t[0],
+  introducao_academica: `Analise ${t[1].toLowerCase()} em diferentes escalas e territórios.`,
+  conteudo_pedagogico: {
+    conceito_chave: t[2],
+    texto_teorico: `${t[2]} A análise geográfica relaciona atores, redes, território, desigualdades e consequências socioambientais.`,
+    exemplo_visual: t[3],
+    imagem_analise: "",
+    etapas_teoricas: [
+      { titulo: "Conceito", texto: t[2], exemplo_real: t[3] },
+      {
+        titulo: "Evidências",
+        texto: "Mapas, indicadores, gráficos e fontes históricas permitem comparar territórios.",
+        exemplo_real: "Verifique título, fonte, data, escala e grupos envolvidos.",
+      },
+      {
+        titulo: "Análise crítica",
+        texto: "Relacione causas, interesses, consequências e alternativas.",
+        exemplo_real: `Explique o exemplo: ${t[3]}`,
+      },
+    ],
+    exemplo_pratico_visual: `Crie um esquema de causas, atores e consequências para ${t[1]}.`,
+  },
+  quiz_relampago: [
+    {
+      pergunta: `Como estudar ${t[1].toLowerCase()}?`,
+      opcoes: [
+        {
+          texto: "Comparando fontes, territórios e escalas",
+          correta: true,
+          explicacao: "A análise usa evidências contextualizadas.",
+        },
+        { texto: "Com uma opinião isolada", correta: false, explicacao: "Faltam dados." },
+        {
+          texto: "Ignorando atores e interesses",
+          correta: false,
+          explicacao: "Eles explicam o processo.",
+        },
+        {
+          texto: "Sem localizar o fenômeno",
+          correta: false,
+          explicacao: "A localização é essencial.",
+        },
+      ],
+    },
+  ],
+  desafio_critico: {
+    pergunta: `Qual procedimento aplica o conceito: ${t[2]}?`,
+    opcoes: [
+      { texto: `Relacionar ${t[3]} a causas e consequências.`, correta: true },
+      { texto: "Generalizar todos os lugares.", correta: false },
+      { texto: "Ignorar dados e fontes.", correta: false },
+      { texto: "Repetir o título sem explicar.", correta: false },
+    ],
+    explicacao_professor: `${t[2]} Use evidências e compare escalas.`,
+  },
+  recompensas: { xp: 600, moedas: 400, titulo: `Especialista em ${t[1]}` },
+});
+const LACUNAS_8ANO: UnidadeFund2[] = (
+  [
+    [
+      "EF08GE07",
+      "Corporações e Organizações Econômicas",
+      "Corporações e organismos internacionais influenciam fluxos, normas e territórios.",
+      "Uma multinacional distribui pesquisa, produção e vendas entre países.",
+    ],
+    [
+      "EF08GE08",
+      "Integração Mundial e Tecnologia",
+      "Tecnologias de transporte e comunicação intensificam fluxos globais de capital, mercadorias e informações.",
+      "Cabos submarinos conectam continentes e sustentam serviços digitais.",
+    ],
+    [
+      "EF08GE09",
+      "Recursos Naturais e Geopolítica",
+      "Recursos estratégicos geram cooperação, dependência e disputas entre países.",
+      "Petróleo, água e minerais críticos influenciam alianças e conflitos.",
+    ],
+    [
+      "EF08GE12",
+      "Organismos de Integração Americana",
+      "Blocos e organismos americanos articulam comércio, política e cooperação regional.",
+      "Mercosul reduz barreiras e cria negociações comuns entre membros.",
+    ],
+    [
+      "EF08GE16",
+      "América Latina e Ordem Mundial",
+      "Países latino-americanos ocupam posições desiguais na divisão internacional do trabalho.",
+      "Exportar matérias-primas e importar tecnologia pode ampliar dependência.",
+    ],
+    [
+      "EF08GE17",
+      "Características da América Latina",
+      "Aspectos físicos, populacionais, urbanos, políticos e econômicos diferenciam sub-regiões latino-americanas.",
+      "Andes, Amazônia, Caribe e Cone Sul apresentam formações distintas.",
+    ],
+    [
+      "EF08GE18",
+      "Economias Latino-Americanas",
+      "Produção agropecuária, mineração, indústria e serviços organizam territórios e redes urbanas.",
+      "Corredores de exportação ligam áreas produtoras a portos.",
+    ],
+    [
+      "EF08GE19",
+      "Cartografia da América e África",
+      "Mapas temáticos revelam padrões populacionais, econômicos e ambientais.",
+      "Um mapa de densidade permite comparar áreas concentradas e vazios demográficos.",
+    ],
+    [
+      "EF08GE20",
+      "Desigualdades Urbanas",
+      "Cidades latino-americanas apresentam segregação, informalidade e acesso desigual a serviços.",
+      "Bairros próximos podem ter diferenças grandes de saneamento e mobilidade.",
+    ],
+    [
+      "EF08GE21",
+      "Países Latino-Americanos",
+      "Indicadores sociais e econômicos permitem comparar países sem apagar sua diversidade.",
+      "Renda média não mostra sozinha como a riqueza é distribuída.",
+    ],
+    [
+      "EF08GE22",
+      "Recursos Hídricos Latino-Americanos",
+      "Bacias e aquíferos atravessam fronteiras e exigem gestão compartilhada.",
+      "A Bacia Amazônica conecta vários países sul-americanos.",
+    ],
+    [
+      "EF08GE23",
+      "Paisagens da América Latina",
+      "Relevo, clima, vegetação e ocupação humana interagem na formação das paisagens.",
+      "A altitude modifica clima e agricultura nos Andes.",
+    ],
+    [
+      "EF08GE24",
+      "Biodiversidade e Ambientes",
+      "Domínios naturais latino-americanos sofrem pressões de produção, urbanização e mudanças climáticas.",
+      "O desmatamento fragmenta habitats na Amazônia.",
+    ],
+    [
+      "EF08GE25",
+      "Povos e Territórios",
+      "Povos indígenas, afrodescendentes e comunidades tradicionais constroem territorialidades e defendem direitos.",
+      "Território reúne recursos, memória, identidade e autonomia.",
+    ],
+    [
+      "EF08GE26",
+      "Antártica e Geopolítica",
+      "A Antártica é regulada por acordos internacionais voltados à pesquisa e proteção ambiental.",
+      "O Tratado da Antártica suspende reivindicações territoriais e prioriza ciência.",
+    ],
+    [
+      "EF08GE27",
+      "Sustentabilidade na América Latina",
+      "Problemas ambientais exigem políticas, participação social e cooperação entre escalas.",
+      "Gestão de resíduos e proteção de bacias combinam ação local e regional.",
+    ],
+  ] as Tema8[]
+).map(criar8);
+
 export const UNIDADES_8ANO: UnidadeFund2[] = [
   // ============================================================
   // UNIDADE 1 — Globalização e DIT
@@ -73,33 +236,41 @@ export const UNIDADES_8ANO: UnidadeFund2[] = [
 
     quiz_relampago: [
       {
-        pergunta: "O que caracteriza a NOVA DIT (Divisão Internacional do Trabalho) em relação à DIT Clássica?",
+        pergunta:
+          "O que caracteriza a NOVA DIT (Divisão Internacional do Trabalho) em relação à DIT Clássica?",
         opcoes: [
           {
-            texto: "Países subdesenvolvidos também industrializam e exportam manufaturados, mas continuam dependentes do capital, das patentes e das decisões estratégicas dos países ricos.",
+            texto:
+              "Países subdesenvolvidos também industrializam e exportam manufaturados, mas continuam dependentes do capital, das patentes e das decisões estratégicas dos países ricos.",
             correta: true,
             explicacao:
               "Correto. É a diferença central. Na DIT Clássica (colonial), o país pobre só exportava matéria-prima. Na Nova DIT, ele pode até montar iPhones — mas não é dono do design nem da marca, então lucra pouco.",
           },
           {
-            texto: "Os países subdesenvolvidos assumiram controle total da propriedade intelectual e dos fluxos financeiros globais.",
+            texto:
+              "Os países subdesenvolvidos assumiram controle total da propriedade intelectual e dos fluxos financeiros globais.",
             correta: false,
             explicacao:
               "É o oposto do que ocorre. Patentes e finanças continuam concentradas nos países ricos (EUA, Europa, Japão). Emergentes fabricam, mas não detêm a tecnologia.",
           },
           {
-            texto: "A DIT deixou de existir porque a globalização eliminou as diferenças entre países.",
+            texto:
+              "A DIT deixou de existir porque a globalização eliminou as diferenças entre países.",
             correta: false,
             explicacao:
               "A globalização INTENSIFICOU a DIT, ela não a eliminou. As diferenças de renda entre países da OCDE e países africanos, por exemplo, são maiores hoje que há 50 anos.",
           },
+
+          { texto: "Outra possibilidade", correta: false, explicacao: "Compare com o conceito." },
         ],
       },
       {
-        pergunta: "Por que Detroit (EUA) e Sheffield (Reino Unido) viraram símbolos do 'Rust Belt' (cinturão da ferrugem)?",
+        pergunta:
+          "Por que Detroit (EUA) e Sheffield (Reino Unido) viraram símbolos do 'Rust Belt' (cinturão da ferrugem)?",
         opcoes: [
           {
-            texto: "Suas indústrias tradicionais (automóveis, aço) fecharam ou migraram para países com mão-de-obra mais barata, deixando desemprego estrutural e cidades esvaziadas.",
+            texto:
+              "Suas indústrias tradicionais (automóveis, aço) fecharam ou migraram para países com mão-de-obra mais barata, deixando desemprego estrutural e cidades esvaziadas.",
             correta: true,
             explicacao:
               "Perfeito. É a face 'perversa' da globalização nos países ricos: quando é mais barato produzir no exterior, cidades inteiras perdem sua economia. Foi um dos motores do voto em Trump nos EUA em 2016.",
@@ -111,18 +282,23 @@ export const UNIDADES_8ANO: UnidadeFund2[] = [
               "Não houve bombardeio nem em Detroit nem em Sheffield na Guerra Fria. O declínio foi puramente econômico — desindustrialização por deslocamento de fábricas ao exterior.",
           },
           {
-            texto: "As cidades foram atingidas por catástrofes climáticas que inutilizaram as indústrias.",
+            texto:
+              "As cidades foram atingidas por catástrofes climáticas que inutilizaram as indústrias.",
             correta: false,
             explicacao:
               "Sem relação. O 'Rust' (ferrugem) é uma metáfora para o abandono industrial, não descrição literal de dano climático. Fábricas fecharam por decisão econômica de empresas.",
           },
+
+          { texto: "Outra possibilidade", correta: false, explicacao: "Compare com o conceito." },
         ],
       },
       {
-        pergunta: "Qual país virou 'a fábrica do mundo' a partir dos anos 1990, absorvendo boa parte da produção industrial que antes ficava nos EUA e Europa?",
+        pergunta:
+          "Qual país virou 'a fábrica do mundo' a partir dos anos 1990, absorvendo boa parte da produção industrial que antes ficava nos EUA e Europa?",
         opcoes: [
           {
-            texto: "China — pela combinação de mão-de-obra abundante e barata, infraestrutura, estabilidade política e políticas de atração de investimento estrangeiro.",
+            texto:
+              "China — pela combinação de mão-de-obra abundante e barata, infraestrutura, estabilidade política e políticas de atração de investimento estrangeiro.",
             correta: true,
             explicacao:
               "Isso mesmo. A China absorveu cadeias produtivas do mundo todo entre 1990-2010. Hoje é a segunda maior economia do planeta e disputa hegemonia com os EUA.",
@@ -139,14 +315,15 @@ export const UNIDADES_8ANO: UnidadeFund2[] = [
             explicacao:
               "A Rússia herdou indústria militar e energética, mas nunca virou 'fábrica do mundo' para bens de consumo. Sua economia depende basicamente de petróleo e gás.",
           },
+
+          { texto: "Outra possibilidade", correta: false, explicacao: "Compare com o conceito." },
         ],
       },
     ],
 
     mini_jogo: {
       tipo: "categorizar",
-      instrucao:
-        "Cada país exerce um papel específico na cadeia global. Classifique corretamente.",
+      instrucao: "Cada país exerce um papel específico na cadeia global. Classifique corretamente.",
       categorias: [
         { id: "design", titulo: "Design e Patentes", cor: "cyan" },
         { id: "montagem", titulo: "Montagem em Massa", cor: "amber" },
@@ -154,11 +331,27 @@ export const UNIDADES_8ANO: UnidadeFund2[] = [
       ],
       cartoes: [
         { texto: "Vale do Silício (EUA) — projeto e engenharia do iPhone.", categoriaId: "design" },
-        { texto: "China (Foxconn) — montagem de 90% dos iPhones do mundo.", categoriaId: "montagem" },
-        { texto: "República Democrática do Congo — extração de coltan (mineral raro dos celulares).", categoriaId: "materia_prima" },
-        { texto: "Bangladesh — costura de roupas para marcas como Zara e H&M.", categoriaId: "montagem" },
-        { texto: "Chile — extração e refino de lítio para baterias.", categoriaId: "materia_prima" },
-        { texto: "Alemanha — patentes e engenharia de precisão automotiva (Bosch, Siemens).", categoriaId: "design" },
+        {
+          texto: "China (Foxconn) — montagem de 90% dos iPhones do mundo.",
+          categoriaId: "montagem",
+        },
+        {
+          texto:
+            "República Democrática do Congo — extração de coltan (mineral raro dos celulares).",
+          categoriaId: "materia_prima",
+        },
+        {
+          texto: "Bangladesh — costura de roupas para marcas como Zara e H&M.",
+          categoriaId: "montagem",
+        },
+        {
+          texto: "Chile — extração e refino de lítio para baterias.",
+          categoriaId: "materia_prima",
+        },
+        {
+          texto: "Alemanha — patentes e engenharia de precisão automotiva (Bosch, Siemens).",
+          categoriaId: "design",
+        },
       ],
     },
 
@@ -176,6 +369,9 @@ export const UNIDADES_8ANO: UnidadeFund2[] = [
             "Assumiram o controle total da propriedade intelectual e dos principais fluxos financeiros das transnacionais.",
           correta: false,
         },
+
+        { texto: "Outra possibilidade sem relação com o conceito.", correta: false },
+        { texto: "Outra possibilidade sem relação com o conceito.", correta: false },
       ],
       explicacao_professor:
         "Correto. Embora países subdesenvolvidos como Brasil, México e Índia agora fabriquem e exportem produtos industriais, ainda dependem das decisões financeiras e das patentes tecnológicas que pertencem aos países desenvolvidos. Fabricar não é o mesmo que possuir — e é aí que reside a assimetria da Nova DIT.",
@@ -249,10 +445,12 @@ export const UNIDADES_8ANO: UnidadeFund2[] = [
 
     quiz_relampago: [
       {
-        pergunta: "Por que a Austrália é classificada como país do 'Norte' desenvolvido, mesmo estando no Hemisfério Sul geográfico?",
+        pergunta:
+          "Por que a Austrália é classificada como país do 'Norte' desenvolvido, mesmo estando no Hemisfério Sul geográfico?",
         opcoes: [
           {
-            texto: "Porque a divisão Norte-Sul é SOCIOECONÔMICA (renda, IDH, industrialização), não geográfica. Australia tem indicadores de país rico.",
+            texto:
+              "Porque a divisão Norte-Sul é SOCIOECONÔMICA (renda, IDH, industrialização), não geográfica. Australia tem indicadores de país rico.",
             correta: true,
             explicacao:
               "Correto. Norte-Sul é uma metáfora política. Austrália, Nova Zelândia e África do Sul (branca, historicamente) estão no Sul geográfico, mas historicamente foram classificadas como parte do 'Norte' rico.",
@@ -269,19 +467,23 @@ export const UNIDADES_8ANO: UnidadeFund2[] = [
             explicacao:
               "Esse é um fator histórico, mas não é o critério oficial. O que classifica um país no 'Norte' são os indicadores atuais (renda, IDH, indústria), não a origem étnica da população.",
           },
+
+          { texto: "Outra possibilidade", correta: false, explicacao: "Compare com o conceito." },
         ],
       },
       {
         pergunta: "Os 'Tigres Asiáticos' (Coreia do Sul, Cingapura, Taiwan, Hong Kong) provam que:",
         opcoes: [
           {
-            texto: "Um país pode sair do subdesenvolvimento se investir décadas em educação, industrialização de alta tecnologia e planejamento estatal — o subdesenvolvimento não é destino.",
+            texto:
+              "Um país pode sair do subdesenvolvimento se investir décadas em educação, industrialização de alta tecnologia e planejamento estatal — o subdesenvolvimento não é destino.",
             correta: true,
             explicacao:
               "Perfeito. Nos anos 1960 essas economias eram pobres. Em 40 anos viraram líderes tecnológicos globais (Samsung, TSMC). Foi resultado de políticas coordenadas, não milagre.",
           },
           {
-            texto: "Basta abrir a economia para o capital estrangeiro para automaticamente virar país rico.",
+            texto:
+              "Basta abrir a economia para o capital estrangeiro para automaticamente virar país rico.",
             correta: false,
             explicacao:
               "Simplificação enganosa. Vários países abriram economia sem virar ricos (Brasil, México). Os Tigres combinaram abertura COM planejamento estatal forte e investimento em educação — foi a combinação que funcionou.",
@@ -292,13 +494,16 @@ export const UNIDADES_8ANO: UnidadeFund2[] = [
             explicacao:
               "Explicação culturalista, sem base científica. Chile, Irlanda e Israel também fizeram transições similares em outras regiões. Não há 'cultura vencedora' — há políticas certas para cada contexto.",
           },
+
+          { texto: "Outra possibilidade", correta: false, explicacao: "Compare com o conceito." },
         ],
       },
       {
         pergunta: "O que representa o BRICS e por que ele foi criado?",
         opcoes: [
           {
-            texto: "Bloco de países emergentes (Brasil, Rússia, Índia, China, África do Sul) que se articulam para negociar coletivamente no comércio, clima e finanças — reduzindo a hegemonia do G7 e do dólar.",
+            texto:
+              "Bloco de países emergentes (Brasil, Rússia, Índia, China, África do Sul) que se articulam para negociar coletivamente no comércio, clima e finanças — reduzindo a hegemonia do G7 e do dólar.",
             correta: true,
             explicacao:
               "Isso mesmo. É um projeto geopolítico do 'Sul Global' para ter mais voz em fóruns dominados pelo Norte. Recentemente admitiu novos membros (Emirados, Egito, Etiópia, Irã).",
@@ -315,6 +520,8 @@ export const UNIDADES_8ANO: UnidadeFund2[] = [
             explicacao:
               "Ao contrário. BRICS é composto por países EMERGENTES (Sul Global) que buscam alternativa aos ricos do G7 — não substituí-lo por dentro.",
           },
+
+          { texto: "Outra possibilidade", correta: false, explicacao: "Compare com o conceito." },
         ],
       },
     ],
@@ -329,12 +536,31 @@ export const UNIDADES_8ANO: UnidadeFund2[] = [
         { id: "periferico", titulo: "Sul Periférico", cor: "emerald" },
       ],
       cartoes: [
-        { texto: "Alemanha — 4ª maior economia global, hub industrial da UE.", categoriaId: "norte" },
-        { texto: "China — 2ª maior economia, ascensão acelerada desde 1990.", categoriaId: "emergente" },
-        { texto: "República Democrática do Congo — mineração dependente, guerras civis, IDH muito baixo.", categoriaId: "periferico" },
-        { texto: "Japão — polo tecnológico, altos indicadores sociais, envelhecido.", categoriaId: "norte" },
-        { texto: "Brasil — agroindústria forte, mas com desigualdade e reprimarização.", categoriaId: "emergente" },
-        { texto: "Chade — economia de subsistência, IDH entre os mais baixos do planeta.", categoriaId: "periferico" },
+        {
+          texto: "Alemanha — 4ª maior economia global, hub industrial da UE.",
+          categoriaId: "norte",
+        },
+        {
+          texto: "China — 2ª maior economia, ascensão acelerada desde 1990.",
+          categoriaId: "emergente",
+        },
+        {
+          texto:
+            "República Democrática do Congo — mineração dependente, guerras civis, IDH muito baixo.",
+          categoriaId: "periferico",
+        },
+        {
+          texto: "Japão — polo tecnológico, altos indicadores sociais, envelhecido.",
+          categoriaId: "norte",
+        },
+        {
+          texto: "Brasil — agroindústria forte, mas com desigualdade e reprimarização.",
+          categoriaId: "emergente",
+        },
+        {
+          texto: "Chade — economia de subsistência, IDH entre os mais baixos do planeta.",
+          categoriaId: "periferico",
+        },
       ],
     },
 
@@ -352,6 +578,9 @@ export const UNIDADES_8ANO: UnidadeFund2[] = [
             "A globalização eliminou completamente as diferenças entre países, tornando qualquer regionalização por desenvolvimento desnecessária.",
           correta: false,
         },
+
+        { texto: "Outra possibilidade sem relação com o conceito.", correta: false },
+        { texto: "Outra possibilidade sem relação com o conceito.", correta: false },
       ],
       explicacao_professor:
         "Excelente. A dicotomia Norte-Sul foi criada em um mundo onde os países ricos eram claramente identificáveis e os pobres estavam claramente 'atrás'. Hoje temos China com potência tecnológica e política, mas ainda com regiões rurais pobres; Estados do Golfo com renda per capita europeia mas indicadores sociais medianos; Brasil como potência agrícola mas com desigualdade extrema. A geografia econômica virou multipolar — os mapas precisam de mais cores.",
@@ -425,10 +654,12 @@ export const UNIDADES_8ANO: UnidadeFund2[] = [
 
     quiz_relampago: [
       {
-        pergunta: "Por que o Conselho de Segurança da ONU é considerado 'anacrônico' (fora do seu tempo)?",
+        pergunta:
+          "Por que o Conselho de Segurança da ONU é considerado 'anacrônico' (fora do seu tempo)?",
         opcoes: [
           {
-            texto: "Porque seus 5 membros permanentes com direito de veto (EUA, Rússia, China, França, Reino Unido) refletem a ordem mundial de 1945, não a de hoje — deixando de fora potências como Alemanha, Japão, Índia e Brasil.",
+            texto:
+              "Porque seus 5 membros permanentes com direito de veto (EUA, Rússia, China, França, Reino Unido) refletem a ordem mundial de 1945, não a de hoje — deixando de fora potências como Alemanha, Japão, Índia e Brasil.",
             correta: true,
             explicacao:
               "Correto. Foi desenhado pelos vencedores da 2ª Guerra. Hoje, esses 5 países não representam mais o peso econômico e demográfico global — mas mantêm privilégio de veto que paralisa decisões.",
@@ -445,13 +676,17 @@ export const UNIDADES_8ANO: UnidadeFund2[] = [
             explicacao:
               "A ONU tem 6 línguas oficiais (inglês, francês, espanhol, russo, mandarim, árabe) com tradução simultânea. Idioma não é o problema.",
           },
+
+          { texto: "Outra possibilidade", correta: false, explicacao: "Compare com o conceito." },
         ],
       },
       {
-        pergunta: "Uma disputa na OMC (Organização Mundial do Comércio) é vinculante. O que isso significa na prática?",
+        pergunta:
+          "Uma disputa na OMC (Organização Mundial do Comércio) é vinculante. O que isso significa na prática?",
         opcoes: [
           {
-            texto: "O país que perde a disputa é OBRIGADO a mudar sua legislação ou aceitar retaliação comercial autorizada pela OMC.",
+            texto:
+              "O país que perde a disputa é OBRIGADO a mudar sua legislação ou aceitar retaliação comercial autorizada pela OMC.",
             correta: true,
             explicacao:
               "Exato. É por isso que a OMC tem poder real. No caso Brasil × EUA do algodão, os EUA foram obrigados a pagar compensação ao Brasil, não podiam simplesmente ignorar.",
@@ -468,13 +703,17 @@ export const UNIDADES_8ANO: UnidadeFund2[] = [
             explicacao:
               "Ao contrário: a OMC vale para todos os 164 membros igualmente. A crítica é que os países ricos têm mais RECURSOS para litigar (advogados especializados) — mas as regras se aplicam a todos.",
           },
+
+          { texto: "Outra possibilidade", correta: false, explicacao: "Compare com o conceito." },
         ],
       },
       {
-        pergunta: "O que diferencia a União Europeia de um simples 'bloco de livre-comércio' como o USMCA (antigo NAFTA)?",
+        pergunta:
+          "O que diferencia a União Europeia de um simples 'bloco de livre-comércio' como o USMCA (antigo NAFTA)?",
         opcoes: [
           {
-            texto: "A UE tem moeda única (Euro), livre circulação de pessoas (Schengen), parlamento eleito e leis comunitárias — é uma integração POLÍTICA, não só econômica.",
+            texto:
+              "A UE tem moeda única (Euro), livre circulação de pessoas (Schengen), parlamento eleito e leis comunitárias — é uma integração POLÍTICA, não só econômica.",
             correta: true,
             explicacao:
               "Perfeito. A UE é o bloco mais integrado do mundo. Vai muito além de tarifas: cria cidadania europeia, direitos comuns e legislação supranacional. USMCA se limita ao comércio.",
@@ -491,23 +730,30 @@ export const UNIDADES_8ANO: UnidadeFund2[] = [
             explicacao:
               "Ambos eliminaram tarifas internas na maior parte dos produtos. A diferença é que a UE avançou MUITO ALÉM disso (moeda, política, cidadania) — o USMCA parou no comércio.",
           },
+
+          { texto: "Outra possibilidade", correta: false, explicacao: "Compare com o conceito." },
         ],
       },
     ],
 
     mini_jogo: {
       tipo: "categorizar",
-      instrucao:
-        "Cada organização/bloco tem uma função específica. Classifique corretamente.",
+      instrucao: "Cada organização/bloco tem uma função específica. Classifique corretamente.",
       categorias: [
         { id: "onu", titulo: "Sistema ONU (política/paz)", cor: "cyan" },
         { id: "economico", titulo: "Comércio e Finanças", cor: "amber" },
         { id: "regional", titulo: "Bloco Regional", cor: "emerald" },
       ],
       cartoes: [
-        { texto: "Conselho de Segurança — decide sanções e envia forças de paz.", categoriaId: "onu" },
+        {
+          texto: "Conselho de Segurança — decide sanções e envia forças de paz.",
+          categoriaId: "onu",
+        },
         { texto: "OMC — arbitra disputas comerciais entre países.", categoriaId: "economico" },
-        { texto: "União Europeia — moeda comum e livre circulação de cidadãos.", categoriaId: "regional" },
+        {
+          texto: "União Europeia — moeda comum e livre circulação de cidadãos.",
+          categoriaId: "regional",
+        },
         { texto: "OMS — coordena resposta global a pandemias.", categoriaId: "onu" },
         { texto: "FMI — empresta recursos a países em crise cambial.", categoriaId: "economico" },
         { texto: "Mercosul — união aduaneira sul-americana.", categoriaId: "regional" },
@@ -528,6 +774,9 @@ export const UNIDADES_8ANO: UnidadeFund2[] = [
             "As organizações multilaterais foram todas dissolvidas nos últimos 10 anos, deixando o mundo sem coordenação internacional.",
           correta: false,
         },
+
+        { texto: "Outra possibilidade sem relação com o conceito.", correta: false },
+        { texto: "Outra possibilidade sem relação com o conceito.", correta: false },
       ],
       explicacao_professor:
         "Excelente análise. As organizações continuam existindo, mas sofrem esvaziamento: os EUA saíram da OMS na pandemia e do Acordo de Paris; bloqueiam o Órgão de Apelação da OMC; Rússia veta qualquer resolução crítica sua na ONU. Ao mesmo tempo, o G20 e o BRICS ganham protagonismo. O sistema multilateral criado em 1945 precisa se reinventar — mas quem tem privilégios (5 membros permanentes) não quer perder poder. Essa é a tensão central da geopolítica atual.",
@@ -604,7 +853,8 @@ export const UNIDADES_8ANO: UnidadeFund2[] = [
         pergunta: "Qual é a diferença jurídica principal entre 'migrante econômico' e 'refugiado'?",
         opcoes: [
           {
-            texto: "Refugiado foge de perseguição/violência e é protegido pela Convenção de Genebra (não pode ser devolvido); migrante econômico busca melhor renda e não tem essa proteção legal internacional.",
+            texto:
+              "Refugiado foge de perseguição/violência e é protegido pela Convenção de Genebra (não pode ser devolvido); migrante econômico busca melhor renda e não tem essa proteção legal internacional.",
             correta: true,
             explicacao:
               "Correto. O status de refugiado dá direitos específicos (asilo, não-devolução). Migrante econômico depende das leis migratórias do país receptor — que podem ser restritivas.",
@@ -621,36 +871,46 @@ export const UNIDADES_8ANO: UnidadeFund2[] = [
             explicacao:
               "Exatamente o oposto. Refugiado tem status LEGAL protegido internacionalmente. Já muitos migrantes econômicos são 'irregulares' porque não têm visto de trabalho.",
           },
+
+          { texto: "Outra possibilidade", correta: false, explicacao: "Compare com o conceito." },
         ],
       },
       {
-        pergunta: "Por que Itália, Alemanha e Japão precisam demograficamente de imigrantes, mesmo com resistência política crescente?",
+        pergunta:
+          "Por que Itália, Alemanha e Japão precisam demograficamente de imigrantes, mesmo com resistência política crescente?",
         opcoes: [
           {
-            texto: "Suas taxas de fecundidade estão muito abaixo da reposição (2,1 filhos por mulher), e sem imigração a população ativa encolhe, colapsando a previdência e o mercado de trabalho.",
+            texto:
+              "Suas taxas de fecundidade estão muito abaixo da reposição (2,1 filhos por mulher), e sem imigração a população ativa encolhe, colapsando a previdência e o mercado de trabalho.",
             correta: true,
             explicacao:
               "Perfeito. É a 'armadilha demográfica' dos países ricos: envelhecem rápido, precisam de trabalhadores jovens, mas rejeitam politicamente quem chega. Contradição estrutural.",
           },
           {
-            texto: "Porque suas indústrias exigem trabalho manual pesado que a população local se recusa a fazer.",
+            texto:
+              "Porque suas indústrias exigem trabalho manual pesado que a população local se recusa a fazer.",
             correta: false,
             explicacao:
               "É PARTE da razão, mas não a principal. A questão central é DEMOGRÁFICA (fecundidade abaixo da reposição) — sem imigração, o país inteiro encolhe, não só um setor.",
           },
           {
-            texto: "Porque leis internacionais obrigam esses países a aceitar cotas anuais de imigrantes.",
+            texto:
+              "Porque leis internacionais obrigam esses países a aceitar cotas anuais de imigrantes.",
             correta: false,
             explicacao:
               "Não existe tal obrigação legal geral. Cada país decide sua política migratória (respeitando o direito de refúgio). A necessidade vem da demografia, não de imposição externa.",
           },
+
+          { texto: "Outra possibilidade", correta: false, explicacao: "Compare com o conceito." },
         ],
       },
       {
-        pergunta: "Por que a saída do Reino Unido da União Europeia (Brexit, 2016) é considerada um caso emblemático de xenofobia política?",
+        pergunta:
+          "Por que a saída do Reino Unido da União Europeia (Brexit, 2016) é considerada um caso emblemático de xenofobia política?",
         opcoes: [
           {
-            texto: "Foi decidida majoritariamente por preocupação com a chegada de trabalhadores europeus (poloneses, romenos), mesmo esses sendo essenciais para setores como saúde, agricultura e construção.",
+            texto:
+              "Foi decidida majoritariamente por preocupação com a chegada de trabalhadores europeus (poloneses, romenos), mesmo esses sendo essenciais para setores como saúde, agricultura e construção.",
             correta: true,
             explicacao:
               "Isso mesmo. Depois do Brexit, hospitais britânicos perderam enfermeiros europeus, fazendas ficaram sem colhedores, e o país entrou em crise de mão-de-obra. Realidade contrariou promessa política.",
@@ -667,6 +927,8 @@ export const UNIDADES_8ANO: UnidadeFund2[] = [
             explicacao:
               "Falso: o Reino Unido NUNCA adotou o Euro (manteve a Libra). E a UE nunca o obrigou a adotar. Confusão comum sobre o funcionamento do bloco.",
           },
+
+          { texto: "Outra possibilidade", correta: false, explicacao: "Compare com o conceito." },
         ],
       },
     ],
@@ -681,12 +943,30 @@ export const UNIDADES_8ANO: UnidadeFund2[] = [
         { id: "climatico", titulo: "Refúgio Climático", cor: "emerald" },
       ],
       cartoes: [
-        { texto: "Brasileiro indo trabalhar como faxineira em Portugal para enviar dinheiro à família.", categoriaId: "economica" },
+        {
+          texto:
+            "Brasileiro indo trabalhar como faxineira em Portugal para enviar dinheiro à família.",
+          categoriaId: "economica",
+        },
         { texto: "Sírios fugindo da guerra civil após 2011.", categoriaId: "refugio" },
-        { texto: "Habitantes das ilhas Tuvalu perdendo suas casas para o mar por conta da subida do nível oceânico.", categoriaId: "climatico" },
-        { texto: "Ucranianos deixando o país após a invasão russa de 2022.", categoriaId: "refugio" },
-        { texto: "Mexicanos atravessando a fronteira sul dos EUA para trabalhar na agricultura da Califórnia.", categoriaId: "economica" },
-        { texto: "Agricultores de Bangladesh migrando após enchentes que salinizaram suas terras.", categoriaId: "climatico" },
+        {
+          texto:
+            "Habitantes das ilhas Tuvalu perdendo suas casas para o mar por conta da subida do nível oceânico.",
+          categoriaId: "climatico",
+        },
+        {
+          texto: "Ucranianos deixando o país após a invasão russa de 2022.",
+          categoriaId: "refugio",
+        },
+        {
+          texto:
+            "Mexicanos atravessando a fronteira sul dos EUA para trabalhar na agricultura da Califórnia.",
+          categoriaId: "economica",
+        },
+        {
+          texto: "Agricultores de Bangladesh migrando após enchentes que salinizaram suas terras.",
+          categoriaId: "climatico",
+        },
       ],
     },
 
@@ -704,6 +984,9 @@ export const UNIDADES_8ANO: UnidadeFund2[] = [
             "Os países ricos não precisam de imigrantes; a rejeição é apenas uma resposta cultural natural à diferença.",
           correta: false,
         },
+
+        { texto: "Outra possibilidade sem relação com o conceito.", correta: false },
+        { texto: "Outra possibilidade sem relação com o conceito.", correta: false },
       ],
       explicacao_professor:
         "Perfeito. A contradição é estrutural. Alemanha precisa importar 400 mil trabalhadores por ano só para manter o sistema produtivo — mas partidos anti-imigração ganham eleições. Japão foi a extremos para NÃO importar imigrantes (automatizou muita coisa) e vive crise de mão-de-obra e cuidado com idosos. O medo do 'outro' vence a lógica econômica. Compreender isso é entender por que a xenofobia é hoje um dos maiores fatores de instabilidade política nos países ricos.",
@@ -780,13 +1063,15 @@ export const UNIDADES_8ANO: UnidadeFund2[] = [
         pergunta: "Por que o dólar americano é chamado de 'moeda de reserva mundial'?",
         opcoes: [
           {
-            texto: "Porque cerca de 60% das reservas dos bancos centrais mundiais são em dólar, e commodities globais (petróleo, ouro) são cotadas nessa moeda.",
+            texto:
+              "Porque cerca de 60% das reservas dos bancos centrais mundiais são em dólar, e commodities globais (petróleo, ouro) são cotadas nessa moeda.",
             correta: true,
             explicacao:
               "Correto. É um privilégio único que os EUA garantiram em 1944 (Bretton Woods). Dá aos americanos poder de sancionar economicamente qualquer país cortando seu acesso ao sistema em dólar.",
           },
           {
-            texto: "Porque é a única moeda oficialmente aceita pela ONU em transações internacionais.",
+            texto:
+              "Porque é a única moeda oficialmente aceita pela ONU em transações internacionais.",
             correta: false,
             explicacao:
               "A ONU não define moeda de transação. É o mercado + a inércia histórica que consolidaram o dólar. Não há decreto oficial internacional.",
@@ -797,13 +1082,16 @@ export const UNIDADES_8ANO: UnidadeFund2[] = [
             explicacao:
               "Não há obrigação legal. A hegemonia do dólar vem da CONVENIÊNCIA (aceito globalmente) e da FORÇA americana — não de imposição por lei.",
           },
+
+          { texto: "Outra possibilidade", correta: false, explicacao: "Compare com o conceito." },
         ],
       },
       {
         pergunta: "O que é 'soft power' e por que os EUA são os maiores praticantes?",
         opcoes: [
           {
-            texto: "É a capacidade de influenciar sem usar força, por atração cultural (filmes, música, marcas, universidades). Os EUA dominam Hollywood, Big Tech e cultura pop globais.",
+            texto:
+              "É a capacidade de influenciar sem usar força, por atração cultural (filmes, música, marcas, universidades). Os EUA dominam Hollywood, Big Tech e cultura pop globais.",
             correta: true,
             explicacao:
               "Perfeito. Uma criança japonesa que cresce vendo Homem-Aranha já é 'meio americana' culturalmente. Isso constrói afinidade duradoura — muito mais eficiente que ocupar militarmente.",
@@ -820,19 +1108,24 @@ export const UNIDADES_8ANO: UnidadeFund2[] = [
             explicacao:
               "Isso é política monetária, não soft power. Soft power é sobre INFLUÊNCIA CULTURAL, não sobre economia interna.",
           },
+
+          { texto: "Outra possibilidade", correta: false, explicacao: "Compare com o conceito." },
         ],
       },
       {
-        pergunta: "As guerras dos EUA no Afeganistão (2001) e no Iraque (2003) tiveram qual efeito principal sobre a hegemonia americana?",
+        pergunta:
+          "As guerras dos EUA no Afeganistão (2001) e no Iraque (2003) tiveram qual efeito principal sobre a hegemonia americana?",
         opcoes: [
           {
-            texto: "Abalaram a percepção de onipotência americana: apesar do gasto trilionário, não trouxeram vitórias claras e enfraqueceram a legitimidade dos EUA em ações militares posteriores.",
+            texto:
+              "Abalaram a percepção de onipotência americana: apesar do gasto trilionário, não trouxeram vitórias claras e enfraqueceram a legitimidade dos EUA em ações militares posteriores.",
             correta: true,
             explicacao:
               "Correto. É o chamado 'declínio relativo' americano. Perdeu-se a aura de invencibilidade que existia após 1991 (queda da URSS). China e Rússia aproveitaram para se afirmar.",
           },
           {
-            texto: "Fortaleceram absolutamente a hegemonia americana, consolidando o controle sobre o Oriente Médio.",
+            texto:
+              "Fortaleceram absolutamente a hegemonia americana, consolidando o controle sobre o Oriente Médio.",
             correta: false,
             explicacao:
               "Nem em nível militar nem econômico as guerras foram vitórias. Os talibãs voltaram ao poder no Afeganistão em 2021, o Iraque virou um caos. Custou trilhões sem estabilidade.",
@@ -843,26 +1136,43 @@ export const UNIDADES_8ANO: UnidadeFund2[] = [
             explicacao:
               "Efeito enorme: crise do refugiados sírios, ascensão do ISIS, desestabilização de todo o Oriente Médio, aumento da dívida americana. Foram guerras geopoliticamente centrais.",
           },
+
+          { texto: "Outra possibilidade", correta: false, explicacao: "Compare com o conceito." },
         ],
       },
     ],
 
     mini_jogo: {
       tipo: "categorizar",
-      instrucao:
-        "Classifique cada elemento em uma das 4 dimensões do poder americano.",
+      instrucao: "Classifique cada elemento em uma das 4 dimensões do poder americano.",
       categorias: [
         { id: "economico", titulo: "Econômico (Dólar/Wall St)", cor: "cyan" },
         { id: "militar", titulo: "Militar (Bases/OTAN)", cor: "amber" },
         { id: "cultural", titulo: "Cultural (Soft Power)", cor: "emerald" },
       ],
       cartoes: [
-        { texto: "Dólar cotando o preço internacional do petróleo (petrodólar).", categoriaId: "economico" },
-        { texto: "Base militar de Ramstein na Alemanha, com 50 mil militares.", categoriaId: "militar" },
+        {
+          texto: "Dólar cotando o preço internacional do petróleo (petrodólar).",
+          categoriaId: "economico",
+        },
+        {
+          texto: "Base militar de Ramstein na Alemanha, com 50 mil militares.",
+          categoriaId: "militar",
+        },
         { texto: "Filmes da Marvel e Disney assistidos em 190 países.", categoriaId: "cultural" },
-        { texto: "Wall Street e a Bolsa de Nova York (NYSE) sendo a principal referência financeira global.", categoriaId: "economico" },
-        { texto: "Aliança OTAN unindo EUA, Canadá e Europa em defesa mútua.", categoriaId: "militar" },
-        { texto: "Netflix, TikTok (parcialmente), Instagram e Youtube — mídias sociais dominantes.", categoriaId: "cultural" },
+        {
+          texto:
+            "Wall Street e a Bolsa de Nova York (NYSE) sendo a principal referência financeira global.",
+          categoriaId: "economico",
+        },
+        {
+          texto: "Aliança OTAN unindo EUA, Canadá e Europa em defesa mútua.",
+          categoriaId: "militar",
+        },
+        {
+          texto: "Netflix, TikTok (parcialmente), Instagram e Youtube — mídias sociais dominantes.",
+          categoriaId: "cultural",
+        },
       ],
     },
 
@@ -880,6 +1190,9 @@ export const UNIDADES_8ANO: UnidadeFund2[] = [
             "Os EUA deixaram de ser potência mundial e foram substituídos pela União Europeia como líder do sistema internacional.",
           correta: false,
         },
+
+        { texto: "Outra possibilidade sem relação com o conceito.", correta: false },
+        { texto: "Outra possibilidade sem relação com o conceito.", correta: false },
       ],
       explicacao_professor:
         "Excelente. 'Declínio relativo' NÃO significa que os EUA caíram — significa que os OUTROS subiram. Em 1991 (fim da URSS), os EUA eram sozinhos no topo. Hoje, disputam com China (economia), Rússia (militar em algumas áreas), Índia (crescimento demográfico) e blocos regionais. A hegemonia continua existindo — só não é mais absoluta. Estamos entrando em uma era MULTIPOLAR pela primeira vez desde 1945.",
@@ -956,69 +1269,85 @@ export const UNIDADES_8ANO: UnidadeFund2[] = [
         pergunta: "Por que várias fronteiras africanas são linhas retas no mapa?",
         opcoes: [
           {
-            texto: "Foram traçadas na Conferência de Berlim (1884-85) por potências europeias usando latitudes, longitudes e rios — sem consultar os povos africanos.",
+            texto:
+              "Foram traçadas na Conferência de Berlim (1884-85) por potências europeias usando latitudes, longitudes e rios — sem consultar os povos africanos.",
             correta: true,
             explicacao:
               "Correto. É a herança da 'partilha da África'. Fronteiras que ignoram etnias e territórios tradicionais criaram Estados sem coesão interna — origem de muitas guerras civis atuais.",
           },
           {
-            texto: "Foram estabelecidas pelos próprios povos africanos após as independências dos anos 1960.",
+            texto:
+              "Foram estabelecidas pelos próprios povos africanos após as independências dos anos 1960.",
             correta: false,
             explicacao:
               "Exatamente o oposto. Os povos africanos preferiam fronteiras étnicas. As linhas retas foram IMPOSTAS pelos colonizadores europeus muito antes das independências.",
           },
           {
-            texto: "São fronteiras naturais definidas pelo deserto do Saara e outros acidentes geográficos.",
+            texto:
+              "São fronteiras naturais definidas pelo deserto do Saara e outros acidentes geográficos.",
             correta: false,
             explicacao:
               "Fronteiras naturais SEGUEM a geografia (rios, montanhas) e são irregulares. As linhas retas africanas IGNORAM a geografia — sinal claro de que foram artificiais.",
           },
+
+          { texto: "Outra possibilidade", correta: false, explicacao: "Compare com o conceito." },
         ],
       },
       {
         pergunta: "O que significa NEOCOLONIALISMO no contexto africano contemporâneo?",
         opcoes: [
           {
-            texto: "Manutenção da dominação econômica por multinacionais europeias, americanas e chinesas sobre recursos africanos (minerais, petróleo, terras) mesmo após a independência política formal.",
+            texto:
+              "Manutenção da dominação econômica por multinacionais europeias, americanas e chinesas sobre recursos africanos (minerais, petróleo, terras) mesmo após a independência política formal.",
             correta: true,
             explicacao:
               "Perfeito. Independência política não trouxe independência econômica. As riquezas continuam sendo extraídas por corporações estrangeiras, com lucros indo para o Norte.",
           },
           {
-            texto: "É a volta do colonialismo tradicional, com países europeus reocupando militarmente a África.",
+            texto:
+              "É a volta do colonialismo tradicional, com países europeus reocupando militarmente a África.",
             correta: false,
             explicacao:
               "Não há reocupação militar formal. O neocolonialismo é ECONÔMICO (via multinacionais e endividamento), não militar. É por isso que ganhou o prefixo 'NEO' (novo).",
           },
           {
-            texto: "É o processo de países africanos colonizarem países europeus por meio de imigração.",
+            texto:
+              "É o processo de países africanos colonizarem países europeus por meio de imigração.",
             correta: false,
             explicacao:
               "A imigração africana para a Europa existe, mas não é 'colonização'. Neocolonialismo refere-se ao FLUXO INVERSO: exploração econômica da África por potências externas.",
           },
+
+          { texto: "Outra possibilidade", correta: false, explicacao: "Compare com o conceito." },
         ],
       },
       {
-        pergunta: "A República Democrática do Congo produz cerca de 70% do cobalto mundial (essencial para baterias de celulares e carros elétricos). Por que a população congolesa não enriquece com essa riqueza?",
+        pergunta:
+          "A República Democrática do Congo produz cerca de 70% do cobalto mundial (essencial para baterias de celulares e carros elétricos). Por que a população congolesa não enriquece com essa riqueza?",
         opcoes: [
           {
-            texto: "A extração é feita por multinacionais estrangeiras que pagam preços baixíssimos aos trabalhadores locais (muitos são crianças em condições precárias) e exportam a matéria-prima bruta; o lucro maior fica no exterior.",
+            texto:
+              "A extração é feita por multinacionais estrangeiras que pagam preços baixíssimos aos trabalhadores locais (muitos são crianças em condições precárias) e exportam a matéria-prima bruta; o lucro maior fica no exterior.",
             correta: true,
             explicacao:
               "Isso mesmo. É o clássico modelo neocolonial: África exporta matéria-prima barata, Norte processa e exporta produtos caros de volta. O valor agregado fica todo fora.",
           },
           {
-            texto: "Porque a população congolesa se recusa a trabalhar nas minas por motivos religiosos.",
+            texto:
+              "Porque a população congolesa se recusa a trabalhar nas minas por motivos religiosos.",
             correta: false,
             explicacao:
               "Falso e ofensivo. Existe intensa exploração de trabalho (inclusive infantil) nas minas do Congo. O problema NÃO é falta de trabalho — é a estrutura de exploração.",
           },
           {
-            texto: "Porque o cobalto congolês tem qualidade ruim e não é valorizado no mercado internacional.",
+            texto:
+              "Porque o cobalto congolês tem qualidade ruim e não é valorizado no mercado internacional.",
             correta: false,
             explicacao:
               "Ao contrário: o cobalto do Congo é altamente valorizado e disputado (é insumo estratégico para baterias). O que é 'ruim' é a distribuição da renda gerada por ele.",
           },
+
+          { texto: "Outra possibilidade", correta: false, explicacao: "Compare com o conceito." },
         ],
       },
     ],
@@ -1033,12 +1362,34 @@ export const UNIDADES_8ANO: UnidadeFund2[] = [
         { id: "neocolonial", titulo: "Neocolonialismo", cor: "emerald" },
       ],
       cartoes: [
-        { texto: "Conferência de Berlim divide a África entre 14 potências europeias sem consultar africanos.", categoriaId: "colonizacao" },
-        { texto: "Independência de Gana (1957) sob liderança de Kwame Nkrumah.", categoriaId: "descolonizacao" },
-        { texto: "Multinacionais compram cobalto do Congo por preços baixíssimos para baterias de celulares.", categoriaId: "neocolonial" },
-        { texto: "Portugal reconhece independência de Angola e Moçambique em 1975.", categoriaId: "descolonizacao" },
-        { texto: "China investe em infraestrutura africana em troca de acesso a minerais estratégicos (Belt and Road).", categoriaId: "neocolonial" },
-        { texto: "Rei Leopoldo II da Bélgica transforma o Congo em sua propriedade pessoal (Estado Livre do Congo).", categoriaId: "colonizacao" },
+        {
+          texto:
+            "Conferência de Berlim divide a África entre 14 potências europeias sem consultar africanos.",
+          categoriaId: "colonizacao",
+        },
+        {
+          texto: "Independência de Gana (1957) sob liderança de Kwame Nkrumah.",
+          categoriaId: "descolonizacao",
+        },
+        {
+          texto:
+            "Multinacionais compram cobalto do Congo por preços baixíssimos para baterias de celulares.",
+          categoriaId: "neocolonial",
+        },
+        {
+          texto: "Portugal reconhece independência de Angola e Moçambique em 1975.",
+          categoriaId: "descolonizacao",
+        },
+        {
+          texto:
+            "China investe em infraestrutura africana em troca de acesso a minerais estratégicos (Belt and Road).",
+          categoriaId: "neocolonial",
+        },
+        {
+          texto:
+            "Rei Leopoldo II da Bélgica transforma o Congo em sua propriedade pessoal (Estado Livre do Congo).",
+          categoriaId: "colonizacao",
+        },
       ],
     },
 
@@ -1056,6 +1407,9 @@ export const UNIDADES_8ANO: UnidadeFund2[] = [
             "A pobreza da África se deve exclusivamente ao clima tropical, que impede o desenvolvimento econômico em regiões quentes.",
           correta: false,
         },
+
+        { texto: "Outra possibilidade sem relação com o conceito.", correta: false },
+        { texto: "Outra possibilidade sem relação com o conceito.", correta: false },
       ],
       explicacao_professor:
         "Excelente análise. A explicação climática (determinismo geográfico) é rasa: várias regiões tropicais do mundo prosperaram (Singapura, Malásia, Costa Rica). O que explica a pobreza estrutural africana são fatores HISTÓRICOS E POLÍTICOS: 400 anos de tráfico de escravos que sangrou o continente demograficamente, 80 anos de colonização que destruiu estruturas produtivas locais, fronteiras artificiais que criam conflitos étnicos permanentes, e um modelo econômico atual que continua drenando recursos. Pobreza não é destino — é herança construída.",
@@ -1129,39 +1483,47 @@ export const UNIDADES_8ANO: UnidadeFund2[] = [
 
     quiz_relampago: [
       {
-        pergunta: "O que argumenta a Teoria da Dependência formulada por economistas latino-americanos?",
+        pergunta:
+          "O que argumenta a Teoria da Dependência formulada por economistas latino-americanos?",
         opcoes: [
           {
-            texto: "O subdesenvolvimento da América Latina não é 'atraso' que se supera com tempo — é uma POSIÇÃO ESTRUTURAL no sistema mundial: enviamos matéria-prima e capital ao centro, que exporta produtos industrializados de volta.",
+            texto:
+              "O subdesenvolvimento da América Latina não é 'atraso' que se supera com tempo — é uma POSIÇÃO ESTRUTURAL no sistema mundial: enviamos matéria-prima e capital ao centro, que exporta produtos industrializados de volta.",
             correta: true,
             explicacao:
               "Perfeito. Foi uma quebra de paradigma nos anos 60. Mostrou que 'esperar desenvolver' era ingênuo — só desenvolveria quem quebrasse a lógica exportadora primária.",
           },
           {
-            texto: "A América Latina se atrasou economicamente porque seus governos não investiram em educação nos anos 60-70.",
+            texto:
+              "A América Latina se atrasou economicamente porque seus governos não investiram em educação nos anos 60-70.",
             correta: false,
             explicacao:
               "Explicação simplista. A Teoria da Dependência aponta causas ESTRUTURAIS (posição no sistema mundial), não meramente decisões internas. Foi uma crítica ao 'desenvolvimentismo' otimista.",
           },
           {
-            texto: "Os países latino-americanos são naturalmente ineficientes e não conseguem competir globalmente.",
+            texto:
+              "Os países latino-americanos são naturalmente ineficientes e não conseguem competir globalmente.",
             correta: false,
             explicacao:
               "É uma explicação racista/culturalista, sem base científica. A Teoria da Dependência NÃO culpa as pessoas latino-americanas — culpa as ESTRUTURAS econômicas globais.",
           },
+
+          { texto: "Outra possibilidade", correta: false, explicacao: "Compare com o conceito." },
         ],
       },
       {
         pergunta: "Por que o sonho de Simón Bolívar de uma 'Grã-Colômbia' unificada FRACASSOU?",
         opcoes: [
           {
-            texto: "As elites locais de cada região preferiram fragmentar o continente em 20 países pequenos, cada uma consolidando poder econômico e político em seu território.",
+            texto:
+              "As elites locais de cada região preferiram fragmentar o continente em 20 países pequenos, cada uma consolidando poder econômico e político em seu território.",
             correta: true,
             explicacao:
               "Correto. É um caso clássico de como interesses de elite podem superar visões geopolíticas grandiosas. Se tivesse dado certo, hoje teríamos uma AL do tamanho da União Europeia.",
           },
           {
-            texto: "Porque as potências europeias invadiram a América Latina novamente e impediram a unificação.",
+            texto:
+              "Porque as potências europeias invadiram a América Latina novamente e impediram a unificação.",
             correta: false,
             explicacao:
               "Não houve reinvasão. As independências foram consolidadas nos anos 1810-1830. A fragmentação foi INTERNA (das elites locais), não imposta externamente.",
@@ -1172,13 +1534,16 @@ export const UNIDADES_8ANO: UnidadeFund2[] = [
             explicacao:
               "Sem base histórica. Os EUA ainda eram país pequeno nessa época. A fragmentação da Grã-Colômbia (1830) foi por conflitos entre elites de Venezuela, Colômbia e Equador.",
           },
+
+          { texto: "Outra possibilidade", correta: false, explicacao: "Compare com o conceito." },
         ],
       },
       {
         pergunta: "México é chamado por analistas de 'exceção latino-americana' porque:",
         opcoes: [
           {
-            texto: "Tem 80% do seu comércio com os EUA (via USMCA), estando economicamente mais integrado à América do Norte do que à América Latina.",
+            texto:
+              "Tem 80% do seu comércio com os EUA (via USMCA), estando economicamente mais integrado à América do Norte do que à América Latina.",
             correta: true,
             explicacao:
               "Exato. Compartilha fronteira de 3.145 km com os EUA e depende disso economicamente. É o clássico caso de 'proximidade excessiva' com uma superpotência — vantagem e vulnerabilidade ao mesmo tempo.",
@@ -1195,26 +1560,45 @@ export const UNIDADES_8ANO: UnidadeFund2[] = [
             explicacao:
               "Falso. O México é uma república federal desde 1824. Nunca foi monarquia (a exceção monárquica na AL foi o Brasil, até 1889).",
           },
+
+          { texto: "Outra possibilidade", correta: false, explicacao: "Compare com o conceito." },
         ],
       },
     ],
 
     mini_jogo: {
       tipo: "categorizar",
-      instrucao:
-        "Classifique cada país/região em sua sub-região da América Latina.",
+      instrucao: "Classifique cada país/região em sua sub-região da América Latina.",
       categorias: [
         { id: "andina", titulo: "Região Andina", cor: "cyan" },
         { id: "cone_sul", titulo: "Cone Sul", cor: "amber" },
         { id: "america_central", titulo: "América Central/Caribe", cor: "emerald" },
       ],
       cartoes: [
-        { texto: "Peru — grande população indígena e antiga capital do Império Inca.", categoriaId: "andina" },
-        { texto: "Argentina — economia com forte pecuária pampeana e agricultura.", categoriaId: "cone_sul" },
-        { texto: "Costa Rica — polo turístico e ambiental sem exército.", categoriaId: "america_central" },
-        { texto: "Bolívia — maior reserva mundial de lítio no Salar de Uyuni.", categoriaId: "andina" },
-        { texto: "Cuba — economia socialista com forte presença cultural na música mundial.", categoriaId: "america_central" },
-        { texto: "Chile — maior produtor global de cobre com economia diversificada.", categoriaId: "cone_sul" },
+        {
+          texto: "Peru — grande população indígena e antiga capital do Império Inca.",
+          categoriaId: "andina",
+        },
+        {
+          texto: "Argentina — economia com forte pecuária pampeana e agricultura.",
+          categoriaId: "cone_sul",
+        },
+        {
+          texto: "Costa Rica — polo turístico e ambiental sem exército.",
+          categoriaId: "america_central",
+        },
+        {
+          texto: "Bolívia — maior reserva mundial de lítio no Salar de Uyuni.",
+          categoriaId: "andina",
+        },
+        {
+          texto: "Cuba — economia socialista com forte presença cultural na música mundial.",
+          categoriaId: "america_central",
+        },
+        {
+          texto: "Chile — maior produtor global de cobre com economia diversificada.",
+          categoriaId: "cone_sul",
+        },
       ],
     },
 
@@ -1232,12 +1616,16 @@ export const UNIDADES_8ANO: UnidadeFund2[] = [
             "A América Latina já superou completamente a dependência econômica e não precisa mais de integração — cada país negocia individualmente com sucesso.",
           correta: false,
         },
+
+        { texto: "Outra possibilidade sem relação com o conceito.", correta: false },
+        { texto: "Outra possibilidade sem relação com o conceito.", correta: false },
       ],
       explicacao_professor:
         "Excelente. Parabéns por concluir o 8º ano de Geografia. Você agora entende que a AL enfrenta um paradoxo estrutural: compartilha problemas comuns (dependência de commodities, desigualdade, herança colonial) que só poderiam ser resolvidos coletivamente — mas politicamente age de forma fragmentada. A UE só funciona porque os países cederam soberania parcial em nome de um projeto comum. Na AL, esse tipo de cessão nunca foi possível — daí a repetição do ciclo dependência-crise-populismo-dependência ao longo de 200 anos de independências.",
     },
     recompensas: { xp: 1500, moedas: 800, titulo: "Analista Geopolítico da América Latina" },
   },
+  ...LACUNAS_8ANO,
 ];
 
 export function getUnidade8ano(slug: string): UnidadeFund2 | undefined {

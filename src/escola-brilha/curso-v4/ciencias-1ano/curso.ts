@@ -5,6 +5,7 @@ import { unidade3 } from "./unidade-3";
 import { unidade4 } from "./unidade-4";
 import { unidade5 } from "./unidade-5";
 import { unidade6 } from "./unidade-6";
+import { unidade7 } from "./unidade-7";
 
 /**
  * Curso: Ciências 1º Ano — "Missão Cientistas Iniciantes"
@@ -21,7 +22,7 @@ const curso: CursoGeoV1 = {
   corPrimaria: "#a855f7",
   corSecundaria: "#1a0b2e",
   tipoAula: "geo-v1",
-  unidades: [unidade1, unidade2, unidade3, unidade4, unidade5, unidade6],
+  unidades: [unidade1, unidade2, unidade3, unidade4, unidade5, unidade6, unidade7],
 };
 
 export default curso;

@@ -313,6 +313,11 @@ function PlayerPortuguesV4Inner({ aula, cursoSlug, voltarPara, onConcluir }: Pro
             </Link>
             <div className="flex-1 h-2 bg-white/10 rounded-full overflow-hidden">
               <div
+                role="progressbar"
+                aria-label="Progresso da aula"
+                aria-valuemin={0}
+                aria-valuemax={100}
+                aria-valuenow={Math.round(progresso)}
                 className="h-full bg-gradient-to-r from-emerald-400 to-amber-300 transition-all"
                 style={{ width: `${progresso}%` }}
               />
@@ -387,6 +392,11 @@ function PlayerPortuguesV4Inner({ aula, cursoSlug, voltarPara, onConcluir }: Pro
                   }
                 >
                   <div
+                    role="progressbar"
+                    aria-label="Progresso da aula"
+                    aria-valuemin={0}
+                    aria-valuemax={100}
+                    aria-valuenow={Math.round(progresso)}
                     className={
                       tween
                         ? "h-full rounded-sm bg-[linear-gradient(90deg,#22d3ee,#818cf8)] transition-all duration-500"

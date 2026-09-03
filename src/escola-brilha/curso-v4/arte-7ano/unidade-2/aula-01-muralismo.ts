@@ -50,10 +50,38 @@ export const aula01: AulaArteV1 = {
     titulo: "🎨 O Distrito das Paredes Vivas",
     instrucao: "Toca em cada pista pra ativar o módulo do muralismo",
     itens: [
-      { emoji: "🖼️", rotulo: "Mural de Diego Rivera", descricao: "No Palácio Nacional do México, Rivera pintou a HISTÓRIA de um povo inteiro numa parede gigante — arte pública que qualquer pessoa pode ver de graça.", cor: "#dc2626", fotoUrl: diegoRivera },
-      { emoji: "🌀", rotulo: "Siqueiros e o dinamismo", descricao: "David Alfaro Siqueiros usava diagonais e cores fortes pra dar MOVIMENTO às figuras — o muralismo mexicano virou escola de arte engajada.", cor: "#b91c1c", fotoUrl: siqueiros },
-      { emoji: "🦇", rotulo: "Beco do Batman", descricao: "Em São Paulo, um beco esquecido virou point turístico coberto de grafite. A arte de rua transformou o USO do espaço.", cor: "#7c2d12", fotoUrl: becoBatman },
-      { emoji: "🏘️", rotulo: "Favela pintada", descricao: "Projetos como o da Dona Marta, no Rio, usam cor coletiva pra mudar a autoestima e a identidade visual de uma comunidade inteira.", cor: "#ea580c", fotoUrl: favelaMural },
+      {
+        emoji: "🖼️",
+        rotulo: "Mural de Diego Rivera",
+        descricao:
+          "No Palácio Nacional do México, Rivera pintou a HISTÓRIA de um povo inteiro numa parede gigante — arte pública que qualquer pessoa pode ver de graça.",
+        cor: "#dc2626",
+        fotoUrl: diegoRivera,
+      },
+      {
+        emoji: "🌀",
+        rotulo: "Siqueiros e o dinamismo",
+        descricao:
+          "David Alfaro Siqueiros usava diagonais e cores fortes pra dar MOVIMENTO às figuras — o muralismo mexicano virou escola de arte engajada.",
+        cor: "#b91c1c",
+        fotoUrl: siqueiros,
+      },
+      {
+        emoji: "🦇",
+        rotulo: "Beco do Batman",
+        descricao:
+          "Em São Paulo, um beco esquecido virou point turístico coberto de grafite. A arte de rua transformou o USO do espaço.",
+        cor: "#7c2d12",
+        fotoUrl: becoBatman,
+      },
+      {
+        emoji: "🏘️",
+        rotulo: "Favela pintada",
+        descricao:
+          "Projetos como o da Dona Marta, no Rio, usam cor coletiva pra mudar a autoestima e a identidade visual de uma comunidade inteira.",
+        cor: "#ea580c",
+        fotoUrl: favelaMural,
+      },
     ],
     falaFinal: "Você vai aprender por que pintar um muro pode mudar a vida de um bairro inteiro.",
   },
@@ -63,34 +91,63 @@ export const aula01: AulaArteV1 = {
     aurora: "Calibra o olho antes de pegar o spray!",
     perguntas: [
       {
-        pergunta: "Nos anos 1920, o governo do México pagou artistas como Diego Rivera e Siqueiros pra pintar MURAIS GIGANTES em prédios públicos. Qual era o principal objetivo?",
+        pergunta:
+          "Nos anos 1920, o governo do México pagou artistas como Diego Rivera e Siqueiros pra pintar MURAIS GIGANTES em prédios públicos. Qual era o principal objetivo?",
         fotoUrl: diegoRivera,
         alternativas: [
-          { texto: "Levar arte e educação histórica a um povo com pouco acesso a museus — arte pública e gratuita", correta: true },
+          {
+            texto:
+              "Levar arte e educação histórica a um povo com pouco acesso a museus — arte pública e gratuita",
+            correta: true,
+          },
           { texto: "Decorar prédios só pra impressionar turistas estrangeiros", correta: false },
+
+          { texto: "Não corresponde à análise", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
-        feedbackAcerto: "Isso! O Muralismo Mexicano nasceu como projeto EDUCATIVO e POLÍTICO — arte pra quem não entra em museu.",
-        feedbackErro: "O foco não era turismo: era levar história e identidade nacional pra dentro da vida do povo comum.",
+        feedbackAcerto:
+          "Isso! O Muralismo Mexicano nasceu como projeto EDUCATIVO e POLÍTICO — arte pra quem não entra em museu.",
+        feedbackErro:
+          "O foco não era turismo: era levar história e identidade nacional pra dentro da vida do povo comum.",
       },
       {
         pergunta: "Qual é a diferença essencial entre GRAFITE e PICHAÇÃO?",
         fotoUrl: pichacaoContraste,
         alternativas: [
-          { texto: "Grafite busca comunicar uma mensagem visual elaborada; pichação é geralmente uma assinatura rápida, sem intenção estética", correta: true },
+          {
+            texto:
+              "Grafite busca comunicar uma mensagem visual elaborada; pichação é geralmente uma assinatura rápida, sem intenção estética",
+            correta: true,
+          },
           { texto: "São exatamente a mesma coisa, só muda o nome", correta: false },
+
+          { texto: "Não corresponde à análise", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
-        feedbackAcerto: "Exato! Grafite tem intenção de composição e mensagem; pichação é marca territorial rápida.",
-        feedbackErro: "Não são sinônimos: técnica, tempo de execução e intenção artística mudam tudo.",
+        feedbackAcerto:
+          "Exato! Grafite tem intenção de composição e mensagem; pichação é marca territorial rápida.",
+        feedbackErro:
+          "Não são sinônimos: técnica, tempo de execução e intenção artística mudam tudo.",
       },
       {
-        pergunta: "Uma comunidade pinta as casas de uma favela inteira com cores e padrões planejados. Que efeito social esse tipo de intervenção costuma gerar?",
+        pergunta:
+          "Uma comunidade pinta as casas de uma favela inteira com cores e padrões planejados. Que efeito social esse tipo de intervenção costuma gerar?",
         fotoUrl: favelaMural,
         alternativas: [
-          { texto: "Fortalece a identidade e o orgulho do lugar, além de atrair visibilidade positiva", correta: true },
+          {
+            texto:
+              "Fortalece a identidade e o orgulho do lugar, além de atrair visibilidade positiva",
+            correta: true,
+          },
           { texto: "Não muda nada na vida dos moradores", correta: false },
+
+          { texto: "Não corresponde à análise", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
-        feedbackAcerto: "Perfeito! Cor coletiva vira ORGULHO DE PERTENCIMENTO — arte como ferramenta social real.",
-        feedbackErro: "Projetos assim têm impacto direto na autoestima da comunidade e na forma como ela é vista de fora.",
+        feedbackAcerto:
+          "Perfeito! Cor coletiva vira ORGULHO DE PERTENCIMENTO — arte como ferramenta social real.",
+        feedbackErro:
+          "Projetos assim têm impacto direto na autoestima da comunidade e na forma como ela é vista de fora.",
       },
     ],
   },
@@ -99,10 +156,38 @@ export const aula01: AulaArteV1 = {
     tipo: "vocabularioCards",
     aurora: "Vocabulário técnico do Distrito das Paredes Vivas. Toca em cada verbete!",
     cards: [
-      { termo: "Muralismo Mexicano", definicao: "Movimento artístico dos anos 1920 (Rivera, Siqueiros, Orozco) que usou paredes públicas pra contar a história e as lutas do povo mexicano.", emoji: "🖼️", cor: "#dc2626", fotoUrl: diegoRivera },
-      { termo: "Grafite", definicao: "Arte urbana feita com spray, rolo ou pincel, com composição, cor e mensagem elaboradas — reconhecida como linguagem artística.", emoji: "🎨", cor: "#ea580c", fotoUrl: grafiteRua },
-      { termo: "Pichação", definicao: "Escrita rápida (tag/assinatura) feita em espaços públicos, geralmente sem intenção estética elaborada — marca de presença territorial.", emoji: "✒️", cor: "#78716c", fotoUrl: pichacaoContraste },
-      { termo: "Intervenção Social", definicao: "Ação artística feita para transformar a percepção, o uso ou o valor de um espaço e da comunidade que vive nele.", emoji: "🏘️", cor: "#b91c1c", fotoUrl: favelaMural },
+      {
+        termo: "Muralismo Mexicano",
+        definicao:
+          "Movimento artístico dos anos 1920 (Rivera, Siqueiros, Orozco) que usou paredes públicas pra contar a história e as lutas do povo mexicano.",
+        emoji: "🖼️",
+        cor: "#dc2626",
+        fotoUrl: diegoRivera,
+      },
+      {
+        termo: "Grafite",
+        definicao:
+          "Arte urbana feita com spray, rolo ou pincel, com composição, cor e mensagem elaboradas — reconhecida como linguagem artística.",
+        emoji: "🎨",
+        cor: "#ea580c",
+        fotoUrl: grafiteRua,
+      },
+      {
+        termo: "Pichação",
+        definicao:
+          "Escrita rápida (tag/assinatura) feita em espaços públicos, geralmente sem intenção estética elaborada — marca de presença territorial.",
+        emoji: "✒️",
+        cor: "#78716c",
+        fotoUrl: pichacaoContraste,
+      },
+      {
+        termo: "Intervenção Social",
+        definicao:
+          "Ação artística feita para transformar a percepção, o uso ou o valor de um espaço e da comunidade que vive nele.",
+        emoji: "🏘️",
+        cor: "#b91c1c",
+        fotoUrl: favelaMural,
+      },
     ],
   },
 
@@ -117,10 +202,34 @@ export const aula01: AulaArteV1 = {
       "Esse é o poder da INTERVENÇÃO SOCIAL pela arte: uma parede cinza e esquecida pode virar espaço de memória, identidade e encontro. O muralismo e o grafite provam que a cidade inteira pode ser TELA — e que arte pública é também um ato de cidadania.",
     ],
     pigmentos: [
-      { nome: "Muralismo Mexicano", hex: "#dc2626", fonte: "Rivera, Siqueiros, Orozco", emoji: "🖼️", fotoUrl: siqueiros },
-      { nome: "Grafite", hex: "#ea580c", fonte: "Arte urbana com composição e mensagem", emoji: "🎨", fotoUrl: becoBatman },
-      { nome: "Pichação", hex: "#78716c", fonte: "Assinatura territorial rápida", emoji: "✒️", fotoUrl: pichacaoContraste },
-      { nome: "Cor Coletiva Comunitária", hex: "#b91c1c", fonte: "Identidade e autoestima do bairro", emoji: "🏘️", fotoUrl: favelaMural },
+      {
+        nome: "Muralismo Mexicano",
+        hex: "#dc2626",
+        fonte: "Rivera, Siqueiros, Orozco",
+        emoji: "🖼️",
+        fotoUrl: siqueiros,
+      },
+      {
+        nome: "Grafite",
+        hex: "#ea580c",
+        fonte: "Arte urbana com composição e mensagem",
+        emoji: "🎨",
+        fotoUrl: becoBatman,
+      },
+      {
+        nome: "Pichação",
+        hex: "#78716c",
+        fonte: "Assinatura territorial rápida",
+        emoji: "✒️",
+        fotoUrl: pichacaoContraste,
+      },
+      {
+        nome: "Cor Coletiva Comunitária",
+        hex: "#b91c1c",
+        fonte: "Identidade e autoestima do bairro",
+        emoji: "🏘️",
+        fotoUrl: favelaMural,
+      },
     ],
   },
 
@@ -129,33 +238,56 @@ export const aula01: AulaArteV1 = {
     aurora: "Verifica o caderno do artista urbano!",
     perguntas: [
       {
-        pergunta: "Por que o mural, ao contrário do quadro de museu, é considerado uma forma de arte especialmente DEMOCRÁTICA?",
+        pergunta:
+          "Por que o mural, ao contrário do quadro de museu, é considerado uma forma de arte especialmente DEMOCRÁTICA?",
         fotoUrl: diegoRivera,
         alternativas: [
-          { texto: "Porque está exposto na rua, acessível a QUALQUER pessoa, de graça, sem precisar de ingresso", correta: true },
+          {
+            texto:
+              "Porque está exposto na rua, acessível a QUALQUER pessoa, de graça, sem precisar de ingresso",
+            correta: true,
+          },
           { texto: "Porque é sempre menor e mais barato de fazer que um quadro", correta: false },
+
+          { texto: "Não corresponde à análise", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
-        feedbackAcerto: "Correto! O acesso livre e gratuito é o que torna o muralismo uma arte verdadeiramente pública.",
-        feedbackErro: "O tamanho ou custo não é o ponto — o que importa é o ACESSO livre de qualquer pessoa na rua.",
+        feedbackAcerto:
+          "Correto! O acesso livre e gratuito é o que torna o muralismo uma arte verdadeiramente pública.",
+        feedbackErro:
+          "O tamanho ou custo não é o ponto — o que importa é o ACESSO livre de qualquer pessoa na rua.",
       },
       {
-        pergunta: "Um grafite tem uma composição elaborada com cores e mensagem. Uma tag é só uma assinatura rápida. O que isso demonstra?",
+        pergunta:
+          "Um grafite tem uma composição elaborada com cores e mensagem. Uma tag é só uma assinatura rápida. O que isso demonstra?",
         fotoUrl: grafiteRua,
         alternativas: [
           { texto: "A diferença de INTENÇÃO ARTÍSTICA entre grafite e pichação", correta: true },
           { texto: "Que grafite e pichação são sempre feitos pela mesma pessoa", correta: false },
+
+          { texto: "Não corresponde à análise", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
-        feedbackAcerto: "Isso! Intenção, tempo de execução e cuidado estético separam grafite de pichação.",
+        feedbackAcerto:
+          "Isso! Intenção, tempo de execução e cuidado estético separam grafite de pichação.",
         feedbackErro: "Não é sobre quem faz — é sobre a INTENÇÃO e o cuidado estético empregados.",
       },
       {
-        pergunta: "O que aconteceu com o Beco do Batman em São Paulo depois de ser tomado por grafites?",
+        pergunta:
+          "O que aconteceu com o Beco do Batman em São Paulo depois de ser tomado por grafites?",
         fotoUrl: becoBatman,
         alternativas: [
-          { texto: "Virou ponto turístico e cultural, mudando a função social do espaço", correta: true },
+          {
+            texto: "Virou ponto turístico e cultural, mudando a função social do espaço",
+            correta: true,
+          },
           { texto: "Foi fechado ao público por causa da arte", correta: false },
+
+          { texto: "Não corresponde à análise", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
-        feedbackAcerto: "Perfeito! A arte urbana transformou um beco esquecido em atração cultural.",
+        feedbackAcerto:
+          "Perfeito! A arte urbana transformou um beco esquecido em atração cultural.",
         feedbackErro: "Pelo contrário: o grafite ATRAIU pessoas e deu nova vida ao espaço.",
       },
     ],
@@ -166,34 +298,47 @@ export const aula01: AulaArteV1 = {
     aurora: "Classifica cada obra pelo CONCEITO de arte urbana que ela representa!",
     animais: [
       {
-        nome: "Mural histórico em prédio público", emoji: "🖼️", fotoUrl: diegoRivera,
+        nome: "Mural histórico em prédio público",
+        emoji: "🖼️",
+        fotoUrl: diegoRivera,
         corAlvo: { nome: "Muralismo Mexicano", hex: "#dc2626" },
         opcoes: [
           { nome: "Muralismo Mexicano", hex: "#dc2626" },
           { nome: "Pichação", hex: "#78716c" },
           { nome: "Grafite", hex: "#ea580c" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Isso! Narrativa histórica em parede pública = Muralismo Mexicano.",
       },
       {
-        nome: "Beco colorido com personagens estilizados", emoji: "🦇", fotoUrl: becoBatman,
+        nome: "Beco colorido com personagens estilizados",
+        emoji: "🦇",
+        fotoUrl: becoBatman,
         corAlvo: { nome: "Grafite", hex: "#ea580c" },
         opcoes: [
           { nome: "Grafite", hex: "#ea580c" },
           { nome: "Muralismo Mexicano", hex: "#dc2626" },
           { nome: "Cor Coletiva Comunitária", hex: "#b91c1c" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Correto! Composição elaborada com spray em espaço urbano = Grafite.",
       },
       {
-        nome: "Fachadas de favela pintadas em conjunto", emoji: "🏘️", fotoUrl: favelaMural,
+        nome: "Fachadas de favela pintadas em conjunto",
+        emoji: "🏘️",
+        fotoUrl: favelaMural,
         corAlvo: { nome: "Cor Coletiva Comunitária", hex: "#b91c1c" },
         opcoes: [
           { nome: "Cor Coletiva Comunitária", hex: "#b91c1c" },
           { nome: "Pichação", hex: "#78716c" },
           { nome: "Grafite", hex: "#ea580c" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
-        falaAcerto: "Perfeito! Pintura planejada em conjunto por moradores = Cor Coletiva Comunitária.",
+        falaAcerto:
+          "Perfeito! Pintura planejada em conjunto por moradores = Cor Coletiva Comunitária.",
       },
     ],
   },
@@ -202,11 +347,42 @@ export const aula01: AulaArteV1 = {
     tipo: "sequenciaMistura",
     aurora: "Ordena os 5 passos pra planejar e pintar SEU mural comunitário.",
     passos: [
-      { id: "p1", texto: "Escolho a parede e converso com a comunidade sobre qual MENSAGEM o mural deve contar", emoji: "🗣️", ordem: 1, fotoUrl: planejamentoComunitario },
-      { id: "p2", texto: "Esboço a composição no papel, pensando em cores e no espaço disponível na parede", emoji: "✏️", ordem: 2, fotoUrl: comparacaoMuro },
-      { id: "p3", texto: "Separo latas de spray e tintas nas cores planejadas", emoji: "🧴", ordem: 3, fotoUrl: latasSpray },
-      { id: "p4", texto: "Subo no andaime e começo pelas formas grandes de fundo, depois os detalhes", emoji: "🪜", ordem: 4, fotoUrl: muralistaAndaime },
-      { id: "p5", texto: "Finalizo com a equipe, revisamos contraste e assinamos o mural coletivamente", emoji: "🤝", ordem: 5, fotoUrl: equipeMuralistas },
+      {
+        id: "p1",
+        texto:
+          "Escolho a parede e converso com a comunidade sobre qual MENSAGEM o mural deve contar",
+        emoji: "🗣️",
+        ordem: 1,
+        fotoUrl: planejamentoComunitario,
+      },
+      {
+        id: "p2",
+        texto: "Esboço a composição no papel, pensando em cores e no espaço disponível na parede",
+        emoji: "✏️",
+        ordem: 2,
+        fotoUrl: comparacaoMuro,
+      },
+      {
+        id: "p3",
+        texto: "Separo latas de spray e tintas nas cores planejadas",
+        emoji: "🧴",
+        ordem: 3,
+        fotoUrl: latasSpray,
+      },
+      {
+        id: "p4",
+        texto: "Subo no andaime e começo pelas formas grandes de fundo, depois os detalhes",
+        emoji: "🪜",
+        ordem: 4,
+        fotoUrl: muralistaAndaime,
+      },
+      {
+        id: "p5",
+        texto: "Finalizo com a equipe, revisamos contraste e assinamos o mural coletivamente",
+        emoji: "🤝",
+        ordem: 5,
+        fotoUrl: equipeMuralistas,
+      },
     ],
     falaAcerto: "Você acabou de planejar e pintar o primeiro mural do Distrito das Paredes Vivas!",
   },
@@ -216,11 +392,32 @@ export const aula01: AulaArteV1 = {
     aurora: "Agora VOCÊ lê o diário do artista urbano. Toca nas palavras coloridas.",
     titulo: "Diário do Artista Urbano",
     trechos: [
-      { texto: "Sou artista urbano. Aprendi com o", palavraDestaque: "Muralismo Mexicano", corDestaque: "#dc2626" },
-      { texto: "que uma parede pública pode contar história pra todo mundo, de graça. No meu bairro, uso", palavraDestaque: "grafite", corDestaque: "#ea580c" },
-      { texto: "com composição pensada — diferente da", palavraDestaque: "pichação", corDestaque: "#78716c" },
-      { texto: "que é só assinatura rápida. Quando a comunidade pinta junto, nasce a", palavraDestaque: "Cor Coletiva Comunitária", corDestaque: "#b91c1c" },
-      { texto: "e o bairro inteiro ganha nova identidade. Arte de rua é", palavraDestaque: "Intervenção Social", corDestaque: "#7c2d12" },
+      {
+        texto: "Sou artista urbano. Aprendi com o",
+        palavraDestaque: "Muralismo Mexicano",
+        corDestaque: "#dc2626",
+      },
+      {
+        texto:
+          "que uma parede pública pode contar história pra todo mundo, de graça. No meu bairro, uso",
+        palavraDestaque: "grafite",
+        corDestaque: "#ea580c",
+      },
+      {
+        texto: "com composição pensada — diferente da",
+        palavraDestaque: "pichação",
+        corDestaque: "#78716c",
+      },
+      {
+        texto: "que é só assinatura rápida. Quando a comunidade pinta junto, nasce a",
+        palavraDestaque: "Cor Coletiva Comunitária",
+        corDestaque: "#b91c1c",
+      },
+      {
+        texto: "e o bairro inteiro ganha nova identidade. Arte de rua é",
+        palavraDestaque: "Intervenção Social",
+        corDestaque: "#7c2d12",
+      },
       { texto: "em ação — e a cidade vira galeria de todos." },
     ],
   },
@@ -249,12 +446,54 @@ export const aula01: AulaArteV1 = {
     aurora: "Fecha a página do Distrito das Paredes Vivas. Toca em cada verbete!",
     titulo: "📓 Caderno do Artista Urbano",
     itens: [
-      { emoji: "🖼️", rotulo: "Muralismo Mexicano", descricao: "Movimento dos anos 1920 que usou paredes públicas pra contar história e política ao povo, de forma acessível e gratuita.", cor: "#dc2626", fotoUrl: diegoRivera },
-      { emoji: "🎨", rotulo: "Grafite", descricao: "Arte urbana com composição, cor e mensagem elaboradas — linguagem artística reconhecida.", cor: "#ea580c", fotoUrl: grafiteRua },
-      { emoji: "✒️", rotulo: "Pichação", descricao: "Assinatura rápida (tag) em espaço público, geralmente sem intenção estética elaborada.", cor: "#78716c", fotoUrl: pichacaoContraste },
-      { emoji: "🏘️", rotulo: "Intervenção Social", descricao: "Ação artística que transforma a percepção, o uso e o valor de um espaço e de uma comunidade.", cor: "#b91c1c", fotoUrl: favelaMural },
-      { emoji: "🖌️", rotulo: "Stencil Urbano", descricao: "Técnica de gabarito vazado usada por artistas de rua pra reproduzir imagens rápidas e marcantes.", cor: "#7c2d12", fotoUrl: stencilBanksy },
-      { emoji: "🧱", rotulo: "Fachada Transformada", descricao: "Um muro cinza que, através da arte, vira ponto de memória, identidade e encontro.", cor: "#dc2626", fotoUrl: fachadaTransformacao },
+      {
+        emoji: "🖼️",
+        rotulo: "Muralismo Mexicano",
+        descricao:
+          "Movimento dos anos 1920 que usou paredes públicas pra contar história e política ao povo, de forma acessível e gratuita.",
+        cor: "#dc2626",
+        fotoUrl: diegoRivera,
+      },
+      {
+        emoji: "🎨",
+        rotulo: "Grafite",
+        descricao:
+          "Arte urbana com composição, cor e mensagem elaboradas — linguagem artística reconhecida.",
+        cor: "#ea580c",
+        fotoUrl: grafiteRua,
+      },
+      {
+        emoji: "✒️",
+        rotulo: "Pichação",
+        descricao:
+          "Assinatura rápida (tag) em espaço público, geralmente sem intenção estética elaborada.",
+        cor: "#78716c",
+        fotoUrl: pichacaoContraste,
+      },
+      {
+        emoji: "🏘️",
+        rotulo: "Intervenção Social",
+        descricao:
+          "Ação artística que transforma a percepção, o uso e o valor de um espaço e de uma comunidade.",
+        cor: "#b91c1c",
+        fotoUrl: favelaMural,
+      },
+      {
+        emoji: "🖌️",
+        rotulo: "Stencil Urbano",
+        descricao:
+          "Técnica de gabarito vazado usada por artistas de rua pra reproduzir imagens rápidas e marcantes.",
+        cor: "#7c2d12",
+        fotoUrl: stencilBanksy,
+      },
+      {
+        emoji: "🧱",
+        rotulo: "Fachada Transformada",
+        descricao:
+          "Um muro cinza que, através da arte, vira ponto de memória, identidade e encontro.",
+        cor: "#dc2626",
+        fotoUrl: fachadaTransformacao,
+      },
     ],
     falaFinal: "Distrito das Paredes Vivas RESTAURADO — Setor Muralista ativo!",
   },
@@ -263,16 +502,29 @@ export const aula01: AulaArteV1 = {
     tipo: "avaliacaoFinal",
     aurora: "Missão final, artista urbano!",
     quiz: {
-      pergunta: "Uma escola pinta um mural gigante na parede externa, com uma mensagem sobre a comunidade, e QUALQUER pessoa da rua pode ver de graça, sem pagar ingresso. Que função social esse tipo de arte pública cumpre, e por que isso é diferente de uma pintura guardada em museu?",
+      pergunta:
+        "Uma escola pinta um mural gigante na parede externa, com uma mensagem sobre a comunidade, e QUALQUER pessoa da rua pode ver de graça, sem pagar ingresso. Que função social esse tipo de arte pública cumpre, e por que isso é diferente de uma pintura guardada em museu?",
       alternativas: [
-        { texto: "Democratiza o acesso à arte: qualquer pessoa vê, sem barreira de ingresso ou horário — a rua vira galeria de todos", correta: true },
-        { texto: "Não muda nada: arte em muro tem o mesmo alcance que arte em museu fechado", correta: false },
+        {
+          texto:
+            "Democratiza o acesso à arte: qualquer pessoa vê, sem barreira de ingresso ou horário — a rua vira galeria de todos",
+          correta: true,
+        },
+        {
+          texto: "Não muda nada: arte em muro tem o mesmo alcance que arte em museu fechado",
+          correta: false,
+        },
+
+        { texto: "Não corresponde à análise", correta: false },
+        { texto: "Outra resposta sem relação", correta: false },
       ],
-      feedback: "Excelente! Essa é a essência do Muralismo Mexicano e da arte urbana: ao ocupar um espaço PÚBLICO e ACESSÍVEL, a arte deixa de depender de ingresso, horário de funcionamento ou status social do visitante. Ela chega a quem passa pela rua todos os dias — e por isso pode ser usada como ferramenta de EDUCAÇÃO, MEMÓRIA e TRANSFORMAÇÃO SOCIAL de um jeito que a arte de museu, isolada, não consegue.",
+      feedback:
+        "Excelente! Essa é a essência do Muralismo Mexicano e da arte urbana: ao ocupar um espaço PÚBLICO e ACESSÍVEL, a arte deixa de depender de ingresso, horário de funcionamento ou status social do visitante. Ela chega a quem passa pela rua todos os dias — e por isso pode ser usada como ferramenta de EDUCAÇÃO, MEMÓRIA e TRANSFORMAÇÃO SOCIAL de um jeito que a arte de museu, isolada, não consegue.",
     },
     missaoFamilia:
       "🗺️ Missão Mapeando a Galeria da Rua: com um adulto, saiam pelo bairro e fotografem 3 exemplos de arte ou intervenção no espaço público (mural, grafite, azulejo, escultura, até uma pichação). Depois, classifiquem juntos cada foto: é grafite, pichação ou intervenção comunitária? Registrem as fotos e a classificação no álbum de família.",
-    recompensaTitulo: "🎨 Distrito das Paredes Vivas restaurado — Setor Muralista da Cidade Suspensa.",
+    recompensaTitulo:
+      "🎨 Distrito das Paredes Vivas restaurado — Setor Muralista da Cidade Suspensa.",
     recompensaItem: "✨ Spray de Pigmento Luminescente",
   },
 

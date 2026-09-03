@@ -8,7 +8,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-globalizacao-digital",
   titulo: "Globalização, Era Digital e o Mundo de Hoje",
   iconeTrilha: "🌐",
-  bncc: ["EF09HI17", "EF09HI18"],
+  bncc: ["EF09HI32", "EF09HI33"],
   duracaoMin: 30,
   estilo: "teen",
 
@@ -31,6 +31,8 @@ export const aula01: AulaGeoV1 = {
     opcoes: [
       { id: "gl", titulo: "GLOBALIZAÇÃO + ERA DIGITAL", subtitulo: "tudo interligado por redes e algoritmos", emoji: "🌐", cor: "from-cyan-800 to-slate-950" },
       { id: "is", titulo: "ISOLAMENTO ENTRE NAÇÕES", subtitulo: "cada país por si", emoji: "❌", cor: "from-amber-900 to-slate-950" },
+          { id: "extra2", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "extra3", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "gl",
     feedbackAcerto: "Correto. Você provavelmente veste uma roupa costurada em Bangladesh, num celular montado na China, com aplicativo dos EUA, ouvindo música coreana. Isso é globalização + era digital.",
@@ -69,9 +71,9 @@ export const aula01: AulaGeoV1 = {
     aurora: "Três perguntas rápidas.",
     instrucao: "Toque no card correto",
     perguntas: [
-      { id: "q1", pergunta: "Quando a INTERNET se tornou comercial (aberta ao público em geral)?", fotoUrl: imgClima, cards: [{ id: "95", emoji: "🌐", titulo: "Anos 1990", cor: "from-teal-600 to-slate-900" }, { id: "50", emoji: "📻", titulo: "Anos 1950", cor: "from-amber-600 to-slate-900" }, { id: "20", emoji: "📱", titulo: "Anos 2020", cor: "from-slate-600 to-slate-900" }], correta: "95", feedbackAcerto: "Correto. Meados dos anos 1990 (1995 é referência).", feedbackErro: "É anos 1990. Antes existia, mas só em universidades." },
-      { id: "q2", pergunta: "O Acordo de PARIS (2015) é sobre:", fotoUrl: imgSmart, cards: [{ id: "cl", emoji: "🌡️", titulo: "Combate ao aquecimento global", cor: "from-teal-600 to-slate-900" }, { id: "gu", emoji: "⚔️", titulo: "Fim de uma guerra", cor: "from-amber-600 to-slate-900" }, { id: "co", emoji: "💰", titulo: "Comércio internacional", cor: "from-slate-600 to-slate-900" }], correta: "cl", feedbackAcerto: "Correto. Meta de limitar o aquecimento a 1,5°C.", feedbackErro: "É sobre CLIMA — limitar o aquecimento global." },
-      { id: "q3", pergunta: "A pandemia da COVID-19 começou em:", fotoUrl: imgNyc, cards: [{ id: "20", emoji: "😷", titulo: "2020", cor: "from-teal-600 to-slate-900" }, { id: "01", emoji: "📱", titulo: "2001", cor: "from-amber-600 to-slate-900" }, { id: "10", emoji: "🌐", titulo: "2010", cor: "from-slate-600 to-slate-900" }], correta: "20", feedbackAcerto: "Correto. Início em Wuhan (China) no fim de 2019, pandemia declarada em março de 2020.", feedbackErro: "É 2020. 2001 = atentado ao WTC; 2010 = Primavera Árabe." },
+      { id: "q1", pergunta: "Quando a INTERNET se tornou comercial (aberta ao público em geral)?", fotoUrl: imgClima, cards: [{ id: "95", emoji: "🌐", titulo: "Anos 1990", cor: "from-teal-600 to-slate-900" }, { id: "50", emoji: "📻", titulo: "Anos 1950", cor: "from-amber-600 to-slate-900" }, { id: "20", emoji: "📱", titulo: "Anos 2020", cor: "from-slate-600 to-slate-900" }, { id: "extra", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" }], correta: "95", feedbackAcerto: "Correto. Meados dos anos 1990 (1995 é referência).", feedbackErro: "É anos 1990. Antes existia, mas só em universidades." },
+      { id: "q2", pergunta: "O Acordo de PARIS (2015) é sobre:", fotoUrl: imgSmart, cards: [{ id: "cl", emoji: "🌡️", titulo: "Combate ao aquecimento global", cor: "from-teal-600 to-slate-900" }, { id: "gu", emoji: "⚔️", titulo: "Fim de uma guerra", cor: "from-amber-600 to-slate-900" }, { id: "co", emoji: "💰", titulo: "Comércio internacional", cor: "from-slate-600 to-slate-900" }, { id: "extra", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" }], correta: "cl", feedbackAcerto: "Correto. Meta de limitar o aquecimento a 1,5°C.", feedbackErro: "É sobre CLIMA — limitar o aquecimento global." },
+      { id: "q3", pergunta: "A pandemia da COVID-19 começou em:", fotoUrl: imgNyc, cards: [{ id: "20", emoji: "😷", titulo: "2020", cor: "from-teal-600 to-slate-900" }, { id: "01", emoji: "📱", titulo: "2001", cor: "from-amber-600 to-slate-900" }, { id: "10", emoji: "🌐", titulo: "2010", cor: "from-slate-600 to-slate-900" }, { id: "extra", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" }], correta: "20", feedbackAcerto: "Correto. Início em Wuhan (China) no fim de 2019, pandemia declarada em março de 2020.", feedbackErro: "É 2020. 2001 = atentado ao WTC; 2010 = Primavera Árabe." },
     ],
     falaFinal: "Você já mapeia as marcas do presente.",
   },

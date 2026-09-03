@@ -99,9 +99,9 @@ export const aula05_dinheiro: AulaV4 = {
   },
   momento10_avaliacao: {
     perguntas: [
-      { pergunta: "R$ 5 + R$ 3,50 = ?", opcoes: ["R$ 8,50", "R$ 8,00", "R$ 9,00"], correta: 0, feedbackAcerto: "🎉 8,50.", feedbackErro: "5+3,50=8,50." },
-      { pergunta: "Troco de R$ 10 pagando R$ 6,25?", opcoes: ["R$ 3,75", "R$ 4,25", "R$ 3,25"], correta: 0, feedbackAcerto: "🎉 R$ 3,75.", feedbackErro: "10−6,25=3,75." },
-      { pergunta: "4 moedas de 50 centavos =?", opcoes: ["R$ 2,00", "R$ 1,00", "R$ 4,00"], correta: 0, feedbackAcerto: "🎉 R$ 2,00.", feedbackErro: "50×4=200." },
+      { pergunta: "R$ 5 + R$ 3,50 = ?", opcoes: ["R$ 8,50", "R$ 8,00", "R$ 9,00"], correta: 0, feedbackAcerto: "🎉 Cinco reais mais três reais e cinquenta centavos totalizam R$ 8,50.", feedbackErro: "Alinhe reais e centavos: R$ 5,00 + R$ 3,50 = R$ 8,50." },
+      { pergunta: "Troco de R$ 10 pagando R$ 6,25?", opcoes: ["R$ 3,75", "R$ 4,25", "R$ 3,25"], correta: 0, feedbackAcerto: "🎉 O troco é a diferença: R$ 10,00 − R$ 6,25 = R$ 3,75.", feedbackErro: "Complete de R$ 6,25 até R$ 10,00: faltam R$ 3,75." },
+      { pergunta: "4 moedas de 50 centavos =?", opcoes: ["R$ 2,00", "R$ 1,00", "R$ 4,00"], correta: 0, feedbackAcerto: "🎉 Quatro grupos de 50 centavos formam 200 centavos, ou R$ 2,00.", feedbackErro: "Calcule 4 × 50 = 200 centavos e converta: 100 centavos = R$ 1,00." },
     ],
   },
   momento11_missaoFamilia: {

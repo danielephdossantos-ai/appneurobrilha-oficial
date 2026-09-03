@@ -1,5 +1,6 @@
 import type { UnidadeGeoV1 } from "../../types";
 import { aula01 } from "./aula-01-relevo-e-rios";
+import { aula02 } from "./aula-02-campo-cidade";
 
 export const unidade3: UnidadeGeoV1 = {
   slug: "unidade-3",
@@ -9,5 +10,5 @@ export const unidade3: UnidadeGeoV1 = {
   descricao:
     "Brilha e Aurora sobem chapadas, atravessam a planície amazônica e descem hidrelétricas pra entender por que o Brasil é um país de planaltos e rios poderosos.",
   corTema: "#f97316",
-  aulas: [aula01],
+  aulas: [aula01, aula02],
 };

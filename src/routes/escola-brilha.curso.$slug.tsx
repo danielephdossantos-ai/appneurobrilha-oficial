@@ -95,6 +95,7 @@ function TrilhaCurso() {
   }
 
   const proximoIdx = aulas.findIndex((a) => !concluidas.has(a.slug));
+  const totalConcluidasValidas = aulas.filter((aula) => concluidas.has(aula.slug)).length;
 
   const sinonimosBusca: Record<string, string[]> = {
     "porquês": ["porque", "por que", "porquê", "por quê"],
@@ -125,7 +126,9 @@ function TrilhaCurso() {
       }
       return false;
     })
-  })).filter(u => u.aulas.length > 0 || termoBusca === "");
+  // Estruturas reservadas sem aula não devem aparecer para a criança como
+  // conteúdo disponível. Elas continuam preservadas no curso para conclusão futura.
+  })).filter(u => u.aulas.length > 0);
 
   return (
     <div
@@ -140,7 +143,7 @@ function TrilhaCurso() {
             ← Escola Brilha
           </Link>
           <div className="text-xs text-white/60">
-            {concluidas.size} / {aulas.length} aulas completas
+            {totalConcluidasValidas} / {aulas.length} aulas completas
           </div>
         </div>
         <div className="max-w-2xl mx-auto px-4 pb-4">
@@ -214,13 +217,14 @@ function TrilhaCurso() {
           />
         )}
         {unidadesFiltradas.map((u) => {
+          const numeroNaTrilha = curso.unidades.findIndex((unidade) => unidade.slug === u.slug) + 1;
           const aulasConcluidasNaUnidade = u.aulas.filter(a => concluidas.has(a.slug)).length;
           return (
           <section key={u.slug}>
 
             <div className="text-center mb-6">
               <div className="text-xs uppercase text-white/50 flex items-center justify-center gap-2">
-                Unidade {u.numero} 
+                Unidade {numeroNaTrilha}
                 <span className="bg-white/10 px-2 py-0.5 rounded-full text-[10px]">
                   {aulasConcluidasNaUnidade} / {u.aulas.length} Aulas Concluídas
                 </span>
@@ -328,7 +332,7 @@ function TrilhaCurso() {
         <AtlasFinalCard
           cursoSlug={slug}
           totalAulas={aulas.length}
-          concluidas={concluidas.size}
+          concluidas={totalConcluidasValidas}
           modoLivre={modoLivre}
         />
         

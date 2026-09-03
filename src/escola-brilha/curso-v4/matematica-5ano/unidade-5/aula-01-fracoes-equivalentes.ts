@@ -4,7 +4,7 @@ export const aula01_equivalentes: AulaV4 = {
   slug: "u5-01-fracoes-equivalentes",
   titulo: "Frações equivalentes",
   iconeTrilha: "🍕",
-  bncc: ["EF05MA03", "EF05MA04"],
+  bncc: ["EF05MA04"],
   duracaoMin: 22,
   metodologias: ["cpa"],
 

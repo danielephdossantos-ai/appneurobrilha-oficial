@@ -11,7 +11,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-preservacao-e-ambiente",
   titulo: "Cuidar da Natureza: Preservação e Impactos",
   iconeTrilha: "♻️",
-  bncc: ["EF04GE06"],
+  bncc: [],
   duracaoMin: 22,
 
   cena01_motivacao: {
@@ -42,6 +42,19 @@ export const aula01: AulaGeoV1 = {
         subtitulo: "porque tem mais espaço",
         emoji: "😊",
         cor: "from-green-500 to-emerald-700",
+      },
+
+      {
+        id: "extra-1",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
+      {
+        id: "extra-2",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
       },
     ],
     respostaCerta: "casa",
@@ -171,8 +184,20 @@ export const aula01: AulaGeoV1 = {
         fotoUrl: contraste,
         cards: [
           { id: "des", emoji: "🪓", titulo: "Desmatamento", cor: "from-red-600 to-rose-800" },
-          { id: "ref", emoji: "🌱", titulo: "Reflorestamento", cor: "from-lime-500 to-emerald-700" },
+          {
+            id: "ref",
+            emoji: "🌱",
+            titulo: "Reflorestamento",
+            cor: "from-lime-500 to-emerald-700",
+          },
           { id: "rec", emoji: "🔄", titulo: "Reciclagem", cor: "from-sky-500 to-blue-700" },
+
+          {
+            id: "extra-3",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "des",
         feedbackAcerto: "Isso! DESMATAMENTO — o mal maior das florestas.",
@@ -185,6 +210,13 @@ export const aula01: AulaGeoV1 = {
           { id: "des", emoji: "🪓", titulo: "Desmatar", cor: "from-red-600 to-rose-800" },
           { id: "rec", emoji: "🔄", titulo: "Reciclar", cor: "from-sky-500 to-blue-700" },
           { id: "pol", emoji: "🏭", titulo: "Poluir", cor: "from-slate-600 to-gray-800" },
+
+          {
+            id: "extra-4",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "rec",
         feedbackAcerto: "Perfeito! RECICLAR = lixo vira produto novo.",
@@ -198,6 +230,13 @@ export const aula01: AulaGeoV1 = {
           { id: "sus", emoji: "♻️", titulo: "Sustentável", cor: "from-emerald-500 to-green-700" },
           { id: "cons", emoji: "🛒", titulo: "Consumista", cor: "from-red-500 to-rose-700" },
           { id: "des", emoji: "🪓", titulo: "Desmatador", cor: "from-slate-600 to-gray-800" },
+
+          {
+            id: "extra-5",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "sus",
         feedbackAcerto: "Isso! SUSTENTÁVEL = usa sem esgotar.",
@@ -290,8 +329,7 @@ export const aula01: AulaGeoV1 = {
       },
       {
         id: "p4",
-        texto:
-          "Cuidar da natureza é dever de TODOS: governo, empresa e cada CIDADÃO. Você também.",
+        texto: "Cuidar da natureza é dever de TODOS: governo, empresa e cada CIDADÃO. Você também.",
         chaves: ["cuidar", "todos", "cidadão"],
       },
     ],
@@ -324,7 +362,11 @@ export const aula01: AulaGeoV1 = {
       {
         id: "r2",
         municipioA: { nome: "Sacola de pano", emoji: "🛍️", cor: "from-emerald-500 to-green-700" },
-        municipioB: { nome: "Usada muitas vezes", emoji: "🔁", cor: "from-lime-500 to-emerald-700" },
+        municipioB: {
+          nome: "Usada muitas vezes",
+          emoji: "🔁",
+          cor: "from-lime-500 to-emerald-700",
+        },
         contexto: "Sacola de pano no lugar de plástica é:",
         pecaCertaId: "reutilizar",
         feedbackAcerto: "Perfeito! REUTILIZAR — usa várias vezes.",
@@ -342,7 +384,11 @@ export const aula01: AulaGeoV1 = {
       {
         id: "r4",
         municipioA: { nome: "Área queimada", emoji: "🔥", cor: "from-red-600 to-orange-700" },
-        municipioB: { nome: "Plantar mudas novas", emoji: "🌱", cor: "from-lime-500 to-emerald-700" },
+        municipioB: {
+          nome: "Plantar mudas novas",
+          emoji: "🌱",
+          cor: "from-lime-500 to-emerald-700",
+        },
         contexto: "Depois de uma queimada, o certo é:",
         pecaCertaId: "reflorestar",
         feedbackAcerto: "Combo! REFLORESTAR — plantar onde tinha floresta.",
@@ -350,8 +396,16 @@ export const aula01: AulaGeoV1 = {
       },
       {
         id: "r5",
-        municipioA: { nome: "Torneira aberta escovando", emoji: "🚰", cor: "from-sky-500 to-blue-700" },
-        municipioB: { nome: "Feche enquanto escova", emoji: "💧", cor: "from-cyan-500 to-blue-700" },
+        municipioA: {
+          nome: "Torneira aberta escovando",
+          emoji: "🚰",
+          cor: "from-sky-500 to-blue-700",
+        },
+        municipioB: {
+          nome: "Feche enquanto escova",
+          emoji: "💧",
+          cor: "from-cyan-500 to-blue-700",
+        },
         contexto: "Fechar a torneira ao escovar os dentes é:",
         pecaCertaId: "reduzir",
         feedbackAcerto: "Isso! REDUZIR o consumo de água.",
@@ -359,8 +413,16 @@ export const aula01: AulaGeoV1 = {
       },
       {
         id: "r6",
-        municipioA: { nome: "Fábrica jogando esgoto no rio", emoji: "🏭", cor: "from-slate-600 to-gray-800" },
-        municipioB: { nome: "Isso é crime ambiental", emoji: "📢", cor: "from-amber-500 to-orange-700" },
+        municipioA: {
+          nome: "Fábrica jogando esgoto no rio",
+          emoji: "🏭",
+          cor: "from-slate-600 to-gray-800",
+        },
+        municipioB: {
+          nome: "Isso é crime ambiental",
+          emoji: "📢",
+          cor: "from-amber-500 to-orange-700",
+        },
         contexto: "Viu uma fábrica poluindo o rio. O certo é:",
         pecaCertaId: "denunciar",
         feedbackAcerto: "Perfeito! DENUNCIAR (Disque 181, IBAMA).",
@@ -415,11 +477,11 @@ export const aula01: AulaGeoV1 = {
             correta: true,
           },
           { id: "c", texto: "Nunca mais comprar nada.", correta: false },
+
+          { id: "extra-6", texto: "Outra possibilidade", correta: false },
         ],
-        feedbackAcerto:
-          "Isso! SUSTENTÁVEL = consumir com CONSCIÊNCIA, protegendo o amanhã.",
-        feedbackErro:
-          "Não é comprar tudo nem parar de comprar. É consumir com CONSCIÊNCIA.",
+        feedbackAcerto: "Isso! SUSTENTÁVEL = consumir com CONSCIÊNCIA, protegendo o amanhã.",
+        feedbackErro: "Não é comprar tudo nem parar de comprar. É consumir com CONSCIÊNCIA.",
       },
       {
         id: "av2",
@@ -428,6 +490,8 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Reflorestamento", correta: false },
           { id: "b", texto: "Desmatamento", correta: true },
           { id: "c", texto: "Reciclagem", correta: false },
+
+          { id: "extra-7", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Perfeito! DESMATAMENTO = cortar em massa.",
         feedbackErro: "Reflorestar é PLANTAR. Cortar é DESMATAR.",
@@ -439,11 +503,11 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Só do governo.", correta: false },
           { id: "b", texto: "De todos: governo, empresas E cada cidadão.", correta: true },
           { id: "c", texto: "Só das crianças.", correta: false },
+
+          { id: "extra-8", texto: "Outra possibilidade", correta: false },
         ],
-        feedbackAcerto:
-          "Isso! TODOS somos responsáveis. Governo, empresa e cada um de nós.",
-        feedbackErro:
-          "Cada um faz sua parte: governo, empresa e CIDADÃO. Você também.",
+        feedbackAcerto: "Isso! TODOS somos responsáveis. Governo, empresa e cada um de nós.",
+        feedbackErro: "Cada um faz sua parte: governo, empresa e CIDADÃO. Você também.",
       },
     ],
     selo: {
@@ -452,8 +516,7 @@ export const aula01: AulaGeoV1 = {
       emoji: "♻️",
       cor: "from-emerald-500 to-green-700",
     },
-    falaFinal:
-      "PARABÉNS, ECOGUARDIÃO! O Brasil precisa de gente como você pra continuar verde.",
+    falaFinal: "PARABÉNS, ECOGUARDIÃO! O Brasil precisa de gente como você pra continuar verde.",
   },
 
   recompensa: { xp: 400, moedas: 300, medalha: "EcoGuardião Nacional" },

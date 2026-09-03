@@ -4,7 +4,7 @@ export const aula06_problemasMultiplicacao: AulaV4 = {
   slug: "u3-06-problemas-multiplicacao",
   titulo: "Problemas de multiplicação",
   iconeTrilha: "🧩",
-  bncc: ["EF04MA06", "EF04MA26"],
+  bncc: ["EF04MA06"],
   duracaoMin: 22,
   metodologias: ["vergnaud", "rme"],
 

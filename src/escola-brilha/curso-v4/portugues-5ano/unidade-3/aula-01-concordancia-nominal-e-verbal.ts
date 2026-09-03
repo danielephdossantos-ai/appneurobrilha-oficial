@@ -20,7 +20,7 @@ export const aula1: AulaPortuguesV4 = {
   slug: "aula-01-concordancia-nominal-e-verbal",
   titulo: "Concordância nominal e verbal",
   iconeTrilha: "⚙️",
-  bncc: ["EF05LP05", "EF05LP06"],
+  bncc: ["EF05LP06", "EF35LP07"],
   duracaoMin: 25,
 
   momento01_motivacao: {

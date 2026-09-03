@@ -13,7 +13,7 @@ export const aula01: AulaGeoV1 = {
   titulo: "TCC Júnior · Feira de Ciências",
   iconeTrilha: "🎓",
   recompensa: { xp: 200, moedas: 100, medalha: "Pesquisador Certificado" },
-  bncc: ["EF09CI13"],
+  bncc: [],
   duracaoMin: 50,
 
   cena01_motivacao: {
@@ -36,6 +36,7 @@ export const aula01: AulaGeoV1 = {
       { id: "prob", titulo: "Uma PERGUNTA clara", subtitulo: "problema investigável", emoji: "❓", cor: "from-emerald-500 to-teal-700" },
       { id: "resp", titulo: "A resposta pronta", subtitulo: "assim já sabemos o resultado", emoji: "✅", cor: "from-slate-500 to-slate-700" },
       { id: "gra", titulo: "Um gráfico bonito", subtitulo: "sem precisar de dados", emoji: "📊", cor: "from-red-500 to-rose-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "prob",
     feedbackAcerto:
@@ -83,6 +84,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🎯", titulo: "Grupo que NÃO recebe a variável testada — serve de comparação", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "👨‍🔬", titulo: "Grupo de cientistas que controla a sala", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🎮", titulo: "Grupo que controla o resultado com computador", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. Sem controle, não há como saber se o efeito veio da variável testada.",
         feedbackErro: "Controle = grupo COMPARAÇÃO. Sem ele, o experimento não é conclusivo." },
@@ -91,6 +93,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "✅", titulo: "Válido — ciência também aprende com hipóteses derrubadas", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "❌", titulo: "Fracasso — perdemos tempo", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🤷", titulo: "Precisa manipular os dados até dar certo", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Sim. Refutar uma hipótese também é conhecimento!",
         feedbackErro: "Ciência aprende também com hipóteses refutadas. NUNCA manipule dados." },
@@ -99,6 +102,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "📊", titulo: "Em tabelas e gráficos claros, com legenda", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🗣️", titulo: "Só na apresentação oral", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🤫", titulo: "Escondidos, para não confundir", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. Tabelas e gráficos deixam os dados claros e verificáveis.",
         feedbackErro: "Dados vão em TABELAS e GRÁFICOS no relatório, sempre com legenda." },
@@ -193,6 +197,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Hipótese é o palpite antes do experimento; conclusão vem dos dados coletados", correta: true },
           { id: "b", texto: "São a mesma coisa em nomes diferentes" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. Hipótese propõe; conclusão comprova.",
         feedbackErro: "Hipótese = ANTES (palpite). Conclusão = DEPOIS (com base nos dados)." },
@@ -200,6 +206,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Comparar com o grupo experimental e isolar o efeito da variável testada", correta: true },
           { id: "b", texto: "Controlar o comportamento dos participantes" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Perfeito. Sem controle, não sabemos se o efeito veio da variável.",
         feedbackErro: "Controle = COMPARAÇÃO. Isola o efeito da variável estudada." },
@@ -207,6 +215,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Método claro, dados honestos, resultados que outros podem repetir", correta: true },
           { id: "b", texto: "Só a opinião do pesquisador, sem experimentos" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. Ciência = método + evidência + reprodutibilidade.",
         feedbackErro: "Confiabilidade = MÉTODO + DADOS + REPRODUTIBILIDADE. Não é opinião." },

@@ -27,7 +27,7 @@ export const aula02: AulaPortuguesV4 = {
   slug: "aula-02-fato-ou-opiniao",
   titulo: "Fato ou Opinião?",
   iconeTrilha: "🔎",
-  bncc: ["EF03LP20", "EF35LP15", "EF35LP17"],
+  bncc: ["EF35LP15", "EF15LP03"],
   duracaoMin: 20,
 
   momento01_motivacao: {

@@ -1,5 +1,6 @@
 import type { UnidadeGeoV1 } from "../../types";
 import { aula01 } from "./aula-01-mundo-feudal-crise";
+import { aula02 } from "./aula-02-modernidade-conexoes";
 
 export const unidade1: UnidadeGeoV1 = {
   slug: "unidade-1",
@@ -9,5 +10,5 @@ export const unidade1: UnidadeGeoV1 = {
   descricao:
     "Brilha e Aurora abrem a Bússola do Novo Mundo e desbloqueiam a Engrenagem 1: O Selo da Ruína Feudal. Fome, guerra e peste derrubam mil anos de feudalismo.",
   corTema: "#0f766e",
-  aulas: [aula01],
+  aulas: [aula01, aula02],
 };

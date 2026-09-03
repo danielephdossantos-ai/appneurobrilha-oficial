@@ -1,5 +1,6 @@
 import type { UnidadeGeoV1 } from "../../types";
 import { aula01 } from "./aula-01-o-que-e-municipio";
+import { aula02 } from "./aula-02-fontes-historia-local";
 
 export const unidade1: UnidadeGeoV1 = {
   slug: "unidade-1",
@@ -9,5 +10,5 @@ export const unidade1: UnidadeGeoV1 = {
   descricao:
     "Piloto do 3º Ano: introdução técnica ao conceito de município usando fotografia real, mapa cartográfico e infográficos. Restaura a primeira página do Grande Livro das Cidades.",
   corTema: "#0f766e",
-  aulas: [aula01],
+  aulas: [aula01, aula02],
 };

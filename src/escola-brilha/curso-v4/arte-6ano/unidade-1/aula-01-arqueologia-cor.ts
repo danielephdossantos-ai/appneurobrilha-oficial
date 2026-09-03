@@ -60,10 +60,38 @@ export const aula01: AulaArteV1 = {
     titulo: "🧩 O Códice dos Impérios Perdidos",
     instrucao: "Toca em cada pista pra abrir a investigação",
     itens: [
-      { emoji: "🐂", rotulo: "Bisão de Altamira (Espanha)", descricao: "Pintura rupestre do Paleolítico Superior. O artista usou as ondulações naturais da rocha pra dar VOLUME 3D ao bisão quando a fogueira balançava.", cor: "#7c2d12", fotoUrl: mapaBisao },
-      { emoji: "🖐️", rotulo: "Mãos em negativo", descricao: "O artista colocava a mão na rocha e soprava pigmento em pó por um canudo de osso. Ficava a silhueta. Era uma assinatura: 'EU ESTIVE AQUI'.", cor: "#dc2626", fotoUrl: mapaMaos },
-      { emoji: "🕯️", rotulo: "Caverna iluminada por tochas", descricao: "Fundo escuro + luz trêmula das fogueiras. As pinturas pareciam se MOVER. Era o 'cinema' do Paleolítico.", cor: "#f59e0b", fotoUrl: mapaCaverna },
-      { emoji: "🎨", rotulo: "Pigmentos naturais", descricao: "Sem tubo de tinta. Carvão = preto. Óxido de ferro = vermelho e marrom. Argila = amarelo. Puro laboratório químico da Pré-História.", cor: "#a16207", fotoUrl: mapaPigmentos },
+      {
+        emoji: "🐂",
+        rotulo: "Bisão de Altamira (Espanha)",
+        descricao:
+          "Pintura rupestre do Paleolítico Superior. O artista usou as ondulações naturais da rocha pra dar VOLUME 3D ao bisão quando a fogueira balançava.",
+        cor: "#7c2d12",
+        fotoUrl: mapaBisao,
+      },
+      {
+        emoji: "🖐️",
+        rotulo: "Mãos em negativo",
+        descricao:
+          "O artista colocava a mão na rocha e soprava pigmento em pó por um canudo de osso. Ficava a silhueta. Era uma assinatura: 'EU ESTIVE AQUI'.",
+        cor: "#dc2626",
+        fotoUrl: mapaMaos,
+      },
+      {
+        emoji: "🕯️",
+        rotulo: "Caverna iluminada por tochas",
+        descricao:
+          "Fundo escuro + luz trêmula das fogueiras. As pinturas pareciam se MOVER. Era o 'cinema' do Paleolítico.",
+        cor: "#f59e0b",
+        fotoUrl: mapaCaverna,
+      },
+      {
+        emoji: "🎨",
+        rotulo: "Pigmentos naturais",
+        descricao:
+          "Sem tubo de tinta. Carvão = preto. Óxido de ferro = vermelho e marrom. Argila = amarelo. Puro laboratório químico da Pré-História.",
+        cor: "#a16207",
+        fotoUrl: mapaPigmentos,
+      },
     ],
     falaFinal: "Você vai aprender a LER as pistas que 30 mil anos de história deixaram nas rochas.",
   },
@@ -73,14 +101,24 @@ export const aula01: AulaArteV1 = {
     aurora: "Calibra o olho de arqueólogo antes de descer na caverna!",
     perguntas: [
       {
-        pergunta: "Por que o bisão de Altamira parece SALTAR da rocha quando iluminado pela fogueira?",
+        pergunta:
+          "Por que o bisão de Altamira parece SALTAR da rocha quando iluminado pela fogueira?",
         fotoUrl: qBisao,
         alternativas: [
-          { texto: "O artista aproveitou os relevos naturais da parede — a rocha VIROU o corpo do animal", correta: true },
+          {
+            texto:
+              "O artista aproveitou os relevos naturais da parede — a rocha VIROU o corpo do animal",
+            correta: true,
+          },
           { texto: "Porque a tinta usada tinha efeito 3D holográfico", correta: false },
+
+          { texto: "Não corresponde à análise", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
-        feedbackAcerto: "Perfeito! Engenharia visual pré-histórica: usar a topografia da rocha como parte do desenho.",
-        feedbackErro: "Nada de holografia no Paleolítico 😄. O truque foi ANATÔMICO: casar o desenho com a forma da rocha.",
+        feedbackAcerto:
+          "Perfeito! Engenharia visual pré-histórica: usar a topografia da rocha como parte do desenho.",
+        feedbackErro:
+          "Nada de holografia no Paleolítico 😄. O truque foi ANATÔMICO: casar o desenho com a forma da rocha.",
       },
       {
         pergunta: "O que era usado como PINCEL pra soprar pigmento em pó nas mãos em negativo?",
@@ -88,19 +126,31 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Um canudo feito de osso oco de animal", correta: true },
           { texto: "Uma pena de pombo molhada em tinta", correta: false },
+
+          { texto: "Não corresponde à análise", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
         feedbackAcerto: "Correto! Osso oco = primeiro aerógrafo da humanidade.",
-        feedbackErro: "Pena molhada é técnica MUITO posterior (medieval). Na Pré-História era osso oco pra SOPRAR o pó.",
+        feedbackErro:
+          "Pena molhada é técnica MUITO posterior (medieval). Na Pré-História era osso oco pra SOPRAR o pó.",
       },
       {
         pergunta: "Como os primeiros humanos conseguiam a cor PRETA pra pintar?",
         fotoUrl: qCarvao,
         alternativas: [
-          { texto: "Moendo carvão vegetal em pó fino e misturando com gordura ou saliva", correta: true },
+          {
+            texto: "Moendo carvão vegetal em pó fino e misturando com gordura ou saliva",
+            correta: true,
+          },
           { texto: "Comprando tinta preta em cavernas mercantis", correta: false },
+
+          { texto: "Não corresponde à análise", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
-        feedbackAcerto: "Isso! Química pura da natureza — carvão + aglutinante = tinta preta durável.",
-        feedbackErro: "Não existia comércio de tinta há 30 mil anos 😄. Cada cor era EXTRAÍDA da natureza.",
+        feedbackAcerto:
+          "Isso! Química pura da natureza — carvão + aglutinante = tinta preta durável.",
+        feedbackErro:
+          "Não existia comércio de tinta há 30 mil anos 😄. Cada cor era EXTRAÍDA da natureza.",
       },
     ],
   },
@@ -109,10 +159,38 @@ export const aula01: AulaArteV1 = {
     tipo: "vocabularioCards",
     aurora: "Vocabulário do arqueólogo visual. Toca em cada verbete!",
     cards: [
-      { termo: "Fonte Visual", definicao: "Imagens que sobreviveram: pinturas rupestres, gravuras, esculturas. Mostram O QUE aquelas pessoas viam e valorizavam.", emoji: "🎨", cor: "#7c2d12", fotoUrl: vocabVisual },
-      { termo: "Fonte Material", definicao: "Objetos físicos reais achados na escavação: ferramentas, ossos, pedras, restos de fogueira. Revelam COMO a arte foi feita.", emoji: "🦴", cor: "#78350f", fotoUrl: vocabMaterial },
-      { termo: "Pigmento Natural", definicao: "Elementos da natureza triturados em pó pra virar cor: carvão (preto), óxido de ferro (vermelho), argila (amarelo).", emoji: "🎨", cor: "#dc2626", fotoUrl: vocabPigmento },
-      { termo: "Aglutinante", definicao: "Líquido misturado ao pigmento pra ele FIXAR na rocha: saliva, sangue, gordura animal. Sem aglutinante, o pó não gruda.", emoji: "🥣", cor: "#a16207", fotoUrl: vocabAglutinante },
+      {
+        termo: "Fonte Visual",
+        definicao:
+          "Imagens que sobreviveram: pinturas rupestres, gravuras, esculturas. Mostram O QUE aquelas pessoas viam e valorizavam.",
+        emoji: "🎨",
+        cor: "#7c2d12",
+        fotoUrl: vocabVisual,
+      },
+      {
+        termo: "Fonte Material",
+        definicao:
+          "Objetos físicos reais achados na escavação: ferramentas, ossos, pedras, restos de fogueira. Revelam COMO a arte foi feita.",
+        emoji: "🦴",
+        cor: "#78350f",
+        fotoUrl: vocabMaterial,
+      },
+      {
+        termo: "Pigmento Natural",
+        definicao:
+          "Elementos da natureza triturados em pó pra virar cor: carvão (preto), óxido de ferro (vermelho), argila (amarelo).",
+        emoji: "🎨",
+        cor: "#dc2626",
+        fotoUrl: vocabPigmento,
+      },
+      {
+        termo: "Aglutinante",
+        definicao:
+          "Líquido misturado ao pigmento pra ele FIXAR na rocha: saliva, sangue, gordura animal. Sem aglutinante, o pó não gruda.",
+        emoji: "🥣",
+        cor: "#a16207",
+        fotoUrl: vocabAglutinante,
+      },
     ],
   },
 
@@ -127,10 +205,34 @@ export const aula01: AulaArteV1 = {
       "E as MÃOS EM NEGATIVO? A pessoa colava a mão na parede e soprava pigmento pelo canudo de osso. Ficava a silhueta. É a primeira ASSINATURA da história: 'Eu estive aqui'. Um código de identidade gravado há mais de 30 mil anos.",
     ],
     pigmentos: [
-      { nome: "Carvão vegetal", hex: "#1f2937", fonte: "Base preta da Pré-História", emoji: "⚫", fotoUrl: matCarvao },
-      { nome: "Óxido de ferro (ocre)", hex: "#b91c1c", fonte: "Vermelho e marrom das rochas", emoji: "🔴", fotoUrl: matOcre },
-      { nome: "Canudo de osso oco", hex: "#d6d3d1", fonte: "Aerógrafo pré-histórico pra soprar pó", emoji: "🦴", fotoUrl: matOsso },
-      { nome: "Pedra de moer", hex: "#78716c", fonte: "Trituradora de pigmento em pó fino", emoji: "🪨", fotoUrl: matPedra },
+      {
+        nome: "Carvão vegetal",
+        hex: "#1f2937",
+        fonte: "Base preta da Pré-História",
+        emoji: "⚫",
+        fotoUrl: matCarvao,
+      },
+      {
+        nome: "Óxido de ferro (ocre)",
+        hex: "#b91c1c",
+        fonte: "Vermelho e marrom das rochas",
+        emoji: "🔴",
+        fotoUrl: matOcre,
+      },
+      {
+        nome: "Canudo de osso oco",
+        hex: "#d6d3d1",
+        fonte: "Aerógrafo pré-histórico pra soprar pó",
+        emoji: "🦴",
+        fotoUrl: matOsso,
+      },
+      {
+        nome: "Pedra de moer",
+        hex: "#78716c",
+        fonte: "Trituradora de pigmento em pó fino",
+        emoji: "🪨",
+        fotoUrl: matPedra,
+      },
     ],
   },
 
@@ -139,13 +241,18 @@ export const aula01: AulaArteV1 = {
     aurora: "Verifica o que ficou no caderno do arqueólogo!",
     perguntas: [
       {
-        pergunta: "Se o arqueólogo encontra um OSSO FURADO usado pra soprar tinta, que tipo de fonte histórica ele achou?",
+        pergunta:
+          "Se o arqueólogo encontra um OSSO FURADO usado pra soprar tinta, que tipo de fonte histórica ele achou?",
         fotoUrl: qOsso,
         alternativas: [
           { texto: "Uma Fonte Material — objeto físico usado na produção da arte", correta: true },
           { texto: "Uma Fonte Oral — porque a pessoa soprava por ele", correta: false },
+
+          { texto: "Não corresponde à análise", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
-        feedbackAcerto: "Excelente! Objetos, ferramentas e utensílios físicos são sempre FONTES MATERIAIS.",
+        feedbackAcerto:
+          "Excelente! Objetos, ferramentas e utensílios físicos são sempre FONTES MATERIAIS.",
         feedbackErro: "Fonte Oral é fala/tradição contada. O osso é um OBJETO — Fonte Material.",
       },
       {
@@ -154,19 +261,30 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Uma Fonte Visual — é a imagem em si", correta: true },
           { texto: "Uma Fonte Material — porque a rocha é material", correta: false },
+
+          { texto: "Não corresponde à análise", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
-        feedbackAcerto: "Perfeito! A IMAGEM em si é Fonte Visual, mesmo que esteja em suporte material.",
-        feedbackErro: "Cuidado: o que classificamos é a natureza da FONTE. Se estamos analisando a IMAGEM, é Fonte Visual.",
+        feedbackAcerto:
+          "Perfeito! A IMAGEM em si é Fonte Visual, mesmo que esteja em suporte material.",
+        feedbackErro:
+          "Cuidado: o que classificamos é a natureza da FONTE. Se estamos analisando a IMAGEM, é Fonte Visual.",
       },
       {
-        pergunta: "Por que o pigmento em pó precisa de AGLUTINANTE (saliva, sangue, gordura) pra virar tinta?",
+        pergunta:
+          "Por que o pigmento em pó precisa de AGLUTINANTE (saliva, sangue, gordura) pra virar tinta?",
         fotoUrl: vocabAglutinante,
         alternativas: [
           { texto: "Sem líquido pra ligar as partículas, o pó não gruda na rocha", correta: true },
           { texto: "Pra dar cheiro forte que espanta animais selvagens", correta: false },
+
+          { texto: "Não corresponde à análise", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
-        feedbackAcerto: "Fantástico! Aglutinante é o que TRANSFORMA pó em tinta que fixa no suporte.",
-        feedbackErro: "Nada a ver com cheiro 😄. É QUÍMICA: o aglutinante gruda o pigmento na parede.",
+        feedbackAcerto:
+          "Fantástico! Aglutinante é o que TRANSFORMA pó em tinta que fixa no suporte.",
+        feedbackErro:
+          "Nada a ver com cheiro 😄. É QUÍMICA: o aglutinante gruda o pigmento na parede.",
       },
     ],
   },
@@ -176,32 +294,44 @@ export const aula01: AulaArteV1 = {
     aurora: "Cada vestígio é um tipo de fonte histórica. Classifica certinho!",
     animais: [
       {
-        nome: "Osso oco de soprar pigmento", emoji: "🦴", fotoUrl: qOsso,
+        nome: "Osso oco de soprar pigmento",
+        emoji: "🦴",
+        fotoUrl: qOsso,
         corAlvo: { nome: "Fonte Material", hex: "#78350f" },
         opcoes: [
           { nome: "Fonte Material", hex: "#78350f" },
           { nome: "Fonte Visual", hex: "#dc2626" },
           { nome: "Fonte Oral", hex: "#0ea5e9" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Isso! Ferramenta física = Fonte Material.",
       },
       {
-        nome: "Pintura do bisão na rocha", emoji: "🐂", fotoUrl: qBisao,
+        nome: "Pintura do bisão na rocha",
+        emoji: "🐂",
+        fotoUrl: qBisao,
         corAlvo: { nome: "Fonte Visual", hex: "#dc2626" },
         opcoes: [
           { nome: "Fonte Visual", hex: "#dc2626" },
           { nome: "Fonte Escrita", hex: "#1e3a8a" },
           { nome: "Fonte Material", hex: "#78350f" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Perfeito! A IMAGEM em si é Fonte Visual.",
       },
       {
-        nome: "Restos de carvão da fogueira", emoji: "🔥", fotoUrl: qCarvao,
+        nome: "Restos de carvão da fogueira",
+        emoji: "🔥",
+        fotoUrl: qCarvao,
         corAlvo: { nome: "Fonte Material", hex: "#1f2937" },
         opcoes: [
           { nome: "Fonte Material", hex: "#1f2937" },
           { nome: "Fonte Visual", hex: "#dc2626" },
           { nome: "Pigmento acabado", hex: "#f59e0b" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Correto! Vestígio físico da fogueira = Fonte Material.",
       },
@@ -212,13 +342,44 @@ export const aula01: AulaArteV1 = {
     tipo: "sequenciaMistura",
     aurora: "Ordena os 5 passos pra criar SEU registro rupestre em casa.",
     passos: [
-      { id: "p1", texto: "AMASSO uma folha de papel várias vezes até virar textura de rocha", emoji: "📜", ordem: 1, fotoUrl: passo1 },
-      { id: "p2", texto: "MOO um pedaço de carvão vegetal em pó fino sobre uma pedra", emoji: "⚫", ordem: 2, fotoUrl: passo2 },
-      { id: "p3", texto: "MISTURO o pó com um pouquinho de água (ou borra de café) numa tigela", emoji: "🥣", ordem: 3, fotoUrl: passo3 },
-      { id: "p4", texto: "DESENHO com o dedo ou galho um símbolo que represente MINHA vida hoje", emoji: "✏️", ordem: 4, fotoUrl: passo4 },
-      { id: "p5", texto: "DEIXO secar e crio meu registro rupestre — Fonte Visual + Material!", emoji: "🎨", ordem: 5, fotoUrl: passo5 },
+      {
+        id: "p1",
+        texto: "AMASSO uma folha de papel várias vezes até virar textura de rocha",
+        emoji: "📜",
+        ordem: 1,
+        fotoUrl: passo1,
+      },
+      {
+        id: "p2",
+        texto: "MOO um pedaço de carvão vegetal em pó fino sobre uma pedra",
+        emoji: "⚫",
+        ordem: 2,
+        fotoUrl: passo2,
+      },
+      {
+        id: "p3",
+        texto: "MISTURO o pó com um pouquinho de água (ou borra de café) numa tigela",
+        emoji: "🥣",
+        ordem: 3,
+        fotoUrl: passo3,
+      },
+      {
+        id: "p4",
+        texto: "DESENHO com o dedo ou galho um símbolo que represente MINHA vida hoje",
+        emoji: "✏️",
+        ordem: 4,
+        fotoUrl: passo4,
+      },
+      {
+        id: "p5",
+        texto: "DEIXO secar e crio meu registro rupestre — Fonte Visual + Material!",
+        emoji: "🎨",
+        ordem: 5,
+        fotoUrl: passo5,
+      },
     ],
-    falaAcerto: "Você acabou de criar uma FONTE HISTÓRICA — igual os artistas de 30 mil anos atrás!",
+    falaAcerto:
+      "Você acabou de criar uma FONTE HISTÓRICA — igual os artistas de 30 mil anos atrás!",
   },
 
   cena08_voceLe: {
@@ -226,18 +387,30 @@ export const aula01: AulaArteV1 = {
     aurora: "Agora VOCÊ lê o diário do arqueólogo visual. Toca nas palavras coloridas.",
     titulo: "Diário do Investigador do Tempo",
     trechos: [
-      { texto: "Sou um investigador do tempo. Analiso as", palavraDestaque: "fontes visuais", corDestaque: "#dc2626" },
+      {
+        texto: "Sou um investigador do tempo. Analiso as",
+        palavraDestaque: "fontes visuais",
+        corDestaque: "#dc2626",
+      },
       { texto: "e as", palavraDestaque: "fontes materiais", corDestaque: "#78350f" },
-      { texto: "que sobreviveram nas cavernas. Sei que o preto vinha do", palavraDestaque: "carvão", corDestaque: "#1f2937" },
+      {
+        texto: "que sobreviveram nas cavernas. Sei que o preto vinha do",
+        palavraDestaque: "carvão",
+        corDestaque: "#1f2937",
+      },
       { texto: "e o vermelho do", palavraDestaque: "óxido de ferro", corDestaque: "#b91c1c" },
-      { texto: "Em Altamira, o bisão salta da rocha por causa da geometria natural — arte + arqueologia!" },
+      {
+        texto:
+          "Em Altamira, o bisão salta da rocha por causa da geometria natural — arte + arqueologia!",
+      },
     ],
   },
 
   cena09_minijogo: {
     tipo: "cenaTematica",
     variante: "minijogo",
-    aurora: "🎯 Laboratório do Arqueólogo! Toca em TODOS os vestígios materiais antes do tempo acabar.",
+    aurora:
+      "🎯 Laboratório do Arqueólogo! Toca em TODOS os vestígios materiais antes do tempo acabar.",
     titulo: "🎯 Laboratório do Arqueólogo",
     instrucao: "Escave todos os elementos antes do tempo acabar!",
     tempoSeg: 35,
@@ -249,7 +422,8 @@ export const aula01: AulaArteV1 = {
       { emoji: "🥣", rotulo: "Tigela com aglutinante", cor: "#a16207" },
       { emoji: "🖐️", rotulo: "Mão em negativo na parede", cor: "#dc2626" },
     ],
-    falaFinal: "Escavação concluída! Você classificou todas as Fontes Materiais do sítio arqueológico.",
+    falaFinal:
+      "Escavação concluída! Você classificou todas as Fontes Materiais do sítio arqueológico.",
   },
 
   cena10_revisao: {
@@ -258,12 +432,51 @@ export const aula01: AulaArteV1 = {
     aurora: "Fecha a primeira página do Códice. Toca em cada verbete!",
     titulo: "📓 Caderno do Códice dos Impérios",
     itens: [
-      { emoji: "🐂", rotulo: "Bisão de Altamira", descricao: "Pintura rupestre que usa relevo natural da rocha pra criar volume 3D quando iluminada por fogueira.", cor: "#7c2d12", fotoUrl: mapaBisao },
-      { emoji: "🖐️", rotulo: "Mãos em Negativo", descricao: "Pigmento soprado por osso oco em volta da mão — primeira assinatura da humanidade.", cor: "#dc2626", fotoUrl: mapaMaos },
-      { emoji: "🎨", rotulo: "Fonte Visual", descricao: "Imagens que sobreviveram — pinturas, gravuras, esculturas. Revelam O QUE viam.", cor: "#7c2d12", fotoUrl: vocabVisual },
-      { emoji: "🦴", rotulo: "Fonte Material", descricao: "Objetos físicos — ferramentas, ossos, carvão. Revelam COMO faziam.", cor: "#78350f", fotoUrl: vocabMaterial },
-      { emoji: "⚫", rotulo: "Pigmento + Aglutinante", descricao: "Química da Pré-História: pó natural + saliva/gordura pra fixar na rocha.", cor: "#1f2937", fotoUrl: vocabAglutinante },
-      { emoji: "🕯️", rotulo: "Luz Trêmula da Fogueira", descricao: "Iluminação instável que fazia as pinturas parecerem se mover — o cinema paleolítico.", cor: "#f59e0b", fotoUrl: mapaCaverna },
+      {
+        emoji: "🐂",
+        rotulo: "Bisão de Altamira",
+        descricao:
+          "Pintura rupestre que usa relevo natural da rocha pra criar volume 3D quando iluminada por fogueira.",
+        cor: "#7c2d12",
+        fotoUrl: mapaBisao,
+      },
+      {
+        emoji: "🖐️",
+        rotulo: "Mãos em Negativo",
+        descricao:
+          "Pigmento soprado por osso oco em volta da mão — primeira assinatura da humanidade.",
+        cor: "#dc2626",
+        fotoUrl: mapaMaos,
+      },
+      {
+        emoji: "🎨",
+        rotulo: "Fonte Visual",
+        descricao: "Imagens que sobreviveram — pinturas, gravuras, esculturas. Revelam O QUE viam.",
+        cor: "#7c2d12",
+        fotoUrl: vocabVisual,
+      },
+      {
+        emoji: "🦴",
+        rotulo: "Fonte Material",
+        descricao: "Objetos físicos — ferramentas, ossos, carvão. Revelam COMO faziam.",
+        cor: "#78350f",
+        fotoUrl: vocabMaterial,
+      },
+      {
+        emoji: "⚫",
+        rotulo: "Pigmento + Aglutinante",
+        descricao: "Química da Pré-História: pó natural + saliva/gordura pra fixar na rocha.",
+        cor: "#1f2937",
+        fotoUrl: vocabAglutinante,
+      },
+      {
+        emoji: "🕯️",
+        rotulo: "Luz Trêmula da Fogueira",
+        descricao:
+          "Iluminação instável que fazia as pinturas parecerem se mover — o cinema paleolítico.",
+        cor: "#f59e0b",
+        fotoUrl: mapaCaverna,
+      },
     ],
     falaFinal: "Primeira página do Códice dos Impérios Perdidos RESTAURADA!",
   },
@@ -272,12 +485,17 @@ export const aula01: AulaArteV1 = {
     tipo: "avaliacaoFinal",
     aurora: "Missão final, investigador do tempo!",
     quiz: {
-      pergunta: "Se um arqueólogo encontra um pedaço de OSSO DE ANIMAL FURADO usado pra soprar tinta na Pré-História, que tipo de fonte histórica ele achou?",
+      pergunta:
+        "Se um arqueólogo encontra um pedaço de OSSO DE ANIMAL FURADO usado pra soprar tinta na Pré-História, que tipo de fonte histórica ele achou?",
       alternativas: [
         { texto: "Uma Fonte Material — objetos, ferramentas e utensílios físicos", correta: true },
         { texto: "Uma Fonte Oral — porque servia pra soprar pelo bico", correta: false },
+
+        { texto: "Não corresponde à análise", correta: false },
+        { texto: "Outra resposta sem relação", correta: false },
       ],
-      feedback: "Excelente! Objetos, ferramentas e utensílios físicos são sempre classificados como FONTES MATERIAIS. Fonte Oral é fala/tradição contada de geração em geração — coisa totalmente diferente.",
+      feedback:
+        "Excelente! Objetos, ferramentas e utensílios físicos são sempre classificados como FONTES MATERIAIS. Fonte Oral é fala/tradição contada de geração em geração — coisa totalmente diferente.",
     },
     missaoFamilia:
       "📸 Meu Registro Rupestre: Com um adulto, amasse uma folha de papel até parecer textura de rocha. Use carvão de churrasco moído (ou lápis grafite 6B) e borra de café úmida pra desenhar um símbolo da SUA vida hoje (animal de estimação, família, ferramenta favorita). Registre no álbum — você acabou de criar uma Fonte Visual + Material da sua época!",

@@ -1137,7 +1137,9 @@ function JogoArrastar({
           Conferir
         </button>
         <button
+          type="button"
           onClick={reset}
+          aria-label="Reiniciar atividade"
           className="h-10 px-3 rounded-xl bg-white/15 grid place-items-center"
         >
           <RefreshCw className="h-4 w-4" />
@@ -1953,4 +1955,3 @@ function JogoLupa({
     </Secao>
   );
 }
-

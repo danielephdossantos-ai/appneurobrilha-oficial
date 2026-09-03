@@ -9,7 +9,7 @@ import { url as imgPatio } from "@/assets/historia-2ano/patio-escola-atual.png.a
 import { url as imgFotoAntiga } from "@/assets/historia-2ano/foto-antiga.png.asset.json";
 /**
  * História · 2º Ano · Unidade 3 · Aula 01
- * "A História da Minha Escola" — EF02HI09 + EF02HI10
+ * "A História da Minha Escola" — EF02HI09
  *
  * Missão: investigar a evolução do espaço escolar e inaugurar a Sala 3
  * do museu — Linha do Tempo da Escola. Recompensa: Engrenagem de Cobre.
@@ -19,7 +19,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-historia-da-escola",
   titulo: "A História da Minha Escola",
   iconeTrilha: "🏫",
-  bncc: ["EF02HI09", "EF02HI10"],
+  bncc: ["EF02HI09"],
   duracaoMin: 20,
 
   cena01_motivacao: {
@@ -57,6 +57,8 @@ export const aula01: AulaGeoV1 = {
         cor: "from-rose-500 to-red-700",
         fotoUrl: imgPalmatoria,
       },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "lousa",
     feedbackAcerto:
@@ -167,6 +169,7 @@ export const aula01: AulaGeoV1 = {
           { id: "p", emoji: "🪶", titulo: "Caneta de pena", cor: "from-amber-400 to-orange-600" },
           { id: "e", emoji: "🖊️", titulo: "Caneta esferográfica", cor: "from-emerald-400 to-teal-600" },
           { id: "t", emoji: "📱", titulo: "Tablet", cor: "from-sky-400 to-indigo-600" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "p",
         feedbackAcerto:
@@ -181,6 +184,8 @@ export const aula01: AulaGeoV1 = {
         cards: [
           { id: "p", emoji: "🚫", titulo: "Proibida por lei", cor: "from-rose-400 to-red-600" },
           { id: "u", emoji: "✅", titulo: "Ainda usada", cor: "from-emerald-400 to-teal-600" },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "p",
         feedbackAcerto:
@@ -197,6 +202,7 @@ export const aula01: AulaGeoV1 = {
           { id: "d", emoji: "📺", titulo: "Tela digital", cor: "from-sky-400 to-indigo-600" },
           { id: "m", emoji: "🌳", titulo: "Árvore", cor: "from-emerald-400 to-teal-600" },
           { id: "b", emoji: "🎒", titulo: "Mochila", cor: "from-amber-400 to-orange-600" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "d",
         feedbackAcerto:
@@ -472,6 +478,8 @@ export const aula01: AulaGeoV1 = {
             id: "b",
             texto: "As crianças deixaram de ter professores",
           },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto:
           "Exatamente! A tecnologia deixou o aprendizado mais dinâmico e divertido.",
@@ -485,6 +493,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Proibida por lei", correta: true },
           { id: "b", texto: "Usada em toda escola" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto:
           "Isso! Hoje a lei protege as crianças. A escola é lugar de acolhimento.",
@@ -499,6 +509,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "A lousa e as mesas", correta: true },
           { id: "b", texto: "A palmatória" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto:
           "Combo! Lousa e mesas continuam — só mudaram de material.",

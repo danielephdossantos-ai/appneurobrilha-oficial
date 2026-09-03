@@ -4,7 +4,7 @@ export const aula07_missaoFinalU6: AulaV4 = {
   slug: "u6-07-missao-final",
   titulo: "Missão Final: Medidor(a) do Reino",
   iconeTrilha: "🏆",
-  bncc: ["EF04MA20", "EF04MA21", "EF04MA22", "EF04MA23", "EF04MA24"],
+  bncc: ["EF04MA20", "EF04MA22", "EF04MA25"],
   duracaoMin: 25,
   metodologias: ["rme", "cpa"],
 

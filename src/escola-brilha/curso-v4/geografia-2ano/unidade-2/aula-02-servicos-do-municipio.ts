@@ -30,7 +30,7 @@ export const aula02: AulaPortuguesV4 = {
   slug: "aula-02-servicos-do-municipio",
   titulo: "Os Serviços do Meu Município",
   iconeTrilha: "🏥",
-  bncc: ["EF02GE06"],
+  bncc: [],
   duracaoMin: 15,
 
   momento01_motivacao: {
@@ -80,12 +80,11 @@ export const aula02: AulaPortuguesV4 = {
           texto: "Sobre construir foguetes.",
           imagemUrl: mapa,
         },
+        { texto: "Sobre outra possibilidade relacionada ao tema.", imagemUrl: bairro },
       ],
       respostaCerta: 0,
-      feedbackAcerto:
-        "🎉 Isso! Os SERVIÇOS do município — e as pessoas que trabalham neles.",
-      feedbackErro:
-        "As pistas mostram escola, posto e mercado. É sobre os SERVIÇOS do município.",
+      feedbackAcerto: "🎉 Isso! Os SERVIÇOS do município — e as pessoas que trabalham neles.",
+      feedbackErro: "As pistas mostram escola, posto e mercado. É sobre os SERVIÇOS do município.",
     },
   },
 
@@ -122,14 +121,7 @@ export const aula02: AulaPortuguesV4 = {
       titulo: "Um dia no bairro da Brilha",
       imagemUrl: bairro,
       legendaImagem: "Cada porta do bairro tem um serviço diferente.",
-      destacar: [
-        "escola",
-        "posto de saúde",
-        "padaria",
-        "mercado",
-        "biblioteca",
-        "gari",
-      ],
+      destacar: ["escola", "posto de saúde", "padaria", "mercado", "biblioteca", "gari"],
       paragrafos: [
         "De manhã cedo, Brilha viu o GARI passando na rua com a lixeira. É ele que RECOLHE o lixo pra rua ficar limpa. Isso é um SERVIÇO do município.",
         "Depois, o pai levou Brilha na ESCOLA. Ali, a PROFESSORA ensina, a COZINHEIRA faz a merenda e o(a) DIRETOR(A) cuida de tudo. A escola é um SERVIÇO PÚBLICO.",
@@ -144,38 +136,34 @@ export const aula02: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "Quem recolhe o LIXO da rua?",
-        opcoes: ["A professora", "O gari", "O padeiro"],
+        opcoes: ["A professora", "O gari", "O padeiro", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 Isso! O GARI cuida da limpeza da rua.",
-        feedbackErro:
-          "O texto diz: 'É ele que RECOLHE o lixo pra rua ficar limpa'. É o GARI.",
+        feedbackErro: "O texto diz: 'É ele que RECOLHE o lixo pra rua ficar limpa'. É o GARI.",
         ondeEstaNoTexto: "…o GARI passando na rua com a lixeira…",
       },
       {
         pergunta: "Quem faz a MERENDA na escola?",
-        opcoes: ["A cozinheira", "O médico", "O motorista de ônibus"],
+        opcoes: ["A cozinheira", "O médico", "O motorista de ônibus", "Outra possibilidade"],
         correta: 0,
         feedbackAcerto: "🎉 A COZINHEIRA faz a merenda.",
-        feedbackErro:
-          "O texto diz: 'a COZINHEIRA faz a merenda'.",
+        feedbackErro: "O texto diz: 'a COZINHEIRA faz a merenda'.",
         ondeEstaNoTexto: "…a COZINHEIRA faz a merenda…",
       },
       {
         pergunta: "Onde a gente COMPRA pão?",
-        opcoes: ["No posto de saúde", "Na padaria", "Na biblioteca"],
+        opcoes: ["No posto de saúde", "Na padaria", "Na biblioteca", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 Na PADARIA! Ela é um comércio.",
-        feedbackErro:
-          "O texto diz: 'passaram na PADARIA (pra comprar pão)'.",
+        feedbackErro: "O texto diz: 'passaram na PADARIA (pra comprar pão)'.",
         ondeEstaNoTexto: "…PADARIA (pra comprar pão)…",
       },
       {
         pergunta: "Onde a gente toma VACINA?",
-        opcoes: ["No mercado", "Na escola", "No posto de saúde"],
+        opcoes: ["No mercado", "Na escola", "No posto de saúde", "Outra possibilidade"],
         correta: 2,
         feedbackAcerto: "🎉 No POSTO DE SAÚDE — cuida da saúde.",
-        feedbackErro:
-          "O texto diz: 'foram no POSTO DE SAÚDE tomar vacina'.",
+        feedbackErro: "O texto diz: 'foram no POSTO DE SAÚDE tomar vacina'.",
         ondeEstaNoTexto: "…foram no POSTO DE SAÚDE tomar vacina…",
       },
     ],
@@ -186,28 +174,27 @@ export const aula02: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "Onde a PROFESSORA trabalha?",
-        opcoes: ["No mercado", "Na escola", "No posto de saúde"],
-        opcoesImagens: [mercado, escola, postoSaude],
+        opcoes: ["No mercado", "Na escola", "No posto de saúde", "Outra possibilidade"],
+        opcoesImagens: [mercado, escola, postoSaude, mercado],
         correta: 1,
         feedbackAcerto: "🎉 Isso! Professora → ESCOLA.",
         feedbackErro: "A PROFESSORA trabalha na ESCOLA.",
       },
       {
         pergunta: "Onde o BIBLIOTECÁRIO cuida dos LIVROS?",
-        opcoes: ["Na biblioteca", "Na praça", "No mercado"],
-        opcoesImagens: [biblioteca, praca, mercado],
+        opcoes: ["Na biblioteca", "Na praça", "No mercado", "Outra possibilidade"],
+        opcoesImagens: [biblioteca, praca, mercado, biblioteca],
         correta: 0,
         feedbackAcerto: "🎉 Certo! Bibliotecário → BIBLIOTECA.",
         feedbackErro: "Quem cuida dos LIVROS trabalha na BIBLIOTECA.",
       },
       {
         pergunta: "Onde a COZINHEIRA da merenda trabalha?",
-        opcoes: ["No posto de saúde", "Na padaria", "Na escola"],
-        opcoesImagens: [postoSaude, padaria, escola],
+        opcoes: ["No posto de saúde", "Na padaria", "Na escola", "Outra possibilidade"],
+        opcoesImagens: [postoSaude, padaria, escola, postoSaude],
         correta: 2,
         feedbackAcerto: "🎉 Isso! Cozinheira da merenda → ESCOLA.",
-        feedbackErro:
-          "A cozinheira da MERENDA trabalha na ESCOLA.",
+        feedbackErro: "A cozinheira da MERENDA trabalha na ESCOLA.",
       },
     ],
   },
@@ -217,16 +204,22 @@ export const aula02: AulaPortuguesV4 = {
     bloco: {
       instrucao: "Do começo do dia até o fim da tarde.",
       itens: [
-        { id: "s1", texto: "1) De manhã, viu o GARI passando com a lixeira.", imagemUrl: funcionarioLimpeza },
+        {
+          id: "s1",
+          texto: "1) De manhã, viu o GARI passando com a lixeira.",
+          imagemUrl: funcionarioLimpeza,
+        },
         { id: "s2", texto: "2) Depois, foi pra ESCOLA (aula + merenda).", imagemUrl: escola },
         { id: "s3", texto: "3) Na volta, passou na PADARIA e no MERCADO.", imagemUrl: mercado },
-        { id: "s4", texto: "4) À tarde, foi no POSTO DE SAÚDE tomar vacina.", imagemUrl: postoSaude },
+        {
+          id: "s4",
+          texto: "4) À tarde, foi no POSTO DE SAÚDE tomar vacina.",
+          imagemUrl: postoSaude,
+        },
       ],
       ordemCerta: ["s1", "s2", "s3", "s4"],
-      feedbackAcerto:
-        "🎉 Perfeito! Gari → escola → padaria/mercado → posto de saúde.",
-      feedbackErro:
-        "Volte no texto: começa com o GARI de manhã e termina no POSTO à tarde.",
+      feedbackAcerto: "🎉 Perfeito! Gari → escola → padaria/mercado → posto de saúde.",
+      feedbackErro: "Volte no texto: começa com o GARI de manhã e termina no POSTO à tarde.",
     },
   },
 
@@ -244,12 +237,11 @@ export const aula02: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "Quem cuida dos LIVROS da biblioteca?",
-        opcoes: ["O padeiro", "O bibliotecário", "O médico"],
-        opcoesImagens: [padaria, bibliotecario, postoSaude],
+        opcoes: ["O padeiro", "O bibliotecário", "O médico", "Outra possibilidade"],
+        opcoesImagens: [padaria, bibliotecario, postoSaude, padaria],
         correta: 1,
         feedbackAcerto: "🎉 O(a) BIBLIOTECÁRIO(A) cuida dos livros.",
-        feedbackErro:
-          "O texto diz: 'Quem cuida dos livros é o(a) BIBLIOTECÁRIO(A)'.",
+        feedbackErro: "O texto diz: 'Quem cuida dos livros é o(a) BIBLIOTECÁRIO(A)'.",
         ondeEstaNoTexto: "…quem cuida dos livros é o(a) BIBLIOTECÁRIO(A)…",
       },
       {
@@ -258,13 +250,12 @@ export const aula02: AulaPortuguesV4 = {
           "Sim — é um comércio",
           "Não — é serviço público, empresta de graça",
           "Só nos fins de semana",
+          "Outra possibilidade",
         ],
-        opcoesImagens: [mercado, livro, biblioteca],
+        opcoesImagens: [mercado, livro, biblioteca, mercado],
         correta: 1,
-        feedbackAcerto:
-          "🎉 Boa! A biblioteca é SERVIÇO PÚBLICO — empresta de graça.",
-        feedbackErro:
-          "O texto diz: 'não vende nada, é do município pra todo mundo'.",
+        feedbackAcerto: "🎉 Boa! A biblioteca é SERVIÇO PÚBLICO — empresta de graça.",
+        feedbackErro: "O texto diz: 'não vende nada, é do município pra todo mundo'.",
         ondeEstaNoTexto: "…não vende nada, é do município pra todo mundo…",
       },
     ],
@@ -293,12 +284,11 @@ export const aula02: AulaPortuguesV4 = {
               { id: "servico", nome: "SERVIÇO público", imagemUrl: postoSaude },
               { id: "comercio", nome: "COMÉRCIO", imagemUrl: mercado },
               { id: "praca", nome: "Praça", imagemUrl: praca },
+              { id: "outra-opcao-2", nome: "Outra possibilidade", imagemUrl: postoSaude },
             ],
             correta: "servico",
-            feedbackAcerto:
-              "🎉 Isso! Posto de saúde é SERVIÇO PÚBLICO — não vende nada.",
-            feedbackErro:
-              "No POSTO ninguém vende — o município cuida da saúde. É SERVIÇO PÚBLICO.",
+            feedbackAcerto: "🎉 Isso! Posto de saúde é SERVIÇO PÚBLICO — não vende nada.",
+            feedbackErro: "No POSTO ninguém vende — o município cuida da saúde. É SERVIÇO PÚBLICO.",
           },
           {
             id: "r2",
@@ -313,12 +303,11 @@ export const aula02: AulaPortuguesV4 = {
               { id: "comercio", nome: "COMÉRCIO", imagemUrl: pao },
               { id: "servico", nome: "SERVIÇO público", imagemUrl: postoSaude },
               { id: "escola", nome: "Escola", imagemUrl: escola },
+              { id: "outra-opcao-3", nome: "Outra possibilidade", imagemUrl: pao },
             ],
             correta: "comercio",
-            feedbackAcerto:
-              "🎉 Certo! Padaria VENDE pão — é COMÉRCIO.",
-            feedbackErro:
-              "Na PADARIA o cliente PAGA pelo pão. Isso é COMÉRCIO.",
+            feedbackAcerto: "🎉 Certo! Padaria VENDE pão — é COMÉRCIO.",
+            feedbackErro: "Na PADARIA o cliente PAGA pelo pão. Isso é COMÉRCIO.",
           },
           {
             id: "r3",
@@ -333,12 +322,11 @@ export const aula02: AulaPortuguesV4 = {
               { id: "servico", nome: "SERVIÇO público", imagemUrl: escola },
               { id: "comercio", nome: "COMÉRCIO", imagemUrl: mercado },
               { id: "posto", nome: "Posto de gasolina", imagemUrl: pontoOnibus },
+              { id: "outra-opcao-4", nome: "Outra possibilidade", imagemUrl: escola },
             ],
             correta: "servico",
-            feedbackAcerto:
-              "🎉 Isso! Escola pública é SERVIÇO — a criança não paga.",
-            feedbackErro:
-              "Na ESCOLA pública ninguém paga pra estudar. É SERVIÇO PÚBLICO.",
+            feedbackAcerto: "🎉 Isso! Escola pública é SERVIÇO — a criança não paga.",
+            feedbackErro: "Na ESCOLA pública ninguém paga pra estudar. É SERVIÇO PÚBLICO.",
           },
           {
             id: "r4",
@@ -353,12 +341,11 @@ export const aula02: AulaPortuguesV4 = {
               { id: "comercio", nome: "COMÉRCIO", imagemUrl: mercado },
               { id: "servico", nome: "SERVIÇO público", imagemUrl: biblioteca },
               { id: "praca", nome: "Praça", imagemUrl: praca },
+              { id: "outra-opcao-5", nome: "Outra possibilidade", imagemUrl: mercado },
             ],
             correta: "comercio",
-            feedbackAcerto:
-              "🎉 Boa! Mercado VENDE produtos — COMÉRCIO.",
-            feedbackErro:
-              "No MERCADO tudo é PAGO. Isso é COMÉRCIO.",
+            feedbackAcerto: "🎉 Boa! Mercado VENDE produtos — COMÉRCIO.",
+            feedbackErro: "No MERCADO tudo é PAGO. Isso é COMÉRCIO.",
           },
           {
             id: "r5",
@@ -373,12 +360,11 @@ export const aula02: AulaPortuguesV4 = {
               { id: "servico", nome: "SERVIÇO público", imagemUrl: lixeiraReciclagem },
               { id: "comercio", nome: "COMÉRCIO", imagemUrl: mercado },
               { id: "sitio", nome: "Sítio", imagemUrl: escola },
+              { id: "outra-opcao-6", nome: "Outra possibilidade", imagemUrl: lixeiraReciclagem },
             ],
             correta: "servico",
-            feedbackAcerto:
-              "🎉 Isso! Coleta de lixo é SERVIÇO PÚBLICO da prefeitura.",
-            feedbackErro:
-              "Quem passa recolhendo o lixo é a PREFEITURA. Isso é SERVIÇO PÚBLICO.",
+            feedbackAcerto: "🎉 Isso! Coleta de lixo é SERVIÇO PÚBLICO da prefeitura.",
+            feedbackErro: "Quem passa recolhendo o lixo é a PREFEITURA. Isso é SERVIÇO PÚBLICO.",
           },
         ],
         feedbackFinal:
@@ -396,11 +382,10 @@ export const aula02: AulaPortuguesV4 = {
     ],
     miniDesafio: {
       pergunta: "Uma FARMÁCIA que vende remédio é serviço público ou comércio?",
-      opcoes: ["Serviço público", "Comércio", "Nenhum dos dois"],
+      opcoes: ["Serviço público", "Comércio", "Nenhum dos dois", "Outra possibilidade"],
       correta: 1,
       feedbackAcerto: "🎉 Isso! Farmácia VENDE remédio — é COMÉRCIO.",
-      feedbackErro:
-        "Farmácia COBRA pelo remédio. Isso é COMÉRCIO.",
+      feedbackErro: "Farmácia COBRA pelo remédio. Isso é COMÉRCIO.",
     },
   },
 
@@ -412,30 +397,29 @@ export const aula02: AulaPortuguesV4 = {
           "Um lugar que vende coisas",
           "Uma ajuda do município pra todos (escola, posto, biblioteca)",
           "Um brinquedo do parque",
+          "Outra possibilidade",
         ],
         correta: 1,
         feedbackAcerto: "🎉 SERVIÇO PÚBLICO = ajuda do município pra todos.",
-        feedbackErro:
-          "SERVIÇO PÚBLICO é a ajuda que o município oferece de graça.",
+        feedbackErro: "SERVIÇO PÚBLICO é a ajuda que o município oferece de graça.",
       },
       {
         pergunta: "2/5 — Padaria e mercado são…",
-        opcoes: ["Serviço público", "Comércio", "Posto de saúde"],
+        opcoes: ["Serviço público", "Comércio", "Posto de saúde", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 São COMÉRCIO — VENDEM produtos.",
-        feedbackErro:
-          "Padaria e mercado VENDEM coisas. Isso é COMÉRCIO.",
+        feedbackErro: "Padaria e mercado VENDEM coisas. Isso é COMÉRCIO.",
       },
       {
         pergunta: "3/5 — Quem cuida dos LIVROS da biblioteca?",
-        opcoes: ["O gari", "O bibliotecário", "O motorista"],
+        opcoes: ["O gari", "O bibliotecário", "O motorista", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 O(a) BIBLIOTECÁRIO(A).",
         feedbackErro: "Livro na biblioteca é cuidado pelo BIBLIOTECÁRIO.",
       },
       {
         pergunta: "4/5 — Quem RECOLHE o lixo da rua?",
-        opcoes: ["A professora", "O gari", "O padeiro"],
+        opcoes: ["A professora", "O gari", "O padeiro", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 O GARI — serviço de limpeza do município.",
         feedbackErro: "É o GARI, do serviço de limpeza da prefeitura.",
@@ -446,12 +430,11 @@ export const aula02: AulaPortuguesV4 = {
           "Vender pão",
           "Cuidar da saúde de todos, de graça",
           "Guardar livros",
+          "Outra possibilidade",
         ],
         correta: 1,
-        feedbackAcerto:
-          "🎉 Cuidar da SAÚDE — de graça pro município todo.",
-        feedbackErro:
-          "POSTO DE SAÚDE cuida da SAÚDE das pessoas, sem cobrar.",
+        feedbackAcerto: "🎉 Cuidar da SAÚDE — de graça pro município todo.",
+        feedbackErro: "POSTO DE SAÚDE cuida da SAÚDE das pessoas, sem cobrar.",
       },
     ],
   },
@@ -465,8 +448,7 @@ export const aula02: AulaPortuguesV4 = {
       "3) Anote 3 COMÉRCIOS perto (ex.: padaria, mercado, farmácia, salão).",
       "4) Escolha 1 trabalhador do bairro e agradeça (ex.: 'obrigada, seu João!').",
     ],
-    registro:
-      "📸 Uma foto do seu bairro ou uma lista escrita dos 6 lugares que você encontrou.",
+    registro: "📸 Uma foto do seu bairro ou uma lista escrita dos 6 lugares que você encontrou.",
   },
 
   recompensa: {

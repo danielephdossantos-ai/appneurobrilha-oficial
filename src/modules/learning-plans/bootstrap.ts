@@ -35,6 +35,8 @@ export async function bootstrapLearningPlans(childId: string): Promise<Bootstrap
     if (!curriculo) {
       await escolar.gerarESalvar({ childId, serie });
       curriculo = await escolar.carregarCurriculo(childId);
+    } else {
+      await escolar.sincronizarCurriculoSeNecessario(childId, serie);
     }
     result.school = !!curriculo;
   }
@@ -46,6 +48,8 @@ export async function bootstrapLearningPlans(childId: string): Promise<Bootstrap
     if (!plano) {
       await apoio.gerarESalvarNeuro(childId);
       plano = await apoio.carregarPlanoNeuro(childId);
+    } else {
+      await apoio.sincronizarPlanoNeuroSeNecessario(childId);
     }
     result.support = !!plano;
   }

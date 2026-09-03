@@ -8,7 +8,7 @@ export const aula02_medidasTendenciaCentral: AulaV4 = {
   slug: "u7-02-medidas-tendencia-central",
   titulo: "Um Número Para Resumir Todos",
   iconeTrilha: "📊",
-  bncc: ["EF09MA22"],
+  bncc: ["EF09MA23"],
   duracaoMin: 30,
   metodologias: ["vergnaud", "skemp"],
 

@@ -23,7 +23,7 @@ export const aula02: AulaPortuguesV4 = {
   slug: "aula-02-sentido-figurado",
   titulo: "Sentido Figurado",
   iconeTrilha: "🌬️",
-  bncc: ["EF35LP28", "EF03LP24"],
+  bncc: ["EF35LP27", "EF35LP31"],
   duracaoMin: 18,
 
   momento01_motivacao: {

@@ -8,7 +8,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-evolucao-humana",
   titulo: "Evolução Humana e Povoamento das Américas",
   iconeTrilha: "🦴",
-  bncc: ["EF06HI03", "EF06HI04"],
+  bncc: [],
   duracaoMin: 30,
   estilo: "teen",
 
@@ -19,7 +19,7 @@ export const aula01: AulaGeoV1 = {
     mapaUrl: imgLuzia,
     imagemDestaqueUrl: imgEvolucao,
     aurora:
-      "Este crânio tem 11 mil anos e foi encontrado em Lagoa Santa, Minas Gerais. É LUZIA — o esqueleto humano mais antigo já achado nas Américas. Ela é evidência FÍSICA de que gente vive por aqui muito antes do que a escola tradicional contava.",
+      "Este crânio tem cerca de 11 mil anos e foi encontrado em Lagoa Santa, Minas Gerais. É LUZIA — um dos esqueletos humanos mais antigos encontrados no Brasil. Ela é uma evidência física importante para estudar o povoamento antigo do território brasileiro.",
     falaFinal:
       "Nesta aula você desbloqueia o Fragmento 2 do Códice: O Fragmento do Crânio Ancestral.",
   },
@@ -45,6 +45,8 @@ export const aula01: AulaGeoV1 = {
         emoji: "❌",
         cor: "from-amber-900 to-slate-950",
       },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "bering",
     feedbackAcerto:
@@ -179,6 +181,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🌍", titulo: "África", cor: "from-teal-600 to-slate-900" },
           { id: "e", emoji: "🌎", titulo: "América", cor: "from-amber-600 to-slate-900" },
           { id: "eu", emoji: "🌐", titulo: "Europa", cor: "from-slate-600 to-slate-900" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "a",
         feedbackAcerto:
@@ -209,10 +212,11 @@ export const aula01: AulaGeoV1 = {
             titulo: "Um dinossauro brasileiro",
             cor: "from-slate-600 to-slate-900",
           },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "b",
         feedbackAcerto:
-          "Correto. Luzia é o esqueleto humano mais antigo das Américas, achado em Lagoa Santa (MG).",
+          "Correto. Luzia é um dos esqueletos humanos mais antigos encontrados no Brasil, achado em Lagoa Santa (MG).",
         feedbackErro:
           "Luzia é o esqueleto de uma mulher de ~11 mil anos, achado em Minas Gerais.",
       },
@@ -239,6 +243,7 @@ export const aula01: AulaGeoV1 = {
             titulo: "Invenção da internet",
             cor: "from-slate-600 to-slate-900",
           },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "a",
         feedbackAcerto:
@@ -500,6 +505,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Europa.", correta: false },
           { id: "b", texto: "África.", correta: true },
           { id: "c", texto: "América.", correta: false },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. ÁFRICA, há ~300 mil anos.",
         feedbackErro: "ÁFRICA. Todos os humanos vivos descendem de populações africanas.",
@@ -511,6 +517,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Invenção do computador.", correta: false },
           { id: "b", texto: "Revolução Agrícola e vida sedentária.", correta: true },
           { id: "c", texto: "Domínio do fogo.", correta: false },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. REVOLUÇÃO AGRÍCOLA — plantar, criar animais, morar em aldeias.",
         feedbackErro: "AGRICULTURA + sedentarismo. Fogo foi antes (Paleolítico).",
@@ -522,6 +529,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Migração pelo Estreito de Bering na última glaciação.", correta: true },
           { id: "b", texto: "Humanos evoluíram sozinhos aqui, sem contato com outros continentes.", correta: false },
           { id: "c", texto: "Chegaram de avião.", correta: false },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. Estreito de BERING, há 15-30 mil anos, com possíveis rotas costeiras.",
         feedbackErro: "É o ESTREITO DE BERING. Homo sapiens surgiu na África, não nas Américas.",

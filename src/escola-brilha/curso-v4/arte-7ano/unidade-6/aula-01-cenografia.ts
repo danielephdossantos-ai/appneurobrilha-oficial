@@ -50,12 +50,41 @@ export const aula01: AulaArteV1 = {
     titulo: "🎡 O Portal do Distrito Encantado",
     instrucao: "Toca em cada pista pra ativar o módulo cenográfico",
     itens: [
-      { emoji: "🏰", rotulo: "Castelo de Escala Forçada", descricao: "De longe parece gigante, mas os andares de cima são MENORES que os de baixo — um truque óptico chamado escala forçada (forced perspective).", cor: "#a21caf", fotoUrl: casteloForcado },
-      { emoji: "🚪", rotulo: "Portal de Entrada Temático", descricao: "A entrada de um parque é o primeiro ato da história: luzes, formas e cores já contam pra onde você vai. Isso é IMAGINEERING.", cor: "#7e22ce", fotoUrl: portal },
-      { emoji: "🌀", rotulo: "Caminho Curvo Guiado", descricao: "Nenhuma rua de parque temático é reta: as curvas escondem o próximo cenário e criam SURPRESA — parte do ESPAÇO LÚDICO.", cor: "#c026d3", fotoUrl: caminhoCurvo },
-      { emoji: "🎪", rotulo: "Terra Temática Imersiva", descricao: "Um espaço inteiro — chão, teto, som, cheiro — projetado pra você ACREDITAR que entrou em outro mundo. Cenografia total.", cor: "#db2777", fotoUrl: terraTematica },
+      {
+        emoji: "🏰",
+        rotulo: "Castelo de Escala Forçada",
+        descricao:
+          "De longe parece gigante, mas os andares de cima são MENORES que os de baixo — um truque óptico chamado escala forçada (forced perspective).",
+        cor: "#a21caf",
+        fotoUrl: casteloForcado,
+      },
+      {
+        emoji: "🚪",
+        rotulo: "Portal de Entrada Temático",
+        descricao:
+          "A entrada de um parque é o primeiro ato da história: luzes, formas e cores já contam pra onde você vai. Isso é IMAGINEERING.",
+        cor: "#7e22ce",
+        fotoUrl: portal,
+      },
+      {
+        emoji: "🌀",
+        rotulo: "Caminho Curvo Guiado",
+        descricao:
+          "Nenhuma rua de parque temático é reta: as curvas escondem o próximo cenário e criam SURPRESA — parte do ESPAÇO LÚDICO.",
+        cor: "#c026d3",
+        fotoUrl: caminhoCurvo,
+      },
+      {
+        emoji: "🎪",
+        rotulo: "Terra Temática Imersiva",
+        descricao:
+          "Um espaço inteiro — chão, teto, som, cheiro — projetado pra você ACREDITAR que entrou em outro mundo. Cenografia total.",
+        cor: "#db2777",
+        fotoUrl: terraTematica,
+      },
     ],
-    falaFinal: "Você vai aprender a projetar ilusões de escala e espaços que contam histórias com o corpo inteiro do visitante.",
+    falaFinal:
+      "Você vai aprender a projetar ilusões de escala e espaços que contam histórias com o corpo inteiro do visitante.",
   },
 
   cena02_previsao: {
@@ -63,34 +92,68 @@ export const aula01: AulaArteV1 = {
     aurora: "Calibra o olho de cenógrafo antes de puxar a régua mágica!",
     perguntas: [
       {
-        pergunta: "Um castelo de parque temático parece ENORME de longe, mas os andares de cima são construídos cada vez MENORES. Que técnica cria essa ilusão de altura?",
+        pergunta:
+          "Um castelo de parque temático parece ENORME de longe, mas os andares de cima são construídos cada vez MENORES. Que técnica cria essa ilusão de altura?",
         fotoUrl: casteloForcado,
         alternativas: [
-          { texto: "Escala Forçada (Forced Perspective) — reduzir o tamanho real pra enganar o olho à distância", correta: true },
-          { texto: "Escala Real — tudo é construído no tamanho verdadeiro, sem truque nenhum", correta: false },
+          {
+            texto:
+              "Escala Forçada (Forced Perspective) — reduzir o tamanho real pra enganar o olho à distância",
+            correta: true,
+          },
+          {
+            texto: "Escala Real — tudo é construído no tamanho verdadeiro, sem truque nenhum",
+            correta: false,
+          },
+
+          { texto: "Não corresponde à análise", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
-        feedbackAcerto: "Isso! A Escala Forçada usa a diminuição progressiva dos elementos pra parecer mais alto/distante do que realmente é.",
-        feedbackErro: "Se fosse escala real, o castelo precisaria ser gigantesco de verdade — caro e difícil. O truque é a escala forçada.",
+        feedbackAcerto:
+          "Isso! A Escala Forçada usa a diminuição progressiva dos elementos pra parecer mais alto/distante do que realmente é.",
+        feedbackErro:
+          "Se fosse escala real, o castelo precisaria ser gigantesco de verdade — caro e difícil. O truque é a escala forçada.",
       },
       {
         pergunta: "Por que as ruas dentro de um parque temático quase nunca são retas?",
         fotoUrl: caminhoCurvo,
         alternativas: [
-          { texto: "Curvas escondem o próximo cenário, criam expectativa e SURPRESA — parte do design de espaço lúdico", correta: true },
+          {
+            texto:
+              "Curvas escondem o próximo cenário, criam expectativa e SURPRESA — parte do design de espaço lúdico",
+            correta: true,
+          },
           { texto: "Curvas são só um erro de projeto que ninguém corrigiu", correta: false },
+
+          { texto: "Não corresponde à análise", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
-        feedbackAcerto: "Exato! É projeto intencional: cada curva é um 'corte de cena' que revela um novo cenário aos poucos.",
-        feedbackErro: "Não é acaso — arquitetos de parques (imagineers) desenham curvas de propósito pra guiar a emoção do visitante.",
+        feedbackAcerto:
+          "Exato! É projeto intencional: cada curva é um 'corte de cena' que revela um novo cenário aos poucos.",
+        feedbackErro:
+          "Não é acaso — arquitetos de parques (imagineers) desenham curvas de propósito pra guiar a emoção do visitante.",
       },
       {
         pergunta: "O que caracteriza uma 'terra temática imersiva' dentro de um parque?",
         fotoUrl: terraTematica,
         alternativas: [
-          { texto: "Todos os elementos — piso, som, luz, cheiro, figurino dos funcionários — seguem UM ÚNICO universo narrativo", correta: true },
-          { texto: "Apenas a fachada dos prédios é decorada; o resto do espaço fica neutro", correta: false },
+          {
+            texto:
+              "Todos os elementos — piso, som, luz, cheiro, figurino dos funcionários — seguem UM ÚNICO universo narrativo",
+            correta: true,
+          },
+          {
+            texto: "Apenas a fachada dos prédios é decorada; o resto do espaço fica neutro",
+            correta: false,
+          },
+
+          { texto: "Não corresponde à análise", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
-        feedbackAcerto: "Perfeito! Imersão total é quando NADA quebra a ilusão — todos os sentidos reforçam a mesma história.",
-        feedbackErro: "Se só a fachada fosse temática, a ilusão quebraria rápido. Imersão exige coerência total do espaço.",
+        feedbackAcerto:
+          "Perfeito! Imersão total é quando NADA quebra a ilusão — todos os sentidos reforçam a mesma história.",
+        feedbackErro:
+          "Se só a fachada fosse temática, a ilusão quebraria rápido. Imersão exige coerência total do espaço.",
       },
     ],
   },
@@ -99,10 +162,38 @@ export const aula01: AulaArteV1 = {
     tipo: "vocabularioCards",
     aurora: "Vocabulário técnico do cenógrafo urbano. Toca em cada verbete!",
     cards: [
-      { termo: "Escala Forçada (Forced Perspective)", definicao: "Técnica que reduz progressivamente o tamanho de elementos pra criar ILUSÃO de altura ou distância maior do que a real.", emoji: "🏰", cor: "#a21caf", fotoUrl: casteloForcado },
-      { termo: "Imagineering", definicao: "Fusão de 'imaginação' + 'engenharia': o processo de projetar espaços temáticos que contam histórias usando arte, arquitetura e tecnologia.", emoji: "🚪", cor: "#7e22ce", fotoUrl: portal },
-      { termo: "Espaço Lúdico", definicao: "Ambiente projetado pra estimular BRINCADEIRA, descoberta e imaginação — playgrounds, parques, cenários interativos.", emoji: "🎪", cor: "#c026d3", fotoUrl: playgroundModerno },
-      { termo: "Cenografia Urbana", definicao: "Arte de transformar o espaço da cidade em CENÁRIO vivo, com narrativa, iluminação e ambientação planejadas.", emoji: "🌃", cor: "#db2777", fotoUrl: luzesNoturnas },
+      {
+        termo: "Escala Forçada (Forced Perspective)",
+        definicao:
+          "Técnica que reduz progressivamente o tamanho de elementos pra criar ILUSÃO de altura ou distância maior do que a real.",
+        emoji: "🏰",
+        cor: "#a21caf",
+        fotoUrl: casteloForcado,
+      },
+      {
+        termo: "Imagineering",
+        definicao:
+          "Fusão de 'imaginação' + 'engenharia': o processo de projetar espaços temáticos que contam histórias usando arte, arquitetura e tecnologia.",
+        emoji: "🚪",
+        cor: "#7e22ce",
+        fotoUrl: portal,
+      },
+      {
+        termo: "Espaço Lúdico",
+        definicao:
+          "Ambiente projetado pra estimular BRINCADEIRA, descoberta e imaginação — playgrounds, parques, cenários interativos.",
+        emoji: "🎪",
+        cor: "#c026d3",
+        fotoUrl: playgroundModerno,
+      },
+      {
+        termo: "Cenografia Urbana",
+        definicao:
+          "Arte de transformar o espaço da cidade em CENÁRIO vivo, com narrativa, iluminação e ambientação planejadas.",
+        emoji: "🌃",
+        cor: "#db2777",
+        fotoUrl: luzesNoturnas,
+      },
     ],
   },
 
@@ -117,10 +208,34 @@ export const aula01: AulaArteV1 = {
       "Quando tudo isso se junta — escala forçada, percurso curvo e espaço lúdico — nasce a IMERSÃO TOTAL: um lugar onde chão, teto, luz, som e até o uniforme dos funcionários contam a MESMA história. É a cenografia urbana levada ao extremo: a cidade inteira vira palco, e você é o protagonista.",
     ],
     pigmentos: [
-      { nome: "Escala Forçada", hex: "#a21caf", fonte: "Ilusão de altura", emoji: "🏰", fotoUrl: casteloForcado },
-      { nome: "Imagineering", hex: "#7e22ce", fonte: "Imaginação + engenharia", emoji: "🚪", fotoUrl: portal },
-      { nome: "Percurso Curvo", hex: "#c026d3", fonte: "Revelação por partes", emoji: "🌀", fotoUrl: caminhoCurvo },
-      { nome: "Espaço Lúdico", hex: "#db2777", fonte: "Arquitetura da brincadeira", emoji: "🎪", fotoUrl: playgroundAventura },
+      {
+        nome: "Escala Forçada",
+        hex: "#a21caf",
+        fonte: "Ilusão de altura",
+        emoji: "🏰",
+        fotoUrl: casteloForcado,
+      },
+      {
+        nome: "Imagineering",
+        hex: "#7e22ce",
+        fonte: "Imaginação + engenharia",
+        emoji: "🚪",
+        fotoUrl: portal,
+      },
+      {
+        nome: "Percurso Curvo",
+        hex: "#c026d3",
+        fonte: "Revelação por partes",
+        emoji: "🌀",
+        fotoUrl: caminhoCurvo,
+      },
+      {
+        nome: "Espaço Lúdico",
+        hex: "#db2777",
+        fonte: "Arquitetura da brincadeira",
+        emoji: "🎪",
+        fotoUrl: playgroundAventura,
+      },
     ],
   },
 
@@ -129,33 +244,60 @@ export const aula01: AulaArteV1 = {
     aurora: "Verifica o caderno do cenógrafo!",
     perguntas: [
       {
-        pergunta: "Na Escala Forçada, o que acontece com os elementos conforme sobem em um castelo temático?",
+        pergunta:
+          "Na Escala Forçada, o que acontece com os elementos conforme sobem em um castelo temático?",
         fotoUrl: casteloForcado,
         alternativas: [
-          { texto: "Ficam PROGRESSIVAMENTE menores, enganando o olho pra parecer mais alto e distante", correta: true },
+          {
+            texto:
+              "Ficam PROGRESSIVAMENTE menores, enganando o olho pra parecer mais alto e distante",
+            correta: true,
+          },
           { texto: "Ficam iguais em tamanho, só mudam de cor", correta: false },
+
+          { texto: "Não corresponde à análise", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
         feedbackAcerto: "Correto! A diminuição progressiva é o coração da escala forçada.",
-        feedbackErro: "Se tudo ficasse do mesmo tamanho, não haveria ilusão de altura — o segredo é a redução progressiva.",
+        feedbackErro:
+          "Se tudo ficasse do mesmo tamanho, não haveria ilusão de altura — o segredo é a redução progressiva.",
       },
       {
         pergunta: "O que faz um 'imagineer' na criação de um parque temático?",
         fotoUrl: portal,
         alternativas: [
-          { texto: "Une arte, arquitetura, narrativa e engenharia pra projetar espaços que contam histórias", correta: true },
-          { texto: "Apenas escolhe as cores das paredes, sem se preocupar com história ou espaço", correta: false },
+          {
+            texto:
+              "Une arte, arquitetura, narrativa e engenharia pra projetar espaços que contam histórias",
+            correta: true,
+          },
+          {
+            texto: "Apenas escolhe as cores das paredes, sem se preocupar com história ou espaço",
+            correta: false,
+          },
+
+          { texto: "Não corresponde à análise", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
         feedbackAcerto: "Isso! Imagineering é projeto NARRATIVO e técnico ao mesmo tempo.",
-        feedbackErro: "O trabalho vai muito além de cor de parede — envolve narrativa, escala e engenharia juntas.",
+        feedbackErro:
+          "O trabalho vai muito além de cor de parede — envolve narrativa, escala e engenharia juntas.",
       },
       {
         pergunta: "Por que os caminhos de um parque temático usam curvas em vez de linhas retas?",
         fotoUrl: caminhoCurvo,
         alternativas: [
-          { texto: "Pra esconder o próximo cenário e criar surpresa gradual durante o percurso", correta: true },
+          {
+            texto: "Pra esconder o próximo cenário e criar surpresa gradual durante o percurso",
+            correta: true,
+          },
           { texto: "Porque é mais barato construir caminhos tortos", correta: false },
+
+          { texto: "Não corresponde à análise", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
-        feedbackAcerto: "Exato! É estratégia narrativa de revelação — cada curva é um novo capítulo visual.",
+        feedbackAcerto:
+          "Exato! É estratégia narrativa de revelação — cada curva é um novo capítulo visual.",
         feedbackErro: "Não é questão de custo — é projeto intencional de experiência do visitante.",
       },
     ],
@@ -166,34 +308,47 @@ export const aula01: AulaArteV1 = {
     aurora: "Classifica cada cenário pelo CONCEITO cenográfico que ele usa!",
     animais: [
       {
-        nome: "Castelo com andares menores no topo", emoji: "🏰", fotoUrl: casteloForcado,
+        nome: "Castelo com andares menores no topo",
+        emoji: "🏰",
+        fotoUrl: casteloForcado,
         corAlvo: { nome: "Escala Forçada", hex: "#a21caf" },
         opcoes: [
           { nome: "Escala Forçada", hex: "#a21caf" },
           { nome: "Espaço Lúdico", hex: "#db2777" },
           { nome: "Percurso Curvo", hex: "#c026d3" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Isso! Redução progressiva de tamanho = Escala Forçada.",
       },
       {
-        nome: "Playground com formas e alturas variadas", emoji: "🛝", fotoUrl: playgroundAventura,
+        nome: "Playground com formas e alturas variadas",
+        emoji: "🛝",
+        fotoUrl: playgroundAventura,
         corAlvo: { nome: "Espaço Lúdico", hex: "#db2777" },
         opcoes: [
           { nome: "Espaço Lúdico", hex: "#db2777" },
           { nome: "Imagineering", hex: "#7e22ce" },
           { nome: "Escala Forçada", hex: "#a21caf" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Correto! Um ambiente pensado pra estimular a brincadeira é Espaço Lúdico.",
       },
       {
-        nome: "Rua sinuosa que esconde o próximo cenário", emoji: "🌀", fotoUrl: caminhoCurvo,
+        nome: "Rua sinuosa que esconde o próximo cenário",
+        emoji: "🌀",
+        fotoUrl: caminhoCurvo,
         corAlvo: { nome: "Percurso Curvo", hex: "#c026d3" },
         opcoes: [
           { nome: "Percurso Curvo", hex: "#c026d3" },
           { nome: "Cenografia Urbana", hex: "#db2777" },
           { nome: "Escala Forçada", hex: "#a21caf" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
-        falaAcerto: "Perfeito! Curvas que revelam cenários aos poucos = Percurso Curvo (design de experiência).",
+        falaAcerto:
+          "Perfeito! Curvas que revelam cenários aos poucos = Percurso Curvo (design de experiência).",
       },
     ],
   },
@@ -202,11 +357,43 @@ export const aula01: AulaArteV1 = {
     tipo: "sequenciaMistura",
     aurora: "Ordena os 5 passos pra projetar a fachada do SEU castelo de escala forçada.",
     passos: [
-      { id: "p1", texto: "Escolho a altura REAL do terreno disponível e decido a altura ILUSÓRIA que quero criar", emoji: "📏", ordem: 1, fotoUrl: castelo },
-      { id: "p2", texto: "Divido o castelo em andares e desenho o TÉRREO em tamanho normal, bem detalhado", emoji: "🏗️", ordem: 2, fotoUrl: casteloForcado },
-      { id: "p3", texto: "Reduzo PROGRESSIVAMENTE cada andar seguinte (janelas, portas e tijolos menores) rumo ao topo", emoji: "📐", ordem: 3, fotoUrl: castelo },
-      { id: "p4", texto: "Adiciono torres pontudas e bandeiras no topo — elas reforçam a sensação de altura", emoji: "🚩", ordem: 4, fotoUrl: dragao },
-      { id: "p5", texto: "Ilumino a fachada à noite com luzes coloridas pra reforçar a magia do cenário", emoji: "✨", ordem: 5, fotoUrl: catedralLuz },
+      {
+        id: "p1",
+        texto:
+          "Escolho a altura REAL do terreno disponível e decido a altura ILUSÓRIA que quero criar",
+        emoji: "📏",
+        ordem: 1,
+        fotoUrl: castelo,
+      },
+      {
+        id: "p2",
+        texto: "Divido o castelo em andares e desenho o TÉRREO em tamanho normal, bem detalhado",
+        emoji: "🏗️",
+        ordem: 2,
+        fotoUrl: casteloForcado,
+      },
+      {
+        id: "p3",
+        texto:
+          "Reduzo PROGRESSIVAMENTE cada andar seguinte (janelas, portas e tijolos menores) rumo ao topo",
+        emoji: "📐",
+        ordem: 3,
+        fotoUrl: castelo,
+      },
+      {
+        id: "p4",
+        texto: "Adiciono torres pontudas e bandeiras no topo — elas reforçam a sensação de altura",
+        emoji: "🚩",
+        ordem: 4,
+        fotoUrl: dragao,
+      },
+      {
+        id: "p5",
+        texto: "Ilumino a fachada à noite com luzes coloridas pra reforçar a magia do cenário",
+        emoji: "✨",
+        ordem: 5,
+        fotoUrl: catedralLuz,
+      },
     ],
     falaAcerto: "Você acabou de projetar a fachada mágica do castelo do seu Distrito Encantado!",
   },
@@ -216,11 +403,31 @@ export const aula01: AulaArteV1 = {
     aurora: "Agora VOCÊ lê o diário do cenógrafo visual. Toca nas palavras coloridas.",
     titulo: "Diário do Cenógrafo Visual",
     trechos: [
-      { texto: "Sou cenógrafo visual. Meu castelo usa", palavraDestaque: "Escala Forçada", corDestaque: "#a21caf" },
-      { texto: "pra parecer gigante sendo pequeno. Todo o projeto é fruto de", palavraDestaque: "Imagineering", corDestaque: "#7e22ce" },
-      { texto: "— imaginação com engenharia. As ruas seguem um", palavraDestaque: "Percurso Curvo", corDestaque: "#c026d3" },
-      { texto: "que esconde surpresas, e o parque inteiro é um", palavraDestaque: "Espaço Lúdico", corDestaque: "#db2777" },
-      { texto: "pensado pra brincadeira. À noite, a", palavraDestaque: "Cenografia Urbana", corDestaque: "#db2777" },
+      {
+        texto: "Sou cenógrafo visual. Meu castelo usa",
+        palavraDestaque: "Escala Forçada",
+        corDestaque: "#a21caf",
+      },
+      {
+        texto: "pra parecer gigante sendo pequeno. Todo o projeto é fruto de",
+        palavraDestaque: "Imagineering",
+        corDestaque: "#7e22ce",
+      },
+      {
+        texto: "— imaginação com engenharia. As ruas seguem um",
+        palavraDestaque: "Percurso Curvo",
+        corDestaque: "#c026d3",
+      },
+      {
+        texto: "que esconde surpresas, e o parque inteiro é um",
+        palavraDestaque: "Espaço Lúdico",
+        corDestaque: "#db2777",
+      },
+      {
+        texto: "pensado pra brincadeira. À noite, a",
+        palavraDestaque: "Cenografia Urbana",
+        corDestaque: "#db2777",
+      },
       { texto: "ganha luz e cor. A cidade virou palco — e você, o protagonista." },
     ],
   },
@@ -228,7 +435,8 @@ export const aula01: AulaArteV1 = {
   cena09_minijogo: {
     tipo: "cenaTematica",
     variante: "minijogo",
-    aurora: "🏰 O Projetista de Ilusões Cênicas! Toca em TODOS os elementos da fachada mágica antes do tempo acabar.",
+    aurora:
+      "🏰 O Projetista de Ilusões Cênicas! Toca em TODOS os elementos da fachada mágica antes do tempo acabar.",
     titulo: "🏰 O Projetista de Ilusões Cênicas",
     instrucao: "Alinhe todos os elementos de escala forçada antes do tempo acabar!",
     tempoSeg: 35,
@@ -249,12 +457,51 @@ export const aula01: AulaArteV1 = {
     aurora: "Fecha a página do Distrito de Entretenimento Lúdico. Toca em cada verbete!",
     titulo: "📓 Caderno do Cenógrafo Visual — O Distrito de Entretenimento Lúdico",
     itens: [
-      { emoji: "🏰", rotulo: "Escala Forçada", descricao: "Redução progressiva do tamanho dos elementos pra criar ilusão de altura ou distância maior.", cor: "#a21caf", fotoUrl: casteloForcado },
-      { emoji: "🚪", rotulo: "Imagineering", descricao: "Fusão de imaginação e engenharia — projeto narrativo de espaços temáticos.", cor: "#7e22ce", fotoUrl: portal },
-      { emoji: "🌀", rotulo: "Percurso Curvo", descricao: "Caminhos sinuosos que escondem o próximo cenário e criam surpresa gradual.", cor: "#c026d3", fotoUrl: caminhoCurvo },
-      { emoji: "🎪", rotulo: "Espaço Lúdico", descricao: "Ambiente projetado pra estimular brincadeira, descoberta e imaginação.", cor: "#db2777", fotoUrl: playgroundModerno },
-      { emoji: "🌃", rotulo: "Cenografia Urbana", descricao: "Transformar o espaço da cidade em cenário vivo, com narrativa e iluminação planejadas.", cor: "#db2777", fotoUrl: luzesNoturnas },
-      { emoji: "🐉", rotulo: "Ambientação Temática", descricao: "Elementos como esculturas e cenários que reforçam o universo narrativo de uma área.", cor: "#7c2d12", fotoUrl: dragao },
+      {
+        emoji: "🏰",
+        rotulo: "Escala Forçada",
+        descricao:
+          "Redução progressiva do tamanho dos elementos pra criar ilusão de altura ou distância maior.",
+        cor: "#a21caf",
+        fotoUrl: casteloForcado,
+      },
+      {
+        emoji: "🚪",
+        rotulo: "Imagineering",
+        descricao: "Fusão de imaginação e engenharia — projeto narrativo de espaços temáticos.",
+        cor: "#7e22ce",
+        fotoUrl: portal,
+      },
+      {
+        emoji: "🌀",
+        rotulo: "Percurso Curvo",
+        descricao: "Caminhos sinuosos que escondem o próximo cenário e criam surpresa gradual.",
+        cor: "#c026d3",
+        fotoUrl: caminhoCurvo,
+      },
+      {
+        emoji: "🎪",
+        rotulo: "Espaço Lúdico",
+        descricao: "Ambiente projetado pra estimular brincadeira, descoberta e imaginação.",
+        cor: "#db2777",
+        fotoUrl: playgroundModerno,
+      },
+      {
+        emoji: "🌃",
+        rotulo: "Cenografia Urbana",
+        descricao:
+          "Transformar o espaço da cidade em cenário vivo, com narrativa e iluminação planejadas.",
+        cor: "#db2777",
+        fotoUrl: luzesNoturnas,
+      },
+      {
+        emoji: "🐉",
+        rotulo: "Ambientação Temática",
+        descricao:
+          "Elementos como esculturas e cenários que reforçam o universo narrativo de uma área.",
+        cor: "#7c2d12",
+        fotoUrl: dragao,
+      },
     ],
     falaFinal: "Distrito de Entretenimento Lúdico RESTAURADO — Setor Cenográfico ativo!",
   },
@@ -263,16 +510,29 @@ export const aula01: AulaArteV1 = {
     tipo: "avaliacaoFinal",
     aurora: "Missão final, cenógrafo visual!",
     quiz: {
-      pergunta: "Um castelo de parque temático tem só 3 andares de altura real, mas de longe parece ter mais de 10. Que técnica cenográfica explica essa ilusão, e qual é o princípio visual por trás dela?",
+      pergunta:
+        "Um castelo de parque temático tem só 3 andares de altura real, mas de longe parece ter mais de 10. Que técnica cenográfica explica essa ilusão, e qual é o princípio visual por trás dela?",
       alternativas: [
-        { texto: "Escala Forçada — os andares superiores são construídos progressivamente menores, imitando a diminuição escalar da distância", correta: true },
-        { texto: "Escala Real — o castelo tem realmente 10 andares, só que muito finos", correta: false },
+        {
+          texto:
+            "Escala Forçada — os andares superiores são construídos progressivamente menores, imitando a diminuição escalar da distância",
+          correta: true,
+        },
+        {
+          texto: "Escala Real — o castelo tem realmente 10 andares, só que muito finos",
+          correta: false,
+        },
+
+        { texto: "Não corresponde à análise", correta: false },
+        { texto: "Outra resposta sem relação", correta: false },
       ],
-      feedback: "Excelente! A ESCALA FORÇADA (forced perspective) usa o mesmo princípio da diminuição escalar da perspectiva linear, só que aplicado em 3D e em construção real: cada andar seguinte é proporcionalmente menor que o de baixo, enganando o cérebro pra interpretar o prédio como muito mais alto e distante do que realmente é. É a mesma matemática visual da Unidade 1, agora usada como ferramenta de CENOGRAFIA e ENTRETENIMENTO.",
+      feedback:
+        "Excelente! A ESCALA FORÇADA (forced perspective) usa o mesmo princípio da diminuição escalar da perspectiva linear, só que aplicado em 3D e em construção real: cada andar seguinte é proporcionalmente menor que o de baixo, enganando o cérebro pra interpretar o prédio como muito mais alto e distante do que realmente é. É a mesma matemática visual da Unidade 1, agora usada como ferramenta de CENOGRAFIA e ENTRETENIMENTO.",
     },
     missaoFamilia:
       "🎬 Missão Diretores de Cinema na Sala: com um adulto, usem brinquedos, potes e objetos de casa pra montar uma cena de FORCED PERSPECTIVE — por exemplo, uma pessoa 'segurando' um brinquedo gigante ou parecendo do tamanho de uma xícara. Posicionem o objeto mais perto da câmera e a pessoa mais longe (ou vice-versa) até a ilusão funcionar na foto. Registrem o resultado no álbum de família.",
-    recompensaTitulo: "🎡 Distrito de Entretenimento Lúdico restaurado — Setor Cenográfico da Cidade Suspensa.",
+    recompensaTitulo:
+      "🎡 Distrito de Entretenimento Lúdico restaurado — Setor Cenográfico da Cidade Suspensa.",
     recompensaItem: "🔮 Lente Anamórfica de Projeção Teatral",
   },
 

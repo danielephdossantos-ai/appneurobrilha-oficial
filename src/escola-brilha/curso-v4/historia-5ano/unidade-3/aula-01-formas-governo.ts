@@ -13,7 +13,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-formas-governo",
   titulo: "As Formas de Governo e os Três Poderes",
   iconeTrilha: "🏛️",
-  bncc: ["EF05HI03"],
+  bncc: ["EF05HI02"],
   duracaoMin: 25,
 
   cena01_motivacao: {
@@ -34,6 +34,8 @@ export const aula01: AulaGeoV1 = {
     opcoes: [
       { id: "sep", titulo: "São TRÊS poderes separados", subtitulo: "Executivo, Legislativo e Judiciário", emoji: "⚖️", cor: "from-emerald-600 to-teal-800", fotoUrl: imgInfo },
       { id: "um", titulo: "É tudo o Presidente", subtitulo: "ele faz, executa e julga sozinho", emoji: "👑", cor: "from-slate-500 to-slate-700", fotoUrl: imgPlan },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "sep",
     feedbackAcerto: "Correto. O filósofo Montesquieu criou a teoria da DIVISÃO DOS TRÊS PODERES pra evitar tirania. O Brasil adotou.",

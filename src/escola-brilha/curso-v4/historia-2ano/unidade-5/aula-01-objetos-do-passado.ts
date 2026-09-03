@@ -6,7 +6,7 @@ import { url as imgTelefone } from "@/assets/historia-2ano/telefone-disco.png.as
 import { url as imgFotoAntiga } from "@/assets/historia-2ano/foto-antiga.png.asset.json";
 /**
  * História · 2º Ano · Unidade 5 · Aula 01
- * "Descobrindo Objetos do Passado" — EF02HI04 + EF02HI05
+ * "Descobrindo Objetos do Passado" — EF02HI05
  *
  * Missão: classificar fontes históricas e montar a Sala 5
  * do museu — Pequeno Museu Digital. Recompensa: Engrenagem de Titânio.
@@ -16,7 +16,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-objetos-do-passado",
   titulo: "Descobrindo Objetos do Passado",
   iconeTrilha: "🏛️",
-  bncc: ["EF02HI04", "EF02HI05"],
+  bncc: ["EF02HI05"],
   duracaoMin: 20,
 
   cena01_motivacao: {
@@ -54,6 +54,8 @@ export const aula01: AulaGeoV1 = {
         cor: "from-sky-400 to-indigo-600",
         fotoUrl: imgTelefone,
       },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "carta",
     feedbackAcerto:
@@ -164,6 +166,7 @@ export const aula01: AulaGeoV1 = {
           { id: "e", emoji: "📜", titulo: "Fonte Escrita", cor: "from-emerald-400 to-teal-600" },
           { id: "m", emoji: "🏺", titulo: "Fonte Material", cor: "from-amber-400 to-orange-600" },
           { id: "o", emoji: "🎙️", titulo: "Fonte Oral", cor: "from-rose-400 to-red-600" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "e",
         feedbackAcerto: "Isso! Diário escrito à mão = FONTE ESCRITA.",
@@ -176,6 +179,8 @@ export const aula01: AulaGeoV1 = {
         cards: [
           { id: "m", emoji: "🧸", titulo: "Fonte Material", cor: "from-amber-400 to-orange-600" },
           { id: "e", emoji: "📜", titulo: "Fonte Escrita", cor: "from-emerald-400 to-teal-600" },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "m",
         feedbackAcerto: "Combo! Objeto = FONTE MATERIAL.",
@@ -189,6 +194,7 @@ export const aula01: AulaGeoV1 = {
           { id: "o", emoji: "🎙️", titulo: "Fonte Oral", cor: "from-rose-400 to-red-600" },
           { id: "e", emoji: "📜", titulo: "Fonte Escrita", cor: "from-emerald-400 to-teal-600" },
           { id: "m", emoji: "🏺", titulo: "Fonte Material", cor: "from-amber-400 to-orange-600" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "o",
         feedbackAcerto: "Isso! Voz contando = FONTE ORAL.",
@@ -436,6 +442,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Pistas, objetos, documentos e relatos deixados por pessoas do passado", correta: true },
           { id: "b", texto: "Só livros novos comprados nas livrarias" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Perfeito! Tudo que o ser humano deixa como marca no mundo é fonte histórica.",
         feedbackErro: "Livro NOVO fala do presente. Fonte histórica é pista do PASSADO.",
@@ -447,6 +455,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Escrita", correta: true },
           { id: "b", texto: "Oral" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Isso! Texto no papel = Fonte Escrita.",
         feedbackErro: "Carta é ESCRITA, não falada. É Fonte Escrita.",
@@ -458,6 +468,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Oral", correta: true },
           { id: "b", texto: "Material" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Combo! Voz falada é FONTE ORAL — memória viva.",
         feedbackErro: "A vovó tá FALANDO, não é um objeto. É Fonte Oral.",

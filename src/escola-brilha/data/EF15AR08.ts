@@ -1,0 +1,2 @@
+import { criarAulaArte1 } from "./criarAulaArte1";
+export default criarAulaArte1({ codigo: "EF15AR08", titulo: "Danças de Muitos Lugares", foco: "Experimentar e apreciar danças de diferentes contextos, ampliando percepção, imaginação e repertório corporal", objeto: "manifestações da dança", exemplos: ["Observar e experimentar uma dança", "Ficar imóvel por obrigação", "Copiar uma conta", "Classificar animais"], resposta: "Observar uma dança, perceber seus movimentos e experimentar uma pequena sequência.", proxima: "EF15AR09" });

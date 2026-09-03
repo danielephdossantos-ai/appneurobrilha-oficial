@@ -4,13 +4,13 @@ export const aula06_missao: AulaV4 = {
   slug: "u2-06-missao",
   titulo: "Missão — Operador do Laboratório",
   iconeTrilha: "🏅",
-  bncc: ["EF06MA03", "EF06MA11"],
+  bncc: ["EF06MA03"],
   duracaoMin: 22,
   metodologias: ["skemp"],
 
   momento01_motivacao: {
     titulo: "Todas as operações",
-    historia: "{NOME}, hoje você combina TUDO: +, −, ×, ÷, potência e raiz.",
+    historia: "{NOME}, hoje você combina TUDO: adição, subtração, multiplicação, divisão e potência.",
   },
 
   momento02_exploracao: {
@@ -25,7 +25,6 @@ export const aula06_missao: AulaV4 = {
           { rotulo: "×", valores: ["×", "Uma linha por algarismo"] },
           { rotulo: "÷", valores: ["÷", "Chave passo a passo"] },
           { rotulo: "^", valores: ["Potência", "Base × base × base…"] },
-          { rotulo: "√", valores: ["Raiz", "Inversa do quadrado"] },
         ],
       },
     ],
@@ -50,7 +49,7 @@ export const aula06_missao: AulaV4 = {
             cabecalhos: ["Prioridade", "Operação", "Símbolos"],
             linhas: [
               { rotulo: "1º", valores: ["1º", "Parênteses", "( )"] },
-              { rotulo: "2º", valores: ["2º", "Potência e raiz", "^ · √"] },
+              { rotulo: "2º", valores: ["2º", "Potência", "^"] },
               { rotulo: "3º", valores: ["3º", "× e ÷", "× ÷"] },
               { rotulo: "4º", valores: ["4º", "+ e −", "+ −"] },
             ],
@@ -79,23 +78,22 @@ export const aula06_missao: AulaV4 = {
   },
 
   momento05_modelagem: {
-    enunciado: "Calcule (5² + √49) × 2.",
+    enunciado: "Calcule (5² + 7) × 2.",
     resposta: "64",
     visualMat: {
       tipo: "tabela",
       cabecalhos: ["Passo", "Cálculo", "Resultado"],
       linhas: [
         { rotulo: "1", valores: ["potência", "5²", "25"] },
-        { rotulo: "2", valores: ["raiz", "√49", "7"] },
-        { rotulo: "3", valores: ["soma", "25 + 7", "32"] },
-        { rotulo: "4", valores: ["produto", "32 × 2", "64"] },
+        { rotulo: "2", valores: ["adição", "25 + 7", "32"] },
+        { rotulo: "3", valores: ["produto", "32 × 2", "64"] },
       ],
     },
-    passos: ["5² = 25.", "√49 = 7.", "25 + 7 = 32.", "32 × 2 = 64."],
+    passos: ["5² = 25.", "25 + 7 = 32.", "32 × 2 = 64."],
   },
 
   momento06_praticaGuiada: {
-    enunciado: "Calcule 3² × 2 + √16.",
+    enunciado: "Calcule 3² × 2 + 4.",
     dica: "Potência → ×  → +.",
     interacao: {
       tipo: "escolhaVisual",
@@ -103,7 +101,7 @@ export const aula06_missao: AulaV4 = {
       opcoes: [{ nome: "22" }, { nome: "20" }, { nome: "30" }],
       respostaCerta: "22",
       feedbackAcerto: "🎯 9 × 2 + 4 = 22.",
-      feedbackErro: "3² = 9 e √16 = 4.",
+      feedbackErro: "3² = 9; depois 9 × 2 + 4.",
     },
   },
 
@@ -142,7 +140,7 @@ export const aula06_missao: AulaV4 = {
   momento10_avaliacao: {
     perguntas: [
       { pergunta: "2³ + 3² =", opcoes: ["17", "13", "36"], correta: 0, feedbackAcerto: "🎉", feedbackErro: "8 + 9." },
-      { pergunta: "√81 − √16 =", opcoes: ["5", "3", "13"], correta: 0, feedbackAcerto: "🎉", feedbackErro: "9 − 4." },
+      { pergunta: "3² − 2² =", opcoes: ["5", "3", "13"], correta: 0, feedbackAcerto: "🎉", feedbackErro: "9 − 4 = 5." },
       { pergunta: "(6 + 4) × 5 =", opcoes: ["50", "26", "34"], correta: 0, feedbackAcerto: "🎉", feedbackErro: "Parênteses primeiro." },
     ],
   },

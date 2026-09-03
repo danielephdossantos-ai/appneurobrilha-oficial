@@ -53,7 +53,7 @@ export const aula08_problemasDaFeira: AulaV4 = {
     perguntaGuia:
       "Como a gente sabe se um problema pede pra SOMAR ou pra fazer outra coisa?",
     pista:
-      "Palavras como 'ganhou mais', 'comprou mais', 'chegaram mais', 'juntou', 'no total' quase sempre indicam SOMA.",
+      "Não escolha a conta por uma palavra isolada. Descubra o que havia, o que mudou e qual quantidade a pergunta quer encontrar.",
     revelacao:
       "Isso! Pra resolver um problema, seguimos 5 passos: 1) LER com calma. 2) DESTACAR os números. 3) ESCOLHER a operação. 4) RESOLVER. 5) EXPLICAR a resposta.",
   },

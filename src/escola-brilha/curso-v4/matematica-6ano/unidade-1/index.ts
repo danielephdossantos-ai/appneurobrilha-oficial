@@ -11,9 +11,9 @@ export const unidade1: Unidade = {
   slug: "unidade-1-laboratorio-dos-numeros",
   numero: 1,
   titulo: "Bem-vindo(a) ao Laboratório dos Números",
-  subtitulo: "Bilhões, comparação, arredondamento e reta numérica com negativos",
+  subtitulo: "Sistema decimal, comparação, arredondamento, reta e problemas com naturais",
   descricao:
-    "Brilha entra no Laboratório. Aprende a ler bilhões, testa hipóteses de comparação, arredonda com critério científico e descobre um mundo novo: os números NEGATIVOS.",
+    "Brilha entra no Laboratório. Aprende a ler números grandes, comparar e localizar naturais, arredondar, reconhecer as regras do sistema decimal e resolver problemas com estratégia.",
   corTema: "#7c3aed",
   aulas: [
     aula01_bilhao,

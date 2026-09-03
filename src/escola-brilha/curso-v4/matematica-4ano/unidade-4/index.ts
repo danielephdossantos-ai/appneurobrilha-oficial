@@ -6,6 +6,7 @@ import { aula04_divisaoPor10E100 } from "./aula-04-divisao-por-10-e-100";
 import { aula05_metadeTercaQuarta } from "./aula-05-metade-terca-quarta";
 import { aula06_problemasDivisao } from "./aula-06-problemas-divisao";
 import { aula07_missaoFinalU4 } from "./aula-07-missao-final";
+import { aula08_padroesRestos } from "./aula-08-padroes-de-restos";
 
 export const unidade4: Unidade = {
   slug: "unidade-4-divisao",
@@ -22,6 +23,7 @@ export const unidade4: Unidade = {
     aula04_divisaoPor10E100,
     aula05_metadeTercaQuarta,
     aula06_problemasDivisao,
+    aula08_padroesRestos,
     aula07_missaoFinalU4,
   ],
 };

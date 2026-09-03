@@ -19,7 +19,7 @@ export const aula3: AulaPortuguesV4 = {
   slug: "aula-03-ordem-e-causa",
   titulo: "Ordem e Causa",
   iconeTrilha: "⛓️",
-  bncc: ["EF35LP06", "EF04LP11", "EF35LP03"],
+  bncc: ["EF35LP06", "EF35LP03", "EF15LP03"],
   duracaoMin: 20,
 
   momento01_motivacao: {

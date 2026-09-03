@@ -8,7 +8,7 @@ export const aula04_aplicacoesDeSemelhanca: AulaV4 = {
   slug: "u4-04-aplicacoes-de-semelhanca",
   titulo: "Semelhança no Mundo Real",
   iconeTrilha: "🏙️",
-  bncc: ["EF09MA12", "EF09MA13"],
+  bncc: ["EF09MA12"],
   duracaoMin: 30,
   metodologias: ["vergnaud", "skemp"],
 

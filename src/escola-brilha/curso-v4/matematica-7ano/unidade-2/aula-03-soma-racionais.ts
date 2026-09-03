@@ -5,7 +5,7 @@ export const aula03_somaRacionais: AulaV4 = {
   slug: "u2-03-soma-racionais",
   titulo: "Somar e Subtrair Racionais",
   iconeTrilha: "🧮",
-  bncc: ["EF07MA08"],
+  bncc: ["EF07MA12"],
   duracaoMin: 30,
   metodologias: ["skemp"],
 

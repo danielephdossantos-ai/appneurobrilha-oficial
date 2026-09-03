@@ -7,12 +7,13 @@ import { url as bananaImg } from "@/assets/neuro-treino/objetos/banana.png.asset
 import { url as estrelaImg } from "@/assets/neuro-treino/objetos/estrela.png.asset.json";
 import { url as presenteImg } from "@/assets/neuro-treino/objetos/presente.png.asset.json";
 import { url as corujaImg } from "@/assets/neuro-treino/objetos/coruja.png.asset.json";
+import { url as blocoImg } from "@/assets/neuro-treino/objetos/bloco.png.asset.json";
 
 /**
  * EF01MA05 — Aula 005 · Biblioteca Pedagógica Escola Brilha
  * Ensino Fundamental I · 1º Ano · Matemática
  * BNCC: Comparar números naturais de até duas ordens em situações do
- * cotidiano, utilizando os sinais de maior (>), menor (<) e igual (=).
+ * cotidiano, com e sem suporte da reta numérica.
  *
  * Missão do Dia: "A Corrida das Frutinhas".
  * Segue o gabarito TRAVADO da EF01MA02.
@@ -40,27 +41,79 @@ const aula: Aula = {
   ],
 
   missao:
-    "Aprender a comparar dois números e usar os sinais > (maior), < (menor) e = (igual) — sempre com apoio visual.",
+    "Aprender a comparar dois números de até duas ordens, explicando qual é maior, menor ou igual e relacionando os sinais >, < e =.",
 
   objetivos: [
     "Identificar qual número é maior.",
     "Identificar qual número é menor.",
     "Reconhecer quando duas quantidades são iguais.",
+    "Comparar primeiro as dezenas e, quando forem iguais, comparar as unidades.",
     "Ler e usar os sinais >, < e =.",
   ],
 
   motivacao:
-    "Comparar números é como brincar de fila — quem está na frente é o maior, quem está atrás é o menor, e quem chega junto é igual!",
+    "Comparar números é observar a quantidade e a forma como o número foi composto. Com dois algarismos, primeiro olhamos as dezenas e depois as unidades.",
 
   explicacao:
-    "Quando comparamos dois números descobrimos três coisas:\n\n🔹 Qual é MAIOR (>)\n🔹 Qual é MENOR (<)\n🔹 Se são IGUAIS (=)\n\nExemplos:\n• 8 🍎 é MAIOR que 5 🍎  →  8 > 5\n• 5 🍌 é MENOR que 8 🍌  →  5 < 8\n• 6 ⭐ é IGUAL a 6 ⭐  →  6 = 6\n\nDica do Brilha: o 'biquinho' do sinal aponta pro número MENOR — é o boquinha comendo o maior.",
+    "Quando comparamos dois números descobrimos qual é MAIOR, qual é MENOR ou se são IGUAIS. Com números de dois algarismos, compare primeiro as dezenas. Exemplo: 42 tem 4 dezenas e 38 tem 3 dezenas; por isso, 42 é maior. Se as dezenas forem iguais, compare as unidades: em 24 e 27, ambos têm 2 dezenas, mas 7 unidades é mais que 4; então 27 é maior.\n\nDepois de compreender as quantidades, podemos registrar a comparação: 8 > 5, 5 < 8 e 6 = 6. Lendo da esquerda para a direita: '8 é maior que 5', '5 é menor que 8' e '6 é igual a 6'. A abertura do sinal fica voltada para o número maior e a ponta fica voltada para o menor.",
+
+  explicacaoAtiva: [
+    {
+      texto: "Primeiro compare as quantidades. Sete objetos é mais que quatro objetos.",
+      exemplo: "7 é maior que 4.",
+      imagem: morangoImg,
+      imagemAlt: "Morango usado para comparar quantidades",
+      checagem: {
+        pergunta: "Qual número representa a maior quantidade?",
+        opcoes: ["4", "7", "São iguais"],
+        correta: 1,
+        explicacao: "Sete objetos formam uma coleção maior que quatro.",
+      },
+    },
+    {
+      texto: "Nos números de dois algarismos, compare primeiro as dezenas. Quatro dezenas é mais que três dezenas.",
+      exemplo: "42 é maior que 38 porque 4 dezenas é mais que 3 dezenas.",
+      imagem: blocoImg,
+      imagemAlt: "Bloco representando um agrupamento",
+      checagem: {
+        pergunta: "Qual é maior: 42 ou 38?",
+        opcoes: ["38", "42", "São iguais"],
+        correta: 1,
+        explicacao: "42 tem 4 dezenas; 38 tem 3 dezenas.",
+      },
+    },
+    {
+      texto: "Se as dezenas forem iguais, compare as unidades.",
+      exemplo: "24 e 27 têm 2 dezenas. Como 7 unidades é mais que 4, 27 é maior.",
+      imagem: ursinhoImg,
+      imagemAlt: "Ursinho usado para comparar unidades",
+      checagem: {
+        pergunta: "Qual é maior: 24 ou 27?",
+        opcoes: ["24", "27", "São iguais"],
+        correta: 1,
+        explicacao: "As dezenas são iguais; 7 unidades é mais que 4.",
+      },
+    },
+    {
+      texto: "Os sinais registram o que já entendemos. Leia sempre a comparação completa, da esquerda para a direita.",
+      exemplo: "18 > 15 lê-se: dezoito é maior que quinze.",
+      imagem: estrelaImg,
+      imagemAlt: "Estrela usada no registro de uma comparação",
+      checagem: {
+        pergunta: "Como lemos 11 < 14?",
+        opcoes: ["11 é menor que 14", "11 é maior que 14", "11 é igual a 14"],
+        correta: 0,
+        explicacao: "O sinal < registra que o número da esquerda é menor.",
+      },
+    },
+  ],
 
   explicacoesNiveis: {
     nivel1: "Maior é o que tem mais. Menor é o que tem menos. Igual é a mesma quantidade.",
     nivel2:
       "Ex.: 12 ursinhos e 9 ursinhos. 12 é MAIOR que 9. Escrevemos 12 > 9.",
     nivel3:
-      "O sinal parece uma boquinha: sempre aponta pro número menor. > engole o maior, < engole o maior no outro lado.",
+      "Leia da esquerda para a direita: 12 > 9 significa '12 é maior que 9'. A abertura fica voltada para o maior.",
     nivel4:
       "Quando os dois números têm a mesma dezena, olhe as unidades: 24 e 27 — 7 > 4, então 27 > 24.",
   },
@@ -91,15 +144,14 @@ const aula: Aula = {
     explicacao:
       "Depois de contar, compare os dois números. O maior é o que tem mais itens no grupo.",
     visual: {
-      tipo: "grupos",
+      tipo: "comparar",
       pergunta: "Qual caixa tem MAIS ursinhos ao todo?",
-      imagemUrl: ursinhoImg,
-      itemSingular: "ursinho",
-      itemPlural: "ursinhos",
-      quantidadeGrupos: 2,
-      itensPorGrupo: 12,
-      opcoes: [9, 12, 21],
-      correta: 1,
+      lados: [
+        { imagemUrl: ursinhoImg, quantidade: 12, rotulo: "Caixa A · 12", cor: "#A78BFA" },
+        { imagemUrl: ursinhoImg, quantidade: 9, rotulo: "Caixa B · 9", cor: "#34D399" },
+      ],
+      opcoes: ["Caixa A · 12", "Caixa B · 9", "Mesma quantidade"],
+      correta: 0,
     },
   },
 
@@ -182,7 +234,7 @@ const aula: Aula = {
       "MAIOR (>): o número com mais quantidade.",
       "MENOR (<): o número com menos quantidade.",
       "IGUAL (=): mesma quantidade dos dois lados.",
-      "O 'biquinho' do sinal sempre aponta pro MENOR.",
+      "Leia a comparação da esquerda para a direita; a abertura do sinal fica voltada para o maior.",
     ],
     dica: "Na dúvida, desenhe os dois grupos e compare olhando.",
   },

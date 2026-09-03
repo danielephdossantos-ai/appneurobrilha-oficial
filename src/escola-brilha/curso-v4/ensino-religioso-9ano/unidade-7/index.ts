@@ -5,7 +5,7 @@ export const unidade7: UnidadeGeoV1 = {
   slug: "unidade-7",
   numero: 7,
   titulo: "Sociedades Justas",
-  subtitulo: "Princípios éticos pra construir o comum (EF09ER07)",
+  subtitulo: "Coexistência, respeito à vida e dignidade humana (EF09ER06)",
   descricao:
     "FINALE. Como princípios éticos das tradições e visões seculares podem construir juntos sociedades mais justas, plurais e solidárias.",
   corTema: "#0891b2",

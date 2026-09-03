@@ -4,7 +4,7 @@ export const aula02_massa: AulaV4 = {
   slug: "u6-02-massa",
   titulo: "Massa — kg e g",
   iconeTrilha: "⚖️",
-  bncc: ["EF04MA20", "EF04MA21"],
+  bncc: ["EF04MA20"],
   duracaoMin: 20,
   metodologias: ["cpa", "rme"],
 

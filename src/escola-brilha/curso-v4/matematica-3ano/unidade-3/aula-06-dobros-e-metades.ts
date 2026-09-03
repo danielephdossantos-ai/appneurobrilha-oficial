@@ -105,9 +105,9 @@ export const aula06_dobrosMetades: AulaV4 = {
   },
   momento10_avaliacao: {
     perguntas: [
-      { pergunta: "Dobro de 18?", opcoes: ["36", "30", "40"], correta: 0, feedbackAcerto: "🎉 36.", feedbackErro: "18+18=36." },
-      { pergunta: "Metade de 24?", opcoes: ["12", "10", "14"], correta: 0, feedbackAcerto: "🎉 12.", feedbackErro: "12+12=24." },
-      { pergunta: "Metade de 100?", opcoes: ["50", "40", "60"], correta: 0, feedbackAcerto: "🎉 50.", feedbackErro: "50+50=100." },
+      { pergunta: "Dobro de 18?", opcoes: ["36", "30", "40"], correta: 0, feedbackAcerto: "🎉 O dobro reúne duas parcelas de 18: 18 + 18 = 36.", feedbackErro: "Decomponha 18 em 10 + 8 e dobre cada parte: 20 + 16 = 36." },
+      { pergunta: "Metade de 24?", opcoes: ["12", "10", "14"], correta: 0, feedbackAcerto: "🎉 Duas partes iguais de 12 formam 24.", feedbackErro: "Procure o número que, somado a ele mesmo, resulta em 24: 12 + 12." },
+      { pergunta: "Metade de 100?", opcoes: ["50", "40", "60"], correta: 0, feedbackAcerto: "🎉 Duas partes iguais de 50 formam 100.", feedbackErro: "Divida 100 em duas partes iguais: 50 e 50." },
     ],
   },
   momento11_missaoFamilia: {

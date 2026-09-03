@@ -42,7 +42,9 @@ export const aula02: AulaGeoV1 = {
         subtitulo: "cada região ficou fechada em si mesma",
         emoji: "❌",
         cor: "from-amber-900 to-slate-950"
-      }
+      },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "mig",
     feedbackAcerto: "Correto. Trens e navios a vapor baratearam viagens e fretes: milhões de europeus migraram (inclusive para o Brasil) e produtos industrializados chegaram a todos os continentes.",
@@ -159,7 +161,8 @@ export const aula02: AulaGeoV1 = {
             emoji: "🎓",
             titulo: "Bolsas de estudo",
             cor: "from-slate-600 to-slate-900"
-          }
+          },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "a",
         feedbackAcerto: "Correto. A pobreza no campo europeu e a demanda por mão de obra nas Américas geraram ondas de migração.",
@@ -187,7 +190,8 @@ export const aula02: AulaGeoV1 = {
             emoji: "🏛️",
             titulo: "Serviam só para passeios",
             cor: "from-slate-600 to-slate-900"
-          }
+          },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "a",
         feedbackAcerto: "Correto. As ferrovias escoavam café e outras matérias-primas até os portos para exportação.",
@@ -215,7 +219,8 @@ export const aula02: AulaGeoV1 = {
             emoji: "⛔",
             titulo: "Fim total do comércio internacional",
             cor: "from-slate-600 to-slate-900"
-          }
+          },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "a",
         feedbackAcerto: "Correto. Algodão, borracha e café saíam das colônias, viravam produto na Europa e voltavam a circular pelo mundo.",
@@ -544,7 +549,8 @@ export const aula02: AulaGeoV1 = {
             id: "c",
             texto: "Acabou com todo tipo de viagem.",
             correta: false
-          }
+          },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. Trens e navios a vapor intensificaram a circulação mundial.",
         feedbackErro: "A Revolução Industrial INTENSIFICOU a circulação de povos, produtos e culturas pelo mundo."
@@ -567,7 +573,8 @@ export const aula02: AulaGeoV1 = {
             id: "c",
             texto: "Curiosidade turística.",
             correta: false
-          }
+          },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. A industrialização expulsou camponeses do campo europeu.",
         feedbackErro: "Foi a pobreza rural e a busca por trabalho e terra nas Américas."
@@ -590,7 +597,8 @@ export const aula02: AulaGeoV1 = {
             id: "c",
             texto: "Fim do comércio entre continentes.",
             correta: false
-          }
+          },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. Essa é a lógica do mercado mundial industrial.",
         feedbackErro: "O mercado mundial ligava colônias fornecedoras de matéria-prima às fábricas europeias."

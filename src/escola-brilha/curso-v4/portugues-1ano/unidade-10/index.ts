@@ -14,10 +14,10 @@ import { aula03 } from "./aula-03-eu-leio-o-texto-inteiro";
 export const unidade10: UnidadePortugues = {
   slug: "unidade-10-palavras-teimosas",
   numero: 10,
-  titulo: "Palavras Teimosas",
+  titulo: "Palavras Frequentes",
   subtitulo: "As palavrinhas que a gente lê de olho",
   descricao:
-    "Algumas palavras aparecem em quase toda frase e não se montam juntando os sons. Aqui a criança treina reconhecê-las num relance e depois lê textos inteiros sem travar.",
+    "Algumas palavras aparecem muitas vezes nos textos. A criança relaciona escrita, sons e sentido, pratica o reconhecimento automático e lê textos com precisão e compreensão.",
   corTema: "#f59e0b",
   aulas: [aula01, aula02, aula03],
 };

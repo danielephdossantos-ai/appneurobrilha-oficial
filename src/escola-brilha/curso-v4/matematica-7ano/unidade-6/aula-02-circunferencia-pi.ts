@@ -5,7 +5,7 @@ export const aula02_circunferenciaPi: AulaV4 = {
   slug: "u6-02-circunferencia-pi",
   titulo: "O Número Secreto do Círculo",
   iconeTrilha: "⭕",
-  bncc: ["EF07MA33"],
+  bncc: ["EF07MA22", "EF07MA33"],
   duracaoMin: 30,
   metodologias: ["skemp"],
 
@@ -122,6 +122,25 @@ export const aula02_circunferenciaPi: AulaV4 = {
             fatorada: "r = 50 m",
           },
           destaque: "Isolar e conferir.",
+        },
+      },
+      {
+        texto: "CIRCUNFERÊNCIA COMO LUGAR GEOMÉTRICO: é o conjunto de todos os pontos que ficam à mesma distância do centro. O compasso mantém essa distância fixa.",
+        exemploReal: {
+          titulo: "🔎 Construção com compasso",
+          contexto: "Construir uma circunferência de raio 4 cm",
+          visualMat: {
+            tipo: "trinomioPassoAPasso",
+            trinomio: "Centro O e raio 4 cm",
+            passos: [
+              { expr: "marque o centro O", explica: "Ponto de referência.", status: "neutro" },
+              { expr: "abra o compasso em 4 cm usando a régua", explica: "Fixe a distância.", status: "ok" },
+              { expr: "apoie a ponta seca em O e dê uma volta completa", explica: "Todos os pontos traçados ficam a 4 cm de O.", status: "ok" },
+              { expr: "um ponto a 3 cm fica dentro; a 5 cm fica fora", explica: "Só os pontos a 4 cm pertencem à circunferência.", status: "ok" },
+            ],
+            fatorada: "Circunferência = pontos equidistantes do centro",
+          },
+          destaque: "Círculo é a região interna; circunferência é o contorno construído pelo compasso.",
         },
       },
     ],

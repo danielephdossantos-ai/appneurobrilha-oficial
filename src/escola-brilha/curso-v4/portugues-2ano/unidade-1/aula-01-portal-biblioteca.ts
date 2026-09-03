@@ -31,7 +31,7 @@ export const aula01: AulaPortuguesV4 = {
   slug: "aula-01-portal-biblioteca",
   titulo: "O Portal da Biblioteca",
   iconeTrilha: "📖",
-  bncc: ["EF02LP01", "EF02LP03", "EF02LP04"],
+  bncc: ["EF02LP01", "EF02LP03", "EF02LP04", "EF12LP01", "EF12LP02", "EF12LP03", "EF15LP02", "EF15LP03", "EF15LP18"],
   duracaoMin: 15,
 
   // ------------------------------------------------------------

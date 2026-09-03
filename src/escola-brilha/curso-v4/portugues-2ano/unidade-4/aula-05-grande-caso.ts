@@ -22,13 +22,7 @@ export const aula05: AulaPortuguesV4 = {
   slug: "aula-05-grande-caso",
   titulo: "O Grande Caso da Biblioteca",
   iconeTrilha: "🏅",
-  bncc: [
-    "EF02LP16",
-    "EF02LP17",
-    "EF02LP18",
-    "EF02LP19",
-    "EF02LP20",
-  ],
+  bncc: ["EF02LP26", "EF02LP28", "EF15LP02", "EF15LP03", "EF15LP16", "EF15LP18"],
   duracaoMin: 18,
 
   momento01_motivacao: {

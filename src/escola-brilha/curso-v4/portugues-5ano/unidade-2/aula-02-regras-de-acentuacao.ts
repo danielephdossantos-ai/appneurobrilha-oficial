@@ -20,7 +20,7 @@ export const aula2: AulaPortuguesV4 = {
   slug: "aula-02-regras-de-acentuacao",
   titulo: "Regras de acentuação",
   iconeTrilha: "✒️",
-  bncc: ["EF05LP01", "EF35LP12"],
+  bncc: ["EF05LP03", "EF35LP12"],
   duracaoMin: 25,
 
   momento01_motivacao: {

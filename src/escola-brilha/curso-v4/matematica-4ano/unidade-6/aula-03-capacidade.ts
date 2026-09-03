@@ -4,7 +4,7 @@ export const aula03_capacidade: AulaV4 = {
   slug: "u6-03-capacidade",
   titulo: "Capacidade — L e mL",
   iconeTrilha: "🥤",
-  bncc: ["EF04MA20", "EF04MA21"],
+  bncc: ["EF04MA20"],
   duracaoMin: 20,
   metodologias: ["cpa", "rme"],
 

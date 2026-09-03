@@ -16,7 +16,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-formacao-da-populacao",
   titulo: "A Formação da População: Muitas Culturas",
   iconeTrilha: "🌍",
-  bncc: ["EF03HI09", "EF03HI10"],
+  bncc: [],
   duracaoMin: 22,
 
   cena01_motivacao: {
@@ -54,6 +54,8 @@ export const aula01: AulaGeoV1 = {
         cor: "from-slate-500 to-slate-700",
         fotoUrl: imgImigrantes,
       },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "mistura",
     feedbackAcerto:
@@ -175,6 +177,7 @@ export const aula01: AulaGeoV1 = {
           { id: "in", emoji: "🪶", titulo: "Indígena", cor: "from-green-600 to-emerald-800" },
           { id: "af", emoji: "🥁", titulo: "Africana", cor: "from-orange-600 to-red-800" },
           { id: "im", emoji: "⛵", titulo: "Imigrante europeu", cor: "from-blue-600 to-indigo-800" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "in",
         feedbackAcerto:
@@ -190,6 +193,7 @@ export const aula01: AulaGeoV1 = {
           { id: "in", emoji: "🪶", titulo: "Indígena", cor: "from-green-600 to-emerald-800" },
           { id: "af", emoji: "🥁", titulo: "Africana", cor: "from-orange-600 to-red-800" },
           { id: "im", emoji: "⛵", titulo: "Imigrante japonês", cor: "from-blue-600 to-indigo-800" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "af",
         feedbackAcerto:
@@ -205,6 +209,7 @@ export const aula01: AulaGeoV1 = {
           { id: "in", emoji: "🪶", titulo: "Indígena", cor: "from-green-600 to-emerald-800" },
           { id: "af", emoji: "🥁", titulo: "Africana", cor: "from-orange-600 to-red-800" },
           { id: "jp", emoji: "🍣", titulo: "Imigrante japonês", cor: "from-blue-600 to-indigo-800" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "jp",
         feedbackAcerto:
@@ -476,6 +481,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Imigração.", correta: true },
           { id: "b", texto: "Navegação comercial." },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto:
           "Certificado. Imigração trouxe milhões de pessoas de várias nacionalidades ao Brasil entre 1870 e 1950.",
@@ -489,6 +496,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Herança dos povos indígenas.", correta: true },
           { id: "b", texto: "Herança dos imigrantes alemães." },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto:
           "Correto. Vocabulário Tupi, rede e mandioca são heranças dos povos INDÍGENAS, primeiros habitantes do território.",
@@ -502,6 +511,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Dos povos africanos escravizados.", correta: true },
           { id: "b", texto: "Dos imigrantes japoneses." },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto:
           "Certificação concluída. Capoeira, feijoada e berimbau nasceram da resistência cultural dos povos AFRICANOS.",

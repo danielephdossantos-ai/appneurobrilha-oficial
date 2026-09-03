@@ -68,13 +68,15 @@ const aula: Aula = {
     "Registrar as respostas.",
     "Organizar as informações em tabela.",
     "Comunicar o resultado.",
+    "Definir categorias sem sobreposição e registrar uma resposta por participante.",
+    "Coletar até duas variáveis categóricas e interpretar combinações.",
   ],
 
   motivacao:
     "Pesquisar é como ser um repórter 🎤 da floresta — a gente descobre o que os amigos pensam!",
 
   explicacao:
-    "Uma PESQUISA 📋 tem 4 passos:\n\n1️⃣ Fazer a pergunta ❓\n2️⃣ Registrar as respostas ✍️\n3️⃣ Organizar os dados 📊\n4️⃣ Contar o resultado e contar pra todo mundo 🎤",
+    "Uma pesquisa começa com uma pergunta clara e categorias de resposta que não se confundem. Depois definimos quem responderá, registramos uma resposta de cada participante, conferimos a contagem, organizamos em tabela ou gráfico e comunicamos o resultado sem mudar os dados. Podemos pesquisar uma variável, como fruta preferida, ou duas, como fruta preferida e turma. Com duas variáveis, cada resposta precisa manter o par correto para podermos comparar os grupos.",
 
   explicacoesNiveis: {
     nivel1: "Pesquisar = perguntar, anotar, organizar e contar.",

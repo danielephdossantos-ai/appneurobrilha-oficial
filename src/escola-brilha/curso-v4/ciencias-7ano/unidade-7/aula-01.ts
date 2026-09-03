@@ -12,7 +12,7 @@ export const aula01: AulaGeoV1 = {
   titulo: "Congresso Científico",
   iconeTrilha: "🎤",
   recompensa: { xp: 200, moedas: 80, medalha: "Cientista do Ano" },
-  bncc: ["EF07CI07", "EF07CI08", "EF07CI09", "EF07CI10", "EF07CI01", "EF07CI13"],
+  bncc: [],
   duracaoMin: 45,
 
   cena01_motivacao: {
@@ -37,6 +37,7 @@ export const aula01: AulaGeoV1 = {
       { id: "cores", titulo: "Muitas cores e desenhos bonitos", subtitulo: "só visual, sem dados", emoji: "🎨", cor: "from-slate-500 to-slate-700", fotoUrl: posterImg },
       { id: "metodo", titulo: "Pergunta, método, resultado, conclusão", subtitulo: "estrutura científica clara", emoji: "📊", cor: "from-emerald-500 to-teal-700", fotoUrl: posterImg },
       { id: "texto", titulo: "Texto denso ocupando tudo", subtitulo: "quanto mais palavras, melhor", emoji: "📝", cor: "from-rose-500 to-red-700", fotoUrl: posterImg },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "metodo",
     feedbackAcerto:
@@ -94,6 +95,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🧬", titulo: "Célula → tecido → órgão → sistema → organismo", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🔄", titulo: "Organismo → célula → tecido", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🎲", titulo: "Não existe ordem", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. Do menor ao maior — cinco degraus.",
         feedbackErro: "Do MENOR ao MAIOR: célula → tecido → órgão → sistema → organismo." },
@@ -102,6 +104,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🔥", titulo: "Diminui a cada elo (regra dos 10%)", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🔄", titulo: "Cicla como a matéria", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "📈", titulo: "Aumenta a cada elo", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. Energia FLUI e se perde como calor. Só matéria cicla.",
         feedbackErro: "Energia NÃO cicla. Só a matéria cicla. Energia se perde a cada elo." },
@@ -110,6 +113,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🔥", titulo: "Química (novas substâncias: CO₂ + H₂O + cinzas)", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "❄️", titulo: "Física", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "❌", titulo: "Matéria some", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. Combustão = química. Madeira vira substâncias novas.",
         feedbackErro: "Madeira não VOLTA a ser madeira. É QUÍMICA — irreversível." },
@@ -218,6 +222,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Pergunta → hipótese → experimento → conclusão → publicação", correta: true },
           { id: "b", texto: "Publicação → conclusão → hipótese → pergunta" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. Do questionamento inicial à comunicação final.",
         feedbackErro: "Ciência COMEÇA na pergunta e TERMINA na publicação. Nunca ao contrário." },
@@ -225,6 +231,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Ter estrutura clara: pergunta, método, resultado, conclusão", correta: true },
           { id: "b", texto: "Ter só imagens bonitas, sem dados" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. Estrutura clara comunica muito mais que decoração.",
         feedbackErro: "Sem dados nem estrutura, é cartaz — não pôster CIENTÍFICO." },
@@ -232,6 +240,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Sem comunicação, descoberta não beneficia ninguém e não pode ser questionada", correta: true },
           { id: "b", texto: "Só para ganhar prêmios" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. Ciência é conhecimento COMPARTILHADO — não segredo.",
         feedbackErro: "Divulgar não é vaidade. É ESSENCIAL — sem ela, ninguém pode verificar, criticar ou aplicar a descoberta." },

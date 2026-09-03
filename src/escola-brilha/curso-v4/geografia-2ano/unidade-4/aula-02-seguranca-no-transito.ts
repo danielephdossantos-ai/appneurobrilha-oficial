@@ -22,7 +22,7 @@ export const aula02: AulaPortuguesV4 = {
   slug: "aula-02-seguranca-no-transito",
   titulo: "Segurança em Primeiro Lugar",
   iconeTrilha: "🚦",
-  bncc: ["EF02GE07", "EF02GE08"],
+  bncc: [],
   duracaoMin: 15,
 
   momento01_motivacao: {
@@ -64,12 +64,11 @@ export const aula02: AulaPortuguesV4 = {
         },
         { texto: "A pintar carros de vermelho.", imagemUrl: carro },
         { texto: "A dormir cedo na escola.", imagemUrl: escola },
+        { texto: "Sobre outra possibilidade relacionada ao tema.", imagemUrl: rua },
       ],
       respostaCerta: 0,
-      feedbackAcerto:
-        "🎉 Isso! Vamos treinar: FAIXA + SEMÁFORO + OLHAR os dois lados.",
-      feedbackErro:
-        "Olhe as pistas: SEMÁFORO, DOIS LADOS, FAIXA. A missão é ATRAVESSAR SEGURO.",
+      feedbackAcerto: "🎉 Isso! Vamos treinar: FAIXA + SEMÁFORO + OLHAR os dois lados.",
+      feedbackErro: "Olhe as pistas: SEMÁFORO, DOIS LADOS, FAIXA. A missão é ATRAVESSAR SEGURO.",
     },
   },
 
@@ -87,8 +86,7 @@ export const aula02: AulaPortuguesV4 = {
         palavra: "semáforo",
         explicacao:
           "É o SINAL de trânsito com luzes VERMELHA, AMARELA e VERDE. Fala pros carros e pras pessoas quando andar e quando esperar.",
-        exemplo:
-          "O SEMÁFORO dos carros ficou VERMELHO — a pessoa pode atravessar.",
+        exemplo: "O SEMÁFORO dos carros ficou VERMELHO — a pessoa pode atravessar.",
         imagemUrl: semaforo,
       },
       {
@@ -107,15 +105,7 @@ export const aula02: AulaPortuguesV4 = {
       titulo: "Como atravessar a rua",
       imagemUrl: rua,
       legendaImagem: "Sempre com um adulto, na faixa, olhando dos dois lados.",
-      destacar: [
-        "calçada",
-        "faixa",
-        "semáforo",
-        "vermelho",
-        "verde",
-        "dois lados",
-        "adulto",
-      ],
+      destacar: ["calçada", "faixa", "semáforo", "vermelho", "verde", "dois lados", "adulto"],
       paragrafos: [
         "O PEDESTRE anda na CALÇADA, longe dos carros. Pra atravessar, procura sempre a FAIXA.",
         "Se tiver SEMÁFORO, espera. Quando o semáforo dos CARROS fica VERMELHO (e o das pessoas fica VERDE), pode atravessar.",
@@ -130,20 +120,18 @@ export const aula02: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "Onde o PEDESTRE anda?",
-        opcoes: ["No meio da rua", "Na calçada", "Em cima do carro"],
+        opcoes: ["No meio da rua", "Na calçada", "Em cima do carro", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 Isso! Na CALÇADA.",
-        feedbackErro:
-          "O texto diz: 'O PEDESTRE anda na CALÇADA, longe dos carros'.",
+        feedbackErro: "O texto diz: 'O PEDESTRE anda na CALÇADA, longe dos carros'.",
         ondeEstaNoTexto: "…O PEDESTRE anda na CALÇADA…",
       },
       {
         pergunta: "Pra atravessar, procura o quê no chão?",
-        opcoes: ["A faixa", "Uma flor", "Uma pedra"],
+        opcoes: ["A faixa", "Uma flor", "Uma pedra", "Outra possibilidade"],
         correta: 0,
         feedbackAcerto: "🎉 Certo! A FAIXA.",
-        feedbackErro:
-          "O texto diz: 'Pra atravessar, procura sempre a FAIXA'.",
+        feedbackErro: "O texto diz: 'Pra atravessar, procura sempre a FAIXA'.",
         ondeEstaNoTexto: "…procura sempre a FAIXA…",
       },
       {
@@ -152,11 +140,11 @@ export const aula02: AulaPortuguesV4 = {
           "Quando o dos CARROS está VERDE",
           "Quando o dos CARROS está VERMELHO",
           "Nunca",
+          "Outra possibilidade",
         ],
         correta: 1,
         feedbackAcerto: "🎉 Boa! Carro VERMELHO = pessoa pode atravessar.",
-        feedbackErro:
-          "O texto diz: 'Quando o semáforo dos CARROS fica VERMELHO… pode atravessar'.",
+        feedbackErro: "O texto diz: 'Quando o semáforo dos CARROS fica VERMELHO… pode atravessar'.",
         ondeEstaNoTexto: "…semáforo dos CARROS fica VERMELHO…",
       },
       {
@@ -165,11 +153,11 @@ export const aula02: AulaPortuguesV4 = {
           "Fecha os olhos e corre",
           "Olha pros DOIS LADOS",
           "Grita bem alto",
+          "Outra possibilidade",
         ],
         correta: 1,
         feedbackAcerto: "🎉 Isso! OLHA pros DOIS LADOS.",
-        feedbackErro:
-          "O texto diz: 'OLHA pros DOIS LADOS'.",
+        feedbackErro: "O texto diz: 'OLHA pros DOIS LADOS'.",
         ondeEstaNoTexto: "…OLHA pros DOIS LADOS…",
       },
     ],
@@ -180,22 +168,30 @@ export const aula02: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "🚦 O sinal dos CARROS ficou VERMELHO. O pedestre...",
-        opcoes: ["Espera parado", "Atravessa na faixa com atenção", "Corre no meio da rua"],
-        opcoesImagens: [carro, criancaAndando, rua],
+        opcoes: [
+          "Espera parado",
+          "Atravessa na faixa com atenção",
+          "Corre no meio da rua",
+          "Outra possibilidade",
+        ],
+        opcoesImagens: [carro, criancaAndando, rua, carro],
         correta: 1,
-        feedbackAcerto:
-          "🎉 Isso! Carro VERMELHO = pessoa atravessa na FAIXA, olhando.",
+        feedbackAcerto: "🎉 Isso! Carro VERMELHO = pessoa atravessa na FAIXA, olhando.",
         feedbackErro:
           "Quando o CARRO fica VERMELHO, o pedestre pode atravessar — mas SEMPRE na FAIXA.",
       },
       {
         pergunta: "🚦 O sinal dos CARROS ficou VERDE. O pedestre...",
-        opcoes: ["Atravessa correndo", "Espera na calçada", "Fica no meio da rua"],
-        opcoesImagens: [rua, criancaAndando, carro],
+        opcoes: [
+          "Atravessa correndo",
+          "Espera na calçada",
+          "Fica no meio da rua",
+          "Outra possibilidade",
+        ],
+        opcoesImagens: [rua, criancaAndando, carro, rua],
         correta: 1,
         feedbackAcerto: "🎉 Certo! ESPERA na CALÇADA.",
-        feedbackErro:
-          "Carro VERDE = carro anda. O pedestre ESPERA na CALÇADA.",
+        feedbackErro: "Carro VERDE = carro anda. O pedestre ESPERA na CALÇADA.",
       },
       {
         pergunta: "🚲 Andando de BICICLETA na rua, o que NÃO pode esquecer?",
@@ -203,17 +199,17 @@ export const aula02: AulaPortuguesV4 = {
           "Capacete e adulto por perto",
           "Chinelo de dedo",
           "Chapéu de festa",
+          "Outra possibilidade",
         ],
-        opcoesImagens: [bicicletaModerna, carro, mapaPercurso],
+        opcoesImagens: [bicicletaModerna, carro, mapaPercurso, bicicletaModerna],
         correta: 0,
         feedbackAcerto: "🎉 Boa! CAPACETE + adulto por perto.",
-        feedbackErro:
-          "De BICICLETA a gente usa CAPACETE e anda com um ADULTO por perto.",
+        feedbackErro: "De BICICLETA a gente usa CAPACETE e anda com um ADULTO por perto.",
       },
       {
         pergunta: "🚌 Dentro do ÔNIBUS/CARRO, a criança usa...",
-        opcoes: ["Cinto de segurança", "Nenhuma proteção", "Só o boné"],
-        opcoesImagens: [carro, pontoOnibus, criancaAndando],
+        opcoes: ["Cinto de segurança", "Nenhuma proteção", "Só o boné", "Outra possibilidade"],
+        opcoesImagens: [carro, pontoOnibus, criancaAndando, carro],
         correta: 0,
         feedbackAcerto: "🎉 Isso! CINTO DE SEGURANÇA sempre.",
         feedbackErro:
@@ -234,10 +230,8 @@ export const aula02: AulaPortuguesV4 = {
         { id: "s5", texto: "5) ATRAVESSO ANDANDO, com o adulto.", imagemUrl: cidade },
       ],
       ordemCerta: ["s1", "s2", "s3", "s4", "s5"],
-      feedbackAcerto:
-        "🎉 Perfeito! Parar → faixa → olhar → esperar → atravessar.",
-      feedbackErro:
-        "Primeiro PARA, depois PROCURA a FAIXA, OLHA, ESPERA e só então ATRAVESSA.",
+      feedbackAcerto: "🎉 Perfeito! Parar → faixa → olhar → esperar → atravessar.",
+      feedbackErro: "Primeiro PARA, depois PROCURA a FAIXA, OLHA, ESPERA e só então ATRAVESSA.",
     },
   },
 
@@ -255,8 +249,8 @@ export const aula02: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "Onde Brilha andou com a mãe?",
-        opcoes: ["Na calçada", "No meio dos carros", "Em cima do muro"],
-        opcoesImagens: [criancaAndando, carro, rua],
+        opcoes: ["Na calçada", "No meio dos carros", "Em cima do muro", "Outra possibilidade"],
+        opcoesImagens: [criancaAndando, carro, rua, criancaAndando],
         correta: 0,
         feedbackAcerto: "🎉 Isso! Na CALÇADA.",
         feedbackErro: "O texto diz: 'Andaram na CALÇADA'.",
@@ -264,12 +258,11 @@ export const aula02: AulaPortuguesV4 = {
       },
       {
         pergunta: "Atravessaram QUANDO o semáforo das pessoas ficou...",
-        opcoes: ["Vermelho", "Verde", "Preto"],
-        opcoesImagens: [semaforo, semaforo, semaforo],
+        opcoes: ["Vermelho", "Verde", "Preto", "Outra possibilidade"],
+        opcoesImagens: [semaforo, semaforo, semaforo, semaforo],
         correta: 1,
         feedbackAcerto: "🎉 Certo! VERDE.",
-        feedbackErro:
-          "O texto diz: 'Quando o das pessoas ficou VERDE… atravessaram'.",
+        feedbackErro: "O texto diz: 'Quando o das pessoas ficou VERDE… atravessaram'.",
         ondeEstaNoTexto: "…o das pessoas ficou VERDE…",
       },
     ],
@@ -277,14 +270,12 @@ export const aula02: AulaPortuguesV4 = {
 
   momento_minijogo: {
     titulo: "🚦 Semáforo: certo ou errado?",
-    instrucao:
-      "Cada CARTELA é uma atitude no trânsito. Coloque em SEGURO ou PERIGOSO.",
+    instrucao: "Cada CARTELA é uma atitude no trânsito. Coloque em SEGURO ou PERIGOSO.",
     jogo: {
       tipo: "arrastarParaAlvo",
       titulo: "Arrastar para o Alvo",
       bloco: {
-        instrucao:
-          "Toque na atitude e depois no cartaz certo (SEGURO ou PERIGOSO).",
+        instrucao: "Toque na atitude e depois no cartaz certo (SEGURO ou PERIGOSO).",
         alvos: [
           {
             id: "seguro",
@@ -303,14 +294,33 @@ export const aula02: AulaPortuguesV4 = {
           { id: "i1", texto: "Atravessar na FAIXA", alvoId: "seguro", imagemUrl: rua },
           { id: "i2", texto: "Esperar o carro PARAR", alvoId: "seguro", imagemUrl: carro },
           { id: "i3", texto: "Usar CINTO no carro", alvoId: "seguro", imagemUrl: carro },
-          { id: "i4", texto: "Usar CAPACETE de bike", alvoId: "seguro", imagemUrl: bicicletaModerna },
-          { id: "i5", texto: "Correr no meio da rua", alvoId: "perigoso", imagemUrl: criancaAndando },
-          { id: "i6", texto: "Atravessar no VERDE dos carros", alvoId: "perigoso", imagemUrl: semaforo },
+          {
+            id: "i4",
+            texto: "Usar CAPACETE de bike",
+            alvoId: "seguro",
+            imagemUrl: bicicletaModerna,
+          },
+          {
+            id: "i5",
+            texto: "Correr no meio da rua",
+            alvoId: "perigoso",
+            imagemUrl: criancaAndando,
+          },
+          {
+            id: "i6",
+            texto: "Atravessar no VERDE dos carros",
+            alvoId: "perigoso",
+            imagemUrl: semaforo,
+          },
           { id: "i7", texto: "Jogar bola na rua", alvoId: "perigoso", imagemUrl: rua },
-          { id: "i8", texto: "Descer do ônibus por trás", alvoId: "perigoso", imagemUrl: pontoOnibus },
+          {
+            id: "i8",
+            texto: "Descer do ônibus por trás",
+            alvoId: "perigoso",
+            imagemUrl: pontoOnibus,
+          },
         ],
-        feedbackAcerto:
-          "🎉 Guardião do trânsito! Você separou as atitudes seguras das perigosas.",
+        feedbackAcerto: "🎉 Guardião do trânsito! Você separou as atitudes seguras das perigosas.",
         feedbackErro:
           "Lembra: FAIXA, SEMÁFORO, CINTO e CAPACETE são SEGUROS. Correr, atravessar no verde do carro e brincar na rua são PERIGOSOS.",
       },
@@ -331,10 +341,10 @@ export const aula02: AulaPortuguesV4 = {
         "Espera parado no meio da rua",
         "Atravessa na FAIXA olhando os dois lados",
         "Corre pra frente do carro",
+        "Outra possibilidade",
       ],
       correta: 1,
-      feedbackAcerto:
-        "🎉 Isso! Atravessa na FAIXA, olhando os dois lados.",
+      feedbackAcerto: "🎉 Isso! Atravessa na FAIXA, olhando os dois lados.",
       feedbackErro:
         "Carro VERMELHO = pessoa atravessa, MAS sempre na FAIXA e olhando os DOIS LADOS.",
     },
@@ -344,28 +354,28 @@ export const aula02: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "1/5 — Onde o PEDESTRE anda?",
-        opcoes: ["No meio da rua", "Na calçada", "Em cima do carro"],
+        opcoes: ["No meio da rua", "Na calçada", "Em cima do carro", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 Na CALÇADA.",
         feedbackErro: "PEDESTRE anda na CALÇADA.",
       },
       {
         pergunta: "2/5 — Pra atravessar, procura o quê?",
-        opcoes: ["A faixa", "Uma flor", "O céu"],
+        opcoes: ["A faixa", "Uma flor", "O céu", "Outra possibilidade"],
         correta: 0,
         feedbackAcerto: "🎉 A FAIXA.",
         feedbackErro: "Atravessa SEMPRE na FAIXA.",
       },
       {
         pergunta: "3/5 — De BICICLETA, o que a criança usa na cabeça?",
-        opcoes: ["Chapéu de festa", "Capacete", "Nada"],
+        opcoes: ["Chapéu de festa", "Capacete", "Nada", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 CAPACETE.",
         feedbackErro: "De bicicleta a criança usa CAPACETE.",
       },
       {
         pergunta: "4/5 — Dentro do CARRO, usa...",
-        opcoes: ["Cinto de segurança", "Só o boné", "Nada"],
+        opcoes: ["Cinto de segurança", "Só o boné", "Nada", "Outra possibilidade"],
         correta: 0,
         feedbackAcerto: "🎉 CINTO de segurança.",
         feedbackErro: "No carro, SEMPRE o CINTO de segurança.",
@@ -376,11 +386,11 @@ export const aula02: AulaPortuguesV4 = {
           "Sim, atravessar na faixa olhando",
           "Não, nunca",
           "Só se estiver chovendo",
+          "Outra possibilidade",
         ],
         correta: 0,
         feedbackAcerto: "🎉 Sim! Pela FAIXA, olhando.",
-        feedbackErro:
-          "Carro VERMELHO = pedestre pode atravessar, na FAIXA e olhando.",
+        feedbackErro: "Carro VERMELHO = pedestre pode atravessar, na FAIXA e olhando.",
       },
     ],
   },
@@ -394,8 +404,7 @@ export const aula02: AulaPortuguesV4 = {
       "3) DESENHE cada um em um quadrinho.",
       "4) Explique pro adulto o que cada um serve.",
     ],
-    registro:
-      "📸 Uma foto do seu caderno com os 3 sinais desenhados.",
+    registro: "📸 Uma foto do seu caderno com os 3 sinais desenhados.",
   },
 
   recompensa: {

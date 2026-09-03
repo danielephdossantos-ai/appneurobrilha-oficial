@@ -32,7 +32,7 @@ export const aula03: AulaPortuguesV4 = {
   slug: "aula-03-pronomes",
   titulo: "Pronomes que evitam repetição",
   iconeTrilha: "🔁",
-  bncc: ["EF04LP07", "EF35LP14"],
+  bncc: ["EF35LP06", "EF35LP08", "EF35LP14"],
   duracaoMin: 20,
 
   momento01_motivacao: {

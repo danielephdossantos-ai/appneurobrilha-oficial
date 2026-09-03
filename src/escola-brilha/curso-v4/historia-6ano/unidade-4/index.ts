@@ -1,5 +1,6 @@
 import type { UnidadeGeoV1 } from "../../types";
 import { aula01 } from "./aula-01-grecia-antiga";
+import { aula02 } from "./aula-02-mundos-antigo-medieval";
 
 export const unidade4: UnidadeGeoV1 = {
   slug: "unidade-4",
@@ -9,5 +10,5 @@ export const unidade4: UnidadeGeoV1 = {
   descricao:
     "Brilha e Aurora exploram Atenas e Esparta — duas pólis, dois projetos de sociedade. Fragmento 4: O Escudo do Hoplita.",
   corTema: "#0f766e",
-  aulas: [aula01],
+  aulas: [aula01, aula02],
 };

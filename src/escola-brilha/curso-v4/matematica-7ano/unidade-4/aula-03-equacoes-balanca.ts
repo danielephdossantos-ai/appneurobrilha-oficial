@@ -5,7 +5,7 @@ export const aula03_equacoesBalanca: AulaV4 = {
   slug: "u4-03-equacoes-balanca",
   titulo: "A Balança da Igualdade",
   iconeTrilha: "⚖️",
-  bncc: ["EF07MA15", "EF07MA16", "EF07MA18"],
+  bncc: ["EF07MA18"],
   duracaoMin: 32,
   metodologias: ["skemp"],
 

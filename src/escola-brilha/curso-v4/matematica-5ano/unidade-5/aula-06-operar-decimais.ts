@@ -4,7 +4,7 @@ export const aula06_operarDecimais: AulaV4 = {
   slug: "u5-06-operar-decimais",
   titulo: "Somar, subtrair e multiplicar decimais",
   iconeTrilha: "➗",
-  bncc: ["EF05MA07"],
+  bncc: ["EF05MA07", "EF05MA08"],
   duracaoMin: 22,
   metodologias: ["skemp"],
 
@@ -16,7 +16,7 @@ export const aula06_operarDecimais: AulaV4 = {
     instrucao: "Regras.",
     cenas: [
       { tipo: "texto", texto: "Soma/subtração: vírgula alinhada. Complete com zeros se faltar.", destaque: true },
-      { tipo: "texto", texto: "Multiplicação por natural: ignore vírgula, calcule, e coloque a vírgula de volta." },
+      { tipo: "texto", texto: "Multiplicação por natural: preserve o valor da unidade. Por exemplo, 2,45 são 245 centésimos; 245 centésimos × 3 = 735 centésimos = 7,35." },
     ],
   },
   momento03_descoberta: {
@@ -29,7 +29,7 @@ export const aula06_operarDecimais: AulaV4 = {
     etapas: [
       { texto: "12,375 + 4,25 → 12,375 + 4,250 = 16,625." },
       { texto: "5,3 − 1,45 → 5,30 − 1,45 = 3,85." },
-      { texto: "2,45 × 3 → 245 × 3 = 735 → 7,35 (mesmas 2 casas)." },
+      { texto: "2,45 × 3: 2,45 são 245 centésimos. 245 × 3 = 735 centésimos, que correspondem a 7,35." },
     ],
   },
   momento05_modelagem: {

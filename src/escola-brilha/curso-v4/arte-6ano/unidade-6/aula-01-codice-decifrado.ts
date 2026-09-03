@@ -48,12 +48,41 @@ export const aula01: AulaArteV1 = {
     titulo: "🏺 O Núcleo em Perigo",
     instrucao: "Toca em cada pista sobre o patrimônio que está desaparecendo de verdade",
     itens: [
-      { emoji: "🪨", rotulo: "Cavernas rachando", descricao: "Pinturas rupestres de 30 mil anos sofrem com umidade, turistas e o próprio tempo. Cada visita deixa CO2 e fungos que corroem o pigmento milimetricamente.", cor: "#7c2d12", fotoUrl: cavernaLascaux },
-      { emoji: "🎨", rotulo: "Tintas egípcias sumindo", descricao: "Pigmentos minerais de tumbas milenares desbotam ao contato com luz e ar. O que resistiu 4 mil anos fechado pode sumir em poucas décadas exposto.", cor: "#f59e0b", fotoUrl: valeDosReis },
-      { emoji: "🗣️", rotulo: "Línguas orais esquecidas", descricao: "Quando o último falante de uma língua morre sem registro, um universo inteiro de histórias, cantos e saberes desaparece PRA SEMPRE.", cor: "#dc2626", fotoUrl: codiceGrafismos },
-      { emoji: "🏛️", rotulo: "Monumentos destruídos", descricao: "Guerras, terremotos e erosão já apagaram templos e cidades inteiras. Sem registro prévio, a reconstrução vira quase impossível.", cor: "#7c3aed", fotoUrl: stonehengeGeral },
+      {
+        emoji: "🪨",
+        rotulo: "Cavernas rachando",
+        descricao:
+          "Pinturas rupestres de 30 mil anos sofrem com umidade, turistas e o próprio tempo. Cada visita deixa CO2 e fungos que corroem o pigmento milimetricamente.",
+        cor: "#7c2d12",
+        fotoUrl: cavernaLascaux,
+      },
+      {
+        emoji: "🎨",
+        rotulo: "Tintas egípcias sumindo",
+        descricao:
+          "Pigmentos minerais de tumbas milenares desbotam ao contato com luz e ar. O que resistiu 4 mil anos fechado pode sumir em poucas décadas exposto.",
+        cor: "#f59e0b",
+        fotoUrl: valeDosReis,
+      },
+      {
+        emoji: "🗣️",
+        rotulo: "Línguas orais esquecidas",
+        descricao:
+          "Quando o último falante de uma língua morre sem registro, um universo inteiro de histórias, cantos e saberes desaparece PRA SEMPRE.",
+        cor: "#dc2626",
+        fotoUrl: codiceGrafismos,
+      },
+      {
+        emoji: "🏛️",
+        rotulo: "Monumentos destruídos",
+        descricao:
+          "Guerras, terremotos e erosão já apagaram templos e cidades inteiras. Sem registro prévio, a reconstrução vira quase impossível.",
+        cor: "#7c3aed",
+        fotoUrl: stonehengeGeral,
+      },
     ],
-    falaFinal: "Sua missão final: aprender como a TECNOLOGIA digital pode guardar a arte do passado para sempre.",
+    falaFinal:
+      "Sua missão final: aprender como a TECNOLOGIA digital pode guardar a arte do passado para sempre.",
   },
 
   cena02_previsao: {
@@ -61,34 +90,69 @@ export const aula01: AulaArteV1 = {
     aurora: "Calibra os sensores antes de escanear o patrimônio!",
     perguntas: [
       {
-        pergunta: "Por que uma pintura rupestre de 30 mil anos corre risco HOJE, mesmo tendo sobrevivido tanto tempo escondida?",
+        pergunta:
+          "Por que uma pintura rupestre de 30 mil anos corre risco HOJE, mesmo tendo sobrevivido tanto tempo escondida?",
         fotoUrl: cavernaLascaux,
         alternativas: [
-          { texto: "Porque a exposição ao ar, luz, umidade e visitas humanas acelera a degradação que séculos fechados não causaram", correta: true },
-          { texto: "Porque pinturas antigas têm prazo de validade marcado na rocha", correta: false },
+          {
+            texto:
+              "Porque a exposição ao ar, luz, umidade e visitas humanas acelera a degradação que séculos fechados não causaram",
+            correta: true,
+          },
+          {
+            texto: "Porque pinturas antigas têm prazo de validade marcado na rocha",
+            correta: false,
+          },
+
+          { texto: "Não corresponde à análise", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
-        feedbackAcerto: "Exato! O equilíbrio que preservou a pintura por milênios se rompe assim que abrimos a caverna ao mundo — por isso a URGÊNCIA de escanear tudo digitalmente.",
-        feedbackErro: "Não existe prazo de validade mágico. O problema é o CONTATO com o ambiente externo — luz, ar e visitantes aceleram o desgaste.",
+        feedbackAcerto:
+          "Exato! O equilíbrio que preservou a pintura por milênios se rompe assim que abrimos a caverna ao mundo — por isso a URGÊNCIA de escanear tudo digitalmente.",
+        feedbackErro:
+          "Não existe prazo de validade mágico. O problema é o CONTATO com o ambiente externo — luz, ar e visitantes aceleram o desgaste.",
       },
       {
         pergunta: "O que é a tecnologia LiDAR usada na preservação digital de patrimônios?",
         fotoUrl: arqueologo,
         alternativas: [
-          { texto: "Um scanner a laser que dispara milhões de feixes por segundo pra criar um modelo 3D exato de um objeto ou lugar", correta: true },
+          {
+            texto:
+              "Um scanner a laser que dispara milhões de feixes por segundo pra criar um modelo 3D exato de um objeto ou lugar",
+            correta: true,
+          },
           { texto: "Uma câmera comum que tira fotos em preto e branco", correta: false },
+
+          { texto: "Não corresponde à análise", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
-        feedbackAcerto: "Perfeito! LiDAR mede o tempo que cada feixe de laser leva pra voltar, criando uma 'nuvem de pontos' que reconstrói a forma real, milímetro por milímetro.",
-        feedbackErro: "LiDAR vai muito além de foto simples: é um LASER que mapeia profundidade e forma em 3D com precisão milimétrica.",
+        feedbackAcerto:
+          "Perfeito! LiDAR mede o tempo que cada feixe de laser leva pra voltar, criando uma 'nuvem de pontos' que reconstrói a forma real, milímetro por milímetro.",
+        feedbackErro:
+          "LiDAR vai muito além de foto simples: é um LASER que mapeia profundidade e forma em 3D com precisão milimétrica.",
       },
       {
-        pergunta: "Se um monumento é totalmente destruído por um terremoto, o que permite RECONSTRUÍ-LO digitalmente depois?",
+        pergunta:
+          "Se um monumento é totalmente destruído por um terremoto, o que permite RECONSTRUÍ-LO digitalmente depois?",
         fotoUrl: stonehengeGeral,
         alternativas: [
-          { texto: "Escaneamentos 3D e fotografias feitos ANTES da destruição, guardados em banco de dados", correta: true },
-          { texto: "A memória dos arqueólogos, que sempre lembram cada detalhe de cor", correta: false },
+          {
+            texto:
+              "Escaneamentos 3D e fotografias feitos ANTES da destruição, guardados em banco de dados",
+            correta: true,
+          },
+          {
+            texto: "A memória dos arqueólogos, que sempre lembram cada detalhe de cor",
+            correta: false,
+          },
+
+          { texto: "Não corresponde à análise", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
-        feedbackAcerto: "Isso! Sem registro PRÉVIO em 3D, a reconstrução vira suposição. Por isso escanear hoje é proteger o amanhã.",
-        feedbackErro: "Memória humana falha e se perde. É o REGISTRO DIGITAL prévio que garante uma reconstrução fiel.",
+        feedbackAcerto:
+          "Isso! Sem registro PRÉVIO em 3D, a reconstrução vira suposição. Por isso escanear hoje é proteger o amanhã.",
+        feedbackErro:
+          "Memória humana falha e se perde. É o REGISTRO DIGITAL prévio que garante uma reconstrução fiel.",
       },
     ],
   },
@@ -97,10 +161,38 @@ export const aula01: AulaArteV1 = {
     tipo: "vocabularioCards",
     aurora: "Vocabulário do arqueólogo digital. Toca em cada verbete!",
     cards: [
-      { termo: "Patrimônio Cultural", definicao: "Todo bem material ou imaterial que representa a identidade e a memória de um povo — cavernas, templos, línguas, festas. Precisa ser protegido para as próximas gerações.", emoji: "🏛️", cor: "#7c2d12", fotoUrl: valeDosReis },
-      { termo: "Escaneamento 3D (LiDAR)", definicao: "Tecnologia a laser que dispara milhões de feixes por segundo e mede o retorno, criando uma cópia digital milimetricamente exata de um objeto ou espaço.", emoji: "📡", cor: "#06b6d4", fotoUrl: arqueologo },
-      { termo: "Museu Virtual", definicao: "Espaço digital, acessível pelo celular ou computador, onde qualquer pessoa no mundo visita réplicas 3D de obras e sítios reais sem sair de casa.", emoji: "🖥️", cor: "#7c3aed", fotoUrl: internetAbstracao },
-      { termo: "Fotogrametria", definicao: "Técnica que cruza dezenas de fotos do mesmo objeto em ângulos diferentes para que um software calcule sua forma em 3D.", emoji: "📸", cor: "#0ea5e9", fotoUrl: mascaraSanxingdui },
+      {
+        termo: "Patrimônio Cultural",
+        definicao:
+          "Todo bem material ou imaterial que representa a identidade e a memória de um povo — cavernas, templos, línguas, festas. Precisa ser protegido para as próximas gerações.",
+        emoji: "🏛️",
+        cor: "#7c2d12",
+        fotoUrl: valeDosReis,
+      },
+      {
+        termo: "Escaneamento 3D (LiDAR)",
+        definicao:
+          "Tecnologia a laser que dispara milhões de feixes por segundo e mede o retorno, criando uma cópia digital milimetricamente exata de um objeto ou espaço.",
+        emoji: "📡",
+        cor: "#06b6d4",
+        fotoUrl: arqueologo,
+      },
+      {
+        termo: "Museu Virtual",
+        definicao:
+          "Espaço digital, acessível pelo celular ou computador, onde qualquer pessoa no mundo visita réplicas 3D de obras e sítios reais sem sair de casa.",
+        emoji: "🖥️",
+        cor: "#7c3aed",
+        fotoUrl: internetAbstracao,
+      },
+      {
+        termo: "Fotogrametria",
+        definicao:
+          "Técnica que cruza dezenas de fotos do mesmo objeto em ângulos diferentes para que um software calcule sua forma em 3D.",
+        emoji: "📸",
+        cor: "#0ea5e9",
+        fotoUrl: mascaraSanxingdui,
+      },
     ],
   },
 
@@ -115,10 +207,34 @@ export const aula01: AulaArteV1 = {
       "Isso cria os MUSEUS VIRTUAIS: plataformas onde qualquer pessoa, de qualquer lugar do mundo, visita em 360° o Louvre, as pirâmides ou as cavernas de Lascaux pelo celular. A arte deixa de pertencer só a quem pode viajar — ela vira patrimônio de TODA a humanidade, protegida em um banco de dados que nenhum terremoto, guerra ou tempo consegue apagar.",
     ],
     pigmentos: [
-      { nome: "Laser LiDAR", hex: "#06b6d4", fonte: "Escaneamento 3D milimétrico de patrimônios", emoji: "📡", fotoUrl: arqueologo },
-      { nome: "Nuvem de pontos", hex: "#0ea5e9", fonte: "Milhões de coordenadas que formam o modelo 3D", emoji: "🌐", fotoUrl: internetAbstracao },
-      { nome: "Réplica digital", hex: "#7c3aed", fonte: "Cópia indestrutível da caverna ou monumento original", emoji: "🖥️", fotoUrl: cavernaLascaux },
-      { nome: "Museu virtual", hex: "#f59e0b", fonte: "Acesso mundial a patrimônios protegidos", emoji: "🏛️", fotoUrl: valeDosReis },
+      {
+        nome: "Laser LiDAR",
+        hex: "#06b6d4",
+        fonte: "Escaneamento 3D milimétrico de patrimônios",
+        emoji: "📡",
+        fotoUrl: arqueologo,
+      },
+      {
+        nome: "Nuvem de pontos",
+        hex: "#0ea5e9",
+        fonte: "Milhões de coordenadas que formam o modelo 3D",
+        emoji: "🌐",
+        fotoUrl: internetAbstracao,
+      },
+      {
+        nome: "Réplica digital",
+        hex: "#7c3aed",
+        fonte: "Cópia indestrutível da caverna ou monumento original",
+        emoji: "🖥️",
+        fotoUrl: cavernaLascaux,
+      },
+      {
+        nome: "Museu virtual",
+        hex: "#f59e0b",
+        fonte: "Acesso mundial a patrimônios protegidos",
+        emoji: "🏛️",
+        fotoUrl: valeDosReis,
+      },
     ],
   },
 
@@ -127,34 +243,68 @@ export const aula01: AulaArteV1 = {
     aurora: "Verifica se o Núcleo do Códice está totalmente decifrado!",
     perguntas: [
       {
-        pergunta: "Qual é a principal vantagem de criar uma RÉPLICA DIGITAL de uma caverna rupestre em vez de manter o turismo direto dentro dela?",
+        pergunta:
+          "Qual é a principal vantagem de criar uma RÉPLICA DIGITAL de uma caverna rupestre em vez de manter o turismo direto dentro dela?",
         fotoUrl: cavernaLascaux,
         alternativas: [
-          { texto: "A réplica pode ser visitada por milhões de pessoas sem causar dano nenhum ao original, que fica protegido", correta: true },
+          {
+            texto:
+              "A réplica pode ser visitada por milhões de pessoas sem causar dano nenhum ao original, que fica protegido",
+            correta: true,
+          },
           { texto: "A réplica é sempre mais bonita que a pintura original", correta: false },
+
+          { texto: "Não corresponde à análise", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
-        feedbackAcerto: "Exatamente! Esse é o dilema do turismo destrutivo — a réplica digital imersiva é a solução responsável.",
-        feedbackErro: "Não é sobre beleza. É sobre PROTEÇÃO: o original é frágil, a réplica pode receber visitas ilimitadas sem risco.",
+        feedbackAcerto:
+          "Exatamente! Esse é o dilema do turismo destrutivo — a réplica digital imersiva é a solução responsável.",
+        feedbackErro:
+          "Não é sobre beleza. É sobre PROTEÇÃO: o original é frágil, a réplica pode receber visitas ilimitadas sem risco.",
       },
       {
         pergunta: "Como funciona a FOTOGRAMETRIA na hora de registrar um objeto antigo em 3D?",
         fotoUrl: mascaraSanxingdui,
         alternativas: [
-          { texto: "Um software cruza dezenas de fotos do objeto em ângulos diferentes e calcula os pontos em comum pra montar um modelo 3D", correta: true },
-          { texto: "Basta uma única foto de frente pra criar o modelo 3D completo", correta: false },
+          {
+            texto:
+              "Um software cruza dezenas de fotos do objeto em ângulos diferentes e calcula os pontos em comum pra montar um modelo 3D",
+            correta: true,
+          },
+          {
+            texto: "Basta uma única foto de frente pra criar o modelo 3D completo",
+            correta: false,
+          },
+
+          { texto: "Não corresponde à análise", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
-        feedbackAcerto: "Isso! Quanto mais ângulos fotografados, mais preciso fica o modelo — geralmente são usadas 50 fotos ou mais.",
-        feedbackErro: "Uma foto só não basta — é a COMPARAÇÃO entre muitos ângulos que permite calcular a profundidade e a forma real.",
+        feedbackAcerto:
+          "Isso! Quanto mais ângulos fotografados, mais preciso fica o modelo — geralmente são usadas 50 fotos ou mais.",
+        feedbackErro:
+          "Uma foto só não basta — é a COMPARAÇÃO entre muitos ângulos que permite calcular a profundidade e a forma real.",
       },
       {
-        pergunta: "Um templo antigo é destruído por um terremoto. O que TORNA possível reconstruí-lo digitalmente depois?",
+        pergunta:
+          "Um templo antigo é destruído por um terremoto. O que TORNA possível reconstruí-lo digitalmente depois?",
         fotoUrl: stonehengeGeral,
         alternativas: [
-          { texto: "A existência de escaneamentos 3D ou muitas fotos feitas ANTES da destruição", correta: true },
-          { texto: "Nada — templos destruídos são perdidos pra sempre, sem exceção", correta: false },
+          {
+            texto: "A existência de escaneamentos 3D ou muitas fotos feitas ANTES da destruição",
+            correta: true,
+          },
+          {
+            texto: "Nada — templos destruídos são perdidos pra sempre, sem exceção",
+            correta: false,
+          },
+
+          { texto: "Não corresponde à análise", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
-        feedbackAcerto: "Correto! Por isso arqueólogos correm pra escanear patrimônios em risco ANTES de qualquer tragédia acontecer.",
-        feedbackErro: "Com registro prévio em 3D, a reconstrução digital — e até física — se torna possível. Nada de 'perdido pra sempre' se houver dado salvo.",
+        feedbackAcerto:
+          "Correto! Por isso arqueólogos correm pra escanear patrimônios em risco ANTES de qualquer tragédia acontecer.",
+        feedbackErro:
+          "Com registro prévio em 3D, a reconstrução digital — e até física — se torna possível. Nada de 'perdido pra sempre' se houver dado salvo.",
       },
     ],
   },
@@ -164,32 +314,44 @@ export const aula01: AulaArteV1 = {
     aurora: "Classifica cada ferramenta no laboratório de preservação digital.",
     animais: [
       {
-        nome: "Scanner a laser de caverna", emoji: "📡", fotoUrl: arqueologo,
+        nome: "Scanner a laser de caverna",
+        emoji: "📡",
+        fotoUrl: arqueologo,
         corAlvo: { nome: "Escaneamento 3D (LiDAR)", hex: "#06b6d4" },
         opcoes: [
           { nome: "Escaneamento 3D (LiDAR)", hex: "#06b6d4" },
           { nome: "Museu Virtual", hex: "#7c3aed" },
           { nome: "Patrimônio Cultural", hex: "#7c2d12" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Isso! Feixes de laser medindo distância = tecnologia LiDAR.",
       },
       {
-        nome: "Plataforma 360° do Louvre online", emoji: "🖥️", fotoUrl: internetAbstracao,
+        nome: "Plataforma 360° do Louvre online",
+        emoji: "🖥️",
+        fotoUrl: internetAbstracao,
         corAlvo: { nome: "Museu Virtual", hex: "#7c3aed" },
         opcoes: [
           { nome: "Museu Virtual", hex: "#7c3aed" },
           { nome: "Escaneamento 3D (LiDAR)", hex: "#06b6d4" },
           { nome: "Fotogrametria", hex: "#0ea5e9" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Perfeito! Acesso remoto e imersivo a obras reais = Museu Virtual.",
       },
       {
-        nome: "Cavernas de Lascaux originais", emoji: "🏛️", fotoUrl: valeDosReis,
+        nome: "Cavernas de Lascaux originais",
+        emoji: "🏛️",
+        fotoUrl: valeDosReis,
         corAlvo: { nome: "Patrimônio Cultural", hex: "#7c2d12" },
         opcoes: [
           { nome: "Patrimônio Cultural", hex: "#7c2d12" },
           { nome: "Museu Virtual", hex: "#7c3aed" },
           { nome: "Fotogrametria", hex: "#0ea5e9" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Correto! O bem real, físico e histórico é o Patrimônio Cultural em si.",
       },
@@ -200,13 +362,44 @@ export const aula01: AulaArteV1 = {
     tipo: "sequenciaMistura",
     aurora: "Ordena os 5 passos da FOTOGRAMETRIA — eu faço na sua frente, agora você organiza.",
     passos: [
-      { id: "p1", texto: "ESCOLHO o objeto antigo a ser preservado (estátua, vaso, ferramenta)", emoji: "🏺", ordem: 1, fotoUrl: mascaraSanxingdui },
-      { id: "p2", texto: "TIRO cerca de 50 fotos do objeto, girando em volta dele em ângulos diferentes", emoji: "📸", ordem: 2, fotoUrl: espadaBronze },
-      { id: "p3", texto: "ENVIO todas as fotos pro software de fotogrametria", emoji: "💻", ordem: 3, fotoUrl: internetAbstracao },
-      { id: "p4", texto: "O SOFTWARE cruza os pontos em comum entre as fotos e calcula a profundidade", emoji: "🧮", ordem: 4, fotoUrl: arqueologo },
-      { id: "p5", texto: "NASCE o modelo 3D indestrutível, pronto pra virar peça de Museu Virtual", emoji: "🌐", ordem: 5, fotoUrl: linhaSonora },
+      {
+        id: "p1",
+        texto: "ESCOLHO o objeto antigo a ser preservado (estátua, vaso, ferramenta)",
+        emoji: "🏺",
+        ordem: 1,
+        fotoUrl: mascaraSanxingdui,
+      },
+      {
+        id: "p2",
+        texto: "TIRO cerca de 50 fotos do objeto, girando em volta dele em ângulos diferentes",
+        emoji: "📸",
+        ordem: 2,
+        fotoUrl: espadaBronze,
+      },
+      {
+        id: "p3",
+        texto: "ENVIO todas as fotos pro software de fotogrametria",
+        emoji: "💻",
+        ordem: 3,
+        fotoUrl: internetAbstracao,
+      },
+      {
+        id: "p4",
+        texto: "O SOFTWARE cruza os pontos em comum entre as fotos e calcula a profundidade",
+        emoji: "🧮",
+        ordem: 4,
+        fotoUrl: arqueologo,
+      },
+      {
+        id: "p5",
+        texto: "NASCE o modelo 3D indestrutível, pronto pra virar peça de Museu Virtual",
+        emoji: "🌐",
+        ordem: 5,
+        fotoUrl: linhaSonora,
+      },
     ],
-    falaAcerto: "Você acabou de dominar a FOTOGRAMETRIA — o objeto físico pode até quebrar, mas o modelo 3D vive pra sempre!",
+    falaAcerto:
+      "Você acabou de dominar a FOTOGRAMETRIA — o objeto físico pode até quebrar, mas o modelo 3D vive pra sempre!",
   },
 
   cena08_voceLe: {
@@ -214,18 +407,26 @@ export const aula01: AulaArteV1 = {
     aurora: "Agora VOCÊ lê o diário do arqueólogo digital. Toca nas palavras coloridas.",
     titulo: "Diário do Arqueólogo Digital",
     trechos: [
-      { texto: "Sou arqueólogo digital. Uso o", palavraDestaque: "escaneamento 3D (LiDAR)", corDestaque: "#06b6d4" },
+      {
+        texto: "Sou arqueólogo digital. Uso o",
+        palavraDestaque: "escaneamento 3D (LiDAR)",
+        corDestaque: "#06b6d4",
+      },
       { texto: "e a", palavraDestaque: "fotogrametria", corDestaque: "#0ea5e9" },
       { texto: "pra proteger o", palavraDestaque: "patrimônio cultural", corDestaque: "#7c2d12" },
       { texto: "que está se esfarelando. Sei que visitar um sítio real demais pode DESTRUÍ-LO." },
-      { texto: "Por isso crio réplicas digitais e Museus Virtuais — assim o mundo INTEIRO visita sem machucar nada. A tecnologia do futuro é a guardiã da arte do passado." },
+      {
+        texto:
+          "Por isso crio réplicas digitais e Museus Virtuais — assim o mundo INTEIRO visita sem machucar nada. A tecnologia do futuro é a guardiã da arte do passado.",
+      },
     ],
   },
 
   cena09_minijogo: {
     tipo: "cenaTematica",
     variante: "minijogo",
-    aurora: "🧩 O Reconstrutor de Dados! Remonte todos os fragmentos digitais do templo danificado antes que o modelo 3D se perca.",
+    aurora:
+      "🧩 O Reconstrutor de Dados! Remonte todos os fragmentos digitais do templo danificado antes que o modelo 3D se perca.",
     titulo: "🧩 O Reconstrutor de Dados",
     instrucao: "Encaixe cada fragmento escaneado no lugar certo do templo em ruínas!",
     tempoSeg: 35,
@@ -246,32 +447,102 @@ export const aula01: AulaArteV1 = {
     aurora: "Fecha o NÚCLEO do Códice. Toca em cada verbete final!",
     titulo: "🧩 Caderno do Códice Decifrado",
     itens: [
-      { emoji: "🏛️", rotulo: "Patrimônio Cultural", descricao: "Bens materiais e imateriais que carregam a identidade de um povo. Frágeis e precisam de proteção ativa.", cor: "#7c2d12", fotoUrl: valeDosReis },
-      { emoji: "📡", rotulo: "Escaneamento 3D (LiDAR)", descricao: "Laser que dispara milhões de feixes por segundo e cria cópias digitais exatas, milímetro por milímetro.", cor: "#06b6d4", fotoUrl: arqueologo },
-      { emoji: "📸", rotulo: "Fotogrametria", descricao: "Dezenas de fotos cruzadas por software criam um modelo 3D indestrutível de qualquer objeto.", cor: "#0ea5e9", fotoUrl: mascaraSanxingdui },
-      { emoji: "🖥️", rotulo: "Museu Virtual", descricao: "Réplica imersiva acessível ao mundo inteiro — solução responsável contra o turismo destrutivo.", cor: "#7c3aed", fotoUrl: internetAbstracao },
-      { emoji: "🪨", rotulo: "Cavernas em risco", descricao: "Pinturas rupestres milenares ameaçadas por umidade, luz e visitas — hoje protegidas por escaneamento total.", cor: "#dc2626", fotoUrl: cavernaLascaux },
-      { emoji: "🏺", rotulo: "Objetos de família", descricao: "Como um vaso ou anel antigo: também merecem registro técnico e história preservada, como um patrimônio pessoal.", cor: "#f59e0b", fotoUrl: anelPrata },
-      { emoji: "🔑", rotulo: "Selo de Mestre Arqueólogo", descricao: "Sua recompensa final: o Códice inteiro decifrado, restaurado e protegido para sempre.", cor: "#7c3aed", fotoUrl: codiceGrafismos },
-      { emoji: "🌐", rotulo: "Banco de dados eterno", descricao: "Diferente da rocha ou da tinta, um dado bem guardado em múltiplas cópias nunca se apaga.", cor: "#0ea5e9", fotoUrl: linhaSonora },
+      {
+        emoji: "🏛️",
+        rotulo: "Patrimônio Cultural",
+        descricao:
+          "Bens materiais e imateriais que carregam a identidade de um povo. Frágeis e precisam de proteção ativa.",
+        cor: "#7c2d12",
+        fotoUrl: valeDosReis,
+      },
+      {
+        emoji: "📡",
+        rotulo: "Escaneamento 3D (LiDAR)",
+        descricao:
+          "Laser que dispara milhões de feixes por segundo e cria cópias digitais exatas, milímetro por milímetro.",
+        cor: "#06b6d4",
+        fotoUrl: arqueologo,
+      },
+      {
+        emoji: "📸",
+        rotulo: "Fotogrametria",
+        descricao:
+          "Dezenas de fotos cruzadas por software criam um modelo 3D indestrutível de qualquer objeto.",
+        cor: "#0ea5e9",
+        fotoUrl: mascaraSanxingdui,
+      },
+      {
+        emoji: "🖥️",
+        rotulo: "Museu Virtual",
+        descricao:
+          "Réplica imersiva acessível ao mundo inteiro — solução responsável contra o turismo destrutivo.",
+        cor: "#7c3aed",
+        fotoUrl: internetAbstracao,
+      },
+      {
+        emoji: "🪨",
+        rotulo: "Cavernas em risco",
+        descricao:
+          "Pinturas rupestres milenares ameaçadas por umidade, luz e visitas — hoje protegidas por escaneamento total.",
+        cor: "#dc2626",
+        fotoUrl: cavernaLascaux,
+      },
+      {
+        emoji: "🏺",
+        rotulo: "Objetos de família",
+        descricao:
+          "Como um vaso ou anel antigo: também merecem registro técnico e história preservada, como um patrimônio pessoal.",
+        cor: "#f59e0b",
+        fotoUrl: anelPrata,
+      },
+      {
+        emoji: "🔑",
+        rotulo: "Selo de Mestre Arqueólogo",
+        descricao:
+          "Sua recompensa final: o Códice inteiro decifrado, restaurado e protegido para sempre.",
+        cor: "#7c3aed",
+        fotoUrl: codiceGrafismos,
+      },
+      {
+        emoji: "🌐",
+        rotulo: "Banco de dados eterno",
+        descricao:
+          "Diferente da rocha ou da tinta, um dado bem guardado em múltiplas cópias nunca se apaga.",
+        cor: "#0ea5e9",
+        fotoUrl: linhaSonora,
+      },
     ],
-    falaFinal: "O CÓDICE DOS IMPÉRIOS PERDIDOS está inteiramente restaurado, arquivado e protegido!",
+    falaFinal:
+      "O CÓDICE DOS IMPÉRIOS PERDIDOS está inteiramente restaurado, arquivado e protegido!",
   },
 
   cena11_avaliacao: {
     tipo: "avaliacaoFinal",
     aurora: "Desafio Final do Detetive, Mestre Arqueólogo!",
     quiz: {
-      pergunta: "Uma comunidade descobre uma pintura rupestre rara, mas sabe que o turismo em massa pode destruí-la em poucos anos. Qual é a solução mais RESPONSÁVEL, unindo preservação e acesso ao público?",
+      pergunta:
+        "Uma comunidade descobre uma pintura rupestre rara, mas sabe que o turismo em massa pode destruí-la em poucos anos. Qual é a solução mais RESPONSÁVEL, unindo preservação e acesso ao público?",
       alternativas: [
-        { texto: "Escanear a caverna em 3D (LiDAR/fotogrametria) e criar uma réplica digital imersiva para visitação, protegendo o original", correta: true },
-        { texto: "Fechar a caverna pra sempre e não deixar mais ninguém saber que ela existe", correta: false },
+        {
+          texto:
+            "Escanear a caverna em 3D (LiDAR/fotogrametria) e criar uma réplica digital imersiva para visitação, protegendo o original",
+          correta: true,
+        },
+        {
+          texto: "Fechar a caverna pra sempre e não deixar mais ninguém saber que ela existe",
+          correta: false,
+        },
+
+        { texto: "Não corresponde à análise", correta: false },
+        { texto: "Outra resposta sem relação", correta: false },
       ],
-      feedback: "Perfeito, Investigador do Tempo! A réplica digital resolve o dilema: o mundo inteiro visita, aprende e se emociona, enquanto o ORIGINAL fica protegido intacto pelas próximas gerações. Você decifrou o Códice por completo!",
+      feedback:
+        "Perfeito, Investigador do Tempo! A réplica digital resolve o dilema: o mundo inteiro visita, aprende e se emociona, enquanto o ORIGINAL fica protegido intacto pelas próximas gerações. Você decifrou o Códice por completo!",
     },
     missaoFamilia:
       "🌐 Expedição ao Museu Virtual: Em família, escolham uma visita 360° online gratuita (por exemplo, o Louvre ou as Cavernas de Lascaux). Explorem por pelo menos 10 minutos e depois expliquem, em 5 linhas no app, como esse mapeamento científico (LiDAR ou fotogrametria) foi usado pra criar aquele passeio virtual e por que isso protege o patrimônio original.",
-    recompensaTitulo: "🧩 O Códice dos Impérios Perdidos Inteiramente Restaurado, Arquivado e Protegido",
+    recompensaTitulo:
+      "🧩 O Códice dos Impérios Perdidos Inteiramente Restaurado, Arquivado e Protegido",
     recompensaItem: "🧩 Selo de Mestre Arqueólogo + Código Criptográfico do Códice Completo",
   },
 

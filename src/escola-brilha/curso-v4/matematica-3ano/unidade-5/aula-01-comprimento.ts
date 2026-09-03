@@ -4,7 +4,7 @@ export const aula01_comprimento: AulaV4 = {
   slug: "u5-01-comprimento",
   titulo: "Metros e Centímetros",
   iconeTrilha: "📏",
-  bncc: ["EF03MA17"],
+  bncc: ["EF03MA17", "EF03MA18"],
   duracaoMin: 20,
   metodologias: ["skemp", "cpa"],
   momento01_motivacao: {

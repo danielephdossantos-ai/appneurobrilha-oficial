@@ -23,7 +23,7 @@ export const aula03: AulaPortuguesV4 = {
   slug: "aula-03-se-o-campo-parasse",
   titulo: "E se o Campo Parasse?",
   iconeTrilha: "🛒",
-  bncc: ["EF02GE08"],
+  bncc: [],
   duracaoMin: 15,
 
   momento01_motivacao: {
@@ -66,10 +66,10 @@ export const aula03: AulaPortuguesV4 = {
         },
         { texto: "Sobre construir prédios altos.", imagemUrl: cidade },
         { texto: "Sobre trocar de escola.", imagemUrl: campo },
+        { texto: "Sobre outra possibilidade relacionada ao tema.", imagemUrl: mapaPercurso },
       ],
       respostaCerta: 0,
-      feedbackAcerto:
-        "🎉 Isso! Vamos investigar a DEPENDÊNCIA da cidade em relação ao campo.",
+      feedbackAcerto: "🎉 Isso! Vamos investigar a DEPENDÊNCIA da cidade em relação ao campo.",
       feedbackErro:
         "As pistas mostram MERCADO VAZIO e CAMINHÃO parado. A missão fala da DEPENDÊNCIA do CAMPO.",
     },
@@ -122,7 +122,7 @@ export const aula03: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "De onde vem o ALIMENTO que a cidade come?",
-        opcoes: ["Do meio dos prédios", "Do campo", "Do teto do mercado"],
+        opcoes: ["Do meio dos prédios", "Do campo", "Do teto do mercado", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 Do CAMPO.",
         feedbackErro: "O texto diz: 'Ele vem do CAMPO'.",
@@ -134,6 +134,7 @@ export const aula03: AulaPortuguesV4 = {
           "Os caminhões que vêm do campo",
           "As nuvens",
           "Os prédios altos",
+          "Outra possibilidade",
         ],
         correta: 0,
         feedbackAcerto: "🎉 Isso! Os CAMINHÕES do campo.",
@@ -147,16 +148,21 @@ export const aula03: AulaPortuguesV4 = {
           "Nada — o mercado inventa comida",
           "O mercado fica VAZIO e falta alimento",
           "A cidade vira campo",
+          "Outra possibilidade",
         ],
         correta: 1,
         feedbackAcerto: "🎉 Certo! Mercado VAZIO, família sem alimento fresco.",
-        feedbackErro:
-          "O texto diz: 'o mercado FICA VAZIO. As famílias ficam sem alimento fresco'.",
+        feedbackErro: "O texto diz: 'o mercado FICA VAZIO. As famílias ficam sem alimento fresco'.",
         ondeEstaNoTexto: "…o mercado FICA VAZIO…",
       },
       {
         pergunta: "A cidade DEPENDE do campo ou não?",
-        opcoes: ["Não depende", "Sim, depende pra ter comida", "Só depende no verão"],
+        opcoes: [
+          "Não depende",
+          "Sim, depende pra ter comida",
+          "Só depende no verão",
+          "Outra possibilidade",
+        ],
         correta: 1,
         feedbackAcerto: "🎉 SIM — depende pra ter COMIDA.",
         feedbackErro: "O texto diz: 'a cidade DEPENDE do campo'.",
@@ -175,8 +181,9 @@ export const aula03: AulaPortuguesV4 = {
           "Vão ficar mais cheios",
           "Vão faltar alimentos frescos",
           "Vão virar praças",
+          "Outra possibilidade",
         ],
-        opcoesImagens: [mercado, geladeira, cidade],
+        opcoesImagens: [mercado, geladeira, cidade, mercado],
         correta: 1,
         feedbackAcerto: "🎉 Vão FALTAR alimentos frescos (escassez).",
         feedbackErro:
@@ -189,34 +196,31 @@ export const aula03: AulaPortuguesV4 = {
           "Sim, dá tranquilo",
           "Não — precisa de MUITO espaço, então acontece no CAMPO",
           "Só nos dias de chuva",
+          "Outra possibilidade",
         ],
-        opcoesImagens: [cidade, campo, vaca],
+        opcoesImagens: [cidade, campo, vaca, cidade],
         correta: 1,
-        feedbackAcerto:
-          "🎉 Isso! Plantação e criação precisam de ESPAÇO — acontecem no CAMPO.",
-        feedbackErro:
-          "Plantar e criar animais precisa de MUITO ESPAÇO — acontece no CAMPO.",
+        feedbackAcerto: "🎉 Isso! Plantação e criação precisam de ESPAÇO — acontecem no CAMPO.",
+        feedbackErro: "Plantar e criar animais precisa de MUITO ESPAÇO — acontece no CAMPO.",
       },
       {
-        pergunta:
-          "Se um DIA o caminhão de leite não vier, a família na cidade...",
+        pergunta: "Se um DIA o caminhão de leite não vier, a família na cidade...",
         opcoes: [
           "Fica sem leite fresco no café",
           "Faz o próprio leite no micro-ondas",
           "Vai até a Lua buscar",
+          "Outra possibilidade",
         ],
-        opcoesImagens: [geladeira, mercado, cidade],
+        opcoesImagens: [geladeira, mercado, cidade, geladeira],
         correta: 0,
         feedbackAcerto: "🎉 Certo — fica SEM leite fresco.",
-        feedbackErro:
-          "Sem o caminhão do campo, a família fica sem LEITE FRESCO.",
+        feedbackErro: "Sem o caminhão do campo, a família fica sem LEITE FRESCO.",
       },
     ],
   },
 
   momento07_sequencia: {
-    instrucao:
-      "Coloca em ORDEM o que acontece quando os CAMINHÕES do campo não passam.",
+    instrucao: "Coloca em ORDEM o que acontece quando os CAMINHÕES do campo não passam.",
     bloco: {
       instrucao: "Do primeiro → último.",
       itens: [
@@ -246,12 +250,11 @@ export const aula03: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "Quem TRAZ as frutas pra feira do bairro?",
-        opcoes: ["Os agricultores do sítio", "As nuvens", "Os pombos"],
-        opcoesImagens: [campo, cidade, mercado],
+        opcoes: ["Os agricultores do sítio", "As nuvens", "Os pombos", "Outra possibilidade"],
+        opcoesImagens: [campo, cidade, mercado, campo],
         correta: 0,
         feedbackAcerto: "🎉 Os AGRICULTORES do sítio.",
-        feedbackErro:
-          "O texto diz: 'Vêm AGRICULTORES do sítio trazendo BANANA, MAÇÃ…'.",
+        feedbackErro: "O texto diz: 'Vêm AGRICULTORES do sítio trazendo BANANA, MAÇÃ…'.",
         ondeEstaNoTexto: "…Vêm AGRICULTORES do sítio…",
       },
       {
@@ -260,12 +263,12 @@ export const aula03: AulaPortuguesV4 = {
           "A feira ficou pequena, com pouca fruta",
           "A feira ficou maior que nunca",
           "Todo mundo virou agricultor",
+          "Outra possibilidade",
         ],
-        opcoesImagens: [mercado, cidade, campo],
+        opcoesImagens: [mercado, cidade, campo, mercado],
         correta: 0,
         feedbackAcerto: "🎉 Isso! Feira PEQUENA, pouca fruta.",
-        feedbackErro:
-          "O texto diz: 'A feira ficou pequena, com pouca fruta'.",
+        feedbackErro: "O texto diz: 'A feira ficou pequena, com pouca fruta'.",
         ondeEstaNoTexto: "…A feira ficou pequena, com pouca fruta…",
       },
     ],
@@ -273,8 +276,7 @@ export const aula03: AulaPortuguesV4 = {
 
   momento_minijogo: {
     titulo: "🤔 E Se... Acontecesse Isso?",
-    instrucao:
-      "Cada rodada mostra uma SITUAÇÃO na cidade. Descubra o que aconteceria.",
+    instrucao: "Cada rodada mostra uma SITUAÇÃO na cidade. Descubra o que aconteceria.",
     jogo: {
       tipo: "arquitetoLugar",
       titulo: "E Se... Acontecesse Isso?",
@@ -294,12 +296,11 @@ export const aula03: AulaPortuguesV4 = {
               { id: "vazio", nome: "Sem alimento fresco", imagemUrl: mercado },
               { id: "cheio", nome: "Cheio do mesmo jeito", imagemUrl: geladeira },
               { id: "vira", nome: "Vira um sítio", imagemUrl: campo },
+              { id: "outra-opcao-2", nome: "Outra possibilidade", imagemUrl: mercado },
             ],
             correta: "vazio",
-            feedbackAcerto:
-              "🎉 Isso! Sem CAMPO → sem alimento fresco.",
-            feedbackErro:
-              "A cidade DEPENDE do campo. Sem caminhão → prateleira VAZIA.",
+            feedbackAcerto: "🎉 Isso! Sem CAMPO → sem alimento fresco.",
+            feedbackErro: "A cidade DEPENDE do campo. Sem caminhão → prateleira VAZIA.",
           },
           {
             id: "r2",
@@ -314,12 +315,11 @@ export const aula03: AulaPortuguesV4 = {
               { id: "nao", nome: "Não — fruta vem do campo", imagemUrl: campo },
               { id: "sim", nome: "Sim, com muito concreto", imagemUrl: cidade },
               { id: "talvez", nome: "Só à noite", imagemUrl: mercado },
+              { id: "outra-opcao-3", nome: "Outra possibilidade", imagemUrl: campo },
             ],
             correta: "nao",
-            feedbackAcerto:
-              "🎉 Certo! FRUTA vem do CAMPO — não se faz com concreto.",
-            feedbackErro:
-              "Concreto vira PRÉDIO, não FRUTA. Fruta vem do CAMPO.",
+            feedbackAcerto: "🎉 Certo! FRUTA vem do CAMPO — não se faz com concreto.",
+            feedbackErro: "Concreto vira PRÉDIO, não FRUTA. Fruta vem do CAMPO.",
           },
           {
             id: "r3",
@@ -334,12 +334,12 @@ export const aula03: AulaPortuguesV4 = {
               { id: "falta", nome: "Vai FALTAR na cidade", imagemUrl: mercado },
               { id: "sobra", nome: "Vai SOBRAR na cidade", imagemUrl: geladeira },
               { id: "bilhete", nome: "Vira brincadeira", imagemUrl: cidade },
+              { id: "outra-opcao-4", nome: "Outra possibilidade", imagemUrl: mercado },
             ],
             correta: "falta",
             feedbackAcerto:
               "🎉 Sim! Sem estrada, o CAMINHÃO não passa e falta alimento (escassez).",
-            feedbackErro:
-              "Sem estrada, o caminhão não passa → FALTA alimento (escassez).",
+            feedbackErro: "Sem estrada, o caminhão não passa → FALTA alimento (escassez).",
           },
           {
             id: "r4",
@@ -354,12 +354,11 @@ export const aula03: AulaPortuguesV4 = {
               { id: "nao", nome: "Não — sem trigo, sem pão", imagemUrl: padaria },
               { id: "sim", nome: "Sim, faz pão de pedra", imagemUrl: cidade },
               { id: "leite", nome: "Faz pão de leite só", imagemUrl: vaca },
+              { id: "outra-opcao-5", nome: "Outra possibilidade", imagemUrl: padaria },
             ],
             correta: "nao",
-            feedbackAcerto:
-              "🎉 Certo! Sem TRIGO do campo, a padaria fica SEM pão.",
-            feedbackErro:
-              "PÃO precisa de TRIGO — que vem do CAMPO. Sem trigo, sem pão.",
+            feedbackAcerto: "🎉 Certo! Sem TRIGO do campo, a padaria fica SEM pão.",
+            feedbackErro: "PÃO precisa de TRIGO — que vem do CAMPO. Sem trigo, sem pão.",
           },
           {
             id: "r5",
@@ -374,12 +373,11 @@ export const aula03: AulaPortuguesV4 = {
               { id: "cheia", nome: "Feira CHEIA de fruta", imagemUrl: maca },
               { id: "vazia", nome: "Vazia como sempre", imagemUrl: mercado },
               { id: "fechada", nome: "Fechada por dias", imagemUrl: cidade },
+              { id: "outra-opcao-6", nome: "Outra possibilidade", imagemUrl: maca },
             ],
             correta: "cheia",
-            feedbackAcerto:
-              "🎉 Isso! Boa COLHEITA no campo = feira CHEIA na cidade.",
-            feedbackErro:
-              "Se o campo colhe muito, chega MUITO alimento na cidade — feira CHEIA.",
+            feedbackAcerto: "🎉 Isso! Boa COLHEITA no campo = feira CHEIA na cidade.",
+            feedbackErro: "Se o campo colhe muito, chega MUITO alimento na cidade — feira CHEIA.",
           },
         ],
         feedbackFinal:
@@ -397,17 +395,16 @@ export const aula03: AulaPortuguesV4 = {
       "A CIDADE DEPENDE do CAMPO pra viver.",
     ],
     miniDesafio: {
-      pergunta:
-        "Se os caminhões do campo não chegarem por vários dias, o que acontece na CIDADE?",
+      pergunta: "Se os caminhões do campo não chegarem por vários dias, o que acontece na CIDADE?",
       opcoes: [
         "Nada — a cidade inventa comida",
         "Falta alimento fresco no mercado",
         "A cidade fica maior",
+        "Outra possibilidade",
       ],
       correta: 1,
       feedbackAcerto: "🎉 Isso! FALTA alimento fresco.",
-      feedbackErro:
-        "Sem os caminhões do campo, o mercado FICA SEM alimento fresco.",
+      feedbackErro: "Sem os caminhões do campo, o mercado FICA SEM alimento fresco.",
     },
   },
 
@@ -415,7 +412,7 @@ export const aula03: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "1/5 — O ALIMENTO da cidade nasce ONDE?",
-        opcoes: ["No campo", "Dentro dos prédios", "No telhado do mercado"],
+        opcoes: ["No campo", "Dentro dos prédios", "No telhado do mercado", "Outra possibilidade"],
         correta: 0,
         feedbackAcerto: "🎉 No CAMPO.",
         feedbackErro: "O ALIMENTO nasce no CAMPO.",
@@ -426,11 +423,11 @@ export const aula03: AulaPortuguesV4 = {
           "Os caminhões que vêm do campo",
           "Só as pessoas da cidade",
           "As nuvens",
+          "Outra possibilidade",
         ],
         correta: 0,
         feedbackAcerto: "🎉 Os CAMINHÕES do campo.",
-        feedbackErro:
-          "Quem ABASTECE o mercado são os CAMINHÕES do CAMPO.",
+        feedbackErro: "Quem ABASTECE o mercado são os CAMINHÕES do CAMPO.",
       },
       {
         pergunta: "3/5 — DEPENDER significa...",
@@ -438,32 +435,30 @@ export const aula03: AulaPortuguesV4 = {
           "Não precisar de nada",
           "PRECISAR de outra coisa pra funcionar",
           "Voar alto",
+          "Outra possibilidade",
         ],
         correta: 1,
         feedbackAcerto: "🎉 PRECISAR pra funcionar.",
         feedbackErro: "DEPENDER = PRECISAR de outra coisa.",
       },
       {
-        pergunta:
-          "4/5 — Se os caminhões do campo NÃO chegarem, o que acontece?",
+        pergunta: "4/5 — Se os caminhões do campo NÃO chegarem, o que acontece?",
         opcoes: [
           "A cidade fabrica frutas com concreto",
           "As pessoas na cidade ficam SEM alimentos frescos",
           "Vira feriado nacional",
+          "Outra possibilidade",
         ],
         correta: 1,
-        feedbackAcerto:
-          "🎉 Isso! A CIDADE depende do CAMPO — sem caminhão, faltam alimentos.",
-        feedbackErro:
-          "Sem os caminhões do CAMPO, a CIDADE fica SEM alimentos frescos.",
+        feedbackAcerto: "🎉 Isso! A CIDADE depende do CAMPO — sem caminhão, faltam alimentos.",
+        feedbackErro: "Sem os caminhões do CAMPO, a CIDADE fica SEM alimentos frescos.",
       },
       {
         pergunta: "5/5 — A CIDADE depende do CAMPO?",
-        opcoes: ["Não, não depende", "Sim — pra ter comida", "Só no verão"],
+        opcoes: ["Não, não depende", "Sim — pra ter comida", "Só no verão", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 SIM! Pra ter COMIDA.",
-        feedbackErro:
-          "A CIDADE depende do CAMPO principalmente pra ter ALIMENTO.",
+        feedbackErro: "A CIDADE depende do CAMPO principalmente pra ter ALIMENTO.",
       },
     ],
   },
@@ -477,8 +472,7 @@ export const aula03: AulaPortuguesV4 = {
       "3) Escreva num papel: 'Sem o campo, eu ficaria sem ____ e sem ____.'",
       "4) Complete com 2 alimentos que sua família mais come.",
     ],
-    registro:
-      "📸 Uma foto do seu papel completado.",
+    registro: "📸 Uma foto do seu papel completado.",
   },
 
   recompensa: {

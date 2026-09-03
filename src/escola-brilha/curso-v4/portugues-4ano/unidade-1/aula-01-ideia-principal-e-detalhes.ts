@@ -24,7 +24,7 @@ export const aula1: AulaPortuguesV4 = {
   slug: "aula-01-ideia-principal-e-detalhes",
   titulo: "Ideia Principal e Detalhes",
   iconeTrilha: "🧭",
-  bncc: ["EF35LP03", "EF35LP05", "EF04LP11"],
+  bncc: ["EF35LP03", "EF35LP05", "EF15LP02", "EF15LP03"],
   duracaoMin: 20,
 
   momento01_motivacao: {

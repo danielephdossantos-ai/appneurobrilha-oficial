@@ -4,7 +4,7 @@ export const aula01_divisaoPor1Digito: AulaV4 = {
   slug: "u4-01-divisao-por-1-digito",
   titulo: "Divisão pela chave (por 1 dígito)",
   iconeTrilha: "➗",
-  bncc: ["EF05MA07"],
+  bncc: ["EF05MA08"],
   duracaoMin: 24,
   metodologias: ["skemp", "cpa"],
 

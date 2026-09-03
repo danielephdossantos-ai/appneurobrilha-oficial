@@ -21,7 +21,7 @@ export const aula02: AulaGeoV1 = {
   slug: "aula-02-estados-e-df",
   titulo: "Os 26 Estados + o DF",
   iconeTrilha: "🚩",
-  bncc: ["EF04GE02"],
+  bncc: ["EF04GE05"],
   duracaoMin: 22,
 
   cena01_motivacao: {
@@ -38,8 +38,7 @@ export const aula02: AulaGeoV1 = {
 
   cena02_previsao: {
     tipo: "votoExplorador",
-    aurora:
-      "Palpite rápido: Brasília, a capital do Brasil, é um ESTADO como São Paulo e Bahia?",
+    aurora: "Palpite rápido: Brasília, a capital do Brasil, é um ESTADO como São Paulo e Bahia?",
     pergunta: "O que é Brasília?",
     opcoes: [
       {
@@ -56,14 +55,26 @@ export const aula02: AulaGeoV1 = {
         emoji: "⭐",
         cor: "from-amber-400 to-yellow-600",
       },
+
+      {
+        id: "extra-1",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
+      {
+        id: "extra-2",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
     ],
     respostaCerta: "df",
     feedbackAcerto:
       "Isso! Brasília é o DISTRITO FEDERAL — um território ESPECIAL criado só pra abrigar o governo do Brasil. Não é estado.",
     feedbackErro:
       "Repensa: Brasília é o DF (Distrito Federal). Foi criado em 1960 só pra ser a capital. Ele não é estado.",
-    falaFinal:
-      "Guarda esse palpite. Bora ver os 26 estados um por um.",
+    falaFinal: "Guarda esse palpite. Bora ver os 26 estados um por um.",
   },
 
   cena03_vocabulario: {
@@ -99,7 +110,8 @@ export const aula02: AulaGeoV1 = {
         cor: "from-sky-500 to-blue-700",
         conteudo:
           "SIGLA é o apelido de 2 LETRAS. Aparece nas placas de carro, nos endereços e nos telejornais. Facilita escrever rápido.",
-        exemplo: "Ex.: SP = São Paulo · RJ = Rio de Janeiro · RS = Rio Grande do Sul · AM = Amazonas.",
+        exemplo:
+          "Ex.: SP = São Paulo · RJ = Rio de Janeiro · RS = Rio Grande do Sul · AM = Amazonas.",
         fotoUrl: lupaEstado,
       },
       {
@@ -109,7 +121,8 @@ export const aula02: AulaGeoV1 = {
         cor: "from-amber-400 to-yellow-600",
         conteudo:
           "Cada estado tem sua BANDEIRA — com cores e símbolos que contam a história e a cultura do lugar. Ela representa o povo daquele estado.",
-        exemplo: "Ex.: SP tem 13 listras pretas e brancas + um mapa amarelo. MG tem um triângulo vermelho.",
+        exemplo:
+          "Ex.: SP tem 13 listras pretas e brancas + um mapa amarelo. MG tem um triângulo vermelho.",
         fotoUrl: bandeiras,
       },
     ],
@@ -186,8 +199,7 @@ export const aula02: AulaGeoV1 = {
 
   cena05_compreensao: {
     tipo: "quizRadar",
-    aurora:
-      "Radar ligado! 3 perguntas rápidas sobre estados, capitais e siglas.",
+    aurora: "Radar ligado! 3 perguntas rápidas sobre estados, capitais e siglas.",
     instrucao: "Toque no card certo pra o radar pousar",
     perguntas: [
       {
@@ -198,10 +210,18 @@ export const aula02: AulaGeoV1 = {
           { id: "campinas", emoji: "🏙️", titulo: "Campinas", cor: "from-slate-400 to-slate-600" },
           { id: "saopaulo", emoji: "🌆", titulo: "São Paulo", cor: "from-red-500 to-rose-700" },
           { id: "santos", emoji: "⚓", titulo: "Santos", cor: "from-sky-500 to-blue-700" },
+
+          {
+            id: "extra-3",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "saopaulo",
         feedbackAcerto: "Isso! A CAPITAL do estado de SP é a cidade de São Paulo — mesmo nome!",
-        feedbackErro: "Repensa: a capital de SP tem o mesmo NOME do estado — é a cidade de São Paulo.",
+        feedbackErro:
+          "Repensa: a capital de SP tem o mesmo NOME do estado — é a cidade de São Paulo.",
       },
       {
         id: "q2",
@@ -211,6 +231,13 @@ export const aula02: AulaGeoV1 = {
           { id: "rg", emoji: "🔤", titulo: "RG", cor: "from-slate-400 to-slate-600" },
           { id: "rs", emoji: "🔤", titulo: "RS", cor: "from-sky-500 to-blue-700" },
           { id: "rn", emoji: "🔤", titulo: "RN", cor: "from-amber-400 to-yellow-600" },
+
+          {
+            id: "extra-4",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "rs",
         feedbackAcerto: "Perfeito! RS = Rio Grande do SUL. RN é Rio Grande do NORTE (Nordeste).",
@@ -222,11 +249,29 @@ export const aula02: AulaGeoV1 = {
         fotoUrl: brasiliaDF,
         cards: [
           { id: "estado-df", emoji: "🏛️", titulo: "Estado do DF", cor: "from-rose-400 to-red-600" },
-          { id: "distrito", emoji: "⭐", titulo: "Distrito Federal", cor: "from-amber-400 to-yellow-600" },
-          { id: "goias", emoji: "🌾", titulo: "Estado de Goiás", cor: "from-emerald-400 to-green-600" },
+          {
+            id: "distrito",
+            emoji: "⭐",
+            titulo: "Distrito Federal",
+            cor: "from-amber-400 to-yellow-600",
+          },
+          {
+            id: "goias",
+            emoji: "🌾",
+            titulo: "Estado de Goiás",
+            cor: "from-emerald-400 to-green-600",
+          },
+
+          {
+            id: "extra-5",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "distrito",
-        feedbackAcerto: "Exato! Brasília fica no DISTRITO FEDERAL — que NÃO é um estado, é um território especial.",
+        feedbackAcerto:
+          "Exato! Brasília fica no DISTRITO FEDERAL — que NÃO é um estado, é um território especial.",
         feedbackErro:
           "Atenção: o DF não é 'estado do DF'. É o DISTRITO FEDERAL, um território especial só pra abrigar a capital.",
       },
@@ -306,11 +351,11 @@ export const aula02: AulaGeoV1 = {
       },
     ],
     ordemCerta: ["am", "ce", "df", "sp", "rs"],
-    feedbackAcerto: "Viagem completa! Você cruzou o Brasil passando por 5 estados de regiões diferentes.",
+    feedbackAcerto:
+      "Viagem completa! Você cruzou o Brasil passando por 5 estados de regiões diferentes.",
     feedbackErro:
       "Essa não é a próxima parada. Lembra: AM (Norte) → CE (Nordeste) → DF (Centro) → SP (Sudeste) → RS (Sul).",
-    falaFinal:
-      "Do topo do mapa até lá embaixo: 5 estados, 5 regiões, 1 Brasil.",
+    falaFinal: "Do topo do mapa até lá embaixo: 5 estados, 5 regiões, 1 Brasil.",
   },
 
   cena08_voceLe: {
@@ -366,7 +411,11 @@ export const aula02: AulaGeoV1 = {
     rodadas: [
       {
         id: "r1",
-        municipioA: { nome: "Salvador é a capital", emoji: "🏖️", cor: "from-amber-400 to-yellow-600" },
+        municipioA: {
+          nome: "Salvador é a capital",
+          emoji: "🏖️",
+          cor: "from-amber-400 to-yellow-600",
+        },
         municipioB: { nome: "Terra do axé", emoji: "🎵", cor: "from-yellow-400 to-orange-600" },
         contexto: "Capital Salvador, primeiro estado colonizado pelos portugueses. Qual é?",
         pecaCertaId: "ba",
@@ -375,7 +424,11 @@ export const aula02: AulaGeoV1 = {
       },
       {
         id: "r2",
-        municipioA: { nome: "Manaus é a capital", emoji: "🌳", cor: "from-emerald-500 to-green-700" },
+        municipioA: {
+          nome: "Manaus é a capital",
+          emoji: "🌳",
+          cor: "from-emerald-500 to-green-700",
+        },
         municipioB: { nome: "Maior estado", emoji: "📏", cor: "from-lime-400 to-emerald-600" },
         contexto: "MAIOR estado do Brasil em tamanho, com a Floresta Amazônica. Capital Manaus.",
         pecaCertaId: "am",
@@ -385,7 +438,11 @@ export const aula02: AulaGeoV1 = {
       {
         id: "r3",
         municipioA: { nome: "Não é estado", emoji: "⭐", cor: "from-orange-400 to-amber-600" },
-        municipioB: { nome: "Onde fica Brasília", emoji: "🏛️", cor: "from-amber-400 to-yellow-600" },
+        municipioB: {
+          nome: "Onde fica Brasília",
+          emoji: "🏛️",
+          cor: "from-amber-400 to-yellow-600",
+        },
         contexto: "Território ESPECIAL, criado em 1960 pra ser a capital do Brasil. Não é estado.",
         pecaCertaId: "df",
         feedbackAcerto: "Combo! DISTRITO FEDERAL (DF) — casa da capital Brasília.",
@@ -393,7 +450,11 @@ export const aula02: AulaGeoV1 = {
       },
       {
         id: "r4",
-        municipioA: { nome: "Capital tem o mesmo nome", emoji: "🏙️", cor: "from-red-500 to-rose-700" },
+        municipioA: {
+          nome: "Capital tem o mesmo nome",
+          emoji: "🏙️",
+          cor: "from-red-500 to-rose-700",
+        },
         municipioB: { nome: "Estado mais populoso", emoji: "👥", cor: "from-rose-400 to-red-600" },
         contexto: "Estado MAIS POVOADO do Brasil. Sua capital tem o MESMO nome do estado. Qual é?",
         pecaCertaId: "sp",
@@ -402,9 +463,14 @@ export const aula02: AulaGeoV1 = {
       },
       {
         id: "r5",
-        municipioA: { nome: "Porto Alegre é a capital", emoji: "🍇", cor: "from-sky-500 to-blue-700" },
+        municipioA: {
+          nome: "Porto Alegre é a capital",
+          emoji: "🍇",
+          cor: "from-sky-500 to-blue-700",
+        },
         municipioB: { nome: "Terra do chimarrão", emoji: "🧉", cor: "from-blue-400 to-indigo-600" },
-        contexto: "Terra do chimarrão, do churrasco e dos gaúchos. Fica lá no Sul. Capital: Porto Alegre.",
+        contexto:
+          "Terra do chimarrão, do churrasco e dos gaúchos. Fica lá no Sul. Capital: Porto Alegre.",
         pecaCertaId: "rs",
         feedbackAcerto: "Perfeito! RIO GRANDE DO SUL (RS) — capital Porto Alegre.",
         feedbackErro: "Ops: chimarrão e gaúchos = RIO GRANDE DO SUL (RS).",
@@ -413,7 +479,8 @@ export const aula02: AulaGeoV1 = {
         id: "r6",
         municipioA: { nome: "Cristo Redentor", emoji: "🗿", cor: "from-pink-400 to-rose-600" },
         municipioB: { nome: "Praia de Copacabana", emoji: "🏝️", cor: "from-cyan-400 to-blue-600" },
-        contexto: "Estado do Cristo Redentor, do Pão de Açúcar e das praias famosas. Capital com o mesmo nome.",
+        contexto:
+          "Estado do Cristo Redentor, do Pão de Açúcar e das praias famosas. Capital com o mesmo nome.",
         pecaCertaId: "rj",
         feedbackAcerto: "Boa! RIO DE JANEIRO (RJ) — Cristo, Copacabana e capital de mesmo nome.",
         feedbackErro: "Pensa no Cristo Redentor: é o RIO DE JANEIRO (RJ).",
@@ -456,8 +523,7 @@ export const aula02: AulaGeoV1 = {
 
   cena11_avaliacao: {
     tipo: "seloAtlas",
-    aurora:
-      "Última etapa! 3 perguntas pra ganhar a insígnia oficial: Guardião das Bandeiras.",
+    aurora: "Última etapa! 3 perguntas pra ganhar a insígnia oficial: Guardião das Bandeiras.",
     instrucao: "Responda as 3 e ganhe seu selo",
     perguntas: [
       {
@@ -467,6 +533,8 @@ export const aula02: AulaGeoV1 = {
           { id: "a", texto: "20 estados", correta: false },
           { id: "b", texto: "26 estados", correta: true },
           { id: "c", texto: "27 estados", correta: false },
+
+          { id: "extra-6", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Isso! 26 estados + 1 Distrito Federal = 27 territórios.",
         feedbackErro: "Repensa: são 26 estados. Somando o DF dá 27 no total.",
@@ -478,6 +546,8 @@ export const aula02: AulaGeoV1 = {
           { id: "a", texto: "RJ", correta: true },
           { id: "b", texto: "RD", correta: false },
           { id: "c", texto: "RN", correta: false },
+
+          { id: "extra-7", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Perfeito! RJ = Rio de Janeiro. RN é Rio Grande do Norte.",
         feedbackErro: "Repensa: Rio de Janeiro → RJ (as 2 primeiras letras importantes).",
@@ -489,8 +559,11 @@ export const aula02: AulaGeoV1 = {
           { id: "a", texto: "No estado de Goiás", correta: false },
           { id: "b", texto: "No Distrito Federal (DF)", correta: true },
           { id: "c", texto: "No estado de São Paulo", correta: false },
+
+          { id: "extra-8", texto: "Outra possibilidade", correta: false },
         ],
-        feedbackAcerto: "Isso! Brasília fica no DISTRITO FEDERAL — um território especial, não um estado.",
+        feedbackAcerto:
+          "Isso! Brasília fica no DISTRITO FEDERAL — um território especial, não um estado.",
         feedbackErro: "Repensa: Brasília fica no DF (Distrito Federal), não em Goiás nem em SP.",
       },
     ],

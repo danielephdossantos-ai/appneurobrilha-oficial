@@ -6,6 +6,8 @@ import { aula04_subtracaoSimples } from "./aula-04-subtracao-simples";
 import { aula05_subtracaoComTroca } from "./aula-05-subtracao-com-troca";
 import { aula06_problemas } from "./aula-06-problemas-mais-menos";
 import { aula07_missaoFinalU2 } from "./aula-07-missao-final-u2";
+import { aula08_fatosBasicos } from "./aula-08-fatos-basicos";
+import { aula09_igualdade } from "./aula-09-igualdade";
 
 export const unidade2: Unidade = {
   slug: "unidade-2-adicao-subtracao",
@@ -21,6 +23,8 @@ export const unidade2: Unidade = {
     aula04_subtracaoSimples,
     aula05_subtracaoComTroca,
     aula06_problemas,
+    aula08_fatosBasicos,
+    aula09_igualdade,
     aula07_missaoFinalU2,
   ],
 };

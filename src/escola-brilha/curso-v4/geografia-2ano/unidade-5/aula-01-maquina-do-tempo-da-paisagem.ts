@@ -71,10 +71,10 @@ export const aula01: AulaPortuguesV4 = {
         },
         { texto: "Sobre fazer um bolo de cenoura.", imagemUrl: flor },
         { texto: "Sobre voar de balão pra Lua.", imagemUrl: vento },
+        { texto: "Sobre outra possibilidade relacionada ao tema.", imagemUrl: cidade },
       ],
       respostaCerta: 0,
-      feedbackAcerto:
-        "🎉 Isso! Vamos comparar o ONTEM com o HOJE da paisagem.",
+      feedbackAcerto: "🎉 Isso! Vamos comparar o ONTEM com o HOJE da paisagem.",
       feedbackErro:
         "Olhe as pistas: árvore antiga, prédios novos, avenida. A missão fala do TEMPO da paisagem.",
     },
@@ -99,8 +99,7 @@ export const aula01: AulaPortuguesV4 = {
       },
       {
         palavra: "passado",
-        explicacao:
-          "É tudo o que já ACONTECEU, o TEMPO ANTIGO. 'Antigamente' é o passado.",
+        explicacao: "É tudo o que já ACONTECEU, o TEMPO ANTIGO. 'Antigamente' é o passado.",
         exemplo: "No PASSADO, aqui era só mato.",
         imagemUrl: bussola,
       },
@@ -137,29 +136,26 @@ export const aula01: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "O que existia ANTIGAMENTE onde hoje é a avenida?",
-        opcoes: ["Um shopping", "Uma floresta e um rio", "Um estádio"],
+        opcoes: ["Um shopping", "Uma floresta e um rio", "Um estádio", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 Isso! Floresta e rio.",
-        feedbackErro:
-          "O texto diz: 'existia uma FLORESTA com muitas ÁRVORES e um RIO limpo'.",
+        feedbackErro: "O texto diz: 'existia uma FLORESTA com muitas ÁRVORES e um RIO limpo'.",
         ondeEstaNoTexto: "…existia uma FLORESTA… e um RIO limpo…",
       },
       {
         pergunta: "O que chegou PRIMEIRO no lugar da floresta?",
-        opcoes: ["Prédios altos", "As primeiras casas", "Semáforo"],
+        opcoes: ["Prédios altos", "As primeiras casas", "Semáforo", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 Certo! Primeiro as CASAS.",
-        feedbackErro:
-          "O texto diz: 'chegaram as primeiras CASAS'.",
+        feedbackErro: "O texto diz: 'chegaram as primeiras CASAS'.",
         ondeEstaNoTexto: "…chegaram as primeiras CASAS…",
       },
       {
         pergunta: "As ruas de terra viraram o quê?",
-        opcoes: ["Avenidas de asfalto", "Rios", "Florestas"],
+        opcoes: ["Avenidas de asfalto", "Rios", "Florestas", "Outra possibilidade"],
         correta: 0,
         feedbackAcerto: "🎉 AVENIDAS DE ASFALTO.",
-        feedbackErro:
-          "O texto diz: 'as ruas viraram AVENIDAS de asfalto'.",
+        feedbackErro: "O texto diz: 'as ruas viraram AVENIDAS de asfalto'.",
         ondeEstaNoTexto: "…as ruas viraram AVENIDAS de asfalto…",
       },
       {
@@ -168,19 +164,18 @@ export const aula01: AulaPortuguesV4 = {
           "Uma praça arborizada",
           "Nada, sumiu tudo",
           "Um lago grande",
+          "Outra possibilidade",
         ],
         correta: 0,
         feedbackAcerto: "🎉 Uma PRAÇA arborizada.",
-        feedbackErro:
-          "O texto diz: 'Só sobrou uma praça arborizada'.",
+        feedbackErro: "O texto diz: 'Só sobrou uma praça arborizada'.",
         ondeEstaNoTexto: "…Só sobrou uma praça arborizada…",
       },
     ],
   },
 
   momento06_personagensCenario: {
-    instrucao:
-      "Cada foto mostra a paisagem em um TEMPO. Descubra qual é ANTES e qual é HOJE.",
+    instrucao: "Cada foto mostra a paisagem em um TEMPO. Descubra qual é ANTES e qual é HOJE.",
     perguntas: [
       {
         pergunta: "Qual imagem mostra a paisagem ANTIGA (natureza/campo)?",
@@ -188,12 +183,12 @@ export const aula01: AulaPortuguesV4 = {
           "Campo aberto com árvores",
           "Prédios altos",
           "Avenida com carros",
+          "Outra possibilidade",
         ],
-        opcoesImagens: [campo, predio, rua],
+        opcoesImagens: [campo, predio, rua, campo],
         correta: 0,
         feedbackAcerto: "🎉 Isso! CAMPO com árvores = paisagem ANTIGA.",
-        feedbackErro:
-          "Antigamente tinha mais NATUREZA — campo aberto, árvores, poucas casas.",
+        feedbackErro: "Antigamente tinha mais NATUREZA — campo aberto, árvores, poucas casas.",
       },
       {
         pergunta: "Qual imagem mostra a paisagem MODERNA (cidade grande)?",
@@ -201,12 +196,12 @@ export const aula01: AulaPortuguesV4 = {
           "Uma flor no campo",
           "Cidade com prédios e avenidas",
           "Um campo com árvores",
+          "Outra possibilidade",
         ],
-        opcoesImagens: [flor, cidade, campo],
+        opcoesImagens: [flor, cidade, campo, flor],
         correta: 1,
         feedbackAcerto: "🎉 Certo! CIDADE com PRÉDIOS = paisagem MODERNA.",
-        feedbackErro:
-          "Paisagem MODERNA da cidade grande tem PRÉDIOS e AVENIDAS.",
+        feedbackErro: "Paisagem MODERNA da cidade grande tem PRÉDIOS e AVENIDAS.",
       },
       {
         pergunta: "E a PRAÇA arborizada da cidade é...",
@@ -214,20 +209,18 @@ export const aula01: AulaPortuguesV4 = {
           "Uma praça com árvores (natureza preservada)",
           "Um prédio de apartamentos",
           "Um rio poluído",
+          "Outra possibilidade",
         ],
-        opcoesImagens: [praca, apartamento, rio],
+        opcoesImagens: [praca, apartamento, rio, praca],
         correta: 0,
-        feedbackAcerto:
-          "🎉 Isso! A PRAÇA guarda um pedacinho da natureza antiga.",
-        feedbackErro:
-          "A PRAÇA arborizada é a natureza PRESERVADA no meio da cidade.",
+        feedbackAcerto: "🎉 Isso! A PRAÇA guarda um pedacinho da natureza antiga.",
+        feedbackErro: "A PRAÇA arborizada é a natureza PRESERVADA no meio da cidade.",
       },
     ],
   },
 
   momento07_sequencia: {
-    instrucao:
-      "Coloca em ORDEM a transformação da paisagem (do mais ANTIGO → mais NOVO).",
+    instrucao: "Coloca em ORDEM a transformação da paisagem (do mais ANTIGO → mais NOVO).",
     bloco: {
       instrucao: "Do PASSADO → PRESENTE.",
       itens: [
@@ -238,10 +231,8 @@ export const aula01: AulaPortuguesV4 = {
         { id: "s5", texto: "5) PRÉDIOS altos e cidade grande.", imagemUrl: cidade },
       ],
       ordemCerta: ["s1", "s2", "s3", "s4", "s5"],
-      feedbackAcerto:
-        "🎉 Perfeito! Floresta → casas → ruas → avenida → prédios.",
-      feedbackErro:
-        "Pense do PASSADO: primeiro FLORESTA, depois CASAS, RUAS, AVENIDAS e PRÉDIOS.",
+      feedbackAcerto: "🎉 Perfeito! Floresta → casas → ruas → avenida → prédios.",
+      feedbackErro: "Pense do PASSADO: primeiro FLORESTA, depois CASAS, RUAS, AVENIDAS e PRÉDIOS.",
     },
   },
 
@@ -263,14 +254,13 @@ export const aula01: AulaPortuguesV4 = {
           "Sítio, pasto e árvores",
           "Prédios altos e metrô",
           "Uma praia com barcos",
+          "Outra possibilidade",
         ],
-        opcoesImagens: [campo, cidade, rio],
+        opcoesImagens: [campo, cidade, rio, campo],
         correta: 0,
         feedbackAcerto: "🎉 Isso! SÍTIO com PASTO.",
-        feedbackErro:
-          "O texto diz: 'era um SÍTIO com PASTO e algumas árvores grandes'.",
-        ondeEstaNoTexto:
-          "…era um SÍTIO com PASTO e algumas árvores grandes…",
+        feedbackErro: "O texto diz: 'era um SÍTIO com PASTO e algumas árvores grandes'.",
+        ondeEstaNoTexto: "…era um SÍTIO com PASTO e algumas árvores grandes…",
       },
       {
         pergunta: "HOJE, o que tem no mesmo lugar?",
@@ -278,22 +268,20 @@ export const aula01: AulaPortuguesV4 = {
           "Só floresta fechada",
           "Casas, praça e padaria",
           "Uma fazenda de bois",
+          "Outra possibilidade",
         ],
-        opcoesImagens: [arvore, cidade, campo],
+        opcoesImagens: [arvore, cidade, campo, arvore],
         correta: 1,
         feedbackAcerto: "🎉 Casas, praça e padaria!",
-        feedbackErro:
-          "O texto diz: 'tem várias CASAS, uma PRAÇA no meio e a padaria da esquina'.",
-        ondeEstaNoTexto:
-          "…várias CASAS, uma PRAÇA no meio e a padaria da esquina…",
+        feedbackErro: "O texto diz: 'tem várias CASAS, uma PRAÇA no meio e a padaria da esquina'.",
+        ondeEstaNoTexto: "…várias CASAS, uma PRAÇA no meio e a padaria da esquina…",
       },
     ],
   },
 
   momento_minijogo: {
     titulo: "⏳ Máquina do Tempo: Ontem × Hoje",
-    instrucao:
-      "Cada CARTELA é uma coisa da paisagem. Coloque em ONTEM ou HOJE.",
+    instrucao: "Cada CARTELA é uma coisa da paisagem. Coloque em ONTEM ou HOJE.",
     jogo: {
       tipo: "arrastarParaAlvo",
       titulo: "Arrastar para o Alvo",
@@ -323,8 +311,7 @@ export const aula01: AulaPortuguesV4 = {
           { id: "i7", texto: "Praça arborizada", alvoId: "hoje", imagemUrl: praca },
           { id: "i8", texto: "Ponte de concreto", alvoId: "hoje", imagemUrl: ponte },
         ],
-        feedbackAcerto:
-          "🎉 Máquina do tempo funcionando! Você separou o passado do presente.",
+        feedbackAcerto: "🎉 Máquina do tempo funcionando! Você separou o passado do presente.",
         feedbackErro:
           "Lembra: árvores, rio limpo e ruas de terra = ONTEM. Prédios, avenidas e semáforo = HOJE.",
       },
@@ -340,17 +327,16 @@ export const aula01: AulaPortuguesV4 = {
       "PRAÇAS arborizadas guardam um pedacinho da natureza antiga.",
     ],
     miniDesafio: {
-      pergunta:
-        "Numa mesma rua, ANTES tinha muita árvore e HOJE tem prédios. Isso é...",
+      pergunta: "Numa mesma rua, ANTES tinha muita árvore e HOJE tem prédios. Isso é...",
       opcoes: [
         "Uma paisagem que NÃO mudou",
         "Uma TRANSFORMAÇÃO da paisagem",
         "Uma cor nova de tinta",
+        "Outra possibilidade",
       ],
       correta: 1,
       feedbackAcerto: "🎉 Isso! A paisagem se TRANSFORMOU.",
-      feedbackErro:
-        "Quando a paisagem MUDA de árvores pra prédios, chamamos de TRANSFORMAÇÃO.",
+      feedbackErro: "Quando a paisagem MUDA de árvores pra prédios, chamamos de TRANSFORMAÇÃO.",
     },
   },
 
@@ -362,6 +348,7 @@ export const aula01: AulaPortuguesV4 = {
           "Tudo que a gente vê num lugar",
           "Só o céu",
           "Um tipo de comida",
+          "Outra possibilidade",
         ],
         correta: 0,
         feedbackAcerto: "🎉 Isso!",
@@ -369,11 +356,15 @@ export const aula01: AulaPortuguesV4 = {
       },
       {
         pergunta: "2/5 — Antigamente, muitas cidades eram...",
-        opcoes: ["Florestas e rios", "Já cheias de prédios", "Feitas de gelo"],
+        opcoes: [
+          "Florestas e rios",
+          "Já cheias de prédios",
+          "Feitas de gelo",
+          "Outra possibilidade",
+        ],
         correta: 0,
         feedbackAcerto: "🎉 FLORESTAS e RIOS.",
-        feedbackErro:
-          "Antes das cidades, no lugar tinha FLORESTA e RIO.",
+        feedbackErro: "Antes das cidades, no lugar tinha FLORESTA e RIO.",
       },
       {
         pergunta: "3/5 — TRANSFORMAÇÃO é...",
@@ -381,11 +372,11 @@ export const aula01: AulaPortuguesV4 = {
           "Quando algo MUDA e vira outra coisa",
           "Quando nada muda",
           "Um tipo de música",
+          "Outra possibilidade",
         ],
         correta: 0,
         feedbackAcerto: "🎉 Certo!",
-        feedbackErro:
-          "TRANSFORMAÇÃO é quando algo MUDA e vira OUTRA coisa.",
+        feedbackErro: "TRANSFORMAÇÃO é quando algo MUDA e vira OUTRA coisa.",
       },
       {
         pergunta: "4/5 — O que vem PRIMEIRO na transformação?",
@@ -393,23 +384,18 @@ export const aula01: AulaPortuguesV4 = {
           "Prédios altos",
           "Floresta com árvores",
           "Avenida de asfalto",
+          "Outra possibilidade",
         ],
         correta: 1,
         feedbackAcerto: "🎉 Floresta.",
-        feedbackErro:
-          "Primeiro vem a NATUREZA (floresta), depois casas, ruas, avenidas e prédios.",
+        feedbackErro: "Primeiro vem a NATUREZA (floresta), depois casas, ruas, avenidas e prédios.",
       },
       {
         pergunta: "5/5 — O que ainda LEMBRA a paisagem antiga na cidade?",
-        opcoes: [
-          "As praças arborizadas",
-          "Os semáforos",
-          "Os prédios",
-        ],
+        opcoes: ["As praças arborizadas", "Os semáforos", "Os prédios", "Outra possibilidade"],
         correta: 0,
         feedbackAcerto: "🎉 As PRAÇAS arborizadas.",
-        feedbackErro:
-          "As PRAÇAS ARBORIZADAS guardam um pedaço da natureza antiga.",
+        feedbackErro: "As PRAÇAS ARBORIZADAS guardam um pedaço da natureza antiga.",
       },
     ],
   },
@@ -423,8 +409,7 @@ export const aula01: AulaPortuguesV4 = {
       "3) Faça 2 desenhos lado a lado: ANTES × HOJE.",
       "4) Escreva 1 coisa que MUDOU e 1 coisa que continua IGUAL.",
     ],
-    registro:
-      "📸 Uma foto do seu desenho ANTES × HOJE.",
+    registro: "📸 Uma foto do seu desenho ANTES × HOJE.",
   },
 
   recompensa: {

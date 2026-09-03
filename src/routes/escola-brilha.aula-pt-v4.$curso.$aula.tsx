@@ -48,15 +48,16 @@ function AulaPtV4Route() {
         cursoSlug={cursoSlug}
         voltarPara={`/escola-brilha/curso/${cursoSlug}`}
         onConcluir={() => {
+          try {
+            const raw = localStorage.getItem(CHAVE_PROGRESSO(cursoSlug));
+            const list: string[] = raw ? JSON.parse(raw) : [];
+            if (!list.includes(aulaSlug)) list.push(aulaSlug);
+            localStorage.setItem(CHAVE_PROGRESSO(cursoSlug), JSON.stringify(list));
+          } catch {
+            /* ignore */
+          }
+
           if (!handleBack(navigate)) {
-            try {
-              const raw = localStorage.getItem(CHAVE_PROGRESSO(cursoSlug));
-              const list: string[] = raw ? JSON.parse(raw) : [];
-              if (!list.includes(aulaSlug)) list.push(aulaSlug);
-              localStorage.setItem(CHAVE_PROGRESSO(cursoSlug), JSON.stringify(list));
-            } catch {
-              /* ignore */
-            }
             navigate({
               to: "/escola-brilha/curso/$slug",
               params: { slug: cursoSlug },

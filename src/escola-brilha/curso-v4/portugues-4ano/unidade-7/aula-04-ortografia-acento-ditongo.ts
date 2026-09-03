@@ -20,7 +20,7 @@ export const aula04: AulaPortuguesV4 = {
   slug: "aula-04-ortografia-acento-ditongo",
   titulo: "O Baú das Letras Certas",
   iconeTrilha: "📦",
-  bncc: ["EF04LP18", "EF04LP21"],
+  bncc: ["EF04LP01", "EF04LP02", "EF04LP03", "EF04LP04", "EF35LP12", "EF35LP13"],
   duracaoMin: 22,
 
   momento01_motivacao: {

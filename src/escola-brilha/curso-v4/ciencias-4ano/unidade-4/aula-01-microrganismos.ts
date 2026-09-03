@@ -10,13 +10,13 @@ import { url as decomposicaoImg } from "@/assets/ciencias-4ano/u4-a1/decomposica
 
 /**
  * Ciências · 4º Ano · Unidade 4 · Aula 01
- * "Microrganismos: o mundo invisível" — EF04CI08
+ * "Microrganismos: o mundo invisível" — EF04CI06/07/08
  */
 export const aula01: AulaGeoV1 = {
   slug: "aula-01-microrganismos",
   titulo: "Microrganismos",
   iconeTrilha: "🦠",
-  bncc: ["EF04CI08"],
+  bncc: ["EF04CI06", "EF04CI07", "EF04CI08"],
   duracaoMin: 30,
 
   cena01_motivacao: {
@@ -39,6 +39,7 @@ export const aula01: AulaGeoV1 = {
       { id: "poucas", titulo: "10 a 100", subtitulo: "quase nada", emoji: "🤏", cor: "from-slate-400 to-slate-600" },
       { id: "medias", titulo: "1.000 a 10.000", subtitulo: "razoável", emoji: "👌", cor: "from-amber-500 to-orange-700" },
       { id: "milhoes", titulo: "MILHÕES", subtitulo: "invisíveis mas muitas", emoji: "🦠", cor: "from-red-500 to-rose-700" },
+      { id: "nenhuma", titulo: "NENHUMA", subtitulo: "a mão fica estéril", emoji: "🚫", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "milhoes",
     feedbackAcerto:
@@ -156,6 +157,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🔬", titulo: "Com microscópio", cor: "from-cyan-500 to-sky-700" },
           { id: "b", emoji: "👁️", titulo: "A olho nu", cor: "from-slate-500 to-slate-700" },
           { id: "c", emoji: "🔍", titulo: "Só com lupa", cor: "from-amber-500 to-orange-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "a",
         feedbackAcerto: "Sim. Bactéria é MUITO pequena — só microscópio revela.",
@@ -169,6 +171,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🥛", titulo: "Iogurte", cor: "from-teal-500 to-emerald-700" },
           { id: "b", emoji: "🪨", titulo: "Pedra", cor: "from-slate-500 to-slate-700" },
           { id: "c", emoji: "💧", titulo: "Água pura", cor: "from-cyan-500 to-sky-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "a",
         feedbackAcerto: "Correto. Iogurte é feito por BACTÉRIAS que fermentam o leite.",
@@ -182,6 +185,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🧼", titulo: "Remover micros ruins", cor: "from-cyan-500 to-sky-700" },
           { id: "b", emoji: "💧", titulo: "Só molhar a pele", cor: "from-slate-500 to-slate-700" },
           { id: "c", emoji: "✨", titulo: "Fazer bolhas bonitas", cor: "from-fuchsia-500 to-pink-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "a",
         feedbackAcerto: "Isso. Sabão + água QUEBRAM as bactérias e vírus grudados na pele.",
@@ -245,7 +249,7 @@ export const aula01: AulaGeoV1 = {
       {
         id: "p1",
         texto:
-          "MICRORGANISMOS são seres vivos tão pequenos que só se enxergam com MICROSCÓPIO. Estão em todo lugar: no ar, na água, no solo, na comida, no nosso corpo. Os principais grupos são BACTÉRIAS, FUNGOS e VÍRUS.",
+          "MICRORGANISMOS e outros agentes microscópicos são tão pequenos que precisamos de instrumentos para observá-los. BACTÉRIAS e alguns FUNGOS são seres vivos; VÍRUS são agentes acelulares estudados junto deles. Podem estar no ar, na água, no solo, nos alimentos e no corpo.",
         chaves: ["microrganismos", "microscópio", "bactérias"],
         definicoes: {
           microrganismos: "Seres vivos invisíveis a olho nu.",
@@ -257,10 +261,10 @@ export const aula01: AulaGeoV1 = {
       {
         id: "p2",
         texto:
-          "Nem todo micro é ruim. FERMENTAÇÃO usa bactérias e fungos pra fazer iogurte, queijo, pão e vinho. No nosso intestino, bilhões de bactérias BOAS ajudam a digerir a comida. Decompositores no solo reciclam matéria morta.",
+          "Nem todo micro é prejudicial. Bactérias e fungos fazem FERMENTAÇÃO para produzir iogurte, queijo e pão; também participam da produção de biocombustíveis e medicamentos. No solo, fungos e bactérias DECOMPOSITORES transformam restos orgânicos e devolvem nutrientes ao ambiente.",
         chaves: ["fermentação", "bactérias boas"],
         definicoes: {
-          fermentação: "Transformação de alimento por micros bons.",
+          fermentação: "Transformação realizada por microrganismos úteis na produção de alimentos e outros produtos.",
           "bactérias boas": "Que vivem em harmonia com o corpo e ajudam.",
         },
         fotoUrl: iogurteImg,
@@ -277,7 +281,7 @@ export const aula01: AulaGeoV1 = {
         fotoUrl: vacinaImg,
       },
     ],
-    falaFinal: "Você agora enxerga o mundo invisível — e sabe como se proteger dele.",
+    falaFinal: "Você reconhece decompositores, usos úteis dos microrganismos e formas de prevenção.",
   },
 
   cena09_minijogo: {
@@ -379,6 +383,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Microscópio", correta: true },
           { id: "b", texto: "Olho nu" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. Só microscópio amplia o suficiente.",
         feedbackErro: "A olho nu não dá. Precisa de MICROSCÓPIO.",
@@ -390,6 +396,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Bactérias boas (fermentação)", correta: true },
           { id: "b", texto: "Bactérias que causam gripe" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Certo. Lactobacilos fermentam o leite.",
         feedbackErro: "Iogurte usa bactérias BOAS. Gripe é vírus, e é ruim.",
@@ -401,6 +409,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Higiene, cozimento e vacinas", correta: true },
           { id: "b", texto: "Torcer pra não pegar" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. Três defesas cientificamente comprovadas.",
         feedbackErro: "Ciência salva vidas: HIGIENE + COZIMENTO + VACINAS.",

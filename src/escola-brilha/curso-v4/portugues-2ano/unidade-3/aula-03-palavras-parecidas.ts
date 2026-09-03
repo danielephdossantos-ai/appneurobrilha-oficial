@@ -21,7 +21,7 @@ export const aula03: AulaPortuguesV4 = {
   slug: "aula-03-palavras-parecidas",
   titulo: "Palavras que se Parecem",
   iconeTrilha: "🤝",
-  bncc: ["EF02LP15"],
+  bncc: ["EF02LP10"],
   duracaoMin: 15,
 
   momento01_motivacao: {

@@ -13,7 +13,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-patrimonio-unesco",
   titulo: "Patrimônio da Humanidade e Diversidade Cultural",
   iconeTrilha: "🏛️",
-  bncc: ["EF05HI06", "EF05HI09"],
+  bncc: ["EF05HI10"],
   duracaoMin: 25,
 
   cena01_motivacao: {
@@ -32,8 +32,10 @@ export const aula01: AulaGeoV1 = {
     pergunta: "Qual o efeito do selo UNESCO?",
     fotoUrl: imgOuro,
     opcoes: [
-      { id: "prot", titulo: "O governo é obrigado a proteger", subtitulo: "não pode destruir, tem que restaurar", emoji: "🛡️", cor: "from-emerald-600 to-teal-800", fotoUrl: imgMachu },
+      { id: "prot", titulo: "O país assume compromisso de proteção", subtitulo: "deve planejar conservação, monitoramento e prestação de informações", emoji: "🛡️", cor: "from-emerald-600 to-teal-800", fotoUrl: imgMachu },
       { id: "nada", titulo: "Nada muda, é só um selo bonito", subtitulo: "sem obrigação real", emoji: "🏷️", cor: "from-slate-500 to-slate-700", fotoUrl: imgIguacu },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "prot",
     feedbackAcerto: "Correto. O país assume COMPROMISSO INTERNACIONAL de proteger, restaurar e proibir destruição.",

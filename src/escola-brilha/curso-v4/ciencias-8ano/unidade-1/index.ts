@@ -1,5 +1,6 @@
 import type { UnidadeGeoV1 } from "../../types";
 import { aula01 } from "./aula-01";
+import { aula02 } from "./aula-02-processos-reprodutivos";
 
 export const unidade1: UnidadeGeoV1 = {
   slug: "unidade-1",
@@ -9,5 +10,5 @@ export const unidade1: UnidadeGeoV1 = {
   descricao:
     "Teoria celular, célula animal e vegetal, organelas, divisão celular, DNA, genes e microrganismos.",
   corTema: "#8b5cf6",
-  aulas: [aula01],
+  aulas: [aula01, aula02],
 };

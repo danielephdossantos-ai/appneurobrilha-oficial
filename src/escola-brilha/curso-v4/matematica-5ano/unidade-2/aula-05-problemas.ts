@@ -10,13 +10,13 @@ export const aula05_problemas: AulaV4 = {
 
   momento01_motivacao: {
     titulo: "Quando somar? Quando subtrair?",
-    historia: "{NOME}, todo problema pede uma pergunta: 'juntar/aumentar' → SOMA. 'tirar/comparar/faltar' → SUBTRAÇÃO.",
+    historia: "{NOME}, para escolher a operação, entenda o que acontece com as quantidades. Elas foram reunidas? Uma quantidade foi retirada? Estamos comparando duas quantidades ou procurando o que falta?",
   },
   momento02_exploracao: {
     instrucao: "Palavras-chave.",
     cenas: [
-      { tipo: "texto", texto: "Somar: total, juntando, chegaram, ganhou, ao todo.", destaque: true },
-      { tipo: "texto", texto: "Subtrair: sobrou, restou, diferença, perdeu, falta." },
+      { tipo: "texto", texto: "Use adição quando quantidades são reunidas ou quando uma quantidade aumenta e queremos descobrir o novo total.", destaque: true },
+      { tipo: "texto", texto: "Use subtração para descobrir quanto resta após uma retirada, a diferença entre quantidades ou uma parte desconhecida. A situação decide, não uma palavra isolada." },
     ],
   },
   momento03_descoberta: {
@@ -33,7 +33,7 @@ export const aula05_problemas: AulaV4 = {
   momento05_modelagem: {
     enunciado: "Uma fazenda tinha 24.560 laranjas; colheu mais 8.735. Total?",
     resposta: "33.295",
-    passos: ["'Colheu mais' = juntou = SOMA.", "24.560 + 8.735 = 33.295."],
+    passos: ["A segunda colheita acrescenta 8.735 ao que já havia sido colhido.", "Por isso reunimos as duas quantidades: 24.560 + 8.735 = 33.295."],
     contaPassoAPasso: {
       operacao: "soma",
       operandos: [24560, 8735],

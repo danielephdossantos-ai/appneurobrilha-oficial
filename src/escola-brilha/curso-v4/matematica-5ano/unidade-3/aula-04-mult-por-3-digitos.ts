@@ -4,18 +4,18 @@ export const aula04_multPor3Digitos: AulaV4 = {
   slug: "u3-04-mult-por-3-digitos",
   titulo: "Multiplicar por 3 dígitos",
   iconeTrilha: "✖️",
-  bncc: ["EF05MA07"],
+  bncc: ["EF05MA08"],
   duracaoMin: 24,
   metodologias: ["skemp"],
 
   momento01_motivacao: {
     titulo: "Três linhas parciais",
-    historia: "{NOME}, com 3 dígitos embaixo aparecem 3 LINHAS: uma pra U, uma pra D (com 1 zero) e uma pra C (com 2 zeros).",
+    historia: "{NOME}, ao multiplicar por um número de 3 algarismos, calculamos três produtos parciais: pelo valor da unidade, da dezena e da centena.",
   },
   momento02_exploracao: {
     instrucao: "Regra dos deslocamentos.",
     cenas: [
-      { tipo: "texto", texto: "Linha U: sem zeros. Linha D: 1 zero. Linha C: 2 zeros.", destaque: true },
+      { tipo: "texto", texto: "Calcule três produtos parciais: pelo valor das unidades, das dezenas e das centenas. Exemplo: em 213, usamos 3, 10 e 200.", destaque: true },
       { tipo: "texto", texto: "No fim, some as 3 linhas." },
     ],
   },

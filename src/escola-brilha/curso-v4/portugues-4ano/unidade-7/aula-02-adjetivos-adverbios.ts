@@ -20,7 +20,7 @@ export const aula02: AulaPortuguesV4 = {
   slug: "aula-02-adjetivos-adverbios",
   titulo: "A Lupa dos Detalhes",
   iconeTrilha: "🔍",
-  bncc: ["EF04LP05", "EF04LP16"],
+  bncc: ["EF04LP07"],
   duracaoMin: 22,
 
   momento01_motivacao: {

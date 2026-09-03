@@ -21,7 +21,7 @@ export const aula01: AulaPortuguesV4 = {
   slug: "aula-01-poema-visual",
   titulo: "O Poema que Vira Desenho",
   iconeTrilha: "🌀",
-  bncc: ["EF04LP26", "EF35LP02", "EF15LP14"],
+  bncc: ["EF04LP26", "EF35LP23", "EF35LP27", "EF15LP04", "EF15LP17", "EF15LP18"],
   duracaoMin: 22,
 
   momento01_motivacao: {

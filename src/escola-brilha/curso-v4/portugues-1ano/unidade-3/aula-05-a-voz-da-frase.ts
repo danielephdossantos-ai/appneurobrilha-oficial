@@ -24,7 +24,7 @@ export const aula05: AulaPortuguesV4 = {
   momento01_motivacao: {
     titulo: "O microfone da Mia",
     historia:
-      "Mia ganhou um microfone. Ela leu a mesma frase três vezes e todo mundo riu: cada vez saiu com uma voz diferente! É que o sinal do final manda na VOZ de quem lê. Bora treinar sua voz de leitor?",
+      "Mia ganhou um microfone. Ela leu a mesma frase três vezes, com intenções diferentes. O sinal final ajuda a escolher a entonação. Bora treinar uma leitura clara e expressiva?",
     imagemUrl: menina,
   },
 
@@ -47,7 +47,7 @@ export const aula05: AulaPortuguesV4 = {
       ],
       respostaCerta: 0,
       feedbackAcerto: "🎉 Isso! A exclamação pede voz animada.",
-      feedbackErro: "O sinal ( ! ) mostra emoção forte, então a voz sobe e fica animada.",
+      feedbackErro: "O sinal ( ! ) pede expressão ou ênfase. Não é necessário gritar.",
     },
   },
 
@@ -68,7 +68,7 @@ export const aula05: AulaPortuguesV4 = {
       },
       {
         palavra: "voz de exclamar",
-        explicacao: "Voz forte, animada ou de susto. Termina com ( ! ).",
+        explicacao: "Voz expressiva, que mostra emoção ou ênfase. Termina com ( ! ).",
         exemplo: "O sol saiu!",
         imagemUrl: estrela,
       },
@@ -85,7 +85,7 @@ export const aula05: AulaPortuguesV4 = {
           { texto: "O gato dorme na cama.", explicacao: "Voz calma: só está contando." },
           { texto: "O gato dorme na cama?", explicacao: "Voz de pergunta: sobe no finalzinho." },
           { texto: "O gato dorme na cama!", explicacao: "Voz animada: susto ou alegria." },
-          { texto: "Cuidado!", explicacao: "Aviso forte: voz alta e rápida." },
+          { texto: "Cuidado!", explicacao: "Aviso: leitura clara e enfática, em volume confortável." },
         ],
       },
     ],
@@ -142,8 +142,8 @@ export const aula05: AulaPortuguesV4 = {
         pergunta: "Na frase 'Que susto!', a voz deve...",
         opcoes: ["Ser calma", "Ser forte e animada", "Ser de pergunta"],
         correta: 1,
-        feedbackAcerto: "🎉 Isso! Exclamação pede voz forte.",
-        feedbackErro: "O sinal ( ! ) mostra emoção, então a voz sai forte.",
+        feedbackAcerto: "🎉 Isso! A exclamação pede uma leitura expressiva.",
+        feedbackErro: "O sinal ( ! ) mostra emoção ou ênfase; leia com expressão, sem precisar gritar.",
       },
     ],
   },
@@ -159,7 +159,7 @@ export const aula05: AulaPortuguesV4 = {
       ],
       ordemCerta: ["s1", "s2", "s3"],
       feedbackAcerto: "🎉 Perfeito! Contou, perguntou e depois se animou.",
-      feedbackErro: "No texto ela primeiro CONTA, depois PERGUNTA e no fim GRITA.",
+      feedbackErro: "No texto ela primeiro CONTA, depois PERGUNTA e no fim EXCLAMA.",
     },
   },
 
@@ -244,10 +244,10 @@ export const aula05: AulaPortuguesV4 = {
 
   momento09_revisao: {
     pontos: [
-      "O sinal do final manda na voz de quem lê.",
+      "O sinal do final ajuda a escolher a entonação.",
       "Ponto ( . ) = voz calma, só contando.",
       "Interrogação ( ? ) = voz que sobe, de pergunta.",
-      "Exclamação ( ! ) = voz forte, animada ou de susto.",
+      "Exclamação ( ! ) = leitura expressiva, com emoção ou ênfase.",
     ],
     miniDesafio: {
       pergunta: "'Que legal!' deve ser lida com qual voz?",
@@ -269,10 +269,10 @@ export const aula05: AulaPortuguesV4 = {
       },
       {
         pergunta: "2/5 — 'Cuidado!' é lida com voz...",
-        opcoes: ["Calma", "Forte e rápida", "De pergunta", "Sem som"],
+        opcoes: ["Sem expressão", "Com clareza e ênfase", "De pergunta", "Sem som"],
         correta: 1,
-        feedbackAcerto: "🎉 Isso! É um aviso forte.",
-        feedbackErro: "O sinal ( ! ) pede voz forte.",
+        feedbackAcerto: "🎉 Isso! É um aviso que pede clareza e ênfase.",
+        feedbackErro: "O sinal ( ! ) pede expressão e ênfase, mas não obriga a gritar.",
       },
       {
         pergunta: "3/5 — O que Mia usou para ler?",

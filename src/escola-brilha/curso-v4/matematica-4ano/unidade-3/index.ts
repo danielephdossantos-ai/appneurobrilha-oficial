@@ -6,6 +6,7 @@ import { aula04_multPor2Digitos } from "./aula-04-mult-por-2-digitos";
 import { aula05_dobroTriploQuadruplo } from "./aula-05-dobro-triplo-quadruplo";
 import { aula06_problemasMultiplicacao } from "./aula-06-problemas-multiplicacao";
 import { aula07_missaoFinalU3 } from "./aula-07-missao-final";
+import { aula08_combinacoes } from "./aula-08-combinacoes";
 
 export const unidade3: Unidade = {
   slug: "unidade-3-multiplicacao",
@@ -22,6 +23,7 @@ export const unidade3: Unidade = {
     aula04_multPor2Digitos,
     aula05_dobroTriploQuadruplo,
     aula06_problemasMultiplicacao,
+    aula08_combinacoes,
     aula07_missaoFinalU3,
   ],
 };

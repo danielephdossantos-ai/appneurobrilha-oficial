@@ -21,13 +21,13 @@ export const aula01_pensandoAntes: AulaV4 = {
   momento01_motivacao: {
     titulo: "Uma máquina quebrada!",
     historia:
-      "Brilha chegou na OFICINA DAS ESTRATÉGIAS! O Inventor dos Números pediu ajuda: 'A Máquina do Pensamento Rápido parou. Ela responde contas na hora, sem contar um por um. Preciso que você me ajude a consertar.'",
+      "Brilha chegou à OFICINA DAS ESTRATÉGIAS! A máquina precisa mostrar diferentes caminhos de cálculo, respeitando o tempo de cada criança.",
     imagemUrl: brilha,
   },
 
   momento02_exploracao: {
     instrucao:
-      "Etapa 1 — Responda RÁPIDO, sem contar dedinho: 10 + 1. Toque nos livros pra ver o total:",
+      "Etapa 1 — Resolva 10 + 1 usando a estratégia que preferir. Toque nos livros para conferir:",
     cenas: [],
     interacao: {
       tipo: "tapContar",
@@ -157,7 +157,7 @@ export const aula01_pensandoAntes: AulaV4 = {
         { imagemUrl: bloco, quantidade: 10, rotulo: "📦" },
         { imagemUrl: estrela, quantidade: 5, rotulo: "⭐" },
       ],
-      pergunta: "Rápido! 40 + 5 = ?",
+      pergunta: "Use uma estratégia: 40 + 5 = ?",
       opcoes: ["44", "45", "50"],
       correta: 1,
       feedbackAcerto: "🎉 Isso! 40 + 5 = 45. Máquina consertada!",
@@ -208,7 +208,7 @@ export const aula01_pensandoAntes: AulaV4 = {
   momento11_missaoFamilia: {
     titulo: "⚙️ Rodada Relâmpago em Casa",
     materiais: [
-      "Um relógio ou cronômetro",
+      "Papel para registrar as estratégias",
       "Papel e lápis",
     ],
     passos: [

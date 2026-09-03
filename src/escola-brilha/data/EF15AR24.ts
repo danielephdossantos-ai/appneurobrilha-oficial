@@ -1,0 +1,2 @@
+import { criarAulaArte1 } from "./criarAulaArte1";
+export default criarAulaArte1({ codigo: "EF15AR24", titulo: "Brincadeiras que Contam Histórias", foco: "Caracterizar e experimentar brinquedos, brincadeiras, danças, histórias e canções de diferentes matrizes culturais", objeto: "matrizes estéticas e culturais", exemplos: ["Conhecer e experimentar brincadeiras culturais", "Dizer que uma cultura é superior", "Apagar a origem", "Trocar por uma conta"], resposta: "Experimentar uma prática cultural, reconhecer sua origem e tratá-la com respeito.", proxima: "EF15AR25" });

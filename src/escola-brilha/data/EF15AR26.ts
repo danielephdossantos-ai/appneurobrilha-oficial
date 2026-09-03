@@ -1,0 +1,2 @@
+import { criarAulaArte1 } from "./criarAulaArte1";
+export default criarAulaArte1({ codigo: "EF15AR26", titulo: "Tecnologia Também Faz Arte", foco: "Explorar tecnologias e recursos digitais em processos de criação artística", objeto: "arte e tecnologia", exemplos: ["Criar imagem ou som com recurso digital", "Compartilhar dados pessoais", "Copiar obra sem crédito", "Usar tela sem objetivo"], resposta: "Usar um recurso digital com intenção artística, segurança e respeito à autoria." });

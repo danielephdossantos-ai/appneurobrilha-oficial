@@ -35,7 +35,7 @@ export const aula02: AulaPortuguesV4 = {
   slug: "aula-02-convivencia-no-lugar",
   titulo: "Vizinhos do meu Lugar",
   iconeTrilha: "🤝",
-  bncc: ["EF02GE02"],
+  bncc: [],
   duracaoMin: 15,
 
   // 1 · MOTIVAÇÃO
@@ -86,6 +86,7 @@ export const aula02: AulaPortuguesV4 = {
           texto: "Sobre estrelas que caem do céu.",
           imagemUrl: estrela,
         },
+        { texto: "Sobre outra possibilidade relacionada ao tema.", imagemUrl: familiaGrande },
       ],
       respostaCerta: 0,
       feedbackAcerto:
@@ -97,23 +98,20 @@ export const aula02: AulaPortuguesV4 = {
 
   // 3 · VOCABULÁRIO
   momento03_vocabulario: {
-    instrucao:
-      "Duas palavras que vão aparecer bastante na missão de hoje.",
+    instrucao: "Duas palavras que vão aparecer bastante na missão de hoje.",
     cards: [
       {
         palavra: "vizinho",
         explicacao:
           "É a pessoa que MORA PERTO da sua casa — do lado, em cima, embaixo ou na mesma rua.",
-        exemplo:
-          "Dona Rosa é minha vizinha: ela mora na casa ao lado.",
+        exemplo: "Dona Rosa é minha vizinha: ela mora na casa ao lado.",
         imagemUrl: idoso,
       },
       {
         palavra: "convivência",
         explicacao:
           "É o jeito das pessoas VIVEREM JUNTAS num mesmo lugar — se ajudando, se respeitando e brincando.",
-        exemplo:
-          "Na praça tem BOA CONVIVÊNCIA: cada um cuida do lugar e das outras pessoas.",
+        exemplo: "Na praça tem BOA CONVIVÊNCIA: cada um cuida do lugar e das outras pessoas.",
         imagemUrl: abraco,
       },
     ],
@@ -121,8 +119,7 @@ export const aula02: AulaPortuguesV4 = {
 
   // 4 · LEITURA GUIADA
   momento04_leituraGuiada: {
-    instrucao:
-      "Aurora vai LER com você. Preste atenção nas palavras em amarelo — elas são pistas.",
+    instrucao: "Aurora vai LER com você. Preste atenção nas palavras em amarelo — elas são pistas.",
     leitura: {
       titulo: "A praça é de todo mundo",
       imagemUrl: praca,
@@ -138,8 +135,7 @@ export const aula02: AulaPortuguesV4 = {
 
   // 5 · COMPREENSÃO
   momento05_compreensao: {
-    instrucao:
-      "As respostas estão TODAS escritas no texto. Volte lá se precisar.",
+    instrucao: "As respostas estão TODAS escritas no texto. Volte lá se precisar.",
     perguntas: [
       {
         pergunta: "Quem passa na praça todo dia?",
@@ -147,12 +143,11 @@ export const aula02: AulaPortuguesV4 = {
           "Só crianças pequenas",
           "Muita gente diferente: crianças, vovós, adultos e o padeiro",
           "Ninguém — a praça fica vazia",
+          "Outra possibilidade",
         ],
         correta: 1,
-        feedbackAcerto:
-          "🎉 Isso! O texto diz que passa MUITA gente diferente na praça.",
-        feedbackErro:
-          "Olhe o primeiro parágrafo — o texto lista várias pessoas diferentes.",
+        feedbackAcerto: "🎉 Isso! O texto diz que passa MUITA gente diferente na praça.",
+        feedbackErro: "Olhe o primeiro parágrafo — o texto lista várias pessoas diferentes.",
         ondeEstaNoTexto:
           "…crianças pra brincar, vovós pra conversar, adultos com cachorros e o padeiro…",
       },
@@ -162,14 +157,12 @@ export const aula02: AulaPortuguesV4 = {
           "Morar longe deles",
           "Viver junto com eles no mesmo LUGAR",
           "Não olhar pra ninguém",
+          "Outra possibilidade",
         ],
         correta: 1,
-        feedbackAcerto:
-          "🎉 Boa! CONVIVER = viver junto no mesmo lugar.",
-        feedbackErro:
-          "O segundo parágrafo diz: 'a gente CONVIVE com elas no mesmo lugar'.",
-        ondeEstaNoTexto:
-          "…a gente CONVIVE com elas no mesmo lugar…",
+        feedbackAcerto: "🎉 Boa! CONVIVER = viver junto no mesmo lugar.",
+        feedbackErro: "O segundo parágrafo diz: 'a gente CONVIVE com elas no mesmo lugar'.",
+        ondeEstaNoTexto: "…a gente CONVIVE com elas no mesmo lugar…",
       },
       {
         pergunta: "Pra a convivência ser BOA, o que todo mundo precisa fazer?",
@@ -177,14 +170,12 @@ export const aula02: AulaPortuguesV4 = {
           "Correr o mais rápido que puder",
           "RESPEITAR o lugar e AJUDAR quem precisa",
           "Ficar em casa o dia inteiro",
+          "Outra possibilidade",
         ],
         correta: 1,
-        feedbackAcerto:
-          "🎉 Isso! RESPEITAR o lugar e AJUDAR — a fórmula da boa convivência.",
-        feedbackErro:
-          "Olhe o último parágrafo — está bem depois de 'todo mundo precisa'.",
-        ondeEstaNoTexto:
-          "…RESPEITAR o lugar (…) e AJUDAR quem precisa…",
+        feedbackAcerto: "🎉 Isso! RESPEITAR o lugar e AJUDAR — a fórmula da boa convivência.",
+        feedbackErro: "Olhe o último parágrafo — está bem depois de 'todo mundo precisa'.",
+        ondeEstaNoTexto: "…RESPEITAR o lugar (…) e AJUDAR quem precisa…",
       },
     ],
   },
@@ -196,31 +187,26 @@ export const aula02: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "Onde as crianças costumam BRINCAR no bairro?",
-        opcoes: ["Na padaria", "Na praça", "No posto de saúde"],
-        opcoesImagens: [padaria, praca, postoSaude],
+        opcoes: ["Na padaria", "Na praça", "No posto de saúde", "Outra possibilidade"],
+        opcoesImagens: [padaria, praca, postoSaude, padaria],
         correta: 1,
-        feedbackAcerto:
-          "🎉 Isso! A PRAÇA é o lugar de brincar do bairro.",
-        feedbackErro:
-          "O texto começou falando das crianças brincando na PRAÇA.",
+        feedbackAcerto: "🎉 Isso! A PRAÇA é o lugar de brincar do bairro.",
+        feedbackErro: "O texto começou falando das crianças brincando na PRAÇA.",
       },
       {
         pergunta: "Quem leva o PÃO quentinho pros clientes?",
-        opcoes: ["O padeiro", "O médico", "O motorista de ônibus"],
-        opcoesImagens: [padaria, postoSaude, pontoOnibus],
+        opcoes: ["O padeiro", "O médico", "O motorista de ônibus", "Outra possibilidade"],
+        opcoesImagens: [padaria, postoSaude, pontoOnibus, padaria],
         correta: 0,
-        feedbackAcerto:
-          "🎉 Certo! Quem faz e leva o pão é o PADEIRO, lá da padaria.",
-        feedbackErro:
-          "O texto diz: 'o padeiro levando pão quentinho pros clientes'.",
+        feedbackAcerto: "🎉 Certo! Quem faz e leva o pão é o PADEIRO, lá da padaria.",
+        feedbackErro: "O texto diz: 'o padeiro levando pão quentinho pros clientes'.",
       },
     ],
   },
 
   // 7 · SEQUÊNCIA — chegou um vizinho novo
   momento07_sequencia: {
-    instrucao:
-      "Chegou um vizinho NOVO na rua. Coloque a história em ordem — começo, meio e fim.",
+    instrucao: "Chegou um vizinho NOVO na rua. Coloque a história em ordem — começo, meio e fim.",
     bloco: {
       instrucao: "Começo → meio → fim.",
       itens: [
@@ -241,8 +227,7 @@ export const aula02: AulaPortuguesV4 = {
         },
       ],
       ordemCerta: ["s1", "s2", "s3"],
-      feedbackAcerto:
-        "🎉 Perfeito! Assim é a boa convivência: recebe, ajuda e brinca junto.",
+      feedbackAcerto: "🎉 Perfeito! Assim é a boa convivência: recebe, ajuda e brinca junto.",
       feedbackErro:
         "Pense: primeiro CHEGA a mudança. Depois os vizinhos AJUDAM. Por último, todo mundo BRINCA junto.",
     },
@@ -250,8 +235,7 @@ export const aula02: AulaPortuguesV4 = {
 
   // 8 · LEITURA INDEPENDENTE
   momento08_leituraIndependente: {
-    instrucao:
-      "Agora leia sozinho e responda as duas perguntas.",
+    instrucao: "Agora leia sozinho e responda as duas perguntas.",
     leitura: {
       titulo: "As palavras mágicas",
       imagemUrl: coracao,
@@ -264,23 +248,20 @@ export const aula02: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "Que palavra você usa pra AGRADECER?",
-        opcoes: ["Desculpa", "Obrigado", "Com licença"],
-        opcoesImagens: [ajudar, coracao, abraco],
+        opcoes: ["Desculpa", "Obrigado", "Com licença", "Outra possibilidade"],
+        opcoesImagens: [ajudar, coracao, abraco, ajudar],
         correta: 1,
         feedbackAcerto: "🎉 Isso! OBRIGADO é a palavra do agradecimento.",
-        feedbackErro:
-          "Está no texto: 'agradece com OBRIGADO'.",
+        feedbackErro: "Está no texto: 'agradece com OBRIGADO'.",
         ondeEstaNoTexto: "…agradece com OBRIGADO…",
       },
       {
         pergunta: "Que palavra você usa pra PEDIR PASSAGEM?",
-        opcoes: ["Por favor", "Obrigado", "Com licença"],
-        opcoesImagens: [compartilhar, coracao, criancasGrupo],
+        opcoes: ["Por favor", "Obrigado", "Com licença", "Outra possibilidade"],
+        opcoesImagens: [compartilhar, coracao, criancasGrupo, compartilhar],
         correta: 2,
-        feedbackAcerto:
-          "🎉 Boa! COM LICENÇA — quando precisa passar por alguém.",
-        feedbackErro:
-          "Está no texto: 'pede passagem com COM LICENÇA'.",
+        feedbackAcerto: "🎉 Boa! COM LICENÇA — quando precisa passar por alguém.",
+        feedbackErro: "Está no texto: 'pede passagem com COM LICENÇA'.",
         ondeEstaNoTexto: "…pede passagem com COM LICENÇA…",
       },
     ],
@@ -296,8 +277,7 @@ export const aula02: AulaPortuguesV4 = {
       tipo: "arquitetoLugar",
       titulo: "Bom Vizinho",
       bloco: {
-        instrucao:
-          "Olhe o LUGAR e o que está acontecendo. Depois toque na ATITUDE certa embaixo.",
+        instrucao: "Olhe o LUGAR e o que está acontecendo. Depois toque na ATITUDE certa embaixo.",
         rodadas: [
           {
             id: "r1",
@@ -312,12 +292,11 @@ export const aula02: AulaPortuguesV4 = {
               { id: "ceder", nome: "Ceder o meu lugar pra ela sentar", imagemUrl: idoso },
               { id: "ignorar", nome: "Fingir que não vi", imagemUrl: pontoOnibus },
               { id: "correr", nome: "Correr pra a padaria", imagemUrl: padaria },
+              { id: "outra-opcao-2", nome: "Outra possibilidade", imagemUrl: idoso },
             ],
             correta: "ceder",
-            feedbackAcerto:
-              "🎉 Isso! CEDER o lugar pra quem precisa mais é boa convivência.",
-            feedbackErro:
-              "Um bom vizinho AJUDA quem precisa: ceder o banco pra vovó é o certo.",
+            feedbackAcerto: "🎉 Isso! CEDER o lugar pra quem precisa mais é boa convivência.",
+            feedbackErro: "Um bom vizinho AJUDA quem precisa: ceder o banco pra vovó é o certo.",
           },
           {
             id: "r2",
@@ -332,12 +311,11 @@ export const aula02: AulaPortuguesV4 = {
               { id: "convidar", nome: "Convidar pra brincar junto", imagemUrl: bola },
               { id: "ignorar2", nome: "Continuar jogando sem olhar", imagemUrl: praca },
               { id: "ir", nome: "Ir embora da praça", imagemUrl: bairro },
+              { id: "outra-opcao-3", nome: "Outra possibilidade", imagemUrl: bola },
             ],
             correta: "convidar",
-            feedbackAcerto:
-              "🎉 Perfeito! Chamar pra brincar faz o outro se sentir do LUGAR.",
-            feedbackErro:
-              "Boa convivência é ACOLHER. Chame pra brincar junto!",
+            feedbackAcerto: "🎉 Perfeito! Chamar pra brincar faz o outro se sentir do LUGAR.",
+            feedbackErro: "Boa convivência é ACOLHER. Chame pra brincar junto!",
           },
           {
             id: "r3",
@@ -345,13 +323,13 @@ export const aula02: AulaPortuguesV4 = {
               nome: "Na calçada",
               emojiLugar: "🏘️",
               emojiMorador: "🍎",
-              pista:
-                "Você tá comendo uma maçã e terminou. O que fazer com o resto?",
+              pista: "Você tá comendo uma maçã e terminou. O que fazer com o resto?",
             },
             opcoes: [
               { id: "lixeira", nome: "Jogar na lixeira mais perto", imagemUrl: lixeiraReciclagem },
               { id: "chao", nome: "Jogar no chão da calçada", imagemUrl: lixeira },
               { id: "vizinho", nome: "Deixar no portão do vizinho", imagemUrl: bairro },
+              { id: "outra-opcao-4", nome: "Outra possibilidade", imagemUrl: lixeiraReciclagem },
             ],
             correta: "lixeira",
             feedbackAcerto:
@@ -372,12 +350,12 @@ export const aula02: AulaPortuguesV4 = {
               { id: "baixo", nome: "Colocar bem baixinho ou usar fone", imagemUrl: coracao },
               { id: "alto", nome: "Colocar bem alto pra todo mundo ouvir", imagemUrl: familia },
               { id: "gritar", nome: "Gritar pra chamar amigos", imagemUrl: criancasGrupo },
+              { id: "outra-opcao-5", nome: "Outra possibilidade", imagemUrl: coracao },
             ],
             correta: "baixo",
             feedbackAcerto:
               "🎉 Isso! De noite a gente RESPEITA o descanso do vizinho — som baixinho.",
-            feedbackErro:
-              "À noite o vizinho está dormindo. RESPEITE: música baixinha ou fone.",
+            feedbackErro: "À noite o vizinho está dormindo. RESPEITE: música baixinha ou fone.",
           },
         ],
         feedbackFinal:
@@ -394,18 +372,16 @@ export const aula02: AulaPortuguesV4 = {
       "Um bom vizinho AJUDA (ceder banco), ACOLHE (chamar pra brincar) e RESPEITA (lixo na lixeira, som baixo à noite).",
     ],
     miniDesafio: {
-      pergunta:
-        "Por que é importante cuidar da CONVIVÊNCIA no lugar onde a gente vive?",
+      pergunta: "Por que é importante cuidar da CONVIVÊNCIA no lugar onde a gente vive?",
       opcoes: [
         "Pra ganhar mais brinquedos",
         "Pra todo mundo viver bem no mesmo LUGAR",
         "Pra ninguém falar com a gente",
+        "Outra possibilidade",
       ],
       correta: 1,
-      feedbackAcerto:
-        "🎉 Isso! Boa convivência faz o LUGAR ser bom pra todo mundo.",
-      feedbackErro:
-        "A gente cuida da convivência pra TODO mundo viver bem no mesmo lugar.",
+      feedbackAcerto: "🎉 Isso! Boa convivência faz o LUGAR ser bom pra todo mundo.",
+      feedbackErro: "A gente cuida da convivência pra TODO mundo viver bem no mesmo lugar.",
     },
   },
 
@@ -418,11 +394,11 @@ export const aula02: AulaPortuguesV4 = {
           "Alguém que mora do outro lado do mundo",
           "Uma pessoa que mora perto da sua casa",
           "Um personagem de desenho",
+          "Outra possibilidade",
         ],
         correta: 1,
         feedbackAcerto: "🎉 Vizinho é quem MORA PERTO.",
-        feedbackErro:
-          "VIZINHO = pessoa que MORA PERTO de você.",
+        feedbackErro: "VIZINHO = pessoa que MORA PERTO de você.",
       },
       {
         pergunta: "2/5 — O que quer dizer CONVIVÊNCIA?",
@@ -430,11 +406,11 @@ export const aula02: AulaPortuguesV4 = {
           "Viver sozinho num quarto",
           "Viver junto com outras pessoas no mesmo lugar",
           "Correr atrás dos amigos",
+          "Outra possibilidade",
         ],
         correta: 1,
         feedbackAcerto: "🎉 Boa! Conviver = viver JUNTO.",
-        feedbackErro:
-          "CONVIVÊNCIA é viver JUNTO com outras pessoas no mesmo LUGAR.",
+        feedbackErro: "CONVIVÊNCIA é viver JUNTO com outras pessoas no mesmo LUGAR.",
       },
       {
         pergunta: "3/5 — Uma vovó não tem lugar pra sentar no ônibus. Você…",
@@ -442,29 +418,26 @@ export const aula02: AulaPortuguesV4 = {
           "Cede seu lugar",
           "Finge que não viu",
           "Fica de pé com raiva",
+          "Outra possibilidade",
         ],
         correta: 0,
         feedbackAcerto: "🎉 CEDE o lugar — atitude de bom vizinho.",
-        feedbackErro:
-          "Bom vizinho AJUDA quem precisa. Cede o lugar pra vovó.",
+        feedbackErro: "Bom vizinho AJUDA quem precisa. Cede o lugar pra vovó.",
       },
       {
         pergunta: "4/5 — Você terminou de comer um doce. Onde vai o papel?",
-        opcoes: ["No chão da rua", "Na lixeira", "No jardim do vizinho"],
-        opcoesImagens: [bairro, lixeiraReciclagem, flor],
+        opcoes: ["No chão da rua", "Na lixeira", "No jardim do vizinho", "Outra possibilidade"],
+        opcoesImagens: [bairro, lixeiraReciclagem, flor, bairro],
         correta: 1,
         feedbackAcerto: "🎉 Isso! Lixo sempre na LIXEIRA.",
-        feedbackErro:
-          "Pra o LUGAR ficar limpo pra todo mundo, lixo vai SEMPRE na lixeira.",
+        feedbackErro: "Pra o LUGAR ficar limpo pra todo mundo, lixo vai SEMPRE na lixeira.",
       },
       {
         pergunta: "5/5 — Qual dessas é uma palavra MÁGICA da convivência?",
-        opcoes: ["Obrigado", "Ai que preguiça", "Sai daí"],
+        opcoes: ["Obrigado", "Ai que preguiça", "Sai daí", "Outra possibilidade"],
         correta: 0,
-        feedbackAcerto:
-          "🎉 OBRIGADO é palavra mágica — parabéns, você é um BOM VIZINHO! 🌟",
-        feedbackErro:
-          "As palavras mágicas são: POR FAVOR, OBRIGADO, COM LICENÇA e DESCULPA.",
+        feedbackAcerto: "🎉 OBRIGADO é palavra mágica — parabéns, você é um BOM VIZINHO! 🌟",
+        feedbackErro: "As palavras mágicas são: POR FAVOR, OBRIGADO, COM LICENÇA e DESCULPA.",
       },
     ],
   },

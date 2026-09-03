@@ -4,7 +4,7 @@ export const aula01_comprimento: AulaV4 = {
   slug: "u6-01-comprimento",
   titulo: "Comprimento — m, cm e mm",
   iconeTrilha: "📏",
-  bncc: ["EF04MA20", "EF04MA21"],
+  bncc: ["EF04MA20"],
   duracaoMin: 22,
   metodologias: ["cpa", "rme"],
 

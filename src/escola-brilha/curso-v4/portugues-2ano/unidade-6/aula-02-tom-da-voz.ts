@@ -16,7 +16,7 @@ export const aula02: AulaPortuguesV4 = {
   slug: "aula-02-tom-da-voz",
   titulo: "O Tom da Voz do Texto",
   iconeTrilha: "🎭",
-  bncc: ["EF02LP27"],
+  bncc: ["EF15LP12", "EF15LP16", "EF15LP19"],
   duracaoMin: 15,
 
   momento01_motivacao: {

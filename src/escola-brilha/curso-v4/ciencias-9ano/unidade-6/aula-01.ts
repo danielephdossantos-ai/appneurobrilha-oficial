@@ -15,7 +15,7 @@ export const aula01: AulaGeoV1 = {
   titulo: "Centro de Inovação Sustentável",
   iconeTrilha: "🌱",
   recompensa: { xp: 160, moedas: 65, medalha: "Sustentabilista Júnior" },
-  bncc: ["EF09CI13", "EF09CI15"],
+  bncc: ["EF09CI13"],
   duracaoMin: 45,
 
   cena01_motivacao: {
@@ -38,6 +38,7 @@ export const aula01: AulaGeoV1 = {
       { id: "renov", titulo: "Solar e eólica", subtitulo: "praticamente zero CO₂ na operação", emoji: "☀️", cor: "from-emerald-500 to-teal-700" },
       { id: "carvao", titulo: "Carvão mineral", subtitulo: "sempre foi o mais limpo", emoji: "🏭", cor: "from-slate-500 to-slate-700" },
       { id: "petro", titulo: "Petróleo", subtitulo: "é natural, então não polui", emoji: "🛢️", cor: "from-red-500 to-rose-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "renov",
     feedbackAcerto:
@@ -85,6 +86,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "☀️", titulo: "Solar fotovoltaica", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🌬️", titulo: "Eólica", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🛢️", titulo: "Petróleo", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. Painéis convertem fótons em corrente elétrica.",
         feedbackErro: "É a SOLAR. Eólica usa vento; petróleo é fóssil." },
@@ -93,6 +95,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "1️⃣", titulo: "Reduzir → Reutilizar → Reciclar", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "3️⃣", titulo: "Reciclar → Reutilizar → Reduzir", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🤷", titulo: "Todos iguais, tanto faz", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Sim. Reduzir vem PRIMEIRO — o melhor lixo é o que não é gerado.",
         feedbackErro: "Ordem correta: REDUZIR (comprar menos) → REUTILIZAR → só então RECICLAR." },
@@ -101,6 +104,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🎯", titulo: "17 objetivos", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🎯", titulo: "5 objetivos", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🎯", titulo: "100 objetivos", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. 17 ODS aprovados pela ONU em 2015.",
         feedbackErro: "São 17 Objetivos de Desenvolvimento Sustentável (ONU, 2015)." },
@@ -191,6 +195,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Fonte que se repõe naturalmente em escala humana (solar, eólica, hidrelétrica)", correta: true },
           { id: "b", texto: "Qualquer energia que sai da tomada" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. Renovável = repõe-se rápido, sem esgotar.",
         feedbackErro: "Renovável = repõe naturalmente (solar, eólica, hidrelétrica, biomassa)." },
@@ -198,6 +204,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Recusar → Reduzir → Reutilizar → Reciclar → Recuperar", correta: true },
           { id: "b", texto: "Reciclar sempre em primeiro lugar" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. Reciclar é o ÚLTIMO recurso.",
         feedbackErro: "REDUZIR vem antes de reciclar. O melhor lixo é o não gerado." },
@@ -205,6 +213,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "17 Objetivos de Desenvolvimento Sustentável da ONU (2015)", correta: true },
           { id: "b", texto: "Um acordo comercial entre Brasil e China" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Perfeito. 17 ODS: fome zero, energia limpa, ação climática, etc.",
         feedbackErro: "Agenda 2030 = 17 ODS da ONU (2015)." },

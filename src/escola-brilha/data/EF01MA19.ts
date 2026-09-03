@@ -81,12 +81,12 @@ const aula: Aula = {
     "Aprender o dinheiro ajuda a fazer compras 🛒, pagar o lanche 🍎 e conferir o troco!",
 
   explicacao:
-    "💰 MOEDAS: 5 centavos, 10 centavos, 25 centavos, 50 centavos e R$ 1.\n\n💵 CÉDULAS: R$ 2, R$ 5, R$ 10, R$ 20, R$ 50 e R$ 100.\n\nCada moeda e cédula tem um VALOR. Quanto maior o número, mais o dinheiro vale.\n\nDá pra JUNTAR moedas e cédulas pra formar o mesmo valor: R$ 5 = R$ 2 + R$ 2 + R$ 1.",
+    "No sistema monetário brasileiro, 100 centavos formam 1 real. Entre as moedas de circulação estão 5, 10, 25 e 50 centavos e R$ 1. As cédulas têm valores de R$ 2, R$ 5, R$ 10, R$ 20, R$ 50, R$ 100 e R$ 200. Compare valores depois de colocá-los na mesma unidade: R$ 1 = 100 centavos, então vale mais que 50 centavos. Combinações diferentes podem formar o mesmo total: R$ 5 = R$ 2 + R$ 2 + R$ 1.",
 
   explicacoesNiveis: {
     nivel1: "Moeda 🟡 é redonda. Cédula 💵 é de papel. Cada uma tem um valor.",
     nivel2:
-      "R$ 2 vale menos que R$ 5. R$ 5 vale menos que R$ 10. O número maior vale mais.",
+      "Quando a unidade é a mesma, R$ 2 vale menos que R$ 5, que vale menos que R$ 10.",
     nivel3:
       "Pra pagar R$ 5 podemos usar uma cédula de R$ 5 OU juntar R$ 2 + R$ 2 + R$ 1.",
     nivel4:

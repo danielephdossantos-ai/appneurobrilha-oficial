@@ -91,7 +91,7 @@ const aula: Aula = {
     "Saber os dias e meses ajuda a lembrar do aniversário, das férias, dos passeios e das festas!",
 
   explicacao:
-    "🌅 MANHÃ · 🌞 TARDE · 🌙 NOITE — os 3 períodos do dia.\n\n📅 SEMANA — Domingo, Segunda, Terça, Quarta, Quinta, Sexta, Sábado (7 dias).\n\n🗓️ ANO — Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro (12 meses).",
+    "Um dia pode ser situado em períodos como manhã, tarde e noite. A semana tem 7 dias, que se repetem em ciclo. Calendários podem apresentar domingo ou segunda-feira na primeira coluna; isso não muda a sucessão dos dias. O ano tem 12 meses, de janeiro a dezembro. Para descobrir antes, depois, ontem ou amanhã, localize o dia no calendário e avance ou volte uma posição.",
 
   explicacoesNiveis: {
     nivel1:
@@ -108,8 +108,8 @@ const aula: Aula = {
     enunciado:
       "O Brilha quer visitar a Coruja 🦉 na quarta-feira. Qual dia vem DEPOIS da quarta?",
     passos: [
-      "A semana começa no domingo.",
-      "Depois de domingo: segunda → terça → quarta.",
+      "No calendário mostrado, a primeira coluna é domingo.",
+      "Siga a ordem: domingo → segunda → terça → quarta.",
       "Depois de quarta vem QUINTA-FEIRA.",
     ],
     resposta: "Quinta-feira.",
@@ -217,7 +217,7 @@ const aula: Aula = {
       pergunta: "Qual é o PRIMEIRO período do dia?",
       opcoes: ["🌙 Noite", "🌅 Manhã", "🌞 Tarde"],
       correta: 1,
-      explicacao: "O dia começa pela manhã, quando o Sol nasce.",
+      explicacao: "Na rotina apresentada, a primeira atividade acontece pela manhã.",
       visual: {
         tipo: "grupos",
         grupos: [

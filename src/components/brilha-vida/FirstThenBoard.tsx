@@ -125,8 +125,8 @@ export function FirstThenBoard({ onClose }: { onClose: () => void }) {
         </div>
       )}
 
-      <p className="mt-6 text-[10px] text-slate-400 text-center">
-        Base clínica: Princípio de Premack (Premack, 1959) — ABA / suportes visuais TEACCH.
+      <p className="mt-6 text-sm text-slate-500 text-center">
+        Use o quadro para deixar a sequência clara, sem retirar necessidades básicas ou conforto.
       </p>
     </div>
   );

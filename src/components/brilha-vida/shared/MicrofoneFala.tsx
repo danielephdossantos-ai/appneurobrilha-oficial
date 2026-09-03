@@ -46,7 +46,7 @@ export function MicrofoneFala({
     }
     const r = new Ctor();
     r.lang = "pt-BR";
-    r.continuous = true;
+    r.continuous = false;
     r.interimResults = true;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -188,8 +188,8 @@ export function MicrofoneFala({
           </button>
         )}
       </div>
-      <p className="mt-2 text-[10px] text-slate-500 text-center font-medium">
-        Fale devagar e perto. Se não souber escrever, o app entende sua voz.
+      <p className="mt-2 text-sm text-slate-600 text-center font-medium">
+        O microfone só liga depois do toque e para após a fala. O navegador transforma a voz em texto; o Brilha Vida não salva esse áudio.
       </p>
     </div>
   );

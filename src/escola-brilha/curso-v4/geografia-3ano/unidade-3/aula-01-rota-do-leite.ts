@@ -17,7 +17,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-rota-do-leite",
   titulo: "A Rota do Leite",
   iconeTrilha: "🥛",
-  bncc: ["EF03GE03"],
+  bncc: [],
   duracaoMin: 22,
 
   cena01_motivacao: {
@@ -52,14 +52,26 @@ export const aula01: AulaGeoV1 = {
         emoji: "🛣️",
         cor: "from-sky-500 to-indigo-700",
       },
+
+      {
+        id: "extra-1",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
+      {
+        id: "extra-2",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
     ],
     respostaCerta: "varios",
     feedbackAcerto:
       "Isso mesmo! O leite passa por PELO MENOS 4 lugares até chegar na sua casa. Cada parada tem gente trabalhando pra você.",
     feedbackErro:
       "Pensa comigo: o leite sai quente da vaca. Pra chegar frio e limpinho na caixinha, ele precisa parar em VÁRIOS lugares no caminho.",
-    falaFinal:
-      "Guarda esse palpite. Bora ver cada parada e descobrir quem trabalha em cada uma.",
+    falaFinal: "Guarda esse palpite. Bora ver cada parada e descobrir quem trabalha em cada uma.",
   },
 
   cena03_vocabulario: {
@@ -183,9 +195,17 @@ export const aula01: AulaGeoV1 = {
           { id: "fazenda", emoji: "🐄", titulo: "Fazenda", cor: "from-emerald-500 to-green-700" },
           { id: "fabrica", emoji: "🏭", titulo: "Fábrica", cor: "from-amber-500 to-orange-700" },
           { id: "mercado", emoji: "🛒", titulo: "Mercado", cor: "from-rose-500 to-pink-700" },
+
+          {
+            id: "extra-3",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "fazenda",
-        feedbackAcerto: "Isso! Tudo começa na FAZENDA 🐄 — é lá que a vaca é ordenhada bem cedinho.",
+        feedbackAcerto:
+          "Isso! Tudo começa na FAZENDA 🐄 — é lá que a vaca é ordenhada bem cedinho.",
         feedbackErro: "Repara: o leite SAI da vaca. E a vaca vive na FAZENDA 🐄, no campo.",
       },
       {
@@ -194,8 +214,20 @@ export const aula01: AulaGeoV1 = {
         fotoUrl: caminhao,
         cards: [
           { id: "fabrica", emoji: "🏭", titulo: "Fábrica", cor: "from-amber-500 to-orange-700" },
-          { id: "caminhao", emoji: "🚛", titulo: "Caminhão resfriado", cor: "from-sky-500 to-blue-700" },
+          {
+            id: "caminhao",
+            emoji: "🚛",
+            titulo: "Caminhão resfriado",
+            cor: "from-sky-500 to-blue-700",
+          },
           { id: "mercado", emoji: "🛒", titulo: "Mercado", cor: "from-rose-500 to-pink-700" },
+
+          {
+            id: "extra-4",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "caminhao",
         feedbackAcerto:
@@ -211,9 +243,17 @@ export const aula01: AulaGeoV1 = {
           { id: "mercado", emoji: "🛒", titulo: "Mercado", cor: "from-rose-500 to-pink-700" },
           { id: "fazenda", emoji: "🐄", titulo: "Fazenda", cor: "from-emerald-500 to-green-700" },
           { id: "fabrica", emoji: "🏭", titulo: "Fábrica", cor: "from-amber-500 to-orange-700" },
+
+          {
+            id: "extra-5",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "fabrica",
-        feedbackAcerto: "Exato! A FÁBRICA 🏭 pasteuriza e enche as caixinhas — é a indústria da cidade.",
+        feedbackAcerto:
+          "Exato! A FÁBRICA 🏭 pasteuriza e enche as caixinhas — é a indústria da cidade.",
         feedbackErro:
           "Repensa: quem tem máquina grande pra aquecer o leite e encher caixinha é a FÁBRICA 🏭.",
       },
@@ -368,12 +408,17 @@ export const aula01: AulaGeoV1 = {
           "Um veículo grande, prateado e com geladeira dentro está viajando pela estrada com milhares de litros de leite. Quem é?",
         pecaCertaId: "caminhao",
         feedbackAcerto: "Perfeito! É o CAMINHÃO 🚛 resfriado — a ponte entre campo e cidade.",
-        feedbackErro: "Pensa na estrada: quem carrega leite frio a longa distância é o CAMINHÃO 🚛.",
+        feedbackErro:
+          "Pensa na estrada: quem carrega leite frio a longa distância é o CAMINHÃO 🚛.",
       },
       {
         id: "r3",
         municipioA: { nome: "Máquinas grandes", emoji: "⚙️", cor: "from-amber-500 to-orange-700" },
-        municipioB: { nome: "Trabalhadores de touca", emoji: "🥼", cor: "from-orange-400 to-amber-600" },
+        municipioB: {
+          nome: "Trabalhadores de touca",
+          emoji: "🥼",
+          cor: "from-orange-400 to-amber-600",
+        },
         contexto:
           "Trabalhadores de touca e jaleco operam máquinas que pasteurizam e enchem caixinhas. Onde estão?",
         pecaCertaId: "fabrica",
@@ -397,7 +442,8 @@ export const aula01: AulaGeoV1 = {
         contexto:
           "Sacos de ração foram feitos numa fábrica e agora vão VOLTAR pro produtor alimentar as vacas. Quem faz a ração?",
         pecaCertaId: "fabrica",
-        feedbackAcerto: "Perfeito! A cidade tem a FÁBRICA 🏭 que produz a ração — e devolve pro campo.",
+        feedbackAcerto:
+          "Perfeito! A cidade tem a FÁBRICA 🏭 que produz a ração — e devolve pro campo.",
         feedbackErro: "Atenção: quem tem máquina pra fazer saco de ração é a FÁBRICA 🏭 da cidade.",
       },
       {
@@ -460,9 +506,13 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "A cidade fabrica suas próprias frutas usando asfalto." },
           {
             id: "b",
-            texto: "As pessoas na cidade ficam sem alimentos frescos, porque a cidade DEPENDE do campo.",
+            texto:
+              "As pessoas na cidade ficam sem alimentos frescos, porque a cidade DEPENDE do campo.",
             correta: true,
           },
+
+          { id: "extra-6", texto: "Outra possibilidade", correta: false },
+          { id: "extra-7", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto:
           "Exato! O campo alimenta a cidade. Se o caminhão parar, o mercado esvazia rápido.",
@@ -474,8 +524,15 @@ export const aula01: AulaGeoV1 = {
         pergunta:
           "O produtor da fazenda ficou sem energia elétrica e sem trator novo. Quem devia mandar essas coisas pra ele?",
         opcoes: [
-          { id: "a", texto: "A CIDADE — que tem fábrica de trator, hospital e rede de energia.", correta: true },
+          {
+            id: "a",
+            texto: "A CIDADE — que tem fábrica de trator, hospital e rede de energia.",
+            correta: true,
+          },
           { id: "b", texto: "Outra fazenda vizinha, porque a cidade não ajuda o campo em nada." },
+
+          { id: "extra-8", texto: "Outra possibilidade", correta: false },
+          { id: "extra-9", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto:
           "Isso! A cidade DEVOLVE pro campo: energia, trator, ração, remédio da vaca. É uma troca.",
@@ -484,15 +541,18 @@ export const aula01: AulaGeoV1 = {
       },
       {
         id: "av3",
-        pergunta:
-          "Qual frase explica MELHOR a relação entre campo e cidade?",
+        pergunta: "Qual frase explica MELHOR a relação entre campo e cidade?",
         opcoes: [
           { id: "a", texto: "Um vive sem o outro tranquilamente." },
           {
             id: "b",
-            texto: "Campo e cidade são PARCEIROS: um produz o alimento, o outro transporta, transforma e vende.",
+            texto:
+              "Campo e cidade são PARCEIROS: um produz o alimento, o outro transporta, transforma e vende.",
             correta: true,
           },
+
+          { id: "extra-10", texto: "Outra possibilidade", correta: false },
+          { id: "extra-11", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto:
           "Perfeito! Parceria é a palavra. Toda vez que você toma leite, você prova essa parceria.",

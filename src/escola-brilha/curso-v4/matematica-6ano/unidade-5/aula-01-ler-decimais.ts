@@ -4,7 +4,7 @@ export const aula01_lerDecimais: AulaV4 = {
   slug: "u5-01-ler-decimais",
   titulo: "Ler e comparar decimais",
   iconeTrilha: "🔢",
-  bncc: ["EF06MA08"],
+  bncc: ["EF06MA07"],
   duracaoMin: 22,
   metodologias: ["cpa", "skemp"],
 
@@ -65,7 +65,7 @@ export const aula01_lerDecimais: AulaV4 = {
         texto: "Decimal e fração: a fração /10, /100 ou /1000 vira decimal direto.",
         exemploReal: {
           contexto: "7/10 = 0,7 · 35/100 = 0,35 · 8/1000 = 0,008.",
-          destaque: "Conte quantos zeros embaixo → tantas casas depois da vírgula.",
+          destaque: "O denominador 10, 100 ou 1.000 indica décimos, centésimos ou milésimos.",
         },
       },
     ],

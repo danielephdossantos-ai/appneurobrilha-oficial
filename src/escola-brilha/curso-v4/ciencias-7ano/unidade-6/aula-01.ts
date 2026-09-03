@@ -12,7 +12,7 @@ export const aula01: AulaGeoV1 = {
   titulo: "Endereço Cósmico",
   iconeTrilha: "🌌",
   recompensa: { xp: 140, moedas: 55, medalha: "Astrônomo Júnior" },
-  bncc: ["EF07CI13", "EF07CI14"],
+  bncc: [],
   duracaoMin: 40,
 
   cena01_motivacao: {
@@ -37,6 +37,7 @@ export const aula01: AulaGeoV1 = {
       { id: "instantaneo", titulo: "Instantâneo", subtitulo: "escuridão imediata", emoji: "⚡", cor: "from-slate-500 to-slate-700", fotoUrl: solarImg },
       { id: "oito", titulo: "~8 minutos", subtitulo: "tempo da luz do Sol chegar", emoji: "☀️", cor: "from-emerald-500 to-teal-700", fotoUrl: solarImg },
       { id: "hora", titulo: "1 hora", subtitulo: "sistema solar é grande", emoji: "🕐", cor: "from-rose-500 to-red-700", fotoUrl: solarImg },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "oito",
     feedbackAcerto:
@@ -93,6 +94,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "☀️", titulo: "Uma estrela (produz luz por fusão nuclear)", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🪐", titulo: "Um planeta gigante", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🌙", titulo: "Um satélite da Terra", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. Sol = estrela = fusão nuclear = luz própria.",
         feedbackErro: "Planeta reflete luz. Sol PRODUZ luz. É uma ESTRELA." },
@@ -101,6 +103,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🌌", titulo: "Via Láctea (~100 bilhões de estrelas)", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🌟", titulo: "Andrômeda", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "☀️", titulo: "Sistema Solar (que é bem menor)", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Sim. Via Láctea = nossa galáxia. Sol é uma estrela dela.",
         feedbackErro: "Andrômeda é a galáxia VIZINHA. Sistema Solar é o nosso bairro. Nossa GALÁXIA é a VIA LÁCTEA." },
@@ -109,6 +112,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🔥", titulo: "Núcleo externo (ferro líquido em movimento)", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🌍", titulo: "Crosta (onde moramos)", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🌋", titulo: "Manto", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. Ferro líquido do núcleo externo gira e cria campo magnético.",
         feedbackErro: "Crosta e manto NÃO geram campo magnético. É o NÚCLEO EXTERNO (ferro líquido)." },
@@ -213,6 +217,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Estrela produz luz própria; planeta apenas reflete", correta: true },
           { id: "b", texto: "Estrela é pequena; planeta é grande" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. Estrela = fusão nuclear = luz própria. Planeta reflete.",
         feedbackErro: "Estrelas geralmente são MAIORES. A diferença real: luz PRÓPRIA vs REFLETIDA." },
@@ -220,6 +226,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Terra → Sistema Solar → Via Láctea → Universo", correta: true },
           { id: "b", texto: "Universo → Via Láctea → Terra → Sistema Solar" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Exato. Do menor endereço ao maior.",
         feedbackErro: "Do MENOR ao MAIOR: Terra → Sistema Solar → Via Láctea → Universo." },
@@ -227,6 +235,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Crosta (onde vivemos)", correta: true },
           { id: "b", texto: "Núcleo interno (o mais profundo)" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. Crosta é a camada mais fina e externa.",
         feedbackErro: "Núcleo interno é o MAIS PROFUNDO. Vivemos na CROSTA — a mais externa." },

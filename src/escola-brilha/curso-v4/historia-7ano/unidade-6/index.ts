@@ -1,5 +1,6 @@
 import type { UnidadeGeoV1 } from "../../types";
 import { aula01 } from "./aula-01-conquista-america";
+import { aula02 } from "./aula-02-sociedades-antes-conquista";
 
 export const unidade6: UnidadeGeoV1 = {
   slug: "unidade-6",
@@ -9,5 +10,5 @@ export const unidade6: UnidadeGeoV1 = {
   descricao:
     "Brilha e Aurora reconstroem a queda dos astecas e incas. Fatores militares, aliança tlaxcalteca, doenças e destruição cultural destravam a Engrenagem 6: O Painel do Templo Indígena Subjugado.",
   corTema: "#b45309",
-  aulas: [aula01],
+  aulas: [aula01, aula02],
 };

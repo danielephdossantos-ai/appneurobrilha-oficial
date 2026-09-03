@@ -4,7 +4,7 @@ export const aula02_angulos: AulaV4 = {
   slug: "u7-02-angulos",
   titulo: "Ângulos — reto, agudo e obtuso",
   iconeTrilha: "📐",
-  bncc: ["EF04MA19"],
+  bncc: ["EF04MA18"],
   duracaoMin: 20,
   metodologias: ["cpa", "skemp"],
 

@@ -13,7 +13,7 @@ export const aula01: AulaPortuguesV4 = {
   slug: "aula-01-briefing-da-linguagem",
   titulo: "Briefing da Linguagem",
   iconeTrilha: "📡",
-  bncc: ["EF67LP01", "EF67LP02"],
+  bncc: ["EF69LP07"],
   duracaoMin: 25,
   momento01_motivacao: {
     titulo: "Conexão Estabelecida: O Protocodificador",

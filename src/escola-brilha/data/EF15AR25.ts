@@ -1,0 +1,2 @@
+import { criarAulaArte1 } from "./criarAulaArte1";
+export default criarAulaArte1({ codigo: "EF15AR25", titulo: "Tesouros Culturais", foco: "Conhecer e valorizar patrimônios culturais materiais e imateriais, especialmente brasileiros", objeto: "patrimônio cultural", exemplos: ["Reconhecer um prédio e uma celebração cultural", "Danificar um patrimônio", "Apagar memórias", "Tratar cultura como enfeite"], resposta: "Distinguir patrimônio material e imaterial e explicar por que precisam ser preservados.", proxima: "EF15AR26" });

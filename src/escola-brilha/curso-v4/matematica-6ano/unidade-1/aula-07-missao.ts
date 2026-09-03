@@ -11,7 +11,7 @@ export const aula07_missao: AulaV4 = {
   momento01_motivacao: {
     titulo: "Formatura do Laboratório",
     historia:
-      "{NOME}, hoje é a MISSÃO. Use TUDO da Unidade 1: ler bilhões, comparar por casa, arredondar na reta, localizar negativos, oposto e módulo.",
+      "{NOME}, hoje é a MISSÃO. Use TUDO da Unidade 1: ler bilhões, comparar por casa, arredondar, localizar naturais na reta, entender sistemas de numeração e resolver problemas.",
   },
 
   momento02_exploracao: {
@@ -25,8 +25,8 @@ export const aula07_missao: AulaV4 = {
           { rotulo: "Classes", valores: ["Classes", "Ler bilhões"] },
           { rotulo: "Cmp", valores: ["Casas de valor", "Comparar/ordenar"] },
           { rotulo: "Rd", valores: ["Regra do 5", "Arredondar"] },
-          { rotulo: "Rt", valores: ["Reta numérica", "Localizar/ordenar"] },
-          { rotulo: "Mod", valores: ["Módulo |x|", "Distância ao zero"] },
+          { rotulo: "Rt", valores: ["Reta numérica", "Localizar/ordenar naturais"] },
+          { rotulo: "SND", valores: ["Valor posicional", "Ler e decompor"] },
         ],
       },
     ],
@@ -73,20 +73,20 @@ export const aula07_missao: AulaV4 = {
         },
       },
       {
-        texto: "Negativos e positivos numa reta só.",
+        texto: "Números naturais em uma reta com escala constante.",
         exemploReal: {
-          contexto: "Ordenar: −5 · 2 · 0 · −1 · 4.",
+          contexto: "Ordenar: 50 · 20 · 0 · 10 · 40.",
           visualMat: {
             tipo: "retaNumerica",
-            min: -6,
-            max: 6,
-            passo: 1,
+            min: 0,
+            max: 50,
+            passo: 10,
             destacar: [
-              { valor: -5, rotulo: "−5", cor: "#ef4444" },
-              { valor: -1, rotulo: "−1", cor: "#f97316" },
+              { valor: 10, rotulo: "10", cor: "#ef4444" },
+              { valor: 20, rotulo: "20", cor: "#f97316" },
               { valor: 0, rotulo: "0" },
-              { valor: 2, rotulo: "2", cor: "#22c55e" },
-              { valor: 4, rotulo: "4", cor: "#0ea5e9" },
+              { valor: 40, rotulo: "40", cor: "#22c55e" },
+              { valor: 50, rotulo: "50", cor: "#0ea5e9" },
             ],
           },
           destaque: "Da esquerda pra direita = do menor pro maior.",
@@ -120,47 +120,48 @@ export const aula07_missao: AulaV4 = {
   },
 
   momento07_praticaIndependente: {
-    enunciado: "Ordene do menor pro maior: −5 · 2 · 0 · −1 · 4.",
+    enunciado: "Qual é o valor do algarismo 7 em 7.205?",
     interacao: {
       tipo: "escolhaVisual",
-      pergunta: "Ordem correta:",
+      pergunta: "Escolha:",
       opcoes: [
-        { nome: "−5 · −1 · 0 · 2 · 4" },
-        { nome: "0 · −1 · −5 · 2 · 4" },
-        { nome: "4 · 2 · 0 · −1 · −5" },
+        { nome: "7.000" },
+        { nome: "700" },
+        { nome: "70" },
+        { nome: "7" },
       ],
-      respostaCerta: "−5 · −1 · 0 · 2 · 4",
-      feedbackAcerto: "🎯 Esquerda → direita.",
-      feedbackErro: "Ordem da reta: esquerda → direita.",
+      respostaCerta: "7.000",
+      feedbackAcerto: "🎯 O 7 ocupa a unidade de milhar.",
+      feedbackErro: "7.205 = 7.000 + 200 + 5.",
     },
   },
 
   momento08_aplicacao: {
-    contexto: "Um submarino desce até −180 m. Depois SOBE 120 m.",
-    problema: "Em qual profundidade fica agora? (−180 + 120)",
+    contexto: "Uma biblioteca tinha 1.800 livros, recebeu 420 e emprestou 350.",
+    problema: "Quantos livros permaneceram na biblioteca?",
     interacao: {
       tipo: "escolhaVisual",
       pergunta: "Escolha:",
-      opcoes: [{ nome: "−60 m" }, { nome: "−300 m" }, { nome: "60 m" }],
-      respostaCerta: "−60 m",
-      feedbackAcerto: "🎯 −180 + 120 = −60.",
-      feedbackErro: "Subir 120 desde −180 → −60.",
+      opcoes: [{ nome: "1.870 livros" }, { nome: "2.570 livros" }, { nome: "1.030 livros" }, { nome: "2.220 livros" }],
+      respostaCerta: "1.870 livros",
+      feedbackAcerto: "🎯 1.800 + 420 − 350 = 1.870.",
+      feedbackErro: "Primeiro some os recebidos; depois retire os emprestados.",
     },
   },
 
   momento09_revisao: {
     pontos: [
       "Você virou Cientista dos Números do Laboratório.",
-      "Ferramentas travadas: bilhões, comparação, arredondamento, reta, negativos, módulo.",
+      "Ferramentas dominadas: bilhões, comparação, arredondamento, reta, valor posicional e resolução de problemas.",
     ],
   },
 
   momento10_avaliacao: {
     perguntas: [
       { pergunta: "3.000.000.000 é igual a:", opcoes: ["3 bilhões", "3 milhões", "300 milhões"], correta: 0, feedbackAcerto: "🎉", feedbackErro: "9 zeros = bilhão." },
-      { pergunta: "|−12| vale:", opcoes: ["12", "−12", "0"], correta: 0, feedbackAcerto: "🎉", feedbackErro: "Módulo é sempre ≥ 0." },
+      { pergunta: "Em 4.305, o algarismo 3 vale:", opcoes: ["300", "3.000", "30", "3"], correta: 0, feedbackAcerto: "🎉", feedbackErro: "O 3 ocupa a centena." },
       { pergunta: "Arredondar 78.499 para o milhar:", opcoes: ["78.000", "79.000", "80.000"], correta: 0, feedbackAcerto: "🎉", feedbackErro: "Centena = 4 < 5." },
-      { pergunta: "Maior entre −3, 0, −10, 2:", opcoes: ["2", "0", "−3"], correta: 0, feedbackAcerto: "🎉", feedbackErro: "2 fica mais à direita." },
+      { pergunta: "25 caixas com 12 livros totalizam:", opcoes: ["300", "250", "37", "2.500"], correta: 0, feedbackAcerto: "🎉", feedbackErro: "25 × 12 = 300." },
     ],
   },
 
@@ -169,7 +170,7 @@ export const aula07_missao: AulaV4 = {
     materiais: ["Papel, canetas"],
     passos: [
       "Faça seu diploma: 'Cientista dos Números — Unidade 1'.",
-      "Escreva 3 exemplos reais (bilhão, negativo, arredondado).",
+      "Escreva 3 exemplos reais: um número grande, um arredondamento e um problema resolvido.",
       "Mostre pra família.",
     ],
     registro: "📸 Foto do diploma.",

@@ -8,7 +8,7 @@ export const aula12: AulaPortuguesV4 = {
   slug: "aula-12-divulgacao-cientifica",
   titulo: "Divulgação Científica",
   iconeTrilha: "🧪",
-  bncc: ["EF67LP20", "EF67LP22"],
+  bncc: ["EF67LP20"],
   duracaoMin: 25,
   momento01_motivacao: {
     titulo: "Traduzindo a Ciência: Do Lab para o Mundo",

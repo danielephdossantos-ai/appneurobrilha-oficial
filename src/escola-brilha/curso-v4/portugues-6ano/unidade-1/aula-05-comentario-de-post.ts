@@ -8,7 +8,7 @@ export const aula05: AulaPortuguesV4 = {
   slug: "aula-05-comentario-de-post",
   titulo: "Comentário: A Voz na Rede",
   iconeTrilha: "💬",
-  bncc: ["EF67LP01", "EF67LP05"],
+  bncc: ["EF67LP02"],
   duracaoMin: 25,
   momento01_motivacao: {
     titulo: "Interatividade Social: O Comentário",

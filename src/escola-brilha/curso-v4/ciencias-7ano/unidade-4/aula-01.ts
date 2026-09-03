@@ -12,7 +12,7 @@ export const aula01: AulaGeoV1 = {
   titulo: "Rede da Vida",
   iconeTrilha: "🌳",
   recompensa: { xp: 140, moedas: 55, medalha: "Ecólogo Júnior" },
-  bncc: ["EF07CI10"],
+  bncc: [],
   duracaoMin: 40,
 
   cena01_motivacao: {
@@ -37,6 +37,7 @@ export const aula01: AulaGeoV1 = {
       { id: "aumentam", titulo: "Plantas aumentam", subtitulo: "sem predadores tudo cresce", emoji: "🌿", cor: "from-slate-500 to-slate-700", fotoUrl: florestaImg },
       { id: "diminuem", titulo: "Plantas diminuem", subtitulo: "herbívoros explodem e devoram tudo", emoji: "📉", cor: "from-emerald-500 to-teal-700", fotoUrl: cadeiaImg },
       { id: "iguais", titulo: "Nada muda", subtitulo: "predadores não afetam plantas", emoji: "🟰", cor: "from-rose-500 to-red-700", fotoUrl: cadeiaImg },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "diminuem",
     feedbackAcerto:
@@ -93,6 +94,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🌿", titulo: "Produtores (plantas)", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🐆", titulo: "Predadores de topo", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🍄", titulo: "Decompositores", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. Sem plantas capturando energia do sol, ninguém come.",
         feedbackErro: "Predadores estão no TOPO. Decompositores reciclam. A BASE é sempre produtor." },
@@ -101,6 +103,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🔥", titulo: "Diminui a cada elo (perdida como calor)", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🔄", titulo: "Cicla igual à matéria", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "📈", titulo: "Aumenta a cada elo", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Sim. Regra dos 10%: só 10% passa ao próximo nível. Resto vira calor.",
         feedbackErro: "Energia NÃO cicla — flui em UMA direção. Só a matéria cicla." },
@@ -109,6 +112,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🍄", titulo: "Decompositores (fungos e bactérias)", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🌿", titulo: "Produtores", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🦆", titulo: "Consumidores", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. Sem fungos e bactérias, matéria morta se acumularia sem fim.",
         feedbackErro: "Produtor faz fotossíntese, consumidor come. DECOMPOSITOR recicla." },
@@ -212,6 +216,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Matéria cicla, mas energia flui em uma direção", correta: true },
           { id: "b", texto: "Tanto matéria quanto energia ciclam igual" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. Matéria (água, C, N) cicla. Energia vem do sol e vira calor.",
         feedbackErro: "Energia NÃO cicla — se perde como calor. Só a matéria cicla." },
@@ -219,6 +225,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Produtores (base da pirâmide)", correta: true },
           { id: "b", texto: "Predadores de topo (mais fortes)" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. Base larga, topo estreito — sempre. Regra dos 10%.",
         feedbackErro: "Predadores são SEMPRE raros. PRODUTORES têm biomassa muito maior." },
@@ -226,6 +234,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Matéria morta se acumularia e nutrientes não voltariam ao solo", correta: true },
           { id: "b", texto: "Nada mudaria" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Exato. Sem reciclagem, plantas ficam sem nutrientes e o ecossistema colapsa.",
         feedbackErro: "Muito mudaria. Sem decompositor, nutrientes não voltam ao solo e a base da cadeia morre." },

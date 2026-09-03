@@ -4,7 +4,7 @@ export const aula02_solidos: AulaV4 = {
   slug: "u6-02-solidos",
   titulo: "Sólidos Geométricos",
   iconeTrilha: "🧊",
-  bncc: ["EF03MA13"],
+  bncc: ["EF03MA13", "EF03MA14"],
   duracaoMin: 20,
   metodologias: ["skemp", "cpa"],
   momento01_motivacao: {

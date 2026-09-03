@@ -18,7 +18,7 @@ export const aula01: AulaPortuguesV4 = {
   slug: "aula-01-antes-de-escrever",
   titulo: "Antes de Escrever, Vamos Pensar",
   iconeTrilha: "🧠",
-  bncc: ["EF02LP21", "EF02LP22"],
+  bncc: ["EF15LP05"],
   duracaoMin: 15,
 
   momento01_motivacao: {

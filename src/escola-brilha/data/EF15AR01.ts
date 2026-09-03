@@ -66,9 +66,12 @@ const aula: Aula = {
 
   explicacoesNiveis: {
     nivel1: "Arte pode ser feita de muitos jeitos: tinta, lápis, papel, pedra, massinha.",
-    nivel2: "Pintura usa tinta. Desenho usa lápis. Escultura usa pedra. Colagem usa papel colado. Modelagem usa massinha.",
-    nivel3: "Cada material dá uma sensação diferente na obra: tinta é molhada e brilhante, pedra é dura, massinha é macia.",
-    nivel4: "No museu a gente aprende olhando obras diferentes — cada uma nasce de um jeito único de fazer arte.",
+    nivel2:
+      "Pintura usa tinta. Desenho usa lápis. Escultura usa pedra. Colagem usa papel colado. Modelagem usa massinha.",
+    nivel3:
+      "Cada material dá uma sensação diferente na obra: tinta é molhada e brilhante, pedra é dura, massinha é macia.",
+    nivel4:
+      "No museu a gente aprende olhando obras diferentes — cada uma nasce de um jeito único de fazer arte.",
   },
 
   exemploResolvido: {
@@ -93,6 +96,7 @@ const aula: Aula = {
         { nome: "escultura", imagemUrl: esculturaImg },
         { nome: "quadro", imagemUrl: quadroImg },
         { nome: "desenho", imagemUrl: desenhoImg },
+        { nome: "colagem", imagemUrl: colagemImg },
       ],
       respostaCerta: "escultura",
     },
@@ -123,35 +127,35 @@ const aula: Aula = {
       perguntas: [
         {
           pergunta: "Tinta colorida num quadro é:",
-          opcoes: ["🎨 PINTURA", "🗿 ESCULTURA", "✂️ COLAGEM"],
+          opcoes: ["🎨 PINTURA", "🗿 ESCULTURA", "✂️ COLAGEM", "Outra opção"],
           correta: 0,
           explicacao: "Tinta + quadro = pintura.",
           visual: { tipo: "itens", imagemUrl: quadroImg, quantidade: 1, rotulo: "🖼️" },
         },
         {
           pergunta: "Feita de pedra dura, ocupa espaço:",
-          opcoes: ["🗿 ESCULTURA", "✏️ DESENHO", "🎨 PINTURA"],
+          opcoes: ["🗿 ESCULTURA", "✏️ DESENHO", "🎨 PINTURA", "Outra opção"],
           correta: 0,
           explicacao: "Pedra e volume = escultura.",
           visual: { tipo: "itens", imagemUrl: esculturaImg, quantidade: 1, rotulo: "🗿" },
         },
         {
           pergunta: "Lápis riscando o papel é:",
-          opcoes: ["✏️ DESENHO", "🧱 MODELAGEM", "🎨 PINTURA"],
+          opcoes: ["✏️ DESENHO", "🧱 MODELAGEM", "🎨 PINTURA", "Outra opção"],
           correta: 0,
           explicacao: "Lápis no papel = desenho.",
           visual: { tipo: "itens", imagemUrl: desenhoImg, quantidade: 1, rotulo: "✏️" },
         },
         {
           pergunta: "Papéis recortados e colados formam:",
-          opcoes: ["✂️ COLAGEM", "🗿 ESCULTURA", "🎨 PINTURA"],
+          opcoes: ["✂️ COLAGEM", "🗿 ESCULTURA", "🎨 PINTURA", "Outra opção"],
           correta: 0,
           explicacao: "Recortar + colar = colagem.",
           visual: { tipo: "itens", imagemUrl: colagemImg, quantidade: 1, rotulo: "✂️" },
         },
         {
           pergunta: "Massinha que se aperta e molda vira:",
-          opcoes: ["🧱 MODELAGEM", "✏️ DESENHO", "🎨 PINTURA"],
+          opcoes: ["🧱 MODELAGEM", "✏️ DESENHO", "🎨 PINTURA", "Outra opção"],
           correta: 0,
           explicacao: "Massinha moldada = modelagem.",
           visual: { tipo: "itens", imagemUrl: modelagemImg, quantidade: 1, rotulo: "🧱" },
@@ -175,35 +179,40 @@ const aula: Aula = {
   quiz: [
     {
       pergunta: "Com o que se faz uma PINTURA?",
-      opcoes: ["Tinta e pincel", "Massinha", "Pedra"],
+      opcoes: ["Tinta e pincel", "Massinha", "Pedra", "Outra opção"],
       correta: 0,
       explicacao: "Pintura é feita com tinta e pincel.",
       visual: { tipo: "itens", imagemUrl: paletaImg, quantidade: 1, rotulo: "🎨" },
     },
     {
       pergunta: "Uma ESCULTURA de pedra é uma obra:",
-      opcoes: ["Que ocupa espaço, dá pra ver de vários lados", "Plana como uma folha", "Feita de tinta molhada"],
+      opcoes: [
+        "Que ocupa espaço, dá pra ver de vários lados",
+        "Plana como uma folha",
+        "Feita de tinta molhada",
+        "Outra opção",
+      ],
       correta: 0,
       explicacao: "Escultura tem volume.",
       visual: { tipo: "itens", imagemUrl: esculturaImg, quantidade: 1, rotulo: "🗿" },
     },
     {
       pergunta: "COLAGEM se faz com:",
-      opcoes: ["Papéis recortados e cola", "Argila e água", "Só lápis"],
+      opcoes: ["Papéis recortados e cola", "Argila e água", "Só lápis", "Outra opção"],
       correta: 0,
       explicacao: "Recortar e colar papéis = colagem.",
       visual: { tipo: "itens", imagemUrl: colagemImg, quantidade: 1, rotulo: "✂️" },
     },
     {
       pergunta: "Onde muitas obras ficam pra todo mundo apreciar?",
-      opcoes: ["No museu", "Na cozinha", "No parque de bola"],
+      opcoes: ["No museu", "Na cozinha", "No parque de bola", "Outra opção"],
       correta: 0,
       explicacao: "Museu é a casa das obras.",
       visual: { tipo: "itens", imagemUrl: museuImg, quantidade: 1, rotulo: "🏛️" },
     },
     {
       pergunta: "Quem CRIA as obras de arte é:",
-      opcoes: ["O artista", "O motorista", "O cozinheiro"],
+      opcoes: ["O artista", "O motorista", "O cozinheiro", "Outra opção"],
       correta: 0,
       explicacao: "Artistas criam as obras.",
       visual: { tipo: "itens", imagemUrl: artistaImg, quantidade: 1, rotulo: "🧑‍🎨" },
@@ -230,6 +239,7 @@ const aula: Aula = {
         { nome: "PINTURA", imagemUrl: quadroImg, rotulo: "🎨 PINTURA" },
         { nome: "ESCULTURA", imagemUrl: esculturaImg, rotulo: "🗿 ESCULTURA" },
         { nome: "MODELAGEM", imagemUrl: modelagemImg, rotulo: "🧱 MODELAGEM" },
+        { nome: "OUTRA-OPCAO", imagemUrl: artistaImg, rotulo: "🔎 OUTRA OPÇÃO" },
       ],
       correta: 0,
       acerto: "🎨 Isso! Tinta num quadro é pintura.",
@@ -246,6 +256,7 @@ const aula: Aula = {
         { nome: "DESENHO", imagemUrl: desenhoImg, rotulo: "✏️ DESENHO" },
         { nome: "COLAGEM", imagemUrl: colagemImg, rotulo: "✂️ COLAGEM" },
         { nome: "ESCULTURA", imagemUrl: esculturaImg, rotulo: "🗿 ESCULTURA" },
+        { nome: "OUTRA-OPCAO", imagemUrl: artistaImg, rotulo: "🔎 OUTRA OPÇÃO" },
       ],
       correta: 0,
       acerto: "✏️ Isso! Lápis no papel = desenho.",
@@ -345,21 +356,21 @@ const aula: Aula = {
     facil: [
       {
         pergunta: "PINTURA se faz com:",
-        opcoes: ["Tinta e pincel", "Pedra", "Massinha"],
+        opcoes: ["Tinta e pincel", "Pedra", "Massinha", "Outra opção"],
         correta: 0,
         explicacao: "Tinta + pincel = pintura.",
         visual: { tipo: "itens", imagemUrl: pincelImg, quantidade: 1, rotulo: "🖌️" },
       },
       {
         pergunta: "DESENHO se faz com:",
-        opcoes: ["Lápis no papel", "Pedra grande", "Tinta e balde"],
+        opcoes: ["Lápis no papel", "Pedra grande", "Tinta e balde", "Outra opção"],
         correta: 0,
         explicacao: "Lápis no papel = desenho.",
         visual: { tipo: "itens", imagemUrl: desenhoImg, quantidade: 1, rotulo: "✏️" },
       },
       {
         pergunta: "Onde ficam obras pra visitar?",
-        opcoes: ["Museu", "Padaria", "Piscina"],
+        opcoes: ["Museu", "Padaria", "Piscina", "Outra opção"],
         correta: 0,
         explicacao: "Museu = casa das obras.",
         visual: { tipo: "itens", imagemUrl: museuImg, quantidade: 1, rotulo: "🏛️" },
@@ -368,21 +379,21 @@ const aula: Aula = {
     medio: [
       {
         pergunta: "Uma obra de pedra que ocupa espaço é:",
-        opcoes: ["Escultura", "Pintura", "Colagem"],
+        opcoes: ["Escultura", "Pintura", "Colagem", "Outra opção"],
         correta: 0,
         explicacao: "Pedra + volume = escultura.",
         visual: { tipo: "itens", imagemUrl: esculturaImg, quantidade: 1, rotulo: "🗿" },
       },
       {
         pergunta: "Recortar e colar papéis vira:",
-        opcoes: ["Colagem", "Pintura", "Escultura"],
+        opcoes: ["Colagem", "Pintura", "Escultura", "Outra opção"],
         correta: 0,
         explicacao: "Papel + cola = colagem.",
         visual: { tipo: "itens", imagemUrl: colagemImg, quantidade: 1, rotulo: "✂️" },
       },
       {
         pergunta: "Apertar massinha até virar formas é:",
-        opcoes: ["Modelagem", "Desenho", "Pintura"],
+        opcoes: ["Modelagem", "Desenho", "Pintura", "Outra opção"],
         correta: 0,
         explicacao: "Massinha = modelagem.",
         visual: { tipo: "itens", imagemUrl: modelagemImg, quantidade: 1, rotulo: "🧱" },
@@ -391,14 +402,14 @@ const aula: Aula = {
     dificil: [
       {
         pergunta: "Qual dessas obras a gente pode olhar de VÁRIOS LADOS?",
-        opcoes: ["Escultura", "Pintura", "Desenho"],
+        opcoes: ["Escultura", "Pintura", "Desenho", "Outra opção"],
         correta: 0,
         explicacao: "Escultura tem volume — dá pra andar em volta.",
         visual: { tipo: "itens", imagemUrl: esculturaImg, quantidade: 1, rotulo: "🗿" },
       },
       {
         pergunta: "Quem CRIA uma obra é:",
-        opcoes: ["O artista", "O bombeiro", "O padeiro"],
+        opcoes: ["O artista", "O bombeiro", "O padeiro", "Outra opção"],
         correta: 0,
         explicacao: "Artista cria arte.",
         visual: { tipo: "itens", imagemUrl: artistaImg, quantidade: 1, rotulo: "🧑‍🎨" },
@@ -409,6 +420,7 @@ const aula: Aula = {
           "Pra olhar com calma e sentir o que ela transmite",
           "Pra comer",
           "Pra jogar bola",
+          "Uma resposta sem relação com a arte",
         ],
         correta: 0,
         explicacao: "Apreciar é olhar com atenção e imaginar.",
@@ -420,8 +432,7 @@ const aula: Aula = {
   minijogo: {
     tipo: "esteira",
     titulo: "Fábrica de Arte",
-    objetivo:
-      "As obras passam na esteira. Toque na bandeja do tipo certo antes que caiam!",
+    objetivo: "As obras passam na esteira. Toque na bandeja do tipo certo antes que caiam!",
     tempoSegundos: 90,
     minAcertos: 10,
     categorias: [

@@ -4,6 +4,7 @@ import { aula02_explorandoSolidos } from "./aula-02-explorando-solidos";
 import { aula03_caminhosLocalizacao } from "./aula-03-caminhos-localizacao";
 import { aula04_medindoOMundo } from "./aula-04-medindo-o-mundo";
 import { aula05_missaoFinal } from "./aula-05-missao-final";
+import { aula06_dinheiroEquivalente } from "./aula-06-dinheiro-equivalente";
 
 /**
  * Unidade 6 — "Exploradores das Formas e Medidas"
@@ -27,5 +28,6 @@ export const unidade6: Unidade = {
     aula03_caminhosLocalizacao,
     aula04_medindoOMundo,
     aula05_missaoFinal,
+    aula06_dinheiroEquivalente,
   ],
 };

@@ -4,7 +4,7 @@ export const aula06_missaoFinal: AulaV4 = {
   slug: "u4-06-missao-final",
   titulo: "Missão Final — Repartidor Imperial",
   iconeTrilha: "🎖️",
-  bncc: ["EF05MA07"],
+  bncc: ["EF05MA08"],
   duracaoMin: 22,
   metodologias: ["skemp", "vergnaud"],
 
@@ -16,7 +16,7 @@ export const aula06_missaoFinal: AulaV4 = {
     instrucao: "Um problema por vez.",
     cenas: [{ tipo: "texto", texto: "Use a chave. Estime → teste → ajuste.", destaque: true }],
   },
-  momento03_descoberta: { perguntaGuia: "Segredo?", pista: "Confie na tabuada.", revelacao: "Se souber a tabuada, você sabe dividir." },
+  momento03_descoberta: { perguntaGuia: "O que ajuda a dividir com segurança?", pista: "Use tabuada, valor posicional e conferência.", revelacao: "A tabuada ajuda a estimar cada algarismo do quociente. O valor posicional organiza as etapas, e a relação divisor × quociente + resto confere o resultado." },
   momento04_explicacao: {
     titulo: "Regras",
     etapas: [{ texto: "Divisões podem ter resto. Cheque com divisor × quociente + resto = dividendo." }],

@@ -40,6 +40,7 @@ export const aula01: AulaGeoV1 = {
       { id: "some", titulo: "SUMIU pra sempre", subtitulo: "virou água", emoji: "❌", cor: "from-red-500 to-rose-700" },
       { id: "dissolve", titulo: "DISSOLVE", subtitulo: "continua ali, só invisível", emoji: "💧", cor: "from-cyan-500 to-sky-700" },
       { id: "flutua", titulo: "FLUTUA", subtitulo: "fica na superfície", emoji: "☁️", cor: "from-slate-400 to-slate-600" },
+      { id: "deposita", titulo: "VAI PARA O FUNDO", subtitulo: "forma um depósito", emoji: "⬇️", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "dissolve",
     feedbackAcerto:
@@ -157,6 +158,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "💧", titulo: "Homogênea", cor: "from-cyan-500 to-sky-700" },
           { id: "b", emoji: "🥗", titulo: "Heterogênea", cor: "from-amber-500 to-orange-700" },
           { id: "c", emoji: "🚫", titulo: "Não é mistura", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "a",
         feedbackAcerto: "Certo. Dissolveu = HOMOGÊNEA (aparência uniforme).",
@@ -170,6 +172,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🧲", titulo: "Separação magnética (ímã)", cor: "from-slate-600 to-slate-900" },
           { id: "b", emoji: "☕", titulo: "Filtração", cor: "from-amber-700 to-yellow-900" },
           { id: "c", emoji: "💨", titulo: "Evaporação", cor: "from-cyan-500 to-sky-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "a",
         feedbackAcerto: "Sim. O ímã só atrai o FERRO — a areia fica.",
@@ -183,6 +186,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🔄", titulo: "Reversível", cor: "from-teal-500 to-emerald-700" },
           { id: "b", emoji: "🔥", titulo: "Irreversível", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "❓", titulo: "Não é transformação", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "b",
         feedbackAcerto: "Isso. Ovo cozido NÃO volta a ser cru. IRREVERSÍVEL.",
@@ -382,6 +386,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Mistura homogênea", correta: true },
           { id: "b", texto: "Transformação irreversível" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Certo. Dissolveu = HOMOGÊNEA. Se evaporar a água, o açúcar volta.",
         feedbackErro: "Não é transformação — o açúcar continua sendo açúcar. É MISTURA.",
@@ -393,6 +399,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Ímã", correta: true },
           { id: "b", texto: "Filtro de papel" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. Só o ÍMÃ atrai ferro.",
         feedbackErro: "Filtro deixa ferro e areia juntos. Precisa de ÍMÃ.",
@@ -404,6 +412,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Não — é irreversível", correta: true },
           { id: "b", texto: "Sim — basta esfriar" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. Transformação IRREVERSÍVEL.",
         feedbackErro: "Esfriar não desfaz. O calor mudou a substância. IRREVERSÍVEL.",

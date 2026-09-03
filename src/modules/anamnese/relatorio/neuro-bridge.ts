@@ -77,6 +77,7 @@ const AREA_TO_CATEGORIAS: Record<keyof PerfilScores, CategoriaSlug[]> = {
   adaptativo: [
     "copiar-figura",
     "tracado-letras",
+    "direcao-letras-numeros",
     "mosaico-de-formas",
     "articulacao-sons",
     "discriminacao-auditiva",

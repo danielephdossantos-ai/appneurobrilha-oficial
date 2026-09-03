@@ -9,11 +9,11 @@ import { TeenBlackboard } from "./TeenBlackboard";
  *
  * A criança lê o MESMO texto curto três vezes:
  *   1ª · em eco   → o app lê devagar, ela repete junto (apoio total)
- *   2ª · sozinha  → cronômetro amigável começa a contar
- *   3ª · sozinha  → compara com a 2ª ("você leu mais solto!")
+ *   2ª · sozinha  → cronômetro opcional registra a leitura
+ *   3ª · sozinha  → pratica precisão, expressão e compreensão
  *
- * É esse treino repetido, e não mais decodificação nova, que automatiza
- * a leitura aos 6 anos. Nada é reprovado aqui: o objetivo é soltar.
+ * A releitura favorece a automaticidade sem trocar a compreensão por
+ * velocidade. Nada é reprovado aqui: cada criança lê no próprio ritmo.
  */
 export function LeituraFluente({
   data,
@@ -85,8 +85,6 @@ export function LeituraFluente({
       setEtapa(3);
     }
   };
-
-  const melhorou = tempo2 != null && tempo3 != null && tempo3 <= tempo2;
 
   return (
     <TeenBlackboard titulo="Monitoramento de Fluxo e Cadência">
@@ -199,12 +197,12 @@ export function LeituraFluente({
         </div>
       )}
 
-      {/* Etapa 2 — 3ª leitura, comparando */}
+      {/* Etapa 2 — 3ª leitura, consolidando */}
       {etapa === 2 && (
         <div className="rounded-2xl border-2 border-fuchsia-300/50 bg-fuchsia-400/10 p-4 space-y-3">
           <p className="text-sm font-bold text-fuchsia-100">
-            Você leu em <b>{tempo2}s</b>. 3ª leitura · o mesmo texto de novo — agora
-            as palavras já são suas conhecidas, vai sair mais solto!
+            O relógio marcou <b>{tempo2}s</b>, apenas como referência. Na 3ª leitura,
+            leia o mesmo texto com precisão, expressão e atenção ao sentido.
           </p>
           <div className="flex flex-wrap gap-2">
             {!rodando ? (
@@ -232,13 +230,12 @@ export function LeituraFluente({
       {etapa === 3 && (
         <div className="rounded-2xl border-2 border-emerald-300/60 bg-emerald-400/15 p-4 space-y-2">
           <p className="text-lg font-black text-emerald-100">
-            {melhorou ? "🚀 Ficou mais solto!" : "🌟 Você leu as três vezes!"}
+            🌟 Você leu as três vezes!
           </p>
           <p className="text-sm text-white/90">
             2ª leitura: <b>{tempo2}s</b> · 3ª leitura: <b>{tempo3}s</b>.{" "}
-            {melhorou
-              ? "Ler o mesmo texto de novo faz o cérebro guardar as palavras inteiras — por isso ficou mais rápido."
-              : "Tudo bem: o que vale é ler com calma e entendendo. Amanhã leia este texto mais uma vez."}
+            O tempo não é nota. Conte o que entendeu e observe se leu as palavras com
+            precisão, respeitou a pontuação e usou uma voz que combina com o texto.
           </p>
           <button
             type="button"

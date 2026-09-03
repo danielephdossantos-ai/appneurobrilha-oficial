@@ -5,7 +5,7 @@ export const aula05_dizimas: AulaV4 = {
   slug: "u2-05-dizimas",
   titulo: "Missão — Dízimas e Fração Geratriz",
   iconeTrilha: "🔁",
-  bncc: ["EF07MA06"],
+  bncc: ["EF07MA08", "EF07MA10"],
   duracaoMin: 32,
   metodologias: ["skemp"],
 

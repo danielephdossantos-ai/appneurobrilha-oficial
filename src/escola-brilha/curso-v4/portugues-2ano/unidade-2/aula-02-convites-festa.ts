@@ -22,7 +22,7 @@ export const aula02: AulaPortuguesV4 = {
   slug: "aula-02-convites-festa",
   titulo: "Convites para a Festa dos Livros",
   iconeTrilha: "🎉",
-  bncc: ["EF02LP09", "EF02LP10", "EF02LP11"],
+  bncc: ["EF12LP04", "EF12LP06", "EF15LP01", "EF15LP03", "EF15LP05"],
   duracaoMin: 15,
 
   momento01_motivacao: {

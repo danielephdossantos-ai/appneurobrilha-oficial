@@ -31,6 +31,8 @@ export const aula06: AulaGeoV1 = {
     opcoes: [
       { id: "dir", titulo: "AMPLIOU DIREITOS", subtitulo: "civis, políticos e sociais, para todos os cidadãos", emoji: "📖", cor: "from-blue-800 to-slate-950" },
       { id: "res", titulo: "RESTRINGIU DIREITOS", subtitulo: "voltou a limitar liberdades", emoji: "❌", cor: "from-amber-900 to-slate-950" },
+          { id: "extra2", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "extra3", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "dir",
     feedbackAcerto:
@@ -75,16 +77,19 @@ export const aula06: AulaGeoV1 = {
         { id: "ug", emoji: "📖", titulo: "Ulysses Guimarães", cor: "from-blue-600 to-slate-900" },
         { id: "tn", emoji: "🗳️", titulo: "Tancredo Neves", cor: "from-amber-600 to-slate-900" },
         { id: "fc", emoji: "💰", titulo: "Fernando Collor", cor: "from-slate-600 to-slate-900" },
+          { id: "extra3", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
       ], correta: "ug", feedbackAcerto: "Correto. Ulysses Guimarães presidiu a Constituinte e cunhou o apelido em 1988.", feedbackErro: "Foi Ulysses Guimarães, presidente da Assembleia Constituinte." },
       { id: "q2", pergunta: "Qual direito social foi criado com a CF/88 e regulamentado em 1990?", fotoUrl: imgMpb, cards: [
         { id: "sus", emoji: "🏥", titulo: "SUS (Sistema Único de Saúde)", cor: "from-blue-600 to-slate-900" },
         { id: "fgts", emoji: "💰", titulo: "Volta do padrão-ouro", cor: "from-amber-600 to-slate-900" },
         { id: "cens", emoji: "📰", titulo: "Censura prévia à imprensa", cor: "from-slate-600 to-slate-900" },
+          { id: "extra3", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
       ], correta: "sus", feedbackAcerto: "Correto. O SUS garante saúde pública universal e gratuita.", feedbackErro: "É o SUS, criado pela CF/88 e regulamentado em 1990." },
       { id: "q3", pergunta: "A partir de 1989, o voto direto para presidente foi usado:", fotoUrl: imgDir, cards: [
         { id: "s", emoji: "🗳️", titulo: "Pela primeira vez desde 1960", cor: "from-blue-600 to-slate-900" },
         { id: "n", emoji: "❌", titulo: "Pela primeira vez na história", cor: "from-amber-600 to-slate-900" },
         { id: "x", emoji: "🎖️", titulo: "Só para eleger governadores", cor: "from-slate-600 to-slate-900" },
+          { id: "extra3", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
       ], correta: "s", feedbackAcerto: "Correto. O Brasil já elegera presidentes por voto direto antes de 1964 (até 1960); a CF/88 restaurou esse direito.", feedbackErro: "Era voto direto desde 1960; a CF/88 o restaurou após décadas de escolha indireta." },
     ],
     falaFinal: "Você já entende os pilares da CF/88.",
@@ -176,16 +181,19 @@ export const aula06: AulaGeoV1 = {
         { id: "a", texto: "Saúde, educação, trabalho e moradia.", correta: true },
         { id: "b", texto: "Apenas o direito ao voto.", correta: false },
         { id: "c", texto: "Apenas a liberdade de expressão.", correta: false },
+          { id: "extra3", texto: "Preciso comparar outras evidências" },
       ], feedbackAcerto: "Correto. São deveres sociais do Estado.", feedbackErro: "Incluem saúde, educação, trabalho, moradia, entre outros." },
       { id: "av2", pergunta: "O SUS foi criado a partir da CF/88 e regulamentado em:", opcoes: [
         { id: "a", texto: "1990.", correta: true },
         { id: "b", texto: "1964.", correta: false },
         { id: "c", texto: "2000.", correta: false },
+          { id: "extra3", texto: "Preciso comparar outras evidências" },
       ], feedbackAcerto: "Correto. Lei 8.080 de 1990.", feedbackErro: "Foi regulamentado em 1990." },
       { id: "av3", pergunta: "'Constituição Cidadã' é apelido dado por:", opcoes: [
         { id: "a", texto: "Ulysses Guimarães, na promulgação de 1988.", correta: true },
         { id: "b", texto: "Getúlio Vargas, em 1937.", correta: false },
         { id: "c", texto: "Um general da ditadura.", correta: false },
+          { id: "extra3", texto: "Preciso comparar outras evidências" },
       ], feedbackAcerto: "Correto. Ele presidiu a Assembleia Constituinte.", feedbackErro: "Foi Ulysses Guimarães, presidente da Constituinte." },
     ],
     selo: { nome: "EF09HI23", subtitulo: "Direitos civis, políticos e sociais da CF/88", emoji: "📖", cor: "from-blue-500 to-slate-900", fotoUrl: imgMpb },

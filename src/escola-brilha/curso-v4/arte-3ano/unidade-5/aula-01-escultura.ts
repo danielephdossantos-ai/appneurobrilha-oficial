@@ -43,10 +43,34 @@ export const aula01: AulaArteV1 = {
     titulo: "🔍 A Praça das Esculturas",
     instrucao: "Toca em cada pista pra investigar",
     itens: [
-      { emoji: "🗿", rotulo: "Estátua na praça", descricao: "Figura com VOLUME — dá pra andar em volta e ver de todos os ângulos.", cor: "#4b5563", fotoUrl: mapaEstatua },
-      { emoji: "🏺", rotulo: "Escultura em argila", descricao: "Argila mole que a mão vai moldando — depois é cozida no forno pra endurecer.", cor: "#b45309", fotoUrl: mapaArgila },
-      { emoji: "🏛️", rotulo: "Escultura em mármore", descricao: "Pedra dura branca. O artista talha com martelo e cinzel — tira o que sobra.", cor: "#f5f5f4", fotoUrl: mapaMarmore },
-      { emoji: "🪵", rotulo: "Escultura em madeira", descricao: "Talhada com formão. No Brasil, Aleijadinho fez profetas famosos assim.", cor: "#78350f", fotoUrl: mapaMadeira },
+      {
+        emoji: "🗿",
+        rotulo: "Estátua na praça",
+        descricao: "Figura com VOLUME — dá pra andar em volta e ver de todos os ângulos.",
+        cor: "#4b5563",
+        fotoUrl: mapaEstatua,
+      },
+      {
+        emoji: "🏺",
+        rotulo: "Escultura em argila",
+        descricao: "Argila mole que a mão vai moldando — depois é cozida no forno pra endurecer.",
+        cor: "#b45309",
+        fotoUrl: mapaArgila,
+      },
+      {
+        emoji: "🏛️",
+        rotulo: "Escultura em mármore",
+        descricao: "Pedra dura branca. O artista talha com martelo e cinzel — tira o que sobra.",
+        cor: "#f5f5f4",
+        fotoUrl: mapaMarmore,
+      },
+      {
+        emoji: "🪵",
+        rotulo: "Escultura em madeira",
+        descricao: "Talhada com formão. No Brasil, Aleijadinho fez profetas famosos assim.",
+        cor: "#78350f",
+        fotoUrl: mapaMadeira,
+      },
     ],
     falaFinal: "Escultura NUNCA é plana — sempre tem 3 dimensões: altura, largura E profundidade.",
   },
@@ -61,6 +85,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Uma estátua que dá pra andar em volta", correta: true },
           { texto: "Um desenho no caderno", correta: false },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
         feedbackAcerto: "Isso! Escultura tem VOLUME — 3 dimensões.",
         feedbackErro: "Desenho é plano (2D). Escultura tem VOLUME (3D).",
@@ -71,6 +98,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "BIDIMENSIONAL — só altura e largura", correta: true },
           { texto: "Tridimensional — tem volume", correta: false },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
         feedbackAcerto: "Certo! 2D = plano. Só dá pra ver de um lado.",
         feedbackErro: "Papel é plano — só 2 dimensões (altura e largura). Nada de volume.",
@@ -81,6 +111,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "TRIDIMENSIONAL — tem volume", correta: true },
           { texto: "Bidimensional — só plana", correta: false },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
         feedbackAcerto: "Perfeito! Bola tem 3D: dá pra pegar e ver de todos os lados.",
         feedbackErro: "Bola tem VOLUME. É 3D — tridimensional.",
@@ -92,10 +125,34 @@ export const aula01: AulaArteV1 = {
     tipo: "vocabularioCards",
     aurora: "Palavras do escultor — toca em cada uma pra desbloquear seu diário.",
     cards: [
-      { termo: "Escultura", definicao: "Obra de arte com VOLUME (3D) — feita em pedra, madeira, argila, metal…", emoji: "🗿", cor: "#4b5563", fotoUrl: vocabEscultura },
-      { termo: "Bidimensional (2D)", definicao: "Só tem ALTURA e LARGURA — como o desenho no papel.", emoji: "📄", cor: "#0284c7", fotoUrl: vocabBidimensional },
-      { termo: "Tridimensional (3D)", definicao: "Tem altura, largura E PROFUNDIDADE — dá pra andar em volta.", emoji: "🎲", cor: "#7c3aed", fotoUrl: vocabTridimensional },
-      { termo: "Volume", definicao: "O ESPAÇO que a escultura ocupa no ar — a 'grossura' dela.", emoji: "📦", cor: "#b45309", fotoUrl: vocabVolume },
+      {
+        termo: "Escultura",
+        definicao: "Obra de arte com VOLUME (3D) — feita em pedra, madeira, argila, metal…",
+        emoji: "🗿",
+        cor: "#4b5563",
+        fotoUrl: vocabEscultura,
+      },
+      {
+        termo: "Bidimensional (2D)",
+        definicao: "Só tem ALTURA e LARGURA — como o desenho no papel.",
+        emoji: "📄",
+        cor: "#0284c7",
+        fotoUrl: vocabBidimensional,
+      },
+      {
+        termo: "Tridimensional (3D)",
+        definicao: "Tem altura, largura E PROFUNDIDADE — dá pra andar em volta.",
+        emoji: "🎲",
+        cor: "#7c3aed",
+        fotoUrl: vocabTridimensional,
+      },
+      {
+        termo: "Volume",
+        definicao: "O ESPAÇO que a escultura ocupa no ar — a 'grossura' dela.",
+        emoji: "📦",
+        cor: "#b45309",
+        fotoUrl: vocabVolume,
+      },
     ],
   },
 
@@ -109,10 +166,34 @@ export const aula01: AulaArteV1 = {
       "No Brasil, Aleijadinho esculpiu 12 profetas em pedra-sabão em Minas Gerais há 250 anos. Ainda hoje as pessoas viajam pra ver essas esculturas!",
     ],
     pigmentos: [
-      { nome: "Branco do mármore", hex: "#f5f5f4", fonte: "Pedra polida das montanhas", emoji: "⚪", fotoUrl: mapaMarmore },
-      { nome: "Marrom da madeira", hex: "#78350f", fonte: "Cedro, jacarandá, imbuia", emoji: "🟤", fotoUrl: mapaMadeira },
-      { nome: "Terracota da argila", hex: "#b45309", fonte: "Argila cozida no forno", emoji: "🟠", fotoUrl: mapaArgila },
-      { nome: "Cinza do bronze", hex: "#4b5563", fonte: "Metal derretido em molde", emoji: "⚙️", fotoUrl: mapaEstatua },
+      {
+        nome: "Branco do mármore",
+        hex: "#f5f5f4",
+        fonte: "Pedra polida das montanhas",
+        emoji: "⚪",
+        fotoUrl: mapaMarmore,
+      },
+      {
+        nome: "Marrom da madeira",
+        hex: "#78350f",
+        fonte: "Cedro, jacarandá, imbuia",
+        emoji: "🟤",
+        fotoUrl: mapaMadeira,
+      },
+      {
+        nome: "Terracota da argila",
+        hex: "#b45309",
+        fonte: "Argila cozida no forno",
+        emoji: "🟠",
+        fotoUrl: mapaArgila,
+      },
+      {
+        nome: "Cinza do bronze",
+        hex: "#4b5563",
+        fonte: "Metal derretido em molde",
+        emoji: "⚙️",
+        fotoUrl: mapaEstatua,
+      },
     ],
   },
 
@@ -126,6 +207,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "RETIRANDO material (técnica subtrativa)", correta: true },
           { texto: "Adicionando material", correta: false },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
         feedbackAcerto: "Sim! Ele RETIRA o que sobra — a figura sai de dentro da pedra.",
         feedbackErro: "Ao contrário: com martelo, ele TIRA pedaços — não adiciona.",
@@ -136,6 +220,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Aleijadinho — mestre brasileiro", correta: true },
           { texto: "Um escultor europeu", correta: false },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
         feedbackAcerto: "Certo! Aleijadinho — orgulho da arte brasileira.",
         feedbackErro: "Foi um mestre BRASILEIRO chamado Aleijadinho, em Minas Gerais.",
@@ -146,6 +233,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Cozida no FORNO em alta temperatura", correta: true },
           { texto: "Colocada na geladeira", correta: false },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
         feedbackAcerto: "Perfeito! O forno endurece a argila e transforma em cerâmica.",
         feedbackErro: "Geladeira não endurece. A argila precisa do FORNO pra virar cerâmica.",
@@ -158,32 +248,44 @@ export const aula01: AulaArteV1 = {
     aurora: "Cada material de escultura tem sua cor típica. Descobre a paleta certa pra cada um!",
     animais: [
       {
-        nome: "Estátua de bronze de herói", emoji: "🗿", fotoUrl: mapaEstatua,
+        nome: "Estátua de bronze de herói",
+        emoji: "🗿",
+        fotoUrl: mapaEstatua,
         corAlvo: { nome: "Cinza esverdeado do bronze envelhecido", hex: "#4b5563" },
         opcoes: [
           { nome: "Rosa-chiclete brilhante", hex: "#ec4899" },
           { nome: "Cinza esverdeado do bronze envelhecido", hex: "#4b5563" },
           { nome: "Amarelo-canário", hex: "#facc15" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Isso! Bronze fica cinza-esverdeado com o tempo.",
       },
       {
-        nome: "Vaso de cerâmica marajoara", emoji: "🏺", fotoUrl: nosVaso,
+        nome: "Vaso de cerâmica marajoara",
+        emoji: "🏺",
+        fotoUrl: nosVaso,
         corAlvo: { nome: "Terracota alaranjado", hex: "#b45309" },
         opcoes: [
           { nome: "Azul-oceano", hex: "#0284c7" },
           { nome: "Terracota alaranjado", hex: "#b45309" },
           { nome: "Roxo-berinjela", hex: "#581c87" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Certo! Argila cozida ganha esse tom alaranjado característico.",
       },
       {
-        nome: "Boneco de plástico de brinquedo", emoji: "🤖", fotoUrl: cotidianoBoneco,
+        nome: "Boneco de plástico de brinquedo",
+        emoji: "🤖",
+        fotoUrl: cotidianoBoneco,
         corAlvo: { nome: "Cores vibrantes misturadas", hex: "#3b82f6" },
         opcoes: [
           { nome: "Cinza fosco", hex: "#6b7280" },
           { nome: "Cores vibrantes misturadas", hex: "#3b82f6" },
           { nome: "Marrom-terra escuro", hex: "#451a03" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Perfeito! Brinquedo moderno = plástico colorido pra chamar atenção.",
       },
@@ -194,10 +296,34 @@ export const aula01: AulaArteV1 = {
     tipo: "sequenciaMistura",
     aurora: "Ordena os 4 passos pra fazer TUA escultura em casa — com massinha!",
     passos: [
-      { id: "p1", texto: "PENSO no que quero fazer: um bicho, uma pessoa, um vaso…", emoji: "💭", ordem: 1, fotoUrl: vocabEscultura },
-      { id: "p2", texto: "AMASSO a massinha até ficar bem mole nas mãos", emoji: "✋", ordem: 2, fotoUrl: mapaArgila },
-      { id: "p3", texto: "MODELO puxando, apertando, juntando — pouco a pouco", emoji: "🤏", ordem: 3, fotoUrl: vocabVolume },
-      { id: "p4", texto: "DEIXO secar e apresento minha escultura pra família!", emoji: "🎨", ordem: 4, fotoUrl: cotidianoBoneco },
+      {
+        id: "p1",
+        texto: "PENSO no que quero fazer: um bicho, uma pessoa, um vaso…",
+        emoji: "💭",
+        ordem: 1,
+        fotoUrl: vocabEscultura,
+      },
+      {
+        id: "p2",
+        texto: "AMASSO a massinha até ficar bem mole nas mãos",
+        emoji: "✋",
+        ordem: 2,
+        fotoUrl: mapaArgila,
+      },
+      {
+        id: "p3",
+        texto: "MODELO puxando, apertando, juntando — pouco a pouco",
+        emoji: "🤏",
+        ordem: 3,
+        fotoUrl: vocabVolume,
+      },
+      {
+        id: "p4",
+        texto: "DEIXO secar e apresento minha escultura pra família!",
+        emoji: "🎨",
+        ordem: 4,
+        fotoUrl: cotidianoBoneco,
+      },
     ],
     falaAcerto: "Sua escultura está PRONTA! Tem VOLUME, dá pra ver de todos os lados.",
   },
@@ -208,9 +334,17 @@ export const aula01: AulaArteV1 = {
     titulo: "Diário do Explorador — Praça das Estátuas",
     trechos: [
       { texto: "Vi uma linda", palavraDestaque: "escultura", corDestaque: "#4b5563" },
-      { texto: "Diferente do desenho, ela tinha", palavraDestaque: "volume", corDestaque: "#b45309" },
+      {
+        texto: "Diferente do desenho, ela tinha",
+        palavraDestaque: "volume",
+        corDestaque: "#b45309",
+      },
       { texto: "O papel é plano (2D) —", palavraDestaque: "bidimensional", corDestaque: "#0284c7" },
-      { texto: "Mas a estátua tem 3 dimensões —", palavraDestaque: "tridimensional", corDestaque: "#7c3aed" },
+      {
+        texto: "Mas a estátua tem 3 dimensões —",
+        palavraDestaque: "tridimensional",
+        corDestaque: "#7c3aed",
+      },
       { texto: "Sou um Explorador do Tempo — a página 5 está sendo restaurada!" },
     ],
   },
@@ -218,7 +352,8 @@ export const aula01: AulaArteV1 = {
   cena09_minijogo: {
     tipo: "cenaTematica",
     variante: "minijogo",
-    aurora: "🗿 Ateliê do Escultor! Toca em CADA ferramenta e material na ordem certa pra terminar a escultura antes do tempo acabar.",
+    aurora:
+      "🗿 Ateliê do Escultor! Toca em CADA ferramenta e material na ordem certa pra terminar a escultura antes do tempo acabar.",
     titulo: "🗿 Ateliê do Escultor",
     instrucao: "Toque em cada item na ordem correta!",
     tempoSeg: 40,
@@ -239,13 +374,55 @@ export const aula01: AulaArteV1 = {
     aurora: "Fecha o caderno da expedição repassando cada achado. Toca em cada verbete!",
     titulo: "📓 Caderno da Expedição da Escultura",
     itens: [
-      { emoji: "🗿", rotulo: "Escultura", descricao: "Obra de arte com volume — 3D.", cor: "#4b5563", fotoUrl: vocabEscultura },
-      { emoji: "📄", rotulo: "Bidimensional", descricao: "Plano — altura e largura só.", cor: "#0284c7", fotoUrl: vocabBidimensional },
-      { emoji: "🎲", rotulo: "Tridimensional", descricao: "Volume — altura, largura, profundidade.", cor: "#7c3aed", fotoUrl: vocabTridimensional },
-      { emoji: "📦", rotulo: "Volume", descricao: "O espaço que a escultura ocupa.", cor: "#b45309", fotoUrl: vocabVolume },
-      { emoji: "🏺", rotulo: "Argila", descricao: "Material mole que endurece no forno.", cor: "#b45309", fotoUrl: mapaArgila },
-      { emoji: "🏛️", rotulo: "Mármore", descricao: "Pedra dura branca dos gregos.", cor: "#f5f5f4", fotoUrl: mapaMarmore },
-      { emoji: "🪵", rotulo: "Madeira", descricao: "Talhada por Aleijadinho e outros mestres.", cor: "#78350f", fotoUrl: mapaMadeira },
+      {
+        emoji: "🗿",
+        rotulo: "Escultura",
+        descricao: "Obra de arte com volume — 3D.",
+        cor: "#4b5563",
+        fotoUrl: vocabEscultura,
+      },
+      {
+        emoji: "📄",
+        rotulo: "Bidimensional",
+        descricao: "Plano — altura e largura só.",
+        cor: "#0284c7",
+        fotoUrl: vocabBidimensional,
+      },
+      {
+        emoji: "🎲",
+        rotulo: "Tridimensional",
+        descricao: "Volume — altura, largura, profundidade.",
+        cor: "#7c3aed",
+        fotoUrl: vocabTridimensional,
+      },
+      {
+        emoji: "📦",
+        rotulo: "Volume",
+        descricao: "O espaço que a escultura ocupa.",
+        cor: "#b45309",
+        fotoUrl: vocabVolume,
+      },
+      {
+        emoji: "🏺",
+        rotulo: "Argila",
+        descricao: "Material mole que endurece no forno.",
+        cor: "#b45309",
+        fotoUrl: mapaArgila,
+      },
+      {
+        emoji: "🏛️",
+        rotulo: "Mármore",
+        descricao: "Pedra dura branca dos gregos.",
+        cor: "#f5f5f4",
+        fotoUrl: mapaMarmore,
+      },
+      {
+        emoji: "🪵",
+        rotulo: "Madeira",
+        descricao: "Talhada por Aleijadinho e outros mestres.",
+        cor: "#78350f",
+        fotoUrl: mapaMadeira,
+      },
     ],
     falaFinal: "Página 5 do Atlas dos Exploradores DESBLOQUEADA — O Ateliê dos Escultores!",
   },
@@ -258,8 +435,12 @@ export const aula01: AulaArteV1 = {
       alternativas: [
         { texto: "O desenho é 2D (plano) e a escultura é 3D (tem volume)", correta: true },
         { texto: "Não tem diferença nenhuma", correta: false },
+
+        { texto: "Não corresponde ao tema", correta: false },
+        { texto: "Outra resposta sem relação", correta: false },
       ],
-      feedback: "Excelente! O desenho fica na folha, plano. A escultura tem VOLUME — dá pra andar em volta e ver por todos os lados. É a arte que ocupa espaço no mundo!",
+      feedback:
+        "Excelente! O desenho fica na folha, plano. A escultura tem VOLUME — dá pra andar em volta e ver por todos os lados. É a arte que ocupa espaço no mundo!",
     },
     missaoFamilia:
       "🗿 Detetives do Volume: em família, encontrem 3 esculturas em casa (pode ser um vaso, um enfeite, uma estátua pequena). Girem cada uma e desenhem como ela é vista DE TRÁS. Comparem com a vista de frente!",

@@ -7,6 +7,7 @@ import { aula38 } from "./aula-38-coesao-sequencial";
 export const unidade8: any = {
   numero: 8,
   id: "unidade-8",
+  slug: "unidade-8",
   titulo: "Sintaxe e Conexões",
   aulas: [aula18, aula35, aula36, aula37, aula38],
 };

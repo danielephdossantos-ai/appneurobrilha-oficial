@@ -98,9 +98,9 @@ export const aula05_tabuadas6a9: AulaV4 = {
   },
   momento10_avaliacao: {
     perguntas: [
-      { pergunta: "7 × 6 = ?", opcoes: ["42", "36", "48"], correta: 0, feedbackAcerto: "🎉 42.", feedbackErro: "7×6=42." },
-      { pergunta: "8 × 8 = ?", opcoes: ["64", "56", "72"], correta: 0, feedbackAcerto: "🎉 64.", feedbackErro: "8×8=64." },
-      { pergunta: "9 × 9 = ?", opcoes: ["81", "72", "90"], correta: 0, feedbackAcerto: "🎉 81.", feedbackErro: "9×9=81." },
+      { pergunta: "7 × 6 = ?", opcoes: ["42", "36", "48"], correta: 0, feedbackAcerto: "🎉 Sete grupos de 6 formam 42.", feedbackErro: "Use 5 × 6 = 30 e acrescente dois grupos de 6: 30 + 12 = 42." },
+      { pergunta: "8 × 8 = ?", opcoes: ["64", "56", "72"], correta: 0, feedbackAcerto: "🎉 Oito grupos de 8 formam 64.", feedbackErro: "Dobre 8 × 4 = 32: o dobro de 32 é 64." },
+      { pergunta: "9 × 9 = ?", opcoes: ["81", "72", "90"], correta: 0, feedbackAcerto: "🎉 Nove grupos de 9 formam 81.", feedbackErro: "Use 10 × 9 = 90 e retire um grupo de 9: 90 − 9 = 81." },
     ],
   },
   momento11_missaoFamilia: {

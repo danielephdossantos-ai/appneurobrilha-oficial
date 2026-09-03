@@ -29,7 +29,7 @@ export const aula02: AulaPortuguesV4 = {
   momento01_motivacao: {
     titulo: "Brilha conhece os moradores das histórias",
     historia:
-      "Brilha abriu outro livro e viu vários personagens juntos: um menino, um cachorro e um gato! — Como sei quem é o mais importante? perguntou Brilha. O livro respondeu: — É quem aparece do COMEÇO ao FIM! Os outros são personagens SECUNDÁRIOS, que ajudam na história.",
+      "Brilha abriu outro livro e viu vários personagens juntos: um menino, um cachorro e um gato! Para descobrir o principal, ele observou em quem a história concentra os acontecimentos. Os demais também participam, mas não são o foco central.",
     imagemUrl: livro,
   },
 
@@ -61,7 +61,7 @@ export const aula02: AulaPortuguesV4 = {
     cards: [
       {
         palavra: "principal",
-        explicacao: "É o personagem MAIS IMPORTANTE — aparece do começo ao fim da história.",
+        explicacao: "É o personagem que ocupa o foco central dos acontecimentos da história.",
         exemplo: "Tiago é o personagem principal, porque a história é sobre ele.",
         imagemUrl: menino,
       },
@@ -81,8 +81,8 @@ export const aula02: AulaPortuguesV4 = {
       {
         tipo: "fraseComPonto",
         frases: [
-          { texto: "Tiago aparece em TODAS as partes da história — ele é o PRINCIPAL.", explicacao: "Quem está sempre presente é o principal." },
-          { texto: "Bolinha só aparece ajudando Tiago — ele é SECUNDÁRIO.", explicacao: "Quem ajuda, mas não é o foco, é secundário." },
+          { texto: "A história acompanha Tiago e o problema vivido por ele — Tiago é o PRINCIPAL.", explicacao: "O principal é o foco central da narrativa." },
+          { texto: "Bolinha participa dos acontecimentos, mas não é o foco — ele é SECUNDÁRIO.", explicacao: "O secundário participa sem ocupar o foco central." },
         ],
       },
     ],
@@ -140,8 +140,8 @@ export const aula02: AulaPortuguesV4 = {
         pergunta: "Quem é o personagem PRINCIPAL dessa história?",
         opcoes: ["Bolinha", "Tiago", "A bola"],
         correta: 1,
-        feedbackAcerto: "🎉 Isso! TIAGO aparece do começo ao fim — a história é sobre ele.",
-        feedbackErro: "Pense: quem aparece em TODAS as partes da história e vive o problema? É o Tiago.",
+        feedbackAcerto: "🎉 Isso! A narrativa acompanha TIAGO e o problema vivido por ele.",
+        feedbackErro: "Pense em quem ocupa o foco dos acontecimentos e vive o problema central: Tiago.",
       },
       {
         pergunta: "Por que Bolinha é um personagem SECUNDÁRIO?",
@@ -152,7 +152,7 @@ export const aula02: AulaPortuguesV4 = {
         ],
         correta: 0,
         feedbackAcerto: "🎉 Certo! Bolinha ajuda a resolver o problema, mas Tiago é o foco da história.",
-        feedbackErro: "Secundário é quem AJUDA, mas não é o personagem mais importante da história.",
+        feedbackErro: "Personagem secundário participa dos acontecimentos, mas não ocupa o foco central.",
       },
       {
         pergunta: "Onde acontece essa história?",
@@ -212,20 +212,20 @@ export const aula02: AulaPortuguesV4 = {
 
   momento09_revisao: {
     pontos: [
-      "O personagem PRINCIPAL aparece do começo ao fim — a história é sobre ele.",
-      "Os personagens SECUNDÁRIOS ajudam, mas não são o foco da história.",
+      "O personagem PRINCIPAL é o foco central dos acontecimentos.",
+      "Os personagens SECUNDÁRIOS participam, mas não são o foco central da história.",
       "Pra descobrir quem é o principal, a gente pensa: de quem é essa história?",
     ],
     miniDesafio: {
       pergunta: "Como a gente descobre quem é o personagem principal?",
       opcoes: [
         "É sempre o maior da história",
-        "É quem aparece do começo ao fim e vive o problema",
+        "É o foco central dos acontecimentos",
         "É quem tem o nome mais bonito",
       ],
       correta: 1,
-      feedbackAcerto: "🎉 Isso! O principal é quem está presente do começo ao fim.",
-      feedbackErro: "Não é sobre tamanho nem nome — é sobre quem aparece a história inteira.",
+      feedbackAcerto: "🎉 Isso! O principal é o foco central da narrativa.",
+      feedbackErro: "Não depende de tamanho nem de aparecer em todas as cenas; depende de quem ocupa o foco da história.",
     },
   },
 
@@ -234,7 +234,7 @@ export const aula02: AulaPortuguesV4 = {
       {
         pergunta: "1/5 — O que é o personagem principal?",
         opcoes: [
-          "Quem aparece do começo ao fim, foco da história",
+          "Quem ocupa o foco central dos acontecimentos",
           "Quem aparece só uma vez",
           "Quem é o mais engraçado",
           "Quem fala mais alto",

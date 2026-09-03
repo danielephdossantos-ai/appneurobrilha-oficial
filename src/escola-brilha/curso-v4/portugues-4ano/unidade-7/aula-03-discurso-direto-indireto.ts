@@ -20,7 +20,7 @@ export const aula03: AulaPortuguesV4 = {
   slug: "aula-03-discurso-direto-indireto",
   titulo: "O Eco da Fala",
   iconeTrilha: "💬",
-  bncc: ["EF04LP14", "EF04LP20"],
+  bncc: ["EF35LP22", "EF35LP30"],
   duracaoMin: 22,
 
   momento01_motivacao: {

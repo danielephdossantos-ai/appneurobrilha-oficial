@@ -24,7 +24,7 @@ export const aula02: AulaPortuguesV4 = {
   slug: "aula-02-trem-alfabeto",
   titulo: "O Trem do Alfabeto",
   iconeTrilha: "🚂",
-  bncc: ["EF02LP06", "EF02LP07", "EF02LP14"],
+  bncc: ["EF02LP06", "EF02LP07"],
   duracaoMin: 15,
 
   momento01_motivacao: {

@@ -20,7 +20,7 @@ export const aula03: AulaPortuguesV4 = {
   slug: "aula-03-representar-cena",
   titulo: "Luz, Câmera, Entonação!",
   iconeTrilha: "🎤",
-  bncc: ["EF04LP25", "EF35LP13", "EF15LP18"],
+  bncc: ["EF04LP25", "EF35LP24", "EF35LP28", "EF15LP12"],
   duracaoMin: 22,
 
   momento01_motivacao: {

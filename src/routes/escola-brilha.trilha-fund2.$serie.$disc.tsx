@@ -21,7 +21,6 @@ type UnidadeTrilha = {
   slug: string;
   titulo: string;
   habilidade: string;
-  concluidaKey: string; // chave localStorage
 };
 
 const SERIES_LABEL: Record<string, string> = {
@@ -52,7 +51,6 @@ function loadUnidades(serie: string, disc: string): UnidadeTrilha[] {
       slug: u.slug,
       titulo: u.titulo,
       habilidade: u.habilidade,
-      concluidaKey: `fund2:6ano:geografia:${u.slug}`,
     }));
   }
   if (serie === "7ano" && disc === "geografia") {
@@ -60,7 +58,6 @@ function loadUnidades(serie: string, disc: string): UnidadeTrilha[] {
       slug: u.slug,
       titulo: u.titulo,
       habilidade: u.habilidade,
-      concluidaKey: `fund2:7ano:geografia:${u.slug}`,
     }));
   }
   if (serie === "8ano" && disc === "geografia") {
@@ -68,7 +65,6 @@ function loadUnidades(serie: string, disc: string): UnidadeTrilha[] {
       slug: u.slug,
       titulo: u.titulo,
       habilidade: u.habilidade,
-      concluidaKey: `fund2:8ano:geografia:${u.slug}`,
     }));
   }
   if (serie === "9ano" && disc === "geografia") {
@@ -76,7 +72,6 @@ function loadUnidades(serie: string, disc: string): UnidadeTrilha[] {
       slug: u.slug,
       titulo: u.titulo,
       habilidade: u.habilidade,
-      concluidaKey: `fund2:9ano:geografia:${u.slug}`,
     }));
   }
 
@@ -109,13 +104,16 @@ function TrilhaFund2() {
     if (typeof window === "undefined") return;
     const params = new URLSearchParams(window.location.search);
     void params;
-    // hydrate progresso local
-    const set = new Set<string>();
-    for (const u of unidades) {
-      if (window.localStorage.getItem(u.concluidaKey) === "1") set.add(u.slug);
+    // Lê a mesma chave gravada pelo player somente após concluir a unidade.
+    const childId = activeChild?.id || localStorage.getItem("neurobrilha:activeChildId") || "sem-crianca";
+    const ano = serie.replace("ano", "");
+    try {
+      const raw = window.localStorage.getItem(`eb.geo${ano}ano.progresso.${childId}`);
+      setConcluidas(new Set(raw ? JSON.parse(raw) : []));
+    } catch {
+      setConcluidas(new Set());
     }
-    setConcluidas(set);
-  }, [unidades]);
+  }, [unidades, serie, activeChild?.id]);
 
   const totalConcluidas = unidades.filter((u) => concluidas.has(u.slug)).length;
   const proximoIdx = unidades.findIndex((u) => !concluidas.has(u.slug));
@@ -201,10 +199,6 @@ function TrilhaFund2() {
                     disabled={!desbloqueada || !rotaPlayer}
                     onClick={() => {
                       if (!rotaPlayer) return;
-                      // marca visita como concluída localmente (leve — só para trilha)
-                      if (typeof window !== "undefined") {
-                        window.localStorage.setItem(u.concluidaKey, "1");
-                      }
                       navigate({ to: rotaPlayer, params: { unidade: u.slug } });
                     }}
                     className={`group relative w-44 rounded-2xl px-4 py-4 text-left transition border ${

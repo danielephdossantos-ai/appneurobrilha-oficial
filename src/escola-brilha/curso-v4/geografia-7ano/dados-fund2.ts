@@ -6,6 +6,153 @@
 
 import type { UnidadeFund2 } from "../geografia-6ano/dados-fund2";
 
+type Config7 = {
+  unidade: number;
+  codigo: string;
+  titulo: string;
+  conceito: string;
+  explicacao: string;
+  exemplo: string;
+};
+const criarUnidade7 = (c: Config7): UnidadeFund2 => ({
+  unidade: c.unidade,
+  slug: `unidade-${c.unidade}-${c.codigo.toLowerCase()}`,
+  titulo: c.titulo,
+  habilidade: c.codigo,
+  introducao_academica: `Investigue ${c.titulo.toLowerCase()} com conceitos, dados e exemplos brasileiros.`,
+  conteudo_pedagogico: {
+    conceito_chave: c.conceito,
+    texto_teorico: c.explicacao,
+    exemplo_visual: c.exemplo,
+    imagem_analise: "",
+    etapas_teoricas: [
+      { titulo: "Conceito", texto: c.conceito, exemplo_real: c.exemplo },
+      {
+        titulo: "Análise",
+        texto: c.explicacao,
+        exemplo_real: "Compare territórios e grupos com dados.",
+      },
+      {
+        titulo: "Aplicação",
+        texto: `Relacione causas e consequências em: ${c.exemplo}`,
+        exemplo_real: "Registre evidências e conclusão.",
+      },
+    ],
+  },
+  quiz_relampago: [
+    {
+      pergunta: `Como analisar ${c.titulo.toLowerCase()}?`,
+      opcoes: [
+        {
+          texto: "Com dados, comparação e contexto",
+          correta: true,
+          explicacao: "Procedimento correto.",
+        },
+        { texto: "Só por opinião", correta: false, explicacao: "Faltam evidências." },
+        {
+          texto: "Sem considerar o território",
+          correta: false,
+          explicacao: "O território é essencial.",
+        },
+        {
+          texto: "Decorando sem explicar",
+          correta: false,
+          explicacao: "A habilidade exige análise.",
+        },
+      ],
+    },
+  ],
+  desafio_critico: {
+    pergunta: `Qual análise aplica ${c.conceito}?`,
+    opcoes: [
+      { texto: `Relacionar ${c.exemplo} a causas e consequências.`, correta: true },
+      { texto: "Ignorar dados.", correta: false },
+      { texto: "Generalizar todos os lugares.", correta: false },
+      { texto: "Repetir o título.", correta: false },
+    ],
+    explicacao_professor: c.explicacao,
+  },
+  recompensas: { xp: 500, moedas: 300, titulo: `Especialista em ${c.titulo}` },
+});
+const LACUNAS_7ANO: UnidadeFund2[] = [
+  criarUnidade7({
+    unidade: 8,
+    codigo: "EF07GE02",
+    titulo: "Fluxos Econômicos, Populacionais e Território",
+    conceito: "Migrações e fluxos econômicos participam da formação territorial brasileira.",
+    explicacao:
+      "Ciclos produtivos, infraestrutura e oportunidades atraem ou expulsam população e reorganizam regiões.",
+    exemplo: "Industrialização concentrou migrantes e atividades no Sudeste.",
+  }),
+  criarUnidade7({
+    unidade: 9,
+    codigo: "EF07GE03",
+    titulo: "Territorialidades e Direitos",
+    conceito:
+      "Povos indígenas, quilombolas, ribeirinhos e outros grupos constroem territorialidades próprias.",
+    explicacao:
+      "Argumentar sobre direitos territoriais exige fontes, respeito e reconhecimento de modos de vida diversos.",
+    exemplo: "Território quilombola reúne moradia, memória, trabalho e identidade coletiva.",
+  }),
+  criarUnidade7({
+    unidade: 10,
+    codigo: "EF07GE05",
+    titulo: "Do Mercantilismo ao Capitalismo",
+    conceito:
+      "A passagem do mercantilismo ao capitalismo alterou produção, comércio, trabalho e territórios.",
+    explicacao:
+      "Colonização, expansão comercial, industrialização e trabalho assalariado integram uma transformação histórica desigual.",
+    exemplo: "A fábrica concentrou trabalhadores e ampliou mercados consumidores.",
+  }),
+  criarUnidade7({
+    unidade: 11,
+    codigo: "EF07GE06",
+    titulo: "Produção, Circulação e Consumo",
+    conceito:
+      "Mercadorias conectam matéria-prima, produção, transporte, comércio, consumo e descarte.",
+    explicacao:
+      "Cada cadeia envolve lugares, trabalhadores, tecnologia, valor e impactos socioambientais.",
+    exemplo: "A soja liga fazenda, armazém, ferrovia, porto e mercado internacional.",
+  }),
+  criarUnidade7({
+    unidade: 12,
+    codigo: "EF07GE07",
+    titulo: "Redes de Transporte e Comunicação",
+    conceito: "Redes conectam lugares de forma desigual e ajudam a organizar o território.",
+    explicacao:
+      "Rodovias, ferrovias, portos, telecomunicações e internet influenciam fluxos, centralidades e acesso.",
+    exemplo: "Um porto exportador conecta áreas produtoras a mercados globais.",
+  }),
+  criarUnidade7({
+    unidade: 13,
+    codigo: "EF07GE09",
+    titulo: "Mapas Temáticos do Brasil",
+    conceito: "Mapas temáticos representam fenômenos demográficos, econômicos e territoriais.",
+    explicacao:
+      "Título, legenda, escala, fonte e data são necessários para interpretar padrões e desigualdades.",
+    exemplo: "Mapa de densidade mostra concentração populacional no litoral e grandes cidades.",
+  }),
+  criarUnidade7({
+    unidade: 14,
+    codigo: "EF07GE10",
+    titulo: "Gráficos e Indicadores",
+    conceito: "Gráficos de barras, setores e histogramas representam dados de maneiras diferentes.",
+    explicacao:
+      "Interpretar exige ler título, fonte, unidades, eixos e proporções antes de concluir.",
+    exemplo: "Uma pirâmide etária combina barras para comparar idade e sexo.",
+  }),
+  criarUnidade7({
+    unidade: 15,
+    codigo: "EF07GE12",
+    titulo: "Unidades de Conservação",
+    conceito: "O SNUC organiza categorias de proteção integral e uso sustentável.",
+    explicacao:
+      "Comparar unidades exige observar objetivos, regras de uso, gestão, comunidades e biodiversidade protegida.",
+    exemplo:
+      "Parque protege ecossistemas e permite visitação controlada; reserva extrativista admite uso sustentável comunitário.",
+  }),
+];
+
 export const UNIDADES_7ANO: UnidadeFund2[] = [
   // ============================================================
   // UNIDADE 1 — Formação Territorial do Brasil e Fronteiras
@@ -14,7 +161,7 @@ export const UNIDADES_7ANO: UnidadeFund2[] = [
     unidade: 1,
     slug: "unidade-1-formacao-territorial",
     titulo: "Formação Territorial do Brasil e Fronteiras",
-    habilidade: "EF07GE01 / EF07GE02",
+    habilidade: "EF07GE01",
     introducao_academica:
       "Por que o Brasil tem esse formato de continente, e não o pedacinho estreito que Portugal recebeu no Tratado de Tordesilhas? Vamos investigar como bandeirantes, tratados diplomáticos e disputas de fronteira desenharam, ao longo de 500 anos, o mapa do maior país da América do Sul.",
     conteudo_pedagogico: {
@@ -73,16 +220,19 @@ export const UNIDADES_7ANO: UnidadeFund2[] = [
 
     quiz_relampago: [
       {
-        pergunta: "Por que hoje falamos português em Manaus, se essa região era espanhola pelo Tratado de Tordesilhas?",
+        pergunta:
+          "Por que hoje falamos português em Manaus, se essa região era espanhola pelo Tratado de Tordesilhas?",
         opcoes: [
           {
-            texto: "Porque bandeirantes e colonos portugueses ocuparam a região antes que a Espanha o fizesse, e o Tratado de Madri (1750) legalizou essa ocupação pelo princípio do uti possidetis.",
+            texto:
+              "Porque bandeirantes e colonos portugueses ocuparam a região antes que a Espanha o fizesse, e o Tratado de Madri (1750) legalizou essa ocupação pelo princípio do uti possidetis.",
             correta: true,
             explicacao:
               "Correto. 'Uti possidetis' = 'quem ocupa, é dono'. Portugal criou fatos consumados no interior e depois negociou o reconhecimento diplomático. Manaus era espanhola no papel, mas portuguesa na prática.",
           },
           {
-            texto: "Porque o Brasil venceu uma guerra contra a Espanha e conquistou a Amazônia à força.",
+            texto:
+              "Porque o Brasil venceu uma guerra contra a Espanha e conquistou a Amazônia à força.",
             correta: false,
             explicacao:
               "Não houve guerra Brasil × Espanha pela Amazônia. A expansão foi feita por ocupação demográfica (bandeirantes, missões, colonos) e depois legalizada por tratados diplomáticos — não por batalhas.",
@@ -92,6 +242,12 @@ export const UNIDADES_7ANO: UnidadeFund2[] = [
             correta: false,
             explicacao:
               "Tordesilhas existiu (1494) e vigorou por mais de 250 anos. Só foi substituído formalmente pelo Tratado de Madri (1750). Você pode inclusive ver o original em museus em Portugal e na Espanha.",
+          },
+
+          {
+            texto: "Outra possibilidade",
+            correta: false,
+            explicacao: "Compare com o conceito estudado.",
           },
         ],
       },
@@ -116,6 +272,12 @@ export const UNIDADES_7ANO: UnidadeFund2[] = [
             explicacao:
               "O Amazonas já era território consolidado pelo Tratado de Madri (1750), muito antes do séc. XX. E não houve conquista militar — a incorporação foi diplomática.",
           },
+
+          {
+            texto: "Outra possibilidade",
+            correta: false,
+            explicacao: "Compare com o conceito estudado.",
+          },
         ],
       },
       {
@@ -139,6 +301,12 @@ export const UNIDADES_7ANO: UnidadeFund2[] = [
             explicacao:
               "Chile e Equador são justamente as exceções: NÃO fazem fronteira com o Brasil. A cordilheira dos Andes separa geograficamente esses dois países da massa continental brasileira.",
           },
+
+          {
+            texto: "Outra possibilidade",
+            correta: false,
+            explicacao: "Compare com o conceito estudado.",
+          },
         ],
       },
     ],
@@ -153,12 +321,30 @@ export const UNIDADES_7ANO: UnidadeFund2[] = [
         { id: "diplomacia", titulo: "Tratados & Diplomacia", cor: "emerald" },
       ],
       cartoes: [
-        { texto: "Divisão do mundo por uma linha imaginária a 370 léguas de Cabo Verde.", categoriaId: "tordesilhas" },
-        { texto: "Fundação de Cuiabá (MT) e Goiás Velho (GO) em terras oficialmente espanholas.", categoriaId: "bandeirantes" },
-        { texto: "Aplicação do princípio 'uti possidetis' (quem ocupa, é dono) em 1750.", categoriaId: "diplomacia" },
-        { texto: "Ciclo do ouro empurrando colonos para Minas Gerais e Mato Grosso.", categoriaId: "bandeirantes" },
-        { texto: "Compra do Acre da Bolívia em 1903 pelo Barão do Rio Branco.", categoriaId: "diplomacia" },
-        { texto: "Papa Alexandre VI mediando a divisão entre Portugal e Espanha.", categoriaId: "tordesilhas" },
+        {
+          texto: "Divisão do mundo por uma linha imaginária a 370 léguas de Cabo Verde.",
+          categoriaId: "tordesilhas",
+        },
+        {
+          texto: "Fundação de Cuiabá (MT) e Goiás Velho (GO) em terras oficialmente espanholas.",
+          categoriaId: "bandeirantes",
+        },
+        {
+          texto: "Aplicação do princípio 'uti possidetis' (quem ocupa, é dono) em 1750.",
+          categoriaId: "diplomacia",
+        },
+        {
+          texto: "Ciclo do ouro empurrando colonos para Minas Gerais e Mato Grosso.",
+          categoriaId: "bandeirantes",
+        },
+        {
+          texto: "Compra do Acre da Bolívia em 1903 pelo Barão do Rio Branco.",
+          categoriaId: "diplomacia",
+        },
+        {
+          texto: "Papa Alexandre VI mediando a divisão entre Portugal e Espanha.",
+          categoriaId: "tordesilhas",
+        },
       ],
     },
 
@@ -176,6 +362,9 @@ export const UNIDADES_7ANO: UnidadeFund2[] = [
             "Cabral nunca chegou ao Brasil; foram os bandeirantes que descobriram o país 100 anos depois.",
           correta: false,
         },
+
+        { texto: "Outra possibilidade sem relação com o conceito.", correta: false },
+        { texto: "Outra possibilidade sem relação com o conceito.", correta: false },
       ],
       explicacao_professor:
         "Excelente análise. Cabral (1500) deu o marco simbólico da posse portuguesa sobre a faixa de Tordesilhas. Mas o Brasil que existe hoje — com Amazônia, Centro-Oeste e Sul incorporados — só se tornou possível porque bandeirantes, missões jesuíticas, pecuaristas e mineradores ocuparam o interior. Sem essa expansão física, a diplomacia não teria como negociar o 'uti possidetis' no Tratado de Madri.",
@@ -190,7 +379,7 @@ export const UNIDADES_7ANO: UnidadeFund2[] = [
     unidade: 2,
     slug: "unidade-2-dinamica-demografica",
     titulo: "Dinâmica Demográfica e Transição",
-    habilidade: "EF07GE03 / EF07GE04",
+    habilidade: "EF07GE04",
     introducao_academica:
       "Se você olhar as fotos de família dos seus avós, provavelmente eles tinham 5, 6, 8 irmãos. Hoje, um casal típico tem 1 ou 2 filhos. O que aconteceu com o Brasil em apenas duas gerações? Vamos investigar a transição demográfica: o processo que transformou o país de 'jovem e explosivo' em 'adulto e envelhecendo'.",
     conteudo_pedagogico: {
@@ -269,13 +458,21 @@ export const UNIDADES_7ANO: UnidadeFund2[] = [
             explicacao:
               "População estável tem formato de retângulo — todas as faixas etárias com tamanho parecido. A base larga indica claramente crescimento populacional.",
           },
+
+          {
+            texto: "Outra possibilidade",
+            correta: false,
+            explicacao: "Compare com o conceito estudado.",
+          },
         ],
       },
       {
-        pergunta: "Qual foi o PRINCIPAL fator para a queda da taxa de fecundidade brasileira (de ~6 filhos em 1960 para ~1,6 em 2022)?",
+        pergunta:
+          "Qual foi o PRINCIPAL fator para a queda da taxa de fecundidade brasileira (de ~6 filhos em 1960 para ~1,6 em 2022)?",
         opcoes: [
           {
-            texto: "Um conjunto de fatores combinados: urbanização, entrada da mulher no mercado de trabalho, contraceptivos e aumento da escolaridade feminina.",
+            texto:
+              "Um conjunto de fatores combinados: urbanização, entrada da mulher no mercado de trabalho, contraceptivos e aumento da escolaridade feminina.",
             correta: true,
             explicacao:
               "Perfeito. Não foi uma única causa: foi a soma dessas transformações. A queda foi tão rápida que o Brasil bateu recorde mundial de velocidade de transição demográfica.",
@@ -292,28 +489,43 @@ export const UNIDADES_7ANO: UnidadeFund2[] = [
             explicacao:
               "Não há registro de epidemias com efeito populacional dessa magnitude no Brasil. A queda foi comportamental (escolhas de casais), não biológica.",
           },
+
+          {
+            texto: "Outra possibilidade",
+            correta: false,
+            explicacao: "Compare com o conceito estudado.",
+          },
         ],
       },
       {
         pergunta: "O que é o 'bônus demográfico'?",
         opcoes: [
           {
-            texto: "Uma janela histórica em que a maioria da população está em idade produtiva (15-64 anos), com poucas crianças e poucos idosos dependentes.",
+            texto:
+              "Uma janela histórica em que a maioria da população está em idade produtiva (15-64 anos), com poucas crianças e poucos idosos dependentes.",
             correta: true,
             explicacao:
               "Isso mesmo. É a oportunidade econômica única de um país: mais gente trabalhando, menos gente dependendo. Se investir em educação e emprego, cresce; se não investir, perde a janela e envelhece pobre.",
           },
           {
-            texto: "Um benefício em dinheiro que o governo paga por cada filho que uma família tem.",
+            texto:
+              "Um benefício em dinheiro que o governo paga por cada filho que uma família tem.",
             correta: false,
             explicacao:
               "Você misturou com auxílios sociais (Bolsa Família, salário-família). Bônus demográfico é um conceito da demografia econômica, não um pagamento.",
           },
           {
-            texto: "Uma fase em que o país tem MUITO mais idosos que jovens, garantindo estabilidade.",
+            texto:
+              "Uma fase em que o país tem MUITO mais idosos que jovens, garantindo estabilidade.",
             correta: false,
             explicacao:
               "É o contrário. 'Bônus' é ter maioria em idade produtiva. Um país com maioria idosa tem PESO demográfico (mais aposentadorias, mais gastos com saúde), não bônus.",
+          },
+
+          {
+            texto: "Outra possibilidade",
+            correta: false,
+            explicacao: "Compare com o conceito estudado.",
           },
         ],
       },
@@ -329,12 +541,27 @@ export const UNIDADES_7ANO: UnidadeFund2[] = [
         { id: "envelhecimento", titulo: "→ Envelhecimento", cor: "emerald" },
       ],
       cartoes: [
-        { texto: "Uso generalizado da pílula anticoncepcional a partir dos anos 70.", categoriaId: "natalidade" },
-        { texto: "Ampliação da rede de saneamento básico e vacinação em massa.", categoriaId: "mortalidade" },
-        { texto: "Aumento da pressão sobre o sistema previdenciário (menos ativos por aposentado).", categoriaId: "envelhecimento" },
-        { texto: "Entrada da mulher no mercado de trabalho e aumento da escolaridade feminina.", categoriaId: "natalidade" },
+        {
+          texto: "Uso generalizado da pílula anticoncepcional a partir dos anos 70.",
+          categoriaId: "natalidade",
+        },
+        {
+          texto: "Ampliação da rede de saneamento básico e vacinação em massa.",
+          categoriaId: "mortalidade",
+        },
+        {
+          texto: "Aumento da pressão sobre o sistema previdenciário (menos ativos por aposentado).",
+          categoriaId: "envelhecimento",
+        },
+        {
+          texto: "Entrada da mulher no mercado de trabalho e aumento da escolaridade feminina.",
+          categoriaId: "natalidade",
+        },
         { texto: "Criação do SUS e da Estratégia Saúde da Família.", categoriaId: "mortalidade" },
-        { texto: "Crescimento acelerado do setor de saúde, cuidadores e produtos para 3ª idade.", categoriaId: "envelhecimento" },
+        {
+          texto: "Crescimento acelerado do setor de saúde, cuidadores e produtos para 3ª idade.",
+          categoriaId: "envelhecimento",
+        },
       ],
     },
 
@@ -352,6 +579,9 @@ export const UNIDADES_7ANO: UnidadeFund2[] = [
             "Ter uma explosão populacional descontrolada, com fome generalizada e escassez de recursos naturais em todas as regiões.",
           correta: false,
         },
+
+        { texto: "Outra possibilidade sem relação com o conceito.", correta: false },
+        { texto: "Outra possibilidade sem relação com o conceito.", correta: false },
       ],
       explicacao_professor:
         "Perfeito. A expressão 'envelhecer antes de enriquecer' resume a angústia demográfica brasileira. Coreia do Sul aproveitou seu bônus (~1960-2000) investindo pesado em educação e indústria de alto valor — hoje é país rico e envelhecido. O Brasil corre o risco de chegar à mesma pirâmide envelhecida (~2040-2060) mas sem a renda que a Coreia acumulou. A janela existe e é matemática — o que fazemos dentro dela é decisão política.",
@@ -366,7 +596,7 @@ export const UNIDADES_7ANO: UnidadeFund2[] = [
     unidade: 3,
     slug: "unidade-3-industrializacao-urbana",
     titulo: "Industrialização, Urbanização e Macrocefalia",
-    habilidade: "EF07GE05 / EF07GE08",
+    habilidade: "EF07GE08",
     introducao_academica:
       "Em 1940, 70% dos brasileiros vivia no campo. Em 2022, mais de 85% mora em cidades. Nunca na história um país transferiu tanta gente para a cidade em tão pouco tempo. Vamos entender como a indústria mudou o Brasil — e por que essa migração criou 'cidades gigantes' que engolem tudo em volta.",
     conteudo_pedagogico: {
@@ -425,10 +655,12 @@ export const UNIDADES_7ANO: UnidadeFund2[] = [
 
     quiz_relampago: [
       {
-        pergunta: "O que caracteriza a política de 'substituição de importações' que Vargas implementou nos anos 1930-40?",
+        pergunta:
+          "O que caracteriza a política de 'substituição de importações' que Vargas implementou nos anos 1930-40?",
         opcoes: [
           {
-            texto: "Produzir internamente no Brasil os produtos industriais que antes eram importados (tecidos, aço, cimento).",
+            texto:
+              "Produzir internamente no Brasil os produtos industriais que antes eram importados (tecidos, aço, cimento).",
             correta: true,
             explicacao:
               "Correto. A crise de 1929 e a guerra tornaram impossível continuar importando. O Brasil foi 'forçado' a se industrializar para substituir o que faltava. Vargas usou o Estado (CSN, Petrobras depois) para bancar essa transição.",
@@ -445,19 +677,27 @@ export const UNIDADES_7ANO: UnidadeFund2[] = [
             explicacao:
               "Isso descreve políticas dos anos 1990 (Collor, FHC) — não a era Vargas. Nos anos 30-50, Vargas fez o oposto: criou estatais como CSN, Petrobras e Vale do Rio Doce.",
           },
+
+          {
+            texto: "Outra possibilidade",
+            correta: false,
+            explicacao: "Compare com o conceito estudado.",
+          },
         ],
       },
       {
         pergunta: "O que significa 'macrocefalia urbana' no contexto brasileiro?",
         opcoes: [
           {
-            texto: "Poucas metrópoles gigantes concentram população e riqueza, enquanto milhares de cidades pequenas ficam economicamente dependentes delas.",
+            texto:
+              "Poucas metrópoles gigantes concentram população e riqueza, enquanto milhares de cidades pequenas ficam economicamente dependentes delas.",
             correta: true,
             explicacao:
               "Perfeito. 'Macro' (grande) + 'cefalia' (cabeça): uma cabeça urbana desproporcional ao corpo do país. É o caso de SP, que sozinha tem quase 10% da população nacional.",
           },
           {
-            texto: "Uma doença que atinge quem mora em cidades muito grandes por causa da poluição.",
+            texto:
+              "Uma doença que atinge quem mora em cidades muito grandes por causa da poluição.",
             correta: false,
             explicacao:
               "Cuidado com a palavra: 'macrocefalia' aqui é uma metáfora urbana, não um diagnóstico médico. Vem do grego macro (grande) + cefalia (cabeça).",
@@ -468,28 +708,44 @@ export const UNIDADES_7ANO: UnidadeFund2[] = [
             explicacao:
               "Isso é o OPOSTO de macrocefalia. Crescimento equilibrado da rede urbana é o que Brasil ideal precisaria — mas não é o que temos hoje.",
           },
+
+          {
+            texto: "Outra possibilidade",
+            correta: false,
+            explicacao: "Compare com o conceito estudado.",
+          },
         ],
       },
       {
-        pergunta: "Por que a industrialização brasileira se concentrou em São Paulo e Rio de Janeiro nas primeiras décadas?",
+        pergunta:
+          "Por que a industrialização brasileira se concentrou em São Paulo e Rio de Janeiro nas primeiras décadas?",
         opcoes: [
           {
-            texto: "Já havia ali capital acumulado do café, mão-de-obra imigrante disponível e infraestrutura de portos e ferrovias.",
+            texto:
+              "Já havia ali capital acumulado do café, mão-de-obra imigrante disponível e infraestrutura de portos e ferrovias.",
             correta: true,
             explicacao:
               "Isso mesmo. A indústria não surge do zero: precisa de dinheiro, gente e logística. SP e RJ tinham os três, herdados do ciclo cafeeiro. Nordeste, por exemplo, não tinha nem capital nem ferrovias equivalentes.",
           },
           {
-            texto: "Porque o governo militar dos anos 60 obrigou as fábricas a se instalarem no Sudeste.",
+            texto:
+              "Porque o governo militar dos anos 60 obrigou as fábricas a se instalarem no Sudeste.",
             correta: false,
             explicacao:
               "A concentração começou MUITO antes dos militares (desde 1930, com Vargas). E não foi por imposição — foi por acúmulo histórico de fatores econômicos. A ditadura, aliás, tentou desconcentrar (via SUDENE, Zona Franca de Manaus).",
           },
           {
-            texto: "Porque só em SP e RJ existiam matérias-primas industriais como ferro e petróleo.",
+            texto:
+              "Porque só em SP e RJ existiam matérias-primas industriais como ferro e petróleo.",
             correta: false,
             explicacao:
               "Ao contrário: as principais minas de ferro estão em Minas Gerais (Carajás e Quadrilátero Ferrífero); petróleo, no Rio, mas também Bahia e mais recentemente pré-sal. A concentração foi por CAPITAL e INFRAESTRUTURA, não por matéria-prima local.",
+          },
+
+          {
+            texto: "Outra possibilidade",
+            correta: false,
+            explicacao: "Compare com o conceito estudado.",
           },
         ],
       },
@@ -497,20 +753,31 @@ export const UNIDADES_7ANO: UnidadeFund2[] = [
 
     mini_jogo: {
       tipo: "categorizar",
-      instrucao:
-        "Classifique cada fato em UMA das três fases da industrialização brasileira.",
+      instrucao: "Classifique cada fato em UMA das três fases da industrialização brasileira.",
       categorias: [
         { id: "vargas", titulo: "Fase 1: Vargas (1930-55)", cor: "cyan" },
         { id: "jk_militar", titulo: "Fase 2: JK/Militar (1956-80)", cor: "amber" },
         { id: "atual", titulo: "Fase 3: Reestruturação (80-hoje)", cor: "emerald" },
       ],
       cartoes: [
-        { texto: "Instalação da Companhia Siderúrgica Nacional (CSN) em Volta Redonda.", categoriaId: "vargas" },
+        {
+          texto: "Instalação da Companhia Siderúrgica Nacional (CSN) em Volta Redonda.",
+          categoriaId: "vargas",
+        },
         { texto: "Chegada da Volkswagen, Ford e GM ao ABC Paulista.", categoriaId: "jk_militar" },
-        { texto: "Construção da hidrelétrica de Itaipu e da Transamazônica.", categoriaId: "jk_militar" },
-        { texto: "Fechamento de fábricas e desconcentração industrial para o interior.", categoriaId: "atual" },
+        {
+          texto: "Construção da hidrelétrica de Itaipu e da Transamazônica.",
+          categoriaId: "jk_militar",
+        },
+        {
+          texto: "Fechamento de fábricas e desconcentração industrial para o interior.",
+          categoriaId: "atual",
+        },
         { texto: "Criação da Petrobras como estatal estratégica.", categoriaId: "vargas" },
-        { texto: "Crescimento de cidades médias como Campinas, Joinville e Uberlândia.", categoriaId: "atual" },
+        {
+          texto: "Crescimento de cidades médias como Campinas, Joinville e Uberlândia.",
+          categoriaId: "atual",
+        },
       ],
     },
 
@@ -528,6 +795,9 @@ export const UNIDADES_7ANO: UnidadeFund2[] = [
             "Cidades onde a maioria da população passa o dia dormindo por causa do calor extremo típico do interior paulista.",
           correta: false,
         },
+
+        { texto: "Outra possibilidade sem relação com o conceito.", correta: false },
+        { texto: "Outra possibilidade sem relação com o conceito.", correta: false },
       ],
       explicacao_professor:
         "Excelente. 'Cidade-dormitório' é um sintoma clássico de rede urbana desequilibrada. A macrocefalia cria uma metrópole central hipertrofiada (SP) que acumula empregos e serviços — enquanto seu entorno vira uma coroa de cidades sem economia própria. As pessoas 'só voltam pra dormir'. É um problema de PLANEJAMENTO REGIONAL, não individual: precisaria desconcentrar empregos, melhorar transporte de massa e criar centralidades secundárias.",
@@ -542,7 +812,7 @@ export const UNIDADES_7ANO: UnidadeFund2[] = [
     unidade: 4,
     slug: "unidade-4-complexo-centro-sul",
     titulo: "O Complexo Geoeconômico do Centro-Sul",
-    habilidade: "EF07GE09 / EF07GE10",
+    habilidade: "Conteúdo complementar — complexo Centro-Sul",
     introducao_academica:
       "Se o Brasil fosse uma empresa, o Centro-Sul seria seu motor: concentra ~75% do PIB, quase toda a indústria pesada, o agronegócio de alta tecnologia e as principais universidades. Vamos entender como uma região que ocupa cerca de 25% do território virou a locomotiva econômica do país.",
     conteudo_pedagogico: {
@@ -601,33 +871,45 @@ export const UNIDADES_7ANO: UnidadeFund2[] = [
 
     quiz_relampago: [
       {
-        pergunta: "Por que Mato Grosso, que era considerado 'sertão pobre' nos anos 60, virou o maior produtor mundial de soja em algumas décadas?",
+        pergunta:
+          "Por que Mato Grosso, que era considerado 'sertão pobre' nos anos 60, virou o maior produtor mundial de soja em algumas décadas?",
         opcoes: [
           {
-            texto: "A combinação de terra barata, clima favorável, mecanização e pesquisa agropecuária da Embrapa (variedades de soja para o Cerrado) transformou a região.",
+            texto:
+              "A combinação de terra barata, clima favorável, mecanização e pesquisa agropecuária da Embrapa (variedades de soja para o Cerrado) transformou a região.",
             correta: true,
             explicacao:
               "Correto. Não foi 'só clima' ou 'só tecnologia' — foi a soma. A Embrapa desenvolveu soja tropical, o calcário corrigiu o solo ácido do Cerrado, e a mecanização em larga escala tornou tudo viável economicamente.",
           },
           {
-            texto: "Uma decisão política do governo Vargas nos anos 40 obrigou os produtores a plantarem soja em MT.",
+            texto:
+              "Uma decisão política do governo Vargas nos anos 40 obrigou os produtores a plantarem soja em MT.",
             correta: false,
             explicacao:
               "A soja em MT explodiu nos anos 80-90, décadas após Vargas. Também não houve imposição legal: a soja migrou para lá porque terra era barata e o clima+tecnologia permitiam produtividade recorde.",
           },
           {
-            texto: "Porque o Cerrado é naturalmente muito fértil, mais que a Amazônia e o Nordeste.",
+            texto:
+              "Porque o Cerrado é naturalmente muito fértil, mais que a Amazônia e o Nordeste.",
             correta: false,
             explicacao:
               "Ao contrário: o solo do Cerrado é NATURALMENTE ácido e pobre. Ele só virou produtivo depois da correção com calcário e adubação intensiva. Sem a tecnologia agrícola, seria improdutivo.",
           },
+
+          {
+            texto: "Outra possibilidade",
+            correta: false,
+            explicacao: "Compare com o conceito estudado.",
+          },
         ],
       },
       {
-        pergunta: "Qual característica diferencia a estrutura fundiária do SUL da do resto do Brasil?",
+        pergunta:
+          "Qual característica diferencia a estrutura fundiária do SUL da do resto do Brasil?",
         opcoes: [
           {
-            texto: "Predomínio de pequenas e médias propriedades familiares, herança da colonização por imigrantes europeus (alemães, italianos, poloneses).",
+            texto:
+              "Predomínio de pequenas e médias propriedades familiares, herança da colonização por imigrantes europeus (alemães, italianos, poloneses).",
             correta: true,
             explicacao:
               "Perfeito. Enquanto o Nordeste tem latifúndios canavieiros e o CO tem grandes fazendas de soja, o Sul se caracteriza por policultura em propriedades familiares — o que explica em parte seus altos IDHs.",
@@ -644,13 +926,21 @@ export const UNIDADES_7ANO: UnidadeFund2[] = [
             explicacao:
               "O Sul é uma das regiões MAIS industrializadas do país: Curitiba tem polo automotivo (Renault, Volvo), Joinville faz eletrodomésticos (WEG, Consul), Novo Hamburgo tem calçados. Agroindústria integrada.",
           },
+
+          {
+            texto: "Outra possibilidade",
+            correta: false,
+            explicacao: "Compare com o conceito estudado.",
+          },
         ],
       },
       {
-        pergunta: "O 'Vale do Silício brasileiro', que concentra as principais empresas de tecnologia e centros de pesquisa, fica em:",
+        pergunta:
+          "O 'Vale do Silício brasileiro', que concentra as principais empresas de tecnologia e centros de pesquisa, fica em:",
         opcoes: [
           {
-            texto: "Interior de SP: eixo Campinas–São Carlos–São José dos Campos (Unicamp, USP, ITA, Embraer).",
+            texto:
+              "Interior de SP: eixo Campinas–São Carlos–São José dos Campos (Unicamp, USP, ITA, Embraer).",
             correta: true,
             explicacao:
               "Isso mesmo. É o polo científico-tecnológico mais forte do Brasil, formado por universidades públicas de excelência + Embrapa + Embraer + institutos de pesquisa. Rende também um ecossistema forte de startups.",
@@ -667,6 +957,12 @@ export const UNIDADES_7ANO: UnidadeFund2[] = [
             explicacao:
               "Brasília é o centro POLÍTICO, não tecnológico. O DF tem UnB e alguns institutos federais, mas não tem a escala industrial e universitária do interior paulista.",
           },
+
+          {
+            texto: "Outra possibilidade",
+            correta: false,
+            explicacao: "Compare com o conceito estudado.",
+          },
         ],
       },
     ],
@@ -682,11 +978,24 @@ export const UNIDADES_7ANO: UnidadeFund2[] = [
       ],
       cartoes: [
         { texto: "Maior polo financeiro do país, com a bolsa B3.", categoriaId: "sudeste" },
-        { texto: "Maior produtor mundial de soja, com forte presença chinesa nas exportações.", categoriaId: "centro_oeste" },
-        { texto: "Colonização por imigrantes europeus (alemães, italianos), estrutura fundiária familiar.", categoriaId: "sul" },
+        {
+          texto: "Maior produtor mundial de soja, com forte presença chinesa nas exportações.",
+          categoriaId: "centro_oeste",
+        },
+        {
+          texto:
+            "Colonização por imigrantes europeus (alemães, italianos), estrutura fundiária familiar.",
+          categoriaId: "sul",
+        },
         { texto: "Sede da Embraer e da FIESP.", categoriaId: "sudeste" },
-        { texto: "Cerrado tecnificado com uso intensivo de calcário e sementes da Embrapa.", categoriaId: "centro_oeste" },
-        { texto: "Maior produtor de frango do país, com polo em Chapecó (SC).", categoriaId: "sul" },
+        {
+          texto: "Cerrado tecnificado com uso intensivo de calcário e sementes da Embrapa.",
+          categoriaId: "centro_oeste",
+        },
+        {
+          texto: "Maior produtor de frango do país, com polo em Chapecó (SC).",
+          categoriaId: "sul",
+        },
       ],
     },
 
@@ -704,6 +1013,9 @@ export const UNIDADES_7ANO: UnidadeFund2[] = [
             "Autossuficiência regional — cada sub-região produz internamente tudo o que consome, sem depender das outras.",
           correta: false,
         },
+
+        { texto: "Outra possibilidade sem relação com o conceito.", correta: false },
+        { texto: "Outra possibilidade sem relação com o conceito.", correta: false },
       ],
       explicacao_professor:
         "Excelente. Integração produtiva regional é justamente o oposto de autossuficiência: as sub-regiões se ESPECIALIZAM em uma parte da cadeia (MT produz grão, PR processa em ração e cria frango, SP financia e exporta pelo porto de Paranaguá). Essa integração explica por que o Centro-Sul é tão poderoso: não é a soma de três regiões — é um sistema articulado, apoiado por rodovias, ferrovias e portos.",
@@ -718,11 +1030,12 @@ export const UNIDADES_7ANO: UnidadeFund2[] = [
     unidade: 5,
     slug: "unidade-5-complexo-nordeste",
     titulo: "O Complexo do Nordeste e as Quatro Sub-regiões",
-    habilidade: "EF07GE10 / EF07GE11",
+    habilidade: "EF07GE11",
     introducao_academica:
       "'O Nordeste' não existe como bloco único — é uma colcha de retalhos com clima, economia e paisagens muito diferentes entre si. Vamos desmontar o estereótipo do 'sertão seco' e conhecer as quatro sub-regiões nordestinas: Zona da Mata, Agreste, Sertão e Meio-Norte.",
     conteudo_pedagogico: {
-      conceito_chave: "As Quatro Sub-regiões do Nordeste (Zona da Mata, Agreste, Sertão, Meio-Norte)",
+      conceito_chave:
+        "As Quatro Sub-regiões do Nordeste (Zona da Mata, Agreste, Sertão, Meio-Norte)",
       texto_teorico:
         "O Nordeste tem 9 estados e cerca de 27% da população brasileira, mas ocupa apenas ~14% do PIB — uma das grandes desigualdades regionais do país. Dentro dele, no entanto, há realidades muito distintas. A divisão em sub-regiões (baseada em clima e vegetação) ajuda a entender essa heterogeneidade.",
       etapas_teoricas: [
@@ -765,10 +1078,10 @@ export const UNIDADES_7ANO: UnidadeFund2[] = [
             "Formado principalmente por Maranhão e Piauí (parte oeste). É a zona de transição entre o Sertão semiárido e a Amazônia úmida. Vegetação: mata dos cocais (com palmeiras como o babaçu e a carnaúba). Economia tradicionalmente baseada no extrativismo do babaçu e, mais recentemente, no avanço da fronteira agrícola (soja).",
           exemplo_real:
             "O sul do MA e o sudoeste do PI fazem parte do 'MATOPIBA' — a nova fronteira agrícola brasileira (Maranhão + Tocantins + Piauí + Bahia). Aqui é onde a soja está avançando mais rápido hoje, com desmatamento acelerado do Cerrado e da mata dos cocais.",
-            exemplos_extras: [
-              "As quebradeiras de coco babaçu são um símbolo do Meio-Norte: mulheres que extraem o coco para vender óleo, sabão e artesanato. Enfrentam conflitos com fazendeiros de soja que querem desmatar as áreas de babaçuais.",
-              "Teresina (PI) e São Luís (MA) são as capitais do Meio-Norte. São Luís tem o Complexo Portuário de Itaqui, um dos mais importantes do país para exportação de soja e minério de ferro (vindo de Carajás pela Estrada de Ferro Carajás).",
-            ],
+          exemplos_extras: [
+            "As quebradeiras de coco babaçu são um símbolo do Meio-Norte: mulheres que extraem o coco para vender óleo, sabão e artesanato. Enfrentam conflitos com fazendeiros de soja que querem desmatar as áreas de babaçuais.",
+            "Teresina (PI) e São Luís (MA) são as capitais do Meio-Norte. São Luís tem o Complexo Portuário de Itaqui, um dos mais importantes do país para exportação de soja e minério de ferro (vindo de Carajás pela Estrada de Ferro Carajás).",
+          ],
         },
       ],
       roteiro_visual_interativo: {
@@ -791,13 +1104,15 @@ export const UNIDADES_7ANO: UnidadeFund2[] = [
         pergunta: "O estereótipo do 'Nordeste = sertão seco' é geograficamente incorreto porque:",
         opcoes: [
           {
-            texto: "O Nordeste tem 4 sub-regiões distintas (Zona da Mata úmida, Agreste, Sertão semiárido e Meio-Norte), com climas e economias diferentes entre si.",
+            texto:
+              "O Nordeste tem 4 sub-regiões distintas (Zona da Mata úmida, Agreste, Sertão semiárido e Meio-Norte), com climas e economias diferentes entre si.",
             correta: true,
             explicacao:
               "Correto. O Sertão é apenas UMA das quatro sub-regiões. As capitais e o turismo estão na Zona da Mata, que é úmida e verde. Generalizar 'Nordeste=sertão' apaga essa diversidade.",
           },
           {
-            texto: "O Nordeste inteiro tem clima semiárido, mas com precipitação variável entre estados.",
+            texto:
+              "O Nordeste inteiro tem clima semiárido, mas com precipitação variável entre estados.",
             correta: false,
             explicacao:
               "Não. A Zona da Mata (RN, PB, PE, AL, SE, BA litorânea) tem clima ÚMIDO com chuvas abundantes o ano inteiro. Só o Sertão é semiárido.",
@@ -808,13 +1123,20 @@ export const UNIDADES_7ANO: UnidadeFund2[] = [
             explicacao:
               "A transposição ajuda regiões específicas, mas o problema da seca no Sertão continua. E a questão original não é sobre seca, é sobre a heterogeneidade da região.",
           },
+
+          {
+            texto: "Outra possibilidade",
+            correta: false,
+            explicacao: "Compare com o conceito estudado.",
+          },
         ],
       },
       {
         pergunta: "Toritama (PE) é chamada de 'capital brasileira do jeans' porque:",
         opcoes: [
           {
-            texto: "Concentra milhares de pequenas confecções que produzem ~20% da calça jeans consumida no Brasil.",
+            texto:
+              "Concentra milhares de pequenas confecções que produzem ~20% da calça jeans consumida no Brasil.",
             correta: true,
             explicacao:
               "Exato. É um polo industrial descentralizado no Agreste pernambucano, feito por micro e pequenas empresas familiares. Prova que existe indústria dinâmica no interior do NE, longe do estereótipo agrícola.",
@@ -831,19 +1153,28 @@ export const UNIDADES_7ANO: UnidadeFund2[] = [
             explicacao:
               "O jeans foi inventado nos EUA (Levi Strauss, 1873). Toritama virou polo produtivo brasileiro só no final do séc. XX, muito depois.",
           },
+
+          {
+            texto: "Outra possibilidade",
+            correta: false,
+            explicacao: "Compare com o conceito estudado.",
+          },
         ],
       },
       {
-        pergunta: "A fruticultura irrigada no Vale do São Francisco (Petrolina-PE / Juazeiro-BA) desmonta que preconceito sobre o Sertão?",
+        pergunta:
+          "A fruticultura irrigada no Vale do São Francisco (Petrolina-PE / Juazeiro-BA) desmonta que preconceito sobre o Sertão?",
         opcoes: [
           {
-            texto: "Desmonta a ideia de que 'Sertão = terra improdutiva', mostrando que com irrigação e tecnologia é possível exportar uvas e mangas de alta qualidade para a Europa.",
+            texto:
+              "Desmonta a ideia de que 'Sertão = terra improdutiva', mostrando que com irrigação e tecnologia é possível exportar uvas e mangas de alta qualidade para a Europa.",
             correta: true,
             explicacao:
               "Perfeito. O Sertão não é improdutivo — é limitado pela ÁGUA. Quando se resolve a escassez hídrica, a região se torna altamente produtiva. Petrolina/Juazeiro é referência mundial em fruticultura tropical.",
           },
           {
-            texto: "Desmonta a ideia de que 'chove pouco no Sertão' — na verdade, chove muito por causa da irrigação.",
+            texto:
+              "Desmonta a ideia de que 'chove pouco no Sertão' — na verdade, chove muito por causa da irrigação.",
             correta: false,
             explicacao:
               "Confusão. Irrigação NÃO é chuva; é bombeamento de água do rio (São Francisco) para a lavoura. Continua chovendo pouco naturalmente no Sertão.",
@@ -854,14 +1185,19 @@ export const UNIDADES_7ANO: UnidadeFund2[] = [
             explicacao:
               "Um polo de fruticultura não muda a estatística regional. O NE continua sendo a região com maiores desafios sociais. O que a fruticultura mostra é que o SERTÃO tem POTENCIAL — não que o NE já não é pobre.",
           },
+
+          {
+            texto: "Outra possibilidade",
+            correta: false,
+            explicacao: "Compare com o conceito estudado.",
+          },
         ],
       },
     ],
 
     mini_jogo: {
       tipo: "categorizar",
-      instrucao:
-        "Cada elemento pertence a UMA das quatro sub-regiões nordestinas. Classifique.",
+      instrucao: "Cada elemento pertence a UMA das quatro sub-regiões nordestinas. Classifique.",
       categorias: [
         { id: "mata", titulo: "Zona da Mata", cor: "emerald" },
         { id: "agreste", titulo: "Agreste", cor: "amber" },
@@ -871,9 +1207,18 @@ export const UNIDADES_7ANO: UnidadeFund2[] = [
       cartoes: [
         { texto: "Praias famosas como Porto de Galinhas e Praia do Forte.", categoriaId: "mata" },
         { texto: "Polo de jeans de Toritama e feira de Caruaru.", categoriaId: "agreste" },
-        { texto: "Fruticultura irrigada em Petrolina-Juazeiro pelo Rio São Francisco.", categoriaId: "sertao" },
-        { texto: "Extrativismo do babaçu e da carnaúba (mata dos cocais).", categoriaId: "meio_norte" },
-        { texto: "Grandes engenhos históricos de cana-de-açúcar desde o séc. XVI.", categoriaId: "mata" },
+        {
+          texto: "Fruticultura irrigada em Petrolina-Juazeiro pelo Rio São Francisco.",
+          categoriaId: "sertao",
+        },
+        {
+          texto: "Extrativismo do babaçu e da carnaúba (mata dos cocais).",
+          categoriaId: "meio_norte",
+        },
+        {
+          texto: "Grandes engenhos históricos de cana-de-açúcar desde o séc. XVI.",
+          categoriaId: "mata",
+        },
         { texto: "Bioma exclusivo do Brasil: a Caatinga.", categoriaId: "sertao" },
       ],
     },
@@ -892,6 +1237,9 @@ export const UNIDADES_7ANO: UnidadeFund2[] = [
             "Na verdade não chove pouco no Sertão: chove tanto quanto em Manaus, só que em poucos meses concentrados.",
           correta: false,
         },
+
+        { texto: "Outra possibilidade sem relação com o conceito.", correta: false },
+        { texto: "Outra possibilidade sem relação com o conceito.", correta: false },
       ],
       explicacao_professor:
         "Excelente análise. Reduzir a pobreza nordestina à seca é 'determinismo geográfico' — teoria já superada. Regiões áridas do mundo (Israel, Emirados Árabes) são ricas quando têm políticas adequadas. O NE brasileiro carrega heranças coloniais (latifúndio canavieiro, escravidão, exclusão política) que explicam a desigualdade muito mais do que o clima. E ainda: a maioria dos nordestinos vive no LITORAL úmido, não no Sertão. Explicar pobreza só por clima é preguiçoso e apaga a história.",
@@ -906,7 +1254,7 @@ export const UNIDADES_7ANO: UnidadeFund2[] = [
     unidade: 6,
     slug: "unidade-6-amazonia-fronteiras",
     titulo: "A Amazônia e as Fronteiras Agrícolas",
-    habilidade: "EF07GE11 / EF07GE12",
+    habilidade: "Conteúdo complementar — fronteiras agrícolas",
     introducao_academica:
       "A Amazônia guarda cerca de 20% da água doce do planeta, 1/3 da biodiversidade mundial e regula o clima da América do Sul. Ao mesmo tempo, sofre desmatamento acelerado por avanço da fronteira agrícola, mineração e obras de infraestrutura. Vamos entender o paradoxo amazônico: patrimônio global versus fronteira econômica.",
     conteudo_pedagogico: {
@@ -968,7 +1316,8 @@ export const UNIDADES_7ANO: UnidadeFund2[] = [
         pergunta: "Qual é a diferença entre 'Amazônia Legal' e 'floresta amazônica'?",
         opcoes: [
           {
-            texto: "Amazônia Legal é um recorte jurídico-administrativo que inclui 9 estados brasileiros (~60% do território nacional), incluindo áreas de Cerrado. Floresta amazônica é o bioma biológico, menor e transnacional.",
+            texto:
+              "Amazônia Legal é um recorte jurídico-administrativo que inclui 9 estados brasileiros (~60% do território nacional), incluindo áreas de Cerrado. Floresta amazônica é o bioma biológico, menor e transnacional.",
             correta: true,
             explicacao:
               "Correto. Muita gente confunde. Cuiabá, por exemplo, está na Amazônia Legal mas em pleno Cerrado — não em floresta. Políticas ambientais precisam distinguir os dois conceitos.",
@@ -985,13 +1334,20 @@ export const UNIDADES_7ANO: UnidadeFund2[] = [
             explicacao:
               "Você inverteu. A Amazônia Legal brasileira é maior (~5 milhões km²) que a porção da floresta amazônica dentro do Brasil (~3,3 milhões km²). Legal inclui Cerrado e transições.",
           },
+
+          {
+            texto: "Outra possibilidade",
+            correta: false,
+            explicacao: "Compare com o conceito estudado.",
+          },
         ],
       },
       {
         pergunta: "O 'Arco do Desmatamento' é uma faixa que:",
         opcoes: [
           {
-            texto: "Vai do leste do PA passando pelo norte do MT até RO e sul do AM — é onde a floresta encontra a fronteira agropecuária.",
+            texto:
+              "Vai do leste do PA passando pelo norte do MT até RO e sul do AM — é onde a floresta encontra a fronteira agropecuária.",
             correta: true,
             explicacao:
               "Perfeito. É a linha de frente do desmatamento, monitorada por satélite pelo INPE (sistema PRODES). Cidades como Sinop (MT), Novo Progresso (PA) e Ariquemes (RO) estão nele.",
@@ -1008,13 +1364,21 @@ export const UNIDADES_7ANO: UnidadeFund2[] = [
             explicacao:
               "É exatamente o OPOSTO: é a área com MAIOR desmatamento, não preservação. Parques nacionais são pontos dentro da Amazônia — não a definição do 'arco'.",
           },
+
+          {
+            texto: "Outra possibilidade",
+            correta: false,
+            explicacao: "Compare com o conceito estudado.",
+          },
         ],
       },
       {
-        pergunta: "Por que o desmatamento no Cerrado (MATOPIBA) recebe MENOS atenção midiática que o da Amazônia, mesmo tendo destruído proporcionalmente MAIS área?",
+        pergunta:
+          "Por que o desmatamento no Cerrado (MATOPIBA) recebe MENOS atenção midiática que o da Amazônia, mesmo tendo destruído proporcionalmente MAIS área?",
         opcoes: [
           {
-            texto: "Porque o Cerrado é menos 'famoso' internacionalmente que a floresta amazônica, tem menos apelo turístico e biodiversidade midiaticamente visível — apesar de igualmente crítico para o ciclo hídrico e a biodiversidade.",
+            texto:
+              "Porque o Cerrado é menos 'famoso' internacionalmente que a floresta amazônica, tem menos apelo turístico e biodiversidade midiaticamente visível — apesar de igualmente crítico para o ciclo hídrico e a biodiversidade.",
             correta: true,
             explicacao:
               "Isso mesmo. Chama-se 'invisibilidade do Cerrado'. Como as imagens de floresta densa e onças-pintadas comovem mais que campos de savana, a mídia global foca na Amazônia. Resultado: Cerrado destrói mais e proibições legais chegam menos.",
@@ -1026,10 +1390,17 @@ export const UNIDADES_7ANO: UnidadeFund2[] = [
               "Falso. O Cerrado abastece as principais bacias hidrográficas do Brasil (nascentes do São Francisco, Tocantins, Paraná). Sem Cerrado, secam os rios. É tão vital quanto a Amazônia — só menos midiático.",
           },
           {
-            texto: "Porque no MATOPIBA praticamente não há desmatamento — os agricultores plantam soja em áreas já ocupadas.",
+            texto:
+              "Porque no MATOPIBA praticamente não há desmatamento — os agricultores plantam soja em áreas já ocupadas.",
             correta: false,
             explicacao:
               "Ao contrário. O MATOPIBA lidera hoje o desmatamento do Cerrado no Brasil. É por isso que a questão faz sentido: destrói MAIS que a Amazônia, mas ganha menos manchete.",
+          },
+
+          {
+            texto: "Outra possibilidade",
+            correta: false,
+            explicacao: "Compare com o conceito estudado.",
           },
         ],
       },
@@ -1045,12 +1416,27 @@ export const UNIDADES_7ANO: UnidadeFund2[] = [
         { id: "politica", titulo: "Política de Proteção", cor: "emerald" },
       ],
       cartoes: [
-        { texto: "Expansão da pecuária extensiva para conversão de floresta em pasto.", categoriaId: "causa" },
-        { texto: "Redução do regime de chuvas em toda a América do Sul (rios voadores).", categoriaId: "consequencia" },
-        { texto: "Demarcação de terras indígenas e criação de unidades de conservação.", categoriaId: "politica" },
+        {
+          texto: "Expansão da pecuária extensiva para conversão de floresta em pasto.",
+          categoriaId: "causa",
+        },
+        {
+          texto: "Redução do regime de chuvas em toda a América do Sul (rios voadores).",
+          categoriaId: "consequencia",
+        },
+        {
+          texto: "Demarcação de terras indígenas e criação de unidades de conservação.",
+          categoriaId: "politica",
+        },
         { texto: "Garimpo ilegal de ouro em terras indígenas Yanomami.", categoriaId: "causa" },
-        { texto: "Perda de biodiversidade e extinção de espécies endêmicas.", categoriaId: "consequencia" },
-        { texto: "Monitoramento por satélite do INPE (sistemas PRODES e DETER).", categoriaId: "politica" },
+        {
+          texto: "Perda de biodiversidade e extinção de espécies endêmicas.",
+          categoriaId: "consequencia",
+        },
+        {
+          texto: "Monitoramento por satélite do INPE (sistemas PRODES e DETER).",
+          categoriaId: "politica",
+        },
       ],
     },
 
@@ -1068,6 +1454,9 @@ export const UNIDADES_7ANO: UnidadeFund2[] = [
             "A Amazônia vai congelar por causa da perda de calor, criando uma nova era do gelo na América do Sul.",
           correta: false,
         },
+
+        { texto: "Outra possibilidade sem relação com o conceito.", correta: false },
+        { texto: "Outra possibilidade sem relação com o conceito.", correta: false },
       ],
       explicacao_professor:
         "Exato. A Amazônia libera ~20 bilhões de toneladas de água por dia na atmosfera via evapotranspiração — os 'rios voadores'. Esse fluxo, empurrado pelos ventos alísios, cai como chuva no Centro-Oeste (soja!) e Sudeste (SP!). Se a floresta virar savana (processo já em curso), esses fluxos enfraquecem — e o país inteiro sente. Preservar a Amazônia não é 'proteger uma floresta distante'; é garantir o abastecimento de água do próprio Sudeste. Geograficamente, todos ganhamos ou perdemos juntos.",
@@ -1144,7 +1533,8 @@ export const UNIDADES_7ANO: UnidadeFund2[] = [
         pergunta: "O que significa 'reprimarização da economia brasileira'?",
         opcoes: [
           {
-            texto: "Aumento da dependência de exportações de produtos primários (agrícolas e minerais) em detrimento de produtos industrializados.",
+            texto:
+              "Aumento da dependência de exportações de produtos primários (agrícolas e minerais) em detrimento de produtos industrializados.",
             correta: true,
             explicacao:
               "Correto. 'Re' + 'primário': voltar a depender de produtos primários. É o que aconteceu nas últimas décadas — indústria minguou (de 35% para 11% do PIB) e commodities cresceram.",
@@ -1161,19 +1551,28 @@ export const UNIDADES_7ANO: UnidadeFund2[] = [
             explicacao:
               "É o OPOSTO. Reprimarização = enfraquecimento da indústria + fortalecimento do setor primário. Se fortalecesse a indústria, seria 'industrialização' ou 'reindustrialização'.",
           },
+
+          {
+            texto: "Outra possibilidade",
+            correta: false,
+            explicacao: "Compare com o conceito estudado.",
+          },
         ],
       },
       {
-        pergunta: "Qual foi a mudança geopolítica mais significativa na balança comercial brasileira desde 2009?",
+        pergunta:
+          "Qual foi a mudança geopolítica mais significativa na balança comercial brasileira desde 2009?",
         opcoes: [
           {
-            texto: "A China ultrapassou os EUA como principal parceiro comercial do Brasil, com destaque para as exportações de soja e minério de ferro.",
+            texto:
+              "A China ultrapassou os EUA como principal parceiro comercial do Brasil, com destaque para as exportações de soja e minério de ferro.",
             correta: true,
             explicacao:
               "Exato. Até 2008, EUA era o maior comprador. Desde 2009, a China lidera — e a distância só cresce. Isso reorientou toda a política externa brasileira e criou dependências novas.",
           },
           {
-            texto: "A União Europeia se tornou o principal comprador do Brasil, superando a China e os EUA juntos.",
+            texto:
+              "A União Europeia se tornou o principal comprador do Brasil, superando a China e os EUA juntos.",
             correta: false,
             explicacao:
               "A UE é importante (~15% das exportações), mas não é o maior parceiro. China (~30%) é isolada em primeiro. UE nunca ultrapassou.",
@@ -1184,19 +1583,28 @@ export const UNIDADES_7ANO: UnidadeFund2[] = [
             explicacao:
               "Ao contrário: as exportações para a China só crescem. Não há disputa comercial relevante entre os dois países — a relação é considerada estratégica por ambos.",
           },
+
+          {
+            texto: "Outra possibilidade",
+            correta: false,
+            explicacao: "Compare com o conceito estudado.",
+          },
         ],
       },
       {
-        pergunta: "Por que economistas alertam que exportar commodities gera menos desenvolvimento que exportar produtos industrializados?",
+        pergunta:
+          "Por que economistas alertam que exportar commodities gera menos desenvolvimento que exportar produtos industrializados?",
         opcoes: [
           {
-            texto: "Produtos industrializados agregam mais valor por unidade, geram mais empregos qualificados e desenvolvem tecnologia nacional; commodities dependem de preços internacionais voláteis e criam poucos empregos.",
+            texto:
+              "Produtos industrializados agregam mais valor por unidade, geram mais empregos qualificados e desenvolvem tecnologia nacional; commodities dependem de preços internacionais voláteis e criam poucos empregos.",
             correta: true,
             explicacao:
               "Perfeito. É a 'escada do valor agregado': quanto mais processado o produto, mais renda e emprego ele gera dentro do país. Vender minério de ferro é ok; vender aço é melhor; vender carro é melhor ainda.",
           },
           {
-            texto: "Porque commodities apenas geram poluição e destruição ambiental, sem gerar dinheiro.",
+            texto:
+              "Porque commodities apenas geram poluição e destruição ambiental, sem gerar dinheiro.",
             correta: false,
             explicacao:
               "Commodities GERAM muito dinheiro (~60% das exportações brasileiras). A crítica não é que 'não geram receita', mas que geram MENOS desenvolvimento por dólar exportado.",
@@ -1206,6 +1614,12 @@ export const UNIDADES_7ANO: UnidadeFund2[] = [
             correta: false,
             explicacao:
               "Não há proibição. Ao contrário: EUA, UE e China ADORAM comprar commodities do Brasil (é matéria-prima barata para eles). A discussão não é 'proibição externa', é 'estratégia interna'.",
+          },
+
+          {
+            texto: "Outra possibilidade",
+            correta: false,
+            explicacao: "Compare com o conceito estudado.",
           },
         ],
       },
@@ -1223,10 +1637,22 @@ export const UNIDADES_7ANO: UnidadeFund2[] = [
       cartoes: [
         { texto: "Soja em grão vendida à China para ração de porcos.", categoriaId: "commodity" },
         { texto: "Celulares e eletrônicos fabricados na Ásia.", categoriaId: "importado" },
-        { texto: "BRICS — grupo de países emergentes buscando alternativas ao eixo EUA-Europa.", categoriaId: "geopolitica" },
-        { texto: "Minério de ferro de Carajás exportado pelo Porto de Itaqui.", categoriaId: "commodity" },
-        { texto: "Máquinas industriais compradas da Alemanha e do Japão.", categoriaId: "importado" },
-        { texto: "Disputa geopolítica sobre a tecnologia 5G da Huawei (China) × EUA.", categoriaId: "geopolitica" },
+        {
+          texto: "BRICS — grupo de países emergentes buscando alternativas ao eixo EUA-Europa.",
+          categoriaId: "geopolitica",
+        },
+        {
+          texto: "Minério de ferro de Carajás exportado pelo Porto de Itaqui.",
+          categoriaId: "commodity",
+        },
+        {
+          texto: "Máquinas industriais compradas da Alemanha e do Japão.",
+          categoriaId: "importado",
+        },
+        {
+          texto: "Disputa geopolítica sobre a tecnologia 5G da Huawei (China) × EUA.",
+          categoriaId: "geopolitica",
+        },
       ],
     },
 
@@ -1244,12 +1670,16 @@ export const UNIDADES_7ANO: UnidadeFund2[] = [
             "Não há dilema real: basta parar de exportar commodities e o Brasil se torna automaticamente uma potência industrial em poucos anos.",
           correta: false,
         },
+
+        { texto: "Outra possibilidade sem relação com o conceito.", correta: false },
+        { texto: "Outra possibilidade sem relação com o conceito.", correta: false },
       ],
       explicacao_professor:
         "Excelente. É um dos maiores debates da geografia econômica brasileira. Reprimarização traz receita imediata, mas fragiliza o país no longo prazo (vulnerabilidade a preços, poucos empregos qualificados, baixa autonomia tecnológica). Reindustrialização é a estratégia usada por Coreia do Sul, China, Alemanha para se tornarem potências — mas exige décadas de investimento coordenado. Não existe escolha 'fácil'; existe uma escolha de futuro. Parabéns por concluir o 7º ano de Geografia — você agora tem ferramentas para participar desse debate.",
     },
     recompensas: { xp: 1500, moedas: 800, titulo: "Analista Geopolítico do Brasil Contemporâneo" },
   },
+  ...LACUNAS_7ANO,
 ];
 
 export function getUnidade7ano(slug: string): UnidadeFund2 | undefined {

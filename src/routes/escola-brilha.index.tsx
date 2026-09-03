@@ -50,6 +50,10 @@ const SERIES_ORDEM = [
 ] as const;
 type Serie = (typeof SERIES_ORDEM)[number];
 
+// Cursos com slug "-v2" ainda são pilotos incompletos. Permanecem preservados
+// no código para revisão, mas não competem com o curso oficial no catálogo infantil.
+const EXIBIR_CURSOS_PILOTO = false;
+
 // Expande "X ao Y Ano" para cada série que ele cobre.
 function expandirAno(ano: string): Serie[] {
   const a = (ano || "").trim();
@@ -500,7 +504,7 @@ function EscolaBrilhaCatalogo() {
                                   7 unidades · Certificado Mestre em Análises →
                                 </div>
                               </Link>
-                              {serie === "6º Ano" && (
+                              {EXIBIR_CURSOS_PILOTO && serie === "6º Ano" && (
                                 <Link
                                   to="/escola-brilha/curso/$slug"
                                   params={{ slug: "geografia-6ano-v2" }}
@@ -518,7 +522,7 @@ function EscolaBrilhaCatalogo() {
                                   </div>
                                 </Link>
                               )}
-                              {serie === "7º Ano" && (
+                              {EXIBIR_CURSOS_PILOTO && serie === "7º Ano" && (
                                 <Link
                                   to="/escola-brilha/curso/$slug"
                                   params={{ slug: "geografia-7ano-v2" }}
@@ -536,7 +540,7 @@ function EscolaBrilhaCatalogo() {
                                   </div>
                                 </Link>
                               )}
-                              {serie === "8º Ano" && (
+                              {EXIBIR_CURSOS_PILOTO && serie === "8º Ano" && (
                                 <Link
                                   to="/escola-brilha/curso/$slug"
                                   params={{ slug: "geografia-8ano-v2" }}
@@ -554,7 +558,7 @@ function EscolaBrilhaCatalogo() {
                                   </div>
                                 </Link>
                               )}
-                              {serie === "9º Ano" && (
+                              {EXIBIR_CURSOS_PILOTO && serie === "9º Ano" && (
                                 <Link
                                   to="/escola-brilha/curso/$slug"
                                   params={{ slug: "geografia-9ano-v2" }}
@@ -581,7 +585,7 @@ function EscolaBrilhaCatalogo() {
 
                         if (cursoV4) {
                           const totalAulas = cursoV4.unidades.reduce((s, u) => s + u.aulas.length, 0);
-                          const mostraPiloto2ano = serie === "2º Ano" && disc === "geografia";
+                          const mostraPiloto2ano = EXIBIR_CURSOS_PILOTO && serie === "2º Ano" && disc === "geografia";
                           return (
                             <div key={disc} className="space-y-2">
                               <Link

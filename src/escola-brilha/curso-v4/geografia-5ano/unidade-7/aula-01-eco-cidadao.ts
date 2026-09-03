@@ -10,7 +10,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-eco-cidadao",
   titulo: "O Selo Eco-Cidadão",
   iconeTrilha: "🏆",
-  bncc: ["EF05GE01", "EF05GE03", "EF05GE05", "EF05GE06", "EF05GE08", "EF05GE11"],
+  bncc: [],
   duracaoMin: 25,
 
   cena01_motivacao: {
@@ -25,8 +25,7 @@ export const aula01: AulaGeoV1 = {
 
   cena02_previsao: {
     tipo: "votoExplorador",
-    aurora:
-      "Palpite: qual é o PAPEL de um ECO-CIDADÃO no mundo de hoje?",
+    aurora: "Palpite: qual é o PAPEL de um ECO-CIDADÃO no mundo de hoje?",
     pergunta: "Ser Eco-Cidadão é...",
     opcoes: [
       {
@@ -43,11 +42,25 @@ export const aula01: AulaGeoV1 = {
         emoji: "🙅",
         cor: "from-slate-400 to-gray-600",
       },
+
+      {
+        id: "extra-1",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
+      {
+        id: "extra-2",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
     ],
     respostaCerta: "conecta",
     feedbackAcerto:
       "Isso! Suas ações LOCAIS somam com bilhões de outras e mudam o PLANETA. Isso é ser Eco-Cidadão.",
-    feedbackErro: "Problemas ambientais são de TODOS. Fechar torneira aqui = ajuda o mundo inteiro.",
+    feedbackErro:
+      "Problemas ambientais são de TODOS. Fechar torneira aqui = ajuda o mundo inteiro.",
     falaFinal: "Cidadão do planeta. Bora fechar a jornada.",
   },
 
@@ -111,8 +124,7 @@ export const aula01: AulaGeoV1 = {
         emoji: "💧",
         cor: "from-sky-500 to-blue-700",
         titulo: "CUIDAR DA ÁGUA",
-        texto:
-          "Fechar torneira, banho curto, reaproveitar chuva. Cada gota conta.",
+        texto: "Fechar torneira, banho curto, reaproveitar chuva. Cada gota conta.",
       },
       {
         id: "energia",
@@ -121,8 +133,7 @@ export const aula01: AulaGeoV1 = {
         emoji: "⚡",
         cor: "from-amber-500 to-yellow-600",
         titulo: "ECONOMIZAR ENERGIA",
-        texto:
-          "Apagar luz, desligar aparelhos, valorizar fontes limpas.",
+        texto: "Apagar luz, desligar aparelhos, valorizar fontes limpas.",
       },
       {
         id: "lixo",
@@ -131,8 +142,7 @@ export const aula01: AulaGeoV1 = {
         emoji: "♻️",
         cor: "from-emerald-500 to-green-700",
         titulo: "SEPARAR O LIXO",
-        texto:
-          "Reciclar, compostar, entregar eletrônico em ponto de logística reversa.",
+        texto: "Reciclar, compostar, entregar eletrônico em ponto de logística reversa.",
       },
       {
         id: "cidade",
@@ -141,8 +151,7 @@ export const aula01: AulaGeoV1 = {
         emoji: "🏙️",
         cor: "from-red-500 to-rose-700",
         titulo: "CUIDAR DA CIDADE",
-        texto:
-          "Andar de bicicleta, plantar árvores, cobrar saneamento pra todos.",
+        texto: "Andar de bicicleta, plantar árvores, cobrar saneamento pra todos.",
       },
     ],
     falaFinal: "4 compromissos diários = Eco-Cidadão em ação.",
@@ -160,6 +169,13 @@ export const aula01: AulaGeoV1 = {
           { id: "ib", emoji: "📋", titulo: "IBGE", cor: "from-sky-500 to-blue-700" },
           { id: "tv", emoji: "📺", titulo: "TV", cor: "from-red-500 to-rose-700" },
           { id: "es", emoji: "🏫", titulo: "Escolas", cor: "from-amber-500 to-orange-700" },
+
+          {
+            id: "extra-3",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "ib",
         feedbackAcerto: "Isso! IBGE conta a população.",
@@ -172,6 +188,13 @@ export const aula01: AulaGeoV1 = {
           { id: "so", emoji: "☀️", titulo: "Solar", cor: "from-amber-400 to-yellow-600" },
           { id: "ca", emoji: "⛏️", titulo: "Carvão", cor: "from-slate-500 to-gray-700" },
           { id: "pe", emoji: "🛢️", titulo: "Petróleo", cor: "from-slate-600 to-gray-800" },
+
+          {
+            id: "extra-4",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "so",
         feedbackAcerto: "Perfeito! SOLAR é renovável e limpa.",
@@ -184,6 +207,13 @@ export const aula01: AulaGeoV1 = {
           { id: "co", emoji: "🌱", titulo: "Compostagem", cor: "from-emerald-500 to-green-700" },
           { id: "ri", emoji: "🌊", titulo: "Jogar no rio", cor: "from-sky-500 to-blue-700" },
           { id: "qu", emoji: "🔥", titulo: "Queimar no quintal", cor: "from-red-500 to-rose-700" },
+
+          {
+            id: "extra-5",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "co",
         feedbackAcerto: "Isso! COMPOSTAGEM vira adubo.",
@@ -265,14 +295,12 @@ export const aula01: AulaGeoV1 = {
       },
       {
         id: "p2",
-        texto:
-          "Cuida da ÁGUA doce, respeita a MATRIZ LIMPA de energia e recusa desperdício.",
+        texto: "Cuida da ÁGUA doce, respeita a MATRIZ LIMPA de energia e recusa desperdício.",
         chaves: ["água", "limpa"],
       },
       {
         id: "p3",
-        texto:
-          "Separa o LIXO, valoriza a RECICLAGEM e cobra ATERROS no lugar de LIXÕES.",
+        texto: "Separa o LIXO, valoriza a RECICLAGEM e cobra ATERROS no lugar de LIXÕES.",
         chaves: ["lixo", "reciclagem", "aterros"],
       },
       {
@@ -311,7 +339,11 @@ export const aula01: AulaGeoV1 = {
       {
         id: "r2",
         municipioA: { nome: "SP gigante", emoji: "🏙️", cor: "from-red-400 to-rose-600" },
-        municipioB: { nome: "Puxa cidades ao redor", emoji: "🌆", cor: "from-purple-400 to-fuchsia-600" },
+        municipioB: {
+          nome: "Puxa cidades ao redor",
+          emoji: "🌆",
+          cor: "from-purple-400 to-fuchsia-600",
+        },
         contexto: "Cidade GIGANTE que influencia várias outras. Nome?",
         pecaCertaId: "metropole",
         feedbackAcerto: "Perfeito! METRÓPOLE.",
@@ -378,8 +410,7 @@ export const aula01: AulaGeoV1 = {
         emoji: "📚",
         percentual: 20,
         cor: "#8b5cf6",
-        descricao:
-          "20% é SABER o que faz — e você já sabe! Agora falta só AGIR.",
+        descricao: "20% é SABER o que faz — e você já sabe! Agora falta só AGIR.",
         exemplos: ["🗺️ Ler mapa", "📊 Entender", "💡 Pensar"],
       },
     ],
@@ -396,13 +427,17 @@ export const aula01: AulaGeoV1 = {
         pergunta: "Qual o papel de um ECO-CIDADÃO no mundo?",
         opcoes: [
           { id: "a", texto: "Achar que problemas ambientais são só longe de casa", correta: false },
-          { id: "b", texto: "Entender que ações locais impactam o planeta e agir pra proteger", correta: true },
+          {
+            id: "b",
+            texto: "Entender que ações locais impactam o planeta e agir pra proteger",
+            correta: true,
+          },
           { id: "c", texto: "Não se preocupar com o meio ambiente", correta: false },
+
+          { id: "extra-6", texto: "Outra possibilidade", correta: false },
         ],
-        feedbackAcerto:
-          "🌟 SUPREMO! Ações locais somam globalmente. Você é Eco-Cidadão!",
-        feedbackErro:
-          "Problemas do planeta são de TODOS. Agir local muda global.",
+        feedbackAcerto: "🌟 SUPREMO! Ações locais somam globalmente. Você é Eco-Cidadão!",
+        feedbackErro: "Problemas do planeta são de TODOS. Agir local muda global.",
       },
       {
         id: "av2",
@@ -411,6 +446,8 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Jogar pilha no rio", correta: false },
           { id: "b", texto: "Separar lixo, economizar água e energia", correta: true },
           { id: "c", texto: "Deixar chuveiro ligado horas", correta: false },
+
+          { id: "extra-7", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Isso! 3 atitudes juntas = Eco-Cidadão em ação.",
         feedbackErro: "Pilha no rio e chuveiro aberto POLUEM. Separar + economizar = certo.",
@@ -422,6 +459,8 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Só um selo bonito", correta: false },
           { id: "b", texto: "Conhecimento pra mudar o Brasil e o planeta", correta: true },
           { id: "c", texto: "Nada de importante", correta: false },
+
+          { id: "extra-8", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto:
           "🏆 PARABÉNS! Você conquistou o SELO ECO-CIDADÃO SUPREMO. O Fundamental 1 está fechado!",

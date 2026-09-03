@@ -194,8 +194,10 @@ function AtlasFinal() {
   }, [cursoSlug]);
 
   const totalAulas = aulas.length;
-  const percent = totalAulas === 0 ? 0 : Math.round((concluidas.size / totalAulas) * 100);
-  const destravado = modoLivre || (totalAulas > 0 && concluidas.size >= totalAulas);
+  const slugsValidos = new Set(aulas.map((aula) => aula.slug));
+  const totalConcluidas = [...concluidas].filter((slug) => slugsValidos.has(slug)).length;
+  const percent = totalAulas === 0 ? 0 : Math.round((totalConcluidas / totalAulas) * 100);
+  const destravado = modoLivre || (totalAulas > 0 && totalConcluidas >= totalAulas);
   const nome = activeChild?.nome ?? "Explorador(a)";
 
   const pagina = paginas[pagIdx];
@@ -239,7 +241,7 @@ function AtlasFinal() {
             />
           </div>
           <div className="text-sm text-white/70">
-            {concluidas.size} de {totalAulas} aulas ({percent}%)
+            {totalConcluidas} de {totalAulas} aulas ({percent}%)
           </div>
           <Link
             to="/escola-brilha/curso/$slug"

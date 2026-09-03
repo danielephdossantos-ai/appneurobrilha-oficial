@@ -9,9 +9,9 @@ import { url as pato } from "@/assets/neuro-treino/objetos/pato.png.asset.json";
 /**
  * Unidade 10 · Aula 1 — Palavras que Piscam
  * -------------------------------------------------------------
- * Fase 9. Reconhecimento LEXICAL DIRETO das palavras de alta
- * frequência que não se resolvem juntando os sons: É, UM, UMA,
- * AS, OS. A criança aprende a "fotografar" a palavra inteira.
+ * Fase 9. Leitura de palavras de alta frequência: É, UM, UMA,
+ * AS, OS. A criança relaciona escrita, pronúncia e sentido até
+ * que o reconhecimento se torne automático com a prática.
  *
  * BNCC: EF01LP02 · EF01LP04 · EF01LP12
  */
@@ -23,9 +23,9 @@ export const aula01: AulaPortuguesV4 = {
   duracaoMin: 14,
 
   momento01_motivacao: {
-    titulo: "Brilha descobre as palavras teimosas",
+    titulo: "Brilha descobre as palavras frequentes",
     historia:
-      "Brilha já sabia juntar os sons: /s/ /o/ /l/ = SOL. Mas aí apareceu a palavrinha É. Ele tentou juntar os sons e não deu certo! — Essa é TEIMOSA — disse Aurora. — Ela não se monta juntando som. Essa a gente aprende de OLHAR. É como reconhecer o rosto de um amigo: você não soletra o rosto, você já sabe quem é!",
+      "Brilha encontrou palavras que aparecem muitas vezes nos textos: É, UM, UMA, AS e OS. Aurora explicou que elas também podem ser lidas observando letras, sons e sinais, como o acento de É. De tanto ler com atenção, o reconhecimento fica automático.",
     imagemUrl: brilha,
   },
 
@@ -45,8 +45,8 @@ export const aula01: AulaPortuguesV4 = {
         { texto: "Como cuidar de um sapo.", imagemUrl: sapo },
       ],
       respostaCerta: 0,
-      feedbackAcerto: "🎉 Isso! Hoje as palavras aparecem rapidinho e somem.",
-      feedbackErro: "As pistas são uma luz que pisca e palavras: são palavras que aparecem rápido.",
+      feedbackAcerto: "🎉 Isso! Hoje vamos observar e reconhecer palavras frequentes.",
+      feedbackErro: "As pistas mostram uma luz e palavras: vamos observar palavras frequentes.",
     },
   },
 
@@ -54,15 +54,15 @@ export const aula01: AulaPortuguesV4 = {
     instrucao: "Duas ideias novas antes de começar:",
     cards: [
       {
-        palavra: "palavra teimosa",
+        palavra: "palavra frequente",
         explicacao:
-          "É a palavrinha que não dá pra montar juntando os sons. A gente aprende olhando e guardando o desenho dela inteiro.",
-        exemplo: "É, UM, UMA, AS, OS são palavras teimosas.",
+          "É uma palavra que aparece muitas vezes. Lemos observando letras, sons, acentos e o sentido da frase; com prática, reconhecemos com facilidade.",
+        exemplo: "É, UM, UMA, AS e OS são palavras frequentes.",
         imagemUrl: livro,
       },
       {
         palavra: "num relance",
-        explicacao: "É reconhecer bem rápido, quase sem tempo de pensar.",
+        explicacao: "É reconhecer com facilidade depois de observar e praticar a escrita e a pronúncia.",
         exemplo: "Você reconhece a sua casa num relance, sem olhar tijolo por tijolo.",
         imagemUrl: estrela,
       },
@@ -89,7 +89,7 @@ export const aula01: AulaPortuguesV4 = {
   },
 
   momento04_leituraGuiada: {
-    instrucao: "Vamos ler juntos. Toda vez que aparecer uma palavra teimosa, aponte o dedo nela.",
+    instrucao: "Vamos ler juntos. Quando aparecer uma palavra frequente estudada, aponte o dedo nela.",
     leitura: {
       titulo: "O Lago do Pato",
       imagemUrl: pato,
@@ -114,11 +114,11 @@ export const aula01: AulaPortuguesV4 = {
         ondeEstaNoTexto: "O pato É bonito. Ele É UM pato do lago.",
       },
       {
-        pergunta: "Qual dessas é uma palavra teimosa do texto?",
+        pergunta: "Qual dessas é uma palavra frequente estudada no texto?",
         opcoes: ["PATO", "AS", "LAGO"],
         correta: 1,
-        feedbackAcerto: "🎉 Isso! AS é teimosa: a gente reconhece de olhar.",
-        feedbackErro: "PATO e LAGO a gente monta juntando sílabas. AS não — ela é teimosa.",
+        feedbackAcerto: "🎉 Isso! AS aparece com frequência e foi praticada nesta aula.",
+        feedbackErro: "AS é uma das palavras frequentes destacadas no texto.",
         ondeEstaNoTexto: "AS patas dele remam.",
       },
     ],
@@ -160,7 +160,7 @@ export const aula01: AulaPortuguesV4 = {
   },
 
   momento08_leituraIndependente: {
-    instrucao: "Agora leia sozinho. As palavras teimosas já são suas conhecidas.",
+    instrucao: "Agora leia sozinho, no seu ritmo. As palavras frequentes já foram praticadas.",
     leitura: {
       titulo: "A Bola",
       imagemUrl: bola,
@@ -184,42 +184,42 @@ export const aula01: AulaPortuguesV4 = {
 
   momento09_revisao: {
     pontos: [
-      "Palavra teimosa não se monta juntando os sons — a gente reconhece OLHANDO.",
-      "As teimosas de hoje: É, UM, UMA, AS, OS.",
-      "Elas aparecem em quase todo texto: quem as reconhece rápido lê mais solto.",
+      "Palavras frequentes também são lidas relacionando escrita, sons e sentido.",
+      "As frequentes de hoje: É, UM, UMA, AS, OS.",
+      "Com prática, o reconhecimento fica automático e libera atenção para compreender.",
     ],
     miniDesafio: {
-      pergunta: "Qual destas é uma palavra teimosa?",
+      pergunta: "Qual destas é uma palavra frequente estudada hoje?",
       opcoes: ["UMA", "SAPO", "BOLA"],
       correta: 0,
       feedbackAcerto: "🎉 Isso!",
-      feedbackErro: "SAPO e BOLA a gente monta com sílabas. UMA a gente aprende de olhar.",
+      feedbackErro: "UMA foi uma das palavras frequentes praticadas nesta aula.",
     },
   },
 
   momento10_avaliacao: {
     perguntas: [
       {
-        pergunta: "1/5 — O que é uma palavra teimosa?",
+        pergunta: "1/5 — O que é uma palavra frequente?",
         opcoes: [
-          "Uma palavra que a gente reconhece olhando, sem juntar os sons",
+          "Uma palavra que aparece muitas vezes e fica mais fácil com a prática",
           "Uma palavra muito comprida",
           "Uma palavra que ninguém usa",
           "Uma palavra escrita errado",
         ],
         correta: 0,
         feedbackAcerto: "🎉 Isso!",
-        feedbackErro: "Não é comprida nem errada: é a palavrinha que não se monta juntando sons.",
+        feedbackErro: "Palavra frequente é a que aparece muitas vezes nos textos.",
       },
       {
-        pergunta: "2/5 — Qual destas NÃO é palavra teimosa?",
+        pergunta: "2/5 — Qual destas NÃO foi uma palavra frequente estudada hoje?",
         opcoes: ["PATO", "É", "UM", "AS"],
         correta: 0,
         feedbackAcerto: "🎉 Isso! PATO se monta: PA + TO.",
-        feedbackErro: "PATO dá pra montar juntando PA e TO. As outras três, não.",
+        feedbackErro: "As palavras frequentes estudadas foram É, UM, UMA, AS e OS. PATO não estava nesse grupo.",
       },
       {
-        pergunta: "3/5 — 'O sapo ___ verde.' Qual palavra teimosa completa?",
+        pergunta: "3/5 — 'O sapo ___ verde.' Qual palavra frequente completa?",
         opcoes: ["É", "E", "Ê", "AS"],
         correta: 0,
         feedbackAcerto: "🎉 Isso! 'O sapo É verde.'",
@@ -233,7 +233,7 @@ export const aula01: AulaPortuguesV4 = {
         feedbackErro: "PATO é um só e é masculino: fica UM pato.",
       },
       {
-        pergunta: "5/5 — Por que treinar as palavras teimosas ajuda a ler?",
+        pergunta: "5/5 — Por que praticar palavras frequentes ajuda a ler?",
         opcoes: [
           "Porque elas aparecem em quase todas as frases",
           "Porque elas são as mais bonitas",
@@ -241,14 +241,14 @@ export const aula01: AulaPortuguesV4 = {
           "Porque elas nunca aparecem",
         ],
         correta: 0,
-        feedbackAcerto: "🎉 Isso! Reconhecer rápido o que mais aparece solta a leitura.",
+        feedbackAcerto: "🎉 Isso! Reconhecer com facilidade o que aparece muito libera atenção para compreender.",
         feedbackErro: "Não é por tamanho nem beleza: é porque elas aparecem o tempo todo nos textos.",
       },
     ],
   },
 
   momento11_missaoFamilia: {
-    titulo: "🏠 Caça às Palavras Teimosas",
+    titulo: "🏠 Caça às Palavras Frequentes",
     materiais: ["Um livrinho, uma revista ou uma embalagem", "Lápis"],
     passos: [
       "1) Escolham qualquer texto que tenha em casa.",
@@ -256,13 +256,13 @@ export const aula01: AulaPortuguesV4 = {
       "3) Cada uma encontrada vale um ponto. Contem juntos.",
       "4) Leiam em voz alta a frase inteira onde cada uma apareceu.",
     ],
-    registro: "📸 Foto do texto com as palavras teimosas circuladas.",
+    registro: "📸 Foto do texto com as palavras frequentes circuladas.",
   },
 
   momento_fluencia: {
     titulo: "Ler de novo, mais solto",
     instrucao:
-      "Agora a gente lê o MESMO texto três vezes: a primeira comigo, a segunda sozinho e a terceira de novo. As palavras teimosas vão ficando fáceis.",
+      "Leia o mesmo texto três vezes: primeiro com apoio, depois sozinho no seu ritmo e novamente buscando precisão, expressão e compreensão. O tempo é apenas uma referência; entender o texto vem primeiro.",
     texto: ["O PATO É BONITO.", "AS PATAS REMAM.", "OS PEIXES OLHAM."],
     metaSegundos: 18,
   },

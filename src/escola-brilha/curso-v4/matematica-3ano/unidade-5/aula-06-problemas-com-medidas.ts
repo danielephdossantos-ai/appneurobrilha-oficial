@@ -95,9 +95,9 @@ export const aula06_problemasMedidas: AulaV4 = {
   },
   momento10_avaliacao: {
     perguntas: [
-      { pergunta: "5 fitas de 40 cm = ?", opcoes: ["200 cm", "45 cm", "20 cm"], correta: 0, feedbackAcerto: "🎉 200 cm.", feedbackErro: "5×40=200." },
-      { pergunta: "1 kg − 400 g = ?", opcoes: ["600 g", "400 g", "1400 g"], correta: 0, feedbackAcerto: "🎉 600 g.", feedbackErro: "1000−400=600." },
-      { pergunta: "Meia hora + 20 min = ?", opcoes: ["50 min", "30 min", "1 h"], correta: 0, feedbackAcerto: "🎉 50 min.", feedbackErro: "30+20=50." },
+      { pergunta: "5 fitas de 40 cm = ?", opcoes: ["200 cm", "45 cm", "20 cm"], correta: 0, feedbackAcerto: "🎉 Cinco comprimentos de 40 cm formam 5 × 40 = 200 cm.", feedbackErro: "São cinco grupos iguais de 40 cm: 40 + 40 + 40 + 40 + 40 = 200 cm." },
+      { pergunta: "1 kg − 400 g = ?", opcoes: ["600 g", "400 g", "1400 g"], correta: 0, feedbackAcerto: "🎉 Convertemos 1 kg em 1000 g e calculamos 1000 − 400 = 600 g.", feedbackErro: "Primeiro use a mesma unidade: 1 kg = 1000 g; depois retire 400 g." },
+      { pergunta: "Meia hora + 20 min = ?", opcoes: ["50 min", "30 min", "1 h"], correta: 0, feedbackAcerto: "🎉 Meia hora são 30 minutos; 30 + 20 = 50 minutos.", feedbackErro: "Converta meia hora em 30 minutos e acrescente os 20 minutos." },
     ],
   },
   momento11_missaoFamilia: {

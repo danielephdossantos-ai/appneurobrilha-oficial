@@ -12,7 +12,7 @@ export const aula02: AulaGeoV1 = {
   titulo: "Tecnologia e Qualidade de Vida",
   iconeTrilha: "💉",
   recompensa: { xp: 130, moedas: 50, medalha: "Historiador da Saúde Júnior" },
-  bncc: ["EF07CI11"],
+  bncc: ["EF07CI10", "EF07CI11"],
   duracaoMin: 40,
 
   cena01_motivacao: {
@@ -37,6 +37,7 @@ export const aula02: AulaGeoV1 = {
       { id: "penicilina", titulo: "Descoberta da penicilina", subtitulo: "primeiro antibiótico eficaz", emoji: "💊", cor: "from-emerald-500 to-teal-700", fotoUrl: microorgImg },
       { id: "sabao", titulo: "Invenção do sabão", subtitulo: "já existia há séculos", emoji: "🧼", cor: "from-slate-500 to-slate-700", fotoUrl: especiesImg },
       { id: "nada", titulo: "Nada mudou", subtitulo: "infecções continuam letais igual", emoji: "❌", cor: "from-rose-500 to-red-700", fotoUrl: microorgImg },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "penicilina",
     feedbackAcerto:
@@ -92,6 +93,7 @@ export const aula02: AulaGeoV1 = {
           { id: "a", emoji: "💊", titulo: "Alexander Fleming (1928)", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🔬", titulo: "Antonie van Leeuwenhoek", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "💉", titulo: "Edward Jenner", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. Fleming observou o efeito do mofo Penicillium sobre bactérias em 1928.",
         feedbackErro: "Leeuwenhoek viu os primeiros micróbios; Jenner criou a primeira vacina. Quem descobriu o ANTIBIÓTICO foi FLEMING." },
@@ -100,6 +102,7 @@ export const aula02: AulaGeoV1 = {
           { id: "a", emoji: "🦠", titulo: "Bactérias", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🦠", titulo: "Vírus", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🦠", titulo: "Qualquer microrganismo, sem distinção", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Sim. Antibiótico só funciona contra BACTÉRIAS. Vírus precisam de outros tratamentos.",
         feedbackErro: "Antibiótico NÃO mata vírus (por isso não tratam gripe comum). Funcionam só contra BACTÉRIAS." },
@@ -108,6 +111,7 @@ export const aula02: AulaGeoV1 = {
           { id: "a", emoji: "🚰", titulo: "Separa a água potável do esgoto contaminado com microrganismos", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "💊", titulo: "Substitui os antibióticos", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🔬", titulo: "Cria novos microrganismos benéficos", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. Saneamento PREVINE o contato com micróbios patogênicos, reduzindo doenças na origem.",
         feedbackErro: "Saneamento não substitui remédio nem cria micróbios — ele PREVINE contato com água/esgoto contaminados." },
@@ -209,6 +213,8 @@ export const aula02: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Varíola, por Edward Jenner em 1796", correta: true },
           { id: "b", texto: "Gripe, por Alexander Fleming em 1928" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. Jenner criou a vacina da varíola em 1796 usando o vírus bovino mais fraco.",
         feedbackErro: "Fleming descobriu a PENICILINA (antibiótico), não vacina. A primeira vacina foi de Jenner contra a VARÍOLA." },
@@ -216,6 +222,8 @@ export const aula02: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Porque a gripe é causada por vírus, e antibióticos só agem contra bactérias", correta: true },
           { id: "b", texto: "Porque a gripe não tem cura de nenhum tipo" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Exato. Antibiótico é específico contra bactérias — vírus exigem outra abordagem.",
         feedbackErro: "A gripe é causada por VÍRUS, e antibiótico só age em BACTÉRIAS. Por isso não funciona." },
@@ -223,6 +231,8 @@ export const aula02: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Varíola", correta: true },
           { id: "b", texto: "Gripe" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. A varíola é a única doença humana totalmente erradicada até hoje.",
         feedbackErro: "A gripe ainda circula. A doença ERRADICADA em 1980 foi a VARÍOLA." },

@@ -21,7 +21,7 @@ export const aula1: AulaPortuguesV4 = {
   slug: "aula-01-poesia-ritmo-e-rima",
   titulo: "Poesia: ritmo e rima",
   iconeTrilha: "🌙",
-  bncc: ["EF05LP28", "EF15LP18"],
+  bncc: ["EF05LP28", "EF35LP23", "EF35LP27", "EF35LP28", "EF35LP31", "EF15LP17", "EF15LP18"],
   duracaoMin: 25,
 
   momento01_motivacao: {

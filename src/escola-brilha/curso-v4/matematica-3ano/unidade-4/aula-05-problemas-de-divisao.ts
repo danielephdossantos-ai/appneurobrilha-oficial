@@ -4,7 +4,7 @@ export const aula05_problemasDivisao: AulaV4 = {
   slug: "u4-05-problemas-divisao",
   titulo: "Problemas de Dividir",
   iconeTrilha: "🧩",
-  bncc: ["EF03MA10"],
+  bncc: ["EF03MA08"],
   duracaoMin: 20,
   metodologias: ["skemp", "cpa"],
   momento01_motivacao: {
@@ -15,7 +15,7 @@ export const aula05_problemasDivisao: AulaV4 = {
     instrucao: "Palavras-chave.",
     cenas: [
       { tipo: "texto", texto: "Repartir · Cada · Igualmente · Quantos grupos → DIVISÃO." },
-      { tipo: "texto", texto: "Cuidado: 'ao todo' → soma; 'sobrou' → subtração.", destaque: true },
+      { tipo: "texto", texto: "Cuidado: escolha a operação entendendo como as quantidades se relacionam, não por uma palavra isolada.", destaque: true },
     ],
   },
   momento03_descoberta: {
@@ -83,7 +83,7 @@ export const aula05_problemasDivisao: AulaV4 = {
     },
   },
   momento09_revisao: {
-    pontos: ["Leia o problema.", "Ache a palavra-chave.", "Escolha a operação."],
+    pontos: ["Leia o problema.", "Identifique o total e o que será repartido ou agrupado.", "Escolha a operação pela relação entre as quantidades."],
     miniDesafio: {
       tipo: "escolhaVisual",
       pergunta: "'Repartir igualmente' pede qual conta?",
@@ -95,9 +95,9 @@ export const aula05_problemasDivisao: AulaV4 = {
   },
   momento10_avaliacao: {
     perguntas: [
-      { pergunta: "28 doces para 7 crianças. Cada uma:", opcoes: ["4", "3", "5"], correta: 0, feedbackAcerto: "🎉 4.", feedbackErro: "28÷7=4." },
-      { pergunta: "60 cadeiras em 6 fileiras. Cada fileira:", opcoes: ["10", "8", "12"], correta: 0, feedbackAcerto: "🎉 10.", feedbackErro: "60÷6=10." },
-      { pergunta: "42 pães em 7 sacos. Cada saco:", opcoes: ["6", "5", "7"], correta: 0, feedbackAcerto: "🎉 6.", feedbackErro: "42÷7=6." },
+      { pergunta: "28 doces para 7 crianças. Cada uma:", opcoes: ["4", "3", "5"], correta: 0, feedbackAcerto: "🎉 Repartindo 28 igualmente entre 7 crianças, cada uma recebe 4.", feedbackErro: "Forme 7 grupos iguais: 7 × 4 = 28, então cada grupo tem 4." },
+      { pergunta: "60 cadeiras em 6 fileiras. Cada fileira:", opcoes: ["10", "8", "12"], correta: 0, feedbackAcerto: "🎉 Seis fileiras com 10 cadeiras formam as 60 cadeiras.", feedbackErro: "Procure o valor de 6 × ? = 60; são 10 cadeiras por fileira." },
+      { pergunta: "42 pães em 7 sacos. Cada saco:", opcoes: ["6", "5", "7"], correta: 0, feedbackAcerto: "🎉 Sete sacos com 6 pães formam o total de 42.", feedbackErro: "Confira pela multiplicação: 7 × 6 = 42." },
     ],
   },
   momento11_missaoFamilia: {

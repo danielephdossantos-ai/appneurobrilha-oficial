@@ -6,6 +6,7 @@ import { aula04_notacaoPequeno } from "./aula-04-notacao-pequeno";
 import { aula05_operacoesNC } from "./aula-05-operacoes-nc";
 import { aula06_comparar } from "./aula-06-comparar";
 import { aula07_missao } from "./aula-07-missao";
+import { aulaRadiciacao } from "../aulas-bncc-complementares";
 
 export const unidade1: Unidade = {
   slug: "unidade-1-reais-na-oficina",
@@ -18,6 +19,7 @@ export const unidade1: Unidade = {
   aulas: [
     aula01_dizimas,
     aula02_potencias,
+    aulaRadiciacao,
     aula03_notacaoGrande,
     aula04_notacaoPequeno,
     aula05_operacoesNC,

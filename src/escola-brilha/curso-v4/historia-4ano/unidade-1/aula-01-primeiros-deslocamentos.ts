@@ -59,6 +59,8 @@ export const aula01: AulaGeoV1 = {
         cor: "from-slate-500 to-slate-700",
         fotoUrl: imgSavana,
       },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "migrando",
     feedbackAcerto:
@@ -183,6 +185,7 @@ export const aula01: AulaGeoV1 = {
           { id: "no", emoji: "🚶", titulo: "Nômade", cor: "from-amber-500 to-orange-700" },
           { id: "se", emoji: "🌾", titulo: "Sedentário", cor: "from-emerald-500 to-teal-700" },
           { id: "ur", emoji: "🏙️", titulo: "Urbano", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "no",
         feedbackAcerto:
@@ -198,6 +201,7 @@ export const aula01: AulaGeoV1 = {
           { id: "ag", emoji: "🌾", titulo: "A agricultura (plantio)", cor: "from-emerald-500 to-teal-700" },
           { id: "es", emoji: "💻", titulo: "A escrita digital", cor: "from-slate-500 to-slate-700" },
           { id: "el", emoji: "⚡", titulo: "A eletricidade", cor: "from-amber-500 to-orange-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "ag",
         feedbackAcerto:
@@ -214,6 +218,7 @@ export const aula01: AulaGeoV1 = {
           { id: "ve", emoji: "🦴", titulo: "Vestígios arqueológicos", cor: "from-slate-500 to-slate-700" },
           { id: "li", emoji: "📚", titulo: "Documentos oficiais", cor: "from-emerald-500 to-teal-700" },
           { id: "no", emoji: "📰", titulo: "Notícias de jornal", cor: "from-amber-500 to-orange-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "ve",
         feedbackAcerto:
@@ -486,6 +491,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Sedentário.", correta: false },
           { id: "b", texto: "Nômade.", correta: true },
           { id: "c", texto: "Urbano moderno.", correta: false },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto! Sem casa fixa + em movimento = NÔMADE.",
         feedbackErro: "Sedentário é o CONTRÁRIO (fixo). Sem moradia + em movimento = NÔMADE.",
@@ -497,6 +503,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "A invenção da escrita digital.", correta: false },
           { id: "b", texto: "O desenvolvimento da agricultura.", correta: true },
           { id: "c", texto: "A energia elétrica.", correta: false },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Perfeito! A AGRICULTURA permitiu produzir comida no mesmo lugar — Revolução Agrícola.",
         feedbackErro: "Escrita e eletricidade são recentes. Quem fixou a humanidade foi a AGRICULTURA.",
@@ -509,6 +516,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Um único grupo NÔMADE que se deslocava entre as cavernas.", correta: true },
           { id: "b", texto: "Três cidades sedentárias já organizadas.", correta: false },
           { id: "c", texto: "Que os humanos surgiram em cada caverna.", correta: false },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto:
           "Isso! Vestígios iguais em cavernas distantes = mesmo grupo NÔMADE se deslocando.",

@@ -29,10 +29,10 @@ import { url as lixeira } from "@/assets/neuro-treino/objetos/lixeira.png.asset.
  * e com quem vive no mesmo município.
  */
 export const aula04: AulaPortuguesV4 = {
-  slug: "aula-04-riscos-e-cuidados",
+  slug: "aula-04-riscos-e-cuidados-municipio",
   titulo: "Riscos e Cuidados no Meu Município",
   iconeTrilha: "🚦",
-  bncc: ["EF02GE08"],
+  bncc: [],
   duracaoMin: 15,
 
   momento01_motivacao: {
@@ -77,12 +77,11 @@ export const aula04: AulaPortuguesV4 = {
         },
         { texto: "Sobre cantar músicas em coral.", imagemUrl: escola },
         { texto: "Sobre plantar árvores no sítio.", imagemUrl: campo },
+        { texto: "Sobre outra possibilidade relacionada ao tema.", imagemUrl: rua },
       ],
       respostaCerta: 0,
-      feedbackAcerto:
-        "🎉 Isso! Fala dos CUIDADOS pra evitar acidentes no município.",
-      feedbackErro:
-        "As pistas são RUA, BICI e FOGO. É sobre CUIDADOS.",
+      feedbackAcerto: "🎉 Isso! Fala dos CUIDADOS pra evitar acidentes no município.",
+      feedbackErro: "As pistas são RUA, BICI e FOGO. É sobre CUIDADOS.",
     },
   },
 
@@ -141,44 +140,39 @@ export const aula04: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "Pra atravessar a rua com segurança, a gente usa…",
-        opcoes: ["A faixa de pedestre", "O meio da rua correndo", "O telhado"],
+        opcoes: [
+          "A faixa de pedestre",
+          "O meio da rua correndo",
+          "O telhado",
+          "Outra possibilidade",
+        ],
         correta: 0,
         feedbackAcerto: "🎉 Isso! A FAIXA DE PEDESTRE.",
-        feedbackErro:
-          "O texto diz: 'a gente usa a FAIXA DE PEDESTRE'.",
+        feedbackErro: "O texto diz: 'a gente usa a FAIXA DE PEDESTRE'.",
         ondeEstaNoTexto: "…a gente usa a FAIXA DE PEDESTRE…",
       },
       {
         pergunta: "Pra onde olhar PRIMEIRO antes de atravessar?",
-        opcoes: ["Só pra cima", "Esquerda, depois direita", "Só pra trás"],
+        opcoes: ["Só pra cima", "Esquerda, depois direita", "Só pra trás", "Outra possibilidade"],
         correta: 1,
-        feedbackAcerto:
-          "🎉 ESQUERDA primeiro, depois DIREITA.",
-        feedbackErro:
-          "O texto diz: 'olha primeiro pra ESQUERDA, depois pra DIREITA'.",
-        ondeEstaNoTexto:
-          "…olha primeiro pra ESQUERDA, depois pra DIREITA…",
+        feedbackAcerto: "🎉 ESQUERDA primeiro, depois DIREITA.",
+        feedbackErro: "O texto diz: 'olha primeiro pra ESQUERDA, depois pra DIREITA'.",
+        ondeEstaNoTexto: "…olha primeiro pra ESQUERDA, depois pra DIREITA…",
       },
       {
         pergunta: "Andando de BICICLETA, o que a gente usa na cabeça?",
-        opcoes: ["Chapéu de festa", "Capacete", "Nada"],
+        opcoes: ["Chapéu de festa", "Capacete", "Nada", "Outra possibilidade"],
         correta: 1,
-        feedbackAcerto:
-          "🎉 CAPACETE — protege a cabeça se cair.",
+        feedbackAcerto: "🎉 CAPACETE — protege a cabeça se cair.",
         feedbackErro: "O texto diz: 'use o CAPACETE'.",
         ondeEstaNoTexto: "…use o CAPACETE…",
       },
       {
         pergunta: "Encontrei uma tomada solta. O que faço?",
-        opcoes: [
-          "Enfio o dedo",
-          "Chamo um ADULTO",
-          "Coloco água",
-        ],
+        opcoes: ["Enfio o dedo", "Chamo um ADULTO", "Coloco água", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 CHAMA um adulto. SEMPRE.",
-        feedbackErro:
-          "O texto diz: 'Chame SEMPRE um ADULTO'.",
+        feedbackErro: "O texto diz: 'Chame SEMPRE um ADULTO'.",
         ondeEstaNoTexto: "…Chame SEMPRE um ADULTO…",
       },
     ],
@@ -193,17 +187,17 @@ export const aula04: AulaPortuguesV4 = {
           "Sair correndo sem olhar",
           "Parar, olhar dos dois lados, atravessar na faixa",
           "Fechar os olhos e correr",
+          "Outra possibilidade",
         ],
-        opcoesImagens: [carro, rua, cidade],
+        opcoesImagens: [carro, rua, cidade, carro],
         correta: 1,
         feedbackAcerto: "🎉 Isso! PARAR, olhar dos DOIS lados, faixa.",
-        feedbackErro:
-          "Antes de atravessar, PARE e OLHE os dois lados.",
+        feedbackErro: "Antes de atravessar, PARE e OLHE os dois lados.",
       },
       {
         pergunta: "Vou andar de bicicleta na praça. O que uso?",
-        opcoes: ["Chinelo e sem capacete", "Capacete", "Guarda-chuva"],
-        opcoesImagens: [bicicletaModerna, sabonete, chuva],
+        opcoes: ["Chinelo e sem capacete", "Capacete", "Guarda-chuva", "Outra possibilidade"],
+        opcoesImagens: [bicicletaModerna, sabonete, chuva, bicicletaModerna],
         correta: 1,
         feedbackAcerto: "🎉 CAPACETE — protege a cabeça.",
         feedbackErro: "Andar de bici PEDE CAPACETE.",
@@ -214,13 +208,12 @@ export const aula04: AulaPortuguesV4 = {
           "Deitar sujo na cama",
           "LAVAR as mãos com água e sabão",
           "Comer com a mão suja",
+          "Outra possibilidade",
         ],
-        opcoesImagens: [familiaTradicional, lavarMaos, sabonete],
+        opcoesImagens: [familiaTradicional, lavarMaos, sabonete, familiaTradicional],
         correta: 1,
-        feedbackAcerto:
-          "🎉 LAVAR as mãos — cuida da saúde.",
-        feedbackErro:
-          "Ao voltar da rua, LAVE as mãos com sabão.",
+        feedbackAcerto: "🎉 LAVAR as mãos — cuida da saúde.",
+        feedbackErro: "Ao voltar da rua, LAVE as mãos com sabão.",
       },
     ],
   },
@@ -233,13 +226,15 @@ export const aula04: AulaPortuguesV4 = {
         { id: "s1", texto: "1) PARAR na calçada, perto da faixa.", imagemUrl: rua },
         { id: "s2", texto: "2) OLHAR pra ESQUERDA.", imagemUrl: setaEsquerda },
         { id: "s3", texto: "3) OLHAR pra DIREITA.", imagemUrl: setaDireita },
-        { id: "s4", texto: "4) Se não vier carro, ATRAVESSAR na faixa, andando.", imagemUrl: pontoOnibus },
+        {
+          id: "s4",
+          texto: "4) Se não vier carro, ATRAVESSAR na faixa, andando.",
+          imagemUrl: pontoOnibus,
+        },
       ],
       ordemCerta: ["s1", "s2", "s3", "s4"],
-      feedbackAcerto:
-        "🎉 Perfeito! Parar → esquerda → direita → atravessar.",
-      feedbackErro:
-        "Primeiro PARE, depois OLHE esquerda, DEPOIS direita, e só então atravesse.",
+      feedbackAcerto: "🎉 Perfeito! Parar → esquerda → direita → atravessar.",
+      feedbackErro: "Primeiro PARE, depois OLHE esquerda, DEPOIS direita, e só então atravesse.",
     },
   },
 
@@ -261,13 +256,12 @@ export const aula04: AulaPortuguesV4 = {
           "Porque era fria demais",
           "Porque pode ter bicho, doença e bueiro aberto",
           "Porque era proibido rir",
+          "Outra possibilidade",
         ],
-        opcoesImagens: [chuva, postoSaude, praca],
+        opcoesImagens: [chuva, postoSaude, praca, chuva],
         correta: 1,
-        feedbackAcerto:
-          "🎉 Pode ter BICHO, DOENÇA e BUEIRO ABERTO.",
-        feedbackErro:
-          "O texto diz: 'pode ter bicho, doença e bueiro aberto'.",
+        feedbackAcerto: "🎉 Pode ter BICHO, DOENÇA e BUEIRO ABERTO.",
+        feedbackErro: "O texto diz: 'pode ter bicho, doença e bueiro aberto'.",
         ondeEstaNoTexto: "…pode ter bicho, doença e bueiro aberto…",
       },
       {
@@ -276,12 +270,12 @@ export const aula04: AulaPortuguesV4 = {
           "Ficou dentro de casa até parar",
           "Foi nadar na rua",
           "Correu no meio dos carros",
+          "Outra possibilidade",
         ],
-        opcoesImagens: [familiaTradicional, chuva, rua],
+        opcoesImagens: [familiaTradicional, chuva, rua, familiaTradicional],
         correta: 0,
         feedbackAcerto: "🎉 Ficou EM CASA até passar.",
-        feedbackErro:
-          "O texto diz: 'Brilha esperou parar. Depois foi tudo tranquilo.'",
+        feedbackErro: "O texto diz: 'Brilha esperou parar. Depois foi tudo tranquilo.'",
         ondeEstaNoTexto: "…Fique dentro de casa…",
       },
     ],
@@ -309,12 +303,11 @@ export const aula04: AulaPortuguesV4 = {
               { id: "perigoso", nome: "PERIGOSO", imagemUrl: carro },
               { id: "seguro", nome: "SEGURO", imagemUrl: rua },
               { id: "escola", nome: "Escola", imagemUrl: escola },
+              { id: "outra-opcao-2", nome: "Outra possibilidade", imagemUrl: carro },
             ],
             correta: "perigoso",
-            feedbackAcerto:
-              "🎉 PERIGOSO! O carro pode não conseguir parar.",
-            feedbackErro:
-              "Correr sem olhar é PERIGOSO — o motorista pode não ver.",
+            feedbackAcerto: "🎉 PERIGOSO! O carro pode não conseguir parar.",
+            feedbackErro: "Correr sem olhar é PERIGOSO — o motorista pode não ver.",
           },
           {
             id: "r2",
@@ -322,19 +315,17 @@ export const aula04: AulaPortuguesV4 = {
               nome: "Bicicleta com capacete",
               emojiLugar: "🚲",
               emojiMorador: "🪖",
-              pista:
-                "Criança andando de BICI com CAPACETE bem preso na cabeça.",
+              pista: "Criança andando de BICI com CAPACETE bem preso na cabeça.",
             },
             opcoes: [
               { id: "seguro", nome: "SEGURO", imagemUrl: bicicletaModerna },
               { id: "perigoso", nome: "PERIGOSO", imagemUrl: fogo },
               { id: "praca", nome: "Praça", imagemUrl: praca },
+              { id: "outra-opcao-3", nome: "Outra possibilidade", imagemUrl: bicicletaModerna },
             ],
             correta: "seguro",
-            feedbackAcerto:
-              "🎉 SEGURO! Capacete PROTEGE a cabeça se cair.",
-            feedbackErro:
-              "Capacete PROTEGE a cabeça — isso é SEGURO.",
+            feedbackAcerto: "🎉 SEGURO! Capacete PROTEGE a cabeça se cair.",
+            feedbackErro: "Capacete PROTEGE a cabeça — isso é SEGURO.",
           },
           {
             id: "r3",
@@ -342,19 +333,17 @@ export const aula04: AulaPortuguesV4 = {
               nome: "Mexer no fogão sozinho",
               emojiLugar: "🔥",
               emojiMorador: "🧒",
-              pista:
-                "Criança sozinha na cozinha querendo ACENDER o fogo do fogão.",
+              pista: "Criança sozinha na cozinha querendo ACENDER o fogo do fogão.",
             },
             opcoes: [
               { id: "perigoso", nome: "PERIGOSO", imagemUrl: fogo },
               { id: "seguro", nome: "SEGURO", imagemUrl: sabonete },
               { id: "posto", nome: "Posto", imagemUrl: postoSaude },
+              { id: "outra-opcao-4", nome: "Outra possibilidade", imagemUrl: fogo },
             ],
             correta: "perigoso",
-            feedbackAcerto:
-              "🎉 PERIGOSO! Fogo só com um ADULTO junto.",
-            feedbackErro:
-              "Fogo sozinho é PERIGO. Sempre chame um ADULTO.",
+            feedbackAcerto: "🎉 PERIGOSO! Fogo só com um ADULTO junto.",
+            feedbackErro: "Fogo sozinho é PERIGO. Sempre chame um ADULTO.",
           },
           {
             id: "r4",
@@ -362,19 +351,17 @@ export const aula04: AulaPortuguesV4 = {
               nome: "Lavar as mãos ao chegar",
               emojiLugar: "🚰",
               emojiMorador: "🧼",
-              pista:
-                "Criança chega da rua e vai LAVAR as mãos com água e sabão antes de comer.",
+              pista: "Criança chega da rua e vai LAVAR as mãos com água e sabão antes de comer.",
             },
             opcoes: [
               { id: "seguro", nome: "SEGURO", imagemUrl: lavarMaos },
               { id: "perigoso", nome: "PERIGOSO", imagemUrl: fogo },
               { id: "lixeira", nome: "Lixeira", imagemUrl: lixeira },
+              { id: "outra-opcao-5", nome: "Outra possibilidade", imagemUrl: lavarMaos },
             ],
             correta: "seguro",
-            feedbackAcerto:
-              "🎉 SEGURO! Lavar as mãos evita doença.",
-            feedbackErro:
-              "Lavar as mãos EVITA doenças. É SEGURO.",
+            feedbackAcerto: "🎉 SEGURO! Lavar as mãos evita doença.",
+            feedbackErro: "Lavar as mãos EVITA doenças. É SEGURO.",
           },
           {
             id: "r5",
@@ -382,19 +369,17 @@ export const aula04: AulaPortuguesV4 = {
               nome: "Brincar na enchente",
               emojiLugar: "🌧️",
               emojiMorador: "💦",
-              pista:
-                "Chuva forte, água no meio da rua, e a criança pulando dentro da água suja.",
+              pista: "Chuva forte, água no meio da rua, e a criança pulando dentro da água suja.",
             },
             opcoes: [
               { id: "perigoso", nome: "PERIGOSO", imagemUrl: chuva },
               { id: "seguro", nome: "SEGURO", imagemUrl: praca },
               { id: "mapa", nome: "Mapa", imagemUrl: mapa },
+              { id: "outra-opcao-6", nome: "Outra possibilidade", imagemUrl: chuva },
             ],
             correta: "perigoso",
-            feedbackAcerto:
-              "🎉 PERIGOSO! Água suja tem doença e bueiro aberto.",
-            feedbackErro:
-              "Água de enchente tem bicho, doença e bueiro aberto. PERIGOSO.",
+            feedbackAcerto: "🎉 PERIGOSO! Água suja tem doença e bueiro aberto.",
+            feedbackErro: "Água de enchente tem bicho, doença e bueiro aberto. PERIGOSO.",
           },
         ],
         feedbackFinal:
@@ -416,12 +401,11 @@ export const aula04: AulaPortuguesV4 = {
         "Andar sem capacete",
         "Colocar o CAPACETE antes de subir na bici",
         "Fechar os olhos",
+        "Outra possibilidade",
       ],
       correta: 1,
-      feedbackAcerto:
-        "🎉 Colocar o CAPACETE antes é PREVENÇÃO.",
-      feedbackErro:
-        "PREVENÇÃO é usar o CAPACETE ANTES de andar.",
+      feedbackAcerto: "🎉 Colocar o CAPACETE antes é PREVENÇÃO.",
+      feedbackErro: "PREVENÇÃO é usar o CAPACETE ANTES de andar.",
     },
   },
 
@@ -429,36 +413,31 @@ export const aula04: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "1/5 — Onde é o lugar CERTO de atravessar a rua?",
-        opcoes: ["No meio da rua", "Na faixa de pedestre", "No telhado"],
+        opcoes: ["No meio da rua", "Na faixa de pedestre", "No telhado", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 FAIXA DE PEDESTRE.",
         feedbackErro: "Só atravesse na FAIXA DE PEDESTRE.",
       },
       {
         pergunta: "2/5 — Antes de atravessar, olhar pra…",
-        opcoes: ["Só pra cima", "Esquerda e depois direita", "Só pra trás"],
+        opcoes: ["Só pra cima", "Esquerda e depois direita", "Só pra trás", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 ESQUERDA e depois DIREITA.",
         feedbackErro: "Olhe ESQUERDA e depois DIREITA.",
       },
       {
         pergunta: "3/5 — Andando de bici, uso na cabeça:",
-        opcoes: ["Chapéu de aniversário", "Capacete", "Toalha"],
+        opcoes: ["Chapéu de aniversário", "Capacete", "Toalha", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 CAPACETE!",
         feedbackErro: "Sempre CAPACETE na bici.",
       },
       {
         pergunta: "4/5 — Vi FOGO ou TOMADA solta. O que faço?",
-        opcoes: [
-          "Mexo sozinho",
-          "Chamo um ADULTO",
-          "Jogo água",
-        ],
+        opcoes: ["Mexo sozinho", "Chamo um ADULTO", "Jogo água", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 CHAMA um ADULTO.",
-        feedbackErro:
-          "Sempre chame um ADULTO — nunca mexa sozinho.",
+        feedbackErro: "Sempre chame um ADULTO — nunca mexa sozinho.",
       },
       {
         pergunta: "5/5 — Em dia de ENCHENTE, o mais seguro é:",
@@ -466,11 +445,11 @@ export const aula04: AulaPortuguesV4 = {
           "Brincar na água da rua",
           "Ficar em casa até passar",
           "Nadar no bueiro",
+          "Outra possibilidade",
         ],
         correta: 1,
         feedbackAcerto: "🎉 Ficar em CASA até passar.",
-        feedbackErro:
-          "Água de enchente é PERIGOSA. Fique em casa.",
+        feedbackErro: "Água de enchente é PERIGOSA. Fique em casa.",
       },
     ],
   },
@@ -484,8 +463,7 @@ export const aula04: AulaPortuguesV4 = {
       "3) Combine com o adulto uma REGRA nova de segurança pra família (ex.: 'sempre capacete na bici').",
       "4) Cole o papel na geladeira pra família toda ver.",
     ],
-    registro:
-      "📸 Uma foto do papel de REGRAS colado na geladeira.",
+    registro: "📸 Uma foto do papel de REGRAS colado na geladeira.",
   },
 
   recompensa: {

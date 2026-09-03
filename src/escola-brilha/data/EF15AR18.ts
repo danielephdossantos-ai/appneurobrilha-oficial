@@ -1,0 +1,2 @@
+import { criarAulaArte1 } from "./criarAulaArte1";
+export default criarAulaArte1({ codigo: "EF15AR18", titulo: "Janelas do Teatro", foco: "Reconhecer e apreciar manifestações teatrais de diferentes contextos", objeto: "manifestações do teatro", exemplos: ["Assistir e ouvir uma história dramatizada", "Interromper a cena", "Copiar uma tabela", "Separar materiais"], resposta: "Observar personagens, espaço, ações e maneiras diferentes de contar uma história.", proxima: "EF15AR19" });

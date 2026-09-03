@@ -29,7 +29,7 @@ export const aula02: AulaPortuguesV4 = {
   slug: "aula-02-divulgacao-cientifica",
   titulo: "O Fenômeno do Arco-Íris",
   iconeTrilha: "🌈",
-  bncc: ["EF04LP12", "EF35LP15"],
+  bncc: ["EF04LP19", "EF35LP17", "EF15LP03"],
   duracaoMin: 22,
 
   momento01_motivacao: {

@@ -78,7 +78,7 @@ export const aula03: AulaPortuguesV4 = {
       },
       {
         palavra: "personagem",
-        explicacao: "Quem aparece na história.",
+        explicacao: "Quem participa dos acontecimentos da história.",
         exemplo: "O coelho e a raposa são os personagens.",
         imagemUrl: coelho,
       },
@@ -92,7 +92,7 @@ export const aula03: AulaPortuguesV4 = {
   },
 
   momento_ensinoVisual: {
-    titulo: "As 4 perguntas do reconto",
+    titulo: "Perguntas que ajudam no reconto",
     instrucao: "Ouça cada pergunta. Recontar é responder as quatro.",
     blocos: [
       {
@@ -131,7 +131,7 @@ export const aula03: AulaPortuguesV4 = {
         opcoes: ["O coelho e a raposa", "O gato e o rato", "A vovó e o sapo"],
         correta: 0,
         feedbackAcerto: "🎉 Isso! O coelho e a raposa.",
-        feedbackErro: "Personagem é quem aparece na história.",
+        feedbackErro: "Personagens participam dos acontecimentos. Nesta história, são o coelho e a raposa.",
         dica: "Procure os dois bichos do texto.",
         ondeEstaNoTexto: "A raposa viu e ajudou a procurar embaixo da folha.",
       },
@@ -190,7 +190,7 @@ export const aula03: AulaPortuguesV4 = {
       ],
       ordemCerta: ["h1", "h2", "h3", "h4"],
       feedbackAcerto: "🎉 Perfeito! Esse é o enredo completo.",
-      feedbackErro: "Toda história tem começo, problema e fim. Comece pela manhã no jardim.",
+      feedbackErro: "Nesta história, comece pela manhã no jardim, conte o que aconteceu depois e termine com o reencontro da cenoura.",
     },
   },
 
@@ -293,8 +293,8 @@ export const aula03: AulaPortuguesV4 = {
     pontos: [
       "Reconto é contar de novo, com as suas palavras.",
       "Escriba é quem escreve o que você fala.",
-      "Toda história tem personagem, lugar, tempo e enredo.",
-      "O enredo tem começo, problema e fim.",
+      "No reconto, citamos personagens, lugar e tempo quando forem importantes ou estiverem informados.",
+      "O enredo organiza os acontecimentos principais; algumas histórias apresentam problema e solução, outras não.",
     ],
     miniDesafio: {
       pergunta: "Quem escreve no reconto com escriba?",
@@ -316,7 +316,7 @@ export const aula03: AulaPortuguesV4 = {
       },
       {
         pergunta: "2/5 — Personagem é...",
-        opcoes: ["o lugar", "quem aparece na história", "a hora", "o título"],
+        opcoes: ["o lugar", "quem participa dos acontecimentos", "a hora", "o título"],
         correta: 1,
         feedbackAcerto: "🎉 Isso!",
         feedbackErro: "Personagem responde a pergunta QUEM?",
@@ -352,7 +352,7 @@ export const aula03: AulaPortuguesV4 = {
       "1) Um adulto lê uma história curtinha para a criança.",
       "2) A criança reconta com as próprias palavras, sem ler.",
       "3) O adulto é o ESCRIBA: escreve exatamente o que a criança falou.",
-      "4) Leiam juntos o reconto e confiram: tem personagem, lugar, tempo e o que aconteceu?",
+      "4) Leiam juntos e confiram se os acontecimentos essenciais estão em ordem. Incluam personagem, lugar e tempo quando forem importantes ou estiverem no texto.",
     ],
     registro: "📸 Uma foto do reconto escrito pela família.",
   },

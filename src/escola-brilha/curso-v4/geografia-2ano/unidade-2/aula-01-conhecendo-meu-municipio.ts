@@ -29,7 +29,7 @@ export const aula01: AulaPortuguesV4 = {
   slug: "aula-01-conhecendo-meu-municipio",
   titulo: "Conhecendo Meu Município",
   iconeTrilha: "🗺️",
-  bncc: ["EF02GE05"],
+  bncc: [],
   duracaoMin: 15,
 
   // 1 · MOTIVAÇÃO
@@ -42,8 +42,7 @@ export const aula01: AulaPortuguesV4 = {
 
   // 2 · PREVISÃO
   momento02_previsao: {
-    instrucao:
-      "Aurora deixou pistas no caderno de investigação. Leia o cartaz.",
+    instrucao: "Aurora deixou pistas no caderno de investigação. Leia o cartaz.",
     bloco: {
       titulo: "Missão do Município",
       capaImagemUrl: mapaPercurso,
@@ -81,10 +80,10 @@ export const aula01: AulaPortuguesV4 = {
           texto: "Sobre viajar de foguete pra Lua.",
           imagemUrl: pontoOnibus,
         },
+        { texto: "Sobre outra possibilidade relacionada ao tema.", imagemUrl: mapa },
       ],
       respostaCerta: 0,
-      feedbackAcerto:
-        "🎉 Isso! Cidade + campo no mesmo mapa = MUNICÍPIO. É o nosso lugar.",
+      feedbackAcerto: "🎉 Isso! Cidade + campo no mesmo mapa = MUNICÍPIO. É o nosso lugar.",
       feedbackErro:
         "Olhe as pistas: cidade, campo e o MAPA que junta tudo. A missão fala do MUNICÍPIO.",
     },
@@ -98,46 +97,34 @@ export const aula01: AulaPortuguesV4 = {
         palavra: "município",
         explicacao:
           "É o LUGAR inteiro onde a gente vive. Tem a parte de cidade E a parte de campo. Cada município tem UM nome (ex.: Salvador, Petrolina, Rio Branco).",
-        exemplo:
-          "Nosso MUNICÍPIO tem casas, ruas, sítios e um rio.",
+        exemplo: "Nosso MUNICÍPIO tem casas, ruas, sítios e um rio.",
         imagemUrl: mapa,
       },
       {
         palavra: "zona urbana",
         explicacao:
           "É a parte de CIDADE do município. Tem muitas casas, prédios, ruas e lojas perto uns dos outros.",
-        exemplo:
-          "A ESCOLA fica na ZONA URBANA do nosso município.",
+        exemplo: "A ESCOLA fica na ZONA URBANA do nosso município.",
         imagemUrl: cidade,
       },
       {
         palavra: "zona rural",
         explicacao:
           "É a parte de CAMPO do município. Tem sítios, fazendas, plantação e criação de animais.",
-        exemplo:
-          "O sítio da vovó fica na ZONA RURAL.",
+        exemplo: "O sítio da vovó fica na ZONA RURAL.",
         imagemUrl: campo,
       },
     ],
   },
 
-
   // 4 · LEITURA GUIADA
   momento04_leituraGuiada: {
-    instrucao:
-      "Aurora vai LER com você. Repare nas palavras destacadas.",
+    instrucao: "Aurora vai LER com você. Repare nas palavras destacadas.",
     leitura: {
       titulo: "O mapa do nosso município",
       imagemUrl: mapa,
       legendaImagem: "O município tem cidade E campo — dois pedaços num só lugar.",
-      destacar: [
-        "município",
-        "zona urbana",
-        "zona rural",
-        "cidade",
-        "campo",
-        "prefeito",
-      ],
+      destacar: ["município", "zona urbana", "zona rural", "cidade", "campo", "prefeito"],
       paragrafos: [
         "Todo lugar onde a gente vive tem um NOME. Esse lugar se chama MUNICÍPIO. O nosso município tem RUAS, casas, escolas — mas também tem SÍTIOS, plantação e animais.",
         "A parte cheia de PRÉDIOS e ruas se chama ZONA URBANA. Ali fica a maioria das casas, das lojas e das ESCOLAS. É o pedaço de CIDADE.",
@@ -149,93 +136,89 @@ export const aula01: AulaPortuguesV4 = {
 
   // 5 · COMPREENSÃO
   momento05_compreensao: {
-    instrucao:
-      "As respostas estão TODAS no texto. Volte lá se precisar.",
+    instrucao: "As respostas estão TODAS no texto. Volte lá se precisar.",
     perguntas: [
       {
         pergunta: "Como se chama o LUGAR inteiro onde a gente vive?",
-        opcoes: ["Município", "Prédio", "Escola"],
+        opcoes: ["Município", "Prédio", "Escola", "Outra possibilidade"],
         correta: 0,
-        feedbackAcerto:
-          "🎉 Isso! É o MUNICÍPIO.",
-        feedbackErro:
-          "O primeiro parágrafo diz: 'Esse lugar se chama MUNICÍPIO'.",
-        ondeEstaNoTexto:
-          "…Esse lugar se chama MUNICÍPIO…",
+        feedbackAcerto: "🎉 Isso! É o MUNICÍPIO.",
+        feedbackErro: "O primeiro parágrafo diz: 'Esse lugar se chama MUNICÍPIO'.",
+        ondeEstaNoTexto: "…Esse lugar se chama MUNICÍPIO…",
       },
       {
         pergunta: "Como se chama a parte cheia de PRÉDIOS e ruas?",
-        opcoes: ["Zona rural", "Zona urbana", "Zona da mata"],
+        opcoes: ["Zona rural", "Zona urbana", "Zona da mata", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 Certo! ZONA URBANA — é o pedaço de cidade.",
-        feedbackErro:
-          "O texto diz: 'A parte cheia de PRÉDIOS e ruas se chama ZONA URBANA'.",
-        ondeEstaNoTexto:
-          "…A parte cheia de PRÉDIOS e ruas se chama ZONA URBANA…",
+        feedbackErro: "O texto diz: 'A parte cheia de PRÉDIOS e ruas se chama ZONA URBANA'.",
+        ondeEstaNoTexto: "…A parte cheia de PRÉDIOS e ruas se chama ZONA URBANA…",
       },
       {
         pergunta: "Como se chama a parte com plantação e animais?",
-        opcoes: ["Zona urbana", "Zona da praia", "Zona rural"],
+        opcoes: ["Zona urbana", "Zona da praia", "Zona rural", "Outra possibilidade"],
         correta: 2,
         feedbackAcerto: "🎉 Boa! ZONA RURAL — é o pedaço de campo.",
-        feedbackErro:
-          "O texto diz: 'A parte com muita TERRA, plantação… se chama ZONA RURAL'.",
+        feedbackErro: "O texto diz: 'A parte com muita TERRA, plantação… se chama ZONA RURAL'.",
         ondeEstaNoTexto:
           "…A parte com muita TERRA, plantação e criação de animais se chama ZONA RURAL…",
       },
       {
         pergunta: "Quem CUIDA do município?",
-        opcoes: ["O prefeito ou a prefeita", "Só as crianças", "Ninguém"],
+        opcoes: ["O prefeito ou a prefeita", "Só as crianças", "Ninguém", "Outra possibilidade"],
         correta: 0,
         feedbackAcerto: "🎉 Isso! O PREFEITO (ou prefeita) cuida do município.",
         feedbackErro:
           "O último parágrafo diz: 'cuidado por uma pessoa chamada PREFEITO ou PREFEITA'.",
-        ondeEstaNoTexto:
-          "…Todo município é cuidado por uma pessoa chamada PREFEITO ou PREFEITA…",
+        ondeEstaNoTexto: "…Todo município é cuidado por uma pessoa chamada PREFEITO ou PREFEITA…",
       },
     ],
   },
 
   // 6 · PERSONAGENS & CENÁRIO — o que fica em cada zona
   momento06_personagensCenario: {
-    instrucao:
-      "Cada coisa fica numa PARTE do município. Onde essas coisas moram?",
+    instrucao: "Cada coisa fica numa PARTE do município. Onde essas coisas moram?",
     perguntas: [
       {
         pergunta: "Onde a gente encontra PRÉDIOS altos?",
-        opcoes: ["Zona rural (campo)", "Zona urbana (cidade)", "Dentro do rio"],
-        opcoesImagens: [campo, apartamento, arvore],
+        opcoes: [
+          "Zona rural (campo)",
+          "Zona urbana (cidade)",
+          "Dentro do rio",
+          "Outra possibilidade",
+        ],
+        opcoesImagens: [campo, apartamento, arvore, campo],
         correta: 1,
         feedbackAcerto: "🎉 Isso! Prédio fica na ZONA URBANA.",
-        feedbackErro:
-          "PRÉDIO ALTO fica na cidade — ZONA URBANA.",
+        feedbackErro: "PRÉDIO ALTO fica na cidade — ZONA URBANA.",
       },
       {
         pergunta: "Onde ficam as PLANTAÇÕES e as vacas?",
-        opcoes: ["Zona urbana", "Dentro do shopping", "Zona rural"],
-        opcoesImagens: [cidade, mercado, vaca],
+        opcoes: ["Zona urbana", "Dentro do shopping", "Zona rural", "Outra possibilidade"],
+        opcoesImagens: [cidade, mercado, vaca, cidade],
         correta: 2,
         feedbackAcerto: "🎉 Certo! Plantação e vaca ficam na ZONA RURAL.",
-        feedbackErro:
-          "PLANTAÇÃO e VACA ficam no campo — ZONA RURAL.",
+        feedbackErro: "PLANTAÇÃO e VACA ficam no campo — ZONA RURAL.",
       },
       {
         pergunta: "Uma PRAÇA com brinquedos costuma ficar em qual parte?",
-        opcoes: ["Zona urbana (cidade)", "Dentro da roça", "No meio do pasto"],
-        opcoesImagens: [praca, campo, vaca],
+        opcoes: [
+          "Zona urbana (cidade)",
+          "Dentro da roça",
+          "No meio do pasto",
+          "Outra possibilidade",
+        ],
+        opcoesImagens: [praca, campo, vaca, praca],
         correta: 0,
-        feedbackAcerto:
-          "🎉 Boa! PRAÇA fica na CIDADE, na ZONA URBANA.",
-        feedbackErro:
-          "PRAÇA com brinquedos, banco e escorregador fica na CIDADE.",
+        feedbackAcerto: "🎉 Boa! PRAÇA fica na CIDADE, na ZONA URBANA.",
+        feedbackErro: "PRAÇA com brinquedos, banco e escorregador fica na CIDADE.",
       },
     ],
   },
 
   // 7 · SEQUÊNCIA — como um município se organiza
   momento07_sequencia: {
-    instrucao:
-      "Coloca em ordem: do MENOR pedaço até o LUGAR inteiro.",
+    instrucao: "Coloca em ordem: do MENOR pedaço até o LUGAR inteiro.",
     bloco: {
       instrucao: "Do menor → maior.",
       itens: [
@@ -270,8 +253,7 @@ export const aula01: AulaPortuguesV4 = {
 
   // 8 · LEITURA INDEPENDENTE
   momento08_leituraIndependente: {
-    instrucao:
-      "Agora leia sozinho e responda as duas perguntas.",
+    instrucao: "Agora leia sozinho e responda as duas perguntas.",
     leitura: {
       titulo: "Um passeio pelo município",
       imagemUrl: mapaPercurso,
@@ -284,14 +266,12 @@ export const aula01: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "A ESCOLA da Brilha fica em qual parte do município?",
-        opcoes: ["Parte de campo", "Parte de cidade", "Dentro do sítio"],
-        opcoesImagens: [campo, cidade, vaca],
+        opcoes: ["Parte de campo", "Parte de cidade", "Dentro do sítio", "Outra possibilidade"],
+        opcoesImagens: [campo, cidade, vaca, campo],
         correta: 1,
         feedbackAcerto: "🎉 Isso! A escola fica na parte de CIDADE.",
-        feedbackErro:
-          "O texto diz: 'A escola fica na parte de CIDADE do município'.",
-        ondeEstaNoTexto:
-          "…A escola fica na parte de CIDADE do município…",
+        feedbackErro: "O texto diz: 'A escola fica na parte de CIDADE do município'.",
+        ondeEstaNoTexto: "…A escola fica na parte de CIDADE do município…",
       },
       {
         pergunta: "O sítio do vovô fica em OUTRO município?",
@@ -299,15 +279,13 @@ export const aula01: AulaPortuguesV4 = {
           "Sim, fica num município diferente",
           "Não — fica no MESMO município, só na parte de campo",
           "O texto não diz",
+          "Outra possibilidade",
         ],
-        opcoesImagens: [carro, mapa, mapaPercurso],
+        opcoesImagens: [carro, mapa, mapaPercurso, carro],
         correta: 1,
-        feedbackAcerto:
-          "🎉 Boa! MESMO município — só na parte de CAMPO.",
-        feedbackErro:
-          "O texto diz: 'O sítio fica na parte de CAMPO do MESMO município'.",
-        ondeEstaNoTexto:
-          "…O sítio fica na parte de CAMPO do MESMO município…",
+        feedbackAcerto: "🎉 Boa! MESMO município — só na parte de CAMPO.",
+        feedbackErro: "O texto diz: 'O sítio fica na parte de CAMPO do MESMO município'.",
+        ondeEstaNoTexto: "…O sítio fica na parte de CAMPO do MESMO município…",
       },
     ],
   },
@@ -321,8 +299,7 @@ export const aula01: AulaPortuguesV4 = {
       tipo: "arquitetoLugar",
       titulo: "Urbana ou Rural?",
       bloco: {
-        instrucao:
-          "Olhe o LUGAR e toque na resposta certa embaixo.",
+        instrucao: "Olhe o LUGAR e toque na resposta certa embaixo.",
         rodadas: [
           {
             id: "r1",
@@ -330,19 +307,17 @@ export const aula01: AulaPortuguesV4 = {
               nome: "Rua com prédios",
               emojiLugar: "🏙️",
               emojiMorador: "🚗",
-              pista:
-                "Você vê PRÉDIOS altos, muita casa colada, ônibus passando. É qual zona?",
+              pista: "Você vê PRÉDIOS altos, muita casa colada, ônibus passando. É qual zona?",
             },
             opcoes: [
               { id: "urbana", nome: "Zona URBANA", imagemUrl: cidade },
               { id: "rural", nome: "Zona RURAL", imagemUrl: campo },
               { id: "praia", nome: "Praia deserta", imagemUrl: arvore },
+              { id: "outra-opcao-2", nome: "Outra possibilidade", imagemUrl: cidade },
             ],
             correta: "urbana",
-            feedbackAcerto:
-              "🎉 Isso! Prédio + rua movimentada = ZONA URBANA.",
-            feedbackErro:
-              "PRÉDIO ALTO e RUA cheia de carro é ZONA URBANA (cidade).",
+            feedbackAcerto: "🎉 Isso! Prédio + rua movimentada = ZONA URBANA.",
+            feedbackErro: "PRÉDIO ALTO e RUA cheia de carro é ZONA URBANA (cidade).",
           },
           {
             id: "r2",
@@ -357,12 +332,11 @@ export const aula01: AulaPortuguesV4 = {
               { id: "rural", nome: "Zona RURAL", imagemUrl: campo },
               { id: "urbana", nome: "Zona URBANA", imagemUrl: cidade },
               { id: "loja", nome: "Dentro do shopping", imagemUrl: mercado },
+              { id: "outra-opcao-3", nome: "Outra possibilidade", imagemUrl: campo },
             ],
             correta: "rural",
-            feedbackAcerto:
-              "🎉 Certo! Plantação + vaca = ZONA RURAL.",
-            feedbackErro:
-              "PLANTAÇÃO e VACA no pasto = ZONA RURAL (campo).",
+            feedbackAcerto: "🎉 Certo! Plantação + vaca = ZONA RURAL.",
+            feedbackErro: "PLANTAÇÃO e VACA no pasto = ZONA RURAL (campo).",
           },
           {
             id: "r3",
@@ -377,12 +351,11 @@ export const aula01: AulaPortuguesV4 = {
               { id: "urbana", nome: "Zona URBANA", imagemUrl: praca },
               { id: "rural", nome: "Zona RURAL", imagemUrl: vaca },
               { id: "posto", nome: "Estrada de terra", imagemUrl: campo },
+              { id: "outra-opcao-4", nome: "Outra possibilidade", imagemUrl: praca },
             ],
             correta: "urbana",
-            feedbackAcerto:
-              "🎉 Boa! Praça de bairro é ZONA URBANA.",
-            feedbackErro:
-              "PRAÇA com brinquedos cercada de casas é ZONA URBANA (cidade).",
+            feedbackAcerto: "🎉 Boa! Praça de bairro é ZONA URBANA.",
+            feedbackErro: "PRAÇA com brinquedos cercada de casas é ZONA URBANA (cidade).",
           },
           {
             id: "r4",
@@ -397,12 +370,11 @@ export const aula01: AulaPortuguesV4 = {
               { id: "rural", nome: "Zona RURAL", imagemUrl: campo },
               { id: "urbana", nome: "Zona URBANA", imagemUrl: cidade },
               { id: "onibus", nome: "Ponto de ônibus", imagemUrl: pontoOnibus },
+              { id: "outra-opcao-5", nome: "Outra possibilidade", imagemUrl: campo },
             ],
             correta: "rural",
-            feedbackAcerto:
-              "🎉 Certo! Estrada de terra + trator = ZONA RURAL.",
-            feedbackErro:
-              "Estrada de TERRA e TRATOR passando é ZONA RURAL (campo).",
+            feedbackAcerto: "🎉 Certo! Estrada de terra + trator = ZONA RURAL.",
+            feedbackErro: "Estrada de TERRA e TRATOR passando é ZONA RURAL (campo).",
           },
           {
             id: "r5",
@@ -417,12 +389,11 @@ export const aula01: AulaPortuguesV4 = {
               { id: "urbana", nome: "Zona URBANA", imagemUrl: escola },
               { id: "rural", nome: "Zona RURAL", imagemUrl: campo },
               { id: "sitio", nome: "Sítio isolado", imagemUrl: vaca },
+              { id: "outra-opcao-6", nome: "Outra possibilidade", imagemUrl: escola },
             ],
             correta: "urbana",
-            feedbackAcerto:
-              "🎉 Isso! Escola cercada de casa é ZONA URBANA.",
-            feedbackErro:
-              "ESCOLA no meio das casas do bairro é ZONA URBANA.",
+            feedbackAcerto: "🎉 Isso! Escola cercada de casa é ZONA URBANA.",
+            feedbackErro: "ESCOLA no meio das casas do bairro é ZONA URBANA.",
           },
         ],
         feedbackFinal:
@@ -440,18 +411,16 @@ export const aula01: AulaPortuguesV4 = {
       "Casa → rua → bairro → município: cada um cabe dentro do próximo.",
     ],
     miniDesafio: {
-      pergunta:
-        "Um sítio do vovô e a sua escola estão no MESMO município. É possível?",
+      pergunta: "Um sítio do vovô e a sua escola estão no MESMO município. É possível?",
       opcoes: [
         "Não — sítio é sempre em outro município",
         "Sim — um município tem cidade E campo",
         "Só se ficarem grudados",
+        "Outra possibilidade",
       ],
       correta: 1,
-      feedbackAcerto:
-        "🎉 Isso! Um município tem ZONA URBANA e ZONA RURAL — os dois cabem juntos.",
-      feedbackErro:
-        "Um município tem CIDADE e CAMPO ao mesmo tempo. Cabem os dois.",
+      feedbackAcerto: "🎉 Isso! Um município tem ZONA URBANA e ZONA RURAL — os dois cabem juntos.",
+      feedbackErro: "Um município tem CIDADE e CAMPO ao mesmo tempo. Cabem os dois.",
     },
   },
 
@@ -464,35 +433,37 @@ export const aula01: AulaPortuguesV4 = {
           "Só a rua da minha casa",
           "O LUGAR inteiro onde a gente vive — cidade + campo",
           "Um brinquedo",
+          "Outra possibilidade",
         ],
         correta: 1,
         feedbackAcerto: "🎉 Isso! MUNICÍPIO = lugar inteiro (cidade + campo).",
-        feedbackErro:
-          "MUNICÍPIO é o LUGAR TODO — a cidade e o campo juntos.",
+        feedbackErro: "MUNICÍPIO é o LUGAR TODO — a cidade e o campo juntos.",
       },
       {
         pergunta: "2/5 — Como se chama a parte de CIDADE do município?",
-        opcoes: ["Zona urbana", "Zona rural", "Zona da mata"],
+        opcoes: ["Zona urbana", "Zona rural", "Zona da mata", "Outra possibilidade"],
         correta: 0,
         feedbackAcerto: "🎉 ZONA URBANA — cidade!",
-        feedbackErro:
-          "A parte de CIDADE se chama ZONA URBANA.",
+        feedbackErro: "A parte de CIDADE se chama ZONA URBANA.",
       },
       {
         pergunta: "3/5 — Como se chama a parte de CAMPO?",
-        opcoes: ["Zona urbana", "Zona rural", "Zona de brinquedo"],
+        opcoes: ["Zona urbana", "Zona rural", "Zona de brinquedo", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 ZONA RURAL — campo!",
-        feedbackErro:
-          "A parte de CAMPO se chama ZONA RURAL.",
+        feedbackErro: "A parte de CAMPO se chama ZONA RURAL.",
       },
       {
         pergunta: "4/5 — Quem CUIDA de um município?",
-        opcoes: ["O prefeito ou a prefeita", "A vaca do sítio", "O motorista"],
+        opcoes: [
+          "O prefeito ou a prefeita",
+          "A vaca do sítio",
+          "O motorista",
+          "Outra possibilidade",
+        ],
         correta: 0,
         feedbackAcerto: "🎉 O PREFEITO (ou prefeita).",
-        feedbackErro:
-          "Quem cuida do município é o PREFEITO ou a PREFEITA.",
+        feedbackErro: "Quem cuida do município é o PREFEITO ou a PREFEITA.",
       },
       {
         pergunta: "5/5 — Um MESMO município pode ter cidade E campo?",
@@ -500,12 +471,11 @@ export const aula01: AulaPortuguesV4 = {
           "Não — só um dos dois",
           "Sim! ZONA URBANA e ZONA RURAL juntas",
           "Só se chover",
+          "Outra possibilidade",
         ],
         correta: 1,
-        feedbackAcerto:
-          "🎉 Certo! Um município tem ZONA URBANA e ZONA RURAL — os dois juntos.",
-        feedbackErro:
-          "Um município tem CIDADE e CAMPO ao mesmo tempo — as duas zonas.",
+        feedbackAcerto: "🎉 Certo! Um município tem ZONA URBANA e ZONA RURAL — os dois juntos.",
+        feedbackErro: "Um município tem CIDADE e CAMPO ao mesmo tempo — as duas zonas.",
       },
     ],
   },
@@ -513,18 +483,14 @@ export const aula01: AulaPortuguesV4 = {
   // 11 · MISSÃO EM FAMÍLIA
   momento11_missaoFamilia: {
     titulo: "🗺️ Explorador do Município",
-    materiais: [
-      "Papel e lápis de cor",
-      "Um adulto pra conversar",
-    ],
+    materiais: ["Papel e lápis de cor", "Um adulto pra conversar"],
     passos: [
       "1) Pergunta pro adulto: 'Qual é o NOME do nosso município?'",
       "2) Desenhe um mapa simples com DUAS partes: um lado com prédios (ZONA URBANA) e outro com árvore/plantação (ZONA RURAL).",
       "3) Marque no desenho com um ⭐ onde fica a sua CASA.",
       "4) Se puder, tire uma foto de UMA coisa da zona urbana (ex.: prédio, rua, praça) e uma coisa da zona rural (ex.: árvore, horta, sítio).",
     ],
-    registro:
-      "📸 Uma foto do seu mapa do município — com sua casa marcada.",
+    registro: "📸 Uma foto do seu mapa do município — com sua casa marcada.",
   },
 
   recompensa: {

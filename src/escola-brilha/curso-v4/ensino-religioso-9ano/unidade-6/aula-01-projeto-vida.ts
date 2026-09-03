@@ -11,7 +11,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-projeto-vida",
   titulo: "Projeto de Vida",
   iconeTrilha: "🎯",
-  bncc: ["EF09ER06"],
+  bncc: ["EF09ER07", "EF09ER08"],
   duracaoMin: 22,
 
   cena01_motivacao: {

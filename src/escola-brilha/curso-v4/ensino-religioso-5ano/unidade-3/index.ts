@@ -1,12 +1,12 @@
 import type { UnidadeGeoV1 } from "../../types";
-import { aula01 } from "./aula-01-ideias-de-eternidade";
+import { aulaEF05ER03 as aula01 } from "../aulas-corrigidas";
 
 export const unidade3: UnidadeGeoV1 = {
   slug: "unidade-3",
   numero: 3,
-  titulo: "O que Continua Depois?",
-  subtitulo: "Ideias de eternidade nas diferentes tradições (EF05ER03)",
-  descricao: "Aurora e Brilha exploram, com respeito, como cada tradição pensa a continuidade da vida e o cuidado com os ancestrais.",
+  titulo: "Mensagens dos Mitos de Criação",
+  subtitulo: "Funções e mensagens dos mitos de criação (EF05ER03)",
+  descricao: "Reconhecer concepções de mundo, natureza, humanidade, divindades, vida e morte comunicadas pelos mitos de criação.",
   corTema: "#f59e0b",
   aulas: [aula01],
 };

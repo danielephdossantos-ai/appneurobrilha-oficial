@@ -1,9 +1,8 @@
 import type { Unidade } from "../../types";
 import { aula01_circunferenciaAngulos } from "./aula-01-circunferencia-angulos";
-import { aula02_comprimentoAreaCirculo } from "./aula-02-comprimento-area-circulo";
-import { aula03_areasFigurasCompostas } from "./aula-03-areas-figuras-compostas";
 import { aula04_volumes } from "./aula-04-volumes";
 import { aula05_missaoCaixaDagua } from "./aula-05-missao-caixa-dagua";
+import { aulaVistasOrtogonais } from "../aulas-bncc-complementares";
 
 export const unidade6: Unidade = {
   slug: "unidade-6-circulo-volumes",
@@ -15,8 +14,7 @@ export const unidade6: Unidade = {
   corTema: "#06b6d4",
   aulas: [
     aula01_circunferenciaAngulos,
-    aula02_comprimentoAreaCirculo,
-    aula03_areasFigurasCompostas,
+    aulaVistasOrtogonais,
     aula04_volumes,
     aula05_missaoCaixaDagua,
   ],

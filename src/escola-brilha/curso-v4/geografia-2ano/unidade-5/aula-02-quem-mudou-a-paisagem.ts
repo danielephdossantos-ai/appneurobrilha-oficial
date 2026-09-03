@@ -27,7 +27,7 @@ export const aula02: AulaPortuguesV4 = {
   slug: "aula-02-quem-mudou-a-paisagem",
   titulo: "Quem Mudou a Paisagem?",
   iconeTrilha: "🔍",
-  bncc: ["EF02GE05"],
+  bncc: [],
   duracaoMin: 15,
 
   momento01_motivacao: {
@@ -69,12 +69,11 @@ export const aula02: AulaPortuguesV4 = {
         },
         { texto: "Aprender a cantar uma música nova.", imagemUrl: sol },
         { texto: "Sobre andar de bicicleta na praia.", imagemUrl: rua },
+        { texto: "Sobre outra possibilidade relacionada ao tema.", imagemUrl: cidade },
       ],
       respostaCerta: 0,
-      feedbackAcerto:
-        "🎉 Isso! Vamos separar NATUREZA × PESSOAS.",
-      feedbackErro:
-        "Olhe: chuva, pessoas, prédios. A missão é descobrir QUEM MUDOU.",
+      feedbackAcerto: "🎉 Isso! Vamos separar NATUREZA × PESSOAS.",
+      feedbackErro: "Olhe: chuva, pessoas, prédios. A missão é descobrir QUEM MUDOU.",
     },
   },
 
@@ -92,8 +91,7 @@ export const aula02: AulaPortuguesV4 = {
         palavra: "humano",
         explicacao:
           "É tudo que as PESSOAS fazem: construir, plantar, asfaltar, cortar. É a MÃO do ser humano na paisagem.",
-        exemplo:
-          "As MÁQUINAS abrindo a avenida = ação HUMANA.",
+        exemplo: "As MÁQUINAS abrindo a avenida = ação HUMANA.",
         imagemUrl: funcionarioLimpeza,
       },
       {
@@ -140,11 +138,11 @@ export const aula02: AulaPortuguesV4 = {
           "Construir um prédio",
           "Desmoronar (cair) a terra",
           "Plantar árvores",
+          "Outra possibilidade",
         ],
         correta: 1,
         feedbackAcerto: "🎉 Isso! DESMORONAR.",
-        feedbackErro:
-          "O texto diz: 'CHUVA muito forte pode DESMORONAR um morro'.",
+        feedbackErro: "O texto diz: 'CHUVA muito forte pode DESMORONAR um morro'.",
         ondeEstaNoTexto: "…pode DESMORONAR um morro…",
       },
       {
@@ -153,30 +151,27 @@ export const aula02: AulaPortuguesV4 = {
           "Derrubar uma árvore antiga",
           "Fazer um prédio novo",
           "Asfaltar a rua",
+          "Outra possibilidade",
         ],
         correta: 0,
         feedbackAcerto: "🎉 Derrubar árvore.",
-        feedbackErro:
-          "O texto diz: 'O VENTO derruba uma árvore antiga'.",
+        feedbackErro: "O texto diz: 'O VENTO derruba uma árvore antiga'.",
         ondeEstaNoTexto: "…O VENTO derruba uma árvore antiga…",
       },
       {
         pergunta: "Quem CONSTRÓI casas e ASFALTA avenidas?",
-        opcoes: ["A chuva", "O sol", "As pessoas"],
+        opcoes: ["A chuva", "O sol", "As pessoas", "Outra possibilidade"],
         correta: 2,
         feedbackAcerto: "🎉 As PESSOAS!",
-        feedbackErro:
-          "O texto diz: 'As PESSOAS… CONSTRUÍRAM casas… e ASFALTARAM avenidas'.",
-        ondeEstaNoTexto:
-          "…CONSTRUÍRAM casas… ABRIRAM ruas e ASFALTARAM avenidas…",
+        feedbackErro: "O texto diz: 'As PESSOAS… CONSTRUÍRAM casas… e ASFALTARAM avenidas'.",
+        ondeEstaNoTexto: "…CONSTRUÍRAM casas… ABRIRAM ruas e ASFALTARAM avenidas…",
       },
       {
         pergunta: "Se foi CHUVA/VENTO/SOL, a mudança é de...",
-        opcoes: ["Natureza", "Máquina do tempo", "Robô"],
+        opcoes: ["Natureza", "Máquina do tempo", "Robô", "Outra possibilidade"],
         correta: 0,
         feedbackAcerto: "🎉 NATUREZA.",
-        feedbackErro:
-          "Se foi CHUVA, VENTO ou SOL, é ação da NATUREZA.",
+        feedbackErro: "Se foi CHUVA, VENTO ou SOL, é ação da NATUREZA.",
         ondeEstaNoTexto: "…é ação da NATUREZA…",
       },
     ],
@@ -187,39 +182,35 @@ export const aula02: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "🌧️ Um morro caiu depois da chuva forte. Quem mudou?",
-        opcoes: ["Natureza (chuva)", "Pessoas", "Ninguém"],
-        opcoesImagens: [chuva, funcionarioLimpeza, sol],
+        opcoes: ["Natureza (chuva)", "Pessoas", "Ninguém", "Outra possibilidade"],
+        opcoesImagens: [chuva, funcionarioLimpeza, sol, chuva],
         correta: 0,
         feedbackAcerto: "🎉 NATUREZA (chuva).",
-        feedbackErro:
-          "Chuva forte que faz o morro cair é ação da NATUREZA.",
+        feedbackErro: "Chuva forte que faz o morro cair é ação da NATUREZA.",
       },
       {
         pergunta: "🏗️ Um prédio novo apareceu na esquina. Quem mudou?",
-        opcoes: ["Natureza", "Pessoas (construção)", "Vento"],
-        opcoesImagens: [chuva, predio, vento],
+        opcoes: ["Natureza", "Pessoas (construção)", "Vento", "Outra possibilidade"],
+        opcoesImagens: [chuva, predio, vento, chuva],
         correta: 1,
         feedbackAcerto: "🎉 PESSOAS.",
-        feedbackErro:
-          "Prédio novo aparece porque as PESSOAS constroem.",
+        feedbackErro: "Prédio novo aparece porque as PESSOAS constroem.",
       },
       {
         pergunta: "🌬️ Uma árvore caiu com o vento forte. Quem mudou?",
-        opcoes: ["Pessoas", "Natureza (vento)", "Ninguém"],
-        opcoesImagens: [funcionarioLimpeza, vento, sol],
+        opcoes: ["Pessoas", "Natureza (vento)", "Ninguém", "Outra possibilidade"],
+        opcoesImagens: [funcionarioLimpeza, vento, sol, funcionarioLimpeza],
         correta: 1,
         feedbackAcerto: "🎉 NATUREZA (vento).",
-        feedbackErro:
-          "Vento forte derrubando árvore é ação da NATUREZA.",
+        feedbackErro: "Vento forte derrubando árvore é ação da NATUREZA.",
       },
       {
         pergunta: "🛣️ Uma máquina abriu uma nova estrada. Quem mudou?",
-        opcoes: ["Natureza", "Pessoas", "A árvore"],
-        opcoesImagens: [chuva, funcionarioLimpeza, arvore],
+        opcoes: ["Natureza", "Pessoas", "A árvore", "Outra possibilidade"],
+        opcoesImagens: [chuva, funcionarioLimpeza, arvore, chuva],
         correta: 1,
         feedbackAcerto: "🎉 PESSOAS.",
-        feedbackErro:
-          "Máquinas abrindo estrada = ação das PESSOAS.",
+        feedbackErro: "Máquinas abrindo estrada = ação das PESSOAS.",
       },
     ],
   },
@@ -236,8 +227,7 @@ export const aula02: AulaPortuguesV4 = {
         { id: "s5", texto: "5) PESSOAS ajudam a limpar depois.", imagemUrl: funcionarioLimpeza },
       ],
       ordemCerta: ["s1", "s2", "s3", "s4", "s5"],
-      feedbackAcerto:
-        "🎉 Isso! Chuva → terra mole → deslizamento → desmoronamento → ajuda.",
+      feedbackAcerto: "🎉 Isso! Chuva → terra mole → deslizamento → desmoronamento → ajuda.",
       feedbackErro:
         "Pensa: começa a CHUVA, aí a terra fica MOLE, DESLIZA, DESMORONA e as pessoas AJUDAM.",
     },
@@ -257,23 +247,20 @@ export const aula02: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "Quem transformou o TERRENO em PRAÇA?",
-        opcoes: ["A chuva", "Prefeitura e moradores", "O vento"],
-        opcoesImagens: [chuva, funcionarioLimpeza, vento],
+        opcoes: ["A chuva", "Prefeitura e moradores", "O vento", "Outra possibilidade"],
+        opcoesImagens: [chuva, funcionarioLimpeza, vento, chuva],
         correta: 1,
         feedbackAcerto: "🎉 PESSOAS (prefeitura + moradores).",
-        feedbackErro:
-          "O texto diz: 'A PREFEITURA e os MORADORES… transformaram'.",
-        ondeEstaNoTexto:
-          "…A PREFEITURA e os MORADORES… transformaram…",
+        feedbackErro: "O texto diz: 'A PREFEITURA e os MORADORES… transformaram'.",
+        ondeEstaNoTexto: "…A PREFEITURA e os MORADORES… transformaram…",
       },
       {
         pergunta: "O que plantaram na praça?",
-        opcoes: ["Árvores", "Prédios", "Rios"],
-        opcoesImagens: [arvore, predio, rio],
+        opcoes: ["Árvores", "Prédios", "Rios", "Outra possibilidade"],
+        opcoesImagens: [arvore, predio, rio, arvore],
         correta: 0,
         feedbackAcerto: "🎉 ÁRVORES.",
-        feedbackErro:
-          "O texto diz: 'Plantaram ÁRVORES'.",
+        feedbackErro: "O texto diz: 'Plantaram ÁRVORES'.",
         ondeEstaNoTexto: "…Plantaram ÁRVORES…",
       },
     ],
@@ -303,13 +290,38 @@ export const aula02: AulaPortuguesV4 = {
           },
         ],
         itens: [
-          { id: "i1", texto: "Chuva forte derrubou terra do morro", alvoId: "natureza", imagemUrl: chuva },
-          { id: "i2", texto: "Vento forte derrubou uma árvore", alvoId: "natureza", imagemUrl: vento },
+          {
+            id: "i1",
+            texto: "Chuva forte derrubou terra do morro",
+            alvoId: "natureza",
+            imagemUrl: chuva,
+          },
+          {
+            id: "i2",
+            texto: "Vento forte derrubou uma árvore",
+            alvoId: "natureza",
+            imagemUrl: vento,
+          },
           { id: "i3", texto: "Sol muito quente secou o rio", alvoId: "natureza", imagemUrl: sol },
           { id: "i4", texto: "Rio subiu depois da tempestade", alvoId: "natureza", imagemUrl: rio },
-          { id: "i5", texto: "Pessoas construíram um prédio novo", alvoId: "pessoas", imagemUrl: predio },
-          { id: "i6", texto: "Máquinas abriram uma nova estrada", alvoId: "pessoas", imagemUrl: rua },
-          { id: "i7", texto: "Moradores plantaram uma praça", alvoId: "pessoas", imagemUrl: planta },
+          {
+            id: "i5",
+            texto: "Pessoas construíram um prédio novo",
+            alvoId: "pessoas",
+            imagemUrl: predio,
+          },
+          {
+            id: "i6",
+            texto: "Máquinas abriram uma nova estrada",
+            alvoId: "pessoas",
+            imagemUrl: rua,
+          },
+          {
+            id: "i7",
+            texto: "Moradores plantaram uma praça",
+            alvoId: "pessoas",
+            imagemUrl: planta,
+          },
           { id: "i8", texto: "Operários fizeram uma ponte", alvoId: "pessoas", imagemUrl: ponte },
         ],
         feedbackAcerto:
@@ -330,11 +342,10 @@ export const aula02: AulaPortuguesV4 = {
     ],
     miniDesafio: {
       pergunta: "Um pedreiro construiu uma escola nova. QUEM mudou a paisagem?",
-      opcoes: ["A chuva", "As pessoas", "O vento"],
+      opcoes: ["A chuva", "As pessoas", "O vento", "Outra possibilidade"],
       correta: 1,
       feedbackAcerto: "🎉 AS PESSOAS!",
-      feedbackErro:
-        "Pedreiro construindo = AÇÃO HUMANA (pessoas).",
+      feedbackErro: "Pedreiro construindo = AÇÃO HUMANA (pessoas).",
     },
   },
 
@@ -342,39 +353,35 @@ export const aula02: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "1/5 — Chuva forte desmoronando morro é...",
-        opcoes: ["Natureza", "Pessoas", "Robô"],
+        opcoes: ["Natureza", "Pessoas", "Robô", "Outra possibilidade"],
         correta: 0,
         feedbackAcerto: "🎉 NATUREZA.",
-        feedbackErro:
-          "CHUVA é força da NATUREZA.",
+        feedbackErro: "CHUVA é força da NATUREZA.",
       },
       {
         pergunta: "2/5 — Máquina abrindo estrada é...",
-        opcoes: ["Natureza", "Pessoas", "Ninguém"],
+        opcoes: ["Natureza", "Pessoas", "Ninguém", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 PESSOAS.",
-        feedbackErro:
-          "Máquina abrindo estrada = AÇÃO HUMANA.",
+        feedbackErro: "Máquina abrindo estrada = AÇÃO HUMANA.",
       },
       {
         pergunta: "3/5 — Vento derrubando árvore é...",
-        opcoes: ["Pessoas", "Natureza", "Semáforo"],
+        opcoes: ["Pessoas", "Natureza", "Semáforo", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 NATUREZA.",
-        feedbackErro:
-          "Vento é força da NATUREZA.",
+        feedbackErro: "Vento é força da NATUREZA.",
       },
       {
         pergunta: "4/5 — Moradores plantando árvores na praça é...",
-        opcoes: ["Natureza", "Pessoas", "Chuva"],
+        opcoes: ["Natureza", "Pessoas", "Chuva", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 PESSOAS.",
-        feedbackErro:
-          "PLANTAR é ação das PESSOAS (mesmo que a planta seja da natureza!).",
+        feedbackErro: "PLANTAR é ação das PESSOAS (mesmo que a planta seja da natureza!).",
       },
       {
         pergunta: "5/5 — Sol muito quente secando o rio é...",
-        opcoes: ["Pessoas", "Natureza", "Foguete"],
+        opcoes: ["Pessoas", "Natureza", "Foguete", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 NATUREZA.",
         feedbackErro: "O SOL é a NATUREZA agindo.",
@@ -391,8 +398,7 @@ export const aula02: AulaPortuguesV4 = {
       "3) Desenhe as duas no caderno.",
       "4) Escreva embaixo: 'NATUREZA' ou 'PESSOAS'.",
     ],
-    registro:
-      "📸 Uma foto do seu caderno com os 2 desenhos e as legendas.",
+    registro: "📸 Uma foto do seu caderno com os 2 desenhos e as legendas.",
   },
 
   recompensa: {

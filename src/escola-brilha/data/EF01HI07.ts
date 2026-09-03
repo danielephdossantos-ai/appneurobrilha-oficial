@@ -33,9 +33,9 @@ const aula: Aula = {
   narrativa: {
     titulo: "O Relógio Das Famílias",
     contexto:
-      "Brilha girou o RELÓGIO MÁGICO ⏰ e viu famílias em épocas diferentes: antigamente muitas pessoas moravam juntas — hoje algumas famílias são pequenas, outras enormes.",
+      "Brilha girou o RELÓGIO MÁGICO ⏰ e viu famílias grandes e pequenas em épocas diferentes, com variados modos de morar, trabalhar e dividir tarefas.",
     problema:
-      "A Coruja Sábia explicou: 'Famílias MUDAM com o tempo. Mas o AMOR e o cuidado PERMANECEM. Ajude o Brilha a descobrir o que muda e o que fica igual!'",
+      "A Coruja Sábia explicou: 'As formas de organização familiar podem MUDAR, enquanto alguns vínculos, memórias ou tradições podem PERMANECER. Vamos investigar as fontes!'",
     convite: "Bora girar o relógio e ver como as famílias mudaram?",
   },
 
@@ -45,12 +45,12 @@ const aula: Aula = {
   ],
 
   missao:
-    "Perceber que as famílias mudam com o tempo — mas o AMOR, o CUIDADO e o RESPEITO permanecem.",
+    "Identificar mudanças e permanências nas formas de organização familiar, comparando fontes e evitando tratar um único modelo de família como regra.",
 
   objetivos: [
     "Comparar famílias de antigamente com as de hoje.",
     "Identificar mudanças na forma de organização.",
-    "Reconhecer o que PERMANECE (amor, cuidado, união).",
+    "Reconhecer permanências possíveis, como vínculos, responsabilidades e memórias.",
     "Valorizar diferentes configurações familiares.",
     "Respeitar todas as famílias.",
   ],
@@ -59,13 +59,13 @@ const aula: Aula = {
     "Toda família é especial — seja grande, pequena, com muitos ou poucos. O que importa é o CARINHO! 💛",
 
   explicacao:
-    "⏰ Antigamente muitas famílias eram MUITO GRANDES — moravam avós, tios, primos, todos juntos.\n🏠 Hoje muitas famílias são MENORES — pai, mãe e filhos; ou só mãe e filhos; ou só pai e filhos; ou avós criando netos.\n💛 O que MUDA: o tamanho, os hábitos, as casas.\n🤗 O que PERMANECE: o amor, o cuidado, a união.\n🌈 Toda família diferente é uma família especial.",
+    "⏰ Em cada época e lugar existiram famílias grandes e pequenas, com diferentes pessoas e modos de viver.\n🏠 Fotografias, relatos e documentos ajudam a comparar essas organizações.\n🔄 O que pode MUDAR: quem mora junto, divisão de tarefas, hábitos e moradia.\n🧭 O que pode PERMANECER: vínculos, responsabilidades, sobrenomes, memórias ou tradições.\n🌈 Não existe um único modelo que represente todas as famílias.",
 
   explicacoesNiveis: {
     nivel1: "Toda família é feita de pessoas que se cuidam.",
     nivel2: "Existem famílias grandes e pequenas.",
-    nivel3: "Antigamente as famílias costumavam ser maiores.",
-    nivel4: "O amor é o que permanece em qualquer época.",
+    nivel3: "Fontes históricas mostram famílias variadas no passado e no presente.",
+    nivel4: "Para comparar, observe quem vivia junto, as tarefas, os hábitos e as memórias.",
   },
 
   exemploResolvido: {
@@ -74,7 +74,7 @@ const aula: Aula = {
     passos: [
       "As duas famílias são diferentes em TAMANHO.",
       "As duas famílias CUIDAM umas das outras.",
-      "O que permanece é o AMOR.",
+      "Alguns vínculos e responsabilidades podem permanecer, mas isso precisa ser observado em cada história.",
     ],
     resposta: "💛 Diferentes no tamanho, iguais no cuidado!",
   },
@@ -91,7 +91,8 @@ const aula: Aula = {
         { nome: "grande", imagemUrl: familiaGrandeImg },
         { nome: "mae-filho", imagemUrl: familiaMaeFilhoImg },
         { nome: "pai-filho", imagemUrl: familiaPaiFilhoImg },
-      ],
+      
+        { nome: "outra-opcao-4", imagemUrl: familiaTradImg },],
       respostaCerta: "grande",
     },
   },
@@ -116,40 +117,40 @@ const aula: Aula = {
 
   desafio: {
     enunciado: "Desafio Brilha: identifique o que MUDA e o que PERMANECE.",
-    resposta: "Muitas coisas mudam, mas o amor fica.",
+    resposta: "Organizações podem mudar; fontes mostram o que permaneceu em cada caso.",
     visual: {
       perguntas: [
         {
           pergunta: "Uma família com a mãe e o filho é família?",
-          opcoes: ["Sim", "Não", "Só às vezes"],
+          opcoes: ["Sim", "Não", "Só às vezes", "Preciso observar melhor"],
           correta: 0,
           explicacao: "Toda configuração é família.",
           visual: { tipo: "itens", imagemUrl: familiaMaeFilhoImg, quantidade: 1, rotulo: "👩‍👦" },
         },
         {
           pergunta: "Antigamente as casas costumavam ter:",
-          opcoes: ["Muita gente junta", "Uma pessoa só", "Só robôs"],
+          opcoes: ["Muita gente junta", "Uma pessoa só", "Só robôs", "Preciso observar melhor"],
           correta: 0,
           explicacao: "Famílias antigas eram grandes.",
           visual: { tipo: "itens", imagemUrl: casaAntigaImg, quantidade: 1, rotulo: "🏚️" },
         },
         {
           pergunta: "Uma família com AVÓ criando o neto é família?",
-          opcoes: ["Sim, claro!", "Não é", "Só metade"],
+          opcoes: ["Sim, claro!", "Não é", "Só metade", "Preciso observar melhor"],
           correta: 0,
           explicacao: "Sim — o que importa é o cuidado.",
           visual: { tipo: "itens", imagemUrl: familiaAvosImg, quantidade: 1, rotulo: "👵" },
         },
         {
-          pergunta: "O que NÃO muda em nenhuma família?",
-          opcoes: ["O amor", "O celular", "A casa"],
+          pergunta: "O que PODE permanecer na história de uma família?",
+          opcoes: ["Uma memória ou tradição", "Todo objeto", "Toda moradia", "Preciso observar melhor"],
           correta: 0,
-          explicacao: "O amor permanece em qualquer época.",
+          explicacao: "Memórias e tradições podem atravessar gerações, mas cada família tem uma história.",
           visual: { tipo: "itens", imagemUrl: abracoImg, quantidade: 1, rotulo: "🤗" },
         },
         {
           pergunta: "Todas as famílias merecem:",
-          opcoes: ["Respeito", "Serem escondidas", "Ficar sem cuidado"],
+          opcoes: ["Respeito", "Serem escondidas", "Ficar sem cuidado", "Preciso observar melhor"],
           correta: 0,
           explicacao: "Toda família merece respeito.",
           visual: { tipo: "itens", imagemUrl: criancasImg, quantidade: 1, rotulo: "💛" },
@@ -162,7 +163,7 @@ const aula: Aula = {
     pontos: [
       "⏰ Famílias antigas costumavam ser grandes.",
       "🏠 Famílias de hoje são de vários tamanhos.",
-      "💛 O que PERMANECE: amor, cuidado, união.",
+      "🧭 Memórias, vínculos, responsabilidades ou tradições PODEM permanecer.",
       "🤗 Toda família diferente é família.",
       "🌈 Respeito é o que segura tudo.",
     ],
@@ -172,41 +173,41 @@ const aula: Aula = {
   quiz: [
     {
       pergunta: "As famílias mudam com o tempo?",
-      opcoes: ["Sim", "Não", "Só as pequenas"],
+      opcoes: ["Sim", "Não", "Só as pequenas", "Preciso observar melhor"],
       correta: 0,
       explicacao: "Elas mudam de tamanho e hábitos.",
       visual: { tipo: "itens", imagemUrl: relogioImg, quantidade: 1, rotulo: "⏰" },
     },
     {
       pergunta: "Antigamente as famílias eram mais:",
-      opcoes: ["Grandes", "Pequenas", "Iguais"],
+      opcoes: ["Grandes", "Pequenas", "Iguais", "Preciso observar melhor"],
       correta: 0,
       explicacao: "Moravam muitas pessoas juntas.",
       visual: { tipo: "itens", imagemUrl: familiaGrandeImg, quantidade: 1, rotulo: "👨‍👩‍👧‍👦" },
     },
     {
       pergunta: "Uma mãe sozinha com o filho é família?",
-      opcoes: ["Sim", "Não", "Só se tiver pai"],
+      opcoes: ["Sim", "Não", "Só se tiver pai", "Preciso observar melhor"],
       correta: 0,
       explicacao: "Toda configuração é família.",
       visual: { tipo: "itens", imagemUrl: familiaMaeFilhoImg, quantidade: 1, rotulo: "👩‍👦" },
     },
     {
-      pergunta: "O que PERMANECE em toda família?",
-      opcoes: ["O amor", "O celular", "O carro"],
+      pergunta: "O que PODE permanecer entre gerações de uma família?",
+      opcoes: ["Uma tradição ou memória", "O mesmo celular", "A mesma casa para todas", "Preciso observar melhor"],
       correta: 0,
-      explicacao: "O amor não muda com o tempo.",
+      explicacao: "Uma fonte pode mostrar tradições e memórias preservadas entre gerações.",
       visual: { tipo: "itens", imagemUrl: abracoImg, quantidade: 1, rotulo: "💛" },
     },
     {
       pergunta: "Hoje aprendemos que as famílias:",
       opcoes: [
-        "Mudam, mas o amor permanece",
+        "Podem mudar e também guardar algumas permanências",
         "São todas iguais",
         "Nunca mudaram",
-      ],
+       "Preciso observar melhor"],
       correta: 0,
-      explicacao: "Mudam no tamanho, o amor fica.",
+      explicacao: "A comparação histórica identifica mudanças e permanências sem impor um único modelo.",
       visual: { tipo: "itens", imagemUrl: corujaImg, quantidade: 1, rotulo: "🦉" },
     },
   ],
@@ -217,7 +218,7 @@ const aula: Aula = {
   curiosidade: {
     titulo: "Você sabia?",
     texto:
-      "Há 100 anos era comum famílias com 8, 10, até 12 filhos morando na mesma casa! Hoje as famílias são de todos os jeitos — e cada uma é única e especial. 🌈",
+      "Fotografias, cartas, certidões e relatos ajudam a descobrir como cada família se organizava em diferentes épocas e lugares. 🌈",
   },
 
   interativas: [
@@ -313,7 +314,7 @@ const aula: Aula = {
       tipo: "selecionarMultiplos",
       titulo: "Fase 4 · O Que Sempre Fica",
       instrucao:
-        "Toque em TUDO que PERMANECE em toda família — antigamente e hoje.",
+        "Toque no que PODE permanecer na história de uma família ao longo do tempo.",
       criterio: "Permanece 💛",
       opcoes: [
         { nome: "Amor", imagemUrl: abracoImg, rotulo: "🤗 AMOR", correto: true },
@@ -322,8 +323,8 @@ const aula: Aula = {
         { nome: "Cuidado do pai", imagemUrl: paiImg, rotulo: "👨 CUIDADO", correto: true },
         { nome: "Celular", imagemUrl: celularImg, rotulo: "❌ CELULAR (é novo)", correto: false },
       ],
-      acerto: "💛 Isso! O amor e o cuidado permanecem — o resto vai mudando.",
-      erro: "O celular é atual. O que PERMANECE é o amor e o cuidado.",
+      acerto: "Isso! Vínculos e formas de cuidado podem permanecer em algumas histórias.",
+      erro: "Objetos e moradias podem mudar; procure elementos que uma fonte mostre atravessando gerações.",
     },
 
     // FASE 5 — Álbum: minha família hoje
@@ -352,7 +353,8 @@ const aula: Aula = {
             { nome: "Abraçar", imagemUrl: abracoImg, rotulo: "🤗 ABRAÇAR" },
             { nome: "Ajudar", imagemUrl: ajudarImg, rotulo: "🤝 AJUDAR" },
             { nome: "Brincar", imagemUrl: criancasImg, rotulo: "🎈 BRINCAR" },
-          ],
+          
+            { nome: "outra-opcao-4", imagemUrl: familiaTradImg },],
         },
         {
           label: "Como é a sua casa?",
@@ -360,7 +362,9 @@ const aula: Aula = {
           opcoes: [
             { nome: "Antiga", imagemUrl: casaAntigaImg, rotulo: "🏚️ ANTIGA" },
             { nome: "Moderna", imagemUrl: casaModernaImg, rotulo: "🏠 MODERNA" },
-          ],
+          
+            { nome: "outra-opcao-3", imagemUrl: familiaTradImg },
+            { nome: "outra-opcao-4", imagemUrl: familiaTradImg },],
         },
       ],
       acerto: "💛 Cartão da família montado! O Brilha guardou com carinho.",
@@ -372,21 +376,21 @@ const aula: Aula = {
     facil: [
       {
         pergunta: "Uma mãe sozinha com filho é família?",
-        opcoes: ["Sim", "Não", "Só metade"],
+        opcoes: ["Sim", "Não", "Só metade", "Preciso observar melhor"],
         correta: 0,
         explicacao: "Toda configuração é família.",
         visual: { tipo: "itens", imagemUrl: familiaMaeFilhoImg, quantidade: 1, rotulo: "👩‍👦" },
       },
       {
         pergunta: "Antigamente as famílias eram mais:",
-        opcoes: ["Grandes", "Pequenas", "Nenhuma"],
+        opcoes: ["Grandes", "Pequenas", "Nenhuma", "Preciso observar melhor"],
         correta: 0,
         explicacao: "Moravam muita gente junta.",
         visual: { tipo: "itens", imagemUrl: familiaGrandeImg, quantidade: 1, rotulo: "👨‍👩‍👧‍👦" },
       },
       {
         pergunta: "Um pai e um filho são família?",
-        opcoes: ["Sim", "Não", "Só se tiver mãe"],
+        opcoes: ["Sim", "Não", "Só se tiver mãe", "Preciso observar melhor"],
         correta: 0,
         explicacao: "Sim, claro!",
         visual: { tipo: "itens", imagemUrl: familiaPaiFilhoImg, quantidade: 1, rotulo: "👨‍👦" },
@@ -394,22 +398,22 @@ const aula: Aula = {
     ],
     medio: [
       {
-        pergunta: "O que PERMANECE em toda família?",
-        opcoes: ["O amor", "O celular", "A casa"],
+        pergunta: "O que PODE permanecer em uma história familiar?",
+        opcoes: ["Uma memória", "O mesmo celular", "A mesma casa para todos", "Preciso observar melhor"],
         correta: 0,
-        explicacao: "O amor não muda.",
+        explicacao: "Memórias podem ser preservadas e transmitidas.",
         visual: { tipo: "itens", imagemUrl: abracoImg, quantidade: 1, rotulo: "🤗" },
       },
       {
         pergunta: "Uma AVÓ criando o neto forma:",
-        opcoes: ["Uma família", "Nada", "Uma escola"],
+        opcoes: ["Uma família", "Nada", "Uma escola", "Preciso observar melhor"],
         correta: 0,
         explicacao: "É uma família também.",
         visual: { tipo: "itens", imagemUrl: familiaAvosImg, quantidade: 1, rotulo: "👵" },
       },
       {
         pergunta: "As famílias de hoje são:",
-        opcoes: ["De vários tamanhos", "Todas iguais", "Só grandes"],
+        opcoes: ["De vários tamanhos", "Todas iguais", "Só grandes", "Preciso observar melhor"],
         correta: 0,
         explicacao: "Existe família de todo tamanho.",
         visual: { tipo: "itens", imagemUrl: familiaTradImg, quantidade: 1, rotulo: "👨‍👩‍👧" },
@@ -418,23 +422,23 @@ const aula: Aula = {
     dificil: [
       {
         pergunta: "As famílias mudam com:",
-        opcoes: ["O tempo", "Nunca", "Só no verão"],
+        opcoes: ["O tempo", "Nunca", "Só no verão", "Preciso observar melhor"],
         correta: 0,
         explicacao: "Mudam de tamanho e hábitos ao longo do tempo.",
         visual: { tipo: "itens", imagemUrl: relogioImg, quantidade: 1, rotulo: "⏰" },
       },
       {
         pergunta: "Toda família merece:",
-        opcoes: ["Respeito", "Escondido", "Ficar sem carinho"],
+        opcoes: ["Respeito", "Escondido", "Ficar sem carinho", "Preciso observar melhor"],
         correta: 0,
         explicacao: "Respeito é essencial.",
         visual: { tipo: "itens", imagemUrl: criancasImg, quantidade: 1, rotulo: "💛" },
       },
       {
-        pergunta: "O que MUDA nas famílias?",
-        opcoes: ["Tamanho e hábitos", "O amor", "O cuidado"],
+        pergunta: "O que PODE mudar na organização familiar?",
+        opcoes: ["Quem mora junto e como divide tarefas", "A existência do passado", "Todas as memórias ao mesmo tempo", "Preciso observar melhor"],
         correta: 0,
-        explicacao: "O amor permanece; o resto muda.",
+        explicacao: "Moradia, composição e divisão de tarefas podem mudar conforme época e contexto.",
         visual: { tipo: "itens", imagemUrl: casaAntigaImg, quantidade: 1, rotulo: "🏚️" },
       },
     ],

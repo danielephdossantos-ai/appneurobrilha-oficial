@@ -5,7 +5,7 @@ export const aula03_triangulos: AulaV4 = {
   slug: "u5-03-triangulos",
   titulo: "O Segredo dos 180°",
   iconeTrilha: "🔺",
-  bncc: ["EF07MA24", "EF07MA25"],
+  bncc: ["EF07MA24", "EF07MA25", "EF07MA26"],
   duracaoMin: 32,
   metodologias: ["skemp"],
 
@@ -61,7 +61,7 @@ export const aula03_triangulos: AulaV4 = {
   },
 
   momento04_explicacao: {
-    titulo: "Ângulo que falta, ângulo externo e condição de existência",
+    titulo: "Ângulos, existência, construção e rigidez",
     etapas: [
       {
         texto: "ÂNGULO QUE FALTA: some os dois conhecidos e subtraia de 180°.",
@@ -117,6 +117,42 @@ export const aula03_triangulos: AulaV4 = {
             fatorada: "3, 4 e 9 → impossível",
           },
           destaque: "Maior lado < soma dos outros dois.",
+        },
+      },
+      {
+        texto: "CONSTRUÇÃO COM RÉGUA E COMPASSO: os arcos localizam o terceiro vértice com as distâncias exatas. O procedimento pode ser escrito como algoritmo e fluxograma.",
+        exemploReal: {
+          titulo: "🔎 Algoritmo de construção",
+          contexto: "Construir um triângulo com lados 4 cm, 5 cm e 6 cm",
+          visualMat: {
+            tipo: "trinomioPassoAPasso",
+            trinomio: "Início → base → arcos → vértice → lados → fim",
+            passos: [
+              { expr: "1. Trace AB = 6 cm com a régua", explica: "Escolho o maior lado como base.", status: "neutro" },
+              { expr: "2. Centro em A, abra o compasso em 4 cm e trace um arco", explica: "Todo ponto do arco fica a 4 cm de A.", status: "ok" },
+              { expr: "3. Centro em B, abra em 5 cm e cruze o primeiro arco", explica: "O encontro define o vértice C.", status: "ok" },
+              { expr: "4. Ligue A a C e B a C", explica: "Fecho o triângulo.", status: "ok" },
+              { expr: "5. Se os arcos não se cruzarem, os lados não formam triângulo", explica: "A construção confirma a condição de existência.", status: "ok" },
+            ],
+            fatorada: "AB = 6 cm, AC = 4 cm e BC = 5 cm",
+          },
+          destaque: "Fluxograma: início → traçar base → arco de A → arco de B → cruzou? sim: ligar vértices; não: construção impossível → fim.",
+        },
+      },
+      {
+        texto: "RIGIDEZ: com três lados fixos, o triângulo não muda de forma sem alterar um lado; por isso ele reforça telhados, pontes e estruturas.",
+        exemploReal: {
+          contexto: "Um quadrilátero articulado entorta; ao receber uma diagonal, vira dois triângulos e fica rígido.",
+          visualMat: {
+            tipo: "trinomioPassoAPasso",
+            trinomio: "Quadrilátero + diagonal",
+            passos: [
+              { expr: "sem diagonal: os ângulos podem mudar", explica: "A estrutura deforma.", status: "neutro" },
+              { expr: "com diagonal: surgem dois triângulos", explica: "Os comprimentos fixam a forma.", status: "ok" },
+            ],
+            fatorada: "Triangulação dá estabilidade",
+          },
+          destaque: "A rigidez é uma propriedade geométrica aplicada na construção.",
         },
       },
     ],

@@ -8,7 +8,7 @@ export const aula03: AulaPortuguesV4 = {
   slug: "aula-03-generos-digitais-email",
   titulo: "E-mail: A Comunicação Formal",
   iconeTrilha: "📧",
-  bncc: ["EF67LP01", "EF67LP07"],
+  bncc: ["EF69LP56"],
   duracaoMin: 25,
   momento01_motivacao: {
     titulo: "Transmissão Oficial: O Protocolo E-mail",

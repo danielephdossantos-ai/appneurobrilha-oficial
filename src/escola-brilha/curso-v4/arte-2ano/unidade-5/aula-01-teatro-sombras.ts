@@ -32,7 +32,6 @@ const u5passo4 = __asset_u5passo4.url;
 import __asset_u5passo5 from "@/assets/arte-2ano/u5-passo5-historia.jpg.asset.json";
 const u5passo5 = __asset_u5passo5.url;
 
-
 /**
  * Arte · 2º Ano · Unidade 5 · Aula 01 — "Teatro de Sombras"
  * (EF15AR18 / EF15AR19 / EF15AR21)
@@ -52,10 +51,30 @@ export const aula01: AulaArteV1 = {
     titulo: "Zoo de Sombras",
     instrucao: "Toca em cada sombra pra descobrir o animal",
     itens: [
-      { emoji: "🐕", rotulo: "Cachorro", descricao: "Mãos juntas, dedinhos formando as orelhas e o focinho.", cor: "#78350f" },
-      { emoji: "🦋", rotulo: "Borboleta", descricao: "Mãos cruzadas com os polegares presos e dedos abertos.", cor: "#a855f7" },
-      { emoji: "🐦", rotulo: "Passarinho", descricao: "Polegares juntos e mãos batendo como asas.", cor: "#0ea5e9" },
-      { emoji: "🐰", rotulo: "Coelho", descricao: "Dois dedos pra cima = orelhas do coelho pulando.", cor: "#f472b6" },
+      {
+        emoji: "🐕",
+        rotulo: "Cachorro",
+        descricao: "Mãos juntas, dedinhos formando as orelhas e o focinho.",
+        cor: "#78350f",
+      },
+      {
+        emoji: "🦋",
+        rotulo: "Borboleta",
+        descricao: "Mãos cruzadas com os polegares presos e dedos abertos.",
+        cor: "#a855f7",
+      },
+      {
+        emoji: "🐦",
+        rotulo: "Passarinho",
+        descricao: "Polegares juntos e mãos batendo como asas.",
+        cor: "#0ea5e9",
+      },
+      {
+        emoji: "🐰",
+        rotulo: "Coelho",
+        descricao: "Dois dedos pra cima = orelhas do coelho pulando.",
+        cor: "#f472b6",
+      },
     ],
     falaFinal: "TEATRO DE SOMBRAS: sua mão vira personagem só com uma luz atrás.",
   },
@@ -69,6 +88,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Uma LUZ e um objeto na frente", correta: true },
           { texto: "Só um objeto sozinho", correta: false },
+
+          { texto: "Não combina com a proposta", correta: false },
+          { texto: "Outra ação sem relação", correta: false },
         ],
         feedbackAcerto: "Isso! Sem luz, não existe sombra.",
         feedbackErro: "Precisa de LUZ! Sombra é a luz sendo bloqueada pelo objeto.",
@@ -78,6 +100,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Menor", correta: false },
           { texto: "Maior", correta: true },
+
+          { texto: "Não combina com a proposta", correta: false },
+          { texto: "Outra ação sem relação", correta: false },
         ],
         feedbackAcerto: "Perfeito! Perto da luz = sombra GIGANTE.",
         feedbackErro: "Ao contrário! Perto da luz, a sombra fica MAIOR.",
@@ -87,6 +112,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Escura (preta ou cinza)", correta: true },
           { texto: "Colorida como arco-íris", correta: false },
+
+          { texto: "Não combina com a proposta", correta: false },
+          { texto: "Outra ação sem relação", correta: false },
         ],
         feedbackAcerto: "Sim! Sombra é escura porque a luz não passa por ali.",
         feedbackErro: "Sombra sempre é ESCURA. Arco-íris é a luz colorida.",
@@ -98,10 +126,34 @@ export const aula01: AulaArteV1 = {
     tipo: "vocabularioCards",
     aurora: "Palavras do teatreiro de sombras — toca em cada uma!",
     cards: [
-      { termo: "Sombra", definicao: "É a marca ESCURA que aparece quando um objeto tampa a luz.", emoji: "🌑", cor: "#1f2937", fotoUrl: vocabSombra },
-      { termo: "Silhueta", definicao: "O CONTORNO escuro do personagem, sem detalhes.", emoji: "👤", cor: "#374151", fotoUrl: vocabSilhueta },
-      { termo: "Tela", definicao: "Pano branco ou parede clara onde a sombra aparece.", emoji: "🖼️", cor: "#f3f4f6", fotoUrl: vocabTela },
-      { termo: "Personagem", definicao: "Quem age no teatro — pode ser bicho, pessoa ou monstro!", emoji: "🎭", cor: "#a855f7", fotoUrl: vocabPersonagem },
+      {
+        termo: "Sombra",
+        definicao: "É a marca ESCURA que aparece quando um objeto tampa a luz.",
+        emoji: "🌑",
+        cor: "#1f2937",
+        fotoUrl: vocabSombra,
+      },
+      {
+        termo: "Silhueta",
+        definicao: "O CONTORNO escuro do personagem, sem detalhes.",
+        emoji: "👤",
+        cor: "#374151",
+        fotoUrl: vocabSilhueta,
+      },
+      {
+        termo: "Tela",
+        definicao: "Pano branco ou parede clara onde a sombra aparece.",
+        emoji: "🖼️",
+        cor: "#f3f4f6",
+        fotoUrl: vocabTela,
+      },
+      {
+        termo: "Personagem",
+        definicao: "Quem age no teatro — pode ser bicho, pessoa ou monstro!",
+        emoji: "🎭",
+        cor: "#a855f7",
+        fotoUrl: vocabPersonagem,
+      },
     ],
   },
 
@@ -115,10 +167,34 @@ export const aula01: AulaArteV1 = {
       "Hoje, com uma lanterna do celular e um lençol, VOCÊ pode fazer o mesmo teatro milenar dentro de casa!",
     ],
     pigmentos: [
-      { nome: "Sombra do dragão", hex: "#1f2937", fonte: "Boneca de couro", emoji: "🐉", fotoUrl: pigDragao },
-      { nome: "Sombra da princesa", hex: "#374151", fonte: "Contorno delicado", emoji: "👸", fotoUrl: pigPrincesa },
-      { nome: "Sombra de árvore", hex: "#4b5563", fonte: "Galhos recortados", emoji: "🌳", fotoUrl: pigArvore },
-      { nome: "Fundo da tela", hex: "#f3f4f6", fonte: "Pano branco iluminado", emoji: "🖼️", fotoUrl: pigTela },
+      {
+        nome: "Sombra do dragão",
+        hex: "#1f2937",
+        fonte: "Boneca de couro",
+        emoji: "🐉",
+        fotoUrl: pigDragao,
+      },
+      {
+        nome: "Sombra da princesa",
+        hex: "#374151",
+        fonte: "Contorno delicado",
+        emoji: "👸",
+        fotoUrl: pigPrincesa,
+      },
+      {
+        nome: "Sombra de árvore",
+        hex: "#4b5563",
+        fonte: "Galhos recortados",
+        emoji: "🌳",
+        fotoUrl: pigArvore,
+      },
+      {
+        nome: "Fundo da tela",
+        hex: "#f3f4f6",
+        fonte: "Pano branco iluminado",
+        emoji: "🖼️",
+        fotoUrl: pigTela,
+      },
     ],
   },
 
@@ -131,6 +207,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "China e Indonésia", correta: true },
           { texto: "Estados Unidos e Canadá", correta: false },
+
+          { texto: "Não combina com a proposta", correta: false },
+          { texto: "Outra ação sem relação", correta: false },
         ],
         feedbackAcerto: "Isso! Nasceu no Oriente, há mais de 2 mil anos.",
         feedbackErro: "Nasceu MUITO antes dos EUA existirem — na China e Indonésia.",
@@ -140,6 +219,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "A luz sendo BLOQUEADA pelo boneco", correta: true },
           { texto: "Uma tinta preta invisível", correta: false },
+
+          { texto: "Não combina com a proposta", correta: false },
+          { texto: "Outra ação sem relação", correta: false },
         ],
         feedbackAcerto: "Certo! O boneco tampa a luz e forma a sombra.",
         feedbackErro: "Não tem tinta. A sombra é a LUZ TAMPADA pelo boneco.",
@@ -149,6 +231,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "O contorno escuro sem detalhes", correta: true },
           { texto: "Uma dança dos índios", correta: false },
+
+          { texto: "Não combina com a proposta", correta: false },
+          { texto: "Outra ação sem relação", correta: false },
         ],
         feedbackAcerto: "Sim! Silhueta = o formato escuro que a sombra mostra.",
         feedbackErro: "Silhueta é o CONTORNO escuro, o formato da sombra.",
@@ -161,32 +246,44 @@ export const aula01: AulaArteV1 = {
     aurora: "Cada silhueta é um personagem. Descobre qual bicho é!",
     animais: [
       {
-        nome: "Silhueta com longo pescoço", emoji: "🦒", fotoUrl: animalGirafa,
+        nome: "Silhueta com longo pescoço",
+        emoji: "🦒",
+        fotoUrl: animalGirafa,
         corAlvo: { nome: "Girafa", hex: "#eab308" },
         opcoes: [
           { nome: "Sapo", hex: "#16a34a" },
           { nome: "Girafa", hex: "#eab308" },
           { nome: "Peixe", hex: "#0ea5e9" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Girafa! O pescoço enorme é a marca dela.",
       },
       {
-        nome: "Silhueta com tromba", emoji: "🐘", fotoUrl: animalElefante5,
+        nome: "Silhueta com tromba",
+        emoji: "🐘",
+        fotoUrl: animalElefante5,
         corAlvo: { nome: "Elefante", hex: "#6b7280" },
         opcoes: [
           { nome: "Cavalo", hex: "#78350f" },
           { nome: "Coelho", hex: "#f472b6" },
           { nome: "Elefante", hex: "#6b7280" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Elefante! A tromba é o detalhe que denuncia.",
       },
       {
-        nome: "Silhueta com asas grandes", emoji: "🦇", fotoUrl: animalMorcego,
+        nome: "Silhueta com asas grandes",
+        emoji: "🦇",
+        fotoUrl: animalMorcego,
         corAlvo: { nome: "Morcego", hex: "#1f2937" },
         opcoes: [
           { nome: "Formiga", hex: "#78350f" },
           { nome: "Morcego", hex: "#1f2937" },
           { nome: "Peixe", hex: "#0ea5e9" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Morcego! As asas de couro fazem uma sombra assustadora.",
       },
@@ -197,11 +294,41 @@ export const aula01: AulaArteV1 = {
     tipo: "sequenciaMistura",
     aurora: "Toca nos passos NA ORDEM CERTA pra montar seu teatro de sombras em casa.",
     passos: [
-      { id: "p1", texto: "Escolho um LENÇOL branco e estico entre duas cadeiras", emoji: "🛏️", ordem: 1, fotoUrl: u5passo1 },
-      { id: "p2", texto: "Apago a luz do quarto pra ficar escurinho", emoji: "🌑", ordem: 2, fotoUrl: u5passo2 },
-      { id: "p3", texto: "Ligo uma LANTERNA atrás do lençol", emoji: "🔦", ordem: 3, fotoUrl: u5passo3 },
-      { id: "p4", texto: "Faço bonecos de PAPEL recortados no palito", emoji: "🎭", ordem: 4, fotoUrl: u5passo4 },
-      { id: "p5", texto: "Movo os bonecos e conto a HISTÓRIA!", emoji: "📖", ordem: 5, fotoUrl: u5passo5 },
+      {
+        id: "p1",
+        texto: "Escolho um LENÇOL branco e estico entre duas cadeiras",
+        emoji: "🛏️",
+        ordem: 1,
+        fotoUrl: u5passo1,
+      },
+      {
+        id: "p2",
+        texto: "Apago a luz do quarto pra ficar escurinho",
+        emoji: "🌑",
+        ordem: 2,
+        fotoUrl: u5passo2,
+      },
+      {
+        id: "p3",
+        texto: "Ligo uma LANTERNA atrás do lençol",
+        emoji: "🔦",
+        ordem: 3,
+        fotoUrl: u5passo3,
+      },
+      {
+        id: "p4",
+        texto: "Faço bonecos de PAPEL recortados no palito",
+        emoji: "🎭",
+        ordem: 4,
+        fotoUrl: u5passo4,
+      },
+      {
+        id: "p5",
+        texto: "Movo os bonecos e conto a HISTÓRIA!",
+        emoji: "📖",
+        ordem: 5,
+        fotoUrl: u5passo5,
+      },
     ],
     falaAcerto: "Seu teatro tá pronto! É hora de vender ingressos pra família!",
   },
@@ -211,8 +338,16 @@ export const aula01: AulaArteV1 = {
     aurora: "Agora VOCÊ lê o diário do bonequeiro! Toca nas palavras coloridas.",
     titulo: "Diário do Bonequeiro de Sombras",
     trechos: [
-      { texto: "Estiquei o lençol e liguei a", palavraDestaque: "lanterna", corDestaque: "#eab308" },
-      { texto: "Meu boneco de papel virou uma", palavraDestaque: "silhueta", corDestaque: "#374151" },
+      {
+        texto: "Estiquei o lençol e liguei a",
+        palavraDestaque: "lanterna",
+        corDestaque: "#eab308",
+      },
+      {
+        texto: "Meu boneco de papel virou uma",
+        palavraDestaque: "silhueta",
+        corDestaque: "#374151",
+      },
       { texto: "No pano branco apareceu a", palavraDestaque: "sombra", corDestaque: "#1f2937" },
       { texto: "Meu primo virou o", palavraDestaque: "personagem", corDestaque: "#a855f7" },
       { texto: "A vovó bateu palmas no fim!" },
@@ -222,7 +357,8 @@ export const aula01: AulaArteV1 = {
   cena09_minijogo: {
     tipo: "cenaTematica",
     variante: "minijogo",
-    aurora: "Adivinha-Sombra! Toca em CADA silhueta pra descobrir todos os personagens antes do tempo acabar!",
+    aurora:
+      "Adivinha-Sombra! Toca em CADA silhueta pra descobrir todos os personagens antes do tempo acabar!",
     titulo: "🎭 Adivinha a Sombra",
     instrucao: "Toque em todas as silhuetas!",
     tempoSeg: 40,
@@ -244,11 +380,31 @@ export const aula01: AulaArteV1 = {
     titulo: "🔁 Roda do Teatro de Sombras",
     itens: [
       { emoji: "🔦", rotulo: "Luz", descricao: "Sem ela não existe sombra.", cor: "#eab308" },
-      { emoji: "🌑", rotulo: "Sombra", descricao: "Marca escura de quem tampa a luz.", cor: "#1f2937" },
-      { emoji: "👤", rotulo: "Silhueta", descricao: "Contorno escuro do personagem.", cor: "#374151" },
-      { emoji: "🖼️", rotulo: "Tela", descricao: "Lençol branco onde a sombra aparece.", cor: "#f3f4f6" },
+      {
+        emoji: "🌑",
+        rotulo: "Sombra",
+        descricao: "Marca escura de quem tampa a luz.",
+        cor: "#1f2937",
+      },
+      {
+        emoji: "👤",
+        rotulo: "Silhueta",
+        descricao: "Contorno escuro do personagem.",
+        cor: "#374151",
+      },
+      {
+        emoji: "🖼️",
+        rotulo: "Tela",
+        descricao: "Lençol branco onde a sombra aparece.",
+        cor: "#f3f4f6",
+      },
       { emoji: "🎭", rotulo: "Personagem", descricao: "Quem vive a história.", cor: "#a855f7" },
-      { emoji: "📖", rotulo: "História", descricao: "O que os personagens vivem no palco.", cor: "#dc2626" },
+      {
+        emoji: "📖",
+        rotulo: "História",
+        descricao: "O que os personagens vivem no palco.",
+        cor: "#dc2626",
+      },
     ],
     falaFinal: "Agora você é diretor do teatro milenar das sombras!",
   },
@@ -261,6 +417,9 @@ export const aula01: AulaArteV1 = {
       alternativas: [
         { texto: "Uma LUZ e um objeto que bloqueia essa luz", correta: true },
         { texto: "Uma tinta preta e um pincel", correta: false },
+
+        { texto: "Não combina com a proposta", correta: false },
+        { texto: "Outra ação sem relação", correta: false },
       ],
       feedback: "Isso! Sombra = luz sendo tampada. Sem luz, sombra não existe.",
     },

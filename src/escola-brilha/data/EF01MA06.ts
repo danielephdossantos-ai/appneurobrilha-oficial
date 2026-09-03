@@ -34,17 +34,18 @@ const aula: Aula = {
 
   conhecimentosPrevios: [
     "Contar até 10 sem pular números.",
-    "Reconhecer 'juntar' como misturar dois grupos.",
+    "Reconhecer e contar pequenas quantidades.",
     "Apontar cada objeto ao contar.",
   ],
 
   missao:
-    "Aprender que SOMAR é juntar duas quantidades — e treinar somas até 10 usando imagens que aparecem, juntam e viram o total.",
+    "Aprender que SOMAR pode ser juntar grupos ou acrescentar itens — e construir somas até 10 com imagens, contagem e estratégias.",
 
   objetivos: [
-    "Compreender a ideia de juntar quantidades.",
+    "Compreender as ideias de juntar e acrescentar quantidades.",
     "Resolver adições simples até 10.",
     "Representar somas com imagens e objetos.",
+    "Usar fatos básicos e contar a partir do maior número.",
     "Relacionar a adição com situações do dia a dia.",
   ],
 
@@ -52,7 +53,38 @@ const aula: Aula = {
     "Somar é como juntar amigos: quanto mais entra na roda, maior fica o grupo!",
 
   explicacao:
-    "SOMAR significa JUNTAR duas quantidades pra descobrir o TOTAL.\n\nO sinal da soma é o + (mais).\n\nExemplos:\n• 3 🍎 + 2 🍎 = 5 🍎\n• 2 🥕 + 3 🥕 = 5 🥕\n\nPra somar, a gente conta o primeiro grupo, depois o segundo, e junta tudo. Também podemos usar os dedos, desenhos ou apontar as imagens.",
+    "SOMAR pode ser JUNTAR dois grupos ou ACRESCENTAR uma quantidade ao que já temos. O resultado é o TOTAL.\n\nO sinal da adição é + (mais).\n\nExemplos:\n• Juntar: 3 maçãs + 2 maçãs = 5 maçãs.\n• Acrescentar: havia 4 flores e chegou mais 1; agora há 5.\n\nNo começo, podemos juntar e contar todos os objetos. Depois aprendemos um jeito mais rápido: começar pelo número maior e contar para a frente. Em 5 + 2, pense: cinco... seis, sete.",
+
+  explicacaoAtiva: [
+    {
+      texto: "Juntar é aproximar dois grupos e descobrir quantos itens existem ao todo.",
+      exemplo: "3 cenouras com mais 2 cenouras formam 5 cenouras: 3 + 2 = 5.",
+      imagem: cenouraImg,
+      imagemAlt: "Cenoura usada para representar uma adição",
+      checagem: { pergunta: "Se juntarmos 3 cenouras e 2 cenouras, quantas teremos?", opcoes: ["4", "5", "6"], correta: 1, explicacao: "Conte as três primeiras e continue com mais duas: quatro, cinco." },
+    },
+    {
+      texto: "Acrescentar é colocar mais itens numa quantidade que já existia.",
+      exemplo: "Havia 4 flores. Chegou mais 1. Agora há 5: 4 + 1 = 5.",
+      imagem: florImg,
+      imagemAlt: "Flor usada para representar algo acrescentado",
+      checagem: { pergunta: "Havia 4 flores e chegou mais 1. Quantas há agora?", opcoes: ["4", "5", "6"], correta: 1, explicacao: "Acrescentar uma unidade ao 4 leva ao próximo número: 5." },
+    },
+    {
+      texto: "Para calcular sem recontar tudo, comece pelo número maior e conte para a frente.",
+      exemplo: "Em 2 + 5, comece no 5 e avance duas vezes: 6, 7.",
+      imagem: estrelaImg,
+      imagemAlt: "Estrela usada para praticar contagem para a frente",
+      checagem: { pergunta: "Comece no 6 e avance 3 números. Onde você chega?", opcoes: ["8", "9", "10"], correta: 1, explicacao: "Depois do 6, avance: 7, 8, 9. Então 6 + 3 = 9." },
+    },
+    {
+      texto: "Alguns fatos ajudam a pensar: somar zero mantém o número; parcelas iguais formam dobros; trocar a ordem não muda o total.",
+      exemplo: "5 + 0 = 5; 2 + 2 = 4; 3 + 2 e 2 + 3 dão 5.",
+      imagem: macaImg,
+      imagemAlt: "Maçã usada para construir fatos básicos da adição",
+      checagem: { pergunta: "Qual soma também tem o mesmo total de 3 + 2?", opcoes: ["3 + 3", "2 + 3", "2 + 0"], correta: 1, explicacao: "Podemos trocar a ordem das parcelas: 3 + 2 = 2 + 3 = 5." },
+    },
+  ],
 
   explicacoesNiveis: {
     nivel1: "Somar é juntar. Junta dois grupos e conta o total.",
@@ -90,14 +122,13 @@ const aula: Aula = {
     explicacao:
       "Quando dois grupos se juntam, a gente faz uma soma. Conte um grupo, depois o outro, e diga o total.",
     visual: {
-      tipo: "grupos",
+      tipo: "comparar",
       pergunta: "Quantas cenouras existem agora, juntando os dois grupos?",
-      imagemUrl: cenouraImg,
-      itemSingular: "cenoura",
-      itemPlural: "cenouras",
-      quantidadeGrupos: 2,
-      itensPorGrupo: 3, // fallback — as fases visuais mostram 3 e 2
-      opcoes: [4, 5, 6],
+      lados: [
+        { imagemUrl: cenouraImg, quantidade: 3, rotulo: "Grupo A · 3", cor: "#FB923C" },
+        { imagemUrl: cenouraImg, quantidade: 2, rotulo: "Grupo B · 2", cor: "#FBBF24" },
+      ],
+      opcoes: ["4", "5", "6"],
       correta: 1,
     },
   },
@@ -167,10 +198,12 @@ const aula: Aula = {
 
   revisao: {
     pontos: [
-      "SOMAR = juntar duas quantidades.",
+      "SOMAR pode ser juntar grupos ou acrescentar itens.",
       "O sinal é o + (mais).",
-      "Sempre conte um grupo, depois o outro, depois o total.",
-      "Dedos, desenhos e imagens ajudam a somar.",
+      "Começar pelo maior e contar para a frente evita recontar tudo.",
+      "Somar zero mantém a quantidade: 6 + 0 = 6.",
+      "Trocar a ordem não muda o total: 3 + 2 = 2 + 3.",
+      "Parcelas iguais formam dobros: 4 + 4 = 8.",
     ],
     dica: "Comece pelo número maior e conte pra frente: pra 3 + 5, comece em 5 e conte 6, 7, 8.",
   },
@@ -227,9 +260,9 @@ const aula: Aula = {
     "🏅 Medalha conquistada: Pequeno Somador! Agora você sabe que SOMAR é juntar — e faz contas até 10 com apoio visual. Missão em Família: junte 3 copos e mais 2 copos, e pergunte quantos ficaram no total. Repita com brinquedos, lápis ou frutas.",
 
   curiosidade: {
-    titulo: "Você sabia?",
+    titulo: "Um atalho que funciona",
     texto:
-      "O sinal + foi criado por um matemático alemão há mais de 500 anos e é usado no mundo inteiro pra mostrar que vamos JUNTAR quantidades. Antes disso, cada país escrevia soma de um jeito diferente!",
+      "Quando aparece + 1, basta dizer o próximo número. Por exemplo: depois do 7 vem o 8, então 7 + 1 = 8.",
   },
 
   interativas: [
@@ -289,7 +322,7 @@ const aula: Aula = {
       tipo: "arrastar",
       titulo: "Fase 4 · Arraste e descubra",
       instrucao:
-        "Arraste os 2 pintinhos que estão sozinhos pra dentro do ninho pra juntar com os que já estão lá.",
+        "Arraste os 2 pintinhos para o ninho e conte quantos você colocou.",
       itemImagem: pintinhoImg,
       alvosVisuais: [
         { nome: "Ninho", cor: "#FBBF24", capacidade: 6, imagemUrl: pintinhoImg },

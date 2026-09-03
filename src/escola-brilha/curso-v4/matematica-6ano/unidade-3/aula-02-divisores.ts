@@ -4,7 +4,7 @@ export const aula02_divisores: AulaV4 = {
   slug: "u3-02-divisores",
   titulo: "Divisores e critérios de divisibilidade",
   iconeTrilha: "🧩",
-  bncc: ["EF06MA05"],
+  bncc: ["EF06MA04", "EF06MA05", "EF06MA34"],
   duracaoMin: 22,
   metodologias: ["cpa", "skemp"],
 
@@ -18,7 +18,7 @@ export const aula02_divisores: AulaV4 = {
     cenas: [
       {
         tipo: "tabela",
-        titulo: "Critérios de divisibilidade (decore!)",
+        titulo: "Critérios de divisibilidade — entenda e aplique",
         cabecalhos: ["Divisor", "Regra"],
         linhas: [
           { rotulo: "2", valores: ["2", "Termina em 0, 2, 4, 6, 8 (par)"] },
@@ -62,10 +62,10 @@ export const aula02_divisores: AulaV4 = {
         },
       },
       {
-        texto: "Todo divisor DIVIDE, todo múltiplo É DIVIDIDO.",
+        texto: "Um teste de divisibilidade pode ser organizado como um algoritmo: uma sequência finita de decisões.",
         exemploReal: {
-          contexto: "3 é divisor de 12. 12 é múltiplo de 3.",
-          destaque: "São duas faces do mesmo par.",
+          contexto: "Algoritmo para verificar se um natural é par: observe o último algarismo; se for 0, 2, 4, 6 ou 8, conclua “par”; caso contrário, conclua “ímpar”.",
+          destaque: "Em um fluxograma, cada resposta “sim” ou “não” conduz ao próximo passo ou à conclusão.",
         },
       },
     ],

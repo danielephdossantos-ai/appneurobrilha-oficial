@@ -1,0 +1,2 @@
+import { criarAulaArte1 } from "./criarAulaArte1";
+export default criarAulaArte1({ codigo: "EF15AR09", titulo: "Meu Corpo Dança", foco: "Estabelecer relações entre as partes do corpo e o corpo inteiro ao dançar", objeto: "relações corporais na dança", exemplos: ["Mover braços e depois o corpo inteiro", "Só assistir televisão", "Somar números", "Nomear planetas"], resposta: "Perceber como cada parte participa e como todas se organizam no movimento.", proxima: "EF15AR10" });
