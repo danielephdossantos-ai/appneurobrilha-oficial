@@ -92,13 +92,13 @@ export const aula05_tabelas: AulaV4 = {
     perguntas: [
       { pergunta: "Total da P1 (Ana+Beto+Carla):", opcoes: ["23", "22", "24"], correta: 0, feedbackAcerto: "🎉 23.", feedbackErro: "8+6+9=23." },
       { pergunta: "Nota da Ana na P4:", opcoes: ["10", "9", "8"], correta: 0, feedbackAcerto: "🎉 10.", feedbackErro: "Linha Ana × P4." },
-      { pergunta: "Média das provas do Beto ~", opcoes: ["7", "6", "8"], correta: 0, feedbackAcerto: "🎉 ~7.", feedbackErro: "29÷4 ≈ 7." },
+      { pergunta: "Total das provas do Beto:", opcoes: ["29", "28", "30"], correta: 0, feedbackAcerto: "🎉 29.", feedbackErro: "6+8+7+8=29." },
     ],
   },
   momento11_missaoFamilia: {
     titulo: "Tabela da Casa",
     materiais: ["Papel"],
-    passos: ["Anote 3 gastos da semana em 3 categorias.", "Some por linha e por coluna."],
+    passos: ["Registre durante 3 dias quantos copos de água cada pessoa da casa bebeu.", "Organize os dados e some por linha e por coluna."],
     registro: "📸 Foto da tabela.",
   },
   recompensa: { xp: 200, moedas: 100 },

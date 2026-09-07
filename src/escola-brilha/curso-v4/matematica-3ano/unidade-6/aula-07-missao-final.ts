@@ -4,7 +4,7 @@ export const aula07_missaoFinalU6: AulaV4 = {
   slug: "u6-07-missao-final",
   titulo: "Arquiteto da Cidade",
   iconeTrilha: "🏆",
-  bncc: ["EF03MA12", "EF03MA13", "EF03MA14", "EF03MA15"],
+  bncc: ["EF03MA12", "EF03MA13", "EF03MA14", "EF03MA15", "EF03MA16"],
   duracaoMin: 20,
   metodologias: ["skemp", "cpa"],
   momento01_motivacao: {

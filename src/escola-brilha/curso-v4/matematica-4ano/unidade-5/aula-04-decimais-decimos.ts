@@ -97,7 +97,7 @@ export const aula04_decimais01: AulaV4 = {
   momento11_missaoFamilia: {
     titulo: "Régua dos décimos",
     materiais: ["Régua", "Papel"],
-    passos: ["Meça 3 objetos em cm.", "Divida cada medida por 10 e escreva em metros com vírgula."],
+    passos: ["Meça 3 objetos em centímetros.", "Divida cada medida por 100 e escreva em metros com vírgula. Exemplo: 30 cm = 0,30 m."],
     registro: "📸 Foto das medidas.",
   },
   recompensa: { xp: 220, moedas: 110 },

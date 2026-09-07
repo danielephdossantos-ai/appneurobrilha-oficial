@@ -14,7 +14,7 @@ export const aula01: AulaGeoV1 = {
   titulo: "Rede da Vida",
   iconeTrilha: "🌳",
   recompensa: { xp: 120, moedas: 45, medalha: "Ecólogo Júnior" },
-  bncc: ["EF06CI06"],
+  bncc: [],
   duracaoMin: 35,
 
   cena01_motivacao: {
@@ -39,6 +39,7 @@ export const aula01: AulaGeoV1 = {
       { id: "explode", titulo: "Presas explodem", subtitulo: "capivaras dominam", emoji: "📈", cor: "from-amber-500 to-orange-700", fotoUrl: predadorImg },
       { id: "equilibra", titulo: "Nada muda", subtitulo: "sistema se equilibra sozinho", emoji: "⚖️", cor: "from-slate-500 to-slate-700", fotoUrl: mataImg },
       { id: "somem", titulo: "Todos somem juntos", subtitulo: "efeito dominó", emoji: "💀", cor: "from-red-500 to-rose-700", fotoUrl: mataImg },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "explode",
     feedbackAcerto:
@@ -86,6 +87,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🎯", titulo: "População = 1 espécie; comunidade = várias espécies", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "❌", titulo: "É a mesma coisa", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🌍", titulo: "População inclui o ambiente físico", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Isso. População = 1 espécie. Comunidade = várias populações interagindo.",
         feedbackErro: "População é UMA espécie só. Comunidade reúne VÁRIAS espécies no mesmo lugar." },
@@ -94,6 +96,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🍄", titulo: "Decompositores", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🐆", titulo: "Predadores de topo", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🌱", titulo: "Produtores", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. Sem decompositores, matéria morta se acumularia e nutrientes não voltariam ao solo.",
         feedbackErro: "Produtores CAPTAM energia; predadores CONTROLAM. Só decompositores RECICLAM matéria." },
@@ -102,6 +105,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🌊", titulo: "Efeito cascata afeta os outros níveis", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "😌", titulo: "Nada, se equilibra sozinho", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🎨", titulo: "Só muda a cor da paisagem", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Perfeito. Cascata trófica: mexer num nível afeta TODOS os outros — pra cima e pra baixo.",
         feedbackErro: "Ecossistemas são REDES conectadas. Perder um nível gera cascata em todos os outros." },
@@ -194,6 +198,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "População = 1 espécie; comunidade = várias espécies interagindo", correta: true },
           { id: "b", texto: "Comunidade tem mais indivíduos que população" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. Número de espécies é a chave — não o número de indivíduos.",
         feedbackErro: "Não é quantidade de indivíduos — é quantidade de ESPÉCIES." },
@@ -201,6 +207,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Reciclar matéria morta e devolver nutrientes ao solo", correta: true },
           { id: "b", texto: "Caçar animais menores para se alimentar" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. Sem decompositores, nutrientes ficariam presos em matéria morta.",
         feedbackErro: "Decompositores não caçam — quebram matéria orgânica MORTA reciclando nutrientes." },
@@ -208,6 +216,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Porque gera efeito cascata em todos os níveis abaixo", correta: true },
           { id: "b", texto: "Porque só faz falta pra outros predadores" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Exato. Cascata trófica — presas explodem, vegetação some, rios erodem.",
         feedbackErro: "Efeito atinge TODOS os níveis — presas, plantas, solo, água. Isso é cascata trófica." },

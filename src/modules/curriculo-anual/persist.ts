@@ -99,16 +99,22 @@ export async function gerarESalvar(input: GerarParaCriancaInput): Promise<Curric
     diasPorSemana: input.diasPorSemana,
   });
 
-  // limpa plano anterior
+  // Preserva o progresso por aula. A posição no calendário pode mudar quando
+  // entram aulas novas, mas uma aula já concluída nunca volta a ficar pendente.
   const antigo = await carregarCurriculo(input.childId);
+  const concluidas = new Set<string>();
   if (antigo?.id) {
+    const { data: itensAntigos } = await supabase
+      .from(T_ITENS)
+      .select("curso_slug,aula_slug,concluido")
+      .eq("curriculo_id", antigo.id);
+    for (const item of (itensAntigos as any[]) ?? []) {
+      if (item.concluido) concluidas.add(`${item.curso_slug}/${item.aula_slug}`);
+    }
     await supabase.from(T_ITENS).delete().eq("curriculo_id", antigo.id);
-    await supabase.from(T_PLANO).delete().eq("id", antigo.id);
   }
 
-  const { data: novo, error } = await supabase
-    .from(T_PLANO)
-    .insert({
+  const dadosPlano = {
       child_id: input.childId,
       serie: plano.serie,
       ano_letivo: plano.ano_letivo,
@@ -116,9 +122,11 @@ export async function gerarESalvar(input: GerarParaCriancaInput): Promise<Curric
       dias_por_semana: plano.dias_por_semana,
       semanas_por_semestre: plano.semanas_por_semestre,
       base_anamnese: (risk ?? null) as any,
-    } as any)
-    .select("id")
-    .single();
+  } as any;
+  const consultaPlano = antigo?.id
+    ? supabase.from(T_PLANO).update(dadosPlano).eq("id", antigo.id).select("id").single()
+    : supabase.from(T_PLANO).insert(dadosPlano).select("id").single();
+  const { data: novo, error } = await consultaPlano;
   if (error) throw error;
 
   const rows = plano.itens.map((i) => ({
@@ -135,6 +143,7 @@ export async function gerarESalvar(input: GerarParaCriancaInput): Promise<Curric
     rota: i.rota,
     minutos: i.minutos,
     prioridade: i.prioridade,
+    concluido: concluidas.has(`${i.curso_slug}/${i.aula_slug}`),
   }));
   for (let i = 0; i < rows.length; i += 500) {
     const { error: e } = await supabase.from(T_ITENS).insert(rows.slice(i, i + 500) as any);
@@ -182,6 +191,41 @@ export async function gerarESalvar(input: GerarParaCriancaInput): Promise<Curric
   // horário padrão (17:00 de Seg a Sex) se ainda não existir
   await garantirHorariosPadrao(input.childId, plano.dias_por_semana);
   return plano;
+}
+
+/** Atualiza apenas quando o catálogo real mudou; mantém progresso e horários. */
+export async function sincronizarCurriculoSeNecessario(
+  childId: string,
+  serie: string | number,
+): Promise<boolean> {
+  const salvo = await carregarCurriculo(childId);
+  if (!salvo) return false;
+  const risk = await buscarRiskAnamnese(childId);
+  const esperado = gerarCurriculoAnual({
+    serie,
+    risk,
+    minutosPorDia: salvo.minutos_por_dia,
+    diasPorSemana: salvo.dias_por_semana,
+    semanasPorSemestre: salvo.semanas_por_semestre,
+    anoLetivo: salvo.ano_letivo,
+  });
+  const { data: atuais } = await supabase
+    .from(T_ITENS)
+    .select("curso_slug,aula_slug,titulo,rota")
+    .eq("curriculo_id", salvo.id);
+  const assinatura = (itens: Array<{ curso_slug: string; aula_slug: string; titulo: string; rota: string }>) =>
+    itens.map((i) => `${i.curso_slug}/${i.aula_slug}|${i.titulo}|${i.rota}`).sort().join("\n");
+  const canonicos = esperado.itens.map((i) => ({
+    curso_slug: i.curso_slug, aula_slug: i.aula_slug, titulo: i.titulo, rota: i.rota,
+  }));
+  if (assinatura(((atuais as any[]) ?? [])) === assinatura(canonicos)) return false;
+  await gerarESalvar({
+    childId,
+    serie,
+    minutosPorDia: salvo.minutos_por_dia,
+    diasPorSemana: salvo.dias_por_semana,
+  });
+  return true;
 }
 
 export async function carregarHorarios(childId: string): Promise<HorarioSalvo[]> {

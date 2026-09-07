@@ -131,7 +131,7 @@ export const aula05_localizacao: AulaV4 = {
     perguntas: [
       { pergunta: "De (1,A) para (1,D): quantos passos à direita?", opcoes: ["3", "2", "4"], correta: 0, feedbackAcerto: "🎉 3.", feedbackErro: "A→B→C→D=3." },
       { pergunta: "Cima muda o quê?", opcoes: ["Linha", "Coluna", "Nada"], correta: 0, feedbackAcerto: "🎉 Linha.", feedbackErro: "Cima = linha muda." },
-      { pergunta: "De (4,C), 1 pra baixo chega em?", opcoes: ["(3,C)", "(5,C)", "(4,B)"], correta: 0, feedbackAcerto: "🎉 (3,C).", feedbackErro: "Baixo diminui linha." },
+      { pergunta: "De (4,C), uma linha acima chega em?", opcoes: ["(3,C)", "(5,C)", "(4,B)"], correta: 0, feedbackAcerto: "🎉 Chegamos a (3,C): a coluna C foi mantida e a linha diminuiu de 4 para 3.", feedbackErro: "Mover uma linha acima mantém a coluna C e leva da linha 4 para a linha 3." },
     ],
   },
   momento11_missaoFamilia: {

@@ -1,0 +1,41 @@
+-- Biblioteca Inclusiva · História do 8º ano completa.
+WITH lessons(code,rel,title) AS (VALUES
+('EF08HI01','unidade-1/aula-01-iluminismo.ts','Iluminismo e crítica ao Antigo Regime'),
+('EF08HI02','unidade-1/aula-02-revolucoes-inglesas.ts','Revoluções inglesas e parlamentarismo'),
+('EF08HI03','unidade-2/aula-02-circulacao-industrial.ts','Revolução Industrial, circulação e trabalho'),
+('EF08HI04','unidade-3/aula-01-revolucao-francesa.ts','Revolução Francesa e seus desdobramentos'),
+('EF08HI05','unidade-3/aula-02-rebelioes-america-portuguesa.ts','Rebeliões na América portuguesa'),
+('EF08HI06','unidade-5/aula-02-estado-nacao-independencias.ts','Estado, nação e território'),
+('EF08HI07','unidade-5/aula-02-estado-nacao-independencias.ts','Independências americanas e projetos nacionais'),
+('EF08HI08','unidade-5/aula-01-haiti-hispanoamerica.ts','Revolução de São Domingo e Haiti'),
+('EF08HI09','unidade-5/aula-01-haiti-hispanoamerica.ts','Independências hispano-americanas'),
+('EF08HI10','unidade-5/aula-01-haiti-hispanoamerica.ts','Lideranças e grupos nas independências'),
+('EF08HI11','unidade-5/aula-01-haiti-hispanoamerica.ts','Pan-americanismo e projetos políticos'),
+('EF08HI12','unidade-4/aula-01-napoleao-corte.ts','Era napoleônica e corte portuguesa no Brasil'),
+('EF08HI13','unidade-6/aula-01-independencia-brasil.ts','Independência do Brasil e permanências sociais'),
+('EF08HI14','unidade-6/aula-07-tutela-participacao.ts','Tutela indígena e participação negra'),
+('EF08HI15','unidade-6/aula-02-disputas-politicas-imperio.ts','Primeiro Reinado, Regências e Segundo Reinado'),
+('EF08HI16','unidade-6/aula-03-revoltas-regenciais.ts','Revoltas regenciais e disputas sociais'),
+('EF08HI17','unidade-6/aula-04-fronteiras-conflitos.ts','Fronteiras, territórios e povos indígenas'),
+('EF08HI18','unidade-6/aula-05-guerra-paraguai.ts','Guerra do Paraguai e diferentes interpretações'),
+('EF08HI19','unidade-6/aula-06-legado-escravidao.ts','Legados da escravização nas Américas'),
+('EF08HI20','unidade-6/aula-10-legados-acoes-afirmativas.ts','Pós-abolição, desigualdades e ações afirmativas'),
+('EF08HI21','unidade-6/aula-08-politicas-indigenistas.ts','Políticas indigenistas no Império'),
+('EF08HI22','unidade-6/aula-09-romantismo-identidade.ts','Romantismo e construção da identidade nacional'),
+('EF08HI23','unidade-7/aula-01-imperialismo.ts','Imperialismo europeu na África e na Ásia'),
+('EF08HI24','unidade-7/aula-02-produtos-africanos-imperialismo.ts','Produtos africanos e exploração imperialista'),
+('EF08HI25','unidade-7/aula-03-eua-america-latina.ts','Estados Unidos e América Latina no século XIX'),
+('EF08HI26','unidade-7/aula-01-imperialismo.ts','Resistências africanas e asiáticas ao imperialismo'),
+('EF08HI27','unidade-7/aula-01-imperialismo.ts','Nacionalismos e tensões territoriais')
+), p AS (SELECT code,'src/escola-brilha/curso-v4/historia-8ano/'||rel source_key,title,'Analisar, comparar e argumentar sobre '||lower(title)||' usando fontes, cronologia, causalidade, conceitos e múltiplas perspectivas.' goal FROM lessons)
+INSERT INTO public.teacher_inclusive_lessons (source_lesson_key,source_version,codigo_bncc,title,school_stage,school_year,subject,knowledge_object,learning_goal,supported_profiles,teacher_pages,student_pages,answer_key,accessibility,source_fidelity_checked,pedagogical_reviewed,technical_reviewed,status,source_route)
+SELECT source_key,'audit-2026-09-04',code,title,'fundamental_2','8º Ano','História',title,goal,ARRAY['tea','tdah','dislexia','deficiencia_intelectual','comunicacao','motora_escrita'],
+jsonb_build_array(jsonb_build_object('title','Guia de análise histórica — '||code,'purpose',goal,'sections',jsonb_build_array(
+ jsonb_build_object('heading','Contextualize revoluções e impérios','content',jsonb_build_array('Compare liberdade, cidadania, nação e direitos perguntando quem foi incluído, excluído e mobilizado em cada contexto.','Apresente independências como processos disputados, com participação de mulheres, indígenas, africanos, afrodescendentes, trabalhadores e elites, evitando narrativas de herói único.','Ao tratar revoluções, guerras, escravização, racismo e imperialismo, use linguagem informativa e não gráfica; não faça encenação de combate, opressão ou sofrimento.')),
+ jsonb_build_object('heading','Analisar fontes, causalidade e legados','content',jsonb_build_array('Compare autoria, data, contexto, finalidade, linguagem, evidências, silêncios e limites de leis, mapas, jornais, imagens, cartas e testemunhos publicados.','Relacione ideias, economia, trabalho, território, raça, gênero, Estado e resistências sem causa única, determinismo ou justificativa civilizatória.','Diferencie evento, processo, interpretação e memória; conecte escravização e imperialismo a legados atuais sem reduzir pessoas a vítimas ou culpar estudantes.')),
+ jsonb_build_object('heading','Rotina adaptativa','content',jsonb_build_array('Divida textos e tarefas em etapas, dê uma instrução por vez, permita pausa planejada e sinalize retomada.','Aceite resposta oral, apontada, mapeada, diagramada, digitada, escrita ou com tecnologia assistiva.','Use glossário, mapas comparáveis, cronologia, fontes ampliadas e prática guiada, retirando pistas gradualmente.')),
+ jsonb_build_object('heading','Critério','content','Analisa quatro de cinco processos usando contexto, cronologia, causalidade, conceito, perspectiva e evidência pertinente.')))),
+jsonb_build_array(jsonb_build_object('title','1. Situar fontes e conceitos','instruction','Identifique período, território, grupos, autoria, finalidade, linguagem, pistas, silêncios e limites.','activity','Compare duas fontes e formule uma pergunta histórica verificável.','support','Glossário, mapa, linha do tempo, leitura apoiada e exemplo resolvido.'),jsonb_build_object('title','2. Explicar processos e disputas','instruction','Relacione ideias, interesses, coerções, resistências, mudanças e permanências.','activity','Monte quadro causal, mapa de fluxos ou linha do tempo de '||lower(title)||'.','support','Prática guiada antes da independente e redução gradual de pistas.'),jsonb_build_object('title','3. Argumentar e revisar interpretações','instruction','Formule argumento com evidências, reconheça agência, outra interpretação, legado e limites.','activity','Cite fontes, confronte contraexemplo e revise a conclusão.','support','Resposta oral, apontada, mapeada, diagramada, digitada, escrita ou assistida.')),
+jsonb_build_array(jsonb_build_object('page',1,'answer','Situa fontes, conceitos, grupos e limites.'),jsonb_build_object('page',2,'answer','Explica processo sem herói único, causa única ou superioridade cultural.'),jsonb_build_object('page',3,'answer','Argumento sustentado por evidências e aberto a revisão.','teacher_note','Registre autonomia, apoio eficaz e próximo passo; preserve origem, raça, religião, política e vivências pessoais.')),
+jsonb_build_object('response_modes',jsonb_build_array('oral','pointing','map','diagram','typing','writing','assistive_technology'),'routine','adjustable','one_instruction_at_a_time',true,'read_aloud',true,'large_text',true,'visual_schedule',true,'planned_pause',true,'low_distraction',true,'age_respectful',true,'privacy_preserving',true,'multiple_perspectives',true,'anti_stereotype',true,'indigenous_afro_descendant_agency',true,'women_workers_agency',true,'contested_interpretations',true,'forced_labor_context',true,'non_graphic',true,'no_violence_roleplay',true,'print','grayscale-safe'),true,true,true,'published','/escola-brilha/curso/historia-8ano' FROM p
+ON CONFLICT (source_lesson_key,codigo_bncc) DO UPDATE SET source_version=EXCLUDED.source_version,title=EXCLUDED.title,school_stage=EXCLUDED.school_stage,school_year=EXCLUDED.school_year,knowledge_object=EXCLUDED.knowledge_object,learning_goal=EXCLUDED.learning_goal,supported_profiles=EXCLUDED.supported_profiles,teacher_pages=EXCLUDED.teacher_pages,student_pages=EXCLUDED.student_pages,answer_key=EXCLUDED.answer_key,accessibility=EXCLUDED.accessibility,source_fidelity_checked=EXCLUDED.source_fidelity_checked,pedagogical_reviewed=EXCLUDED.pedagogical_reviewed,technical_reviewed=EXCLUDED.technical_reviewed,status=EXCLUDED.status,source_route=EXCLUDED.source_route,updated_at=now();

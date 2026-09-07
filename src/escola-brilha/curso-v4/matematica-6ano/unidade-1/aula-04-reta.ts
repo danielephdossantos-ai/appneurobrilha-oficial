@@ -4,7 +4,7 @@ export const aula04_reta: AulaV4 = {
   slug: "u1-04-reta",
   titulo: "A reta numérica",
   iconeTrilha: "📏",
-  bncc: ["EF06MA03"],
+  bncc: ["EF06MA01"],
   duracaoMin: 20,
   metodologias: ["cpa"],
 

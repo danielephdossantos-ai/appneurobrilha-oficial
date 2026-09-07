@@ -4,7 +4,7 @@ export const aula03_pm: AulaV4 = {
   slug: "u7-03-pm",
   titulo: "Princípio Multiplicativo",
   iconeTrilha: "🎲",
-  bncc: ["EF08MA22"],
+  bncc: ["EF08MA03", "EF08MA22"],
   duracaoMin: 24,
   metodologias: ["skemp"],
   momento01_motivacao: {

@@ -67,8 +67,7 @@ const aula: Aula = {
   },
 
   exemploResolvido: {
-    enunciado:
-      "Você quer ver um quadro MUITO antigo, de 200 anos atrás. Onde vai?",
+    enunciado: "Você quer ver um quadro MUITO antigo, de 200 anos atrás. Onde vai?",
     passos: [
       "Antigo e importante = fica guardado.",
       "Lugar que GUARDA arte antiga = museu.",
@@ -88,6 +87,7 @@ const aula: Aula = {
         { nome: "artesao", imagemUrl: artesaoImg },
         { nome: "curador", imagemUrl: curadorImg },
         { nome: "crianca", imagemUrl: meninoImg },
+        { nome: "artista", imagemUrl: artistaImg },
       ],
       respostaCerta: "artesao",
     },
@@ -118,35 +118,35 @@ const aula: Aula = {
       perguntas: [
         {
           pergunta: "Quadro de 300 anos atrás fica guardado em:",
-          opcoes: ["🏛️ MUSEU", "🏪 MERCADO", "🚌 ÔNIBUS"],
+          opcoes: ["🏛️ MUSEU", "🏪 MERCADO", "🚌 ÔNIBUS", "Outra opção"],
           correta: 0,
           explicacao: "Museu guarda o antigo.",
           visual: { tipo: "itens", imagemUrl: museuImg, quantidade: 1, rotulo: "🏛️" },
         },
         {
           pergunta: "Quem PINTA o quadro é o:",
-          opcoes: ["👩‍🎨 ARTISTA", "🍞 PADEIRO", "🚒 BOMBEIRO"],
+          opcoes: ["👩‍🎨 ARTISTA", "🍞 PADEIRO", "🚒 BOMBEIRO", "Outra opção"],
           correta: 0,
           explicacao: "Artista cria a obra.",
           visual: { tipo: "itens", imagemUrl: artistaImg, quantidade: 1, rotulo: "🎨" },
         },
         {
           pergunta: "Quem faz VASO, BONECA e TECIDO à mão é o:",
-          opcoes: ["🧵 ARTESÃO", "👨‍🍳 COZINHEIRO", "🧑‍🚀 ASTRONAUTA"],
+          opcoes: ["🧵 ARTESÃO", "👨‍🍳 COZINHEIRO", "🧑‍🚀 ASTRONAUTA", "Outra opção"],
           correta: 0,
           explicacao: "Artesão trabalha com as mãos.",
           visual: { tipo: "itens", imagemUrl: artesaoImg, quantidade: 1, rotulo: "🧵" },
         },
         {
           pergunta: "Quem ORGANIZA a exposição escolhendo as obras é o:",
-          opcoes: ["👓 CURADOR", "🎤 CANTOR", "⚽ JOGADOR"],
+          opcoes: ["👓 CURADOR", "🎤 CANTOR", "⚽ JOGADOR", "Outra opção"],
           correta: 0,
           explicacao: "Curador cuida da exposição.",
           visual: { tipo: "itens", imagemUrl: curadorImg, quantidade: 1, rotulo: "👓" },
         },
         {
           pergunta: "Lugar NOVO que mostra obras pra visitar e vender:",
-          opcoes: ["🖼️ GALERIA", "🏥 HOSPITAL", "🏫 ESCOLA"],
+          opcoes: ["🖼️ GALERIA", "🏥 HOSPITAL", "🏫 ESCOLA", "Outra opção"],
           correta: 0,
           explicacao: "Galeria mostra o novo.",
           visual: { tipo: "itens", imagemUrl: galeriaImg, quantidade: 1, rotulo: "🖼️" },
@@ -169,35 +169,35 @@ const aula: Aula = {
   quiz: [
     {
       pergunta: "Lugar que guarda obras antigas:",
-      opcoes: ["Museu", "Padaria", "Estádio"],
+      opcoes: ["Museu", "Padaria", "Estádio", "Outra opção"],
       correta: 0,
       explicacao: "Museu = antigo e importante.",
       visual: { tipo: "itens", imagemUrl: museuImg, quantidade: 1, rotulo: "🏛️" },
     },
     {
       pergunta: "Quem faz vaso de barro à mão é:",
-      opcoes: ["Artesão", "Motorista", "Dentista"],
+      opcoes: ["Artesão", "Motorista", "Dentista", "Outra opção"],
       correta: 0,
       explicacao: "Artesão trabalha com as mãos.",
       visual: { tipo: "itens", imagemUrl: artesaoImg, quantidade: 1, rotulo: "🧵" },
     },
     {
       pergunta: "Quem organiza a exposição é:",
-      opcoes: ["Curador", "Piloto", "Palhaço"],
+      opcoes: ["Curador", "Piloto", "Palhaço", "Outra opção"],
       correta: 0,
       explicacao: "Curador escolhe as obras.",
       visual: { tipo: "itens", imagemUrl: curadorImg, quantidade: 1, rotulo: "👓" },
     },
     {
       pergunta: "Lugar onde o artista CRIA suas obras:",
-      opcoes: ["Ateliê", "Farmácia", "Zoo"],
+      opcoes: ["Ateliê", "Farmácia", "Zoo", "Outra opção"],
       correta: 0,
       explicacao: "Ateliê é o espaço de criação.",
       visual: { tipo: "itens", imagemUrl: paletaImg, quantidade: 1, rotulo: "🎨" },
     },
     {
       pergunta: "Galeria é o lugar que:",
-      opcoes: ["Mostra arte nova", "Faz pão", "Corta cabelo"],
+      opcoes: ["Mostra arte nova", "Faz pão", "Corta cabelo", "Outra opção"],
       correta: 0,
       explicacao: "Galeria mostra e vende arte nova.",
       visual: { tipo: "itens", imagemUrl: galeriaImg, quantidade: 1, rotulo: "🖼️" },
@@ -224,6 +224,7 @@ const aula: Aula = {
         { nome: "MUSEU", imagemUrl: museuImg, rotulo: "🏛️ MUSEU" },
         { nome: "ARTISTA", imagemUrl: artistaImg, rotulo: "👩‍🎨 ARTISTA" },
         { nome: "QUADRO", imagemUrl: quadroImg, rotulo: "🖼️ QUADRO" },
+        { nome: "OUTRA-OPCAO", imagemUrl: galeriaImg, rotulo: "🔎 OUTRA OPÇÃO" },
       ],
       correta: 0,
       acerto: "🏛️ Isso! Museu guarda arte antiga.",
@@ -240,6 +241,7 @@ const aula: Aula = {
         { nome: "ARTESAO", imagemUrl: artesaoImg, rotulo: "🧵 ARTESÃO" },
         { nome: "CURADOR", imagemUrl: curadorImg, rotulo: "👓 CURADOR" },
         { nome: "CRIANCA", imagemUrl: meninoImg, rotulo: "🧒 CRIANÇA" },
+        { nome: "OUTRA-OPCAO", imagemUrl: galeriaImg, rotulo: "🔎 OUTRA OPÇÃO" },
       ],
       correta: 0,
       acerto: "🧵 Boa! Artesão faz peças à mão.",
@@ -286,15 +288,13 @@ const aula: Aula = {
           nome: "Galeria",
           imagemUrl: galeriaImg,
           rotulo: "🖼️ GALERIA",
-          descoberta:
-            "GALERIA mostra obras NOVAS de artistas vivos. Dá pra visitar e até comprar!",
+          descoberta: "GALERIA mostra obras NOVAS de artistas vivos. Dá pra visitar e até comprar!",
         },
         {
           nome: "Ateliê",
           imagemUrl: paletaImg,
           rotulo: "🎨 ATELIÊ",
-          descoberta:
-            "ATELIÊ é o cantinho onde o artista CRIA. Cheio de tintas, pincéis e ideias!",
+          descoberta: "ATELIÊ é o cantinho onde o artista CRIA. Cheio de tintas, pincéis e ideias!",
         },
         {
           nome: "Artista",
@@ -331,8 +331,18 @@ const aula: Aula = {
         { nome: "Vaso de barro", imagemUrl: vasoCeramicaImg, rotulo: "🏺 VASO", correto: true },
         { nome: "Boneca de pano", imagemUrl: bonecaPanoImg, rotulo: "🧸 BONECA", correto: true },
         { nome: "Tecido colorido", imagemUrl: tecidoImg, rotulo: "🧵 TECIDO", correto: true },
-        { nome: "Máscara indígena", imagemUrl: mascaraIndigenaImg, rotulo: "🎭 MÁSCARA", correto: true },
-        { nome: "Máscara africana", imagemUrl: mascaraAfricanaImg, rotulo: "🎭 MÁSCARA", correto: true },
+        {
+          nome: "Máscara indígena",
+          imagemUrl: mascaraIndigenaImg,
+          rotulo: "🎭 MÁSCARA",
+          correto: true,
+        },
+        {
+          nome: "Máscara africana",
+          imagemUrl: mascaraAfricanaImg,
+          rotulo: "🎭 MÁSCARA",
+          correto: true,
+        },
         { nome: "Museu (prédio)", imagemUrl: museuImg, rotulo: "🏛️ MUSEU", correto: false },
         { nome: "Curador (pessoa)", imagemUrl: curadorImg, rotulo: "👓 CURADOR", correto: false },
       ],
@@ -346,21 +356,21 @@ const aula: Aula = {
     facil: [
       {
         pergunta: "Museu guarda arte:",
-        opcoes: ["Antiga e importante", "Que não presta", "Nenhuma"],
+        opcoes: ["Antiga e importante", "Que não presta", "Nenhuma", "Outra opção"],
         correta: 0,
         explicacao: "Museu = antigo.",
         visual: { tipo: "itens", imagemUrl: museuImg, quantidade: 1, rotulo: "🏛️" },
       },
       {
         pergunta: "Quem pinta o quadro é:",
-        opcoes: ["Artista", "Motorista", "Padeiro"],
+        opcoes: ["Artista", "Motorista", "Padeiro", "Outra opção"],
         correta: 0,
         explicacao: "Artista cria.",
         visual: { tipo: "itens", imagemUrl: artistaImg, quantidade: 1, rotulo: "🎨" },
       },
       {
         pergunta: "Quem faz vaso à mão é:",
-        opcoes: ["Artesão", "Cantor", "Piloto"],
+        opcoes: ["Artesão", "Cantor", "Piloto", "Outra opção"],
         correta: 0,
         explicacao: "Artesão trabalha com as mãos.",
         visual: { tipo: "itens", imagemUrl: artesaoImg, quantidade: 1, rotulo: "🧵" },
@@ -369,21 +379,21 @@ const aula: Aula = {
     medio: [
       {
         pergunta: "Galeria é o lugar que:",
-        opcoes: ["Mostra arte nova", "Guarda comida", "Corta cabelo"],
+        opcoes: ["Mostra arte nova", "Guarda comida", "Corta cabelo", "Outra opção"],
         correta: 0,
         explicacao: "Galeria = arte nova.",
         visual: { tipo: "itens", imagemUrl: galeriaImg, quantidade: 1, rotulo: "🖼️" },
       },
       {
         pergunta: "Ateliê é o lugar onde:",
-        opcoes: ["O artista cria", "Se compra pão", "Se toma remédio"],
+        opcoes: ["O artista cria", "Se compra pão", "Se toma remédio", "Outra opção"],
         correta: 0,
         explicacao: "Ateliê = criação.",
         visual: { tipo: "itens", imagemUrl: paletaImg, quantidade: 1, rotulo: "🎨" },
       },
       {
         pergunta: "Curador é a pessoa que:",
-        opcoes: ["Organiza a exposição", "Dirige ônibus", "Faz bolo"],
+        opcoes: ["Organiza a exposição", "Dirige ônibus", "Faz bolo", "Outra opção"],
         correta: 0,
         explicacao: "Curador = organizador.",
         visual: { tipo: "itens", imagemUrl: curadorImg, quantidade: 1, rotulo: "👓" },
@@ -392,14 +402,14 @@ const aula: Aula = {
     dificil: [
       {
         pergunta: "Uma boneca de pano feita à mão é:",
-        opcoes: ["Artesanato", "Máquina", "Alimento"],
+        opcoes: ["Artesanato", "Máquina", "Alimento", "Outra opção"],
         correta: 0,
         explicacao: "Feita à mão = artesanato.",
         visual: { tipo: "itens", imagemUrl: bonecaPanoImg, quantidade: 1, rotulo: "🧸" },
       },
       {
         pergunta: "Se você quer ver obras muito antigas, você vai:",
-        opcoes: ["Ao museu", "Ao mercado", "Ao estádio"],
+        opcoes: ["Ao museu", "Ao mercado", "Ao estádio", "Outra opção"],
         correta: 0,
         explicacao: "Museu guarda o antigo.",
         visual: { tipo: "itens", imagemUrl: museuImg, quantidade: 1, rotulo: "🏛️" },
@@ -410,6 +420,7 @@ const aula: Aula = {
           "Artista cria obras; artesão faz peças à mão",
           "São a mesma coisa",
           "Nenhum dos dois faz arte",
+          "Uma resposta sem relação com a arte",
         ],
         correta: 0,
         explicacao: "Papéis diferentes, ambos fazem arte.",
@@ -421,8 +432,7 @@ const aula: Aula = {
   minijogo: {
     tipo: "esteira",
     titulo: "Fábrica Do Mundo Da Arte",
-    objetivo:
-      "As coisas passam na esteira. Toque em LUGAR, PESSOA ou OBRA antes que caiam!",
+    objetivo: "As coisas passam na esteira. Toque em LUGAR, PESSOA ou OBRA antes que caiam!",
     tempoSegundos: 90,
     minAcertos: 10,
     categorias: [

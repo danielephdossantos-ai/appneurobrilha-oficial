@@ -11,7 +11,7 @@ import { DiplomaBrilha } from "@/components/DiplomaBrilha";
 import type { MascotePersonagem } from "@/escola-brilha/mascotes-personagens";
 
 /**
- * Trilha visual estilo Duolingo para séries que NÃO viraram Curso v4
+ * Jornada visual própria do NeuroBrilha para séries que ainda não usam o Curso v4.
  * (Educação Infantil, 1º Ano, etc.).
  * As aulas continuam sendo as habilidades BNCC já existentes — só o
  * visual da lista muda. Ao concluir todas, destrava um diploma

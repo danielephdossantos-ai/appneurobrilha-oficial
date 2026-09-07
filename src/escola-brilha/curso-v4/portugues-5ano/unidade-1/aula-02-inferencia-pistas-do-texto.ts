@@ -22,7 +22,7 @@ export const aula2: AulaPortuguesV4 = {
   slug: "aula-02-inferencia-pistas-do-texto",
   titulo: "Inferência: Pistas do Texto",
   iconeTrilha: "🔍",
-  bncc: ["EF35LP04", "EF05LP07"],
+  bncc: ["EF35LP04", "EF35LP05", "EF15LP02", "EF15LP03"],
   duracaoMin: 25,
 
   momento01_motivacao: {

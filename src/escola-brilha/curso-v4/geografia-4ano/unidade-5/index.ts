@@ -1,5 +1,6 @@
 import type { UnidadeGeoV1 } from "../../types";
 import { aula01 } from "./aula-01-trabalho-e-economia";
+import { aula02 } from "./aula-02-producao-circulacao-consumo";
 
 export const unidade5: UnidadeGeoV1 = {
   slug: "unidade-5",
@@ -9,5 +10,5 @@ export const unidade5: UnidadeGeoV1 = {
   descricao:
     "Brilha e Aurora acompanham a cadeia produtiva do campo à loja pra entender os 3 setores da economia e quem trabalha em cada um.",
   corTema: "#64748b",
-  aulas: [aula01],
+  aulas: [aula01, aula02],
 };

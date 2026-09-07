@@ -5,7 +5,7 @@ import { speakBilingual, speakEnglish, stopSpeakingEn, warmupEnVoices } from "@/
 import type { AulaIng, MomentoIng, CursoIng } from "./types";
 
 /**
- * PlayerInglesEI — Educação Infantil, formato Duolingo-vertical.
+ * PlayerInglesEI — Educação Infantil, formato de etapas verticais NeuroBrilha.
  *
  * Regras de áudio:
  *  - Narração PT com palavra-alvo em EN entre "aspas" → speakBilingual

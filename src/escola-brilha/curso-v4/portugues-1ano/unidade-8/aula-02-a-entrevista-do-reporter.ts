@@ -86,12 +86,12 @@ export const aula02: AulaPortuguesV4 = {
 
   momento_ensinoVisual: {
     titulo: "A pergunta tem um sinal só dela",
-    instrucao: "Ouça: perguntas terminam com ? e a voz sobe no fim.",
+    instrucao: "Ouça: na escrita direta, perguntas terminam com ?. A entonação muda conforme o tipo de pergunta e o jeito de falar.",
     blocos: [
       {
         tipo: "fraseComPonto",
         frases: [
-          { texto: "Qual é o seu nome?", explicacao: "Termina com ? — a voz sobe no fim." },
+          { texto: "Qual é o seu nome?", explicacao: "Termina com ? — leia com entonação de pergunta." },
           { texto: "Meu nome é Ana.", explicacao: "Termina com . — é a resposta, voz normal." },
           { texto: "O que você faz aqui?", explicacao: "Pergunta: ponto de interrogação." },
           { texto: "Eu cuido dos livros.", explicacao: "Resposta: ponto final." },
@@ -258,10 +258,10 @@ export const aula02: AulaPortuguesV4 = {
         ],
         alvos: [
           { id: "a1", nome: "Pergunta (?)", descricao: "Pede uma resposta", imagemUrl: menino },
-          { id: "a2", nome: "Resposta (.)", descricao: "Responde a pergunta", imagemUrl: bibliotecario },
+          { id: "a2", nome: "Resposta", descricao: "Apresenta a informação pedida", imagemUrl: bibliotecario },
         ],
         feedbackAcerto: "🎉 Isso! O sinal no fim mostra se é pergunta ou resposta.",
-        feedbackErro: "Olhe o último sinal da frase: ? é pergunta, . é resposta.",
+        feedbackErro: "A pergunta pede informação e usa ?. A resposta apresenta a informação pedida e pode ter pontuação adequada ao que diz.",
       },
     },
   },
@@ -269,7 +269,7 @@ export const aula02: AulaPortuguesV4 = {
   momento09_revisao: {
     pontos: [
       "Entrevista é fazer perguntas para alguém e escutar a resposta.",
-      "Perguntas terminam com o sinal ? e a voz sobe no fim.",
+      "Perguntas diretas terminam com ?. A entonação ajuda a mostrar que estamos perguntando e varia conforme a frase.",
       "O repórter escreve as perguntas ANTES de entrevistar.",
       "Depois dá para gravar a entrevista e mostrar para a turma.",
     ],

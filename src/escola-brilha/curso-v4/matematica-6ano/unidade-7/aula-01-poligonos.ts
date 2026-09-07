@@ -4,7 +4,7 @@ export const aula01_poligonos: AulaV4 = {
   slug: "u7-01-poligonos",
   titulo: "Polígonos e ângulos",
   iconeTrilha: "📐",
-  bncc: ["EF06MA17", "EF06MA18"],
+  bncc: ["EF06MA18", "EF06MA19", "EF06MA20", "EF06MA25", "EF06MA26", "EF06MA27"],
   duracaoMin: 22,
   metodologias: ["vanHiele" as string, "cpa"],
 

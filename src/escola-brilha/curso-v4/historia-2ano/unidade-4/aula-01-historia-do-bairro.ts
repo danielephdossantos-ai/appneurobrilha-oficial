@@ -6,7 +6,7 @@ import { url as imgMonumento } from "@/assets/historia-2ano/monumento-historico.
 import { url as imgFotoAntiga } from "@/assets/historia-2ano/foto-antiga.png.asset.json";
 /**
  * História · 2º Ano · Unidade 4 · Aula 01
- * "A História da Comunidade" — EF02HI08 + EF02HI11
+ * "A História da Comunidade" — EF02HI08
  *
  * Missão: investigar como o bairro mudou e inaugurar a Sala 4
  * do museu — Memórias do Bairro. Recompensa: Engrenagem de Ouro.
@@ -16,7 +16,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-historia-do-bairro",
   titulo: "A História da Comunidade",
   iconeTrilha: "🏘️",
-  bncc: ["EF02HI08", "EF02HI11"],
+  bncc: ["EF02HI08"],
   duracaoMin: 20,
 
   cena01_motivacao: {
@@ -54,6 +54,8 @@ export const aula01: AulaGeoV1 = {
         cor: "from-sky-400 to-blue-600",
         fotoUrl: imgBairroAntigo,
       },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "novo",
     feedbackAcerto:
@@ -164,6 +166,7 @@ export const aula01: AulaGeoV1 = {
           { id: "b", emoji: "🐴", titulo: "Burros ou cavalos", cor: "from-amber-400 to-orange-600" },
           { id: "e", emoji: "⚡", titulo: "Motor elétrico", cor: "from-sky-400 to-indigo-600" },
           { id: "g", emoji: "⛽", titulo: "Motor a gasolina", cor: "from-rose-400 to-red-600" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "b",
         feedbackAcerto: "Isso! Bonde puxado a BURRO. Bem antigo!",
@@ -176,6 +179,8 @@ export const aula01: AulaGeoV1 = {
         cards: [
           { id: "m", emoji: "📍", titulo: "Marco de memória", cor: "from-emerald-400 to-teal-600" },
           { id: "l", emoji: "🎡", titulo: "Brinquedo novo", cor: "from-rose-400 to-red-600" },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "m",
         feedbackAcerto: "Combo! Coreto antigo = MARCO DE MEMÓRIA da comunidade.",
@@ -189,6 +194,7 @@ export const aula01: AulaGeoV1 = {
           { id: "n", emoji: "🏗️", titulo: "Novas construções e asfalto", cor: "from-sky-400 to-indigo-600" },
           { id: "c", emoji: "🌧️", titulo: "Chuva no bairro", cor: "from-cyan-400 to-blue-600" },
           { id: "s", emoji: "😴", titulo: "Ninguém morando", cor: "from-slate-400 to-slate-600" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "n",
         feedbackAcerto: "Isso! Construções, asfalto e comércio novo mostram o crescimento.",
@@ -437,6 +443,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Um monumento ou igreja preservada desde a fundação", correta: true },
           { id: "b", texto: "Os modelos de carros novos que passam todo dia" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Isso mesmo! Monumentos e prédios tombados são testemunhas do passado que continuam no presente.",
         feedbackErro: "Carro novo é do presente. Permanência é o que RESISTE ao tempo, tipo monumento e igreja.",
@@ -448,6 +456,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Novas construções, ruas asfaltadas e comércio novo", correta: true },
           { id: "b", texto: "A chuva forte que caiu ontem" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Combo! Prédios, asfalto e comércio novo mostram que a comunidade cresceu.",
         feedbackErro: "Chuva muda todo dia. O que mostra CRESCIMENTO são construções e asfalto novos.",
@@ -459,6 +469,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Não jogar lixo nas praças e respeitar os vizinhos", correta: true },
           { id: "b", texto: "Pichar o muro da igreja antiga" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Isso! Cuidar do patrimônio mantém viva a história da comunidade.",
         feedbackErro: "Pichar destrói o patrimônio. Cuidar é NÃO jogar lixo e respeitar.",

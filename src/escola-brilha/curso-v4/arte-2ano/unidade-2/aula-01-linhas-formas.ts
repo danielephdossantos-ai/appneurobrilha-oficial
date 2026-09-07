@@ -52,10 +52,30 @@ export const aula01: AulaArteV1 = {
     titulo: "Galeria de Formas Mágicas",
     instrucao: "Toca em cada forma para explorar",
     itens: [
-      { emoji: "🔺", rotulo: "Triângulo", descricao: "3 lados, parece a ponta de um foguete ou uma fatia de pizza.", cor: "#f97316" },
-      { emoji: "⬛", rotulo: "Quadrado", descricao: "4 lados iguais, como a janela da sua casa.", cor: "#2563eb" },
-      { emoji: "⚪", rotulo: "Círculo", descricao: "Sem pontas, gira como uma bola de futebol.", cor: "#22c55e" },
-      { emoji: "▬", rotulo: "Retângulo", descricao: "4 lados, dois compridos e dois curtos, como uma porta.", cor: "#a855f7" },
+      {
+        emoji: "🔺",
+        rotulo: "Triângulo",
+        descricao: "3 lados, parece a ponta de um foguete ou uma fatia de pizza.",
+        cor: "#f97316",
+      },
+      {
+        emoji: "⬛",
+        rotulo: "Quadrado",
+        descricao: "4 lados iguais, como a janela da sua casa.",
+        cor: "#2563eb",
+      },
+      {
+        emoji: "⚪",
+        rotulo: "Círculo",
+        descricao: "Sem pontas, gira como uma bola de futebol.",
+        cor: "#22c55e",
+      },
+      {
+        emoji: "▬",
+        rotulo: "Retângulo",
+        descricao: "4 lados, dois compridos e dois curtos, como uma porta.",
+        cor: "#a855f7",
+      },
     ],
     falaFinal: "As formas geométricas são os TIJOLINHOS de todo desenho do mundo!",
   },
@@ -66,10 +86,14 @@ export const aula01: AulaArteV1 = {
     aurora: "Antes de desenhar, vamos treinar o OLHO de artista. Que forma vai nascer?",
     perguntas: [
       {
-        pergunta: "Se juntarmos 4 linhas retas do mesmo tamanho fechando todas as pontas, que forma nasce?",
+        pergunta:
+          "Se juntarmos 4 linhas retas do mesmo tamanho fechando todas as pontas, que forma nasce?",
         alternativas: [
           { texto: "Um Quadrado", correta: true },
           { texto: "Um Círculo", correta: false },
+
+          { texto: "Não combina com a proposta", correta: false },
+          { texto: "Outra ação sem relação", correta: false },
         ],
         feedbackAcerto: "Isso! 4 lados iguais = Quadrado.",
         feedbackErro: "Quase! Círculo não tem pontas nem lados retos.",
@@ -79,6 +103,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Retângulo", correta: false },
           { texto: "Triângulo", correta: true },
+
+          { texto: "Não combina com a proposta", correta: false },
+          { texto: "Outra ação sem relação", correta: false },
         ],
         feedbackAcerto: "Perfeito! 3 lados = Triângulo.",
         feedbackErro: "Retângulo tem 4 lados. Montanha lembra Triângulo.",
@@ -88,6 +115,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Linha Reta", correta: false },
           { texto: "Linha Curva", correta: true },
+
+          { texto: "Não combina com a proposta", correta: false },
+          { texto: "Outra ação sem relação", correta: false },
         ],
         feedbackAcerto: "Boa! Curvas dão movimento suave ao desenho.",
         feedbackErro: "Linha reta é como uma régua. Ondas são curvas.",
@@ -100,10 +130,34 @@ export const aula01: AulaArteV1 = {
     tipo: "vocabularioCards",
     aurora: "Toca em cada cartão pra aprender as palavras do artista geométrico.",
     cards: [
-      { termo: "Linha Reta", definicao: "Vai direto de um ponto ao outro, sem curvar. Como uma régua.", emoji: "➖", cor: "#2563eb", fotoUrl: vocabReta },
-      { termo: "Linha Curva", definicao: "Se dobra suave, como uma onda do mar ou uma nuvem.", emoji: "〰️", cor: "#22c55e", fotoUrl: vocabCurva },
-      { termo: "Forma Geométrica", definicao: "Figura fechada feita de linhas: quadrado, círculo, triângulo.", emoji: "🔷", cor: "#f97316", fotoUrl: vocabForma },
-      { termo: "Contorno", definicao: "É a borda que faz aparecer a forma no papel.", emoji: "✏️", cor: "#a855f7", fotoUrl: vocabContorno },
+      {
+        termo: "Linha Reta",
+        definicao: "Vai direto de um ponto ao outro, sem curvar. Como uma régua.",
+        emoji: "➖",
+        cor: "#2563eb",
+        fotoUrl: vocabReta,
+      },
+      {
+        termo: "Linha Curva",
+        definicao: "Se dobra suave, como uma onda do mar ou uma nuvem.",
+        emoji: "〰️",
+        cor: "#22c55e",
+        fotoUrl: vocabCurva,
+      },
+      {
+        termo: "Forma Geométrica",
+        definicao: "Figura fechada feita de linhas: quadrado, círculo, triângulo.",
+        emoji: "🔷",
+        cor: "#f97316",
+        fotoUrl: vocabForma,
+      },
+      {
+        termo: "Contorno",
+        definicao: "É a borda que faz aparecer a forma no papel.",
+        emoji: "✏️",
+        cor: "#a855f7",
+        fotoUrl: vocabContorno,
+      },
     ],
   },
 
@@ -118,10 +172,34 @@ export const aula01: AulaArteV1 = {
       "Hoje, esses quadros estão em museus do mundo inteiro — e tudo começou com formas simples como as suas!",
     ],
     pigmentos: [
-      { nome: "Círculo de Kandinsky", hex: "#f97316", fonte: "Cores concêntricas", emoji: "⭕", fotoUrl: pigKandinsky },
-      { nome: "Quadrado de Mondrian", hex: "#dc2626", fonte: "Linhas pretas grossas", emoji: "🟥", fotoUrl: pigMondrian },
-      { nome: "Triângulo do Foguete", hex: "#facc15", fonte: "Aponta pra cima", emoji: "🔺", fotoUrl: pigTriangulo },
-      { nome: "Retângulo da Porta", hex: "#2563eb", fonte: "Alto e estreito", emoji: "🟦", fotoUrl: pigRetangulo },
+      {
+        nome: "Círculo de Kandinsky",
+        hex: "#f97316",
+        fonte: "Cores concêntricas",
+        emoji: "⭕",
+        fotoUrl: pigKandinsky,
+      },
+      {
+        nome: "Quadrado de Mondrian",
+        hex: "#dc2626",
+        fonte: "Linhas pretas grossas",
+        emoji: "🟥",
+        fotoUrl: pigMondrian,
+      },
+      {
+        nome: "Triângulo do Foguete",
+        hex: "#facc15",
+        fonte: "Aponta pra cima",
+        emoji: "🔺",
+        fotoUrl: pigTriangulo,
+      },
+      {
+        nome: "Retângulo da Porta",
+        hex: "#2563eb",
+        fonte: "Alto e estreito",
+        emoji: "🟦",
+        fotoUrl: pigRetangulo,
+      },
     ],
   },
 
@@ -135,6 +213,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "3 lados", correta: true },
           { texto: "4 lados", correta: false },
+
+          { texto: "Não combina com a proposta", correta: false },
+          { texto: "Outra ação sem relação", correta: false },
         ],
         feedbackAcerto: "Tri = 3! Triângulo tem 3 lados.",
         feedbackErro: "4 lados é o Quadrado. Triângulo tem 3.",
@@ -144,6 +225,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Wassily Kandinsky", correta: true },
           { texto: "Ronaldinho Gaúcho", correta: false },
+
+          { texto: "Não combina com a proposta", correta: false },
+          { texto: "Outra ação sem relação", correta: false },
         ],
         feedbackAcerto: "Isso! Kandinsky é o mestre das formas coloridas.",
         feedbackErro: "Ronaldinho joga bola! Kandinsky é o pintor das formas.",
@@ -153,6 +237,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Círculo", correta: true },
           { texto: "Quadrado", correta: false },
+
+          { texto: "Não combina com a proposta", correta: false },
+          { texto: "Outra ação sem relação", correta: false },
         ],
         feedbackAcerto: "Sim! Bola = Círculo, sem pontas.",
         feedbackErro: "Quadrado tem 4 pontas. Bola é redonda = Círculo.",
@@ -166,32 +253,44 @@ export const aula01: AulaArteV1 = {
     aurora: "Cada objeto do dia a dia tem uma forma escondida. Escolhe a forma certa pra cada um!",
     animais: [
       {
-        nome: "Fatia de pizza", emoji: "🍕", fotoUrl: objPizza,
+        nome: "Fatia de pizza",
+        emoji: "🍕",
+        fotoUrl: objPizza,
         corAlvo: { nome: "Triângulo", hex: "#f97316" },
         opcoes: [
           { nome: "Círculo", hex: "#22c55e" },
           { nome: "Triângulo", hex: "#f97316" },
           { nome: "Quadrado", hex: "#2563eb" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Triângulo! 3 lados iguais que apontam pra fora.",
       },
       {
-        nome: "Bola de futebol", emoji: "⚽", fotoUrl: objBola,
+        nome: "Bola de futebol",
+        emoji: "⚽",
+        fotoUrl: objBola,
         corAlvo: { nome: "Círculo", hex: "#22c55e" },
         opcoes: [
           { nome: "Retângulo", hex: "#a855f7" },
           { nome: "Triângulo", hex: "#f97316" },
           { nome: "Círculo", hex: "#22c55e" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Círculo! Redondinho sem nenhuma ponta.",
       },
       {
-        nome: "Porta da sala", emoji: "🚪", fotoUrl: objPorta,
+        nome: "Porta da sala",
+        emoji: "🚪",
+        fotoUrl: objPorta,
         corAlvo: { nome: "Retângulo", hex: "#a855f7" },
         opcoes: [
           { nome: "Círculo", hex: "#22c55e" },
           { nome: "Retângulo", hex: "#a855f7" },
           { nome: "Triângulo", hex: "#f97316" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Retângulo! 2 lados compridos e 2 curtos.",
       },
@@ -203,11 +302,41 @@ export const aula01: AulaArteV1 = {
     tipo: "sequenciaMistura",
     aurora: "Toca nos passos NA ORDEM CERTA de como desenhamos uma casa usando só formas.",
     passos: [
-      { id: "p1", texto: "Desenho um QUADRADO grande (a parede)", emoji: "⬛", ordem: 1, fotoUrl: passo1Img },
-      { id: "p2", texto: "Em cima, um TRIÂNGULO (o telhado)", emoji: "🔺", ordem: 2, fotoUrl: passo2Img },
-      { id: "p3", texto: "No meio, um RETÂNGULO pequeno (a porta)", emoji: "🟪", ordem: 3, fotoUrl: passo3Img },
-      { id: "p4", texto: "Do lado, um QUADRADINHO (a janela)", emoji: "🟦", ordem: 4, fotoUrl: passo4Img },
-      { id: "p5", texto: "Um CÍRCULO amarelo no céu (o sol!)", emoji: "☀️", ordem: 5, fotoUrl: passo5Img },
+      {
+        id: "p1",
+        texto: "Desenho um QUADRADO grande (a parede)",
+        emoji: "⬛",
+        ordem: 1,
+        fotoUrl: passo1Img,
+      },
+      {
+        id: "p2",
+        texto: "Em cima, um TRIÂNGULO (o telhado)",
+        emoji: "🔺",
+        ordem: 2,
+        fotoUrl: passo2Img,
+      },
+      {
+        id: "p3",
+        texto: "No meio, um RETÂNGULO pequeno (a porta)",
+        emoji: "🟪",
+        ordem: 3,
+        fotoUrl: passo3Img,
+      },
+      {
+        id: "p4",
+        texto: "Do lado, um QUADRADINHO (a janela)",
+        emoji: "🟦",
+        ordem: 4,
+        fotoUrl: passo4Img,
+      },
+      {
+        id: "p5",
+        texto: "Um CÍRCULO amarelo no céu (o sol!)",
+        emoji: "☀️",
+        ordem: 5,
+        fotoUrl: passo5Img,
+      },
     ],
     falaAcerto: "Uau! Você construiu uma casa inteira só com formas!",
   },
@@ -218,10 +347,22 @@ export const aula01: AulaArteV1 = {
     aurora: "Agora VOCÊ lê o diário do pequeno arquiteto. Toca nas palavras coloridas.",
     titulo: "Diário do Pequeno Arquiteto",
     trechos: [
-      { texto: "Hoje eu desenhei um telhado bem", palavraDestaque: "triângulo", corDestaque: "#f97316" },
+      {
+        texto: "Hoje eu desenhei um telhado bem",
+        palavraDestaque: "triângulo",
+        corDestaque: "#f97316",
+      },
       { texto: "A parede virou um grande", palavraDestaque: "quadrado", corDestaque: "#2563eb" },
-      { texto: "O sol lá no alto era um lindo", palavraDestaque: "círculo", corDestaque: "#facc15" },
-      { texto: "E a porta ficou um perfeito", palavraDestaque: "retângulo", corDestaque: "#a855f7" },
+      {
+        texto: "O sol lá no alto era um lindo",
+        palavraDestaque: "círculo",
+        corDestaque: "#facc15",
+      },
+      {
+        texto: "E a porta ficou um perfeito",
+        palavraDestaque: "retângulo",
+        corDestaque: "#a855f7",
+      },
       { texto: "Formas viraram uma casa. Eu sou arquiteto de verdade!" },
     ],
   },
@@ -230,7 +371,8 @@ export const aula01: AulaArteV1 = {
   cena09_minijogo: {
     tipo: "cenaTematica",
     variante: "minijogo",
-    aurora: "Detetive das Formas! O museu está cheio de formas escondidas. Toque em CADA uma antes do tempo acabar!",
+    aurora:
+      "Detetive das Formas! O museu está cheio de formas escondidas. Toque em CADA uma antes do tempo acabar!",
     titulo: "🔎 Detetive das Formas",
     instrucao: "Toque em todas as formas rapidinho!",
     tempoSeg: 45,
@@ -252,11 +394,36 @@ export const aula01: AulaArteV1 = {
     aurora: "Vamos revisar tudo que aprendemos! Toca em cada forma pra lembrar.",
     titulo: "🔁 Roda das Formas",
     itens: [
-      { emoji: "🔺", rotulo: "Triângulo", descricao: "3 lados. Fatia de pizza, telhado, montanha.", cor: "#f97316" },
-      { emoji: "⚪", rotulo: "Círculo", descricao: "Redondo, sem pontas. Sol, bola, roda.", cor: "#22c55e" },
-      { emoji: "⬛", rotulo: "Quadrado", descricao: "4 lados iguais. Janela, dado, azulejo.", cor: "#2563eb" },
-      { emoji: "▬", rotulo: "Retângulo", descricao: "4 lados, 2 longos + 2 curtos. Porta, celular, TV.", cor: "#a855f7" },
-      { emoji: "〰️", rotulo: "Linha Curva", descricao: "Suave como onda ou nuvem.", cor: "#06b6d4" },
+      {
+        emoji: "🔺",
+        rotulo: "Triângulo",
+        descricao: "3 lados. Fatia de pizza, telhado, montanha.",
+        cor: "#f97316",
+      },
+      {
+        emoji: "⚪",
+        rotulo: "Círculo",
+        descricao: "Redondo, sem pontas. Sol, bola, roda.",
+        cor: "#22c55e",
+      },
+      {
+        emoji: "⬛",
+        rotulo: "Quadrado",
+        descricao: "4 lados iguais. Janela, dado, azulejo.",
+        cor: "#2563eb",
+      },
+      {
+        emoji: "▬",
+        rotulo: "Retângulo",
+        descricao: "4 lados, 2 longos + 2 curtos. Porta, celular, TV.",
+        cor: "#a855f7",
+      },
+      {
+        emoji: "〰️",
+        rotulo: "Linha Curva",
+        descricao: "Suave como onda ou nuvem.",
+        cor: "#06b6d4",
+      },
       { emoji: "➖", rotulo: "Linha Reta", descricao: "Direta como uma régua.", cor: "#f43f5e" },
     ],
     falaFinal: "Agora você é um mestre das formas geométricas!",
@@ -271,6 +438,9 @@ export const aula01: AulaArteV1 = {
       alternativas: [
         { texto: "Linha Curva", correta: true },
         { texto: "Linha Reta", correta: false },
+
+        { texto: "Não combina com a proposta", correta: false },
+        { texto: "Outra ação sem relação", correta: false },
       ],
       feedback: "Isso! Linhas curvas dão sensação de movimento e suavidade ao desenho.",
     },

@@ -16,7 +16,7 @@ export const aula02: AulaPortuguesV4 = {
   slug: "aula-02-frases-completas",
   titulo: "Construindo Frases Completas",
   iconeTrilha: "✍️",
-  bncc: ["EF02LP22", "EF02LP23"],
+  bncc: ["EF02LP01", "EF02LP08", "EF02LP09", "EF15LP05"],
   duracaoMin: 15,
 
   momento01_motivacao: {

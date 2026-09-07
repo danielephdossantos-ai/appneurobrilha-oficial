@@ -4,7 +4,7 @@ export const aula05_problemasMissao: AulaV4 = {
   slug: "u2-05-problemas-missao",
   titulo: "Missão: Problemas do 2º Grau",
   iconeTrilha: "🎯",
-  bncc: ["EF09MA09", "EF09MA10"],
+  bncc: ["EF09MA09"],
   duracaoMin: 30,
   metodologias: ["skemp", "vergnaud"],
 

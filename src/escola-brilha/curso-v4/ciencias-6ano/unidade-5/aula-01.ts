@@ -14,7 +14,7 @@ export const aula01: AulaGeoV1 = {
   titulo: "Estação de Energia",
   iconeTrilha: "⚡",
   recompensa: { xp: 120, moedas: 45, medalha: "Físico Júnior" },
-  bncc: ["EF06CI08"],
+  bncc: [],
   duracaoMin: 35,
 
   cena01_motivacao: {
@@ -37,6 +37,7 @@ export const aula01: AulaGeoV1 = {
       { id: "sol", titulo: "Do Sol", subtitulo: "energia solar transformada", emoji: "☀️", cor: "from-amber-500 to-orange-700", fotoUrl: renovaveisImg },
       { id: "motor", titulo: "Do motor", subtitulo: "surge do próprio motor", emoji: "⚙️", cor: "from-slate-500 to-slate-700", fotoUrl: bancadaImg },
       { id: "lampada", titulo: "Da lâmpada", subtitulo: "ela mesma cria luz", emoji: "💡", cor: "from-red-500 to-rose-700", fotoUrl: luzImg },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "sol",
     feedbackAcerto:
@@ -84,6 +85,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🏔️", titulo: "Potencial gravitacional", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🏃", titulo: "Cinética", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🔥", titulo: "Térmica", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Isso. Está PARADA mas em altura — energia armazenada por posição.",
         feedbackErro: "Parada = sem cinética. Altura = energia POTENCIAL gravitacional armazenada." },
@@ -92,6 +94,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🔄", titulo: "Cinética → Térmica", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "☀️", titulo: "Luminosa → Elétrica", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "❄️", titulo: "Térmica → Potencial", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. Movimento (atrito) vira calor. Base do aquecimento por fricção.",
         feedbackErro: "Movimento gera atrito, atrito gera calor. Cinética → Térmica." },
@@ -100,6 +103,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🌊", titulo: "Como ondas eletromagnéticas no vácuo", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "💨", titulo: "Precisa de ar para se propagar", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🔌", titulo: "Por cabos invisíveis", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Sim. Luz é onda eletromagnética — viaja no vácuo do espaço a 300.000 km/s.",
         feedbackErro: "Luz NÃO precisa de meio. Atravessa o vácuo espacial — por isso enxergamos estrelas." },
@@ -191,6 +195,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Energia não se cria nem se destrói — apenas se transforma", correta: true },
           { id: "b", texto: "Energia pode surgir do nada em condições especiais" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. Lei universal — vale para o universo inteiro.",
         feedbackErro: "Energia NUNCA surge do nada. Sempre vem de uma transformação anterior." },
@@ -198,6 +204,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Energia solar", correta: true },
           { id: "b", texto: "Petróleo" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. Sol brilha há bilhões de anos — fonte inesgotável na escala humana.",
         feedbackErro: "Petróleo é FÓSSIL — leva milhões de anos para se formar. Não renovável." },
@@ -205,6 +213,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Química (bateria) → Elétrica (fio) → Luminosa (LED)", correta: true },
           { id: "b", texto: "Luminosa → Química → Elétrica" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Exato. Bateria armazena química, converte em elétrica, LED transforma em luz.",
         feedbackErro: "A ORIGEM é a bateria (química). O LED é o FIM (luminosa). A sequência é Química → Elétrica → Luminosa." },

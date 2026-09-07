@@ -4,7 +4,7 @@ export const aula07_missaoFinal: AulaV4 = {
   slug: "u1-07-missao-final",
   titulo: "Missão Final — Escriba do Império",
   iconeTrilha: "📜",
-  bncc: ["EF05MA01", "EF05MA02"],
+  bncc: ["EF05MA01"],
   duracaoMin: 22,
   metodologias: ["skemp", "vergnaud"],
 

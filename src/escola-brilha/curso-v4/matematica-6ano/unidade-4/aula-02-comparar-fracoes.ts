@@ -4,7 +4,7 @@ export const aula02_comparar: AulaV4 = {
   slug: "u4-02-comparar-fracoes",
   titulo: "Comparar frações",
   iconeTrilha: "⚖️",
-  bncc: ["EF06MA09"],
+  bncc: ["EF06MA07"],
   duracaoMin: 22,
   metodologias: ["skemp"],
 

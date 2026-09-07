@@ -46,8 +46,8 @@ export function LeituraIlustrada({ data }: { data: LeituraIlustradaData }) {
       <div className={`rounded-2xl p-4 md:p-6 space-y-4 ${skin.teen ? "bg-transparent text-cyan-50" : "bg-white text-[#0d1f55] shadow-xl"}`}>
         {data.titulo && (
           <div className="text-center">
-            <div className={`text-[10px] uppercase tracking-widest ${skin.teen ? "text-cyan-400/60" : "text-[#0d1f55]/60"}`}>Leitura</div>
-            <h3 className="text-xl font-black">{data.titulo}</h3>
+            <div className={`${skin.kids ? "text-sm" : "text-[10px]"} uppercase tracking-widest ${skin.teen ? "text-cyan-400/60" : "text-[#0d1f55]/60"}`}>Leitura</div>
+            <h3 className={skin.kids ? "text-2xl font-black" : "text-xl font-black"}>{data.titulo}</h3>
           </div>
         )}
 
@@ -57,17 +57,17 @@ export function LeituraIlustrada({ data }: { data: LeituraIlustradaData }) {
               <img
                 src={data.imagemUrl}
                 alt={data.legendaImagem ?? ""}
-                className={`w-32 h-32 md:w-full md:h-auto object-contain drop-shadow ${skin.teen ? "brightness-90 contrast-125" : ""}`}
+                className={`${skin.kids ? "w-44 h-44" : "w-32 h-32"} md:w-full md:h-auto object-contain drop-shadow ${skin.teen ? "brightness-90 contrast-125" : ""}`}
               />
               {data.legendaImagem && (
-                <div className={`text-[10px] text-center italic ${skin.teen ? "text-cyan-400/60" : "text-[#0d1f55]/60"}`}>
+                <div className={`${skin.kids ? "text-sm" : "text-[10px]"} text-center italic ${skin.teen ? "text-cyan-400/60" : "text-[#0d1f55]/60"}`}>
                   {data.legendaImagem}
                 </div>
               )}
             </div>
           )}
 
-        <div className="space-y-3 text-lg leading-relaxed">
+        <div className={`space-y-3 leading-relaxed ${skin.kids ? "text-xl font-semibold" : "text-lg"}`}>
             {data.paragrafos.map((p, i) => (
               <p key={i}>{renderComDestaque(p, data.destacar ?? [], !!skin.teen)}</p>
             ))}

@@ -4,6 +4,7 @@ import { aula02_teoremaDeTales } from "./aula-02-teorema-de-tales";
 import { aula03_semelhancaDeTriangulos } from "./aula-03-semelhanca-de-triangulos";
 import { aula04_aplicacoesDeSemelhanca } from "./aula-04-aplicacoes-de-semelhanca";
 import { aula05_missaoTopografo } from "./aula-05-missao-topografo";
+import { aulaRazoesProporcionalidade, aulaParalelasDemonstracao } from "../aulas-bncc-complementares";
 
 export const unidade4: Unidade = {
   slug: "unidade-4-semelhanca",
@@ -14,7 +15,9 @@ export const unidade4: Unidade = {
     "Nesta unidade você descobre como a Matemática mede o que os olhos não alcançam: razões, proporções, o Teorema de Tales, semelhança de triângulos e, na missão final, você vira topógrafo e mede alturas e distâncias usando sombra e escala de mapa.",
   corTema: "#f59e0b",
   aulas: [
+    aulaRazoesProporcionalidade,
     aula01_razaoProporcaoSemelhanca,
+    aulaParalelasDemonstracao,
     aula02_teoremaDeTales,
     aula03_semelhancaDeTriangulos,
     aula04_aplicacoesDeSemelhanca,

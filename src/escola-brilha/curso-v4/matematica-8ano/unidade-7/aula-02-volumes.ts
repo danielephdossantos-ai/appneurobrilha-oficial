@@ -4,7 +4,7 @@ export const aula02_volumes: AulaV4 = {
   slug: "u7-02-volumes",
   titulo: "Volume de prismas",
   iconeTrilha: "📦",
-  bncc: ["EF08MA20"],
+  bncc: ["EF08MA20", "EF08MA21"],
   duracaoMin: 24,
   metodologias: ["skemp"],
   momento01_motivacao: {

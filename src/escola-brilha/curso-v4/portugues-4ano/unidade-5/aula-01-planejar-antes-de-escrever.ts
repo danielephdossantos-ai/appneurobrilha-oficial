@@ -22,7 +22,7 @@ export const aula01: AulaPortuguesV4 = {
   slug: "aula-01-planejar-antes-de-escrever",
   titulo: "Planejar antes de escrever",
   iconeTrilha: "🧭",
-  bncc: ["EF35LP25", "EF35LP26"],
+  bncc: ["EF15LP05", "EF35LP25"],
   duracaoMin: 18,
 
   momento01_motivacao: {

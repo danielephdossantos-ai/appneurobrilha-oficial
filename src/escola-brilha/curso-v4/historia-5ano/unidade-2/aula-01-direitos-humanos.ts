@@ -13,7 +13,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-direitos-humanos",
   titulo: "A Declaração dos Direitos Humanos",
   iconeTrilha: "🕊️",
-  bncc: ["EF05HI02", "EF05HI04"],
+  bncc: [],
   duracaoMin: 25,
 
   cena01_motivacao: {
@@ -37,7 +37,7 @@ export const aula01: AulaGeoV1 = {
       {
         id: "guerra",
         titulo: "Logo depois da 2ª Guerra Mundial",
-        subtitulo: "os países viram os horrores e criaram regras globais",
+        subtitulo: "os países reagiram às graves violações e criaram referências globais",
         emoji: "🕊️",
         cor: "from-emerald-600 to-teal-800",
         fotoUrl: imgOnu,
@@ -50,6 +50,8 @@ export const aula01: AulaGeoV1 = {
         cor: "from-slate-500 to-slate-700",
         fotoUrl: imgDecl,
       },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "guerra",
     feedbackAcerto:
@@ -158,6 +160,7 @@ export const aula01: AulaGeoV1 = {
           { id: "o", emoji: "🌐", titulo: "ONU", cor: "from-sky-500 to-blue-700" },
           { id: "n", emoji: "🚀", titulo: "NASA", cor: "from-amber-500 to-orange-700" },
           { id: "f", emoji: "⚽", titulo: "FIFA", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "o",
         feedbackAcerto: "Correto. ONU — Organização das Nações Unidas.",
@@ -171,6 +174,7 @@ export const aula01: AulaGeoV1 = {
           { id: "l", emoji: "⚖️", titulo: "Liberdade, Igualdade, Fraternidade", cor: "from-emerald-500 to-teal-700" },
           { id: "o", emoji: "👑", titulo: "Ordem e Rei", cor: "from-slate-500 to-slate-700" },
           { id: "g", emoji: "💰", titulo: "Guerra e Ouro", cor: "from-amber-500 to-orange-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "l",
         feedbackAcerto: "Isso! Liberdade, Igualdade, Fraternidade — três palavras que mudaram o mundo.",
@@ -184,6 +188,7 @@ export const aula01: AulaGeoV1 = {
           { id: "c", emoji: "📜", titulo: "Constituição Cidadã", cor: "from-emerald-500 to-teal-700" },
           { id: "i", emoji: "👑", titulo: "Constituição Imperial", cor: "from-amber-500 to-orange-700" },
           { id: "m", emoji: "⛓️", titulo: "Constituição Colonial", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "c",
         feedbackAcerto: "Exato. CONSTITUIÇÃO CIDADÃ — porque colocou os direitos humanos em primeiro lugar.",

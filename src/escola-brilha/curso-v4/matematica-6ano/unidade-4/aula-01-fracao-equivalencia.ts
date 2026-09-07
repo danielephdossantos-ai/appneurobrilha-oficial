@@ -118,7 +118,7 @@ export const aula01_fracaoEquivalencia: AulaV4 = {
     interacao: {
       tipo: "escolhaVisual",
       pergunta: "Escolha:",
-      opcoes: [{ nome: "1/2" }, { nome: "4/8" }, { nome: "2/4" }],
+      opcoes: [{ nome: "1/2" }, { nome: "1/4" }, { nome: "4/2" }],
       respostaCerta: "1/2",
       feedbackAcerto: "🎯 4/8 = 1/2 (irredutível).",
       feedbackErro: "Simplifique até acabar.",

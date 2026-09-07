@@ -1,4 +1,5 @@
 import type { Unidade } from "../../types";
+import { aula00_multiplosFluxograma } from "./aula-00-multiplos-fluxograma";
 import { aula01_inteirosReta } from "./aula-01-inteiros-reta";
 import { aula02_somaInteiros } from "./aula-02-soma-inteiros";
 import { aula03_subtracaoInteiros } from "./aula-03-subtracao-inteiros";
@@ -14,6 +15,7 @@ export const unidade1: Unidade = {
     "Brilha desce abaixo do zero. Reta numérica, módulo e oposto, as quatro operações com sinais e potências de base negativa — a base de toda a álgebra do 7º ano.",
   corTema: "#6366f1",
   aulas: [
+    aula00_multiplosFluxograma,
     aula01_inteirosReta,
     aula02_somaInteiros,
     aula03_subtracaoInteiros,

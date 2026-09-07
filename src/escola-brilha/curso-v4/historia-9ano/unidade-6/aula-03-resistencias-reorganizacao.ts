@@ -32,6 +32,8 @@ export const aula03: AulaGeoV1 = {
     opcoes: [
       { id: "mul", titulo: "MÚLTIPLAS FORMAS", subtitulo: "música, imprensa alternativa, Igreja, movimento estudantil", emoji: "✊", cor: "from-teal-800 to-slate-950" },
       { id: "nen", titulo: "NENHUMA RESISTÊNCIA", subtitulo: "a sociedade aceitou passivamente", emoji: "❌", cor: "from-amber-900 to-slate-950" },
+          { id: "extra2", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "extra3", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "mul",
     feedbackAcerto:
@@ -116,16 +118,19 @@ export const aula03: AulaGeoV1 = {
         { id: "j", emoji: "📰", titulo: "Jornal de imprensa alternativa", cor: "from-teal-600 to-slate-900" },
         { id: "p", emoji: "🎖️", titulo: "Partido militar", cor: "from-amber-600 to-slate-900" },
         { id: "b", emoji: "🏦", titulo: "Banco estatal", cor: "from-slate-600 to-slate-900" },
+          { id: "extra3", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
       ], correta: "j", feedbackAcerto: "Correto. Jornal que driblava a censura com humor crítico.", feedbackErro: "É um jornal de imprensa alternativa, fundado em 1969." },
       { id: "q2", pergunta: "Qual foi o único partido de oposição legal durante boa parte da ditadura?", fotoUrl: imgDir, cards: [
         { id: "m", emoji: "📜", titulo: "MDB", cor: "from-teal-600 to-slate-900" },
         { id: "p", emoji: "🎖️", titulo: "ARENA", cor: "from-amber-600 to-slate-900" },
         { id: "u", emoji: "🎓", titulo: "UNE", cor: "from-slate-600 to-slate-900" },
+          { id: "extra3", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
       ], correta: "m", feedbackAcerto: "Correto. MDB era a oposição legal; ARENA apoiava o governo.", feedbackErro: "É o MDB. ARENA era o partido governista." },
       { id: "q3", pergunta: "O que foi o Congresso de Ibiúna (1968)?", fotoUrl: imgMpb, cards: [
         { id: "e", emoji: "🎓", titulo: "Encontro clandestino da UNE, duramente reprimido", cor: "from-teal-600 to-slate-900" },
         { id: "g", emoji: "🎖️", titulo: "Reunião de generais", cor: "from-amber-600 to-slate-900" },
         { id: "c", emoji: "⛪", titulo: "Concílio da Igreja", cor: "from-slate-600 to-slate-900" },
+          { id: "extra3", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
       ], correta: "e", feedbackAcerto: "Correto. Mais de 700 estudantes foram presos nesse congresso clandestino.", feedbackErro: "É o encontro clandestino da UNE, reprimido violentamente pela polícia." },
     ],
     falaFinal: "Você já reconhece as diferentes frentes de resistência.",
@@ -217,16 +222,19 @@ export const aula03: AulaGeoV1 = {
         { id: "a", texto: "Só pela luta armada.", correta: false },
         { id: "b", texto: "De várias formas: cultura, imprensa, Igreja, estudantes e política legal.", correta: true },
         { id: "c", texto: "Não existiu resistência.", correta: false },
+          { id: "extra3", texto: "Preciso comparar outras evidências" },
       ], feedbackAcerto: "Correto. A resistência foi plural.", feedbackErro: "Houve várias formas de resistência, não só a luta armada." },
       { id: "av2", pergunta: "O MDB era:", opcoes: [
         { id: "a", texto: "O único partido de oposição legal na maior parte da ditadura.", correta: true },
         { id: "b", texto: "O partido dos militares.", correta: false },
         { id: "c", texto: "Uma organização estudantil.", correta: false },
+          { id: "extra3", texto: "Preciso comparar outras evidências" },
       ], feedbackAcerto: "Correto. ARENA era o partido governista; MDB, a oposição.", feedbackErro: "É o partido de oposição legal — ARENA era o governista." },
       { id: "av3", pergunta: "O Congresso de Ibiúna (1968) foi reprimido porque era:", opcoes: [
         { id: "a", texto: "Um encontro clandestino da UNE.", correta: true },
         { id: "b", texto: "Uma reunião de generais.", correta: false },
         { id: "c", texto: "Um congresso internacional oficial.", correta: false },
+          { id: "extra3", texto: "Preciso comparar outras evidências" },
       ], feedbackAcerto: "Correto. A UNE era ilegal, e o encontro foi duramente reprimido.", feedbackErro: "Era um encontro clandestino da UNE, entidade estudantil ilegalizada." },
     ],
     selo: { nome: "EF09HI20", subtitulo: "Resistências e reorganização democrática", emoji: "✊", cor: "from-teal-500 to-slate-900", fotoUrl: imgRes },

@@ -7,6 +7,7 @@ import {
   getAulaArteV1FromCurso,
   getProximaAulaArteV1,
 } from "@/escola-brilha/curso-v4/registry";
+import { advancePlanFlow, completePlanItem } from "@/lib/plan-flow";
 
 export const Route = createFileRoute("/escola-brilha/aula-arte-v1/$curso/$aula")({
   head: ({ params }) => ({
@@ -39,7 +40,7 @@ function marcarConcluida(cursoSlug: string, aulaSlug: string) {
 function AulaArteV1Page() {
   const { curso, aula } = Route.useParams();
   const navigate = useNavigate();
-  const { handleBack } = useBackNavigation();
+  const { handleBack, context: navContext } = useBackNavigation();
   const dados = getAulaArteV1FromCurso(curso, aula);
   const [mostrarFinal, setMostrarFinal] = useState(false);
 
@@ -75,8 +76,18 @@ function AulaArteV1Page() {
     }
   };
 
-  const concluir = () => {
+  const concluir = async () => {
     marcarConcluida(curso, aula);
+    if (navContext?.isPlanFlow) {
+      await completePlanItem(navContext);
+      const nextRoute = advancePlanFlow(navContext);
+      if (nextRoute) {
+        navigate({ to: nextRoute });
+        return;
+      }
+      sair();
+      return;
+    }
     const proxima = getProximaAulaArteV1(curso, aula);
     if (proxima) {
       navigate({

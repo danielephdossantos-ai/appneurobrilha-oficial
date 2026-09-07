@@ -58,7 +58,8 @@ function AulaEIRoute() {
         voltarPara="/escola-brilha/portugues-ei"
         onConcluir={async () => {
           try {
-            const key = `eb.ei.pt.concluidas.${curso.slug}`;
+            const childId = localStorage.getItem("neurobrilha:activeChildId") || "sem-crianca";
+            const key = `eb.ei.pt.concluidas.${curso.slug}.${childId}`;
             const raw = localStorage.getItem(key);
             const list: string[] = raw ? JSON.parse(raw) : [];
             if (!list.includes(aulaSlug)) list.push(aulaSlug);

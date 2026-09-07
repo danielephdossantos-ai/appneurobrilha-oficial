@@ -42,12 +42,41 @@ export const aula01: AulaArteV1 = {
     titulo: "⚒️ A Câmara do Brilho Eterno",
     instrucao: "Toca em cada pista sobre a arte que nasceu do fogo e do metal derretido",
     itens: [
-      { emoji: "🔥", rotulo: "Forja em chamas", descricao: "Controlar o fogo pra derreter cobre, depois bronze e por fim ferro foi uma revolução tecnológica. Cada metal exigia mais temperatura e mais domínio da técnica.", cor: "#dc2626", fotoUrl: forjaFogo },
-      { emoji: "⚔️", rotulo: "Espada de bronze entrelaçada", descricao: "Linhas geométricas perfeitas gravadas na lâmina não eram só decoração — mostravam o PODER de quem carregava a espada e a habilidade do artesão que a fundiu.", cor: "#a16207", fotoUrl: espadaBronze },
-      { emoji: "👺", rotulo: "Máscara Taotie (Dinastia Shang)", descricao: "Rosto de monstro simétrico gravado em vasos e máscaras de bronze chinesas de ~1600 a.C. Representava proteção espiritual e o poder da dinastia.", cor: "#7c2d12", fotoUrl: mascaraTaotie },
-      { emoji: "🏺", rotulo: "Vaso ritual Shang", descricao: "Vasos de bronze usados em cerimônias religiosas da China Antiga. Só a elite podia possuir peças assim — o metal era sinônimo de STATUS.", cor: "#b45309", fotoUrl: vasoShang },
+      {
+        emoji: "🔥",
+        rotulo: "Forja em chamas",
+        descricao:
+          "Controlar o fogo pra derreter cobre, depois bronze e por fim ferro foi uma revolução tecnológica. Cada metal exigia mais temperatura e mais domínio da técnica.",
+        cor: "#dc2626",
+        fotoUrl: forjaFogo,
+      },
+      {
+        emoji: "⚔️",
+        rotulo: "Espada de bronze entrelaçada",
+        descricao:
+          "Linhas geométricas perfeitas gravadas na lâmina não eram só decoração — mostravam o PODER de quem carregava a espada e a habilidade do artesão que a fundiu.",
+        cor: "#a16207",
+        fotoUrl: espadaBronze,
+      },
+      {
+        emoji: "👺",
+        rotulo: "Máscara Taotie (Dinastia Shang)",
+        descricao:
+          "Rosto de monstro simétrico gravado em vasos e máscaras de bronze chinesas de ~1600 a.C. Representava proteção espiritual e o poder da dinastia.",
+        cor: "#7c2d12",
+        fotoUrl: mascaraTaotie,
+      },
+      {
+        emoji: "🏺",
+        rotulo: "Vaso ritual Shang",
+        descricao:
+          "Vasos de bronze usados em cerimônias religiosas da China Antiga. Só a elite podia possuir peças assim — o metal era sinônimo de STATUS.",
+        cor: "#b45309",
+        fotoUrl: vasoShang,
+      },
     ],
-    falaFinal: "Sua missão nesta página: descobrir como o metal derretido virou símbolo de PODER e IDENTIDADE.",
+    falaFinal:
+      "Sua missão nesta página: descobrir como o metal derretido virou símbolo de PODER e IDENTIDADE.",
   },
 
   cena02_previsao: {
@@ -55,34 +84,63 @@ export const aula01: AulaArteV1 = {
     aurora: "Calibra o olhar de fundidor antes de entrar na forja!",
     perguntas: [
       {
-        pergunta: "Por que a Idade dos Metais é considerada uma revolução maior que a Idade da Pedra?",
+        pergunta:
+          "Por que a Idade dos Metais é considerada uma revolução maior que a Idade da Pedra?",
         fotoUrl: fundicaoMetal,
         alternativas: [
-          { texto: "Porque o metal podia ser derretido e MOLDADO em qualquer forma — a pedra só podia ser lascada", correta: true },
+          {
+            texto:
+              "Porque o metal podia ser derretido e MOLDADO em qualquer forma — a pedra só podia ser lascada",
+            correta: true,
+          },
           { texto: "Porque o metal é mais bonito que a pedra", correta: false },
+
+          { texto: "Não corresponde à análise", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
-        feedbackAcerto: "Exato! Metal líquido preenche QUALQUER molde. Pedra bruta é rígida e só permite lascar — a liberdade de forma mudou tudo.",
-        feedbackErro: "Não é sobre beleza. É sobre TECNOLOGIA: metal derretido pode virar qualquer forma; pedra não pode ser moldada, só lascada.",
+        feedbackAcerto:
+          "Exato! Metal líquido preenche QUALQUER molde. Pedra bruta é rígida e só permite lascar — a liberdade de forma mudou tudo.",
+        feedbackErro:
+          "Não é sobre beleza. É sobre TECNOLOGIA: metal derretido pode virar qualquer forma; pedra não pode ser moldada, só lascada.",
       },
       {
-        pergunta: "Na Dinastia Shang (China Antiga, ~1600 a.C.), quem podia ter objetos de bronze decorados como máscaras e vasos rituais?",
+        pergunta:
+          "Na Dinastia Shang (China Antiga, ~1600 a.C.), quem podia ter objetos de bronze decorados como máscaras e vasos rituais?",
         fotoUrl: mascaraSanxingdui,
         alternativas: [
-          { texto: "Principalmente a elite e a realeza — bronze era ornato de status e poder dinástico", correta: true },
+          {
+            texto:
+              "Principalmente a elite e a realeza — bronze era ornato de status e poder dinástico",
+            correta: true,
+          },
           { texto: "Qualquer pessoa comum podia comprar em qualquer mercado", correta: false },
+
+          { texto: "Não corresponde à análise", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
-        feedbackAcerto: "Correto! Bronze era caro e difícil de produzir — só quem tinha poder político e religioso tinha acesso a essas peças.",
-        feedbackErro: "Pense em quem controlava a metalurgia: era um recurso raro e caro, reservado à elite dinástica e religiosa.",
+        feedbackAcerto:
+          "Correto! Bronze era caro e difícil de produzir — só quem tinha poder político e religioso tinha acesso a essas peças.",
+        feedbackErro:
+          "Pense em quem controlava a metalurgia: era um recurso raro e caro, reservado à elite dinástica e religiosa.",
       },
       {
         pergunta: "O que é a técnica da cera perdida?",
         fotoUrl: ceraPerdidaEtapas,
         alternativas: [
-          { texto: "Esculpir em cera, cobrir com barro, derreter a cera e despejar metal líquido no molde vazio", correta: true },
+          {
+            texto:
+              "Esculpir em cera, cobrir com barro, derreter a cera e despejar metal líquido no molde vazio",
+            correta: true,
+          },
           { texto: "Derreter cera para acender tochas dentro da forja", correta: false },
+
+          { texto: "Não corresponde à análise", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
-        feedbackAcerto: "Isso! Cera → molde de barro → cera derrete e escoa → metal líquido ocupa o espaço vazio e vira a peça final.",
-        feedbackErro: "Não tem nada a ver com tochas. É um processo de MOLDAGEM: a cera dá a forma, o barro guarda essa forma, e o metal a substitui.",
+        feedbackAcerto:
+          "Isso! Cera → molde de barro → cera derrete e escoa → metal líquido ocupa o espaço vazio e vira a peça final.",
+        feedbackErro:
+          "Não tem nada a ver com tochas. É um processo de MOLDAGEM: a cera dá a forma, o barro guarda essa forma, e o metal a substitui.",
       },
     ],
   },
@@ -91,10 +149,38 @@ export const aula01: AulaArteV1 = {
     tipo: "vocabularioCards",
     aurora: "Vocabulário do fundidor. Toca em cada verbete!",
     cards: [
-      { termo: "Idade dos Metais", definicao: "Período em que a humanidade aprendeu a extrair e fundir cobre, bronze e ferro, substituindo ferramentas de pedra por peças moldáveis e mais resistentes.", emoji: "⚒️", cor: "#b45309", fotoUrl: fundicaoMetal },
-      { termo: "Técnica da Cera Perdida", definicao: "Processo de fundição: esculpe-se em cera, cobre-se com barro, derrete-se a cera e despeja-se metal líquido no molde vazio.", emoji: "🕯️", cor: "#dc2626", fotoUrl: ceraPerdidaEtapas },
-      { termo: "Ornato de Status", definicao: "Joias, armaduras e vasos decorados que mostravam o PODER e a posição social de quem os possuía — não eram só enfeite.", emoji: "👑", cor: "#a16207", fotoUrl: mascaraTaotie },
-      { termo: "Dinastia Shang", definicao: "Primeira dinastia chinesa com registros de bronzes rituais (~1600 a.C.), famosa por vasos e máscaras com o padrão Taotie.", emoji: "🏺", cor: "#7c2d12", fotoUrl: vasoShang },
+      {
+        termo: "Idade dos Metais",
+        definicao:
+          "Período em que a humanidade aprendeu a extrair e fundir cobre, bronze e ferro, substituindo ferramentas de pedra por peças moldáveis e mais resistentes.",
+        emoji: "⚒️",
+        cor: "#b45309",
+        fotoUrl: fundicaoMetal,
+      },
+      {
+        termo: "Técnica da Cera Perdida",
+        definicao:
+          "Processo de fundição: esculpe-se em cera, cobre-se com barro, derrete-se a cera e despeja-se metal líquido no molde vazio.",
+        emoji: "🕯️",
+        cor: "#dc2626",
+        fotoUrl: ceraPerdidaEtapas,
+      },
+      {
+        termo: "Ornato de Status",
+        definicao:
+          "Joias, armaduras e vasos decorados que mostravam o PODER e a posição social de quem os possuía — não eram só enfeite.",
+        emoji: "👑",
+        cor: "#a16207",
+        fotoUrl: mascaraTaotie,
+      },
+      {
+        termo: "Dinastia Shang",
+        definicao:
+          "Primeira dinastia chinesa com registros de bronzes rituais (~1600 a.C.), famosa por vasos e máscaras com o padrão Taotie.",
+        emoji: "🏺",
+        cor: "#7c2d12",
+        fotoUrl: vasoShang,
+      },
     ],
   },
 
@@ -109,10 +195,34 @@ export const aula01: AulaArteV1 = {
       "O mesmo aconteceu na Europa da Idade dos Metais: armaduras, capacetes e espadas de bronze com padrões entrelaçados mostravam a posição social do guerreiro. Quem controlava a metalurgia — o segredo de derreter e moldar metal — controlava também o PODER. Metal virou sinônimo de riqueza, proteção espiritual e identidade dinástica.",
     ],
     pigmentos: [
-      { nome: "Bronze fundido", hex: "#b45309", fonte: "Liga de cobre e estanho da Idade dos Metais", emoji: "⚒️", fotoUrl: fundicaoMetal },
-      { nome: "Máscara Taotie", hex: "#7c2d12", fonte: "Ornato ritual da Dinastia Shang (~1600 a.C.)", emoji: "👺", fotoUrl: mascaraTaotie },
-      { nome: "Molde de cera derretida", hex: "#f59e0b", fonte: "Etapa central da técnica da cera perdida", emoji: "🕯️", fotoUrl: ceraPerdidaEtapas },
-      { nome: "Espada entrelaçada", hex: "#78350f", fonte: "Arma-símbolo de status guerreiro", emoji: "⚔️", fotoUrl: espadaBronze },
+      {
+        nome: "Bronze fundido",
+        hex: "#b45309",
+        fonte: "Liga de cobre e estanho da Idade dos Metais",
+        emoji: "⚒️",
+        fotoUrl: fundicaoMetal,
+      },
+      {
+        nome: "Máscara Taotie",
+        hex: "#7c2d12",
+        fonte: "Ornato ritual da Dinastia Shang (~1600 a.C.)",
+        emoji: "👺",
+        fotoUrl: mascaraTaotie,
+      },
+      {
+        nome: "Molde de cera derretida",
+        hex: "#f59e0b",
+        fonte: "Etapa central da técnica da cera perdida",
+        emoji: "🕯️",
+        fotoUrl: ceraPerdidaEtapas,
+      },
+      {
+        nome: "Espada entrelaçada",
+        hex: "#78350f",
+        fonte: "Arma-símbolo de status guerreiro",
+        emoji: "⚔️",
+        fotoUrl: espadaBronze,
+      },
     ],
   },
 
@@ -121,34 +231,69 @@ export const aula01: AulaArteV1 = {
     aurora: "Verifica se o Códice registrou tudo sobre os metais!",
     perguntas: [
       {
-        pergunta: "Qual é a principal diferença técnica entre trabalhar com PEDRA e trabalhar com METAL LÍQUIDO?",
+        pergunta:
+          "Qual é a principal diferença técnica entre trabalhar com PEDRA e trabalhar com METAL LÍQUIDO?",
         fotoUrl: fundicaoMetal,
         alternativas: [
-          { texto: "Metal líquido preenche qualquer molde e permite formas complexas; a pedra bruta só pode ser lascada ou polida", correta: true },
-          { texto: "Não existe diferença nenhuma, os dois materiais funcionam do mesmo jeito", correta: false },
+          {
+            texto:
+              "Metal líquido preenche qualquer molde e permite formas complexas; a pedra bruta só pode ser lascada ou polida",
+            correta: true,
+          },
+          {
+            texto: "Não existe diferença nenhuma, os dois materiais funcionam do mesmo jeito",
+            correta: false,
+          },
+
+          { texto: "Não corresponde à análise", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
-        feedbackAcerto: "Isso! Essa liberdade de MOLDAGEM foi o que permitiu criar joias, máscaras e armas com detalhes impossíveis em pedra.",
-        feedbackErro: "Existe sim uma diferença enorme: metal derretido é LÍQUIDO e se molda a qualquer forma; pedra é rígida e só permite lascar.",
+        feedbackAcerto:
+          "Isso! Essa liberdade de MOLDAGEM foi o que permitiu criar joias, máscaras e armas com detalhes impossíveis em pedra.",
+        feedbackErro:
+          "Existe sim uma diferença enorme: metal derretido é LÍQUIDO e se molda a qualquer forma; pedra é rígida e só permite lascar.",
       },
       {
         pergunta: "Na técnica da cera perdida, o que acontece com a cera durante o processo?",
         fotoUrl: ceraPerdidaEtapas,
         alternativas: [
-          { texto: "Ela derrete e escoa para fora do molde de barro, deixando um espaço vazio que o metal líquido vai ocupar", correta: true },
+          {
+            texto:
+              "Ela derrete e escoa para fora do molde de barro, deixando um espaço vazio que o metal líquido vai ocupar",
+            correta: true,
+          },
           { texto: "Ela vira parte permanente da peça final, misturada ao metal", correta: false },
+
+          { texto: "Não corresponde à análise", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
-        feedbackAcerto: "Correto! Por isso o nome 'cera PERDIDA' — ela some no processo, dando lugar ao metal que assume sua forma exata.",
-        feedbackErro: "A cera não fica na peça final — ela derrete e é 'perdida', abrindo espaço para o metal líquido tomar sua forma.",
+        feedbackAcerto:
+          "Correto! Por isso o nome 'cera PERDIDA' — ela some no processo, dando lugar ao metal que assume sua forma exata.",
+        feedbackErro:
+          "A cera não fica na peça final — ela derrete e é 'perdida', abrindo espaço para o metal líquido tomar sua forma.",
       },
       {
-        pergunta: "Por que vasos e máscaras de bronze da Dinastia Shang são chamados de 'ornato de status'?",
+        pergunta:
+          "Por que vasos e máscaras de bronze da Dinastia Shang são chamados de 'ornato de status'?",
         fotoUrl: vasoShang,
         alternativas: [
-          { texto: "Porque eram caros e difíceis de produzir, reservados à elite e usados para mostrar poder político e religioso", correta: true },
-          { texto: "Porque qualquer camponês da época tinha um em casa para cozinhar", correta: false },
+          {
+            texto:
+              "Porque eram caros e difíceis de produzir, reservados à elite e usados para mostrar poder político e religioso",
+            correta: true,
+          },
+          {
+            texto: "Porque qualquer camponês da época tinha um em casa para cozinhar",
+            correta: false,
+          },
+
+          { texto: "Não corresponde à análise", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
-        feedbackAcerto: "Exato! Controlar a metalurgia era controlar o poder — só reis, nobres e sacerdotes tinham acesso a essas peças.",
-        feedbackErro: "Pense em quem controlava a produção de bronze: era raro e caro, por isso virou símbolo de status da elite, não objeto comum.",
+        feedbackAcerto:
+          "Exato! Controlar a metalurgia era controlar o poder — só reis, nobres e sacerdotes tinham acesso a essas peças.",
+        feedbackErro:
+          "Pense em quem controlava a produção de bronze: era raro e caro, por isso virou símbolo de status da elite, não objeto comum.",
       },
     ],
   },
@@ -158,32 +303,44 @@ export const aula01: AulaArteV1 = {
     aurora: "Classifica cada peça no quadrante certo da Forja de Identidades.",
     animais: [
       {
-        nome: "Máscara Taotie de bronze", emoji: "👺", fotoUrl: mascaraTaotie,
+        nome: "Máscara Taotie de bronze",
+        emoji: "👺",
+        fotoUrl: mascaraTaotie,
         corAlvo: { nome: "Ornato de Status", hex: "#7c2d12" },
         opcoes: [
           { nome: "Ornato de Status", hex: "#7c2d12" },
           { nome: "Ferramenta Comum", hex: "#0ea5e9" },
           { nome: "Molde de Cera", hex: "#f59e0b" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Isso! Máscara ritual de elite = Ornato de Status puro.",
       },
       {
-        nome: "Vaso ritual de bronze Shang", emoji: "🏺", fotoUrl: vasoShang,
+        nome: "Vaso ritual de bronze Shang",
+        emoji: "🏺",
+        fotoUrl: vasoShang,
         corAlvo: { nome: "Ornato de Status", hex: "#7c2d12" },
         opcoes: [
           { nome: "Ornato de Status", hex: "#7c2d12" },
           { nome: "Ferramenta Comum", hex: "#0ea5e9" },
           { nome: "Molde de Cera", hex: "#f59e0b" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Perfeito! Vaso usado em cerimônia dinástica = símbolo de poder.",
       },
       {
-        nome: "Etapas da cera derretendo no barro", emoji: "🕯️", fotoUrl: ceraPerdidaEtapas,
+        nome: "Etapas da cera derretendo no barro",
+        emoji: "🕯️",
+        fotoUrl: ceraPerdidaEtapas,
         corAlvo: { nome: "Molde de Cera", hex: "#f59e0b" },
         opcoes: [
           { nome: "Molde de Cera", hex: "#f59e0b" },
           { nome: "Ornato de Status", hex: "#7c2d12" },
           { nome: "Ferramenta Comum", hex: "#0ea5e9" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Correto! Isso é a técnica de fundição, não o objeto final de status.",
       },
@@ -194,13 +351,46 @@ export const aula01: AulaArteV1 = {
     tipo: "sequenciaMistura",
     aurora: "Ordena os 5 passos da TÉCNICA DA CERA PERDIDA, do escultor ao objeto pronto.",
     passos: [
-      { id: "p1", texto: "ESCULPO a peça desejada (máscara, joia, espada) em CERA macia", emoji: "🕯️", ordem: 1, fotoUrl: ceraPerdidaEtapas },
-      { id: "p2", texto: "COBRE tudo com camadas de BARRO até formar um molde sólido em volta da cera", emoji: "🟤", ordem: 2, fotoUrl: vasoShang },
-      { id: "p3", texto: "AQUEÇO o molde até a cera DERRETER e escorrer por um canal, deixando o espaço vazio", emoji: "🔥", ordem: 3, fotoUrl: forjaFogo },
-      { id: "p4", texto: "DESPEJO metal líquido (bronze) dentro do molde vazio, preenchendo cada detalhe", emoji: "🧪", ordem: 4, fotoUrl: fundicaoMetal },
-      { id: "p5", texto: "ESPERO esfriar, QUEBRO o barro e revelo a peça de metal idêntica ao modelo original", emoji: "⚒️", ordem: 5, fotoUrl: espadaBronze },
+      {
+        id: "p1",
+        texto: "ESCULPO a peça desejada (máscara, joia, espada) em CERA macia",
+        emoji: "🕯️",
+        ordem: 1,
+        fotoUrl: ceraPerdidaEtapas,
+      },
+      {
+        id: "p2",
+        texto: "COBRE tudo com camadas de BARRO até formar um molde sólido em volta da cera",
+        emoji: "🟤",
+        ordem: 2,
+        fotoUrl: vasoShang,
+      },
+      {
+        id: "p3",
+        texto:
+          "AQUEÇO o molde até a cera DERRETER e escorrer por um canal, deixando o espaço vazio",
+        emoji: "🔥",
+        ordem: 3,
+        fotoUrl: forjaFogo,
+      },
+      {
+        id: "p4",
+        texto: "DESPEJO metal líquido (bronze) dentro do molde vazio, preenchendo cada detalhe",
+        emoji: "🧪",
+        ordem: 4,
+        fotoUrl: fundicaoMetal,
+      },
+      {
+        id: "p5",
+        texto:
+          "ESPERO esfriar, QUEBRO o barro e revelo a peça de metal idêntica ao modelo original",
+        emoji: "⚒️",
+        ordem: 5,
+        fotoUrl: espadaBronze,
+      },
     ],
-    falaAcerto: "Você acabou de dominar a TÉCNICA DA CERA PERDIDA — a mesma usada pelos artesãos Shang há 3600 anos!",
+    falaAcerto:
+      "Você acabou de dominar a TÉCNICA DA CERA PERDIDA — a mesma usada pelos artesãos Shang há 3600 anos!",
   },
 
   cena08_voceLe: {
@@ -208,18 +398,33 @@ export const aula01: AulaArteV1 = {
     aurora: "Agora VOCÊ lê o diário do fundidor. Toca nas palavras coloridas.",
     titulo: "Diário do Fundidor",
     trechos: [
-      { texto: "Sou fundidor. Domino o fogo pra transformar minério em", palavraDestaque: "bronze", corDestaque: "#b45309" },
+      {
+        texto: "Sou fundidor. Domino o fogo pra transformar minério em",
+        palavraDestaque: "bronze",
+        corDestaque: "#b45309",
+      },
       { texto: "Uso a", palavraDestaque: "técnica da cera perdida", corDestaque: "#f59e0b" },
-      { texto: "para esculpir máscaras e vasos que viram", palavraDestaque: "ornato de status", corDestaque: "#7c2d12" },
-      { texto: "Cada linha entrelaçada na minha peça não é só beleza — é PODER e IDENTIDADE gravados no metal." },
-      { texto: "Quando o metal esfria e o barro quebra, uma nova era de possibilidades nasce diante dos meus olhos." },
+      {
+        texto: "para esculpir máscaras e vasos que viram",
+        palavraDestaque: "ornato de status",
+        corDestaque: "#7c2d12",
+      },
+      {
+        texto:
+          "Cada linha entrelaçada na minha peça não é só beleza — é PODER e IDENTIDADE gravados no metal.",
+      },
+      {
+        texto:
+          "Quando o metal esfria e o barro quebra, uma nova era de possibilidades nasce diante dos meus olhos.",
+      },
     ],
   },
 
   cena09_minijogo: {
     tipo: "cenaTematica",
     variante: "minijogo",
-    aurora: "🎯 A Forja da Cera Perdida! Controle a temperatura, derreta a cera no ponto exato e despeje o bronze sem bolhas de ar.",
+    aurora:
+      "🎯 A Forja da Cera Perdida! Controle a temperatura, derreta a cera no ponto exato e despeje o bronze sem bolhas de ar.",
     titulo: "🔥 A Forja da Cera Perdida",
     instrucao: "Ajuste a temperatura da forja virtual e finalize a fundição perfeita!",
     tempoSeg: 35,
@@ -231,7 +436,8 @@ export const aula01: AulaArteV1 = {
       { emoji: "⚒️", rotulo: "Peça revelada e polida", cor: "#a16207" },
       { emoji: "👑", rotulo: "Selo de status dinástico", cor: "#7c2d12" },
     ],
-    falaFinal: "Fundição perfeita! Você controlou o fogo como um verdadeiro artesão da Dinastia Shang.",
+    falaFinal:
+      "Fundição perfeita! Você controlou o fogo como um verdadeiro artesão da Dinastia Shang.",
   },
 
   cena10_revisao: {
@@ -240,14 +446,70 @@ export const aula01: AulaArteV1 = {
     aurora: "Fecha a página do Códice sobre os Metais. Toca em cada verbete!",
     titulo: "📓 Caderno da Estética dos Metais",
     itens: [
-      { emoji: "⚒️", rotulo: "Idade dos Metais", descricao: "Período de domínio do cobre, bronze e ferro — ferramentas e arte ganharam formas antes impossíveis em pedra.", cor: "#b45309", fotoUrl: fundicaoMetal },
-      { emoji: "🕯️", rotulo: "Técnica da Cera Perdida", descricao: "Cera vira molde de barro; a cera derrete e escoa; o metal líquido preenche o vazio e assume a forma exata.", cor: "#f59e0b", fotoUrl: ceraPerdidaEtapas },
-      { emoji: "👑", rotulo: "Ornato de Status", descricao: "Joias, máscaras e armaduras decoradas mostravam poder, identidade dinástica e posição social.", cor: "#7c2d12", fotoUrl: mascaraTaotie },
-      { emoji: "🏺", rotulo: "Dinastia Shang", descricao: "China Antiga, ~1600 a.C. Vasos rituais de bronze com padrão Taotie usados pela elite em cerimônias.", cor: "#a16207", fotoUrl: vasoShang },
-      { emoji: "⚔️", rotulo: "Armas e armaduras decoradas", descricao: "Espadas e capacetes com linhas entrelaçadas revelavam a posição do guerreiro na sociedade.", cor: "#78350f", fotoUrl: capaceteBronze },
-      { emoji: "🪙", rotulo: "Metal líquido vs. pedra rígida", descricao: "Metal derretido preenche qualquer molde; a pedra bruta só pode ser lascada — foi uma revolução de possibilidades.", cor: "#dc2626", fotoUrl: machadoBronze },
-      { emoji: "🏆", rotulo: "Lingote de Bronze Shang", descricao: "Sua recompensa: desbloqueia a página 'A Forja dos Símbolos de Poder' do Códice.", cor: "#f59e0b", fotoUrl: lingoteBronze },
-      { emoji: "💍", rotulo: "Joia de metal precioso", descricao: "Anéis e adornos de prata e ouro completavam o conjunto de status ao lado das armas e vasos.", cor: "#0ea5e9", fotoUrl: anelPrata },
+      {
+        emoji: "⚒️",
+        rotulo: "Idade dos Metais",
+        descricao:
+          "Período de domínio do cobre, bronze e ferro — ferramentas e arte ganharam formas antes impossíveis em pedra.",
+        cor: "#b45309",
+        fotoUrl: fundicaoMetal,
+      },
+      {
+        emoji: "🕯️",
+        rotulo: "Técnica da Cera Perdida",
+        descricao:
+          "Cera vira molde de barro; a cera derrete e escoa; o metal líquido preenche o vazio e assume a forma exata.",
+        cor: "#f59e0b",
+        fotoUrl: ceraPerdidaEtapas,
+      },
+      {
+        emoji: "👑",
+        rotulo: "Ornato de Status",
+        descricao:
+          "Joias, máscaras e armaduras decoradas mostravam poder, identidade dinástica e posição social.",
+        cor: "#7c2d12",
+        fotoUrl: mascaraTaotie,
+      },
+      {
+        emoji: "🏺",
+        rotulo: "Dinastia Shang",
+        descricao:
+          "China Antiga, ~1600 a.C. Vasos rituais de bronze com padrão Taotie usados pela elite em cerimônias.",
+        cor: "#a16207",
+        fotoUrl: vasoShang,
+      },
+      {
+        emoji: "⚔️",
+        rotulo: "Armas e armaduras decoradas",
+        descricao:
+          "Espadas e capacetes com linhas entrelaçadas revelavam a posição do guerreiro na sociedade.",
+        cor: "#78350f",
+        fotoUrl: capaceteBronze,
+      },
+      {
+        emoji: "🪙",
+        rotulo: "Metal líquido vs. pedra rígida",
+        descricao:
+          "Metal derretido preenche qualquer molde; a pedra bruta só pode ser lascada — foi uma revolução de possibilidades.",
+        cor: "#dc2626",
+        fotoUrl: machadoBronze,
+      },
+      {
+        emoji: "🏆",
+        rotulo: "Lingote de Bronze Shang",
+        descricao:
+          "Sua recompensa: desbloqueia a página 'A Forja dos Símbolos de Poder' do Códice.",
+        cor: "#f59e0b",
+        fotoUrl: lingoteBronze,
+      },
+      {
+        emoji: "💍",
+        rotulo: "Joia de metal precioso",
+        descricao:
+          "Anéis e adornos de prata e ouro completavam o conjunto de status ao lado das armas e vasos.",
+        cor: "#0ea5e9",
+        fotoUrl: anelPrata,
+      },
     ],
     falaFinal: "Página dos Metais RESTAURADA — 'A Forja dos Símbolos de Poder' desbloqueada!",
   },
@@ -256,12 +518,24 @@ export const aula01: AulaArteV1 = {
     tipo: "avaliacaoFinal",
     aurora: "Desafio do Fundidor, investigador!",
     quiz: {
-      pergunta: "Por que a técnica da cera perdida foi tão importante para a arte da Idade dos Metais e da Dinastia Shang?",
+      pergunta:
+        "Por que a técnica da cera perdida foi tão importante para a arte da Idade dos Metais e da Dinastia Shang?",
       alternativas: [
-        { texto: "Porque permitiu moldar detalhes complexos (rostos, padrões entrelaçados) em metal, algo impossível de esculpir em pedra bruta", correta: true },
-        { texto: "Porque era a única forma de deixar objetos brilhantes e coloridos", correta: false },
+        {
+          texto:
+            "Porque permitiu moldar detalhes complexos (rostos, padrões entrelaçados) em metal, algo impossível de esculpir em pedra bruta",
+          correta: true,
+        },
+        {
+          texto: "Porque era a única forma de deixar objetos brilhantes e coloridos",
+          correta: false,
+        },
+
+        { texto: "Não corresponde à análise", correta: false },
+        { texto: "Outra resposta sem relação", correta: false },
       ],
-      feedback: "Perfeito! A cera perdida deu liberdade total de FORMA: cera vira molde, molde vira metal — e assim nasceram máscaras Taotie, vasos rituais e espadas entrelaçadas cheias de detalhes que a pedra jamais permitiria.",
+      feedback:
+        "Perfeito! A cera perdida deu liberdade total de FORMA: cera vira molde, molde vira metal — e assim nasceram máscaras Taotie, vasos rituais e espadas entrelaçadas cheias de detalhes que a pedra jamais permitiria.",
     },
     missaoFamilia:
       "⚒️ Missão Investigadores de Metais Domésticos: Percorra sua casa e encontre pelo menos 3 objetos de metal diferentes (cobre, inox, alumínio, prata, ferro). Para cada um, observe e anote: Que metal é? Tem alguma decoração, ranhura ou relevo? Ele mostra 'status' (é usado só em ocasiões especiais) ou é do dia a dia? No app, registre fotos dos objetos e escreva 5 linhas comparando: qual peça parece mais 'ornato de status' e qual é mais 'ferramenta comum' — e por quê.",

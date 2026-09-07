@@ -4,7 +4,7 @@ export const aula01_planoCartesiano: AulaV4 = {
   slug: "u7-01-plano-cartesiano",
   titulo: "Plano cartesiano: coordenadas",
   iconeTrilha: "🗺️",
-  bncc: ["EF05MA14"],
+  bncc: ["EF05MA14", "EF05MA15"],
   duracaoMin: 22,
   metodologias: ["cpa"],
 
@@ -94,18 +94,18 @@ export const aula01_planoCartesiano: AulaV4 = {
     },
   },
   momento07_praticaIndependente: {
-    enunciado: "Ponto simétrico de (2,4) no eixo Y (x vira −x, se estender).",
+    enunciado: "Parta de (2,4), avance 3 unidades para a direita e mantenha a mesma altura.",
     interacao: {
       tipo: "escolhaVisual",
-      pergunta: "Escolha (aceite valores positivos): reflete pra:",
-      opcoes: [{ nome: "(−2, 4)" }, { nome: "(2, −4)" }, { nome: "(4, 2)" }],
-      respostaCerta: "(−2, 4)",
-      feedbackAcerto: "🎯",
-      feedbackErro: "Reflexão no Y muda o X de sinal.",
+      pergunta: "Ponto de chegada:",
+      opcoes: [{ nome: "(5, 4)" }, { nome: "(2, 7)" }, { nome: "(3, 4)" }, { nome: "(5, 7)" }],
+      respostaCerta: "(5, 4)",
+      feedbackAcerto: "🎯 O x aumenta de 2 para 5 e o y permanece 4.",
+      feedbackErro: "Mover para a direita altera x: 2 + 3 = 5. A altura y continua 4.",
     },
   },
   momento08_aplicacao: {
-    contexto: "Batalha naval: barco em (3,4). Míssil em (3,2).",
+    contexto: "Mapa do tesouro: uma pista está em (3,4) e outra em (3,2).",
     problema: "Distância vertical?",
     interacao: {
       tipo: "escolhaVisual",

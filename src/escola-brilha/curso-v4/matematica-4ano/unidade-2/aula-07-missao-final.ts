@@ -4,7 +4,7 @@ export const aula07_missaoFinalU2: AulaV4 = {
   slug: "u2-07-missao-final",
   titulo: "Missão Final: Contador do Reino",
   iconeTrilha: "🏆",
-  bncc: ["EF04MA03", "EF04MA05", "EF04MA13"],
+  bncc: ["EF04MA03", "EF04MA05"],
   duracaoMin: 25,
   metodologias: ["cpa", "vergnaud", "skemp"],
 
@@ -18,7 +18,7 @@ export const aula07_missaoFinalU2: AulaV4 = {
     cenas: [
       { tipo: "texto", texto: "Soma com 'vai 1': passou de 9 sobe 1 pra ESQUERDA.", destaque: true },
       { tipo: "texto", texto: "Subtração com troca: −1 na esquerda, +10 na direita." },
-      { tipo: "texto", texto: "Problema: leia com calma e ache a palavra-chave." },
+      { tipo: "texto", texto: "Problema: entenda a relação entre os dados e o que precisa ser descoberto." },
     ],
   },
   momento03_descoberta: {
@@ -52,8 +52,8 @@ export const aula07_missaoFinalU2: AulaV4 = {
   momento05_modelagem: {
     enunciado: "Subtraia 7.203 − 3.478.",
     passos: [
-      "U: 3−8 não dá → 13−8=5. D vira −1 (era 0 → cascata).",
-      "D: 0 já virou. Empresta de C (2 vira 1). 10−7=3.",
+      "U: como há 0 dezenas, trocamos 1 centena por 10 dezenas; depois trocamos 1 dezena por 10 unidades. Assim, 13 − 8 = 5.",
+      "D: após ceder 1 dezena às unidades, restam 9 dezenas. Então 9 − 7 = 2.",
       "C: 1 − 4 não dá → 11−4=7. UM vira 6.",
       "UM: 6−3=3.",
     ],

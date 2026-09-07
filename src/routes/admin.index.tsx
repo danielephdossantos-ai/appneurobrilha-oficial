@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useAppState, type Diagnostico } from "@/core/store";
@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
-import { Shield, Sparkles, Users } from "lucide-react";
+import { GraduationCap, Shield, Sparkles, Users } from "lucide-react";
 import { diagnosticoToNeuroProfile, NEURO_PROFILE_LABEL } from "@/lib/neuro-profile";
 
 export const Route = createFileRoute("/admin/")({
@@ -88,6 +88,16 @@ function AdminPage() {
             <p className="text-sm text-muted-foreground">Perfis fictícios prontos — sem anamnese.</p>
           </div>
         </header>
+
+        <Card className="border-indigo-200 bg-indigo-50/70">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-base"><GraduationCap className="h-5 w-5 text-indigo-600" /> Área do Professor</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            <p className="text-sm text-muted-foreground">Gere códigos gratuitos para professores e alunos, acompanhe a meta de alunos pagantes e controle os acessos.</p>
+            <Button asChild><Link to="/admin/professores">Gerenciar professores e códigos</Link></Button>
+          </CardContent>
+        </Card>
 
 
         <Card className="border-primary/30 bg-primary/5">

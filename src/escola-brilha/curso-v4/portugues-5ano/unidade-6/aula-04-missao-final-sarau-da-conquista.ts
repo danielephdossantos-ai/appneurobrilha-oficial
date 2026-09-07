@@ -27,7 +27,7 @@ export const aula4: AulaPortuguesV4 = {
   slug: "aula-04-missao-final-sarau-da-conquista",
   titulo: "Missão final: Sarau da Conquista",
   iconeTrilha: "🌟",
-  bncc: ["EF05LP26", "EF05LP19"],
+  bncc: ["EF35LP01", "EF35LP02", "EF35LP21", "EF35LP28", "EF15LP15", "EF15LP19"],
   duracaoMin: 30,
 
   momento01_motivacao: {

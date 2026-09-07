@@ -84,7 +84,7 @@ export const aula02: AulaPortuguesV4 = {
   // ------------------------------------------------------------
   momento_ensinoVisual: {
     titulo: "Conhecendo as letras",
-    instrucao: "Cada letra tem um som e pode começar uma palavra. Veja alguns exemplos.",
+    instrucao: "As letras ajudam a representar os sons da fala. Uma mesma letra pode aparecer com sons diferentes. Veja palavras que começam com estas letras.",
     blocos: [
       {
         tipo: "alfabetoCompleto",
@@ -243,7 +243,7 @@ export const aula02: AulaPortuguesV4 = {
           { id: "alvoDado", nome: "DADO", imagemUrl: dado },
         ],
         feedbackAcerto: "🎉 Muito bem! Cada letra combina com a palavra que ela inicia.",
-        feedbackErro: "Pense no SOM da letra: A de ABELHA, B de BOLA, C de CASA, D de DADO.",
+        feedbackErro: "Ouça o começo das palavras: A de ABELHA, B de BOLA, C de CASA, D de DADO.",
       },
     },
   },

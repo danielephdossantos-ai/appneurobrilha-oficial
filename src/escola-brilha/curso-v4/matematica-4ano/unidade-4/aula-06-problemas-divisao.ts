@@ -4,7 +4,7 @@ export const aula06_problemasDivisao: AulaV4 = {
   slug: "u4-06-problemas-divisao",
   titulo: "Problemas de divisão",
   iconeTrilha: "🧩",
-  bncc: ["EF04MA07", "EF04MA27"],
+  bncc: ["EF04MA07"],
   duracaoMin: 22,
   metodologias: ["vergnaud", "rme"],
 
@@ -29,7 +29,7 @@ export const aula06_problemasDivisao: AulaV4 = {
     titulo: "Ler o problema",
     etapas: [
       {
-        texto: "Palavra-chave 'para cada' = repartir. 'Quantos pacotes de X' = agrupar.",
+        texto: "Descubra se o total será repartido em uma quantidade conhecida de grupos ou organizado em grupos de tamanho conhecido.",
         exemploReal: {
           contexto: "156 páginas em 4 dias iguais.",
           destaque: "156 ÷ 4 = 39 páginas por dia.",

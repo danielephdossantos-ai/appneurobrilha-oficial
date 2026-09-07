@@ -4,7 +4,7 @@ export const aula05_decimaisMilesimos: AulaV4 = {
   slug: "u5-05-decimais-milesimos",
   titulo: "Decimais até milésimos",
   iconeTrilha: "🔢",
-  bncc: ["EF05MA05"],
+  bncc: ["EF05MA02", "EF05MA03"],
   duracaoMin: 22,
   metodologias: ["cpa"],
 

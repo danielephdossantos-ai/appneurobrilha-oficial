@@ -37,6 +37,7 @@ export const aula03: AulaGeoV1 = {
       { id: "carvao", titulo: "Carvão mineral", subtitulo: "movia máquinas a vapor", emoji: "⚫", cor: "from-slate-600 to-slate-900", fotoUrl: laboratorioImg },
       { id: "petroleo", titulo: "Petróleo", subtitulo: "já dominava as fábricas", emoji: "🛢️", cor: "from-amber-500 to-orange-700", fotoUrl: laboratorioImg },
       { id: "eletricidade", titulo: "Eletricidade", subtitulo: "energia limpa desde o início", emoji: "⚡", cor: "from-yellow-500 to-amber-700", fotoUrl: transformacoesImg },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "carvao",
     feedbackAcerto:
@@ -92,6 +93,7 @@ export const aula03: AulaGeoV1 = {
           { id: "a", emoji: "⚫", titulo: "Carvão mineral", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🛢️", titulo: "Petróleo", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🌞", titulo: "Energia solar", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. Máquinas a vapor a carvão moveram fábricas, trens e navios a partir de 1760.",
         feedbackErro: "Petróleo e solar vieram DEPOIS. A Revolução Industrial começou com CARVÃO." },
@@ -100,6 +102,7 @@ export const aula03: AulaGeoV1 = {
           { id: "a", emoji: "🛢️", titulo: "Levou milhões de anos para se formar", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🌱", titulo: "Se repõe em poucos meses", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "💨", titulo: "Não libera nenhum gás ao queimar", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Sim. Fósseis levam milhões de anos para se formar — por isso não são renováveis em escala humana.",
         feedbackErro: "Fósseis NÃO se repõem rápido e SIM liberam CO₂ ao queimar. A característica-chave é o tempo de formação: milhões de anos." },
@@ -108,6 +111,7 @@ export const aula03: AulaGeoV1 = {
           { id: "a", emoji: "🌡️", titulo: "Intensificação do efeito estufa e aquecimento global", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "❄️", titulo: "Resfriamento acelerado do planeta", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🌈", titulo: "Nenhum problema relevante", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. Excesso de CO₂ retém mais calor na atmosfera, elevando a temperatura média global.",
         feedbackErro: "O efeito é de AQUECIMENTO, não resfriamento — e é um problema muito relevante hoje." },
@@ -209,6 +213,8 @@ export const aula03: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Carvão mineral e máquinas a vapor", correta: true },
           { id: "b", texto: "Petróleo e motores de combustão interna" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. Petróleo virou relevante décadas depois, no final do século 19.",
         feedbackErro: "Petróleo é POSTERIOR. A Revolução Industrial (1760) usou CARVÃO e máquina a vapor." },
@@ -216,6 +222,8 @@ export const aula03: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Levam milhões de anos para se formar novamente", correta: true },
           { id: "b", texto: "São ilegais de extrair" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. O tempo de formação é o que torna a reposição inviável em escala humana.",
         feedbackErro: "Não é questão legal — é uma questão de TEMPO GEOLÓGICO de formação." },
@@ -223,6 +231,8 @@ export const aula03: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Aumento das emissões de CO₂ e aquecimento global", correta: true },
           { id: "b", texto: "Redução da temperatura média do planeta" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. Excesso de CO₂ intensifica o efeito estufa natural, elevando a temperatura global.",
         feedbackErro: "O efeito observado é de AQUECIMENTO, não de resfriamento." },

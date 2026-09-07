@@ -116,7 +116,7 @@ function prepararParlendaParaAudio(versos: string[]) {
 function CardScreen({ children, cor }: { children: React.ReactNode; cor: string }) {
   return (
     <div
-      className="w-full max-w-full min-w-0 overflow-hidden box-border rounded-[28px] sm:rounded-[36px] p-4 sm:p-8 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.4)] border-4"
+      className="w-full max-w-full min-w-0 overflow-hidden box-border rounded-[24px] sm:rounded-[36px] p-3 sm:p-8 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.4)] border-[3px] sm:border-4"
       style={{ background: "rgba(255,255,255,0.95)", borderColor: cor }}
     >
       {children}
@@ -136,7 +136,7 @@ function BigListenButton({ onClick, label = "Ouvir" }: { onClick: () => void; la
 }
 
 function ImageFrame({ src, alt, size = "xl" }: { src: string; alt: string; size?: "md" | "xl" | "hero" }) {
-  const px = size === "hero" ? 340 : size === "xl" ? 220 : 140;
+  const px = size === "hero" ? 390 : size === "xl" ? 290 : 180;
   // Sempre responsivo: nunca ultrapassa a largura disponível no celular
   const style: React.CSSProperties = {
     width: "100%",
@@ -145,10 +145,10 @@ function ImageFrame({ src, alt, size = "xl" }: { src: string; alt: string; size?
   };
   return (
     <div
-      className="mx-auto rounded-[32px] bg-gradient-to-br from-yellow-100 to-pink-100 border-4 border-white shadow-inner grid place-items-center overflow-hidden"
+      className="mx-auto rounded-[24px] sm:rounded-[32px] bg-gradient-to-br from-yellow-100 to-pink-100 border-2 sm:border-4 border-white shadow-inner grid place-items-center overflow-hidden"
       style={style}
     >
-      <img src={src} alt={alt} className="max-w-[85%] max-h-[85%] object-contain" />
+      <img src={src} alt={alt} className="w-[96%] h-[96%] object-contain" />
     </div>
   );
 }
@@ -162,7 +162,7 @@ function TituloMomento({ n, texto, cor }: { n: number; texto: string; cor: strin
       >
         {n}
       </div>
-      <h2 className="text-lg sm:text-xl font-bold text-slate-700">{texto}</h2>
+      <h2 className="text-xl sm:text-2xl font-black leading-tight text-slate-800">{texto}</h2>
     </div>
   );
 }
@@ -197,8 +197,8 @@ function MomentoRender({
           <ImageFrame src={m.mascoteUrl} alt="Mascote" size="hero" />
           <div className="mt-6 grid gap-4">
             <BigListenButton onClick={() => speak(m.falaMascote)} />
-            {m.legenda && <p className="text-center text-sm text-slate-500 italic">{m.legenda}</p>}
-            <button onClick={marcarOk} className="mt-2 mx-auto text-purple-700 underline">
+            {m.legenda && <p className="text-center text-base text-slate-600 italic leading-relaxed">{m.legenda}</p>}
+            <button onClick={marcarOk} className="mt-2 mx-auto min-h-12 px-5 text-lg font-bold text-purple-700 underline">
               Continuar ▸
             </button>
           </div>
@@ -218,8 +218,8 @@ function MomentoRender({
               }}
               label="Ouvir a parlenda"
             />
-            {m.legenda && <p className="text-center text-xs text-slate-500 italic">{m.legenda}</p>}
-            <button onClick={marcarOk} className="mt-2 mx-auto text-purple-700 underline">
+            {m.legenda && <p className="text-center text-base text-slate-600 italic">{m.legenda}</p>}
+            <button onClick={marcarOk} className="mt-2 mx-auto min-h-12 px-5 text-lg font-bold text-purple-700 underline">
               Continuar ▸
             </button>
           </div>
@@ -231,18 +231,18 @@ function MomentoRender({
         <CardScreen cor={cor}>
           <TituloMomento n={idx + 1} texto="Toca e escuta" cor={cor} />
           <BigListenButton onClick={() => speak(m.instrucaoAudio)} label="Ouvir instrução" />
-          <div className="mt-6 grid grid-cols-3 gap-3">
+          <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-3">
             {m.itens.map((it) => (
               <button
                 key={it.nome}
                 onClick={() => speak(it.nome)}
-                className="rounded-3xl bg-white border-2 border-purple-200 p-2 shadow active:scale-95 transition"
+                className="min-h-36 rounded-3xl bg-white border-2 border-purple-200 p-2 shadow active:scale-95 transition"
               >
                 <ImageFrame src={it.imagemUrl} alt={it.nome} size="md" />
               </button>
             ))}
           </div>
-          <button onClick={marcarOk} className="mt-6 mx-auto block text-purple-700 underline">
+          <button onClick={marcarOk} className="mt-6 mx-auto min-h-12 px-5 block text-lg font-bold text-purple-700 underline">
             Continuar ▸
           </button>
         </CardScreen>
@@ -267,7 +267,7 @@ function MomentoRender({
               </button>
             </div>
           </div>
-          <div className="mt-5 grid grid-cols-3 gap-3">
+          <div className="mt-5 grid grid-cols-2 sm:grid-cols-3 gap-3">
             {m.opcoes.map((o) => (
               <button
                 key={o.nome}
@@ -283,7 +283,7 @@ function MomentoRender({
                     speak(m.feedbackErro);
                   }
                 }}
-                className={`rounded-3xl border-2 p-2 shadow active:scale-95 transition ${
+                className={`min-h-36 rounded-3xl border-2 p-2 shadow active:scale-95 transition ${
                   acertou && o.correta ? "border-green-500 bg-green-50" : "border-purple-200 bg-white"
                 }`}
               >
@@ -291,7 +291,7 @@ function MomentoRender({
               </button>
             ))}
           </div>
-          {msg && <p className="mt-4 text-center font-semibold text-slate-700">{msg}</p>}
+          {msg && <p className="mt-4 text-center text-lg leading-relaxed font-bold text-slate-800">{msg}</p>}
         </CardScreen>
       );
     }
@@ -458,7 +458,7 @@ function MomentoRender({
         <CardScreen cor={cor}>
           <TituloMomento n={idx + 1} texto="Escolhe a resposta certa" cor={cor} />
           <BigListenButton onClick={() => speak(m.perguntaAudio)} label="Ouvir pergunta" />
-          <div className="mt-5 grid grid-cols-2 sm:grid-cols-3 gap-3">
+          <div className="mt-5 grid grid-cols-2 gap-3 sm:gap-4">
             {m.opcoes.map((o) => {
               const qtd = Math.max(1, o.quantidade ?? 1);
               return (
@@ -476,7 +476,7 @@ function MomentoRender({
                       speak(m.feedbackErro);
                     }
                   }}
-                  className={`rounded-3xl border-2 p-2 shadow active:scale-95 transition ${
+                  className={`min-h-44 rounded-3xl border-2 p-2 shadow active:scale-95 transition ${
                     ok && o.correta ? "border-green-500 bg-green-50" : "border-purple-200 bg-white"
                   }`}
                 >
@@ -499,12 +499,12 @@ function MomentoRender({
                       ))}
                     </div>
                   )}
-                  <p className="mt-1 text-center text-sm font-semibold text-slate-700">{o.nome}</p>
+                  <p className="mt-2 text-center text-base sm:text-lg font-black leading-tight text-slate-800">{o.nome}</p>
                 </button>
               );
             })}
           </div>
-          {msg && <p className="mt-4 text-center font-semibold text-slate-700">{msg}</p>}
+          {msg && <p className="mt-4 text-center text-lg leading-relaxed font-bold text-slate-800">{msg}</p>}
         </CardScreen>
       );
     }
@@ -3873,4 +3873,3 @@ function ConexaoPessoalBloco({
     </CardScreen>
   );
 }
-

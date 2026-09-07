@@ -17,13 +17,13 @@ export const aula01_ideiaDeFracao: AulaV4 = {
     instrucao: "Numerador (em cima) e denominador (embaixo).",
     cenas: [
       { tipo: "texto", texto: "1/4 lê-se 'um quarto'. Em cima: quantas partes peguei. Embaixo: em quantas dividi.", destaque: true },
-      { tipo: "texto", texto: "1/2 = metade · 1/3 = terço · 1/4 = quarto · 1/5 = quinto · 1/10 = décimo." },
+      { tipo: "texto", texto: "Frações unitárias têm numerador 1: 1/2, 1/3, 1/4, 1/5, 1/10 e 1/100." },
     ],
   },
   momento03_descoberta: {
     perguntaGuia: "1/4 é mais que 1/2?",
     pista: "Pense na pizza cortada.",
-    revelacao: "Não. Quanto MAIOR o denominador, MENORES as partes. Dividir em 4 dá pedaços menores do que em 2.",
+    revelacao: "Não. Quando comparamos o MESMO inteiro dividido em partes iguais, quanto maior o denominador, menores são as partes. Dividir o mesmo inteiro em 4 dá pedaços menores do que dividi-lo em 2.",
   },
   momento04_explicacao: {
     titulo: "Ler uma fração",
@@ -40,6 +40,13 @@ export const aula01_ideiaDeFracao: AulaV4 = {
         exemploReal: {
           contexto: "4 fatias comidas de 4.",
           destaque: "4/4 = 1 (inteiro).",
+        },
+      },
+      {
+        texto: "Na reta numérica, as frações ficam entre os números inteiros. Divida o trecho de 0 a 1 em partes iguais e marque quantas partes percorreu.",
+        exemploReal: {
+          contexto: "Divida o trecho de 0 a 1 em 4 intervalos iguais. O primeiro ponto depois do zero representa 1/4.",
+          destaque: "0 — 1/4 — 2/4 — 3/4 — 1",
         },
       },
     ],
@@ -85,7 +92,7 @@ export const aula01_ideiaDeFracao: AulaV4 = {
     },
   },
   momento09_revisao: {
-    pontos: ["Fração = parte igual do todo.", "Numerador em cima, denominador embaixo."],
+    pontos: ["Fração representa partes iguais de um inteiro.", "Numerador em cima, denominador embaixo.", "Frações também podem ser localizadas na reta numérica."],
   },
   momento10_avaliacao: {
     perguntas: [

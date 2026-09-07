@@ -21,7 +21,7 @@ export const aula05: AulaPortuguesV4 = {
   slug: "aula-05-formatura-na-academia",
   titulo: "Formatura na Academia",
   iconeTrilha: "🎓",
-  bncc: ["EF02LP26", "EF02LP27", "EF02LP28"],
+  bncc: ["EF02LP26", "EF02LP28", "EF15LP02", "EF15LP03", "EF15LP13", "EF15LP16", "EF15LP19"],
   duracaoMin: 20,
 
   momento01_motivacao: {

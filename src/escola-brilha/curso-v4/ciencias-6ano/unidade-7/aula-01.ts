@@ -13,7 +13,7 @@ export const aula01: AulaGeoV1 = {
   titulo: "Projeto Integrador",
   iconeTrilha: "🎓",
   recompensa: { xp: 150, moedas: 60, medalha: "Cientista Formado" },
-  bncc: ["EF06CI06"],
+  bncc: [],
   duracaoMin: 40,
 
   cena01_motivacao: {
@@ -36,6 +36,7 @@ export const aula01: AulaGeoV1 = {
       { id: "problema", titulo: "Definir problema + hipótese", subtitulo: "planejar antes de agir", emoji: "❓", cor: "from-emerald-500 to-teal-700", fotoUrl: equipeImg },
       { id: "coletar", titulo: "Sair coletando água já", subtitulo: "ir a campo direto", emoji: "🏃", cor: "from-red-500 to-rose-700", fotoUrl: equipeImg },
       { id: "poster", titulo: "Fazer o pôster primeiro", subtitulo: "estética antes de dado", emoji: "🎨", cor: "from-slate-500 to-slate-700", fotoUrl: posterImg },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "problema",
     feedbackAcerto:
@@ -83,6 +84,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🎯", titulo: "Pergunta específica e RESPONSÁVEL com dados", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🌍", titulo: "Pergunta gigante tipo 'o que é a vida?'", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🤷", titulo: "Qualquer pergunta serve", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Isso. Pergunta específica + testável com dados = boa base.",
         feedbackErro: "Pergunta muito ampla NÃO se responde num projeto escolar. Foco em algo específico e testável." },
@@ -91,6 +93,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🧠", titulo: "Diferentes olhares detectam erros e enriquecem análise", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🎨", titulo: "Fica mais bonito visualmente", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "😴", titulo: "Pra fazer menos trabalho", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. Ciência real é COLETIVA — revisão por pares detecta o que 1 pessoa não vê.",
         feedbackErro: "Equipe não é pra economizar trabalho — é pra ENRIQUECER análise e reduzir viés." },
@@ -99,6 +102,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "📝", titulo: "Publicar mesmo assim — refutar é resultado válido", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🗑️", titulo: "Jogar fora e recomeçar do zero", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🎭", titulo: "Manipular dados pra confirmar", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Perfeito. Refutar hipótese é RESULTADO CIENTÍFICO — evita que outros percam tempo com ela.",
         feedbackErro: "Manipular dados é FRAUDE. Refutar hipótese é resultado válido e útil pra ciência." },
@@ -192,6 +196,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Definir problema e hipótese testável", correta: true },
           { id: "b", texto: "Fazer o pôster bonito" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. Sem problema definido, não há projeto — só atividade.",
         feedbackErro: "Pôster é a última etapa (comunicação). PROBLEMA sempre vem primeiro." },
@@ -199,6 +205,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Publica assim mesmo — refutar é resultado válido", correta: true },
           { id: "b", texto: "Ajusta os dados para confirmar a hipótese" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. Refutar hipótese é ciência funcionando — não fracasso.",
         feedbackErro: "Ajustar dados é FRAUDE científica. Refutar é resultado válido e útil." },
@@ -206,6 +214,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Diferentes olhares detectam erros e enriquecem a análise", correta: true },
           { id: "b", texto: "Só pra dividir menos trabalho por pessoa" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Exato. Revisão por pares é o mecanismo mais forte da ciência moderna.",
         feedbackErro: "Não é sobre trabalho — é sobre REDUZIR ERRO e enriquecer análise." },

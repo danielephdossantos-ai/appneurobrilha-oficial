@@ -45,6 +45,19 @@ export const aula02: AulaGeoV1 = {
         emoji: "🏭",
         cor: "from-slate-400 to-gray-600",
       },
+
+      {
+        id: "extra-1",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
+      {
+        id: "extra-2",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
     ],
     respostaCerta: "campo",
     feedbackAcerto: "Isso! Arroz cresce no CAMPO. A fábrica só empacota e a cidade só vende.",
@@ -158,7 +171,19 @@ export const aula02: AulaGeoV1 = {
         cards: [
           { id: "campo", emoji: "🌾", titulo: "Do campo", cor: "from-amber-500 to-orange-700" },
           { id: "fab", emoji: "🏭", titulo: "Só da fábrica", cor: "from-slate-500 to-gray-700" },
-          { id: "lab", emoji: "🧪", titulo: "Do laboratório", cor: "from-purple-500 to-fuchsia-700" },
+          {
+            id: "lab",
+            emoji: "🧪",
+            titulo: "Do laboratório",
+            cor: "from-purple-500 to-fuchsia-700",
+          },
+
+          {
+            id: "extra-3",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "campo",
         feedbackAcerto: "Isso! Comida vem do CAMPO. Fábrica só transforma.",
@@ -169,9 +194,21 @@ export const aula02: AulaGeoV1 = {
         pergunta: "Trator, semente melhorada e remédio pro gado vêm...",
         fotoUrl: IMG_AGRO,
         cards: [
-          { id: "cid", emoji: "🏭", titulo: "Da cidade (indústria)", cor: "from-sky-500 to-blue-700" },
+          {
+            id: "cid",
+            emoji: "🏭",
+            titulo: "Da cidade (indústria)",
+            cor: "from-sky-500 to-blue-700",
+          },
           { id: "flor", emoji: "🌳", titulo: "Da floresta", cor: "from-emerald-500 to-green-700" },
           { id: "mar", emoji: "🌊", titulo: "Do mar", cor: "from-blue-500 to-indigo-700" },
+
+          {
+            id: "extra-4",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "cid",
         feedbackAcerto: "Perfeito! Máquina e insumo saem da INDÚSTRIA urbana.",
@@ -181,9 +218,31 @@ export const aula02: AulaGeoV1 = {
         id: "q3",
         pergunta: "Logística é...",
         cards: [
-          { id: "trans", emoji: "🚚", titulo: "Transportar do campo à casa", cor: "from-sky-500 to-blue-700" },
-          { id: "col", emoji: "🌾", titulo: "Colher no campo", cor: "from-amber-500 to-orange-700" },
-          { id: "com", emoji: "🍽️", titulo: "Comer no restaurante", cor: "from-red-500 to-rose-700" },
+          {
+            id: "trans",
+            emoji: "🚚",
+            titulo: "Transportar do campo à casa",
+            cor: "from-sky-500 to-blue-700",
+          },
+          {
+            id: "col",
+            emoji: "🌾",
+            titulo: "Colher no campo",
+            cor: "from-amber-500 to-orange-700",
+          },
+          {
+            id: "com",
+            emoji: "🍽️",
+            titulo: "Comer no restaurante",
+            cor: "from-red-500 to-rose-700",
+          },
+
+          {
+            id: "extra-5",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "trans",
         feedbackAcerto: "Isso! LOGÍSTICA = mover produto do campo até você.",
@@ -266,12 +325,14 @@ export const aula02: AulaGeoV1 = {
       },
       {
         id: "p3",
-        texto: "AGRONEGÓCIO é toda a cadeia: da semente ao supermercado. Envolve fazenda, indústria e transporte.",
+        texto:
+          "AGRONEGÓCIO é toda a cadeia: da semente ao supermercado. Envolve fazenda, indústria e transporte.",
         chaves: ["agronegócio", "cadeia"],
       },
       {
         id: "p4",
-        texto: "LOGÍSTICA é como o produto sai do campo e chega em casa. Sem estrada boa, comida encarece.",
+        texto:
+          "LOGÍSTICA é como o produto sai do campo e chega em casa. Sem estrada boa, comida encarece.",
         chaves: ["logística", "estrada"],
       },
     ],
@@ -385,6 +446,8 @@ export const aula02: AulaGeoV1 = {
           { id: "a", texto: "Campo não precisa da cidade", correta: false },
           { id: "b", texto: "Um depende do outro pra funcionar", correta: true },
           { id: "c", texto: "Cidade produz alimento sozinha", correta: false },
+
+          { id: "extra-6", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Isso! Um DEPENDE do outro.",
         feedbackErro: "Interdependência = DEPENDER UM DO OUTRO.",
@@ -396,6 +459,8 @@ export const aula02: AulaGeoV1 = {
           { id: "a", texto: "Só a plantação", correta: false },
           { id: "b", texto: "Toda a cadeia: semente, fazenda, indústria e mercado", correta: true },
           { id: "c", texto: "Só o supermercado", correta: false },
+
+          { id: "extra-7", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Perfeito! Agronegócio é a CADEIA INTEIRA.",
         feedbackErro: "É a CADEIA INTEIRA — semente até mercado.",
@@ -407,6 +472,8 @@ export const aula02: AulaGeoV1 = {
           { id: "a", texto: "Chega mais rápido", correta: false },
           { id: "b", texto: "Apodrece no campo e não chega em casa", correta: true },
           { id: "c", texto: "Fica mais barata", correta: false },
+
+          { id: "extra-8", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Isso! Sem estrada, comida APODRECE no campo.",
         feedbackErro: "Sem transporte, comida NÃO CHEGA e apodrece.",

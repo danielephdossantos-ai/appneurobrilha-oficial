@@ -20,7 +20,7 @@ export const aula3: AulaPortuguesV4 = {
   slug: "aula-03-falar-em-publico",
   titulo: "Falar em público",
   iconeTrilha: "🎤",
-  bncc: ["EF05LP19", "EF05LP20"],
+  bncc: ["EF05LP19", "EF05LP20", "EF35LP18", "EF35LP19", "EF35LP20", "EF15LP09", "EF15LP10", "EF15LP11", "EF15LP12", "EF15LP13"],
   duracaoMin: 25,
 
   momento01_motivacao: {

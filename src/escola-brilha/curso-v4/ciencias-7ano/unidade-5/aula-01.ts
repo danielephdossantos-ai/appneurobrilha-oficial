@@ -12,7 +12,7 @@ export const aula01: AulaGeoV1 = {
   titulo: "Química Básica",
   iconeTrilha: "⚗️",
   recompensa: { xp: 140, moedas: 55, medalha: "Químico Júnior" },
-  bncc: ["EF07CI01", "EF07CI02", "EF07CI03"],
+  bncc: [],
   duracaoMin: 40,
 
   cena01_motivacao: {
@@ -37,6 +37,7 @@ export const aula01: AulaGeoV1 = {
       { id: "quimica", titulo: "Transformação química", subtitulo: "virou substância nova", emoji: "⚗️", cor: "from-slate-500 to-slate-700", fotoUrl: laboratorioImg },
       { id: "fisica", titulo: "Transformação física", subtitulo: "mesma H₂O, forma diferente", emoji: "❄️", cor: "from-emerald-500 to-teal-700", fotoUrl: transformacoesImg },
       { id: "sumiu", titulo: "Matéria sumiu", subtitulo: "gelo desapareceu", emoji: "❌", cor: "from-rose-500 to-red-700", fotoUrl: transformacoesImg },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "fisica",
     feedbackAcerto:
@@ -93,6 +94,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "❄️", titulo: "Física (só muda estado)", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🔥", titulo: "Química (nova substância)", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "❌", titulo: "Não é transformação", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. Sólido → líquido = mudança de estado = física.",
         feedbackErro: "Gelo e água líquida são a MESMA H₂O. Só o estado mudou. É FÍSICA." },
@@ -101,6 +103,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🔗", titulo: "2 hidrogênios + 1 oxigênio ligados", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "⚛️", titulo: "1 átomo apenas", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🌊", titulo: "Muitas gotas", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Sim. H₂O = 2H + 1O ligados por ligação covalente.",
         feedbackErro: "Molécula tem pelo menos 2 átomos. H₂O = 2H + 1O." },
@@ -109,6 +112,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🔥", titulo: "Química (vira CO₂ + H₂O + cinzas)", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "❄️", titulo: "Física (só muda forma)", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "❌", titulo: "Matéria some", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. Madeira + O₂ → CO₂ + H₂O + cinzas. Substâncias novas = química.",
         feedbackErro: "Madeira NÃO volta a ser madeira. Formou substâncias NOVAS = QUÍMICA." },
@@ -211,6 +215,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Átomo", correta: true },
           { id: "b", texto: "Molécula (que é feita de vários átomos)" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. Átomo = unidade química fundamental.",
         feedbackErro: "Molécula é feita de ÁTOMOS. Átomo é a unidade mínima." },
@@ -218,6 +224,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Química (ferro vira óxido de ferro — nova substância)", correta: true },
           { id: "b", texto: "Física (só mudou de cor)" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. Formou substância nova (óxido) = QUÍMICA.",
         feedbackErro: "Mudou a SUBSTÂNCIA (ferro → óxido de ferro), não só a aparência. É QUÍMICA." },
@@ -225,6 +233,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Mistura homogênea (não dá pra ver as partes)", correta: true },
           { id: "b", texto: "Substância pura" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. Duas substâncias juntas = MISTURA (homogênea porque não separa).",
         feedbackErro: "Substância pura tem UMA só coisa. Água + sal = MISTURA." },

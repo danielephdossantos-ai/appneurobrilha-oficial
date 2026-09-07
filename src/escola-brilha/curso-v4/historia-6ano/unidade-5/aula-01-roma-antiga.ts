@@ -8,7 +8,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-roma-antiga",
   titulo: "Roma Antiga: da República ao Império",
   iconeTrilha: "🦅",
-  bncc: ["EF06HI09", "EF06HI10"],
+  bncc: ["EF06HI11"],
   duracaoMin: 30,
   estilo: "teen",
 
@@ -45,6 +45,8 @@ export const aula01: AulaGeoV1 = {
         emoji: "👑",
         cor: "from-amber-900 to-slate-950",
       },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "rep",
     feedbackAcerto:
@@ -179,6 +181,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "👑", titulo: "Augusto", cor: "from-teal-600 to-slate-900" },
           { id: "j", emoji: "🗡️", titulo: "Júlio César", cor: "from-amber-600 to-slate-900" },
           { id: "n", emoji: "🎻", titulo: "Nero", cor: "from-slate-600 to-slate-900" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "a",
         feedbackAcerto:
@@ -199,6 +202,7 @@ export const aula01: AulaGeoV1 = {
           },
           { id: "r", emoji: "👑", titulo: "Reino divino", cor: "from-amber-600 to-slate-900" },
           { id: "m", emoji: "🗡️", titulo: "Guerra sagrada", cor: "from-slate-600 to-slate-900" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "c",
         feedbackAcerto:
@@ -229,6 +233,7 @@ export const aula01: AulaGeoV1 = {
             titulo: "Aviação",
             cor: "from-slate-600 to-slate-900",
           },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "d",
         feedbackAcerto:
@@ -487,6 +492,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Império → República → Monarquia.", correta: false },
           { id: "b", texto: "Monarquia → República → Império.", correta: true },
           { id: "c", texto: "República → Império → Monarquia.", correta: false },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. Monarquia (7 reis) → República (509 a.C.) → Império (27 a.C.).",
         feedbackErro: "MONARQUIA → REPÚBLICA → IMPÉRIO.",
@@ -498,6 +504,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Nero.", correta: false },
           { id: "b", texto: "Augusto.", correta: true },
           { id: "c", texto: "Rômulo.", correta: false },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. AUGUSTO, em 27 a.C., inaugurou o Império.",
         feedbackErro: "É AUGUSTO. Nero veio depois. Rômulo é mito de fundação.",
@@ -509,6 +516,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Internet.", correta: false },
           { id: "b", texto: "Direito e línguas latinas (português, espanhol...).", correta: true },
           { id: "c", texto: "Democracia direta grega.", correta: false },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. Direito Romano e línguas latinas moldam o Ocidente até hoje.",
         feedbackErro: "É o DIREITO ROMANO e as línguas latinas.",

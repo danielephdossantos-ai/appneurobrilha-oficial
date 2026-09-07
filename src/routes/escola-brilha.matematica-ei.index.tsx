@@ -28,15 +28,15 @@ function TrilhaMatematicaEI() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-sky-900 via-cyan-900 to-teal-900 text-white">
       <div className="max-w-3xl mx-auto px-4 py-6">
-        <Link to="/" className="text-white/80 text-sm">◂ Voltar</Link>
+        <Link to="/escola-brilha" className="inline-flex min-h-12 items-center text-white text-base font-bold">◂ Voltar</Link>
         <header className="text-center mt-3 mb-6">
-          <p className="text-yellow-300 font-bold text-xs tracking-wider">
+          <p className="text-yellow-300 font-black text-sm tracking-wider">
             EDUCAÇÃO INFANTIL · BNCC
           </p>
           <h1 className="text-3xl sm:text-4xl font-black mt-2">
             Códice da Matemática
           </h1>
-          <p className="text-white/80 mt-2 text-sm max-w-xl mx-auto">
+          <p className="text-white/90 mt-3 text-base sm:text-lg leading-relaxed max-w-xl mx-auto">
             Contar, comparar, ver formas e cores — a base que a criança usa a vida inteira.
           </p>
         </header>
@@ -52,27 +52,27 @@ function TrilhaMatematicaEI() {
             return (
               <div
                 key={curso.slug}
-                className="rounded-3xl p-5 shadow-xl border-2 border-white/15"
+                className="rounded-3xl p-4 sm:p-5 shadow-xl border-2 border-white/20"
                 style={{
                   background: `linear-gradient(160deg, ${curso.corSecundaria}, ${curso.corPrimaria})`,
                 }}
               >
                 <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 rounded-full bg-white/10 grid place-items-center overflow-hidden shrink-0">
-                    <img src={curso.mascoteUrl} alt="" className="w-14 h-14 object-contain" />
+                  <div className="w-20 h-20 rounded-full bg-white/10 grid place-items-center overflow-hidden shrink-0">
+                    <img src={curso.mascoteUrl} alt="" className="w-[92%] h-[92%] object-contain" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-[10px] uppercase tracking-widest text-white/80 font-black">
+                    <p className="text-sm uppercase tracking-wider text-white/90 font-black">
                       {curso.serieLabel}
                     </p>
-                    <h3 className="text-lg font-black leading-tight">{curso.titulo}</h3>
-                    <p className="text-[11px] text-white/85 mt-0.5">
+                    <h3 className="text-xl sm:text-2xl font-black leading-tight">{curso.titulo}</h3>
+                    <p className="text-sm text-white/90 mt-1 font-semibold">
                       {feitas}/{total} aulas · {completo ? "concluído ✓" : `${curso.unidades.length} unidade(s)`}
                     </p>
                   </div>
                 </div>
 
-                <div className="mt-4 rounded-3xl bg-black/25 p-4">
+                <div className="mt-4 rounded-3xl bg-black/25 p-3 sm:p-4">
                   <div className="space-y-2">
                     {curso.unidades.map((u) => (
                       <div key={u.slug} className="pt-3">
@@ -80,7 +80,7 @@ function TrilhaMatematicaEI() {
                           <div className="inline-block bg-black/40 rounded-full px-4 py-1 text-xs uppercase tracking-wider font-bold text-yellow-300">
                             Unidade {u.numero ?? ""}
                           </div>
-                          <div className="text-sm font-bold mt-1">{u.titulo}</div>
+                          <div className="text-base sm:text-lg font-bold mt-2">{u.titulo}</div>
                         </div>
                         <div className="space-y-4">
                           {u.aulas.map((a, i) => {
@@ -88,22 +88,22 @@ function TrilhaMatematicaEI() {
                             const align = flatIdx % 2 === 0 ? "justify-start" : "justify-end";
                             const feito = concluidas.includes(a.slug);
                             return (
-                              <div key={a.slug} className={`flex ${align} px-6`}>
+                              <div key={a.slug} className={`flex ${align} px-1 sm:px-6`}>
                                 <Link
                                   to="/escola-brilha/matematica-ei/$serie/$aula"
                                   params={{ serie: curso.serie, aula: a.slug }}
-                                  className="group relative w-32 h-32 rounded-full grid place-items-center shadow-xl active:scale-95 transition"
+                                  className="group relative w-36 h-36 sm:w-40 sm:h-40 rounded-full grid place-items-center shadow-xl active:scale-95 transition"
                                   style={{
                                     background: `linear-gradient(135deg, ${curso.corPrimaria}, #fde68a)`,
                                     color: curso.corSecundaria,
                                   }}
                                 >
                                   <div className="text-center px-2">
-                                    <div className="text-3xl">{a.icone}</div>
-                                    <div className="text-[10px] font-black mt-1 leading-tight line-clamp-3">
+                                    <div className="text-4xl">{a.icone}</div>
+                                    <div className="text-sm font-black mt-1 leading-tight line-clamp-3">
                                       {a.titulo}
                                     </div>
-                                    <div className="text-[9px] opacity-70 mt-0.5">Aula {i + 1}</div>
+                                    <div className="text-xs font-bold opacity-80 mt-1">Aula {i + 1}</div>
                                   </div>
                                   {feito && (
                                     <div className="absolute -top-1 -right-1 w-7 h-7 rounded-full bg-emerald-500 grid place-items-center text-white text-sm">
@@ -124,8 +124,8 @@ function TrilhaMatematicaEI() {
           })}
         </div>
 
-        <p className="text-[11px] text-white/60 text-center mt-6">
-          Próximas semanas e níveis (Pré I e Pré II) chegam em breve.
+        <p className="text-sm sm:text-base text-white/80 text-center mt-6 leading-relaxed">
+          A trilha completa é organizada por idade e por progressão pedagógica.
         </p>
       </div>
     </div>
@@ -139,9 +139,7 @@ function storageKey(cursoSlug: string, childId: string | null) {
 function readList(cursoSlug: string, childId: string | null): string[] {
   try {
     if (typeof window === "undefined") return [];
-    const raw =
-      localStorage.getItem(storageKey(cursoSlug, childId)) ??
-      localStorage.getItem(`eb.ei.mat.concluidas.${cursoSlug}`);
+    const raw = localStorage.getItem(storageKey(cursoSlug, childId));
     return raw ? (JSON.parse(raw) as string[]) : [];
   } catch {
     return [];

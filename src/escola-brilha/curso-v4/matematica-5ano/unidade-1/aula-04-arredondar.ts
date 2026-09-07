@@ -4,7 +4,7 @@ export const aula04_arredondar: AulaV4 = {
   slug: "u1-04-arredondar",
   titulo: "Arredondar para 10, 100, 1.000 e 10.000",
   iconeTrilha: "🎯",
-  bncc: ["EF05MA02"],
+  bncc: ["EF05MA01"],
   duracaoMin: 20,
   metodologias: ["skemp"],
 

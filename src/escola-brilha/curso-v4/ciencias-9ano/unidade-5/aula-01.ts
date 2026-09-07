@@ -15,7 +15,7 @@ export const aula01: AulaGeoV1 = {
   titulo: "Observatório Espacial",
   iconeTrilha: "🔭",
   recompensa: { xp: 160, moedas: 65, medalha: "Astrônomo Júnior" },
-  bncc: ["EF09CI14", "EF09CI15", "EF09CI16", "EF09CI17"],
+  bncc: ["EF09CI14"],
   duracaoMin: 45,
 
   cena01_motivacao: {
@@ -38,6 +38,7 @@ export const aula01: AulaGeoV1 = {
       { id: "138", titulo: "~13,8 bilhões de anos", subtitulo: "modelo do Big Bang", emoji: "🌌", cor: "from-emerald-500 to-teal-700" },
       { id: "milhoes", titulo: "Alguns milhões de anos", subtitulo: "mesma escala dos dinossauros", emoji: "🦖", cor: "from-slate-500 to-slate-700" },
       { id: "eterno", titulo: "Sempre existiu", subtitulo: "não teve começo", emoji: "♾️", cor: "from-red-500 to-rose-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "138",
     feedbackAcerto:
@@ -85,6 +86,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🌌", titulo: "Via Láctea", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🌠", titulo: "Andrômeda", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "☀️", titulo: "Sistema Solar", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. Via Láctea = ~200 bilhões de estrelas.",
         feedbackErro: "Nossa galáxia é a VIA LÁCTEA. Sistema Solar é uma pequena parte dela." },
@@ -93,6 +95,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "📍", titulo: "GPS, previsão do tempo e TV", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🕯️", titulo: "Lâmpadas incandescentes antigas", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🚲", titulo: "Bicicletas comuns", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Sim. Vivemos na era dos satélites.",
         feedbackErro: "GPS, previsão do tempo, TV por satélite — dependem TODOS de satélites em órbita." },
@@ -101,6 +104,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🏭", titulo: "CO₂ (dióxido de carbono)", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "💧", titulo: "H₂O pura", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "💨", titulo: "N₂ (nitrogênio)", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. CO₂ + metano são os principais gases de efeito estufa antropogênicos.",
         feedbackErro: "É o CO₂. Nitrogênio (78% do ar) e vapor d'água são naturais e não são o vilão principal." },
@@ -191,6 +195,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "A expansão do Universo a partir de um estado inicial há ~13,8 Ga", correta: true },
           { id: "b", texto: "Uma explosão gigante numa galáxia próxima" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. É a expansão do próprio ESPAÇO, não uma explosão localizada.",
         feedbackErro: "Big Bang = expansão do Universo há 13,8 Ga. Não é uma bomba num lugar." },
@@ -198,6 +204,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Luz e calor (energia radiante)", correta: true },
           { id: "b", texto: "Oxigênio para respirar" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. Oxigênio vem das plantas; do Sol vem energia radiante.",
         feedbackErro: "O Sol nos dá LUZ e CALOR. Oxigênio quem produz é a fotossíntese das plantas." },
@@ -205,6 +213,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Aumento de CO₂ pela queima de combustíveis fósseis", correta: true },
           { id: "b", texto: "Chuvas de meteoros no séc. XX" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Perfeito. Consenso científico do IPCC.",
         feedbackErro: "É o CO₂ humano (fósseis + desmatamento) — consenso do IPCC." },

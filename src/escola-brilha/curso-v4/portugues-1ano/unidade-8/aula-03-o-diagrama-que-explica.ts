@@ -29,7 +29,7 @@ export const aula03: AulaPortuguesV4 = {
   momento01_motivacao: {
     titulo: "Um texto que se lê com os olhos",
     historia:
-      "Brilha quis explicar como nasce uma planta. Só que ele não escreveu um textão: ele fez desenhos em ordem, ligou tudo com setinhas e colocou o nome embaixo de cada desenho. Isso chama DIAGRAMA. Dá pra entender só de olhar!",
+      "Brilha quis explicar como nasce uma planta. Ele organizou desenhos, rótulos e setas. Isso forma um DIAGRAMA. Para entender, observamos o título, as figuras, os nomes e o que cada seta indica.",
     imagemUrl: plantaPequena,
   },
 
@@ -52,7 +52,7 @@ export const aula03: AulaPortuguesV4 = {
       ],
       respostaCerta: 0,
       feedbackAcerto: "🎉 Isso! A seta mostra o caminho: o que vem depois.",
-      feedbackErro: "A seta ➡ sempre aponta para o próximo passo.",
+      feedbackErro: "Neste diagrama de sequência, a seta aponta para o próximo passo. Em outros diagramas, pode indicar direção, ligação ou relação.",
     },
   },
 
@@ -90,7 +90,7 @@ export const aula03: AulaPortuguesV4 = {
           { texto: "Como nasce a planta.", explicacao: "1ª parte: o TÍTULO em cima." },
           { texto: "Semente.", explicacao: "2ª parte: o desenho com o RÓTULO embaixo." },
           { texto: "Semente ➡ broto.", explicacao: "3ª parte: a SETA liga um passo ao outro." },
-          { texto: "Planta ➡ árvore.", explicacao: "A leitura vai sempre no sentido da seta." },
+          { texto: "Planta ➡ árvore.", explicacao: "Neste diagrama, seguimos o sentido da seta para acompanhar a sequência." },
         ],
       },
     ],
@@ -269,7 +269,7 @@ export const aula03: AulaPortuguesV4 = {
       "Diagrama explica usando desenho, seta e nome curtinho.",
       "O título fica em cima; o rótulo fica embaixo do desenho.",
       "A seta ➡ mostra o que vem depois.",
-      "Dá para entender o diagrama só de olhar.",
+      "Para entender o diagrama, observamos juntos o título, as figuras, os rótulos e o significado das setas.",
     ],
     miniDesafio: {
       pergunta: "No diagrama, o nome do desenho fica onde?",
@@ -308,7 +308,7 @@ export const aula03: AulaPortuguesV4 = {
         opcoes: ["em cima", "no fim", "dentro da seta", "não tem título"],
         correta: 0,
         feedbackAcerto: "🎉 Isso!",
-        feedbackErro: "Como em toda curiosidade, o título abre o texto.",
+        feedbackErro: "Neste modelo, o título aparece em cima e apresenta o assunto do diagrama.",
       },
       {
         pergunta: "5/5 — Rótulo é...",

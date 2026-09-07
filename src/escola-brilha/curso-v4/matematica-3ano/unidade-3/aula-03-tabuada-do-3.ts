@@ -98,9 +98,9 @@ export const aula03_tabuadaDo3: AulaV4 = {
   },
   momento10_avaliacao: {
     perguntas: [
-      { pergunta: "4 × 3 = ?", opcoes: ["12", "9", "15"], correta: 0, feedbackAcerto: "🎉 12.", feedbackErro: "3+3+3+3=12." },
-      { pergunta: "6 × 3 = ?", opcoes: ["18", "15", "21"], correta: 0, feedbackAcerto: "🎉 18.", feedbackErro: "6×3=18." },
-      { pergunta: "9 × 3 = ?", opcoes: ["27", "24", "30"], correta: 0, feedbackAcerto: "🎉 27.", feedbackErro: "9×3=27." },
+      { pergunta: "4 × 3 = ?", opcoes: ["12", "9", "15"], correta: 0, feedbackAcerto: "🎉 Quatro grupos de 3 formam 12.", feedbackErro: "Some quatro grupos iguais: 3 + 3 + 3 + 3 = 12." },
+      { pergunta: "6 × 3 = ?", opcoes: ["18", "15", "21"], correta: 0, feedbackAcerto: "🎉 Seis grupos de 3 formam 18.", feedbackErro: "Conte de 3 em 3 seis vezes: 3, 6, 9, 12, 15, 18." },
+      { pergunta: "9 × 3 = ?", opcoes: ["27", "24", "30"], correta: 0, feedbackAcerto: "🎉 Nove grupos de 3 formam 27.", feedbackErro: "Use 10 × 3 = 30 e retire um grupo de 3: 30 − 3 = 27." },
     ],
   },
   momento11_missaoFamilia: {

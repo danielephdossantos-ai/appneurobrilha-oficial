@@ -12,7 +12,7 @@ export const aula07_missaoFinalReino: AulaV4 = {
     "EF04MA09",
     "EF04MA17",
     "EF04MA19",
-    "EF04MA23",
+    "EF04MA20",
     "EF04MA27",
   ],
   duracaoMin: 30,
@@ -26,7 +26,7 @@ export const aula07_missaoFinalReino: AulaV4 = {
   momento02_exploracao: {
     instrucao: "Reveja o essencial.",
     cenas: [
-      { tipo: "texto", texto: "UM · C · D · U.  Soma reagrupa. Sub troca.  Mult 2 dígitos = 2 parciais.  Div pela maior casa.", destaque: true },
+      { tipo: "texto", texto: "UM · C · D · U. Soma reagrupa. Subtração pode exigir trocas. Multiplicação por 2 dígitos usa produtos parciais. Na divisão, forme da esquerda para a direita o primeiro número que possa ser dividido pelo divisor.", destaque: true },
       { tipo: "texto", texto: "Fração = parte/todo. 1/4 = 0,25.  1 kg=1000 g. 1 h=60 min.  Quadrado tem 4 eixos." },
     ],
   },
@@ -98,7 +98,7 @@ export const aula07_missaoFinalReino: AulaV4 = {
       "Números até 10.000: UM·C·D·U.",
       "Soma reagrupa · Sub troca.",
       "Mult 2 dígitos: 2 parciais.",
-      "Div pela maior casa; resto < divisor.",
+      "Divisão: forme o primeiro dividendo parcial possível; resto final menor que o divisor.",
       "Fração = parte/todo; decimal usa vírgula.",
       "Medidas: base 10/100/1000 (tempo: base 60).",
       "Perímetro = soma dos lados.",

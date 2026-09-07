@@ -18,7 +18,7 @@ export const aula02: AulaGeoV1 = {
   slug: "aula-02-feira-do-bairro",
   titulo: "A Feira do Bairro",
   iconeTrilha: "🍅",
-  bncc: ["EF03GE03"],
+  bncc: [],
   duracaoMin: 22,
 
   cena01_motivacao: {
@@ -53,14 +53,26 @@ export const aula02: AulaGeoV1 = {
         emoji: "🛣️",
         cor: "from-emerald-500 to-green-700",
       },
+
+      {
+        id: "extra-1",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
+      {
+        id: "extra-2",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
     ],
     respostaCerta: "caminho",
     feedbackAcerto:
       "Isso mesmo! O tomate faz uma pequena viagem cheia de paradas. Cada uma tem gente trabalhando pra ele chegar fresco.",
     feedbackErro:
       "Pensa comigo: o tomate nasce na terra. Alguém colheu, alguém dirigiu, alguém arrumou. Tem viagem sim!",
-    falaFinal:
-      "Guarda esse palpite. Bora ver cada parada e quem faz o quê.",
+    falaFinal: "Guarda esse palpite. Bora ver cada parada e quem faz o quê.",
   },
 
   cena03_vocabulario: {
@@ -76,8 +88,7 @@ export const aula02: AulaGeoV1 = {
         cor: "from-emerald-500 to-green-700",
         conteudo:
           "É onde tudo começa. O PEQUENO PRODUTOR planta alface, tomate, cenoura, couve. De manhã cedo, ele COLHE e coloca em caixotes de madeira, ainda molhados de orvalho.",
-        exemplo:
-          "Uma família de 4 pessoas cuida da horta e enche 20 caixotes por dia.",
+        exemplo: "Uma família de 4 pessoas cuida da horta e enche 20 caixotes por dia.",
         fotoUrl: colheita,
       },
       {
@@ -87,8 +98,7 @@ export const aula02: AulaGeoV1 = {
         cor: "from-sky-500 to-blue-700",
         conteudo:
           "A CAMINHONETE do produtor (menor que um caminhão) leva os caixotes pela estrada rural. Como é feira do dia seguinte, ela viaja de MADRUGADA pra chegar cedo.",
-        exemplo:
-          "Uma caminhonete pequena carrega uns 30 caixotes de uma vez só.",
+        exemplo: "Uma caminhonete pequena carrega uns 30 caixotes de uma vez só.",
         fotoUrl: caminhonete,
       },
       {
@@ -98,8 +108,7 @@ export const aula02: AulaGeoV1 = {
         cor: "from-amber-500 to-orange-700",
         conteudo:
           "É o MERCADO DOS FEIRANTES (CEASA), lá pelas 3h da manhã, na entrada da cidade. Vários sitiantes chegam com caminhonetes cheias. Os feirantes escolhem o que vão vender na feira.",
-        exemplo:
-          "Num entreposto grande passam mais de 500 caminhonetes por noite.",
+        exemplo: "Num entreposto grande passam mais de 500 caminhonetes por noite.",
         fotoUrl: entreposto,
       },
       {
@@ -109,8 +118,7 @@ export const aula02: AulaGeoV1 = {
         cor: "from-rose-500 to-pink-700",
         conteudo:
           "O FEIRANTE monta a BARRACA na rua do seu bairro bem cedo. Empilha as frutas e verduras bonitas, coloca o preço na plaquinha e espera a família chegar com a sacola de feira.",
-        exemplo:
-          "Uma feira pode ter 40 barracas e receber 2 mil pessoas numa manhã de sábado.",
+        exemplo: "Uma feira pode ter 40 barracas e receber 2 mil pessoas numa manhã de sábado.",
         fotoUrl: feira,
       },
     ],
@@ -186,8 +194,20 @@ export const aula02: AulaGeoV1 = {
         fotoUrl: colheita,
         cards: [
           { id: "sitio", emoji: "🌱", titulo: "Sítio", cor: "from-emerald-500 to-green-700" },
-          { id: "entreposto", emoji: "🏬", titulo: "Entreposto", cor: "from-amber-500 to-orange-700" },
+          {
+            id: "entreposto",
+            emoji: "🏬",
+            titulo: "Entreposto",
+            cor: "from-amber-500 to-orange-700",
+          },
           { id: "feira", emoji: "🍅", titulo: "Feira", cor: "from-rose-500 to-pink-700" },
+
+          {
+            id: "extra-3",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "sitio",
         feedbackAcerto:
@@ -202,8 +222,20 @@ export const aula02: AulaGeoV1 = {
         fotoUrl: entreposto,
         cards: [
           { id: "sitio", emoji: "🌱", titulo: "Sítio", cor: "from-emerald-500 to-green-700" },
-          { id: "entreposto", emoji: "🏬", titulo: "Entreposto (CEASA)", cor: "from-amber-500 to-orange-700" },
+          {
+            id: "entreposto",
+            emoji: "🏬",
+            titulo: "Entreposto (CEASA)",
+            cor: "from-amber-500 to-orange-700",
+          },
           { id: "casa", emoji: "🏠", titulo: "Casa deles", cor: "from-sky-500 to-blue-700" },
+
+          {
+            id: "extra-4",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "entreposto",
         feedbackAcerto:
@@ -213,13 +245,29 @@ export const aula02: AulaGeoV1 = {
       },
       {
         id: "q3",
-        pergunta:
-          "Quem monta a BARRACA na rua e vende a fruta pra sua família no sábado?",
+        pergunta: "Quem monta a BARRACA na rua e vende a fruta pra sua família no sábado?",
         fotoUrl: feira,
         cards: [
-          { id: "produtor", emoji: "🌱", titulo: "Produtor do sítio", cor: "from-emerald-500 to-green-700" },
-          { id: "feirante", emoji: "🍅", titulo: "Feirante da feira", cor: "from-rose-500 to-pink-700" },
+          {
+            id: "produtor",
+            emoji: "🌱",
+            titulo: "Produtor do sítio",
+            cor: "from-emerald-500 to-green-700",
+          },
+          {
+            id: "feirante",
+            emoji: "🍅",
+            titulo: "Feirante da feira",
+            cor: "from-rose-500 to-pink-700",
+          },
           { id: "motorista", emoji: "🛻", titulo: "Motorista", cor: "from-sky-500 to-blue-700" },
+
+          {
+            id: "extra-5",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "feirante",
         feedbackAcerto:
@@ -280,34 +328,29 @@ export const aula02: AulaGeoV1 = {
         id: "s2-caminhonete",
         emoji: "🛻",
         rotulo: "Caminhonete na estrada",
-        descricao:
-          "De madrugada, a caminhonete carregada sai do sítio devagar rumo à cidade.",
+        descricao: "De madrugada, a caminhonete carregada sai do sítio devagar rumo à cidade.",
       },
       {
         id: "s3-entreposto",
         emoji: "🏬",
         rotulo: "Entreposto (CEASA)",
-        descricao:
-          "Às 3h, o feirante escolhe os melhores caixotes de tomate no entreposto.",
+        descricao: "Às 3h, o feirante escolhe os melhores caixotes de tomate no entreposto.",
       },
       {
         id: "s4-barraca",
         emoji: "🍅",
         rotulo: "Barraca da feira",
-        descricao:
-          "6h: o feirante monta a barraca na rua e empilha os tomates com preço.",
+        descricao: "6h: o feirante monta a barraca na rua e empilha os tomates com preço.",
       },
       {
         id: "s5-sacola",
         emoji: "🛍️",
         rotulo: "Sua sacola de feira",
-        descricao:
-          "Sua família chega, escolhe o tomate mais bonito, paga e leva pra casa. Chegou!",
+        descricao: "Sua família chega, escolhe o tomate mais bonito, paga e leva pra casa. Chegou!",
       },
     ],
     ordemCerta: ["s1-colheita", "s2-caminhonete", "s3-entreposto", "s4-barraca", "s5-sacola"],
-    feedbackAcerto:
-      "Rota da feira completa! Você seguiu direitinho, do sítio até sua sacola.",
+    feedbackAcerto: "Rota da feira completa! Você seguiu direitinho, do sítio até sua sacola.",
     feedbackErro:
       "Essa não é a próxima parada. Pensa: COLHEITA → CAMINHONETE → ENTREPOSTO → BARRACA → SACOLA.",
     falaFinal:
@@ -371,8 +414,7 @@ export const aula02: AulaGeoV1 = {
           "Bem cedinho, usa chapéu, molha a horta e colhe alface pra encher os caixotes. Quem é?",
         pecaCertaId: "produtor",
         feedbackAcerto: "Boa! É o PRODUTOR 🌱 do sítio — a raiz de tudo.",
-        feedbackErro:
-          "Repara: quem cuida da horta e colhe é o PRODUTOR 🌱, no sítio.",
+        feedbackErro: "Repara: quem cuida da horta e colhe é o PRODUTOR 🌱, no sítio.",
       },
       {
         id: "r2",
@@ -381,20 +423,26 @@ export const aula02: AulaGeoV1 = {
         contexto:
           "3h da manhã, dirige uma caminhonete carregada de caixotes de tomate rumo à cidade. Quem é?",
         pecaCertaId: "motorista",
-        feedbackAcerto:
-          "Perfeito! É o MOTORISTA 🛻 — muitas vezes o próprio produtor dirigindo.",
+        feedbackAcerto: "Perfeito! É o MOTORISTA 🛻 — muitas vezes o próprio produtor dirigindo.",
         feedbackErro:
           "Pensa na estrada de madrugada: quem está no volante da caminhonete é o MOTORISTA 🛻.",
       },
       {
         id: "r3",
-        municipioA: { nome: "Colete e prancheta", emoji: "📋", cor: "from-amber-500 to-orange-700" },
-        municipioB: { nome: "Galpão do entreposto", emoji: "🏬", cor: "from-orange-400 to-amber-600" },
+        municipioA: {
+          nome: "Colete e prancheta",
+          emoji: "📋",
+          cor: "from-amber-500 to-orange-700",
+        },
+        municipioB: {
+          nome: "Galpão do entreposto",
+          emoji: "🏬",
+          cor: "from-orange-400 to-amber-600",
+        },
         contexto:
           "Trabalha no entreposto anotando caixotes que chegam, organizando fila de caminhonetes. Quem é?",
         pecaCertaId: "atacadista",
-        feedbackAcerto:
-          "Isso! É o ATACADISTA 🏬 — quem organiza o entreposto (CEASA).",
+        feedbackAcerto: "Isso! É o ATACADISTA 🏬 — quem organiza o entreposto (CEASA).",
         feedbackErro:
           "Ops: colete, prancheta e galpão gigante é trabalho do ATACADISTA 🏬 do entreposto.",
       },
@@ -405,34 +453,39 @@ export const aula02: AulaGeoV1 = {
         contexto:
           "Monta a barraca na rua às 6h, empilha as frutas bonitas e grita ‘olha a laranja!’. Quem é?",
         pecaCertaId: "feirante",
-        feedbackAcerto:
-          "Perfeito! É o FEIRANTE 🍅 — a estrela da manhã de sábado.",
-        feedbackErro:
-          "Repensa: quem atende sua família na feira do bairro é o FEIRANTE 🍅.",
+        feedbackAcerto: "Perfeito! É o FEIRANTE 🍅 — a estrela da manhã de sábado.",
+        feedbackErro: "Repensa: quem atende sua família na feira do bairro é o FEIRANTE 🍅.",
       },
       {
         id: "r5",
-        municipioA: { nome: "Sementes na terra", emoji: "🌰", cor: "from-emerald-500 to-green-700" },
+        municipioA: {
+          nome: "Sementes na terra",
+          emoji: "🌰",
+          cor: "from-emerald-500 to-green-700",
+        },
         municipioB: { nome: "Regador na horta", emoji: "💧", cor: "from-lime-400 to-emerald-600" },
-        contexto:
-          "Planta as sementes, rega toda tarde, espera crescer. Quem faz isso?",
+        contexto: "Planta as sementes, rega toda tarde, espera crescer. Quem faz isso?",
         pecaCertaId: "produtor",
-        feedbackAcerto:
-          "Combo! O PRODUTOR 🌱 planta, rega e colhe — trabalho de meses.",
-        feedbackErro:
-          "Pensa: quem cuida da planta desde semente é o PRODUTOR 🌱 do sítio.",
+        feedbackAcerto: "Combo! O PRODUTOR 🌱 planta, rega e colhe — trabalho de meses.",
+        feedbackErro: "Pensa: quem cuida da planta desde semente é o PRODUTOR 🌱 do sítio.",
       },
       {
         id: "r6",
-        municipioA: { nome: "Fila de caminhonetes", emoji: "🚦", cor: "from-amber-500 to-orange-700" },
-        municipioB: { nome: "Forklift de caixotes", emoji: "🚜", cor: "from-orange-400 to-amber-600" },
+        municipioA: {
+          nome: "Fila de caminhonetes",
+          emoji: "🚦",
+          cor: "from-amber-500 to-orange-700",
+        },
+        municipioB: {
+          nome: "Forklift de caixotes",
+          emoji: "🚜",
+          cor: "from-orange-400 to-amber-600",
+        },
         contexto:
           "De madrugada organiza a fila de descarga no galpão gigante da entrada da cidade. Quem é?",
         pecaCertaId: "atacadista",
-        feedbackAcerto:
-          "Perfeito! ATACADISTA 🏬 do entreposto coordena tudo antes do sol nascer.",
-        feedbackErro:
-          "Atenção: quem manda no galpão gigante do entreposto é o ATACADISTA 🏬.",
+        feedbackAcerto: "Perfeito! ATACADISTA 🏬 do entreposto coordena tudo antes do sol nascer.",
+        feedbackErro: "Atenção: quem manda no galpão gigante do entreposto é o ATACADISTA 🏬.",
       },
     ],
     falaFinal:
@@ -481,12 +534,19 @@ export const aula02: AulaGeoV1 = {
         pergunta:
           "Se os pequenos produtores do campo pararem de plantar, o que acontece com a feira do bairro?",
         opcoes: [
-          { id: "a", texto: "A feira continua igualzinha, porque as barracas fabricam sozinhas os tomates." },
+          {
+            id: "a",
+            texto: "A feira continua igualzinha, porque as barracas fabricam sozinhas os tomates.",
+          },
           {
             id: "b",
-            texto: "A feira fica vazia — sem alface, sem tomate, sem laranja. A cidade DEPENDE do sítio.",
+            texto:
+              "A feira fica vazia — sem alface, sem tomate, sem laranja. A cidade DEPENDE do sítio.",
             correta: true,
           },
+
+          { id: "extra-6", texto: "Outra possibilidade", correta: false },
+          { id: "extra-7", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto:
           "Exato! Sem sítio, não tem alimento fresco. A feira só existe porque o produtor colhe.",
@@ -500,10 +560,14 @@ export const aula02: AulaGeoV1 = {
         opcoes: [
           {
             id: "a",
-            texto: "O ENTREPOSTO (CEASA) da cidade — lugar onde feirantes vão comprar de madrugada.",
+            texto:
+              "O ENTREPOSTO (CEASA) da cidade — lugar onde feirantes vão comprar de madrugada.",
             correta: true,
           },
           { id: "b", texto: "O parquinho do bairro, porque tem espaço grande." },
+
+          { id: "extra-8", texto: "Outra possibilidade", correta: false },
+          { id: "extra-9", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto:
           "Isso! O entreposto é a ponte. Sem ele, o produtor não encontra feirantes pra vender.",
@@ -512,15 +576,18 @@ export const aula02: AulaGeoV1 = {
       },
       {
         id: "av3",
-        pergunta:
-          "Qual frase explica MELHOR a feira do bairro?",
+        pergunta: "Qual frase explica MELHOR a feira do bairro?",
         opcoes: [
           { id: "a", texto: "A feira é da cidade e não tem nada a ver com o campo." },
           {
             id: "b",
-            texto: "A feira é o ENCONTRO entre o campo (que produz) e a cidade (que oferece o espaço pra vender).",
+            texto:
+              "A feira é o ENCONTRO entre o campo (que produz) e a cidade (que oferece o espaço pra vender).",
             correta: true,
           },
+
+          { id: "extra-10", texto: "Outra possibilidade", correta: false },
+          { id: "extra-11", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto:
           "Perfeito! Toda feira é um encontro. Campo colhe, cidade acolhe, você compra.",

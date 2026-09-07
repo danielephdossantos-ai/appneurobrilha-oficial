@@ -20,7 +20,7 @@ export const aula1: AulaPortuguesV4 = {
   slug: "aula-01-silaba-tonica-acentuacao",
   titulo: "Sílaba tônica e acentuação",
   iconeTrilha: "🧭",
-  bncc: ["EF04LP01", "EF04LP02"],
+  bncc: ["EF04LP04"],
   duracaoMin: 22,
 
   momento01_motivacao: {

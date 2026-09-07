@@ -12,7 +12,7 @@ import { url as imgBrilhaCrianca } from "@/assets/historia-2ano/presente-brilha-
 import { url as imgFotoAntiga } from "@/assets/historia-2ano/foto-antiga.png.asset.json";
 /**
  * História · 2º Ano · Unidade 2 · Aula 01
- * "Minha História e Minha Família" — EF02HI03 + EF02HI04
+ * "Minha História e Minha Família" — EF02HI04
  *
  * Missão: Investigar as origens da família e montar a Sala 2 do Museu —
  * Árvore Genealógica + Álbum. Recompensa: Engrenagem de Prata.
@@ -22,7 +22,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-arvore-genealogica",
   titulo: "Minha História e Minha Família",
   iconeTrilha: "🌳",
-  bncc: ["EF02HI03", "EF02HI04"],
+  bncc: ["EF02HI04"],
   duracaoMin: 20,
 
   cena01_motivacao: {
@@ -60,6 +60,8 @@ export const aula01: AulaGeoV1 = {
         cor: "from-yellow-500 to-amber-700",
         fotoUrl: imgSapatinhos,
       },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "certidao",
     feedbackAcerto:
@@ -170,6 +172,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "👵", titulo: "Avós", cor: "from-amber-400 to-orange-600" },
           { id: "p", emoji: "👩", titulo: "Pais", cor: "from-emerald-400 to-teal-600" },
           { id: "c", emoji: "🧒", titulo: "Crianças", cor: "from-sky-400 to-indigo-600" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "a",
         feedbackAcerto:
@@ -185,6 +188,7 @@ export const aula01: AulaGeoV1 = {
           { id: "c", emoji: "📜", titulo: "Certidão", cor: "from-amber-400 to-orange-600" },
           { id: "f", emoji: "📸", titulo: "Foto antiga", cor: "from-emerald-400 to-teal-600" },
           { id: "s", emoji: "👟", titulo: "Sapatinho", cor: "from-sky-400 to-indigo-600" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "c",
         feedbackAcerto:
@@ -200,6 +204,7 @@ export const aula01: AulaGeoV1 = {
           { id: "t", emoji: "🎂", titulo: "Tradição", cor: "from-amber-400 to-orange-600" },
           { id: "g", emoji: "👨‍👩‍👧", titulo: "Geração", cor: "from-emerald-400 to-teal-600" },
           { id: "a", emoji: "🌳", titulo: "Árvore", cor: "from-sky-400 to-indigo-600" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "t",
         feedbackAcerto:
@@ -463,6 +468,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Árvore Genealógica", correta: true },
           { id: "b", texto: "Mapa do Tesouro" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto:
           "Isso aí! Ela tem esse nome porque cresce a partir das RAÍZES da família.",
@@ -478,6 +485,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Certidão de nascimento", correta: true },
           { id: "b", texto: "Foto antiga" },
           { id: "c", texto: "Sapatinho de bronze" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Combo! A certidão tem os nomes escritos oficialmente.",
         feedbackErro: "Foto e sapatinho lembram. Só a CERTIDÃO prova.",
@@ -490,6 +498,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Tradição da família", correta: true },
           { id: "b", texto: "Regra da escola" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto:
           "Isso! Costume que passa de pais pra filhos é TRADIÇÃO.",

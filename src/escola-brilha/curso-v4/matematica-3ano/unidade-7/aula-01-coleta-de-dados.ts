@@ -117,7 +117,7 @@ export const aula01_coletaDados: AulaV4 = {
   momento10_avaliacao: {
     perguntas: [
       { pergunta: "5+4+3 = ?", opcoes: ["12", "10", "14"], correta: 0, feedbackAcerto: "🎉 12.", feedbackErro: "5+4+3=12." },
-      { pergunta: "Qual é o passo 1 da coleta?", opcoes: ["Perguntar", "Contar", "Comparar"], correta: 0, feedbackAcerto: "🎉 Perguntar.", feedbackErro: "Sempre pergunta primeiro." },
+      { pergunta: "Antes de coletar dados de uma pesquisa, o que precisamos definir?", opcoes: ["A pergunta da pesquisa", "O resultado vencedor", "A maior barra"], correta: 0, feedbackAcerto: "🎉 A pergunta define quais dados precisam ser coletados.", feedbackErro: "Primeiro definimos o que queremos investigar; depois coletamos e organizamos os dados." },
       { pergunta: "Total de 6+6+6?", opcoes: ["18", "16", "20"], correta: 0, feedbackAcerto: "🎉 18.", feedbackErro: "3×6=18." },
     ],
   },

@@ -3,6 +3,7 @@ import { useNavigationStore, useBackNavigation } from "@/lib/navigation-context"
 import { getAulaPortuguesFromCurso } from "@/escola-brilha/curso-v4/registry";
 import { PlayerPortuguesV4 } from "@/escola-brilha/curso-v4/player-portugues/PlayerPortuguesV4";
 import { ProfessorBrilhaBubble } from "@/escola-brilha/professor-brilha/ProfessorBrilhaBubble";
+import { advancePlanFlow, completePlanItem } from "@/lib/plan-flow";
 
 /**
  * Rota da AULA de Português v4.
@@ -28,7 +29,7 @@ const CHAVE_PROGRESSO = (slug: string) => {
 function AulaPtV4Route() {
   const { curso: cursoSlug, aula: aulaSlug } = Route.useParams();
   const navigate = useNavigate();
-  const { handleBack } = useBackNavigation();
+  const { handleBack, context: navContext } = useBackNavigation();
   const found = getAulaPortuguesFromCurso(cursoSlug, aulaSlug);
 
   if (!found) {
@@ -47,16 +48,26 @@ function AulaPtV4Route() {
         aula={found.aula}
         cursoSlug={cursoSlug}
         voltarPara={`/escola-brilha/curso/${cursoSlug}`}
-        onConcluir={() => {
-          if (!handleBack(navigate)) {
-            try {
-              const raw = localStorage.getItem(CHAVE_PROGRESSO(cursoSlug));
-              const list: string[] = raw ? JSON.parse(raw) : [];
-              if (!list.includes(aulaSlug)) list.push(aulaSlug);
-              localStorage.setItem(CHAVE_PROGRESSO(cursoSlug), JSON.stringify(list));
-            } catch {
-              /* ignore */
+        onConcluir={async () => {
+          try {
+            const raw = localStorage.getItem(CHAVE_PROGRESSO(cursoSlug));
+            const list: string[] = raw ? JSON.parse(raw) : [];
+            if (!list.includes(aulaSlug)) list.push(aulaSlug);
+            localStorage.setItem(CHAVE_PROGRESSO(cursoSlug), JSON.stringify(list));
+          } catch {
+            /* ignore */
+          }
+
+          if (navContext?.isPlanFlow) {
+            await completePlanItem(navContext);
+            const nextRoute = advancePlanFlow(navContext);
+            if (nextRoute) {
+              navigate({ to: nextRoute });
+              return;
             }
+          }
+
+          if (!handleBack(navigate)) {
             navigate({
               to: "/escola-brilha/curso/$slug",
               params: { slug: cursoSlug },

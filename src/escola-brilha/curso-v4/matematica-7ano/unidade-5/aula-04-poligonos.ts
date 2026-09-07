@@ -12,7 +12,7 @@ export const aula04_poligonos: AulaV4 = {
   momento01_motivacao: {
     titulo: "Por que a colmeia é hexagonal?",
     historia:
-      "{NOME}, as abelhas poderiam construir favos redondos ou quadrados, mas escolheram o hexágono — a forma que preenche o espaço sem sobrar buraco e gasta menos cera. Hoje você vai descobrir a fórmula que revela os ângulos de QUALQUER polígono, do triângulo ao decágono.",
+      "{NOME}, os favos lembram hexágonos que se encaixam sem deixar espaços. Hoje você vai dividir polígonos em triângulos para descobrir seus ângulos sem depender de fórmula decorada e aprender a construir polígonos regulares por um algoritmo.",
   },
 
   momento02_exploracao: {
@@ -35,7 +35,7 @@ export const aula04_poligonos: AulaV4 = {
           { rotulo: "5", valores: ["octógono", 8, 6, "1080°"] },
         ],
       },
-      { tipo: "texto", texto: "🔑 Cada triângulo entrega 180°. Por isso a soma dos ângulos internos é (n − 2) × 180°." },
+      { tipo: "texto", texto: "🔑 Primeiro conte os triângulos no desenho e some 180° para cada um. A escrita (n − 2) × 180° apenas resume esse raciocínio; não substitui a compreensão geométrica." },
     ],
   },
 
@@ -112,6 +112,26 @@ export const aula04_poligonos: AulaV4 = {
             fatorada: "externo 72°, interno 108°",
           },
           destaque: "Soma externa = 360°, sempre.",
+        },
+      },
+      {
+        texto: "CONSTRUÇÃO DE POLÍGONO REGULAR: régua e compasso executam uma sequência precisa que pode ser registrada como fluxograma.",
+        exemploReal: {
+          titulo: "🔎 Algoritmo do quadrado",
+          contexto: "Construir um quadrado conhecendo o lado AB",
+          visualMat: {
+            tipo: "trinomioPassoAPasso",
+            trinomio: "Início → lado → perpendiculares → arcos → fechar → fim",
+            passos: [
+              { expr: "1. Trace AB com a medida dada", explica: "Primeiro lado.", status: "neutro" },
+              { expr: "2. Construa retas perpendiculares a AB em A e B", explica: "Garante ângulos de 90°.", status: "ok" },
+              { expr: "3. Com o compasso aberto em AB, marque D a partir de A e C a partir de B", explica: "Garante quatro lados iguais.", status: "ok" },
+              { expr: "4. Ligue C a D", explica: "Fecha o quadrado.", status: "ok" },
+              { expr: "5. Confira lados iguais e quatro ângulos retos", explica: "Validação da construção.", status: "ok" },
+            ],
+            fatorada: "Fluxograma completo e verificável",
+          },
+          destaque: "Cada caixa do fluxograma contém uma ação; a ordem permite que outra pessoa repita a construção.",
         },
       },
     ],

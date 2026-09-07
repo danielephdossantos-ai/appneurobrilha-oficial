@@ -15,7 +15,7 @@ export const aula01: AulaGeoV1 = {
   titulo: "Centro de Física Experimental",
   iconeTrilha: "⚙️",
   recompensa: { xp: 160, moedas: 65, medalha: "Físico Júnior" },
-  bncc: ["EF09CI05", "EF09CI06", "EF09CI07"],
+  bncc: [],
   duracaoMin: 45,
 
   cena01_motivacao: {
@@ -38,6 +38,7 @@ export const aula01: AulaGeoV1 = {
       { id: "nao", titulo: "NÃO — se não há atrito, mantém-se sozinho", subtitulo: "1ª Lei de Newton (inércia)", emoji: "🚗", cor: "from-emerald-500 to-teal-700" },
       { id: "sim", titulo: "SIM — parou de empurrar, parou de andar", subtitulo: "todo movimento precisa de força", emoji: "💪", cor: "from-slate-500 to-slate-700" },
       { id: "meio", titulo: "Depende do peso do carro", subtitulo: "só carro leve continua", emoji: "⚖️", cor: "from-red-500 to-rose-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "nao",
     feedbackAcerto:
@@ -85,6 +86,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🔄", titulo: "A toda ação há reação igual e oposta", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "💪", titulo: "Força maior sempre vence", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🎈", titulo: "Objetos leves não geram força", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. É o que faz o barco andar quando você rema.",
         feedbackErro: "3ª Lei: ação e reação. Forças SEMPRE aparecem em pares." },
@@ -93,6 +95,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "⚡", titulo: "60 joules por segundo", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🔢", titulo: "60 volts por segundo", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "⏳", titulo: "60 horas de energia", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Sim. Watt = joule por segundo.",
         feedbackErro: "1 W = 1 J/s. Lâmpada de 60 W = 60 J a cada segundo." },
@@ -101,6 +104,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🌊", titulo: "Ambos são ondas que carregam energia", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🥇", titulo: "Ambos precisam do ar para se propagar", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🔗", titulo: "Ambos são partículas de matéria", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. Som precisa de meio; luz não. Mas ambos são ondas.",
         feedbackErro: "Ambos são ONDAS. Só que som precisa de meio; luz viaja no vácuo." },
@@ -191,6 +195,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Tendência de manter velocidade se não houver força resultante", correta: true },
           { id: "b", texto: "Tendência de todo corpo cair para o centro da Terra" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. É por isso que usamos cinto de segurança.",
         feedbackErro: "Inércia = manter o estado de movimento (parado ou em MRU) sem força." },
@@ -198,6 +204,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Potência (energia por tempo)", correta: true },
           { id: "b", texto: "Força" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. 1 W = 1 J / s.",
         feedbackErro: "Força = Newton. WATT = potência (energia/tempo)." },
@@ -205,6 +213,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Som precisa de meio material; luz viaja no vácuo", correta: true },
           { id: "b", texto: "Som viaja no vácuo; luz precisa de ar" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Perfeito. No espaço não há som (não tem ar).",
         feedbackErro: "É o CONTRÁRIO: som precisa de meio; luz atravessa o vácuo." },

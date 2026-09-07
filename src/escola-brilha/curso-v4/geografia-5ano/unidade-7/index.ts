@@ -1,5 +1,6 @@
 import type { UnidadeGeoV1 } from "../../types";
 import { aula01 } from "./aula-01-eco-cidadao";
+import { aula02 } from "./aula-02-participacao-ambiental";
 
 export const unidade7: UnidadeGeoV1 = {
   slug: "unidade-7",
@@ -9,5 +10,5 @@ export const unidade7: UnidadeGeoV1 = {
   descricao:
     "Brilha junta tudo que aprendeu no Fundamental 1 e conquista o Selo Eco-Cidadão Supremo — cidadão do planeta.",
   corTema: "#16a34a",
-  aulas: [aula01],
+  aulas: [aula01, aula02],
 };

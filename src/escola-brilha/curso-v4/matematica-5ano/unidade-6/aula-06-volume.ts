@@ -10,12 +10,13 @@ export const aula06_volume: AulaV4 = {
 
   momento01_motivacao: {
     titulo: "Quanto cabe dentro?",
-    historia: "{NOME}, volume mede o espaço DENTRO de um sólido. Num paralelepípedo: V = comprimento × largura × altura.",
+    historia: "{NOME}, volume mede o espaço ocupado por um sólido. Uma unidade cúbica é um cubinho de aresta 1; contar esses cubinhos ajuda a compreender a medida do volume.",
   },
   momento02_exploracao: {
     instrucao: "Unidades e sólidos.",
     cenas: [
       { tipo: "texto", texto: "1 m³ = 1.000.000 cm³. 1 dm³ = 1 L (importante!).", destaque: true },
+      { tipo: "texto", texto: "Uma camada com comprimento × largura cubinhos forma a base. Multiplicar pelo número de camadas, a altura, conta todos os cubos unitários." },
       {
         tipo: "solido",
         forma: "cubo",
@@ -67,8 +68,8 @@ export const aula06_volume: AulaV4 = {
     resposta: "200 cm³",
     contaPassoAPasso: {
       operacao: "mult",
-      operandos: [10, 5],
-      resultado: 50,
+      operandos: [10, 5, 4],
+      resultado: 200,
       passos: [
         { fala: "Primeiro: 10 × 5 = 50 (área da base)." },
         { fala: "Depois: 50 × 4 = 200. Volume = 200 cm³." },
@@ -112,7 +113,7 @@ export const aula06_volume: AulaV4 = {
     },
   },
   momento09_revisao: {
-    pontos: ["Paralelepípedo: c × l × a.", "Cubo: a³.", "1 dm³ = 1 L."],
+    pontos: ["Volume pode ser medido contando cubos unitários.", "Paralelepípedo: cubos na base × número de camadas = c × l × a.", "Cubo: a³.", "1 dm³ = 1 L."],
   },
   momento10_avaliacao: {
     perguntas: [

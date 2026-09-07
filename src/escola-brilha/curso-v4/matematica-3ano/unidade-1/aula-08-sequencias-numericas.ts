@@ -6,13 +6,13 @@ import type { AulaV4 } from "../../types";
  *
  * Foco: descobrir o "pulo" fixo entre termos consecutivos e prever
  * os próximos termos. Pulos de 1, 2, 5, 10 e 100.
- * BNCC: EF03MA03.
+ * BNCC: EF03MA10.
  */
 export const aula08_sequenciasNumericas: AulaV4 = {
   slug: "08-sequencias-numericas",
   titulo: "O Pulo dos Números",
   iconeTrilha: "🦘",
-  bncc: ["EF03MA03"],
+  bncc: ["EF03MA10"],
   duracaoMin: 20,
   metodologias: ["skemp", "vergnaud"],
 

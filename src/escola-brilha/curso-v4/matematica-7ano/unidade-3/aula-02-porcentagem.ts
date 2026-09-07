@@ -5,7 +5,7 @@ export const aula02_porcentagem: AulaV4 = {
   slug: "u3-02-porcentagem",
   titulo: "Porcentagem na Prática",
   iconeTrilha: "💯",
-  bncc: ["EF07MA02", "EF07MA09"],
+  bncc: ["EF07MA02"],
   duracaoMin: 30,
   metodologias: ["skemp"],
 

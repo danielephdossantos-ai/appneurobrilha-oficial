@@ -60,7 +60,7 @@ const aula: Aula = {
   ],
 
   motivacao:
-    "A Coruja Sábia mostra: quando você vira de lado, o que estava à direita passa a ficar à esquerda. Aprender isso ajuda a ler mapas, seguir pistas e brincar de caça ao tesouro!",
+    "A Coruja Sábia mostra que cada pessoa conserva seu lado direito e esquerdo, mas a posição de um objeto em relação a ela pode mudar quando ela se vira.",
 
   explicacao:
     "🦉 A Coruja Sábia ensina: DIREITA e ESQUERDA dependem de QUEM está olhando.\n\n🐿️ O Brilha olha pra árvore. A castanha está à DIREITA DELE.\n\n🐰 O Coelho está do OUTRO LADO da árvore. Pra ele, a MESMA castanha está à ESQUERDA.\n\n👉 O objeto não se mexeu — quem mudou foi o ponto de vista!\n\n🧭 Sempre pergunte: 'Direita de QUEM? Esquerda de QUEM?'",
@@ -82,7 +82,7 @@ const aula: Aula = {
     passos: [
       "Olhe pro Brilha: a castanha está do lado direito dele.",
       "Agora imagine o Coelho de frente pro Brilha.",
-      "Se você vira, direita e esquerda TROCAM.",
+      "O Coelho está orientado no sentido oposto ao Brilha; compare a posição da castanha com o corpo dele.",
       "Então, pro Coelho, a castanha está à ESQUERDA.",
     ],
     resposta:
@@ -111,7 +111,7 @@ const aula: Aula = {
   exercicios: [
     { enunciado: "🐿️ Brilha olha pra árvore. A castanha está do lado direito dele. Ela está à…", resposta: "Direita", dica: "Direita do Brilha." },
     { enunciado: "🐰 Coelho está do outro lado. A MESMA castanha, pra ele, está à…", resposta: "Esquerda", dica: "Ele vê o oposto." },
-    { enunciado: "Se você VIRAR, sua direita passa a ser sua…", resposta: "Esquerda", dica: "Trocou de lado." },
+    { enunciado: "Se você virar, sua mão direita passa a ser qual mão?", resposta: "Continua sendo a mão direita", dica: "Os lados do corpo não trocam de nome." },
     { enunciado: "Pra saber onde uma coisa está, precisamos saber o…", resposta: "Ponto de referência", dica: "De quem estamos falando." },
     { enunciado: "🦉 Coruja pergunta: 'Direita de …?' Complete.", resposta: "Quem", dica: "Sempre de alguém." },
   ],
@@ -146,7 +146,7 @@ const aula: Aula = {
           pergunta: "Agora quem olha é o Coelho, do OUTRO lado. Pra ele, a MESMA castanha está à…",
           opcoes: ["Direita", "Esquerda", "Em cima"],
           correta: 1,
-          explicacao: "Ele está de frente pro Brilha, então direita e esquerda TROCAM. Pra ele, é à ESQUERDA.",
+          explicacao: "Ele está orientado no sentido oposto ao Brilha. Em relação ao corpo dele, a castanha fica à ESQUERDA.",
           visual: {
             tipo: "cena",
             posicao: "esquerda",
@@ -192,7 +192,7 @@ const aula: Aula = {
     pontos: [
       "DIREITA e ESQUERDA dependem de QUEM está olhando.",
       "O PONTO DE REFERÊNCIA é a pessoa (ou animal) que olha a cena.",
-      "Se dois amigos ficam FRENTE A FRENTE, direita e esquerda TROCAM.",
+      "Frente a frente, a direita de uma pessoa aparece do lado esquerdo para quem a observa.",
       "Sempre pergunte: 'Direita de QUEM? Esquerda de QUEM?'",
       "Mapas e GPS usam ponto de referência pra mostrar o caminho certo.",
     ],
@@ -219,7 +219,7 @@ const aula: Aula = {
       pergunta: "A MESMA castanha, agora vista pelo Coelho, está à…",
       opcoes: ["Direita", "Esquerda", "Atrás"],
       correta: 1,
-      explicacao: "Ele está do outro lado. Direita e esquerda TROCAM → à ESQUERDA.",
+      explicacao: "Ele está orientado no sentido oposto; em relação ao corpo dele, fica à ESQUERDA.",
       visual: {
         tipo: "cena",
         posicao: "esquerda",
@@ -323,7 +323,7 @@ const aula: Aula = {
           opcoes: ["Direita", "Esquerda", "Em cima"],
           correta: 1,
           acerto: "🎉 Isso! Ele está do outro lado — pra ele é ESQUERDA.",
-          erro: "Como o Coelho está do outro lado, direita e esquerda TROCAM.",
+          erro: "Observe a orientação do corpo do Coelho e localize o lado esquerdo dele.",
         },
         {
           modo: "dupla",
@@ -390,7 +390,7 @@ const aula: Aula = {
           opcoes: ["Direita", "Esquerda", "Atrás"],
           correta: 1,
           acerto: "⬅️ Perfeito! Ele vê a bola do lado esquerdo dele.",
-          erro: "Coelho está do outro lado — direita e esquerda TROCAM.",
+          erro: "Use o corpo do Coelho como referência e observe para onde ele está orientado.",
         },
       ],
     },
@@ -499,7 +499,7 @@ const aula: Aula = {
         pergunta: "A MESMA castanha, vista pelo Coelho, está à…",
         opcoes: ["Direita", "Esquerda", "Atrás"],
         correta: 1,
-        explicacao: "Coelho está do outro lado → direita e esquerda TROCAM.",
+        explicacao: "Com o Coelho orientado no sentido oposto, a posição fica à esquerda dele.",
         visual: {
           tipo: "cena",
           posicao: "esquerda",
@@ -543,7 +543,7 @@ const aula: Aula = {
         pergunta: "A MESMA bola: pro Brilha está à direita. Pro Coelho (do outro lado) está à…",
         opcoes: ["Direita", "Esquerda", "Em cima"],
         correta: 1,
-        explicacao: "Do outro lado, direita e esquerda TROCAM → ESQUERDA.",
+        explicacao: "Use a orientação da Coruja: em relação ao corpo dela, fica à ESQUERDA.",
         visual: {
           tipo: "cena",
           posicao: "esquerda",

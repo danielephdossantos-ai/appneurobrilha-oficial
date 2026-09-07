@@ -15,7 +15,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-profissoes-de-outros-tempos",
   titulo: "Trabalho e Profissões de Outros Tempos",
   iconeTrilha: "⚙️",
-  bncc: ["EF03HI05", "EF03HI06"],
+  bncc: [],
   duracaoMin: 22,
 
   cena01_motivacao: {
@@ -53,6 +53,8 @@ export const aula01: AulaGeoV1 = {
         cor: "from-slate-500 to-slate-700",
         fotoUrl: imgMaquinaEscrever,
       },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "tecnologia",
     feedbackAcerto:
@@ -173,6 +175,8 @@ export const aula01: AulaGeoV1 = {
         cards: [
           { id: "ex", emoji: "🕯️", titulo: "Não — profissão extinta", cor: "from-amber-700 to-orange-900" },
           { id: "at", emoji: "💡", titulo: "Sim — só mudou de nome", cor: "from-slate-500 to-slate-700" },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "ex",
         feedbackAcerto:
@@ -187,6 +191,8 @@ export const aula01: AulaGeoV1 = {
         cards: [
           { id: "ex", emoji: "🕯️", titulo: "Sim — desapareceu", cor: "from-amber-700 to-orange-900" },
           { id: "mo", emoji: "📷", titulo: "Não — foi modificada", cor: "from-slate-600 to-slate-800" },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "mo",
         feedbackAcerto:
@@ -201,6 +207,8 @@ export const aula01: AulaGeoV1 = {
         cards: [
           { id: "pr", emoji: "💻", titulo: "Do PRESENTE (nova)", cor: "from-blue-600 to-indigo-800" },
           { id: "pa", emoji: "🕯️", titulo: "Do passado remoto", cor: "from-slate-500 to-slate-700" },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "pr",
         feedbackAcerto:
@@ -461,6 +469,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "A invenção e popularização dos computadores e teclados digitais.", correta: true },
           { id: "b", texto: "As pessoas deixaram de escrever textos e livros no mundo inteiro." },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto:
           "Certificado. O computador tornou a escrita mais rápida, limpa e fácil de corrigir. Datilógrafo virou profissão extinta.",
@@ -474,6 +484,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Profissão extinta." },
           { id: "b", texto: "Profissão modificada.", correta: true },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto:
           "Correto. Modificada: mesmo nome, ferramentas diferentes. É o caso do fotógrafo, do professor e da telefonista.",
@@ -487,6 +499,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Programador de aplicativos.", correta: true },
           { id: "b", texto: "Padeiro de forno a lenha." },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto:
           "Certificação concluída. Programador é uma profissão do PRESENTE — nasceu com o computador e o smartphone.",

@@ -11,7 +11,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-vertebrados-invertebrados",
   titulo: "O Reino Animal",
   iconeTrilha: "🦴",
-  bncc: ["EF03CI04"],
+  bncc: ["EF03CI06"],
   duracaoMin: 30,
 
   cena01_motivacao: {
@@ -32,8 +32,9 @@ export const aula01: AulaGeoV1 = {
     fotoUrl: borboletaImg,
     opcoes: [
       { id: "sim", titulo: "SIM", subtitulo: "tem osso por dentro", emoji: "🦴", cor: "from-emerald-500 to-green-700" },
-      { id: "nao", titulo: "NÃO", subtitulo: "corpo mole por dentro", emoji: "🦋", cor: "from-amber-400 to-orange-600" },
+      { id: "nao", titulo: "NÃO", subtitulo: "não possui coluna vertebral", emoji: "🦋", cor: "from-amber-400 to-orange-600" },
       { id: "talvez", titulo: "NÃO SEI", subtitulo: "preciso investigar", emoji: "🤔", cor: "from-slate-500 to-slate-700" },
+      { id: "depende", titulo: "DEPENDE", subtitulo: "só quando é adulta", emoji: "🔎", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "nao",
     feedbackAcerto: "HIPÓTESE CONFIRMADA! Borboleta é INVERTEBRADO — corpo molinho por dentro, protegido só por uma casquinha por fora.",
@@ -100,8 +101,9 @@ export const aula01: AulaGeoV1 = {
         id: "q1", pergunta: "O gato é vertebrado ou invertebrado?", fotoUrl: gatoImg,
         cards: [
           { id: "a", emoji: "🦴", titulo: "Vertebrado — tem esqueleto e coluna", cor: "from-emerald-500 to-green-700" },
-          { id: "b", emoji: "🦋", titulo: "Invertebrado — corpo mole", cor: "from-amber-500 to-orange-700" },
+          { id: "b", emoji: "🦋", titulo: "Invertebrado — sem coluna vertebral", cor: "from-amber-500 to-orange-700" },
           { id: "c", emoji: "❓", titulo: "Nenhum dos dois", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "❓", titulo: "Nenhuma das anteriores", cor: "from-blue-400 to-indigo-700" },
         ],
         correta: "a",
         feedbackAcerto: "Isso! Gato tem esqueleto igual ao seu.",
@@ -113,6 +115,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🦴", titulo: "Vertebrada", cor: "from-emerald-500 to-green-700" },
           { id: "b", emoji: "🕷️", titulo: "Invertebrada — sem ossos internos", cor: "from-amber-500 to-orange-700" },
           { id: "c", emoji: "❓", titulo: "Depende do tamanho", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "❓", titulo: "Nenhuma das anteriores", cor: "from-blue-400 to-indigo-700" },
         ],
         correta: "b",
         feedbackAcerto: "Sim. Aranha é INVERTEBRADA — o que a sustenta é uma casca dura por fora.",
@@ -124,6 +127,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🪶", titulo: "Penas coloridas", cor: "from-slate-500 to-slate-700" },
           { id: "b", emoji: "🦴", titulo: "Coluna vertebral e esqueleto por dentro", cor: "from-emerald-500 to-green-700" },
           { id: "c", emoji: "🐚", titulo: "Concha dura por fora", cor: "from-amber-500 to-orange-700" },
+          { id: "d", emoji: "❓", titulo: "Nenhuma das anteriores", cor: "from-blue-400 to-indigo-700" },
         ],
         correta: "b",
         feedbackAcerto: "Correto. Coluna vertebral = marca registrada do vertebrado.",
@@ -239,6 +243,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Aranha = invertebrado (sem ossos). Sapo = vertebrado (tem esqueleto).", correta: true },
           { id: "b", texto: "Os dois são vertebrados porque saltam." },
+          { id: "c", texto: "Outra resposta" },
+          { id: "d", texto: "Nenhuma das anteriores" },
         ],
         feedbackAcerto: "Perfeito! Aprender a olhar a estrutura, não só o comportamento.",
         feedbackErro: "Saltar não define vertebrado. O que importa é ter COLUNA por dentro." },
@@ -246,6 +252,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Ter ou não ter coluna vertebral e esqueleto interno", correta: true },
           { id: "b", texto: "Ter ou não ter pelos coloridos" },
+          { id: "c", texto: "Outra resposta" },
+          { id: "d", texto: "Nenhuma das anteriores" },
         ],
         feedbackAcerto: "Isso. Coluna e esqueleto interno = vertebrado.",
         feedbackErro: "Cor e pelo não classificam. O critério é ESQUELETO INTERNO." },
@@ -253,6 +261,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Invertebrados — cerca de 95% dos animais", correta: true },
           { id: "b", texto: "Vertebrados — são a maioria" },
+          { id: "c", texto: "Outra resposta" },
+          { id: "d", texto: "Nenhuma das anteriores" },
         ],
         feedbackAcerto: "Correto. Invertebrados são maioria absoluta.",
         feedbackErro: "Invertebrados são cerca de 95% de todas as espécies animais." },

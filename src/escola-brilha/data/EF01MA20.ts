@@ -75,7 +75,7 @@ const aula: Aula = {
     "Saber o que é CERTO, POSSÍVEL ou IMPOSSÍVEL ajuda a tomar decisões e a entender o mundo!",
 
   explicacao:
-    "Existem 3 tipos de acontecimentos:\n\n✅ CERTO — sempre acontece (ex.: o Sol ☀️ nasce todo dia).\n\n🤔 POSSÍVEL — pode acontecer, pode não acontecer (ex.: hoje pode chover 🌧️).\n\n❌ IMPOSSÍVEL — nunca acontece (ex.: um peixe 🐟 viver no deserto).",
+    "Classificamos um evento dentro de uma experiência bem definida. CERTO acontece em todos os resultados possíveis; POSSÍVEL acontece em alguns resultados, mas não em todos; IMPOSSÍVEL não acontece em nenhum resultado. Numa caixa somente com bolas azuis e vermelhas, retirar azul ou vermelha é certo, retirar azul é possível e retirar verde é impossível. Se as condições mudarem, a classificação também pode mudar.",
 
   explicacoesNiveis: {
     nivel1: "✅ Certo = sempre. 🤔 Possível = talvez. ❌ Impossível = nunca.",
@@ -99,20 +99,20 @@ const aula: Aula = {
   },
 
   atividadeGuiada: {
-    enunciado: "Um gato 🐱 pode miar?",
-    resposta: "✅ Certo.",
+    enunciado: "Um gato 🐱 miará durante os próximos cinco minutos?",
+    resposta: "🤔 Possível.",
     explicacao:
-      "Todo gato saudável mia — é o som que ele faz. Então miar é um evento CERTO.",
+      "Ele pode miar ou pode ficar quieto nesse intervalo. É possível, mas não certo.",
     visual: {
       tipo: "cena",
-      pergunta: "Um gato 🐱 pode miar?",
+      pergunta: "O gato miará nos próximos cinco minutos?",
       posicao: "aoLado",
       referenciaImg: gatoImg,
       referenciaLabel: "Gato",
-      sujeitoImg: certoImg,
-      sujeitoLabel: "✅ Certo",
+      sujeitoImg: possivelImg,
+      sujeitoLabel: "🤔 Possível",
       opcoes: ["✅ Certo", "🤔 Possível", "❌ Impossível"],
-      correta: 0,
+      correta: 1,
     },
   },
 
@@ -127,19 +127,19 @@ const aula: Aula = {
   desafio: {
     enunciado: "Desafio Brilha: classifique cada acontecimento!",
     resposta:
-      "🌙 Lua à noite = Certo · 🎲 Tirar 3 no dado = Possível · 🐟 Peixe de bicicleta = Impossível.",
+      "🌙 Ver a Lua numa noite específica = Possível · 🎲 Tirar 3 no dado = Possível · 🐟 Peixe de bicicleta = Impossível.",
     visual: {
       perguntas: [
         {
-          pergunta: "🌙 A Lua aparecer durante a noite é…",
+          pergunta: "🌙 Ver a Lua no céu durante esta noite é…",
           opcoes: ["✅ Certo", "🤔 Possível", "❌ Impossível"],
-          correta: 0,
-          explicacao: "A Lua sempre aparece à noite (mesmo escondida por nuvens).",
+          correta: 1,
+          explicacao: "Ela pode estar visível ou não, dependendo da fase, do horário e das condições do céu.",
           visual: {
             tipo: "grupos",
             grupos: [
               { imagemUrl: luaImg, quantidade: 1, rotulo: "Lua à noite", cor: "#6366F1" },
-              { imagemUrl: certoImg, quantidade: 1, rotulo: "✅ Certo", cor: "#22C55E" },
+              { imagemUrl: possivelImg, quantidade: 1, rotulo: "🤔 Possível", cor: "#F59E0B" },
             ],
           },
         },

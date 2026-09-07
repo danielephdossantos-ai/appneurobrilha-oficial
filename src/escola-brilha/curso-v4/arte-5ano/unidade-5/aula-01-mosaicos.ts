@@ -52,10 +52,38 @@ export const aula01: AulaArteV1 = {
     titulo: "🧩 A Matriz da Fragmentação",
     instrucao: "Toca em cada pista pra investigar",
     itens: [
-      { emoji: "👑", rotulo: "Basílica de Ravena (séc. VI)", descricao: "Na Itália, o imperador Justiniano aparece em mosaico bizantino feito de milhares de tesselas de ouro e vidro que brilham com a luz das velas.", cor: "#1e40af", fotoUrl: mapaRavena },
-      { emoji: "🦎", rotulo: "Antoni Gaudí e o Trencadís", descricao: "Na Espanha, Gaudí quebrava azulejos e ladrilhos de cerâmica pra colar em bancos ondulados no Parque Güell — mosaico moderno cheio de cor.", cor: "#0ea5e9", fotoUrl: mapaGaudi },
-      { emoji: "✨", rotulo: "Tesselas de Ouro e Vidro", descricao: "Cada tessela é um cubinho pequeno de vidro, cerâmica ou pedra. Juntas, criam uma síntese visual — o olho junta os fragmentos à distância.", cor: "#7c2d12", fotoUrl: mapaTesselas },
-      { emoji: "🏛️", rotulo: "Mosaico Romano de Piso", descricao: "Muito antes de Ravena e Gaudí, os romanos já cobriam pisos de casas ricas com mosaicos geométricos feitos de pedrinhas naturais.", cor: "#78350f", fotoUrl: mapaRomano },
+      {
+        emoji: "👑",
+        rotulo: "Basílica de Ravena (séc. VI)",
+        descricao:
+          "Na Itália, o imperador Justiniano aparece em mosaico bizantino feito de milhares de tesselas de ouro e vidro que brilham com a luz das velas.",
+        cor: "#1e40af",
+        fotoUrl: mapaRavena,
+      },
+      {
+        emoji: "🦎",
+        rotulo: "Antoni Gaudí e o Trencadís",
+        descricao:
+          "Na Espanha, Gaudí quebrava azulejos e ladrilhos de cerâmica pra colar em bancos ondulados no Parque Güell — mosaico moderno cheio de cor.",
+        cor: "#0ea5e9",
+        fotoUrl: mapaGaudi,
+      },
+      {
+        emoji: "✨",
+        rotulo: "Tesselas de Ouro e Vidro",
+        descricao:
+          "Cada tessela é um cubinho pequeno de vidro, cerâmica ou pedra. Juntas, criam uma síntese visual — o olho junta os fragmentos à distância.",
+        cor: "#7c2d12",
+        fotoUrl: mapaTesselas,
+      },
+      {
+        emoji: "🏛️",
+        rotulo: "Mosaico Romano de Piso",
+        descricao:
+          "Muito antes de Ravena e Gaudí, os romanos já cobriam pisos de casas ricas com mosaicos geométricos feitos de pedrinhas naturais.",
+        cor: "#78350f",
+        fotoUrl: mapaRomano,
+      },
     ],
     falaFinal: "Você vai construir imagem com fragmentos igual os mestres do mosaico!",
   },
@@ -68,8 +96,14 @@ export const aula01: AulaArteV1 = {
         pergunta: "Por que o mosaico de Ravena brilha tanto na luz das velas?",
         fotoUrl: mapaRavena,
         alternativas: [
-          { texto: "Porque as tesselas têm folha de ouro e vidro que refletem a luz", correta: true },
+          {
+            texto: "Porque as tesselas têm folha de ouro e vidro que refletem a luz",
+            correta: true,
+          },
           { texto: "Porque a parede foi pintada com tinta metálica", correta: false },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
         feedbackAcerto: "Perfeito! O ouro e o vidro das tesselas fazem a imagem cintilar.",
         feedbackErro: "Não é tinta! São as TESSELAS de ouro e vidro que refletem a luz.",
@@ -78,10 +112,17 @@ export const aula01: AulaArteV1 = {
         pergunta: "O que Gaudí fazia para criar o Trencadís no Parque Güell?",
         fotoUrl: mapaGaudi,
         alternativas: [
-          { texto: "Quebrava azulejos e ladrilhos de cerâmica pra colar em bancos ondulados", correta: true },
+          {
+            texto: "Quebrava azulejos e ladrilhos de cerâmica pra colar em bancos ondulados",
+            correta: true,
+          },
           { texto: "Pintava os bancos com pincel fininho", correta: false },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
-        feedbackAcerto: "Isso! Trencadís é mosaico feito de cacos de cerâmica quebrada de propósito.",
+        feedbackAcerto:
+          "Isso! Trencadís é mosaico feito de cacos de cerâmica quebrada de propósito.",
         feedbackErro: "Não é pintura — Gaudí QUEBRAVA azulejos pra criar o mosaico Trencadís.",
       },
       {
@@ -90,6 +131,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Tessela", correta: true },
           { texto: "Pincelada", correta: false },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
         feedbackAcerto: "Correto! Tessela é o nome do fragmento que forma o mosaico.",
         feedbackErro: "Pincelada é de pintura. O fragmento do mosaico é a TESSELA.",
@@ -101,10 +145,38 @@ export const aula01: AulaArteV1 = {
     tipo: "vocabularioCards",
     aurora: "Vocabulário da arquitetura dos fragmentos. Toca em cada card!",
     cards: [
-      { termo: "Tessela", definicao: "Pequeno fragmento de vidro, cerâmica ou pedra usado pra montar um mosaico. É a unidade básica de tudo.", emoji: "🔲", cor: "#7c2d12", fotoUrl: vocabTessela },
-      { termo: "Andamento", definicao: "As linhas-guia que orientam a direção das tesselas, criando fluxo e movimento na imagem final.", emoji: "🌀", cor: "#b45309", fotoUrl: vocabAndamento },
-      { termo: "Mosaico", definicao: "Imagem inteira construída pela junção de muitas tesselas — a fragmentação vira síntese visual à distância.", emoji: "🧩", cor: "#1e40af", fotoUrl: vocabMosaico },
-      { termo: "Rejunte", definicao: "Espaço entre as tesselas, preenchido com argamassa. Sem ele, as peças ficariam coladas sem respiro.", emoji: "◻️", cor: "#44403c", fotoUrl: vocabRejunte },
+      {
+        termo: "Tessela",
+        definicao:
+          "Pequeno fragmento de vidro, cerâmica ou pedra usado pra montar um mosaico. É a unidade básica de tudo.",
+        emoji: "🔲",
+        cor: "#7c2d12",
+        fotoUrl: vocabTessela,
+      },
+      {
+        termo: "Andamento",
+        definicao:
+          "As linhas-guia que orientam a direção das tesselas, criando fluxo e movimento na imagem final.",
+        emoji: "🌀",
+        cor: "#b45309",
+        fotoUrl: vocabAndamento,
+      },
+      {
+        termo: "Mosaico",
+        definicao:
+          "Imagem inteira construída pela junção de muitas tesselas — a fragmentação vira síntese visual à distância.",
+        emoji: "🧩",
+        cor: "#1e40af",
+        fotoUrl: vocabMosaico,
+      },
+      {
+        termo: "Rejunte",
+        definicao:
+          "Espaço entre as tesselas, preenchido com argamassa. Sem ele, as peças ficariam coladas sem respiro.",
+        emoji: "◻️",
+        cor: "#44403c",
+        fotoUrl: vocabRejunte,
+      },
     ],
   },
 
@@ -119,10 +191,34 @@ export const aula01: AulaArteV1 = {
       "Todo mosaico segue o ANDAMENTO: linhas-guia que orientam a direção das tesselas, criando um fluxo visual. Entre uma tessela e outra, fica o REJUNTE — o espaço que dá respiro à composição.",
     ],
     pigmentos: [
-      { nome: "Papel de revista colorido", hex: "#facc15", fonte: "Vira tesselas de papel na prática", emoji: "📰", fotoUrl: matRevista },
-      { nome: "Tesselas de vidro", hex: "#0ea5e9", fonte: "Cacos coloridos e brilhantes", emoji: "🔷", fotoUrl: matVidro },
-      { nome: "Folha de ouro", hex: "#eab308", fonte: "Camada fina de ouro das tesselas bizantinas", emoji: "✨", fotoUrl: matOuro },
-      { nome: "Argamassa de rejunte", hex: "#44403c", fonte: "Preenche o espaço entre as tesselas", emoji: "◻️", fotoUrl: vocabRejunte },
+      {
+        nome: "Papel de revista colorido",
+        hex: "#facc15",
+        fonte: "Vira tesselas de papel na prática",
+        emoji: "📰",
+        fotoUrl: matRevista,
+      },
+      {
+        nome: "Tesselas de vidro",
+        hex: "#0ea5e9",
+        fonte: "Cacos coloridos e brilhantes",
+        emoji: "🔷",
+        fotoUrl: matVidro,
+      },
+      {
+        nome: "Folha de ouro",
+        hex: "#eab308",
+        fonte: "Camada fina de ouro das tesselas bizantinas",
+        emoji: "✨",
+        fotoUrl: matOuro,
+      },
+      {
+        nome: "Argamassa de rejunte",
+        hex: "#44403c",
+        fonte: "Preenche o espaço entre as tesselas",
+        emoji: "◻️",
+        fotoUrl: vocabRejunte,
+      },
     ],
   },
 
@@ -136,6 +232,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "As linhas-guia que orientam a direção e o fluxo das tesselas", correta: true },
           { texto: "O nome da cola usada pra fixar as peças", correta: false },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
         feedbackAcerto: "Perfeito! O andamento organiza o movimento visual do mosaico.",
         feedbackErro: "Cola não é isso. ANDAMENTO é a direção/fluxo das linhas de tesselas.",
@@ -146,9 +245,13 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Trencadís — mosaico de azulejos quebrados de propósito", correta: true },
           { texto: "Afresco — pintura direto na parede úmida", correta: false },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
         feedbackAcerto: "Isso! O Trencadís transforma cacos quebrados em mosaico colorido.",
-        feedbackErro: "Afresco é pintura em parede. Gaudí usava o TRENCADÍS, feito de cacos quebrados.",
+        feedbackErro:
+          "Afresco é pintura em parede. Gaudí usava o TRENCADÍS, feito de cacos quebrados.",
       },
       {
         pergunta: "Por que os mosaicos de Ravena são feitos de tesselas de ouro e vidro?",
@@ -156,6 +259,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Pra refletir a luz das velas e brilhar dentro da basílica", correta: true },
           { texto: "Porque era o material mais barato disponível na época", correta: false },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
         feedbackAcerto: "Correto! Ouro e vidro fazem o mosaico cintilar com a luz.",
         feedbackErro: "Não era o mais barato — era escolhido justamente pelo BRILHO refletido.",
@@ -168,32 +274,44 @@ export const aula01: AulaArteV1 = {
     aurora: "Cada mosaico usa um estilo de fragmentação. Combina certinho!",
     animais: [
       {
-        nome: "Imperador Justiniano", emoji: "👑", fotoUrl: mapaRavena,
+        nome: "Imperador Justiniano",
+        emoji: "👑",
+        fotoUrl: mapaRavena,
         corAlvo: { nome: "Mosaico Bizantino de Ravena", hex: "#1e40af" },
         opcoes: [
           { nome: "Mosaico Bizantino de Ravena", hex: "#1e40af" },
           { nome: "Trencadís de Gaudí", hex: "#0ea5e9" },
           { nome: "Pontilhismo de Seurat", hex: "#a855f7" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Isso! Tesselas de ouro e vidro brilhando na Basílica de São Vital.",
       },
       {
-        nome: "Banco ondulado colorido", emoji: "🦎", fotoUrl: mapaGaudi,
+        nome: "Banco ondulado colorido",
+        emoji: "🦎",
+        fotoUrl: mapaGaudi,
         corAlvo: { nome: "Trencadís de Gaudí", hex: "#0ea5e9" },
         opcoes: [
           { nome: "Trencadís de Gaudí", hex: "#0ea5e9" },
           { nome: "Mosaico Bizantino de Ravena", hex: "#1e40af" },
           { nome: "Vitral gótico", hex: "#f59e0b" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Perfeito! Azulejos quebrados de propósito viram banco cheio de cor.",
       },
       {
-        nome: "Piso de casa romana", emoji: "🏛️", fotoUrl: mapaRomano,
+        nome: "Piso de casa romana",
+        emoji: "🏛️",
+        fotoUrl: mapaRomano,
         corAlvo: { nome: "Mosaico Geométrico Romano", hex: "#78350f" },
         opcoes: [
           { nome: "Mosaico Geométrico Romano", hex: "#78350f" },
           { nome: "Anamorfose de perspectiva", hex: "#7c2d12" },
           { nome: "Trencadís de Gaudí", hex: "#0ea5e9" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Correto! Pedrinhas naturais organizadas em padrão geométrico repetido.",
       },
@@ -204,11 +322,41 @@ export const aula01: AulaArteV1 = {
     tipo: "sequenciaMistura",
     aurora: "Ordena os 5 passos pra construir seu PRÓPRIO mosaico de papel.",
     passos: [
-      { id: "p1", texto: "CONTORNO o andamento: desenho as linhas-guia primeiro numa folha", emoji: "🌀", ordem: 1, fotoUrl: passo1 },
-      { id: "p2", texto: "RECORTO tesselas irregulares de papel colorido de revista", emoji: "✂️", ordem: 2, fotoUrl: passo2 },
-      { id: "p3", texto: "SEPARO as tesselas por cor em montinhos organizados", emoji: "🎨", ordem: 3, fotoUrl: passo3 },
-      { id: "p4", texto: "COLO as tesselas seguindo a direção do andamento desenhado", emoji: "🖇️", ordem: 4, fotoUrl: passo4 },
-      { id: "p5", texto: "DEIXO o rejunte: pequenos espaços entre cada tessela colada", emoji: "◻️", ordem: 5, fotoUrl: passo5 },
+      {
+        id: "p1",
+        texto: "CONTORNO o andamento: desenho as linhas-guia primeiro numa folha",
+        emoji: "🌀",
+        ordem: 1,
+        fotoUrl: passo1,
+      },
+      {
+        id: "p2",
+        texto: "RECORTO tesselas irregulares de papel colorido de revista",
+        emoji: "✂️",
+        ordem: 2,
+        fotoUrl: passo2,
+      },
+      {
+        id: "p3",
+        texto: "SEPARO as tesselas por cor em montinhos organizados",
+        emoji: "🎨",
+        ordem: 3,
+        fotoUrl: passo3,
+      },
+      {
+        id: "p4",
+        texto: "COLO as tesselas seguindo a direção do andamento desenhado",
+        emoji: "🖇️",
+        ordem: 4,
+        fotoUrl: passo4,
+      },
+      {
+        id: "p5",
+        texto: "DEIXO o rejunte: pequenos espaços entre cada tessela colada",
+        emoji: "◻️",
+        ordem: 5,
+        fotoUrl: passo5,
+      },
     ],
     falaAcerto: "Seu mosaico de papel segue a mesma lógica dos mestres bizantinos!",
   },
@@ -218,10 +366,22 @@ export const aula01: AulaArteV1 = {
     aurora: "Agora VOCÊ lê o diário do arquiteto dos fragmentos. Toca nas palavras coloridas.",
     titulo: "Diário do Arquiteto dos Fragmentos",
     trechos: [
-      { texto: "Sou um construtor de imagens quebradas. Cada peça é uma", palavraDestaque: "tessela", corDestaque: "#7c2d12" },
+      {
+        texto: "Sou um construtor de imagens quebradas. Cada peça é uma",
+        palavraDestaque: "tessela",
+        corDestaque: "#7c2d12",
+      },
       { texto: "Eu sigo o", palavraDestaque: "andamento", corDestaque: "#b45309" },
-      { texto: "pra dar fluxo e direção ao meu", palavraDestaque: "mosaico", corDestaque: "#1e40af" },
-      { texto: "Entre uma peça e outra, deixo sempre o", palavraDestaque: "rejunte", corDestaque: "#44403c" },
+      {
+        texto: "pra dar fluxo e direção ao meu",
+        palavraDestaque: "mosaico",
+        corDestaque: "#1e40af",
+      },
+      {
+        texto: "Entre uma peça e outra, deixo sempre o",
+        palavraDestaque: "rejunte",
+        corDestaque: "#44403c",
+      },
       { texto: "Eu transformo cacos quebrados em obra-prima — igual Ravena e Gaudí!" },
     ],
   },
@@ -229,7 +389,8 @@ export const aula01: AulaArteV1 = {
   cena09_minijogo: {
     tipo: "cenaTematica",
     variante: "minijogo",
-    aurora: "🎯 O Arquiteto de Tesselas! Toca em CADA caco antes do tempo acabar pra encaixar o mosaico.",
+    aurora:
+      "🎯 O Arquiteto de Tesselas! Toca em CADA caco antes do tempo acabar pra encaixar o mosaico.",
     titulo: "🎯 O Arquiteto de Tesselas",
     instrucao: "Toque em todos os cacos antes do tempo acabar!",
     tempoSeg: 35,
@@ -250,12 +411,48 @@ export const aula01: AulaArteV1 = {
     aurora: "Fecha o caderno dos mosaicos. Toca em cada verbete!",
     titulo: "📓 Caderno da Fragmentação",
     itens: [
-      { emoji: "👑", rotulo: "Basílica de Ravena (séc. VI)", descricao: "Mosaico bizantino do imperador Justiniano com tesselas de ouro e vidro.", cor: "#1e40af", fotoUrl: mapaRavena },
-      { emoji: "🔲", rotulo: "Tessela", descricao: "Pequeno fragmento de vidro, cerâmica ou pedra — a unidade básica do mosaico.", cor: "#7c2d12", fotoUrl: vocabTessela },
-      { emoji: "🌀", rotulo: "Andamento", descricao: "Linhas-guia que orientam a direção e o fluxo das tesselas.", cor: "#b45309", fotoUrl: vocabAndamento },
-      { emoji: "🧩", rotulo: "Mosaico", descricao: "Imagem completa formada pela junção de muitas tesselas.", cor: "#1e40af", fotoUrl: vocabMosaico },
-      { emoji: "🦎", rotulo: "Trencadís de Gaudí", descricao: "Azulejos quebrados de propósito colados em bancos ondulados.", cor: "#0ea5e9", fotoUrl: mapaGaudi },
-      { emoji: "🏛️", rotulo: "Mosaico Romano", descricao: "Pisos geométricos feitos de pedrinhas naturais na Roma Antiga.", cor: "#78350f", fotoUrl: mapaRomano },
+      {
+        emoji: "👑",
+        rotulo: "Basílica de Ravena (séc. VI)",
+        descricao: "Mosaico bizantino do imperador Justiniano com tesselas de ouro e vidro.",
+        cor: "#1e40af",
+        fotoUrl: mapaRavena,
+      },
+      {
+        emoji: "🔲",
+        rotulo: "Tessela",
+        descricao: "Pequeno fragmento de vidro, cerâmica ou pedra — a unidade básica do mosaico.",
+        cor: "#7c2d12",
+        fotoUrl: vocabTessela,
+      },
+      {
+        emoji: "🌀",
+        rotulo: "Andamento",
+        descricao: "Linhas-guia que orientam a direção e o fluxo das tesselas.",
+        cor: "#b45309",
+        fotoUrl: vocabAndamento,
+      },
+      {
+        emoji: "🧩",
+        rotulo: "Mosaico",
+        descricao: "Imagem completa formada pela junção de muitas tesselas.",
+        cor: "#1e40af",
+        fotoUrl: vocabMosaico,
+      },
+      {
+        emoji: "🦎",
+        rotulo: "Trencadís de Gaudí",
+        descricao: "Azulejos quebrados de propósito colados em bancos ondulados.",
+        cor: "#0ea5e9",
+        fotoUrl: mapaGaudi,
+      },
+      {
+        emoji: "🏛️",
+        rotulo: "Mosaico Romano",
+        descricao: "Pisos geométricos feitos de pedrinhas naturais na Roma Antiga.",
+        cor: "#78350f",
+        fotoUrl: mapaRomano,
+      },
     ],
     falaFinal: "Nova página do Atlas da Matriz da Percepção DESBLOQUEADA!",
   },
@@ -264,12 +461,17 @@ export const aula01: AulaArteV1 = {
     tipo: "avaliacaoFinal",
     aurora: "Missão final, arquiteto dos fragmentos!",
     quiz: {
-      pergunta: "Como se chama cada pequeno fragmento de vidro, cerâmica ou pedra que forma um mosaico?",
+      pergunta:
+        "Como se chama cada pequeno fragmento de vidro, cerâmica ou pedra que forma um mosaico?",
       alternativas: [
         { texto: "Tessela", correta: true },
         { texto: "Pincelada", correta: false },
+
+        { texto: "Não corresponde ao tema", correta: false },
+        { texto: "Outra resposta sem relação", correta: false },
       ],
-      feedback: "Perfeito! A TESSELA é a unidade básica de todo mosaico — dos bizantinos de Ravena até o Trencadís de Gaudí. Juntas, elas viram uma imagem inteira.",
+      feedback:
+        "Perfeito! A TESSELA é a unidade básica de todo mosaico — dos bizantinos de Ravena até o Trencadís de Gaudí. Juntas, elas viram uma imagem inteira.",
     },
     missaoFamilia:
       "🥚 O Mosaico de Casca de Ovo: Com seus pais, pinte cascas de ovo lavadas com tinta colorida, quebre em pedacinhos e cole num papelão seguindo um andamento (linhas-guia) desenhado antes. Deixe o rejunte entre as cascas. Registrem no álbum!",

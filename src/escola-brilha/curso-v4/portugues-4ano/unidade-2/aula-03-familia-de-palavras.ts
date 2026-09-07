@@ -20,7 +20,7 @@ export const aula3: AulaPortuguesV4 = {
   slug: "aula-03-familia-de-palavras",
   titulo: "Família de palavras: radical, prefixo e sufixo",
   iconeTrilha: "🌳",
-  bncc: ["EF04LP04"],
+  bncc: ["EF04LP08"],
   duracaoMin: 22,
 
   momento01_motivacao: {

@@ -26,7 +26,7 @@ export const aula03: AulaPortuguesV4 = {
   slug: "aula-03-listas-organizam",
   titulo: "Listas que Organizam",
   iconeTrilha: "📝",
-  bncc: ["EF02LP09", "EF02LP10", "EF02LP12"],
+  bncc: ["EF12LP04", "EF15LP01", "EF15LP03"],
   duracaoMin: 15,
 
   momento01_motivacao: {

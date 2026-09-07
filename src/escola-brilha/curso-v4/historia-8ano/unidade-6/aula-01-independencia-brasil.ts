@@ -8,7 +8,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-independencia-brasil",
   titulo: "A Independência do Brasil e o Império",
   iconeTrilha: "🇧🇷",
-  bncc: ["EF08HI12", "EF08HI13", "EF08HI14"],
+  bncc: ["EF08HI13"],
   duracaoMin: 30,
   estilo: "teen",
 
@@ -32,6 +32,8 @@ export const aula01: AulaGeoV1 = {
     opcoes: [
       { id: "eli", titulo: "ELITE QUIS EVITAR REVOLUÇÃO SOCIAL", subtitulo: "controle 'de cima', sem povo armado", emoji: "👑", cor: "from-teal-800 to-slate-950" },
       { id: "pov", titulo: "O POVO PEDIU UM REI", subtitulo: "escolha popular por votação", emoji: "❌", cor: "from-amber-900 to-slate-950" },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "eli",
     feedbackAcerto:

@@ -9,9 +9,9 @@ export const aula04_divisaoPor10E100: AulaV4 = {
   metodologias: ["skemp"],
 
   momento01_motivacao: {
-    titulo: "Tirando zeros",
+    titulo: "Valores dez, cem e mil vezes menores",
     historia:
-      "{NOME}, dividir por 10 é o inverso de multiplicar por 10: tira 1 zero. Por 100, tira 2. Por 1.000, tira 3 (quando dá exato).",
+      "{NOME}, dividir por 10, 100 ou 1.000 reduz o valor de cada algarismo, deslocando-o para casas menores. Nesta aula usamos divisões exatas com números naturais.",
   },
   momento02_exploracao: {
     instrucao: "Repare no padrão.",
@@ -25,32 +25,32 @@ export const aula04_divisaoPor10E100: AulaV4 = {
     revelacao: "35 ÷ 10 = 3, resto 5. No 4º ano ainda não escrevemos 3,5 — só quociente inteiro e resto.",
   },
   momento04_explicacao: {
-    titulo: "Regra dos zeros (agora ao contrário)",
+    titulo: "Deslocamento para casas menores",
     etapas: [
       {
-        texto: "Se o número termina em zeros suficientes, apague-os.",
+        texto: "Em divisões exatas por 100, cada algarismo passa duas casas para valores menores.",
         exemploReal: {
           contexto: "4.500 ÷ 100.",
-          destaque: "Apago 2 zeros: 45.",
+          destaque: "4 milhares viram 4 dezenas e 5 centenas viram 5 unidades: 45.",
         },
       },
     ],
   },
   momento05_modelagem: {
     enunciado: "Quanto é 8.000 ÷ 1000?",
-    passos: ["1000 tem 3 zeros.", "8.000 → apago 3 zeros → 8."],
+    passos: ["Dividir por 1.000 desloca cada valor três casas para a direita.", "8 unidades de milhar passam a 8 unidades."],
     resposta: "8",
   },
   momento06_praticaGuiada: {
     enunciado: "2.400 ÷ 100 = ?",
-    dica: "Apague 2 zeros.",
+    dica: "Desloque cada algarismo duas casas para valores menores.",
     interacao: {
       tipo: "escolhaVisual",
       pergunta: "Escolha:",
       opcoes: [{ nome: "24" }, { nome: "240" }, { nome: "2,4" }],
       respostaCerta: "24",
       feedbackAcerto: "🎯 24.",
-      feedbackErro: "÷100 = apagar 2 zeros.",
+      feedbackErro: "Dividir por 100 desloca cada valor duas casas para a direita: 4.500 ÷ 100 = 45.",
     },
   },
   momento07_praticaIndependente: {
@@ -61,7 +61,7 @@ export const aula04_divisaoPor10E100: AulaV4 = {
       opcoes: [{ nome: "90" }, { nome: "9" }, { nome: "900" }],
       respostaCerta: "90",
       feedbackAcerto: "🎯 90.",
-      feedbackErro: "9.000 → apago 2 zeros → 90.",
+      feedbackErro: "9 milhares divididos por 100 tornam-se 9 dezenas: 90.",
     },
   },
   momento08_aplicacao: {
@@ -77,17 +77,17 @@ export const aula04_divisaoPor10E100: AulaV4 = {
     },
   },
   momento09_revisao: {
-    pontos: ["Apague tantos zeros quantos o divisor tiver, se o número permitir."],
+    pontos: ["÷10 desloca uma casa; ÷100, duas; ÷1.000, três, nas divisões exatas trabalhadas."],
   },
   momento10_avaliacao: {
     perguntas: [
-      { pergunta: "300 ÷ 10 = ?", opcoes: ["30", "3", "300"], correta: 0, feedbackAcerto: "🎉 30.", feedbackErro: "Apagar 1 zero." },
-      { pergunta: "6.000 ÷ 1000 = ?", opcoes: ["6", "60", "600"], correta: 0, feedbackAcerto: "🎉 6.", feedbackErro: "Apagar 3 zeros." },
-      { pergunta: "1.200 ÷ 100 = ?", opcoes: ["12", "120", "1,2"], correta: 0, feedbackAcerto: "🎉 12.", feedbackErro: "Apagar 2 zeros." },
+      { pergunta: "300 ÷ 10 = ?", opcoes: ["30", "3", "300"], correta: 0, feedbackAcerto: "🎉 Três centenas tornam-se três dezenas: 30.", feedbackErro: "Dividir por 10 desloca o valor uma casa para a direita: 300 → 30." },
+      { pergunta: "6.000 ÷ 1000 = ?", opcoes: ["6", "60", "600"], correta: 0, feedbackAcerto: "🎉 Seis milhares divididos por mil resultam em 6 unidades.", feedbackErro: "Desloque o valor três casas: unidade de milhar → unidade." },
+      { pergunta: "1.200 ÷ 100 = ?", opcoes: ["12", "120", "1,2"], correta: 0, feedbackAcerto: "🎉 Doze centenas divididas por cem resultam em 12 unidades.", feedbackErro: "Dividir por 100 desloca os valores duas casas: 1.200 → 12." },
     ],
   },
   momento11_missaoFamilia: {
-    titulo: "Truque dos zeros",
+    titulo: "Deslocamentos de valor",
     materiais: ["Papel"],
     passos: ["Escreva 3 números terminados em zeros.", "Divida cada um por 10, 100 e 1.000.", "Escreva os resultados."],
     registro: "📸 Foto do papel.",

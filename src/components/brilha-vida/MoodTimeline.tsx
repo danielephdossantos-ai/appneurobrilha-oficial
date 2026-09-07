@@ -104,7 +104,7 @@ export function MoodTimeline({
   const entries = useMoodLog(childId ?? undefined);
   const [janela, setJanela] = useState<Janela>(7);
   const dias = useMemo(() => agregarPorDia(entries, janela), [entries, janela]);
-  const total = entries.length;
+  const total = dias.reduce((soma, dia) => soma + dia.n, 0);
   const noDia = entries.filter(
     (e) => e.at.slice(0, 10) === new Date().toISOString().slice(0, 10),
   ).length;
@@ -136,11 +136,11 @@ export function MoodTimeline({
           <h3 className="font-black text-slate-800 text-lg flex items-center gap-2">
             <Calendar className="h-5 w-5 text-primary" /> Linha do humor
           </h3>
-          <p className="text-xs text-slate-500 font-medium">
+          <p className="text-sm text-slate-600 font-medium">
             Como {childId ? "essa criança" : "a criança"} tem se sentido nos últimos dias.
           </p>
         </div>
-        <div className="flex gap-1 p-1 bg-slate-100 rounded-full text-xs font-black">
+        <div className="flex gap-1 p-1 bg-slate-100 rounded-full text-sm font-black">
           {([7, 30] as Janela[]).map((j) => (
             <button
               key={j}
@@ -165,13 +165,13 @@ export function MoodTimeline({
         </div>
       ) : (
         <>
-          <div className="grid grid-cols-3 gap-2 mb-3">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mb-3">
             <Metric label="Hoje" value={`${noDia}`} sub="check-ins" />
             <Metric label="Total" value={`${total}`} sub={`nos ${janela}d`} />
             <Metric
               label="Tendência"
               value={
-                trend === "sobe" ? "Melhorando" : trend === "desce" ? "Precisa apoio" : trend === "estavel" ? "Estável" : "—"
+                trend === "sobe" ? "Subiu" : trend === "desce" ? "Desceu" : trend === "estavel" ? "Estável" : "—"
               }
               icon={
                 trend === "sobe" ? (
@@ -185,12 +185,8 @@ export function MoodTimeline({
             />
           </div>
 
-          <svg
-            viewBox={`0 0 ${W} ${H}`}
-            className="w-full h-auto"
-            role="img"
-            aria-label="Gráfico de humor por dia"
-          >
+          <div className="w-full overflow-x-auto pb-2">
+          <svg viewBox={`0 0 ${W} ${H}`} className="w-full min-w-[560px] h-auto" role="img" aria-label="Gráfico de registros emocionais por dia">
             {/* linhas de referência */}
             {[2, 1, 0, -1, -2].map((v) => (
               <g key={v}>
@@ -264,8 +260,9 @@ export function MoodTimeline({
               );
             })}
           </svg>
+          </div>
 
-          <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] font-bold text-slate-600">
+          <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm font-bold text-slate-600">
             <span className="flex items-center gap-1">
               <span className="inline-block w-3 h-1 rounded-full bg-sky-500" /> Como se sente
               (valência)
@@ -274,13 +271,16 @@ export function MoodTimeline({
               <span className="inline-block w-3 h-0.5 border-t-2 border-dashed border-violet-400" /> Energia
             </span>
           </div>
+          <p className="mt-3 text-sm text-slate-600">
+            O gráfico resume os registros feitos no app. Ele não avalia diagnóstico nem determina sozinho como a criança está.
+          </p>
 
           {!compact && (
             <div className="mt-4 grid grid-cols-7 md:grid-cols-14 gap-1">
               {dias.slice(-14).map((d) => (
                 <div
                   key={d.data}
-                  className="aspect-square rounded-lg border border-slate-100 flex flex-col items-center justify-center text-[9px] font-black text-slate-600"
+                  className="min-h-14 rounded-lg border border-slate-100 flex flex-col items-center justify-center text-xs font-black text-slate-600"
                   style={{ background: corValencia(d.valence) + "22" }}
                   title={`${d.label}${d.emocaoTop ? " — " + d.emocaoTop : ""} (${d.n} check-ins)`}
                 >
@@ -309,12 +309,12 @@ function Metric({
 }) {
   return (
     <div className="rounded-2xl bg-slate-50 border border-slate-100 p-2.5">
-      <div className="text-[10px] font-black uppercase tracking-wider text-slate-500">{label}</div>
+      <div className="text-xs font-black uppercase tracking-wider text-slate-600">{label}</div>
       <div className="flex items-center gap-1 mt-0.5">
         {icon}
         <div className="text-base font-black text-slate-800 leading-tight">{value}</div>
       </div>
-      {sub && <div className="text-[10px] font-medium text-slate-400">{sub}</div>}
+      {sub && <div className="text-xs font-medium text-slate-500">{sub}</div>}
     </div>
   );
 }

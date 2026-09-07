@@ -12,7 +12,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-clima-e-biomas",
   titulo: "Clima e Biomas do Brasil",
   iconeTrilha: "🌱",
-  bncc: ["EF04GE05"],
+  bncc: [],
   duracaoMin: 22,
 
   cena01_motivacao: {
@@ -43,6 +43,19 @@ export const aula01: AulaGeoV1 = {
         subtitulo: "pra ninguém morder",
         emoji: "🦖",
         cor: "from-red-500 to-rose-700",
+      },
+
+      {
+        id: "extra-1",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
+      {
+        id: "extra-2",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
       },
     ],
     respostaCerta: "agua",
@@ -165,6 +178,13 @@ export const aula01: AulaGeoV1 = {
           { id: "am", emoji: "🌳", titulo: "Amazônia", cor: "from-emerald-500 to-green-700" },
           { id: "ca", emoji: "🌵", titulo: "Caatinga", cor: "from-amber-500 to-orange-700" },
           { id: "pa", emoji: "🐎", titulo: "Pampa", cor: "from-teal-500 to-emerald-700" },
+
+          {
+            id: "extra-3",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "ca",
         feedbackAcerto: "Isso! Mandacaru + seca = CAATINGA.",
@@ -178,6 +198,13 @@ export const aula01: AulaGeoV1 = {
           { id: "ce", emoji: "🌾", titulo: "Cerrado", cor: "from-yellow-500 to-amber-700" },
           { id: "ma", emoji: "🌲", titulo: "Mata Atlântica", cor: "from-teal-500 to-emerald-700" },
           { id: "am", emoji: "🌳", titulo: "Amazônia", cor: "from-emerald-500 to-green-700" },
+
+          {
+            id: "extra-4",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "ce",
         feedbackAcerto: "Perfeito! Ipê + lobo-guará = CERRADO.",
@@ -191,6 +218,13 @@ export const aula01: AulaGeoV1 = {
           { id: "b", emoji: "🦖", titulo: "Assustar bicho", cor: "from-red-500 to-rose-700" },
           { id: "a", emoji: "💧", titulo: "Guardar água", cor: "from-sky-500 to-blue-700" },
           { id: "s", emoji: "☀️", titulo: "Refletir sol", cor: "from-yellow-400 to-amber-600" },
+
+          {
+            id: "extra-5",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "a",
         feedbackAcerto: "Isso! Espinho não perde água. GUARDA água pra seca.",
@@ -346,7 +380,11 @@ export const aula01: AulaGeoV1 = {
     rodadas: [
       {
         id: "r1",
-        municipioA: { nome: "Onça-pintada + boto-cor-de-rosa", emoji: "🐆", cor: "from-emerald-600 to-green-800" },
+        municipioA: {
+          nome: "Onça-pintada + boto-cor-de-rosa",
+          emoji: "🐆",
+          cor: "from-emerald-600 to-green-800",
+        },
         municipioB: { nome: "Floresta úmida", emoji: "🌳", cor: "from-emerald-500 to-green-700" },
         contexto: "Onça-pintada, arara-azul, boto-cor-de-rosa vivem no...",
         pecaCertaId: "amazonia",
@@ -355,8 +393,16 @@ export const aula01: AulaGeoV1 = {
       },
       {
         id: "r2",
-        municipioA: { nome: "Mandacaru + asa-branca", emoji: "🌵", cor: "from-amber-500 to-orange-700" },
-        municipioB: { nome: "Sol forte, pouca chuva", emoji: "☀️", cor: "from-yellow-500 to-orange-700" },
+        municipioA: {
+          nome: "Mandacaru + asa-branca",
+          emoji: "🌵",
+          cor: "from-amber-500 to-orange-700",
+        },
+        municipioB: {
+          nome: "Sol forte, pouca chuva",
+          emoji: "☀️",
+          cor: "from-yellow-500 to-orange-700",
+        },
         contexto: "Mandacaru e asa-branca são cara de qual bioma?",
         pecaCertaId: "caatinga",
         feedbackAcerto: "Perfeito! CAATINGA — só existe no Brasil.",
@@ -364,7 +410,11 @@ export const aula01: AulaGeoV1 = {
       },
       {
         id: "r3",
-        municipioA: { nome: "Lobo-guará + ipê amarelo", emoji: "🌾", cor: "from-yellow-500 to-amber-700" },
+        municipioA: {
+          nome: "Lobo-guará + ipê amarelo",
+          emoji: "🌾",
+          cor: "from-yellow-500 to-amber-700",
+        },
         municipioB: { nome: "Savana brasileira", emoji: "🦊", cor: "from-orange-500 to-amber-700" },
         contexto: "Lobo-guará e ipê amarelo vivem no...",
         pecaCertaId: "cerrado",
@@ -382,7 +432,11 @@ export const aula01: AulaGeoV1 = {
       },
       {
         id: "r5",
-        municipioA: { nome: "Campos abertos + gaúchos", emoji: "🐎", cor: "from-lime-500 to-emerald-700" },
+        municipioA: {
+          nome: "Campos abertos + gaúchos",
+          emoji: "🐎",
+          cor: "from-lime-500 to-emerald-700",
+        },
         municipioB: { nome: "Sul do Brasil", emoji: "🌾", cor: "from-teal-500 to-emerald-700" },
         contexto: "Campos abertos no Rio Grande do Sul é o...",
         pecaCertaId: "pampa",
@@ -391,7 +445,11 @@ export const aula01: AulaGeoV1 = {
       },
       {
         id: "r6",
-        municipioA: { nome: "Jacaré + capivara + tuiuiú", emoji: "🐊", cor: "from-emerald-500 to-green-700" },
+        municipioA: {
+          nome: "Jacaré + capivara + tuiuiú",
+          emoji: "🐊",
+          cor: "from-emerald-500 to-green-700",
+        },
         municipioB: { nome: "Planície alagada", emoji: "💧", cor: "from-cyan-500 to-blue-700" },
         contexto: "Área alagada com muito bicho no MT/MS é o...",
         pecaCertaId: "pantanal",
@@ -443,6 +501,8 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Caatinga", correta: false },
           { id: "b", texto: "Amazônia", correta: true },
           { id: "c", texto: "Pampa", correta: false },
+
+          { id: "extra-6", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Isso! AMAZÔNIA — quente, úmida e a maior floresta tropical.",
         feedbackErro: "Caatinga é SECA. A grande floresta úmida é a AMAZÔNIA.",
@@ -454,6 +514,8 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Pra guardar água e sobreviver ao clima seco.", correta: true },
           { id: "b", texto: "Porque as plantas não gostam de sol.", correta: false },
           { id: "c", texto: "Pra fazer sombra pros bichos.", correta: false },
+
+          { id: "extra-7", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Perfeito! A planta se ADAPTA ao clima seco guardando água.",
         feedbackErro: "É adaptação ao clima SECO — folha pequena/espinho não perde água.",
@@ -465,6 +527,8 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Amazônia", correta: false },
           { id: "b", texto: "Caatinga", correta: true },
           { id: "c", texto: "Mata Atlântica", correta: false },
+
+          { id: "extra-8", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Isso! A CAATINGA é exclusiva do Brasil — só existe aqui.",
         feedbackErro: "Amazônia se estende por outros países. Só a CAATINGA é exclusiva do Brasil.",
@@ -476,8 +540,7 @@ export const aula01: AulaGeoV1 = {
       emoji: "🌱",
       cor: "from-emerald-500 to-green-700",
     },
-    falaFinal:
-      "PARABÉNS, BIOMESTRE! Você conhece os climas e biomas do Brasil inteiro.",
+    falaFinal: "PARABÉNS, BIOMESTRE! Você conhece os climas e biomas do Brasil inteiro.",
   },
 
   recompensa: { xp: 400, moedas: 300, medalha: "Biomestre do Brasil" },

@@ -8,7 +8,7 @@ export const aula06: AulaPortuguesV4 = {
   slug: "aula-06-algoritmo-da-noticia",
   titulo: "A Estrutura da Notícia",
   iconeTrilha: "📰",
-  bncc: ["EF67LP08", "EF67LP10"],
+  bncc: ["EF67LP10"],
   duracaoMin: 25,
   momento01_motivacao: {
     titulo: "Transmissão de Dados: O Gênero Notícia",

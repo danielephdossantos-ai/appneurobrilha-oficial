@@ -235,7 +235,7 @@ export function QuizTexto({
             quiz.opcoes.length <= 2
               ? "grid-cols-2"
               : quiz.opcoes.length === 3
-                ? "grid-cols-3"
+                ? "grid-cols-2 sm:grid-cols-3"
                 : "grid-cols-2 sm:grid-cols-4"
           }`}
         >
@@ -257,7 +257,7 @@ export function QuizTexto({
                 onClick={() => tocar(i)}
                 className={`relative flex flex-col items-stretch rounded-3xl shadow-xl overflow-hidden transition-all duration-200 ${borda}`}
               >
-                <div className="relative w-full h-24 md:h-28 bg-slate-50">
+                <div className="relative w-full h-32 sm:h-28 bg-slate-50">
                   <img
                     src={quiz.opcoesImagens![i]}
                     alt={op}
@@ -268,7 +268,7 @@ export function QuizTexto({
                   />
                 </div>
                 <div className="bg-black/70 px-2 py-1.5">
-                  <span className="block text-white text-xs sm:text-sm font-black leading-tight text-center">
+                  <span className="block text-white text-sm font-black leading-tight text-center">
                     {op}
                   </span>
                 </div>
@@ -438,4 +438,3 @@ export function QuizTexto({
     </TeenBlackboard>
   );
 }
-

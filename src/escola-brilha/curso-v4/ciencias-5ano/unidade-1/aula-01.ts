@@ -9,7 +9,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-laboratorio-cientista",
   titulo: "Laboratório do Cientista",
   iconeTrilha: "🔬",
-  bncc: ["EF05CI01"],
+  bncc: [],
   duracaoMin: 30,
 
   cena01_motivacao: {
@@ -32,6 +32,7 @@ export const aula01: AulaGeoV1 = {
       { id: "amber", titulo: "Barra AMBAR", subtitulo: "a mais alta", emoji: "📊", cor: "from-amber-400 to-orange-600" },
       { id: "teal", titulo: "Barra TEAL", subtitulo: "média", emoji: "📊", cor: "from-teal-400 to-emerald-600" },
       { id: "slate", titulo: "Barra SLATE", subtitulo: "a mais baixa", emoji: "📊", cor: "from-slate-500 to-slate-800" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "amber",
     feedbackAcerto: "Leitura correta. A barra âmbar é visivelmente a mais alta — cresceu mais.",
@@ -99,6 +100,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "⚖️", titulo: "Pra comparar com os grupos que sofreram mudança", cor: "from-teal-500 to-emerald-700" },
           { id: "b", emoji: "👨‍🔬", titulo: "Pra o cientista mostrar autoridade", cor: "from-slate-500 to-slate-700" },
           { id: "c", emoji: "📋", titulo: "Pra listar os materiais", cor: "from-red-500 to-rose-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Isso. Sem grupo controle, você não sabe se a mudança teve efeito.",
         feedbackErro: "Grupo controle é o parâmetro de comparação — sem ele, não dá pra concluir nada." },
@@ -108,6 +110,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "✅", titulo: "Sim, 2 já é suficiente", cor: "from-red-500 to-rose-700" },
           { id: "b", emoji: "❌", titulo: "Não, amostra pequena dá resultado incerto", cor: "from-emerald-500 to-green-700" },
           { id: "c", emoji: "🤷", titulo: "Depende do humor do cientista", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "b",
         feedbackAcerto: "Exato. Amostras maiores tornam a média mais representativa da realidade.",
         feedbackErro: "Cuidado. Amostra pequena pode ter azar ou coincidência. Mais amostras = mais confiança." },
@@ -117,6 +120,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "💭", titulo: "Uma opinião forte de alguém importante", cor: "from-red-500 to-rose-700" },
           { id: "b", emoji: "📊", titulo: "Dado registrado que apoia a conclusão", cor: "from-cyan-500 to-sky-700" },
           { id: "c", emoji: "🎬", titulo: "Uma cena de filme", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "b",
         feedbackAcerto: "Sim. Evidência é dado — não é opinião, não é intuição.",
         feedbackErro: "Opinião não é evidência. Só dado registrado e verificável conta como evidência científica." },
@@ -267,6 +271,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Pra comparar e saber se a variável teve efeito", correta: true },
           { id: "b", texto: "Pra deixar o experimento mais bonito" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. Sem controle, você não sabe se o resultado veio da variável ou de outro fator.",
         feedbackErro: "Beleza não é critério científico. Controle serve pra COMPARAR." },
@@ -275,6 +281,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "10 plantas por grupo", correta: true },
           { id: "b", texto: "1 planta por grupo" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. Amostra maior reduz influência de coincidências.",
         feedbackErro: "1 amostra pode ter azar. 10 amostras dão média mais representativa." },
@@ -283,6 +291,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Não, sem evidência não é ciência", correta: true },
           { id: "b", texto: "Sim, se o cientista for famoso" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Isso. Ciência exige EVIDÊNCIA verificável — fama não substitui dado.",
         feedbackErro: "Nem o cientista mais famoso conclui sem dados. Sem evidência não é ciência." },

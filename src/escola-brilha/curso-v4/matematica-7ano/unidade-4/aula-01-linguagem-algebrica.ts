@@ -5,7 +5,7 @@ export const aula01_linguagemAlgebrica: AulaV4 = {
   slug: "u4-01-linguagem-algebrica",
   titulo: "A Língua da Álgebra",
   iconeTrilha: "🔤",
-  bncc: ["EF07MA13", "EF07MA14"],
+  bncc: ["EF07MA13"],
   duracaoMin: 30,
   metodologias: ["skemp"],
 

@@ -16,7 +16,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-municipio-estado-pais",
   titulo: "O Município e o Estado: Organização Territorial",
   iconeTrilha: "🗺️",
-  bncc: ["EF03HI11", "EF03HI12"],
+  bncc: [],
   duracaoMin: 22,
 
   cena01_motivacao: {
@@ -54,6 +54,8 @@ export const aula01: AulaGeoV1 = {
         cor: "from-slate-500 to-slate-700",
         fotoUrl: imgPrefeitura,
       },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "estado",
     feedbackAcerto:
@@ -175,6 +177,7 @@ export const aula01: AulaGeoV1 = {
           { id: "pf", emoji: "🏘️", titulo: "Prefeito", cor: "from-teal-600 to-emerald-800" },
           { id: "gv", emoji: "🏛️", titulo: "Governador", cor: "from-indigo-600 to-blue-800" },
           { id: "ps", emoji: "🇧🇷", titulo: "Presidente", cor: "from-yellow-500 to-green-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "pf",
         feedbackAcerto:
@@ -189,6 +192,8 @@ export const aula01: AulaGeoV1 = {
         cards: [
           { id: "ca", emoji: "⭐", titulo: "Capital", cor: "from-indigo-600 to-blue-800" },
           { id: "in", emoji: "🏘️", titulo: "Distrito comercial", cor: "from-slate-500 to-slate-700" },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "ca",
         feedbackAcerto:
@@ -203,6 +208,8 @@ export const aula01: AulaGeoV1 = {
         cards: [
           { id: "br", emoji: "⭐", titulo: "Brasília", cor: "from-yellow-500 to-green-700" },
           { id: "sp", emoji: "🏙️", titulo: "São Paulo", cor: "from-slate-500 to-slate-700" },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "br",
         feedbackAcerto:
@@ -476,6 +483,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Capital.", correta: true },
           { id: "b", texto: "Distrito comercial." },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto:
           "Certificado. A capital centraliza as decisões políticas e a administração do estado.",
@@ -489,6 +498,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "O governo do Estado, responsável por gerenciar serviços que passam por vários municípios.", correta: true },
           { id: "b", texto: "A prefeitura, que resolve tudo dentro e fora do município." },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto:
           "Correto. Prefeitura só cuida DENTRO da cidade. Rodovia entre cidades = ESTADO.",
@@ -502,6 +513,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Brasília (Distrito Federal).", correta: true },
           { id: "b", texto: "Rio de Janeiro." },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto:
           "🏆 CURSO CONCLUÍDO! Brasília é a capital federal desde 1960 — sede do Presidente, do Congresso e do STF.",

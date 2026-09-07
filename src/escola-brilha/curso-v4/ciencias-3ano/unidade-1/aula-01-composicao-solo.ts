@@ -52,6 +52,7 @@ export const aula01: AulaGeoV1 = {
         emoji: "🏖️",
         cor: "from-amber-400 to-orange-600",
       },
+      { id: "argiloso", titulo: "SOLO ARGILOSO", subtitulo: "grãos muito pequenos", emoji: "🧱", cor: "from-orange-500 to-red-700" },
       {
         id: "humoso",
         titulo: "SOLO HUMOSO",
@@ -198,6 +199,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "✅", titulo: "Não — é rocha, água, ar, matéria orgânica e seres vivos", cor: "from-emerald-500 to-green-700" },
           { id: "b", emoji: "🟫", titulo: "Sim, só terra e nada mais", cor: "from-slate-500 to-slate-700" },
           { id: "c", emoji: "💧", titulo: "É feito só de água", cor: "from-cyan-500 to-sky-700" },
+          { id: "d", emoji: "❓", titulo: "Nenhuma das anteriores", cor: "from-blue-400 to-indigo-700" },
         ],
         correta: "a",
         feedbackAcerto: "Isso. Solo é uma MISTURA VIVA — não é só terra, é um ecossistema.",
@@ -211,6 +213,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🪱", titulo: "Cava túneis, deixa entrar ar e água, e produz nutriente", cor: "from-rose-500 to-pink-700" },
           { id: "b", emoji: "🥗", titulo: "Come as plantas todas", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "😴", titulo: "Só dorme na terra", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "❓", titulo: "Nenhuma das anteriores", cor: "from-blue-400 to-indigo-700" },
         ],
         correta: "a",
         feedbackAcerto: "Perfeito. A minhoca é um trator natural — sem ela, o solo fica compactado e seco.",
@@ -224,6 +227,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🏖️", titulo: "Areia da praia", cor: "from-amber-500 to-orange-700" },
           { id: "b", emoji: "🌱", titulo: "Solo humoso da horta", cor: "from-emerald-500 to-green-700" },
           { id: "c", emoji: "🪨", titulo: "Só pedra", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "❓", titulo: "Nenhuma das anteriores", cor: "from-blue-400 to-indigo-700" },
         ],
         correta: "b",
         feedbackAcerto: "Sim. Matéria orgânica funciona como esponja — segura a água por muito mais tempo.",
@@ -484,6 +488,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Cavam túneis, deixam entrar ar e água e produzem nutrientes", correta: true },
           { id: "b", texto: "Porque comem todas as plantas da horta" },
+          { id: "c", texto: "Outra resposta" },
+          { id: "d", texto: "Nenhuma das anteriores" },
         ],
         feedbackAcerto: "Correto. Minhoca é engenheira do solo — sem ela, a terra vira pedra.",
         feedbackErro: "Minhoca NÃO come planta viva. Ela come folha morta e melhora o solo.",
@@ -495,6 +501,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "A capacidade do solo deixar a água passar", correta: true },
           { id: "b", texto: "A cor que o solo tem" },
+          { id: "c", texto: "Outra resposta" },
+          { id: "d", texto: "Nenhuma das anteriores" },
         ],
         feedbackAcerto: "Isso. Areia = alta permeabilidade. Argila = baixa. Húmus = média (ideal pra planta).",
         feedbackErro: "Permeabilidade fala de ÁGUA passando pelo solo, não de cor.",
@@ -506,6 +514,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Não — é rocha, água, ar, matéria orgânica e seres vivos", correta: true },
           { id: "b", texto: "Sim, só terra preta e nada mais" },
+          { id: "c", texto: "Outra resposta" },
+          { id: "d", texto: "Nenhuma das anteriores" },
         ],
         feedbackAcerto: "Exato. Solo é uma comunidade viva — não é só terra, é ecossistema.",
         feedbackErro: "Solo é mistura de vários componentes. Nunca só terra preta.",

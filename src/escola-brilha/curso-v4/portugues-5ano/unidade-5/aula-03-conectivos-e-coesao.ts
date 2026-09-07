@@ -22,7 +22,7 @@ export const aula3: AulaPortuguesV4 = {
   slug: "aula-03-conectivos-e-coesao",
   titulo: "Conectivos e coesão",
   iconeTrilha: "🌉",
-  bncc: ["EF05LP07", "EF05LP26"],
+  bncc: ["EF05LP07", "EF05LP27", "EF35LP08"],
   duracaoMin: 25,
 
   momento01_motivacao: {

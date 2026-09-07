@@ -8,7 +8,7 @@ export const aula15: AulaPortuguesV4 = {
   slug: "aula-15-artigo-de-opiniao",
   titulo: "Artigo de Opinião",
   iconeTrilha: "⚖️",
-  bncc: ["EF67LP05", "EF06LP01"],
+  bncc: ["EF67LP05"],
   duracaoMin: 25,
   momento01_motivacao: {
     titulo: "Fortificação de Ideias: O Artigo de Opinião",

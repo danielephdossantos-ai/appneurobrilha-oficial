@@ -9,7 +9,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-matriz-energetica",
   titulo: "Matriz Energética do Brasil",
   iconeTrilha: "⚡",
-  bncc: ["EF05GE06", "EF05GE07"],
+  bncc: ["EF05GE07"],
   duracaoMin: 22,
 
   cena01_motivacao: {
@@ -24,8 +24,7 @@ export const aula01: AulaGeoV1 = {
 
   cena02_previsao: {
     tipo: "votoExplorador",
-    aurora:
-      "Palpite: qual dessas fontes NÃO ACABA nunca?",
+    aurora: "Palpite: qual dessas fontes NÃO ACABA nunca?",
     pergunta: "Qual fonte é RENOVÁVEL?",
     opcoes: [
       {
@@ -41,6 +40,19 @@ export const aula01: AulaGeoV1 = {
         subtitulo: "combustível do subsolo",
         emoji: "🛢️",
         cor: "from-slate-500 to-gray-700",
+      },
+
+      {
+        id: "extra-1",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
+      {
+        id: "extra-2",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
       },
     ],
     respostaCerta: "sol",
@@ -160,6 +172,13 @@ export const aula01: AulaGeoV1 = {
           { id: "sol", emoji: "☀️", titulo: "Solar", cor: "from-amber-400 to-yellow-600" },
           { id: "car", emoji: "⛏️", titulo: "Carvão", cor: "from-slate-500 to-gray-700" },
           { id: "pet", emoji: "🛢️", titulo: "Petróleo", cor: "from-slate-600 to-gray-800" },
+
+          {
+            id: "extra-3",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "sol",
         feedbackAcerto: "Isso! SOLAR = infinita e limpa.",
@@ -172,6 +191,13 @@ export const aula01: AulaGeoV1 = {
           { id: "car", emoji: "⛏️", titulo: "Carvão", cor: "from-slate-500 to-gray-700" },
           { id: "hid", emoji: "💧", titulo: "Hidrelétrica", cor: "from-blue-500 to-indigo-700" },
           { id: "nu", emoji: "☢️", titulo: "Nuclear", cor: "from-purple-500 to-fuchsia-700" },
+
+          {
+            id: "extra-4",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "hid",
         feedbackAcerto: "Perfeito! HIDRELÉTRICA lidera a matriz brasileira.",
@@ -184,7 +210,19 @@ export const aula01: AulaGeoV1 = {
         cards: [
           { id: "polui", emoji: "🌫️", titulo: "Poluição do ar", cor: "from-slate-500 to-gray-700" },
           { id: "sil", emoji: "🤫", titulo: "Muito silêncio", cor: "from-sky-500 to-blue-700" },
-          { id: "flor", emoji: "🌳", titulo: "Mais floresta", cor: "from-emerald-500 to-green-700" },
+          {
+            id: "flor",
+            emoji: "🌳",
+            titulo: "Mais floresta",
+            cor: "from-emerald-500 to-green-700",
+          },
+
+          {
+            id: "extra-5",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "polui",
         feedbackAcerto: "Isso! Combustíveis fósseis POLUEM e aquecem o planeta.",
@@ -397,6 +435,8 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Porque funcionam melhor à noite", correta: false },
           { id: "b", texto: "Porque são limpas, renováveis e não poluem", correta: true },
           { id: "c", texto: "Porque são as mais caras", correta: false },
+
+          { id: "extra-6", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Isso! LIMPAS, RENOVÁVEIS e não poluem — protegem o planeta.",
         feedbackErro: "Sol e vento são fortes durante o dia. Vantagem = LIMPAS.",
@@ -408,6 +448,8 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Sol", correta: false },
           { id: "b", texto: "Petróleo", correta: true },
           { id: "c", texto: "Vento", correta: false },
+
+          { id: "extra-7", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Perfeito! PETRÓLEO é fóssil — leva milhões de anos.",
         feedbackErro: "Sol e vento são renováveis. Fóssil = PETRÓLEO.",
@@ -419,6 +461,8 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Nuclear", correta: false },
           { id: "b", texto: "Hidrelétrica", correta: true },
           { id: "c", texto: "Carvão", correta: false },
+
+          { id: "extra-8", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Isso! HIDRELÉTRICA lidera. Itaipu, Belo Monte, Furnas.",
         feedbackErro: "Nuclear e carvão são pequenos. Brasil = HIDRELÉTRICA.",

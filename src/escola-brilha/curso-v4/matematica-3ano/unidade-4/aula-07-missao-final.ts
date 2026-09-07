@@ -4,7 +4,7 @@ export const aula07_missaoFinalU4: AulaV4 = {
   slug: "u4-07-missao-final",
   titulo: "Repartidor Oficial",
   iconeTrilha: "🏆",
-  bncc: ["EF03MA10"],
+  bncc: ["EF03MA08", "EF03MA09"],
   duracaoMin: 20,
   metodologias: ["skemp", "cpa"],
   momento01_motivacao: {
@@ -83,7 +83,7 @@ export const aula07_missaoFinalU4: AulaV4 = {
     },
   },
   momento09_revisao: {
-    pontos: ["Exata × Com resto.", "Fração como divisão.", "Palavras-chave."],
+    pontos: ["Divisão exata e divisão com resto.", "Partes iguais como metade, terça e quarta parte.", "Operação escolhida pela relação entre as quantidades."],
     miniDesafio: {
       tipo: "escolhaVisual",
       pergunta: "Quarta parte de 100?",

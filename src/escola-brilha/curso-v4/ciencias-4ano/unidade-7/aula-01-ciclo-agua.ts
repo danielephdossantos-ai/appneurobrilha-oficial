@@ -9,13 +9,13 @@ import { url as economiaImg } from "@/assets/ciencias-4ano/u7-a1/economia-agua.j
 
 /**
  * Ciências · 4º Ano · Unidade 7 · Aula 01
- * "Ciclo da Água e Preservação" — EF04CI05/06
+ * "Ciclo da Água e Preservação" — conteúdo complementar
  */
 export const aula01: AulaGeoV1 = {
   slug: "aula-01-ciclo-agua-preservacao",
   titulo: "Ciclo da Água e Preservação",
   iconeTrilha: "💧",
-  bncc: ["EF04CI05", "EF04CI06"],
+  bncc: [],
   duracaoMin: 30,
 
   cena01_motivacao: {
@@ -38,6 +38,7 @@ export const aula01: AulaGeoV1 = {
       { id: "some", titulo: "Some pra sempre", subtitulo: "vira nada", emoji: "🚫", cor: "from-red-500 to-rose-700" },
       { id: "vapor", titulo: "Vira VAPOR e sobe pro céu", subtitulo: "muda de estado", emoji: "💨", cor: "from-cyan-500 to-sky-700" },
       { id: "chao", titulo: "Vaza pelo chão", subtitulo: "entra na terra", emoji: "⬇️", cor: "from-amber-600 to-yellow-800" },
+      { id: "congela", titulo: "CONGELA NA HORA", subtitulo: "vira gelo", emoji: "🧊", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "vapor",
     feedbackAcerto:
@@ -155,6 +156,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "☀️", titulo: "Calor do sol", cor: "from-amber-500 to-orange-700" },
           { id: "b", emoji: "❄️", titulo: "Frio da noite", cor: "from-cyan-500 to-blue-800" },
           { id: "c", emoji: "🌬️", titulo: "Vento forte", cor: "from-slate-400 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "a",
         feedbackAcerto: "Sim. CALOR do sol → evaporação.",
@@ -168,6 +170,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "💧", titulo: "Gotinhas de água condensada", cor: "from-cyan-500 to-blue-700" },
           { id: "b", emoji: "💨", titulo: "Ar puro", cor: "from-slate-400 to-slate-700" },
           { id: "c", emoji: "🔥", titulo: "Fumaça", cor: "from-red-500 to-rose-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "a",
         feedbackAcerto: "Correto. Nuvem = milhões de GOTINHAS de água condensada.",
@@ -181,6 +184,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🌊", titulo: "Vira rio e volta pro mar", cor: "from-cyan-500 to-blue-800" },
           { id: "b", emoji: "☁️", titulo: "Volta pra nuvem direto", cor: "from-slate-400 to-slate-700" },
           { id: "c", emoji: "🚫", titulo: "Some", cor: "from-red-500 to-rose-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "a",
         feedbackAcerto: "Sim. Chuva → rio → mar. Fecha o ciclo.",
@@ -379,6 +383,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Calor do sol", correta: true },
           { id: "b", texto: "Vento gelado" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. CALOR do sol.",
         feedbackErro: "Evaporação precisa de CALOR — o sol é a fonte.",
@@ -390,6 +396,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Menos de 1%", correta: true },
           { id: "b", texto: "A metade" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. É POUCA água doce. Por isso preservar é urgente.",
         feedbackErro: "É MENOS DE 1%. A maior parte da água é salgada ou congelada.",
@@ -401,6 +409,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Fechar a torneira ao escovar dentes", correta: true },
           { id: "b", texto: "Deixar torneira aberta o tempo todo" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Exato. Pequenas atitudes = grande economia.",
         feedbackErro: "Fechar torneira ECONOMIZA água. Deixar aberta desperdiça litros.",

@@ -32,14 +32,19 @@ export const aula05_missaoFinal: AulaV4 = {
   // Desafio 1 — CÁLCULO MENTAL (30 + 4)
   momento02_exploracao: {
     instrucao:
-      "Desafio 1 de 5 — CÁLCULO MENTAL. Rápido: 30 + 4. Toque nas peças:",
+      "Desafio 1 de 5 — CÁLCULO MENTAL. Resolva 30 + 4 no seu tempo e toque nas peças para conferir:",
     cenas: [],
     interacao: {
-      tipo: "tapContar",
-      imagemUrl: bloco,
-      quantidade: 34,
-      itemPlural: "peças",
+      tipo: "contarQuiz",
+      grupos: [
+        { imagemUrl: bloco, quantidade: 3, rotulo: "3 dezenas" },
+        { imagemUrl: estrela, quantidade: 4, rotulo: "4 unidades" },
+      ],
       pergunta: "30 + 4 = ?",
+      opcoes: ["30", "34", "43"],
+      correta: 1,
+      feedbackAcerto: "Certo: 3 dezenas e 4 unidades formam 34.",
+      feedbackErro: "Junte 30 e 4, mantendo dezenas e unidades.",
     },
   },
 

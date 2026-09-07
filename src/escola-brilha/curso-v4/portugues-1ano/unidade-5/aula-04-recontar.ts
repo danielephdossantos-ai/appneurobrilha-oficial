@@ -209,7 +209,7 @@ export const aula04: AulaPortuguesV4 = {
   momento09_revisao: {
     pontos: [
       "RECONTAR é contar de novo a história, com as próprias palavras, na ordem certa.",
-      "Pra recontar bem, usamos: personagem principal, cenário, tempo, começo, meio e fim.",
+      "Para recontar com clareza, mantemos os acontecimentos principais na ordem e citamos personagens, lugar ou tempo quando forem importantes.",
       "As imagens em sequência ajudam a lembrar a ordem dos acontecimentos.",
     ],
     miniDesafio: {
@@ -269,13 +269,13 @@ export const aula04: AulaPortuguesV4 = {
         pergunta: "5/5 — Pra recontar bem uma história, é importante lembrar de…",
         opcoes: [
           "Só o nome do personagem",
-          "Personagem, cenário, tempo, começo, meio e fim",
+          "Os acontecimentos principais na ordem e os elementos importantes",
           "Só o começo e o fim",
           "Só a última página",
         ],
         correta: 1,
         feedbackAcerto: "🎉 Isso mesmo! Você é um verdadeiro Contador de Histórias! 🌟",
-        feedbackErro: "Se pular o meio, a história fica sem sentido. Um bom reconto usa TUDO.",
+        feedbackErro: "Um bom reconto preserva os acontecimentos essenciais e a ordem da narrativa, sem precisar repetir cada detalhe.",
       },
     ],
   },

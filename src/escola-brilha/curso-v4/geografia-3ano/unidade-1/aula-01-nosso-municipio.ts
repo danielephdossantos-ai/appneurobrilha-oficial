@@ -19,7 +19,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-nosso-municipio",
   titulo: "Meu Município: Cidade + Campo",
   iconeTrilha: "🗺️",
-  bncc: ["EF03GE01"],
+  bncc: [],
   duracaoMin: 20,
 
   cena01_motivacao: {
@@ -53,6 +53,19 @@ export const aula01: AulaGeoV1 = {
         emoji: "🏙️🌾",
         cor: "from-emerald-400 to-amber-500",
       },
+
+      {
+        id: "extra-1",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
+      {
+        id: "extra-2",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
     ],
     respostaCerta: "cidade-campo",
     feedbackAcerto:
@@ -74,8 +87,7 @@ export const aula01: AulaGeoV1 = {
         emoji: "🗺️",
         cor: "from-emerald-500 to-teal-700",
         fotoUrl: imgMunicipioAereo,
-        conteudo:
-          "É o pedaço do país que tem UMA prefeitura, UM prefeito, e junta cidade + campo.",
+        conteudo: "É o pedaço do país que tem UMA prefeitura, UM prefeito, e junta cidade + campo.",
         exemplo: "A gente mora no município de _______ (fala o seu!).",
       },
       {
@@ -94,8 +106,7 @@ export const aula01: AulaGeoV1 = {
         emoji: "🌾",
         cor: "from-lime-500 to-emerald-700",
         fotoUrl: imgZonaRural,
-        conteudo:
-          "É a parte do município com plantações, animais, matas e rios. É o CAMPO.",
+        conteudo: "É a parte do município com plantações, animais, matas e rios. É o CAMPO.",
         exemplo: "Sítio, fazenda, roça de milho — zona rural.",
       },
       {
@@ -180,6 +191,13 @@ export const aula01: AulaGeoV1 = {
           { id: "urbana", emoji: "🏙️", titulo: "Zona Urbana", cor: "from-sky-400 to-indigo-500" },
           { id: "rural", emoji: "🌾", titulo: "Zona Rural", cor: "from-lime-400 to-emerald-600" },
           { id: "fronteira", emoji: "🚧", titulo: "Fronteira", cor: "from-amber-400 to-rose-600" },
+
+          {
+            id: "extra-3",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "urbana",
         feedbackAcerto:
@@ -194,20 +212,38 @@ export const aula01: AulaGeoV1 = {
           { id: "urbana", emoji: "🏙️", titulo: "Zona Urbana", cor: "from-sky-400 to-indigo-500" },
           { id: "rural", emoji: "🌾", titulo: "Zona Rural", cor: "from-lime-400 to-emerald-600" },
           { id: "rio", emoji: "🌊", titulo: "Só no Rio", cor: "from-cyan-400 to-blue-600" },
+
+          {
+            id: "extra-4",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "rural",
         feedbackAcerto:
           "Boa! Plantação, sítio e animais moram na ZONA RURAL — o campo do município.",
-        feedbackErro:
-          "Não é aí. Plantações, sítios e animais ficam no CAMPO — a ZONA RURAL.",
+        feedbackErro: "Não é aí. Plantações, sítios e animais ficam no CAMPO — a ZONA RURAL.",
       },
       {
         id: "q3",
         pergunta: "O que separa UM município do outro?",
         cards: [
-          { id: "fronteira", emoji: "🚧", titulo: "A Fronteira", cor: "from-amber-400 to-rose-600" },
+          {
+            id: "fronteira",
+            emoji: "🚧",
+            titulo: "A Fronteira",
+            cor: "from-amber-400 to-rose-600",
+          },
           { id: "rio", emoji: "🌊", titulo: "O Rio", cor: "from-cyan-400 to-blue-600" },
           { id: "praca", emoji: "🌳", titulo: "A Praça", cor: "from-emerald-400 to-teal-600" },
+
+          {
+            id: "extra-5",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "fronteira",
         feedbackAcerto:
@@ -350,10 +386,8 @@ export const aula01: AulaGeoV1 = {
         contexto:
           "Entre os dois municípios corre uma água larga que os barcos atravessam. Que marco separa naturalmente as duas terras?",
         pecaCertaId: "rio",
-        feedbackAcerto:
-          "Combo! O RIO é um marco natural — a fronteira passa em cima da água.",
-        feedbackErro:
-          "Quase! Quando tem água correndo entre dois municípios, o marco é o RIO 🌊.",
+        feedbackAcerto: "Combo! O RIO é um marco natural — a fronteira passa em cima da água.",
+        feedbackErro: "Quase! Quando tem água correndo entre dois municípios, o marco é o RIO 🌊.",
       },
       {
         id: "r2",
@@ -372,8 +406,7 @@ export const aula01: AulaGeoV1 = {
         pecaCertaId: "placa",
         feedbackAcerto:
           "Boa! A PLACA 🪧 na beira da estrada é o marco oficial: passou daqui, mudou de município.",
-        feedbackErro:
-          "Repara: numa estrada quem avisa a mudança de município é a PLACA 🪧.",
+        feedbackErro: "Repara: numa estrada quem avisa a mudança de município é a PLACA 🪧.",
       },
       {
         id: "r3",
@@ -390,10 +423,8 @@ export const aula01: AulaGeoV1 = {
         contexto:
           "Aqui o povo levantou uma construção de tijolos separando os quintais dos dois municípios. Qual é o marco?",
         pecaCertaId: "muro",
-        feedbackAcerto:
-          "Isso! O MURO 🧱 virou o marco combinado entre os dois municípios.",
-        feedbackErro:
-          "A pista fala de tijolos separando quintais — é o MURO 🧱.",
+        feedbackAcerto: "Isso! O MURO 🧱 virou o marco combinado entre os dois municípios.",
+        feedbackErro: "A pista fala de tijolos separando quintais — é o MURO 🧱.",
       },
       {
         id: "r4",
@@ -412,8 +443,7 @@ export const aula01: AulaGeoV1 = {
         pecaCertaId: "ponte",
         feedbackAcerto:
           "Combo perfeito! A PONTE 🌉 conecta os dois lados e é o marco combinado dessa fronteira.",
-        feedbackErro:
-          "Atravessar o rio de carro pede uma PONTE 🌉 — esse é o marco dessa rodada.",
+        feedbackErro: "Atravessar o rio de carro pede uma PONTE 🌉 — esse é o marco dessa rodada.",
       },
     ],
     falaFinal:
@@ -451,7 +481,8 @@ export const aula01: AulaGeoV1 = {
   },
   cena11_avaliacao: {
     tipo: "seloAtlas",
-    aurora: "Chegou a hora da verdade, explorador! Responda 3 perguntas pra ganhar sua insígnia oficial.",
+    aurora:
+      "Chegou a hora da verdade, explorador! Responda 3 perguntas pra ganhar sua insígnia oficial.",
     instrucao: "Toque na resposta certa. Você tem 1 chance por pergunta.",
     perguntas: [
       {
@@ -459,8 +490,14 @@ export const aula01: AulaGeoV1 = {
         pergunta: "O que é um MUNICÍPIO?",
         opcoes: [
           { id: "a", texto: "Só a parte da cidade com prédios." },
-          { id: "b", texto: "A zona urbana e a zona rural juntas, com o mesmo prefeito.", correta: true },
+          {
+            id: "b",
+            texto: "A zona urbana e a zona rural juntas, com o mesmo prefeito.",
+            correta: true,
+          },
           { id: "c", texto: "Um país pequeno dentro de outro país." },
+
+          { id: "extra-6", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Isso! Município é urbano + rural juntos, com uma prefeitura só.",
         feedbackErro: "Quase! Município junta a zona urbana E a rural — as duas partes.",
@@ -472,6 +509,8 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Plantação, gado e muito espaço aberto.", correta: true },
           { id: "b", texto: "Semáforo, ônibus e prédios altos." },
           { id: "c", texto: "Shopping, cinema e metrô." },
+
+          { id: "extra-7", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Perfeito! Plantação, gado e espaço aberto são marcas do campo.",
         feedbackErro: "Ops! Semáforo e prédios são marcas da zona URBANA, não da rural.",
@@ -482,10 +521,17 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Uma parede alta com portão." },
           { id: "b", texto: "Nada, é só continuar andando." },
-          { id: "c", texto: "Uma FRONTEIRA, marcada por rios, placas ou linhas no mapa.", correta: true },
+          {
+            id: "c",
+            texto: "Uma FRONTEIRA, marcada por rios, placas ou linhas no mapa.",
+            correta: true,
+          },
+
+          { id: "extra-8", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Exato! A fronteira pode ser um rio, uma placa ou uma linha no mapa.",
-        feedbackErro: "Quase! Fronteira nem sempre é parede — pode ser rio, placa ou linha no mapa.",
+        feedbackErro:
+          "Quase! Fronteira nem sempre é parede — pode ser rio, placa ou linha no mapa.",
       },
     ],
     selo: {
@@ -497,7 +543,6 @@ export const aula01: AulaGeoV1 = {
     falaFinal:
       "Sua primeira página do Atlas Municipal está pronta! Você já sabe o que é município, reconhece zona urbana e rural, e entende como funcionam as fronteiras. Guarde essa insígnia — a próxima aula te espera!",
   },
-
 
   recompensa: { xp: 100, moedas: 20, medalha: "Cartógrafo Iniciante" },
 };

@@ -94,6 +94,7 @@ const ICONS: Partial<Record<CategoriaSlug, string>> = {
   "ritmo-e-sopro": icRitmoSopro,
   "paromatopeias-corpo": icSonsCorpo,
   "tracado-letras": icTracado,
+  "direcao-letras-numeros": icTracado,
   "triagem-categorias": icTriagem,
   "expressao-emocao": icExpressao,
   "discriminacao-auditiva": icDiscriminacaoAuditiva,
@@ -173,6 +174,20 @@ const GROUP_CONFIG: Record<
     bg: "from-orange-50 to-orange-100/50 dark:from-orange-950/30 dark:to-orange-900/20",
     border: "border-orange-200 dark:border-orange-800",
     accent: "bg-orange-500",
+  },
+  "Jogos Clínicos Cognitivos": {
+    icon: <GraduationCap className="h-5 w-5" />,
+    color: "text-amber-700",
+    bg: "from-amber-50 to-amber-100/50 dark:from-amber-950/30 dark:to-amber-900/20",
+    border: "border-amber-200 dark:border-amber-800",
+    accent: "bg-amber-500",
+  },
+  Alfabetização: {
+    icon: <BookOpen className="h-5 w-5" />,
+    color: "text-amber-700",
+    bg: "from-amber-50 to-yellow-100/50 dark:from-amber-950/30 dark:to-yellow-900/20",
+    border: "border-amber-200 dark:border-amber-800",
+    accent: "bg-amber-500",
   },
 };
 
@@ -365,8 +380,11 @@ function Treino() {
 
 
           {GRUPOS.map((g) => {
-
-            const cfg = GROUP_CONFIG[g.nome];
+            const cfg = Object.entries(GROUP_CONFIG).find(([nome]) => g.nome.startsWith(nome))?.[1];
+            const totalVariacoes = g.slugs.reduce(
+              (total, slug) => total + (VARIATIONS[slug]?.length ?? 0),
+              0,
+            );
             return (
               <section
                 key={g.nome}
@@ -381,12 +399,12 @@ function Treino() {
                   </div>
                   <div>
                     <h2
-                      className={`font-black text-sm ${cfg?.color ?? "text-foreground"} uppercase tracking-wider`}
+                      className={`font-black text-base ${cfg?.color ?? "text-foreground"} uppercase tracking-wide`}
                     >
                       {g.nome}
                     </h2>
-                    <div className="text-xs text-muted-foreground">
-                      {g.slugs.length} atividades · {g.slugs.length * 50} variações
+                    <div className="text-sm text-muted-foreground">
+                      {g.slugs.length} atividades · {totalVariacoes} variações
                     </div>
                   </div>
                 </div>
@@ -410,7 +428,7 @@ function Treino() {
                             timestamp: Date.now(),
                           });
                         }}
-                        className="group relative bg-background hover:bg-accent/30 border-2 border-border hover:border-primary/30 rounded-2xl p-2 flex flex-col items-center text-center transition-all hover:-translate-y-0.5 hover:shadow-md active:scale-95"
+                        className="group relative min-h-44 bg-background hover:bg-accent/30 border-2 border-border hover:border-primary/30 rounded-2xl p-3 flex flex-col items-center justify-between text-center transition-all hover:-translate-y-0.5 hover:shadow-md active:scale-95"
                       >
                         {/* Favoritar */}
                         <div className="absolute top-1.5 left-1.5 z-10">
@@ -437,7 +455,7 @@ function Treino() {
                         )}
 
                         {/* Ícone GRANDE — foco visual para a criança */}
-                        <div className="w-28 h-28 sm:w-32 sm:h-32 grid place-items-center rounded-2xl">
+                        <div className="w-24 h-24 min-[380px]:w-28 min-[380px]:h-28 sm:w-32 sm:h-32 grid place-items-center rounded-2xl">
                           {iconSrc ? (
                             <img
                               src={iconSrc}
@@ -455,7 +473,7 @@ function Treino() {
                           )}
                         </div>
 
-                        <div className="mt-1 font-bold text-[10px] leading-tight text-muted-foreground line-clamp-1">
+                        <div className="mt-2 min-h-10 flex items-center justify-center font-extrabold text-sm leading-snug text-foreground line-clamp-2">
                           {c?.nome ?? slug}
                         </div>
                       </Link>

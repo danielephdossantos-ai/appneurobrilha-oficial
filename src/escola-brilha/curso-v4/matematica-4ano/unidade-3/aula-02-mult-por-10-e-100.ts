@@ -9,50 +9,50 @@ export const aula02_multPor10E100: AulaV4 = {
   metodologias: ["skemp", "rme"],
 
   momento01_motivacao: {
-    titulo: "O truque dos zeros",
+    titulo: "Valores dez, cem e mil vezes maiores",
     historia:
-      "{NOME}, multiplicar por 10, 100 ou 1.000 é só empurrar zeros pra direita.",
+      "{NOME}, multiplicar por 10, 100 ou 1.000 faz cada algarismo ocupar uma casa de valor maior.",
   },
   momento02_exploracao: {
     instrucao: "Repare no padrão.",
     cenas: [
-      { tipo: "texto", texto: "×10 → 1 zero. ×100 → 2 zeros. ×1000 → 3 zeros.", destaque: true },
+      { tipo: "texto", texto: "×10 desloca cada algarismo 1 casa para a esquerda; ×100 desloca 2; ×1000 desloca 3.", destaque: true },
       { tipo: "texto", texto: "Ex.: 34 × 10 = 340. 34 × 100 = 3.400. 34 × 1000 = 34.000." },
     ],
   },
   momento03_descoberta: {
     perguntaGuia: "Por que funciona?",
     pista: "Pense em casas de valor.",
-    revelacao: "Cada zero puxa o número uma casa pra ESQUERDA — pra valer 10 vezes mais.",
+    revelacao: "Cada fator 10 desloca o valor uma casa para a esquerda no quadro posicional.",
   },
   momento04_explicacao: {
-    titulo: "Regra dos zeros",
+    titulo: "Deslocamento no quadro posicional",
     etapas: [
       {
-        texto: "Quantos zeros o multiplicador tem, tantos zeros aparecem no final.",
+        texto: "Multiplicar por 100 faz cada algarismo passar duas casas para valores maiores.",
         exemploReal: {
           contexto: "45 × 100.",
-          destaque: "45 × 100 = 4.500. Acrescento 2 zeros ao 45.",
+          destaque: "45 × 100 = 4.500: 4 dezenas viram 4 milhares e 5 unidades viram 5 centenas.",
         },
       },
     ],
   },
   momento05_modelagem: {
     enunciado: "Quanto é 27 × 1000?",
-    passos: ["1000 tem 3 zeros.", "27 → 27 000.", "27.000."],
+    passos: ["Multiplicar por 1.000 desloca cada valor três casas.", "2 dezenas passam a 2 dezenas de milhar e 7 unidades passam a 7 milhares.", "Resultado: 27.000."],
     resposta: "27.000",
     casasValor: { numero: 27000, mostrarDecomposicao: true, extenso: "vinte e sete mil" },
   },
   momento06_praticaGuiada: {
     enunciado: "56 × 100 = ?",
-    dica: "Cole 2 zeros no fim do 56.",
+    dica: "Desloque cada algarismo duas casas para valores maiores.",
     interacao: {
       tipo: "escolhaVisual",
       pergunta: "Escolha:",
       opcoes: [{ nome: "5.600" }, { nome: "560" }, { nome: "56.000" }],
       respostaCerta: "5.600",
       feedbackAcerto: "🎯 5.600.",
-      feedbackErro: "×100 = 2 zeros.",
+      feedbackErro: "Ao multiplicar por 100, cada algarismo passa a ocupar uma casa de valor cem vezes maior.",
     },
   },
   momento07_praticaIndependente: {
@@ -63,7 +63,7 @@ export const aula02_multPor10E100: AulaV4 = {
       opcoes: [{ nome: "820" }, { nome: "82" }, { nome: "8.200" }],
       respostaCerta: "820",
       feedbackAcerto: "🎯 820.",
-      feedbackErro: "×10 = 1 zero.",
+      feedbackErro: "Ao multiplicar por 10, cada algarismo passa para a casa imediatamente maior.",
     },
   },
   momento08_aplicacao: {
@@ -79,17 +79,17 @@ export const aula02_multPor10E100: AulaV4 = {
     },
   },
   momento09_revisao: {
-    pontos: ["Cole tantos zeros quantos o multiplicador tiver."],
+    pontos: ["×10 desloca uma casa; ×100, duas; ×1.000, três.", "Os zeros registram as casas que ficam vazias."],
   },
   momento10_avaliacao: {
     perguntas: [
-      { pergunta: "45 × 10 = ?", opcoes: ["450", "45", "4.500"], correta: 0, feedbackAcerto: "🎉 450.", feedbackErro: "×10 → 1 zero." },
-      { pergunta: "12 × 100 = ?", opcoes: ["1.200", "120", "12.000"], correta: 0, feedbackAcerto: "🎉 1.200.", feedbackErro: "×100 → 2 zeros." },
-      { pergunta: "8 × 1000 = ?", opcoes: ["8.000", "800", "80.000"], correta: 0, feedbackAcerto: "🎉 8.000.", feedbackErro: "×1000 → 3 zeros." },
+      { pergunta: "45 × 10 = ?", opcoes: ["450", "45", "4.500"], correta: 0, feedbackAcerto: "🎉 Quatro dezenas e cinco unidades passam a quatro centenas e cinco dezenas: 450.", feedbackErro: "Cada algarismo muda uma casa para a esquerda: 45 × 10 = 450." },
+      { pergunta: "12 × 100 = ?", opcoes: ["1.200", "120", "12.000"], correta: 0, feedbackAcerto: "🎉 Os valores avançam duas casas: 12 × 100 = 1.200.", feedbackErro: "Uma dezena vira um milhar e duas unidades viram duas centenas: 1.200." },
+      { pergunta: "8 × 1000 = ?", opcoes: ["8.000", "800", "80.000"], correta: 0, feedbackAcerto: "🎉 O 8 passa da unidade para a unidade de milhar: 8.000.", feedbackErro: "Multiplicar por 1.000 torna o valor mil vezes maior: 8 × 1.000 = 8.000." },
     ],
   },
   momento11_missaoFamilia: {
-    titulo: "Cadeia de Zeros",
+    titulo: "Quadro de valor posicional",
     materiais: ["Papel"],
     passos: ["Escolha um número de 2 algarismos.", "Multiplique por 10, 100 e 1.000.", "Escreva os três resultados."],
     registro: "📸 Foto dos três resultados.",

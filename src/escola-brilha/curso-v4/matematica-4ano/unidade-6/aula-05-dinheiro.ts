@@ -4,7 +4,7 @@ export const aula05_dinheiro: AulaV4 = {
   slug: "u6-05-dinheiro",
   titulo: "Dinheiro — real e centavos",
   iconeTrilha: "💰",
-  bncc: ["EF04MA24", "EF04MA25"],
+  bncc: ["EF04MA25"],
   duracaoMin: 22,
   metodologias: ["rme", "vergnaud"],
 

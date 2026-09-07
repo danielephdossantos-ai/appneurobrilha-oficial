@@ -12,7 +12,7 @@ import { DemoAnimado } from "./shared/DemoAnimado";
  */
 
 const CICLO_MS = 900; // meio ciclo (uma "batida") — total 1.8s por asa completa
-const DURACAO_S = 90;
+const DURACAO_S = 30;
 
 export function ButterflyHug({ onClose }: { onClose: () => void }) {
   const [rodando, setRodando] = useState(false);
@@ -62,7 +62,7 @@ export function ButterflyHug({ onClose }: { onClose: () => void }) {
 
       <h2 className="text-2xl font-black text-slate-800 mb-1">Abraço da Borboleta</h2>
       <p className="text-sm text-slate-500 mb-3 font-medium text-center max-w-xs">
-        Cruze os braços no peito, com as mãos nos ombros. Toque de leve uma mão de cada vez, seguindo as asas.
+        Se esse toque for confortável, cruze os braços e toque de leve uma mão de cada vez. Você pode parar quando quiser.
       </p>
 
       <div className="mb-3 flex flex-col items-center gap-2">
@@ -116,7 +116,7 @@ export function ButterflyHug({ onClose }: { onClose: () => void }) {
       </div>
       <p className="text-sm font-bold text-slate-500 mb-4">
         {concluido
-          ? "Você acalmou o coração 💜"
+              ? "Você terminou os movimentos 💜"
           : rodando
           ? lado === "esq"
             ? "← mão esquerda"
@@ -157,8 +157,8 @@ export function ButterflyHug({ onClose }: { onClose: () => void }) {
         </button>
       </div>
 
-      <p className="mt-6 text-[10px] text-slate-400 text-center max-w-xs">
-        Base clínica: Butterfly Hug (Artigas & Jarero, EMDR) — estimulação bilateral lenta.
+      <p className="mt-6 text-sm text-slate-500 text-center max-w-sm">
+        Este é um exercício educativo de percepção corporal. Ele não substitui acompanhamento profissional.
       </p>
     </div>
   );

@@ -82,7 +82,7 @@ const aula: Aula = {
     "As formas estão em toda parte — na moeda, no livro, na janela, na fatia de pizza! Descobrir os nomes é um super poder.",
 
   explicacao:
-    "🔵 CÍRCULO — não tem lados nem pontas. Ex.: ⚽ bola, 🪙 moeda, 🕒 relógio.\n\n🟨 QUADRADO — tem 4 lados IGUAIS. Ex.: 🧩 azulejo, 🪟 janela quadrada.\n\n▭ RETÂNGULO — tem 4 lados; dois maiores e dois menores. Ex.: 📖 livro, 📱 celular, 🚪 porta.\n\n🔺 TRIÂNGULO — tem 3 lados e 3 pontas. Ex.: 🍕 fatia de pizza, 🚧 placa de trânsito.",
+    "FIGURAS PLANAS podem ser desenhadas numa superfície. CÍRCULO — contorno curvo, sem lados retos e sem vértices; a face plana de uma moeda lembra um círculo. QUADRADO — 4 lados de mesma medida e 4 vértices. RETÂNGULO — 4 lados e 4 vértices; lados opostos têm a mesma medida. TRIÂNGULO — 3 lados e 3 vértices. Objetos espaciais não são figuras planas: uma bola é uma esfera, embora seu desenho ou sombra possa parecer um círculo.",
 
   explicacoesNiveis: {
     nivel1:
@@ -125,7 +125,7 @@ const aula: Aula = {
   },
 
   exercicios: [
-    { enunciado: "⚽ Bola parece qual forma?", resposta: "Círculo", dica: "Redondinha." },
+    { enunciado: "Qual figura plana aparece no contorno da face de uma moeda?", resposta: "Círculo", dica: "Observe a face plana, não o objeto inteiro." },
     { enunciado: "🧩 Azulejo parece qual forma?", resposta: "Quadrado", dica: "4 lados iguais." },
     { enunciado: "📖 Livro parece qual forma?", resposta: "Retângulo", dica: "2 lados maiores." },
     { enunciado: "🍕 Fatia de pizza parece qual forma?", resposta: "Triângulo", dica: "3 pontas." },

@@ -6,6 +6,7 @@ import { unidade4 } from "./unidade-4";
 import { unidade5 } from "./unidade-5";
 import { unidade6 } from "./unidade-6";
 import { unidade7 } from "./unidade-7";
+import { unidade8 } from "./unidade-8";
 
 /**
  * Ciências · 3º Ano — "Os Guardiões da Biosfera e os Mistérios da Matéria"
@@ -24,7 +25,7 @@ const curso: CursoGeoV1 = {
   corPrimaria: "#059669",
   corSecundaria: "#052e16",
   tipoAula: "geo-v1",
-  unidades: [unidade1, unidade2, unidade3, unidade4, unidade5, unidade6, unidade7],
+  unidades: [unidade1, unidade2, unidade3, unidade4, unidade5, unidade6, unidade7, unidade8],
 };
 
 export default curso;

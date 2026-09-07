@@ -9,9 +9,9 @@ import { url as pato } from "@/assets/neuro-treino/objetos/pato.png.asset.json";
 /**
  * Unidade 10 · Aula 3 — Eu Leio o Texto Inteiro
  * -------------------------------------------------------------
- * Fase 9. Fechamento: PARA, ELE, ELA, DO, DA. Aqui as teimosas
- * das três aulas se juntam num texto único e a criança lê o
- * parágrafo inteiro sozinha, com releitura cronometrada.
+ * Fase 9. Fechamento: PARA, ELE, ELA, DO, DA. As palavras
+ * frequentes das três aulas aparecem em um texto único, lido
+ * com precisão, expressão, ritmo confortável e compreensão.
  *
  * BNCC: EF01LP02 · EF01LP04 · EF01LP12 · EF01LP16
  */
@@ -23,9 +23,9 @@ export const aula03: AulaPortuguesV4 = {
   duracaoMin: 15,
 
   momento01_motivacao: {
-    titulo: "Brilha lê um texto inteiro sem travar",
+    titulo: "Brilha lê um texto inteiro com compreensão",
     historia:
-      "Brilha respirou fundo e leu o texto do começo ao fim. Não travou nenhuma vez! — Como você conseguiu? — perguntou Nina. — Eu já conheço as teimosas de olho — disse Brilha. — Aí sobra cabeça pra entender a história.",
+      "Brilha leu o texto com precisão, ritmo confortável e atenção ao sentido. Quando encontrou uma palavra difícil, releu sem pressa. A prática com palavras frequentes deixou mais atenção disponível para compreender a história.",
     imagemUrl: brilha,
   },
 
@@ -51,13 +51,13 @@ export const aula03: AulaPortuguesV4 = {
   },
 
   momento03_vocabulario: {
-    instrucao: "Duas teimosas importantes:",
+    instrucao: "Palavras frequentes importantes:",
     cards: [
       {
         palavra: "ele / ela",
         explicacao:
           "São palavrinhas que a gente usa no lugar do nome, pra não repetir toda hora.",
-        exemplo: "O pato nadou. ELE nadou rápido.",
+        exemplo: "O pato nadou. ELE nadou até a margem.",
         imagemUrl: pato,
       },
       {
@@ -72,7 +72,7 @@ export const aula03: AulaPortuguesV4 = {
   momento_ensinoVisual: {
     titulo: "Último treino de relance",
     instrucao:
-      "As últimas teimosas vão piscar. Depois delas, você lê o texto inteiro.",
+      "As últimas palavras frequentes vão aparecer. Depois, você lê o texto inteiro no seu ritmo.",
     blocos: [
       {
         tipo: "palavraRelampago",
@@ -192,9 +192,9 @@ export const aula03: AulaPortuguesV4 = {
 
   momento09_revisao: {
     pontos: [
-      "Teimosas de hoje: PARA, ELE, ELA, DO, DA.",
+      "Palavras frequentes de hoje: PARA, ELE, ELA, DO, DA.",
       "ELE e ELA entram no lugar do nome do personagem.",
-      "Quando as teimosas já são conhecidas, sobra atenção pra ENTENDER o texto.",
+      "Quando palavras frequentes ficam automáticas, sobra atenção para ENTENDER o texto.",
     ],
     miniDesafio: {
       pergunta: "'O sapo pulou. ___ caiu na água.' Qual completa?",
@@ -241,16 +241,16 @@ export const aula03: AulaPortuguesV4 = {
         feedbackErro: "Elas substituem o nome, pra não ficar 'o sapo, o sapo, o sapo' o tempo todo.",
       },
       {
-        pergunta: "5/5 — Por que conhecer as teimosas ajuda a ENTENDER a história?",
+        pergunta: "5/5 — Por que praticar palavras frequentes ajuda a ENTENDER a história?",
         opcoes: [
-          "Porque você não trava e sobra atenção para o sentido",
+          "Porque o reconhecimento fica mais automático e sobra atenção para o sentido",
           "Porque o texto fica mais curto",
           "Porque as letras mudam de cor",
           "Porque não precisa mais ler",
         ],
         correta: 0,
         feedbackAcerto: "🎉 Exatamente isso!",
-        feedbackErro: "O texto continua igual. O que muda é você: sem travar, dá pra pensar no sentido.",
+        feedbackErro: "O texto continua igual. Com a prática, o reconhecimento exige menos esforço e sobra atenção para o sentido.",
       },
     ],
   },
@@ -261,7 +261,7 @@ export const aula03: AulaPortuguesV4 = {
     passos: [
       "1) O adulto lê uma página em voz alta.",
       "2) A criança lê a mesma página depois, no ritmo dela.",
-      "3) Juntos, procurem 3 teimosas na página: PARA, ELE, ELA, DO, DA.",
+      "3) Juntos, procurem palavras frequentes na página, como PARA, ELE, ELA, DO e DA.",
       "4) A criança conta com as próprias palavras o que aconteceu na página.",
     ],
     registro: "📸 Foto da página lida ou um áudio da criança recontando.",
@@ -270,7 +270,7 @@ export const aula03: AulaPortuguesV4 = {
   momento_fluencia: {
     titulo: "Ler de novo, mais solto",
     instrucao:
-      "Esse é o texto de fechamento da unidade. Leia três vezes: comigo, sozinho e mais uma. Você vai ver a diferença.",
+      "Este é o texto de fechamento. Leia com apoio, depois sozinho no seu ritmo e mais uma vez com precisão e expressão. O tempo é apenas uma referência; ao final, conte o que entendeu.",
     texto: [
       "O SAPO ACHOU UMA BOLA.",
       "ELE LEVOU A BOLA PARA A RÃ.",

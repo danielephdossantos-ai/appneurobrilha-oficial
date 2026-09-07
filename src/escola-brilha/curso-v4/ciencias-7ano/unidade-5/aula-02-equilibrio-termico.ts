@@ -37,6 +37,7 @@ export const aula02: AulaGeoV1 = {
       { id: "4graus", titulo: "Continua 4°C", subtitulo: "o frio se mantém sozinho", emoji: "🧊", cor: "from-sky-500 to-cyan-700", fotoUrl: transformacoesImg },
       { id: "25graus", titulo: "Chega a ~25°C", subtitulo: "se equilibra com o ambiente", emoji: "🌡️", cor: "from-emerald-500 to-teal-700", fotoUrl: laboratorioImg },
       { id: "0graus", titulo: "Cai para 0°C", subtitulo: "o frio se intensifica", emoji: "❄️", cor: "from-rose-500 to-red-700", fotoUrl: laboratorioImg },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "25graus",
     feedbackAcerto:
@@ -92,6 +93,7 @@ export const aula02: AulaGeoV1 = {
           { id: "a", emoji: "🔥", titulo: "Do corpo mais quente para o mais frio", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "❄️", titulo: "Do corpo mais frio para o mais quente", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🟰", titulo: "Em qualquer direção aleatória", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. Isso é uma lei universal da física — calor nunca flui espontaneamente do frio para o quente.",
         feedbackErro: "O calor NUNCA flui espontaneamente do frio para o quente. Sempre do mais quente para o mais frio." },
@@ -100,6 +102,7 @@ export const aula02: AulaGeoV1 = {
           { id: "a", emoji: "⚖️", titulo: "Equilíbrio térmico", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🔥", titulo: "Combustão", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🧊", titulo: "Congelamento", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Sim. Equilíbrio térmico = mesma temperatura = fluxo de calor cessa.",
         feedbackErro: "Combustão é reação química; congelamento é mudança de estado. O nome certo aqui é EQUILÍBRIO TÉRMICO." },
@@ -108,6 +111,7 @@ export const aula02: AulaGeoV1 = {
           { id: "a", emoji: "⚙️", titulo: "Sempre parte do calor se perde para a fonte fria", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🔧", titulo: "Porque as máquinas são mal construídas", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🧪", titulo: "Não existe essa limitação", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. É uma lei da física (2ª lei da termodinâmica), não um problema de engenharia que se resolve com uma máquina melhor.",
         feedbackErro: "Não é falta de qualidade da máquina. É uma LEI FÍSICA: parte do calor sempre vai para a fonte fria." },
@@ -209,6 +213,8 @@ export const aula02: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Do corpo mais quente para o mais frio", correta: true },
           { id: "b", texto: "Sempre do menor para o maior corpo" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. Direção é dada pela temperatura, não pelo tamanho do corpo.",
         feedbackErro: "Tamanho não define a direção do calor — TEMPERATURA sim. Sempre do mais quente ao mais frio." },
@@ -216,6 +222,8 @@ export const aula02: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "As reações químicas da vida (enzimas) só funcionam bem numa faixa estreita de temperatura", correta: true },
           { id: "b", texto: "É só uma questão de conforto, sem efeito biológico real" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. Fora da faixa segura, enzimas perdem função e o organismo entra em risco.",
         feedbackErro: "Não é só conforto — é sobrevivência. Enzimas e reações vitais dependem de temperatura estável." },
@@ -223,6 +231,8 @@ export const aula02: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Parte do calor sempre precisa ser descartada para a fonte fria (2ª lei da termodinâmica)", correta: true },
           { id: "b", texto: "Porque a tecnologia atual ainda não é boa o suficiente" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. É uma limitação da própria física, não da tecnologia disponível.",
         feedbackErro: "Não é limitação tecnológica — é uma LEI FÍSICA universal (segunda lei da termodinâmica)." },

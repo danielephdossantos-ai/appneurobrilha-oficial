@@ -47,12 +47,24 @@ export const aula01: AulaGeoV1 = {
         emoji: "🏖️",
         cor: "from-sky-400 to-blue-600",
       },
+
+      {
+        id: "extra-1",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
+      {
+        id: "extra-2",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
     ],
     respostaCerta: "migracao",
     feedbackAcerto:
       "Isso! MIGRAR é mudar de lugar pra viver e trabalhar — não é passeio, é vida nova.",
-    feedbackErro:
-      "Turismo é férias, volta pra casa. Mudar de vez pra outro lugar é MIGRAÇÃO.",
+    feedbackErro: "Turismo é férias, volta pra casa. Mudar de vez pra outro lugar é MIGRAÇÃO.",
     falaFinal: "Milhões de brasileiros já migraram. Vamos entender por quê.",
   },
 
@@ -78,7 +90,8 @@ export const aula01: AulaGeoV1 = {
         cor: "from-pink-500 to-rose-700",
         conteudo:
           "DIVERSIDADE é a mistura de povos, cores, religiões e culturas que formam o Brasil.",
-        exemplo: "Ex.: indígenas, africanos, europeus, asiáticos e árabes construíram o nosso jeito.",
+        exemplo:
+          "Ex.: indígenas, africanos, europeus, asiáticos e árabes construíram o nosso jeito.",
         fotoUrl: diversidade,
       },
       {
@@ -96,8 +109,7 @@ export const aula01: AulaGeoV1 = {
         capa: "4. Imigrante × Emigrante",
         emoji: "✈️",
         cor: "from-emerald-500 to-green-700",
-        conteudo:
-          "IMIGRANTE é quem CHEGA num país novo. EMIGRANTE é quem SAI do próprio país.",
+        conteudo: "IMIGRANTE é quem CHEGA num país novo. EMIGRANTE é quem SAI do próprio país.",
         exemplo: "Ex.: japonês que veio pro Brasil é imigrante aqui e emigrante lá no Japão.",
       },
     ],
@@ -170,6 +182,13 @@ export const aula01: AulaGeoV1 = {
           { id: "port", emoji: "⛵", titulo: "Portugueses", cor: "from-blue-500 to-indigo-700" },
           { id: "indi", emoji: "🏹", titulo: "Indígenas", cor: "from-emerald-500 to-green-700" },
           { id: "afr", emoji: "🥁", titulo: "Africanos", cor: "from-amber-500 to-orange-700" },
+
+          {
+            id: "extra-3",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "indi",
         feedbackAcerto: "Isso! Os POVOS INDÍGENAS já viviam aqui há milhares de anos.",
@@ -181,8 +200,20 @@ export const aula01: AulaGeoV1 = {
         fotoUrl: migracao,
         cards: [
           { id: "tur", emoji: "🏖️", titulo: "Turismo", cor: "from-sky-500 to-blue-700" },
-          { id: "mig", emoji: "🚚", titulo: "Migração interna", cor: "from-amber-500 to-orange-700" },
+          {
+            id: "mig",
+            emoji: "🚚",
+            titulo: "Migração interna",
+            cor: "from-amber-500 to-orange-700",
+          },
           { id: "im", emoji: "✈️", titulo: "Imigração", cor: "from-emerald-500 to-green-700" },
+
+          {
+            id: "extra-4",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "mig",
         feedbackAcerto: "Perfeito! Dentro do Brasil = MIGRAÇÃO INTERNA.",
@@ -196,6 +227,13 @@ export const aula01: AulaGeoV1 = {
           { id: "em", emoji: "👋", titulo: "Emigrante", cor: "from-red-500 to-rose-700" },
           { id: "im", emoji: "🤝", titulo: "Imigrante", cor: "from-emerald-500 to-green-700" },
           { id: "tu", emoji: "🎒", titulo: "Turista", cor: "from-sky-500 to-blue-700" },
+
+          {
+            id: "extra-5",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "im",
         feedbackAcerto: "Boa! Quem CHEGA num país novo é IMIGRANTE.",
@@ -349,7 +387,11 @@ export const aula01: AulaGeoV1 = {
       {
         id: "r5",
         municipioA: { nome: "Sushi", emoji: "🍣", cor: "from-red-500 to-rose-700" },
-        municipioB: { nome: "Feira da Liberdade", emoji: "🏮", cor: "from-amber-500 to-orange-700" },
+        municipioB: {
+          nome: "Feira da Liberdade",
+          emoji: "🏮",
+          cor: "from-amber-500 to-orange-700",
+        },
         contexto: "Sushi, tempurá e feira da Liberdade em SP vêm de...",
         pecaCertaId: "japoneses",
         feedbackAcerto: "Isso! JAPONESES — Brasil tem a maior colônia japonesa fora do Japão.",
@@ -409,9 +451,12 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Ninguém — o Brasil era vazio", correta: false },
           { id: "b", texto: "Os povos indígenas", correta: true },
           { id: "c", texto: "Os africanos", correta: false },
+
+          { id: "extra-6", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Isso! POVOS INDÍGENAS já viviam aqui há milhares de anos.",
-        feedbackErro: "Africanos vieram depois, escravizados. Antes de 1500 já viviam aqui os INDÍGENAS.",
+        feedbackErro:
+          "Africanos vieram depois, escravizados. Antes de 1500 já viviam aqui os INDÍGENAS.",
       },
       {
         id: "av2",
@@ -420,6 +465,8 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Viagem de turismo", correta: false },
           { id: "b", texto: "Migração interna", correta: true },
           { id: "c", texto: "Imigração", correta: false },
+
+          { id: "extra-7", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Perfeito! Dentro do Brasil = MIGRAÇÃO INTERNA.",
         feedbackErro: "Imigração é ENTRE PAÍSES. Dentro do Brasil chama MIGRAÇÃO INTERNA.",
@@ -431,6 +478,8 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "No campo", correta: false },
           { id: "b", texto: "Nas cidades", correta: true },
           { id: "c", texto: "Nas florestas", correta: false },
+
+          { id: "extra-8", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Isso! Mais de 85% da população mora em CIDADES.",
         feedbackErro: "Só 15% vive no campo. A maioria (85%) mora nas CIDADES.",

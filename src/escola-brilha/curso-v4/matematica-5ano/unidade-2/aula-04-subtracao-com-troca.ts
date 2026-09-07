@@ -9,19 +9,19 @@ export const aula04_subtracaoComTroca: AulaV4 = {
   metodologias: ["skemp", "vergnaud"],
 
   momento01_motivacao: {
-    titulo: "Emprestar do vizinho",
-    historia: "{NOME}, quando o topo é MENOR que a base, a gente pede emprestado da coluna à esquerda. Se o vizinho for 0, ele pede pro vizinho DELE — e vai em cadeia.",
+    titulo: "Trocar entre ordens",
+    historia: "{NOME}, quando não há unidades suficientes em uma ordem, trocamos 1 unidade da ordem à esquerda por 10 unidades da ordem atual. Se houver zero, continuamos as trocas até encontrar uma ordem com valor disponível.",
   },
   momento02_exploracao: {
-    instrucao: "Empréstimo em cadeia.",
+    instrucao: "Trocas em cadeia pelo valor posicional.",
     cenas: [
-      { tipo: "texto", texto: "Topo < base → pede 1 pro vizinho (vira +10).", destaque: true },
-      { tipo: "texto", texto: "Vizinho = 0? Ele pede pro seguinte. Vira 9 no meio." },
+      { tipo: "texto", texto: "Quando o algarismo de cima é menor, troque 1 unidade da ordem à esquerda por 10 da ordem atual.", destaque: true },
+      { tipo: "texto", texto: "Se a ordem à esquerda tiver zero, continue até encontrar valor para reagrupar. Cada zero atravessado recebe 10 e cede 1, ficando com 9." },
     ],
   },
   momento03_descoberta: {
     perguntaGuia: "40.000 − 12.567. Como fazer se tudo é 0?",
-    pista: "O empréstimo desce da DM até a U.",
+    pista: "Reagrupe uma dezena de milhar até chegar às unidades.",
     revelacao: "DM 4 dá 1 → vira 3. UM/C/D valem 10 e emprestam de volta virando 9. U pega +10.",
   },
   momento04_explicacao: {
@@ -49,7 +49,7 @@ export const aula04_subtracaoComTroca: AulaV4 = {
     ],
   },
   momento05_modelagem: {
-    enunciado: "Some cuidadoso: 60.000 − 24.375.",
+    enunciado: "Subtraia com cuidado: 60.000 − 24.375.",
     resposta: "35.625",
     passos: ["Toda coluna do topo é 0 (menos DM).", "DM 6 empresta em cadeia.", "= 35.625."],
     contaPassoAPasso: {
@@ -107,7 +107,7 @@ export const aula04_subtracaoComTroca: AulaV4 = {
     },
   },
   momento09_revisao: {
-    pontos: ["Empréstimo em cadeia atravessa zeros.", "Zeros do meio viram 9 depois do empréstimo.", "Anote cada troca no caderno."],
+    pontos: ["Trocas em cadeia podem atravessar zeros.", "Cada troca conserva o valor total do número.", "Anote cada reagrupamento no caderno."],
   },
   momento10_avaliacao: {
     perguntas: [

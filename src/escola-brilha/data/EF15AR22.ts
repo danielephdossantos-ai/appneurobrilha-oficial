@@ -1,0 +1,2 @@
+import { criarAulaArte1 } from "./criarAulaArte1";
+export default criarAulaArte1({ codigo: "EF15AR22", titulo: "Personagens e Vozes", foco: "Experimentar possibilidades criativas de movimento e voz na criação de personagens", objeto: "movimento e voz de personagens", exemplos: ["Variar gesto e voz para criar personagem", "Imitar para humilhar", "Falar sempre igual", "Resolver uma conta"], resposta: "Criar personagens respeitosos variando corpo e voz de maneira intencional.", proxima: "EF15AR23" });

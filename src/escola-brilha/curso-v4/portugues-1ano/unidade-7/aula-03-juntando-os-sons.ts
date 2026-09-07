@@ -61,7 +61,7 @@ export const aula03: AulaPortuguesV4 = {
       {
         palavra: "adivinhar",
         explicacao: "É descobrir a resposta usando as pistas que você escutou.",
-        exemplo: "Escutei /s/ /o/ /l/ e adivinhei: SOL!",
+        exemplo: "Escutei /s/ /ó/ /u/ e adivinhei: SOL!",
         imagemUrl: coruja,
       },
     ],
@@ -75,7 +75,7 @@ export const aula03: AulaPortuguesV4 = {
       {
         tipo: "sintetizarFonemas",
         itens: [
-          { fonemas: ["s", "o", "l"], palavra: "SOL", imagemUrl: sol },
+          { fonemas: ["s", "ó", "u"], palavra: "SOL", imagemUrl: sol },
           { fonemas: ["l", "u", "a"], palavra: "LUA", imagemUrl: lua },
           { fonemas: ["p", "a", "t", "o"], palavra: "PATO", imagemUrl: pato },
           { fonemas: ["r", "a", "t", "o"], palavra: "RATO", imagemUrl: rato },
@@ -104,7 +104,7 @@ export const aula03: AulaPortuguesV4 = {
     instrucao: "A resposta está no texto.",
     perguntas: [
       {
-        pergunta: "Qual palavra apareceu com os sons /s/ /o/ /l/?",
+        pergunta: "Qual palavra apareceu com os sons /s/ /ó/ /u/?",
         opcoes: ["LUA", "SOL", "BOLA"],
         correta: 1,
         feedbackAcerto: "🎉 Isso!",
@@ -208,7 +208,7 @@ export const aula03: AulaPortuguesV4 = {
     pontos: [
       "Juntar sons é o segredo da leitura.",
       "Fale os sons cada vez mais rápido até virar palavra.",
-      "/s/ /o/ /l/ → SOL.",
+      "/s/ /ó/ /u/ → SOL, na pronúncia brasileira mais comum.",
     ],
     miniDesafio: {
       pergunta: "/l/ /u/ /a/ juntos formam qual palavra?",
@@ -222,13 +222,13 @@ export const aula03: AulaPortuguesV4 = {
   momento10_avaliacao: {
     perguntas: [
       {
-        pergunta: "1/5 — /s/ /o/ /l/ formam:",
+        pergunta: "1/5 — Na pronúncia brasileira mais comum, /s/ /ó/ /u/ formam:",
         opcoes: ["SAL", "SOL", "SUL", "SÓ"],
         correta: 1,
         feedbackAcerto: "🎉 SOL!",
-        feedbackErro: "O som do meio é /o/, então é S-O-L.",
-        dica: "Preste atenção no som do meio: é /o/ ou /a/?",
-        reensino: "/s/ + /o/ + /l/ = SOL. Se o meio fosse /a/, seria SAL.",
+        feedbackErro: "Os sons /s/ /ó/ /u/ formam a palavra SOL.",
+        dica: "O som final parecido com /u/ é escrito com L nesta palavra.",
+        reensino: "Na fala brasileira mais comum, SOL soa como /s/ /ó/ /u/. A escrita termina com L.",
       },
       {
         pergunta: "2/5 — /p/ /a/ /t/ /o/ formam:",

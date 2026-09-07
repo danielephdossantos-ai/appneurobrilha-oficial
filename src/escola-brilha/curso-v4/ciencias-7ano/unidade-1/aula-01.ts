@@ -18,7 +18,7 @@ export const aula01: AulaGeoV1 = {
   titulo: "Atlas da Vida",
   iconeTrilha: "🔬",
   recompensa: { xp: 130, moedas: 50, medalha: "Pesquisador Júnior" },
-  bncc: ["EF07CI07"],
+  bncc: [],
   duracaoMin: 40,
 
   cena01_motivacao: {
@@ -43,6 +43,7 @@ export const aula01: AulaGeoV1 = {
       { id: "iguais", titulo: "Estruturas idênticas", subtitulo: "toda célula é igual", emoji: "🟰", cor: "from-slate-500 to-slate-700", fotoUrl: celulaAnimalImg },
       { id: "diferentes", titulo: "Parte igual, parte diferente", subtitulo: "membrana e núcleo iguais; parede e cloroplasto só na vegetal", emoji: "🧩", cor: "from-emerald-500 to-teal-700", fotoUrl: celulaVegetalImg },
       { id: "opostas", titulo: "Nada em comum", subtitulo: "biologia diferente", emoji: "❌", cor: "from-red-500 to-rose-700", fotoUrl: celulaVegetalImg },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "diferentes",
     feedbackAcerto:
@@ -99,6 +100,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🌱", titulo: "Cloroplasto (faz fotossíntese)", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🧬", titulo: "Núcleo", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🔋", titulo: "Mitocôndria", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Isso. Cloroplasto = fotossíntese = exclusivo de plantas e algas.",
         feedbackErro: "Núcleo e mitocôndria existem em animal E vegetal. CLOROPLASTO é só de planta." },
@@ -107,6 +109,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🧵", titulo: "Tecido", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🫀", titulo: "Órgão", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🧍", titulo: "Organismo", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. Células iguais → tecido. Tecidos diferentes juntos → órgão.",
         feedbackErro: "Órgão é feito de VÁRIOS tecidos diferentes. Células iguais formam TECIDO." },
@@ -115,6 +118,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "⚡", titulo: "Produzir energia (ATP) via respiração celular", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🧬", titulo: "Armazenar o DNA", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🛡️", titulo: "Proteger a célula", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Sim. Mitocôndria = usina energética da célula. Produz ATP.",
         feedbackErro: "DNA fica no NÚCLEO. Proteção é da MEMBRANA. Mitocôndria = ENERGIA." },
@@ -217,6 +221,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Robert Hooke, observando cortiça ao microscópio", correta: true },
           { id: "b", texto: "Charles Darwin, estudando espécies" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. Hooke observou pequenas 'câmaras' na cortiça e chamou de 'cells'.",
         feedbackErro: "Darwin trabalhou com evolução (séc. XIX). Célula = HOOKE, 1665, cortiça." },
@@ -224,6 +230,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Célula → tecido → órgão → sistema → organismo", correta: true },
           { id: "b", texto: "Organismo → sistema → tecido → célula" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Exato. Cinco degraus, do simples ao complexo.",
         feedbackErro: "Do MENOR ao MAIOR: célula → tecido → órgão → sistema → organismo." },
@@ -231,6 +239,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Parede de celulose + cloroplastos + vacúolo central grande", correta: true },
           { id: "b", texto: "Núcleo maior que a célula animal" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. Parede + cloroplasto + vacúolo grande = marca vegetal.",
         feedbackErro: "Núcleo é parecido nas duas. A diferença está em PAREDE, CLOROPLASTO e VACÚOLO." },

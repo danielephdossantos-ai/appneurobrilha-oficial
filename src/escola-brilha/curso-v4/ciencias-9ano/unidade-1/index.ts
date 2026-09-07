@@ -1,5 +1,6 @@
 import type { UnidadeGeoV1 } from "../../types";
 import { aula01 } from "./aula-01";
+import { aula02, aula03 } from "./aulas-evolucao-conservacao";
 
 export const unidade1: UnidadeGeoV1 = {
   slug: "unidade-1",
@@ -9,5 +10,5 @@ export const unidade1: UnidadeGeoV1 = {
   descricao:
     "DNA, genes, cromossomos, hereditariedade, Leis de Mendel, evolução, seleção natural e biodiversidade.",
   corTema: "#6d28d9",
-  aulas: [aula01],
+  aulas: [aula01, aula02, aula03],
 };

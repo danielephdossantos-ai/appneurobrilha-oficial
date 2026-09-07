@@ -17,7 +17,7 @@ export const aula01: AulaGeoV1 = {
   titulo: "Observatório Planetário",
   iconeTrilha: "🌍",
   recompensa: { xp: 140, moedas: 55, medalha: "Geocientista Júnior" },
-  bncc: ["EF08CI11", "EF08CI13"],
+  bncc: [],
   duracaoMin: 45,
 
   cena01_motivacao: {
@@ -42,6 +42,7 @@ export const aula01: AulaGeoV1 = {
       { id: "coincidencia", titulo: "Pura coincidência", subtitulo: "não significa nada", emoji: "🎲", cor: "from-slate-500 to-slate-700", fotoUrl: placasImg },
       { id: "deriva", titulo: "Já foram GRUDADOS", subtitulo: "e as placas se afastaram", emoji: "🧩", cor: "from-emerald-500 to-teal-700", fotoUrl: placasImg },
       { id: "erosao", titulo: "Erosão do mar", subtitulo: "esculpiu formatos parecidos", emoji: "🌊", cor: "from-red-500 to-rose-700", fotoUrl: placasImg },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "deriva",
     feedbackAcerto:
@@ -92,6 +93,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🐌", titulo: "Alguns cm por ano", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🚗", titulo: "Alguns km por dia", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "⚡", titulo: "Não se movem", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Sim. Alguns cm/ano — parecido com o crescimento da sua unha. Ao longo de milhões de anos, muda continentes.",
         feedbackErro: "Se fosse km/dia, sentiríamos. Placas se movem CENTÍMETROS por ANO — muito lento, mas contínuo." },
@@ -100,6 +102,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🌬️", titulo: "Nitrogênio (78%)", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "💨", titulo: "Oxigênio (21%)", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🔥", titulo: "Gás carbônico (~0,04%)", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Sim. Nitrogênio é o mais abundante — 78%.",
         feedbackErro: "Oxigênio é vital, mas só 21%. O CAMPEÃO em quantidade é o NITROGÊNIO (78%)." },
@@ -108,6 +111,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🌌", titulo: "Via Láctea", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🌀", titulo: "Andrômeda", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "⭐", titulo: "Alpha Centauri", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Sim. Via Láctea, com cerca de 200 bilhões de estrelas.",
         feedbackErro: "Andrômeda é galáxia VIZINHA. Alpha Centauri é estrela. Nossa galáxia = VIA LÁCTEA." },
@@ -210,6 +214,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Alfred Wegener", correta: true },
           { id: "b", texto: "Isaac Newton" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. Wegener notou o encaixe dos continentes e fósseis idênticos em terras separadas.",
         feedbackErro: "Newton = gravidade. WEGENER propôs a deriva continental." },
@@ -217,6 +223,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "78% nitrogênio + 21% oxigênio + 1% outros", correta: true },
           { id: "b", texto: "50% oxigênio + 50% CO₂" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. Nitrogênio domina; oxigênio é vital, mas menor.",
         feedbackErro: "CO₂ é só ~0,04%. Composição real: 78% N₂, 21% O₂, 1% outros." },
@@ -224,6 +232,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "A galáxia Via Láctea", correta: true },
           { id: "b", texto: "A galáxia Andrômeda" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. Nosso Sol é uma das ~200 bi de estrelas da Via Láctea.",
         feedbackErro: "Andrômeda é galáxia vizinha. Estamos na VIA LÁCTEA." },

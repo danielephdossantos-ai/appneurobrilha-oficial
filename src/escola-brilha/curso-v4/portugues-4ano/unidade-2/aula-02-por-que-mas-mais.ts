@@ -20,7 +20,7 @@ export const aula2: AulaPortuguesV4 = {
   slug: "aula-02-por-que-mas-mais",
   titulo: "Por que / porque / porquê e mas / mais",
   iconeTrilha: "🔀",
-  bncc: ["EF04LP03", "EF35LP12"],
+  bncc: ["EF35LP12", "EF35LP13"],
   duracaoMin: 22,
 
   momento01_motivacao: {

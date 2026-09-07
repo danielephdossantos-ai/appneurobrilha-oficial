@@ -1,5 +1,6 @@
 import type { UnidadeGeoV1 } from "../../types";
 import { aula01 } from "./aula-01-formacao-da-populacao";
+import { aula02 } from "./aula-02-grupos-perspectivas";
 
 export const unidade5: UnidadeGeoV1 = {
   slug: "unidade-5",
@@ -9,5 +10,5 @@ export const unidade5: UnidadeGeoV1 = {
   descricao:
     "Restaura a Página 5 do Grande Livro das Cidades: O Mosaico Cultural. O aluno investiga como a população brasileira nasceu do cruzamento de povos indígenas, africanos e imigrantes.",
   corTema: "#16a34a",
-  aulas: [aula01],
+  aulas: [aula01, aula02],
 };

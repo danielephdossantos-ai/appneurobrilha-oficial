@@ -17,7 +17,7 @@ export const aula04: AulaPortuguesV4 = {
   slug: "aula-04-escrever-para-pessoas",
   titulo: "Escrevendo para Diferentes Pessoas",
   iconeTrilha: "📚",
-  bncc: ["EF02LP24", "EF02LP25"],
+  bncc: ["EF15LP01", "EF15LP05"],
   duracaoMin: 15,
 
   momento01_motivacao: {

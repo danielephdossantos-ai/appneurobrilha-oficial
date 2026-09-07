@@ -6,6 +6,7 @@ import { aula04_graficosBarras } from "./aula-04-graficos-barras";
 import { aula05_tabelas } from "./aula-05-tabelas";
 import { aula06_probabilidade } from "./aula-06-probabilidade";
 import { aula07_missaoFinalReino } from "./aula-07-missao-final-reino";
+import { aula08_localizacaoRetas } from "./aula-08-localizacao-retas";
 
 export const unidade7: Unidade = {
   slug: "unidade-7-geometria-dados-missao-do-reino",
@@ -22,6 +23,7 @@ export const unidade7: Unidade = {
     aula04_graficosBarras,
     aula05_tabelas,
     aula06_probabilidade,
+    aula08_localizacaoRetas,
     aula07_missaoFinalReino,
   ],
 };

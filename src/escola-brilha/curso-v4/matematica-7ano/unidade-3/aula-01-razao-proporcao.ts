@@ -5,7 +5,7 @@ export const aula01_razaoProporcao: AulaV4 = {
   slug: "u3-01-razao-proporcao",
   titulo: "Razão e Proporção",
   iconeTrilha: "🔗",
-  bncc: ["EF07MA10"],
+  bncc: ["EF07MA09", "EF07MA17"],
   duracaoMin: 30,
   metodologias: ["skemp", "vergnaud"],
 

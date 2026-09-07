@@ -9,7 +9,7 @@ import { url as bola } from "@/assets/neuro-treino/objetos/bola.png.asset.json";
 import { url as casa } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
 
 /**
- * Aula 5 — Minha Escrita e a Escrita Certa
+ * Aula 5 — Minha Escrita e a Escrita Convencional
  * -------------------------------------------------------------
  * A criança compara a própria escrita com a escrita convencional,
  * percebendo semelhanças e diferenças (letra que faltou, letra trocada,
@@ -19,7 +19,7 @@ import { url as casa } from "@/assets/neuro-treino/objetos/casa.png.asset.json";
  */
 export const aula05: AulaPortuguesV4 = {
   slug: "aula-05-minha-escrita-e-a-certa",
-  titulo: "Minha Escrita e a Escrita Certa",
+  titulo: "Minha Escrita e a Escrita Convencional",
   iconeTrilha: "🔍",
   bncc: ["EF01LP03", "EF01LP02"],
   duracaoMin: 15,
@@ -27,7 +27,7 @@ export const aula05: AulaPortuguesV4 = {
   momento01_motivacao: {
     titulo: "A lupa do detetive Brilha",
     historia:
-      "Brilha virou detetive de palavras! Ele escreve do jeito que acha, depois compara com a escrita certa usando a lupa. Não é bronca: é descoberta. Bora usar a lupa com ele?",
+      "Brilha virou detetive de palavras! Ele escreve do jeito que consegue, depois compara com a forma usada nos livros. Não é bronca: é descoberta. Bora usar a lupa com ele?",
     imagemUrl: esquilo,
   },
 
@@ -39,7 +39,7 @@ export const aula05: AulaPortuguesV4 = {
       recado: {
         rotulo: "Caderno",
         icone: "🔍",
-        linhas: ["Escrevi: SAPU", "Escrita certa: SAPO"],
+        linhas: ["Minha tentativa: SAPU", "Forma convencional: SAPO"],
         estilo: "papel",
       },
       pergunta: "O que mudou entre as duas escritas?",
@@ -64,9 +64,9 @@ export const aula05: AulaPortuguesV4 = {
         imagemUrl: livro,
       },
       {
-        palavra: "escrita certa",
+        palavra: "escrita convencional",
         explicacao: "É como a palavra aparece nos livros e cartazes: a forma convencional.",
-        exemplo: "A escrita certa é SAPO, com O no final.",
+        exemplo: "A forma convencional é SAPO, com O no final.",
         imagemUrl: sapo,
       },
       {
@@ -87,7 +87,7 @@ export const aula05: AulaPortuguesV4 = {
         frases: [
           { texto: "SAPU → SAPO.", explicacao: "Trocou a última letra: U virou O." },
           { texto: "BOA → BOLA.", explicacao: "Faltava uma letra no meio: o L." },
-          { texto: "CASSA → CASA.", explicacao: "Tinha uma letra a mais: sobrou um S." },
+          { texto: "CASAA → CASA.", explicacao: "Tinha uma letra a mais: sobrou um A no final." },
         ],
       },
       {
@@ -142,14 +142,14 @@ export const aula05: AulaPortuguesV4 = {
     instrucao: "Agora você é o detetive.",
     perguntas: [
       {
-        pergunta: "Escrevi PATU. A escrita certa é PATO. O que aconteceu?",
+        pergunta: "Escrevi PATU. A forma convencional é PATO. O que aconteceu?",
         opcoes: ["Faltou uma letra", "Troquei uma letra", "Sobrou uma letra"],
         correta: 1,
         feedbackAcerto: "🎉 Isso! Troquei o O pelo U no final.",
         feedbackErro: "As duas palavras têm 4 letras: então nenhuma faltou. Uma foi TROCADA.",
       },
       {
-        pergunta: "Escrevi MAA. A escrita certa é MALA. O que aconteceu?",
+        pergunta: "Escrevi MAA. A forma convencional é MALA. O que aconteceu?",
         opcoes: ["Faltou uma letra", "Sobrou uma letra", "Nada mudou"],
         correta: 0,
         feedbackAcerto: "🎉 Isso! Faltou o L do meio.",
@@ -164,7 +164,7 @@ export const aula05: AulaPortuguesV4 = {
       instrucao: "Começo → meio → fim.",
       itens: [
         { id: "s1", texto: "Escrevo do meu jeito.", imagemUrl: lapis },
-        { id: "s2", texto: "Comparo com a escrita certa.", imagemUrl: livro },
+        { id: "s2", texto: "Comparo com a forma convencional.", imagemUrl: livro },
         { id: "s3", texto: "Arrumo o que estava diferente.", imagemUrl: esquilo },
       ],
       ordemCerta: ["s1", "s2", "s3"],
@@ -174,21 +174,21 @@ export const aula05: AulaPortuguesV4 = {
   },
 
   momento_minijogo: {
-    titulo: "Caça à Escrita Certa",
-    instrucao: "Selecione as palavras que estão escritas do jeito certo.",
+    titulo: "Caça à Forma Convencional",
+    instrucao: "Selecione as palavras escritas como aparecem nos livros.",
     jogo: {
       tipo: "selecionarItens",
       titulo: "Certo ou diferente?",
       bloco: {
         instrucao: "Toque só nas palavras escritas corretamente.",
-        pergunta: "Quais palavras estão certas?",
+        pergunta: "Quais palavras estão na forma convencional?",
         opcoes: [
           { id: "o1", texto: "SAPO", correto: true },
           { id: "o2", texto: "BOA (para dizer bola)", correto: false },
           { id: "o3", texto: "CASA", correto: true },
           { id: "o4", texto: "PATU", correto: false },
         ],
-        feedbackAcerto: "🎉 Isso! SAPO e CASA estão certas. BOA e PATU precisam de conserto.",
+        feedbackAcerto: "🎉 Isso! SAPO e CASA estão na forma convencional. As outras tentativas podem ser revisadas.",
         feedbackErro: "Leia devagar, letra por letra, e compare com a palavra do livro.",
       },
     },
@@ -224,7 +224,7 @@ export const aula05: AulaPortuguesV4 = {
 
   momento_escrita: {
     titulo: "Escrever, comparar e arrumar",
-    instrucao: "Escreva do seu jeito, depois compare com o modelo e conserte.",
+    instrucao: "Escreva do seu jeito, depois compare com o modelo e revise.",
     blocos: [
       {
         tipo: "tracadoLetra",
@@ -245,7 +245,7 @@ export const aula05: AulaPortuguesV4 = {
         tipo: "escritaReal",
         formato: "lista",
         titulo: "Minha lista de detetive",
-        comando: "Escreva 3 palavras do seu jeito. Depois compare com o modelo e conserte o que ficou diferente.",
+        comando: "Escreva 3 palavras do seu jeito. Depois compare com o modelo e revise o que ficou diferente.",
         linhas: 3,
         modelo: ["SAPO", "BOLA", "CASA"],
         checklist: [
@@ -276,11 +276,11 @@ export const aula05: AulaPortuguesV4 = {
   momento10_avaliacao: {
     perguntas: [
       {
-        pergunta: "1/5 — Qual palavra está escrita do jeito certo?",
+        pergunta: "1/5 — Qual palavra está na forma convencional?",
         opcoes: ["SAPU", "SAPO", "SSAPO", "SAP"],
         correta: 1,
         feedbackAcerto: "🎉 Isso!",
-        feedbackErro: "A escrita certa é S-A-P-O.",
+        feedbackErro: "Nos livros, essa palavra aparece como S-A-P-O.",
       },
       {
         pergunta: "2/5 — Escrevi BOA para dizer BOLA. O que aconteceu?",
@@ -290,18 +290,18 @@ export const aula05: AulaPortuguesV4 = {
         feedbackErro: "BOLA tem o L no meio; em BOA ele faltou.",
       },
       {
-        pergunta: "3/5 — Escrevi CASSA para dizer CASA. O que aconteceu?",
+        pergunta: "3/5 — Escrevi CASAA para dizer CASA. O que aconteceu?",
         opcoes: ["Faltou uma letra", "Sobrou uma letra", "Troquei o C", "Está certo"],
         correta: 1,
-        feedbackAcerto: "🎉 Isso! Sobrou um S.",
-        feedbackErro: "CASA tem um S só; em CASSA sobrou um.",
+        feedbackAcerto: "🎉 Isso! Sobrou um A no final.",
+        feedbackErro: "Compare: C-A-S-A-A e C-A-S-A. Na tentativa, há um A a mais no final.",
       },
       {
         pergunta: "4/5 — Comparar minha escrita com a certa serve para...",
         opcoes: ["Ganhar bronca", "Descobrir o que arrumar", "Apagar tudo", "Desenhar"],
         correta: 1,
         feedbackAcerto: "🎉 Isso! Serve para aprender e arrumar.",
-        feedbackErro: "Comparar é ferramenta de detetive: mostra o que consertar.",
+        feedbackErro: "Comparar é ferramenta de detetive: mostra o que podemos revisar.",
       },
       {
         pergunta: "5/5 — Qual foi a palavra que Mia arrumou na lista?",

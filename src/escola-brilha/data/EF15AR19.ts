@@ -1,0 +1,2 @@
+import { criarAulaArte1 } from "./criarAulaArte1";
+export default criarAulaArte1({ codigo: "EF15AR19", titulo: "Teatro no Cotidiano", foco: "Descobrir teatralidades no cotidiano por meio de gestos, vozes, ações e personagens", objeto: "teatralidade cotidiana", exemplos: ["Observar gestos e vozes de uma cena", "Zombar de uma pessoa", "Calcular distâncias", "Colorir sem observar"], resposta: "Perceber como gesto, voz e ação ajudam a representar personagens e situações.", proxima: "EF15AR20" });

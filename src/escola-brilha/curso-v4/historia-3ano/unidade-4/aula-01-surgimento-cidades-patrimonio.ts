@@ -17,7 +17,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-surgimento-cidades-patrimonio",
   titulo: "O Surgimento das Cidades e o Patrimônio",
   iconeTrilha: "🏛️",
-  bncc: ["EF03HI07", "EF03HI08"],
+  bncc: ["EF03HI04", "EF03HI05"],
   duracaoMin: 22,
 
   cena01_motivacao: {
@@ -55,6 +55,8 @@ export const aula01: AulaGeoV1 = {
         cor: "from-slate-500 to-slate-700",
         fotoUrl: imgMonumento,
       },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "memoria",
     feedbackAcerto:
@@ -175,6 +177,8 @@ export const aula01: AulaGeoV1 = {
         cards: [
           { id: "ma", emoji: "🏛️", titulo: "Patrimônio Material", cor: "from-teal-600 to-emerald-800" },
           { id: "im", emoji: "🎭", titulo: "Patrimônio Imaterial", cor: "from-orange-500 to-red-700" },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "im",
         feedbackAcerto:
@@ -189,6 +193,8 @@ export const aula01: AulaGeoV1 = {
         cards: [
           { id: "ma", emoji: "🏛️", titulo: "Patrimônio Material", cor: "from-teal-600 to-emerald-800" },
           { id: "im", emoji: "🎭", titulo: "Patrimônio Imaterial", cor: "from-orange-500 to-red-700" },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "ma",
         feedbackAcerto:
@@ -203,6 +209,8 @@ export const aula01: AulaGeoV1 = {
         cards: [
           { id: "to", emoji: "📜", titulo: "Tombamento", cor: "from-slate-600 to-slate-800" },
           { id: "mu", emoji: "🚧", titulo: "Multa de trânsito", cor: "from-red-500 to-red-700" },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "to",
         feedbackAcerto:
@@ -461,6 +469,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Patrimônio Imaterial.", correta: true },
           { id: "b", texto: "Patrimônio Financeiro." },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto:
           "Certificado. O patrimônio imaterial vive na memória e na prática cultural das pessoas.",
@@ -474,6 +484,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Tombamento.", correta: true },
           { id: "b", texto: "Reforma tributária." },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto:
           "Correto. Tombamento é o registro que garante a proteção legal do patrimônio material.",
@@ -487,6 +499,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Preservar a memória e a arquitetura da fundação da cidade.", correta: true },
           { id: "b", texto: "Porque o prédio é feio e ninguém gosta dele." },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto:
           "Certificação concluída. Preservar patrimônio é preservar a MEMÓRIA da comunidade pras próximas gerações.",

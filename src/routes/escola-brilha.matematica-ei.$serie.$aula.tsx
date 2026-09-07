@@ -61,7 +61,8 @@ function AulaMatEIRoute() {
         voltarPara="/escola-brilha/matematica-ei"
         onConcluir={async () => {
           try {
-            const key = `eb.ei.mat.concluidas.${curso.slug}`;
+            const childId = localStorage.getItem("neurobrilha:activeChildId") || "sem-crianca";
+            const key = `eb.ei.mat.concluidas.${curso.slug}.${childId}`;
             const raw = localStorage.getItem(key);
             const list: string[] = raw ? JSON.parse(raw) : [];
             if (!list.includes(aulaSlug)) list.push(aulaSlug);

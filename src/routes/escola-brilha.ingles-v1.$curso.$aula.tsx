@@ -2,6 +2,8 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { PlayerEnglishV1 } from "@/escola-brilha/ingles-1ano/PlayerEnglishV1";
 import { getLessonByCursoAula } from "@/escola-brilha/ingles-lessons-index";
 import { ProfessorInglesBubble } from "@/escola-brilha/professor-ingles/ProfessorInglesBubble";
+import { useBackNavigation } from "@/lib/navigation-context";
+import { advancePlanFlow, completePlanItem } from "@/lib/plan-flow";
 const getLesson = (aula: string, curso?: string) =>
   getLessonByCursoAula(curso ?? "ingles-1ano", aula);
 
@@ -30,10 +32,29 @@ export const Route = createFileRoute("/escola-brilha/ingles-v1/$curso/$aula")({
 
 function IngV1Page() {
   const navigate = useNavigate();
+  const { handleBack, context: navContext } = useBackNavigation();
   const { aula, curso } = Route.useParams();
   const lesson = getLesson(aula, curso);
-  const sair = () => navigate({ to: "/" });
-  const concluir = () => navigate({ to: "/" });
+  const voltarParaTrilha = () => {
+    if (!handleBack(navigate)) {
+      navigate({
+        to: "/escola-brilha/trilha-ingles/$serie",
+        params: { serie: serieFromCurso(curso) },
+      });
+    }
+  };
+  const sair = voltarParaTrilha;
+  const concluir = async () => {
+    if (navContext?.isPlanFlow) {
+      await completePlanItem(navContext);
+      const nextRoute = advancePlanFlow(navContext);
+      if (nextRoute) {
+        navigate({ to: nextRoute });
+        return;
+      }
+    }
+    voltarParaTrilha();
+  };
   if (!lesson) {
     return (
       <div className="min-h-screen grid place-items-center bg-[#0d1f55] text-white p-6 text-center">

@@ -112,25 +112,35 @@ export async function gerarESalvarNeuro(childId: string): Promise<PlanoNeuroGera
   const plano = gerarPlanoNeuro({ scores, risk, age });
 
   const antigo = await carregarPlanoNeuro(childId);
+  const conclusoesPorSlug = new Map<string, number>();
   if (antigo?.id) {
+    const { data: itensAntigos } = await supabase
+      .from(T_ITENS)
+      .select("slug,concluido")
+      .eq("plano_id", antigo.id);
+    for (const item of (itensAntigos as any[]) ?? []) {
+      if (item.concluido) conclusoesPorSlug.set(item.slug, (conclusoesPorSlug.get(item.slug) ?? 0) + 1);
+    }
     await supabase.from(T_ITENS).delete().eq("plano_id", antigo.id);
-    await supabase.from(T_PLANO).delete().eq("id", antigo.id);
   }
 
-  const { data: novo, error } = await supabase
-    .from(T_PLANO)
-    .insert({
+  const dadosPlano = {
       child_id: childId,
       semanas: plano.semanas,
       dias_por_semana: plano.dias_por_semana,
       sessoes_por_dia: plano.sessoes_por_dia,
       base_anamnese: (risk ?? null) as any,
-    } as any)
-    .select("id")
-    .single();
+  } as any;
+  const consultaPlano = antigo?.id
+    ? supabase.from(T_PLANO).update(dadosPlano).eq("id", antigo.id).select("id").single()
+    : supabase.from(T_PLANO).insert(dadosPlano).select("id").single();
+  const { data: novo, error } = await consultaPlano;
   if (error) throw error;
 
-  const rows = plano.itens.map((i) => ({
+  const rows = plano.itens.map((i) => {
+    const restantes = conclusoesPorSlug.get(i.slug) ?? 0;
+    if (restantes > 0) conclusoesPorSlug.set(i.slug, restantes - 1);
+    return ({
     plano_id: (novo as any).id,
     child_id: childId,
     semana: i.semana,
@@ -145,7 +155,9 @@ export async function gerarESalvarNeuro(childId: string): Promise<PlanoNeuroGera
     prioridade: i.prioridade,
     rota: i.rota,
     minutos: i.minutos,
-  }));
+    concluido: restantes > 0,
+  });
+  });
   for (let i = 0; i < rows.length; i += 500) {
     const { error: e } = await supabase.from(T_ITENS).insert(rows.slice(i, i + 500) as any);
     if (e) throw e;
@@ -222,6 +234,32 @@ export async function gerarESalvarNeuro(childId: string): Promise<PlanoNeuroGera
 
   await garantirHorariosNeuro(childId, plano.dias_por_semana);
   return plano;
+}
+
+/** Reconcilia o plano gravado com as categorias atuais sem zerar conquistas. */
+export async function sincronizarPlanoNeuroSeNecessario(childId: string): Promise<boolean> {
+  const salvo = await carregarPlanoNeuro(childId);
+  if (!salvo) return false;
+  const [{ scores, risk }, childResult, itensResult] = await Promise.all([
+    buscarAnamnese(childId),
+    supabase.from("children" as any).select("idade").eq("id", childId).single(),
+    supabase.from(T_ITENS).select("slug").eq("plano_id", salvo.id),
+  ]);
+  if (childResult.error) throw childResult.error;
+  const age = Number((childResult.data as any)?.idade);
+  if (!Number.isFinite(age)) return false;
+  const esperado = gerarPlanoNeuro({
+    scores, risk, age,
+    semanas: salvo.semanas,
+    diasPorSemana: salvo.dias_por_semana,
+    sessoesPorDia: salvo.sessoes_por_dia,
+  });
+  const assinatura = (slugs: string[]) => slugs.sort().join("|");
+  const atuais = ((itensResult.data as any[]) ?? []).map((i) => String(i.slug));
+  const canonicos = esperado.itens.map((i) => i.slug);
+  if (assinatura(atuais) === assinatura(canonicos)) return false;
+  await gerarESalvarNeuro(childId);
+  return true;
 }
 
 export async function carregarHorariosNeuro(childId: string): Promise<HorarioNeuro[]> {

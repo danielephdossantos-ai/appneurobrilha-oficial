@@ -47,6 +47,19 @@ export const aula04: AulaGeoV1 = {
         emoji: "🤝",
         cor: "from-emerald-400 to-amber-500",
       },
+
+      {
+        id: "extra-1",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
+      {
+        id: "extra-2",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
     ],
     respostaCerta: "ambos",
     feedbackAcerto:
@@ -70,7 +83,8 @@ export const aula04: AulaGeoV1 = {
         cor: "from-emerald-500 to-teal-700",
         conteudo:
           "É tudo o que a gente VÊ de um lugar: casa, rua, rio, morro, árvore, prédio, pessoas passando. Um retrato do lugar num momento.",
-        exemplo: "A paisagem da sua rua hoje é diferente da paisagem da rua da sua avó quando ela era criança.",
+        exemplo:
+          "A paisagem da sua rua hoje é diferente da paisagem da rua da sua avó quando ela era criança.",
       },
       {
         id: "natural",
@@ -100,8 +114,7 @@ export const aula04: AulaGeoV1 = {
         exemplo: "O terreno que era mata virou bairro em 10 anos — isso é transformação.",
       },
     ],
-    falaFinal:
-      "Agora você tem as 4 palavras do detetive de paisagens. Bora aplicar no mapa!",
+    falaFinal: "Agora você tem as 4 palavras do detetive de paisagens. Bora aplicar no mapa!",
   },
 
   cena04_leituraGuiada: {
@@ -164,15 +177,30 @@ export const aula04: AulaGeoV1 = {
     perguntas: [
       {
         id: "q1",
-        pergunta: "A CHUVA forte cavou uma cratera na rua. Que tipo de ação transformou a paisagem?",
+        pergunta:
+          "A CHUVA forte cavou uma cratera na rua. Que tipo de ação transformou a paisagem?",
         cards: [
           { id: "natural", emoji: "🌧️", titulo: "Ação natural", cor: "from-sky-500 to-blue-700" },
           { id: "humana", emoji: "🚧", titulo: "Ação humana", cor: "from-orange-500 to-red-700" },
-          { id: "nenhuma", emoji: "❓", titulo: "Nenhuma das duas", cor: "from-stone-400 to-stone-600" },
+          {
+            id: "nenhuma",
+            emoji: "❓",
+            titulo: "Nenhuma das duas",
+            cor: "from-stone-400 to-stone-600",
+          },
+
+          {
+            id: "extra-3",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "natural",
-        feedbackAcerto: "Isso! Chuva é NATUREZA 🌧️ — mesmo passando na cidade, quem cavou foi a água.",
-        feedbackErro: "Quase! Quem cavou foi a CHUVA — isso é ação NATURAL 🌧️, mesmo que aconteça na rua.",
+        feedbackAcerto:
+          "Isso! Chuva é NATUREZA 🌧️ — mesmo passando na cidade, quem cavou foi a água.",
+        feedbackErro:
+          "Quase! Quem cavou foi a CHUVA — isso é ação NATURAL 🌧️, mesmo que aconteça na rua.",
       },
       {
         id: "q2",
@@ -181,26 +209,49 @@ export const aula04: AulaGeoV1 = {
           { id: "natural", emoji: "🌧️", titulo: "Ação natural", cor: "from-sky-500 to-blue-700" },
           { id: "humana", emoji: "🚧", titulo: "Ação humana", cor: "from-orange-500 to-red-700" },
           { id: "mista", emoji: "🤷", titulo: "Foi por acaso", cor: "from-stone-400 to-stone-600" },
+
+          {
+            id: "extra-4",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "humana",
-        feedbackAcerto: "Boa! Derrubar mata pra pasto é AÇÃO HUMANA 🚧 — feita com trator e motosserra.",
-        feedbackErro: "Repara: mata não cai sozinha pra virar pasto. Quem derruba é o SER HUMANO 🚧.",
+        feedbackAcerto:
+          "Boa! Derrubar mata pra pasto é AÇÃO HUMANA 🚧 — feita com trator e motosserra.",
+        feedbackErro:
+          "Repara: mata não cai sozinha pra virar pasto. Quem derruba é o SER HUMANO 🚧.",
       },
       {
         id: "q3",
-        pergunta: "O rio, depois de muitos anos, ABRIU um novo caminho no meio da rocha. Qual ação?",
+        pergunta:
+          "O rio, depois de muitos anos, ABRIU um novo caminho no meio da rocha. Qual ação?",
         cards: [
           { id: "humana", emoji: "🚧", titulo: "Ação humana", cor: "from-orange-500 to-red-700" },
           { id: "natural", emoji: "🌊", titulo: "Ação natural", cor: "from-sky-500 to-blue-700" },
-          { id: "prefeito", emoji: "🏛️", titulo: "O prefeito mandou", cor: "from-stone-400 to-stone-600" },
+          {
+            id: "prefeito",
+            emoji: "🏛️",
+            titulo: "O prefeito mandou",
+            cor: "from-stone-400 to-stone-600",
+          },
+
+          {
+            id: "extra-5",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "natural",
-        feedbackAcerto: "Exato! O RIO cavando rocha ao longo do tempo é ação NATURAL 🌊 — lenta, mas poderosa.",
-        feedbackErro: "Ops! Rio cavando rocha em muitos anos é ação NATURAL 🌊. Ninguém mandou fazer.",
+        feedbackAcerto:
+          "Exato! O RIO cavando rocha ao longo do tempo é ação NATURAL 🌊 — lenta, mas poderosa.",
+        feedbackErro:
+          "Ops! Rio cavando rocha em muitos anos é ação NATURAL 🌊. Ninguém mandou fazer.",
       },
     ],
-    falaFinal:
-      "Radar afiado! Você já sabe separar o que a natureza muda do que o ser humano muda.",
+    falaFinal: "Radar afiado! Você já sabe separar o que a natureza muda do que o ser humano muda.",
   },
 
   cena06_personagensLugar: {
@@ -333,7 +384,8 @@ export const aula04: AulaGeoV1 = {
         contexto:
           "Onde tinha mata fechada com árvores altas, agora tem pasto com gado. Que tipo de transformação aconteceu?",
         pecaCertaId: "humana",
-        feedbackAcerto: "Combo! Mata que vira pasto é AÇÃO HUMANA 🚧 — feita com motosserra e trator.",
+        feedbackAcerto:
+          "Combo! Mata que vira pasto é AÇÃO HUMANA 🚧 — feita com motosserra e trator.",
         feedbackErro: "Repara: mata não cai sozinha pra virar pasto. Isso é AÇÃO HUMANA 🚧.",
       },
       {
@@ -343,7 +395,8 @@ export const aula04: AulaGeoV1 = {
         contexto:
           "O morro ficou MAIS BAIXO depois de 50 anos de chuva forte todo verão. Que tipo de transformação foi essa?",
         pecaCertaId: "natural",
-        feedbackAcerto: "Boa! Chuva gastando o morro em 50 anos é AÇÃO NATURAL 🌧️ — lenta e poderosa.",
+        feedbackAcerto:
+          "Boa! Chuva gastando o morro em 50 anos é AÇÃO NATURAL 🌧️ — lenta e poderosa.",
         feedbackErro: "Ops! Chuva desgastando o morro em muitos anos é AÇÃO NATURAL 🌧️.",
       },
       {
@@ -353,13 +406,19 @@ export const aula04: AulaGeoV1 = {
         contexto:
           "Onde tinha só mato e capim, agora tem 200 casas, ruas asfaltadas e uma escola. Qual foi a transformação?",
         pecaCertaId: "humana",
-        feedbackAcerto: "Isso! Bairro no lugar de terreno vazio é AÇÃO HUMANA 🚧 — máquinas, tijolo e trabalho.",
-        feedbackErro: "Atenção: bairro não nasce sozinho. Isso é AÇÃO HUMANA 🚧, feita por operários e máquinas.",
+        feedbackAcerto:
+          "Isso! Bairro no lugar de terreno vazio é AÇÃO HUMANA 🚧 — máquinas, tijolo e trabalho.",
+        feedbackErro:
+          "Atenção: bairro não nasce sozinho. Isso é AÇÃO HUMANA 🚧, feita por operários e máquinas.",
       },
       {
         id: "r4",
         municipioA: { nome: "Rio no caminho antigo", emoji: "🌊", cor: "from-sky-500 to-blue-700" },
-        municipioB: { nome: "Rio no caminho novo", emoji: "🏞️", cor: "from-teal-500 to-emerald-700" },
+        municipioB: {
+          nome: "Rio no caminho novo",
+          emoji: "🏞️",
+          cor: "from-teal-500 to-emerald-700",
+        },
         contexto:
           "O rio, depois de muitos anos, foi cavando a rocha e ABRIU um caminho novo. Que ação foi essa?",
         pecaCertaId: "natural",
@@ -385,7 +444,11 @@ export const aula04: AulaGeoV1 = {
         cor: "#0ea5e9",
         descricao:
           "Transformação NATURAL: chuva que gasta rocha, rio que muda de caminho, vento que carrega areia, morro que perde terra. Muda a paisagem DEVAGAR, ao longo de muitos anos.",
-        exemplos: ["Chuva desgastando a rocha", "Rio mudando de caminho", "Morro ficando mais baixo"],
+        exemplos: [
+          "Chuva desgastando a rocha",
+          "Rio mudando de caminho",
+          "Morro ficando mais baixo",
+        ],
       },
       {
         id: "humana",
@@ -413,19 +476,28 @@ export const aula04: AulaGeoV1 = {
         pergunta: "O que é uma PAISAGEM do município?",
         opcoes: [
           { id: "a", texto: "Só a mata que fica longe da cidade." },
-          { id: "b", texto: "Tudo o que a gente VÊ de um lugar: casa, rua, rio, morro, árvore, prédio.", correta: true },
+          {
+            id: "b",
+            texto: "Tudo o que a gente VÊ de um lugar: casa, rua, rio, morro, árvore, prédio.",
+            correta: true,
+          },
           { id: "c", texto: "Uma foto antiga guardada no álbum da família." },
+
+          { id: "extra-6", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Isso! Paisagem é TUDO o que a gente vê num lugar — natural e construído.",
         feedbackErro: "Quase! Paisagem é TUDO o que a gente vê do lugar, não só a mata.",
       },
       {
         id: "p2",
-        pergunta: "Uma CHUVA muito forte cavou uma cratera no morro. Que tipo de transformação foi essa?",
+        pergunta:
+          "Uma CHUVA muito forte cavou uma cratera no morro. Que tipo de transformação foi essa?",
         opcoes: [
           { id: "a", texto: "Ação humana, porque foi na cidade." },
           { id: "b", texto: "Ação natural — quem cavou foi a chuva.", correta: true },
           { id: "c", texto: "Nenhuma das duas — foi por acaso." },
+
+          { id: "extra-7", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Perfeito! Chuva é NATUREZA — mesmo passando na cidade.",
         feedbackErro: "Ops! Quem cavou foi a chuva. Isso é AÇÃO NATURAL.",
@@ -436,10 +508,19 @@ export const aula04: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "A natural é boa e a humana é ruim." },
           { id: "b", texto: "Não existe diferença — é tudo igual." },
-          { id: "c", texto: "A natural costuma ser LENTA (muitos anos) e a humana costuma ser RÁPIDA (poucos anos).", correta: true },
+          {
+            id: "c",
+            texto:
+              "A natural costuma ser LENTA (muitos anos) e a humana costuma ser RÁPIDA (poucos anos).",
+            correta: true,
+          },
+
+          { id: "extra-8", texto: "Outra possibilidade", correta: false },
         ],
-        feedbackAcerto: "Exato! Natureza muda LENTO, ser humano muda RÁPIDO. Nenhuma é 'melhor' — são forças diferentes.",
-        feedbackErro: "Repensa: a natural é LENTA (leva muitos anos) e a humana é RÁPIDA (poucos anos).",
+        feedbackAcerto:
+          "Exato! Natureza muda LENTO, ser humano muda RÁPIDO. Nenhuma é 'melhor' — são forças diferentes.",
+        feedbackErro:
+          "Repensa: a natural é LENTA (leva muitos anos) e a humana é RÁPIDA (poucos anos).",
       },
     ],
     selo: {

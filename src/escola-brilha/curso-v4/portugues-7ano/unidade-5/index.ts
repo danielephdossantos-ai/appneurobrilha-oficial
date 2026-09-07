@@ -6,6 +6,7 @@ import { aula25 } from "./aula-25-leitura-dramatizada";
 
 export const unidade5 = {
   id: "unidade-5",
+  slug: "unidade-5",
   numero: 5,
   titulo: "Vozes da Literatura",
   aulas: [aula21, aula22, aula23, aula24, aula25],

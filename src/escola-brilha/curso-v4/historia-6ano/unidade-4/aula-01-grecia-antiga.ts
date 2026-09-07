@@ -8,7 +8,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-grecia-antiga",
   titulo: "Grécia Antiga: Democracia e Cidadania",
   iconeTrilha: "🛡️",
-  bncc: ["EF06HI07", "EF06HI08"],
+  bncc: ["EF06HI10", "EF06HI12"],
   duracaoMin: 30,
   estilo: "teen",
 
@@ -45,6 +45,8 @@ export const aula01: AulaGeoV1 = {
         emoji: "🛡️",
         cor: "from-amber-900 to-slate-950",
       },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "at",
     feedbackAcerto:
@@ -179,6 +181,7 @@ export const aula01: AulaGeoV1 = {
           { id: "p", emoji: "🗳️", titulo: "Poder do povo", cor: "from-teal-600 to-slate-900" },
           { id: "r", emoji: "👑", titulo: "Poder do rei", cor: "from-amber-600 to-slate-900" },
           { id: "d", emoji: "💰", titulo: "Poder do dinheiro", cor: "from-slate-600 to-slate-900" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "p",
         feedbackAcerto: "Correto. Demos (povo) + kratos (poder) = poder do povo.",
@@ -207,6 +210,7 @@ export const aula01: AulaGeoV1 = {
             titulo: "Só mulheres",
             cor: "from-slate-600 to-slate-900",
           },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "h",
         feedbackAcerto:
@@ -222,6 +226,7 @@ export const aula01: AulaGeoV1 = {
           { id: "e", emoji: "🛡️", titulo: "Esparta", cor: "from-amber-600 to-slate-900" },
           { id: "a", emoji: "🏛️", titulo: "Atenas", cor: "from-teal-600 to-slate-900" },
           { id: "c", emoji: "⚓", titulo: "Corinto", cor: "from-slate-600 to-slate-900" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "e",
         feedbackAcerto:
@@ -480,6 +485,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Poder do rei.", correta: false },
           { id: "b", texto: "Poder do povo (demos + kratos).", correta: true },
           { id: "c", texto: "Poder dos ricos.", correta: false },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. DEMOS (povo) + KRATOS (poder) = poder do povo.",
         feedbackErro: "É PODER DO POVO. Vem de demos + kratos.",
@@ -491,6 +497,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Toda a população da cidade.", correta: false },
           { id: "b", texto: "Só homens atenienses adultos livres.", correta: true },
           { id: "c", texto: "Só as mulheres.", correta: false },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto:
           "Correto. Mulheres, escravos e estrangeiros ficavam de fora — cerca de 88% da população.",
@@ -504,6 +511,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Pólis.", correta: true },
           { id: "b", texto: "Império.", correta: false },
           { id: "c", texto: "Comuna.", correta: false },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. PÓLIS. Cada uma com leis, exército e moeda próprios.",
         feedbackErro: "É PÓLIS. Grécia era um mosaico de pólis independentes.",

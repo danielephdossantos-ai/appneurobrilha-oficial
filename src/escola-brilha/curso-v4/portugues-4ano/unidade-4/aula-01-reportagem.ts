@@ -30,7 +30,7 @@ export const aula01: AulaPortuguesV4 = {
   slug: "aula-01-reportagem",
   titulo: "A Reportagem da Ponte",
   iconeTrilha: "🕵️",
-  bncc: ["EF04LP13", "EF35LP15"],
+  bncc: ["EF04LP14", "EF04LP16", "EF35LP16", "EF15LP01", "EF15LP03"],
   duracaoMin: 22,
 
   momento01_motivacao: {

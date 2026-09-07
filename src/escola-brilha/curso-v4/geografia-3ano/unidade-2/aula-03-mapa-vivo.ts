@@ -51,6 +51,19 @@ export const aula03: AulaGeoV1 = {
         emoji: "🟥",
         cor: "from-red-500 to-orange-700",
       },
+
+      {
+        id: "extra-1",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
+      {
+        id: "extra-2",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
     ],
     respostaCerta: "so-telhado",
     feedbackAcerto:
@@ -155,42 +168,72 @@ export const aula03: AulaGeoV1 = {
     perguntas: [
       {
         id: "q1",
-        pergunta: "Uma foto tirada por um DRONE lá em cima mostrando só os telhados é qual tipo de representação?",
+        pergunta:
+          "Uma foto tirada por um DRONE lá em cima mostrando só os telhados é qual tipo de representação?",
         fotoUrl: vistaDeCimaCasa,
         cards: [
           { id: "vista", emoji: "👁️", titulo: "Vista de cima", cor: "from-sky-500 to-indigo-700" },
           { id: "maquete", emoji: "🏛️", titulo: "Maquete 3D", cor: "from-amber-500 to-orange-700" },
           { id: "mapa", emoji: "🗺️", titulo: "Mapa 2D", cor: "from-emerald-500 to-lime-700" },
+
+          {
+            id: "extra-3",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "vista",
-        feedbackAcerto: "Isso! Foto de drone é VISTA DE CIMA 👁️ — mostra os telhados de verdade, sem símbolos.",
-        feedbackErro: "Repara: foto real, tirada por drone, é VISTA DE CIMA 👁️. Maquete é modelo 3D e mapa usa símbolos.",
+        feedbackAcerto:
+          "Isso! Foto de drone é VISTA DE CIMA 👁️ — mostra os telhados de verdade, sem símbolos.",
+        feedbackErro:
+          "Repara: foto real, tirada por drone, é VISTA DE CIMA 👁️. Maquete é modelo 3D e mapa usa símbolos.",
       },
       {
         id: "q2",
-        pergunta: "Um modelo pequeninho em 3D da cidade, com prédios miniatura em cima de uma mesa, é o quê?",
+        pergunta:
+          "Um modelo pequeninho em 3D da cidade, com prédios miniatura em cima de uma mesa, é o quê?",
         fotoUrl: maqueteMunicipio,
         cards: [
           { id: "mapa", emoji: "🗺️", titulo: "Mapa 2D", cor: "from-emerald-500 to-lime-700" },
           { id: "maquete", emoji: "🏛️", titulo: "Maquete 3D", cor: "from-amber-500 to-orange-700" },
           { id: "vista", emoji: "👁️", titulo: "Vista de cima", cor: "from-sky-500 to-indigo-700" },
+
+          {
+            id: "extra-4",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "maquete",
-        feedbackAcerto: "Boa! Modelo 3D pequeninho da cidade é uma MAQUETE 🏛️ — tem altura, largura e profundidade.",
-        feedbackErro: "Ops: modelo 3D em miniatura é MAQUETE 🏛️. Mapa é plano no papel, vista de cima é foto real.",
+        feedbackAcerto:
+          "Boa! Modelo 3D pequeninho da cidade é uma MAQUETE 🏛️ — tem altura, largura e profundidade.",
+        feedbackErro:
+          "Ops: modelo 3D em miniatura é MAQUETE 🏛️. Mapa é plano no papel, vista de cima é foto real.",
       },
       {
         id: "q3",
-        pergunta: "Um desenho PLANO no papel, com quadradinhos pra casas, círculos pra praças e linha azul pra rio, é o quê?",
+        pergunta:
+          "Um desenho PLANO no papel, com quadradinhos pra casas, círculos pra praças e linha azul pra rio, é o quê?",
         fotoUrl: mapa2dSimbolos,
         cards: [
           { id: "vista", emoji: "👁️", titulo: "Vista de cima", cor: "from-sky-500 to-indigo-700" },
           { id: "mapa", emoji: "🗺️", titulo: "Mapa 2D", cor: "from-emerald-500 to-lime-700" },
           { id: "maquete", emoji: "🏛️", titulo: "Maquete 3D", cor: "from-amber-500 to-orange-700" },
+
+          {
+            id: "extra-5",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "mapa",
-        feedbackAcerto: "Exato! Desenho plano com SÍMBOLOS é MAPA 🗺️ — cabe no papel e mostra o município todo.",
-        feedbackErro: "Repensa: desenho plano com símbolos (quadrados, círculos, linhas) é MAPA 🗺️.",
+        feedbackAcerto:
+          "Exato! Desenho plano com SÍMBOLOS é MAPA 🗺️ — cabe no papel e mostra o município todo.",
+        feedbackErro:
+          "Repensa: desenho plano com símbolos (quadrados, círculos, linhas) é MAPA 🗺️.",
       },
     ],
     falaFinal:
@@ -238,37 +281,43 @@ export const aula03: AulaGeoV1 = {
         id: "observar",
         emoji: "🌆",
         rotulo: "Observar o lugar",
-        descricao: "O cartógrafo vai até o município e olha tudo: casas, ruas, rios, praças. É o começo do trabalho.",
+        descricao:
+          "O cartógrafo vai até o município e olha tudo: casas, ruas, rios, praças. É o começo do trabalho.",
       },
       {
         id: "subir",
         emoji: "🎈",
         rotulo: "Ver de cima",
-        descricao: "Sobe de balão ou drone pra ver o município INTEIRO de cima. Só assim ele consegue entender onde cada coisa fica.",
+        descricao:
+          "Sobe de balão ou drone pra ver o município INTEIRO de cima. Só assim ele consegue entender onde cada coisa fica.",
       },
       {
         id: "fotografar",
         emoji: "📸",
         rotulo: "Tirar foto aérea",
-        descricao: "Tira uma foto aérea (vista de cima) do lugar. Essa foto vai virar a BASE do mapa.",
+        descricao:
+          "Tira uma foto aérea (vista de cima) do lugar. Essa foto vai virar a BASE do mapa.",
       },
       {
         id: "desenhar",
         emoji: "✏️",
         rotulo: "Desenhar os símbolos",
-        descricao: "Em cima da foto ele desenha os símbolos: quadrado pra casa, círculo pra praça, linha pra rua.",
+        descricao:
+          "Em cima da foto ele desenha os símbolos: quadrado pra casa, círculo pra praça, linha pra rua.",
       },
       {
         id: "legenda",
         emoji: "📖",
         rotulo: "Criar a legenda",
-        descricao: "Escreve num cantinho o que cada símbolo significa. Isso se chama LEGENDA — sem ela ninguém entende o mapa.",
+        descricao:
+          "Escreve num cantinho o que cada símbolo significa. Isso se chama LEGENDA — sem ela ninguém entende o mapa.",
       },
       {
         id: "imprimir",
         emoji: "🗺️",
         rotulo: "Mapa pronto",
-        descricao: "Imprime o mapa e distribui pra escola, pra prefeitura e pros moradores. Agora todo mundo pode usar!",
+        descricao:
+          "Imprime o mapa e distribui pra escola, pra prefeitura e pros moradores. Agora todo mundo pode usar!",
       },
     ],
     ordemCerta: ["observar", "subir", "fotografar", "desenhar", "legenda", "imprimir"],
@@ -340,7 +389,11 @@ export const aula03: AulaGeoV1 = {
       {
         id: "r2",
         municipioA: { nome: "Cartógrafo", emoji: "🧭", cor: "from-emerald-500 to-lime-700" },
-        municipioB: { nome: "Modelo em miniatura", emoji: "🏛️", cor: "from-amber-500 to-orange-700" },
+        municipioB: {
+          nome: "Modelo em miniatura",
+          emoji: "🏛️",
+          cor: "from-amber-500 to-orange-700",
+        },
         contexto:
           "Chegou um MODELO PEQUENINO com casas em miniatura, igreja com torre e praça, tudo em 3D em cima de uma mesa. O que é?",
         pecaCertaId: "maquete",
@@ -350,7 +403,11 @@ export const aula03: AulaGeoV1 = {
       {
         id: "r3",
         municipioA: { nome: "Cartógrafo", emoji: "🧭", cor: "from-emerald-500 to-lime-700" },
-        municipioB: { nome: "Desenho com símbolos", emoji: "🗺️", cor: "from-emerald-500 to-lime-700" },
+        municipioB: {
+          nome: "Desenho com símbolos",
+          emoji: "🗺️",
+          cor: "from-emerald-500 to-lime-700",
+        },
         contexto:
           "Chegou um DESENHO PLANO no papel com quadrados coloridos pras casas, linha azul pro rio e símbolos numa legenda. Que tipo é?",
         pecaCertaId: "mapa",
@@ -360,17 +417,26 @@ export const aula03: AulaGeoV1 = {
       {
         id: "r4",
         municipioA: { nome: "Cartógrafo", emoji: "🧭", cor: "from-emerald-500 to-lime-700" },
-        municipioB: { nome: "Casa da Rita vista do alto", emoji: "🏠", cor: "from-rose-400 to-pink-600" },
+        municipioB: {
+          nome: "Casa da Rita vista do alto",
+          emoji: "🏠",
+          cor: "from-rose-400 to-pink-600",
+        },
         contexto:
           "Chegou uma imagem da casa da Dona Rita mostrando SÓ o telhado vermelho, o quintal e a piscina, do jeitinho que são. É o quê?",
         pecaCertaId: "vista",
         feedbackAcerto: "Perfeito! Foto do telhado do jeito que é = VISTA DE CIMA 👁️.",
-        feedbackErro: "Atenção: se mostra o telhado do jeitinho que é (sem símbolos), é VISTA DE CIMA 👁️.",
+        feedbackErro:
+          "Atenção: se mostra o telhado do jeitinho que é (sem símbolos), é VISTA DE CIMA 👁️.",
       },
       {
         id: "r5",
         municipioA: { nome: "Cartógrafo", emoji: "🧭", cor: "from-emerald-500 to-lime-700" },
-        municipioB: { nome: "Escola em miniatura na feira", emoji: "🏫", cor: "from-amber-500 to-orange-700" },
+        municipioB: {
+          nome: "Escola em miniatura na feira",
+          emoji: "🏫",
+          cor: "from-amber-500 to-orange-700",
+        },
         contexto:
           "Chegou uma miniatura da escola nova, com prédio, quadra e árvores em 3D, feita pelo arquiteto pra prefeitura ver antes de construir. O que é?",
         pecaCertaId: "maquete",
@@ -396,7 +462,12 @@ export const aula03: AulaGeoV1 = {
         cor: "#f59e0b",
         descricao:
           "Aqui entram a VISTA DE CIMA (foto tirada de drone, mostra o lugar do jeito que é) e a MAQUETE (modelo 3D em miniatura, tem altura). As duas ajudam você a IMAGINAR o município como ele é de verdade.",
-        exemplos: ["Foto de drone", "Imagem de satélite", "Maquete da escola", "Miniatura da cidade"],
+        exemplos: [
+          "Foto de drone",
+          "Imagem de satélite",
+          "Maquete da escola",
+          "Miniatura da cidade",
+        ],
       },
       {
         id: "fatia-2d",
@@ -424,8 +495,14 @@ export const aula03: AulaGeoV1 = {
         pergunta: "Um MAPA 2D mostra a casa como o quê?",
         opcoes: [
           { id: "a", texto: "Um desenho da casa com porta, janela e telhado." },
-          { id: "b", texto: "Um quadradinho colorido que representa o telhado visto de cima.", correta: true },
+          {
+            id: "b",
+            texto: "Um quadradinho colorido que representa o telhado visto de cima.",
+            correta: true,
+          },
           { id: "c", texto: "Uma foto da casa tirada da rua." },
+
+          { id: "extra-6", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto:
           "Isso! No mapa 2D a casa vira um SÍMBOLO — um quadradinho. Porta e janela ficam de fora porque o mapa mostra o telhado visto de cima.",
@@ -437,8 +514,14 @@ export const aula03: AulaGeoV1 = {
         pergunta: "Qual a DIFERENÇA principal entre maquete e mapa?",
         opcoes: [
           { id: "a", texto: "Não tem diferença, é a mesma coisa." },
-          { id: "b", texto: "A maquete é 3D (tem altura), o mapa é 2D (plano no papel com símbolos).", correta: true },
+          {
+            id: "b",
+            texto: "A maquete é 3D (tem altura), o mapa é 2D (plano no papel com símbolos).",
+            correta: true,
+          },
           { id: "c", texto: "A maquete é grande e o mapa é pequeno." },
+
+          { id: "extra-7", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto:
           "Perfeito! Maquete = 3D (tem altura, tipo brinquedo). Mapa = 2D (plano, com símbolos e legenda).",
@@ -447,12 +530,18 @@ export const aula03: AulaGeoV1 = {
       },
       {
         id: "p3",
-        pergunta:
-          "Por que o mapa precisa de LEGENDA?",
+        pergunta: "Por que o mapa precisa de LEGENDA?",
         opcoes: [
           { id: "a", texto: "Pra ficar bonito.", correta: false },
           { id: "b", texto: "Pra ninguém entender.", correta: false },
-          { id: "c", texto: "Pra explicar o que cada símbolo significa — sem legenda ninguém sabe se o quadrado é casa ou escola.", correta: true },
+          {
+            id: "c",
+            texto:
+              "Pra explicar o que cada símbolo significa — sem legenda ninguém sabe se o quadrado é casa ou escola.",
+            correta: true,
+          },
+
+          { id: "extra-8", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto:
           "Exato! A LEGENDA é o dicionário do mapa. Ela conta o que cada símbolo quer dizer.",

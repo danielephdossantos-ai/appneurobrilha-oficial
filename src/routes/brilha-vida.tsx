@@ -2,12 +2,10 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useNavigationStore, useBackNavigation } from "@/lib/navigation-context";
 import { completePlanItem, advancePlanFlow } from "@/lib/plan-flow";
 import { Shell, PageHeader, Card } from "@/components/Layout";
-import { Heart, Users, Shield, Zap, Smile, BookOpen, Loader2, X } from "lucide-react";
+import { Heart, Users, Shield, Zap, Smile, BookOpen } from "lucide-react";
 import { useEffect, useState, type ReactNode } from "react";
 import { z } from "zod";
 import { useAppState } from "@/core/store";
-import { InfiniteActivityEngine } from "@/engines/infinite-activity-engine";
-import { ActivityContainer } from "@/components/activities/ActivityContainer";
 import { PausaRespirar } from "@/components/brilha-vida/PausaRespirar";
 import { TermometroEmocoes } from "@/components/brilha-vida/TermometroEmocoes";
 import { SemaforoSentir } from "@/components/brilha-vida/SemaforoSentir";
@@ -24,7 +22,6 @@ import { DiarioSentir } from "@/components/brilha-vida/DiarioSentir";
 import { ElogioMagico } from "@/components/brilha-vida/ElogioMagico";
 import { BolhaBemEstar } from "@/components/brilha-vida/BolhaBemEstar";
 import { RodaDoDia } from "@/components/brilha-vida/RodaDoDia";
-import { TerapeutaFlutuante } from "@/components/brilha-vida/TerapeutaFlutuante";
 import { Grounding54321 } from "@/components/brilha-vida/Grounding54321";
 import { ButterflyHug } from "@/components/brilha-vida/ButterflyHug";
 import { EspagueteEstatua } from "@/components/brilha-vida/EspagueteEstatua";
@@ -35,12 +32,7 @@ import { FirstThenBoard } from "@/components/brilha-vida/FirstThenBoard";
 import { CronogramaVisual } from "@/components/brilha-vida/CronogramaVisual";
 import { TimerVisual } from "@/components/brilha-vida/TimerVisual";
 import { CartaoEscolha } from "@/components/brilha-vida/CartaoEscolha";
-import { KitCuidador } from "@/components/brilha-vida/KitCuidador";
-import { DiarioABC } from "@/components/brilha-vida/DiarioABC";
-import { GuiaCrise } from "@/components/brilha-vida/GuiaCrise";
-import { BateriaCuidador } from "@/components/brilha-vida/BateriaCuidador";
 import { MoodTimeline } from "@/components/brilha-vida/MoodTimeline";
-import { motion, AnimatePresence } from "framer-motion";
 
 import { url as catEmocoesImg } from "@/assets/brilha-vida/categoria-emocoes.png.asset.json";
 import { url as catAmizadeImg } from "@/assets/brilha-vida/categoria-amizade.png.asset.json";
@@ -73,15 +65,10 @@ import { url as atvPrimeiroDepoisImg } from "@/assets/brilha-vida/primeiro-depoi
 import { url as atvCronogramaImg } from "@/assets/brilha-vida/cronograma-visual.png.asset.json";
 import { url as atvTimerImg } from "@/assets/brilha-vida/relogio-vermelho.png.asset.json";
 import { url as atvEscolhaImg } from "@/assets/brilha-vida/cartao-escolha.png.asset.json";
-import { url as atvKitCuidadorImg } from "@/assets/brilha-vida/kit-cuidador.png.asset.json";
-import { url as atvDiarioAbcImg } from "@/assets/brilha-vida/diario-abc.png.asset.json";
-import { url as atvGuiaCriseImg } from "@/assets/brilha-vida/guia-crise.png.asset.json";
-import { url as atvBateriaImg } from "@/assets/brilha-vida/bateria-cuidador.png.asset.json";
 
 import { url as catSosImg } from "@/assets/brilha-vida/cat-sos.png.asset.json";
 import { url as catModelosImg } from "@/assets/brilha-vida/cat-modelos.png.asset.json";
 import { url as catTeaTdahImg } from "@/assets/brilha-vida/cat-tea-tdah.png.asset.json";
-import { url as catCuidadorImg } from "@/assets/brilha-vida/cat-cuidador.png.asset.json";
 
 const ATIVIDADE_IMG: Record<string, string> = {
   "Termômetro das Emoções": atvTermometroImg,
@@ -110,10 +97,6 @@ const ATIVIDADE_IMG: Record<string, string> = {
   "Meu Dia em Cartões": atvCronogramaImg,
   "Relógio Vermelho": atvTimerImg,
   "Você Escolhe": atvEscolhaImg,
-  "Kit do Cuidador": atvKitCuidadorImg,
-  "Diário ABC": atvDiarioAbcImg,
-  "Guia de Crise": atvGuiaCriseImg,
-  "Bateria do Cuidador": atvBateriaImg,
 };
 
 export const Route = createFileRoute("/brilha-vida")({
@@ -178,14 +161,6 @@ const categorias = [
     descricao: "Suportes visuais para organizar a rotina, antecipar transições e fazer escolhas",
     atividades: ["Primeiro… Depois", "Meu Dia em Cartões", "Relógio Vermelho", "Você Escolhe"],
   },
-  {
-    id: "cuidador",
-    nome: "Apoio ao Cuidador",
-    img: catCuidadorImg,
-    cor: "from-amber-300/30 to-amber-100/5",
-    descricao: "Recursos de observação, organização e apoio para quem acompanha a criança",
-    atividades: ["Kit do Cuidador", "Diário ABC", "Guia de Crise", "Bateria do Cuidador"],
-  },
 ];
 
 function BrilhaVida() {
@@ -193,15 +168,13 @@ function BrilhaVida() {
   const { atividade } = Route.useSearch();
   const navigate = useNavigate();
   const { handleBack, context } = useBackNavigation();
-  const [activeActivity, setActiveActivity] = useState<any>(null);
-  const [customActivity, setCustomActivity] = useState<null | "respirar" | "termometro" | "semaforo" | "cantinho" | "comoestou" | "emojimagico" | "historias" | "dividindo" | "cuidando" | "minhavez" | "regras" | "conflitos" | "diario" | "elogio" | "bolha" | "roda" | "grounding" | "borboleta" | "espaguete" | "escutacorpo" | "zones" | "moodmeter" | "firstthen" | "cronograma" | "timer" | "escolha" | "kitcuidador" | "diarioabc" | "guiacrise" | "bateriacuidador">(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [customActivity, setCustomActivity] = useState<null | "respirar" | "termometro" | "semaforo" | "cantinho" | "comoestou" | "emojimagico" | "historias" | "dividindo" | "cuidando" | "minhavez" | "regras" | "conflitos" | "diario" | "elogio" | "bolha" | "roda" | "grounding" | "borboleta" | "espaguete" | "escutacorpo" | "zones" | "moodmeter" | "firstthen" | "cronograma" | "timer" | "escolha">(null);
 
   useEffect(() => {
     const permitidas = new Set([
       "respirar","termometro","semaforo","cantinho","comoestou","emojimagico","historias","dividindo","cuidando",
       "minhavez","regras","conflitos","diario","elogio","bolha","roda","grounding","borboleta","espaguete","escutacorpo",
-      "zones","moodmeter","firstthen","cronograma","timer","escolha","kitcuidador","diarioabc","guiacrise","bateriacuidador",
+      "zones","moodmeter","firstthen","cronograma","timer","escolha",
     ]);
     if (atividade && permitidas.has(atividade)) setCustomActivity(atividade as any);
   }, [atividade]);
@@ -313,55 +286,7 @@ function BrilhaVida() {
       setCustomActivity("escolha");
       return;
     }
-    if (tipo === "Kit do Cuidador") {
-      setCustomActivity("kitcuidador");
-      return;
-    }
-    if (tipo === "Diário ABC") {
-      setCustomActivity("diarioabc");
-      return;
-    }
-    if (tipo === "Guia de Crise") {
-      setCustomActivity("guiacrise");
-      return;
-    }
-    if (tipo === "Bateria do Cuidador") {
-      setCustomActivity("bateriacuidador");
-      return;
-    }
-    setIsLoading(true);
-
-    // Simular atraso para feedback visual lúdico
-    setTimeout(() => {
-      try {
-        const gradeLevel = activeChild.serie ? parseInt(activeChild.serie) || 1 : 1;
-        const activity = InfiniteActivityEngine.generate({
-          childId: activeChild.id,
-          age: activeChild.idade || 6,
-          grade: gradeLevel,
-          neuroProfile: activeChild.diagnostico || "Tipico",
-          previousPerformance: 0.7,
-          adjustments: (activeChild as any).adjustments || {
-            visualComplexity: "medium",
-            stimuliReduction: false,
-            audioAdaptation: { volume: 0.8, pacing: "normal" },
-            positiveReinforcementFrequency: 0.5,
-          },
-        });
-
-        // Forçar tipo socioemocional se o motor sorteou algo genérico
-        if (!["social-story", "emotion-match"].includes(activity.content.type)) {
-          const isStory = Math.random() > 0.5;
-          activity.content.type = isStory ? "social-story" : "emotion-match";
-        }
-
-        setActiveActivity(activity);
-      } catch (error) {
-        console.error("Erro ao gerar atividade Brilha Vida:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    }, 800);
+    console.warn(`[BrilhaVida] Atividade sem componente auditado: ${tipo}`);
   };
 
   const finishAndBack = async () => {
@@ -372,7 +297,6 @@ function BrilhaVida() {
     }
     if (!handleBack(navigate)) {
       setCustomActivity(null);
-      setActiveActivity(null);
     }
   };
 
@@ -403,54 +327,16 @@ function BrilhaVida() {
     cronograma: { node: <CronogramaVisual onClose={() => { void finishAndBack(); }} />, contexto: "Meu Dia em Cartões" },
     timer: { node: <TimerVisual onClose={() => { void finishAndBack(); }} />, contexto: "Relógio Vermelho" },
     escolha: { node: <CartaoEscolha onClose={() => { void finishAndBack(); }} />, contexto: "Você Escolhe" },
-    kitcuidador: { node: <KitCuidador onClose={() => { void finishAndBack(); }} />, contexto: "Kit do Cuidador" },
-    diarioabc: { node: <DiarioABC onClose={() => { void finishAndBack(); }} />, contexto: "Diário ABC" },
-    guiacrise: { node: <GuiaCrise onClose={() => { void finishAndBack(); }} />, contexto: "Guia de Crise" },
-    bateriacuidador: { node: <BateriaCuidador onClose={() => { void finishAndBack(); }} />, contexto: "Bateria do Cuidador" },
   };
 
   if (customActivity && CUSTOM_MAP[customActivity]) {
-    const { node, contexto } = CUSTOM_MAP[customActivity];
+    const { node } = CUSTOM_MAP[customActivity];
     return (
       <Shell>
         {node}
-        <TerapeutaFlutuante contexto={contexto} />
       </Shell>
     );
   }
-
-  if (activeActivity) {
-    return (
-      <Shell>
-        <div className="relative">
-          <button
-            onClick={() => { if (!handleBack(navigate)) setActiveActivity(null); }}
-            className="absolute -top-12 right-0 p-2 bg-white rounded-full shadow-lg border-2 border-slate-100 text-slate-400 hover:text-destructive transition-colors z-50"
-          >
-            <X size={24} />
-          </button>
-          <ActivityContainer
-            activity={{
-              ...activeActivity,
-              type:
-                activeActivity.content.type === "emotion-match" ||
-                activeActivity.content.type === "social-story"
-                  ? "multiple-choice"
-                  : "multiple-choice",
-              instruction: activeActivity.content.question,
-              title: activeActivity.content.title,
-            }}
-            onComplete={() => {
-              setTimeout(() => { void finishAndBack(); }, 1200);
-            }}
-            emotion={{ current: "happy" }}
-          />
-        </div>
-        <TerapeutaFlutuante contexto="atividade Brilha Vida" />
-      </Shell>
-    );
-  }
-
 
   return (
     <Shell>
@@ -459,22 +345,6 @@ function BrilhaVida() {
         title="Brilha Vida"
         subtitle="Educação socioemocional e regulação para brilhar na vida"
       />
-
-      <AnimatePresence>
-        {isLoading && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-white/80 backdrop-blur-sm"
-          >
-            <Loader2 className="h-16 w-16 text-primary animate-spin mb-4" />
-            <h2 className="text-2xl font-black text-primary animate-pulse">
-              Preparando sua missão...
-            </h2>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
         <Card className="bg-gradient-to-br from-emerald/10 to-emerald/5 border-emerald/20 flex items-start gap-4">
@@ -550,13 +420,13 @@ function BrilhaVida() {
                   </div>
 
                   {/* Abaixo do título: Badge compacta e centralizada */}
-                  <div className="text-[9px] font-black text-primary/60 uppercase tracking-wider flex items-center justify-center gap-1 bg-white/50 backdrop-blur-sm px-2.5 py-0.5 rounded-full border border-primary/10">
+                  <div className="text-xs font-black text-primary/70 uppercase tracking-wider flex items-center justify-center gap-1 bg-white/60 backdrop-blur-sm px-3 py-1 rounded-full border border-primary/10">
                     BRILHA VIDA <Zap className="h-2.5 w-2.5 fill-primary" />
                   </div>
 
                   {/* Base: Área de ação consistente */}
                   <div className="mt-auto w-full pt-2 border-t border-black/5 flex items-center justify-between px-1">
-                    <span className="text-[10px] font-black text-primary uppercase tracking-tight">Começar</span>
+                    <span className="text-sm font-black text-primary uppercase tracking-tight">Começar</span>
                     <Smile className="h-5 w-5 text-primary opacity-30 group-hover:opacity-100 transition-opacity" />
                   </div>
                 </button>
@@ -574,13 +444,12 @@ function BrilhaVida() {
           <h3 className="text-xl font-black mb-2 flex items-center gap-2">
             <Smile className="h-6 w-6 text-sun" /> Momento Calma
           </h3>
-          <p className="text-slate-400 max-w-md">
-            Precisa de uma pausa? Nosso guia de apoio está aqui para ouvir você e ajudar com uma pausa, respiração e organização do momento. É só tocar no coraçãozinho.
+          <p className="text-slate-300 max-w-md text-base leading-relaxed">
+            Precisa de uma pausa? Escolha Pausa para Respirar, Cantinho da Calma ou Semáforo do Sentir. Se ainda estiver difícil, chame um adulto de confiança.
           </p>
         </div>
       </Card>
 
-      <TerapeutaFlutuante />
     </Shell>
   );
 }

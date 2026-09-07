@@ -6,6 +6,7 @@ import { aula15 } from "./aula-15-adverbios-e-locucoes";
 
 export const unidade3 = {
   id: "unidade-3",
+  slug: "unidade-3",
   numero: 3,
   titulo: "Sintaxe do Poder",
   aulas: [aula11, aula12, aula13, aula14, aula15],

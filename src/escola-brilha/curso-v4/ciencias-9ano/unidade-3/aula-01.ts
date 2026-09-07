@@ -14,7 +14,7 @@ export const aula01: AulaGeoV1 = {
   titulo: "Laboratório de Química Aplicada",
   iconeTrilha: "⚗️",
   recompensa: { xp: 160, moedas: 65, medalha: "Químico Júnior" },
-  bncc: ["EF09CI01", "EF09CI02", "EF09CI03", "EF09CI04"],
+  bncc: ["EF09CI03"],
   duracaoMin: 45,
 
   cena01_motivacao: {
@@ -37,6 +37,7 @@ export const aula01: AulaGeoV1 = {
       { id: "nova", titulo: "Substâncias novas são formadas", subtitulo: "reação química: rearranjo dos átomos", emoji: "⚗️", cor: "from-emerald-500 to-teal-700" },
       { id: "mesma", titulo: "É só uma mistura", subtitulo: "as substâncias continuam iguais", emoji: "🥤", cor: "from-slate-500 to-slate-700" },
       { id: "magica", titulo: "Simplesmente magia", subtitulo: "não tem explicação química", emoji: "✨", cor: "from-red-500 to-rose-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "nova",
     feedbackAcerto:
@@ -84,6 +85,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🔴", titulo: "Número de PRÓTONS no núcleo", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "⚡", titulo: "Número de elétrons", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "⚪", titulo: "Número de nêutrons", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. Nº de prótons = número atômico (Z).",
         feedbackErro: "É o número de PRÓTONS. Elétrons e nêutrons podem variar (íon/isótopo)." },
@@ -92,6 +94,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🔗", titulo: "2 átomos de hidrogênio na molécula", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🥤", titulo: "2 moléculas de água", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🧪", titulo: "2 gramas de água", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Sim. H₂O = 2 H + 1 O.",
         feedbackErro: "Subscrito = quantos ÁTOMOS de cada elemento na molécula." },
@@ -100,6 +103,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "⚖️", titulo: "Solução NEUTRA", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🍋", titulo: "Muito ácida", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🧼", titulo: "Muito básica", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. Água pura tem pH 7 = neutro.",
         feedbackErro: "pH 7 = neutro. Abaixo é ácido, acima é básico." },
@@ -190,6 +194,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Carga positiva (+)", correta: true },
           { id: "b", texto: "Carga negativa (−)" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. Prótons (+), elétrons (−), nêutrons (0).",
         feedbackErro: "Prótons são POSITIVOS. Elétrons é que são negativos." },
@@ -197,6 +203,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "A massa dos reagentes é igual à dos produtos", correta: true },
           { id: "b", texto: "A massa sempre aumenta na reação" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. Conservação da massa (1789).",
         feedbackErro: "Massa se CONSERVA — átomos só se rearranjam." },
@@ -204,6 +212,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Fortemente ácida", correta: true },
           { id: "b", texto: "Fortemente básica" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Perfeito. pH < 7 = ácido. pH 2 é bem ácido.",
         feedbackErro: "pH abaixo de 7 é ÁCIDO. pH 2 é fortemente ácido." },

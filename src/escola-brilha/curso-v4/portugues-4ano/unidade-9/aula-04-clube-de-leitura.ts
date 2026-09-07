@@ -21,7 +21,7 @@ export const aula04: AulaPortuguesV4 = {
   slug: "aula-04-clube-de-leitura",
   titulo: "O Clube de Leitura dos Exploradores",
   iconeTrilha: "⭐",
-  bncc: ["EF35LP01", "EF35LP16", "EF35LP29", "EF35LP30"],
+  bncc: ["EF35LP01", "EF35LP02", "EF35LP21", "EF15LP15", "EF15LP16", "EF15LP19"],
   duracaoMin: 22,
 
   momento01_motivacao: {

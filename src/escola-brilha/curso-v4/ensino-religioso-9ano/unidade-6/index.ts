@@ -5,7 +5,7 @@ export const unidade6: UnidadeGeoV1 = {
   slug: "unidade-6",
   numero: 6,
   titulo: "Projeto de Vida",
-  subtitulo: "Convicções que moldam escolhas futuras (EF09ER06)",
+  subtitulo: "Princípios éticos e construção do projeto de vida (EF09ER07–EF09ER08)",
   descricao:
     "Como as convicções (religiosas ou seculares) influenciam carreira, relacionamentos, engajamento social e o projeto de vida do jovem.",
   corTema: "#c2410c",

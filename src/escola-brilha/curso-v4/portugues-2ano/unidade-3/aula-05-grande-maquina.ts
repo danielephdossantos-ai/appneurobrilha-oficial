@@ -25,13 +25,7 @@ export const aula05: AulaPortuguesV4 = {
   slug: "aula-05-grande-maquina",
   titulo: "A Grande Máquina das Palavras",
   iconeTrilha: "🏅",
-  bncc: [
-    "EF02LP06",
-    "EF02LP07",
-    "EF02LP08",
-    "EF02LP14",
-    "EF02LP15",
-  ],
+  bncc: ["EF02LP02", "EF02LP06", "EF02LP07", "EF02LP08", "EF02LP10"],
   duracaoMin: 15,
 
   momento01_motivacao: {

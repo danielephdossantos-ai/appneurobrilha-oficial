@@ -61,7 +61,7 @@ export const aula04: AulaPortuguesV4 = {
     cards: [
       {
         palavra: "cartaz",
-        explicacao: "É um aviso grande, com letras bem visíveis, colado num lugar onde muita gente passa.",
+        explicacao: "É um texto visual feito para informar, orientar ou divulgar algo a muitas pessoas.",
         exemplo: "O cartaz da escola avisava sobre a hora do recreio.",
         imagemUrl: quadroAlegre,
       },
@@ -203,7 +203,7 @@ export const aula04: AulaPortuguesV4 = {
       },
       {
         tipo: "escritaReal",
-        formato: "lista",
+        formato: "cartaz",
         titulo: "Meu cartaz da sala",
         comando: "Escreva um cartaz de aviso pra sua sala ou pra sua casa. Poucas palavras, uma em cada linha.",
         linhas: 3,

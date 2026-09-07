@@ -24,7 +24,7 @@ export const aula1: AulaPortuguesV4 = {
   slug: "aula-01-tema-e-ideia-central",
   titulo: "Tema e Ideia Central",
   iconeTrilha: "🕵️",
-  bncc: ["EF05LP01", "EF15LP03"],
+  bncc: ["EF35LP03", "EF15LP02", "EF15LP03"],
   duracaoMin: 25,
 
   momento01_motivacao: {

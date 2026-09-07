@@ -42,7 +42,9 @@ export const aula02: AulaGeoV1 = {
         subtitulo: "nenhuma oposição existiu",
         emoji: "❌",
         cor: "from-amber-900 to-slate-950"
-      }
+      },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "conf",
     feedbackAcerto: "Correto. A elite (sobretudo os liberais brasileiros) via D. Pedro I como autoritário e ainda ligado a Portugal. A pressão política culminou na abdicação em 1831.",
@@ -159,7 +161,8 @@ export const aula02: AulaGeoV1 = {
             emoji: "🏖️",
             titulo: "Desejo de descansar",
             cor: "from-slate-600 to-slate-900"
-          }
+          },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "a",
         feedbackAcerto: "Correto. Crise política, autoritarismo e conflitos com brasileiros levaram à abdicação.",
@@ -187,7 +190,8 @@ export const aula02: AulaGeoV1 = {
             emoji: "🌍",
             titulo: "Fim da monarquia",
             cor: "from-slate-600 to-slate-900"
-          }
+          },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "a",
         feedbackAcerto: "Correto. Foi um período de forte instabilidade, com várias revoltas regionais.",
@@ -215,7 +219,8 @@ export const aula02: AulaGeoV1 = {
             emoji: "🌎",
             titulo: "Exigência de países estrangeiros",
             cor: "from-slate-600 to-slate-900"
-          }
+          },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "a",
         feedbackAcerto: "Correto. A elite política antecipou a maioridade (aos 14 anos) para recentralizar o poder e acabar com a instabilidade.",
@@ -544,7 +549,8 @@ export const aula02: AulaGeoV1 = {
             id: "c",
             texto: "Doença súbita sem relação política.",
             correta: false
-          }
+          },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. Autoritarismo e conflitos levaram à crise que resultou na abdicação.",
         feedbackErro: "Foi a pressão política e os conflitos com brasileiros que forçaram a abdicação."
@@ -567,7 +573,8 @@ export const aula02: AulaGeoV1 = {
             id: "c",
             texto: "Fim da escravidão no Brasil.",
             correta: false
-          }
+          },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. Foi um período de forte instabilidade e revoltas.",
         feedbackErro: "O Período Regencial foi marcado por instabilidade política e revoltas regionais."
@@ -590,7 +597,8 @@ export const aula02: AulaGeoV1 = {
             id: "c",
             texto: "Por exigência de Portugal.",
             correta: false
-          }
+          },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. D. Pedro II foi coroado aos 14 anos para recentralizar o poder.",
         feedbackErro: "Foi para encerrar a instabilidade regencial — ele tinha só 14 anos."

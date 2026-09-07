@@ -63,13 +63,15 @@ const aula: Aula = {
     "Observar gráficos de colunas.",
     "Comparar quantidades.",
     "Responder perguntas usando informações organizadas.",
+    "Identificar título, categorias, escala e unidade.",
+    "Calcular total e diferença a partir dos dados.",
   ],
 
   motivacao:
     "Tabelas e gráficos aparecem em jornais, jogos e aplicativos — ler eles é um superpoder de detetive 🔍!",
 
   explicacao:
-    "Uma TABELA 📋 organiza as informações em linhas e colunas.\n\nUm GRÁFICO DE COLUNAS 📊 mostra as mesmas informações usando barras: quanto maior a barra, MAIOR a quantidade.\n\nEles ajudam a ENTENDER os dados rapidinho!",
+    "Uma tabela organiza dados em linhas e colunas. Leia o título, as categorias e os valores. Um gráfico de colunas representa cada categoria por uma coluna: usando a mesma escala e começando no zero, coluna mais alta indica maior quantidade. Confira título, categorias, escala e unidade. Além de maior e menor, podemos achar o total somando os valores e a diferença subtraindo uma quantidade da outra.",
 
   explicacoesNiveis: {
     nivel1: "📋 Tabela = linhas e colunas. 📊 Gráfico = barras. Maior barra = mais votos.",

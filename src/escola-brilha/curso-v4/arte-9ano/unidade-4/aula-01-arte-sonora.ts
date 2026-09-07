@@ -10,39 +10,109 @@ export const aula01: AulaArteV1 = {
   slug: "aula-01-arte-sonora",
   titulo: "Instalações Sonoras, Paisagem Acústica e Arte Conceitual",
   iconeTrilha: "🔊",
-  bncc: ["EF69AR20", "EF69AR21", "EF69AR22", "EF69AR23"],
+  bncc: ["EF69AR20", "EF69AR21", "EF69AR22"],
   duracaoMin: 34,
 
   cena01_motivacao: {
-    tipo: "cenaTematica", variante: "explorar",
-    aurora: "Engenheiro de Paisagens Sonoras! As telas ficaram pretas — mas quando você fica em silêncio, começa a OUVIR pingos, tambores, sussurros e trânsito. Aqui o som É a escultura. Toca em cada pista pra ativar o Pavilhão Acústico.",
+    tipo: "cenaTematica",
+    variante: "explorar",
+    aurora:
+      "Engenheiro de Paisagens Sonoras! As telas ficaram pretas — mas quando você fica em silêncio, começa a OUVIR pingos, tambores, sussurros e trânsito. Aqui o som É a escultura. Toca em cada pista pra ativar o Pavilhão Acústico.",
     titulo: "🔊 O Despertar da Escuta Ativa",
     instrucao: "Toca em cada pista",
     itens: [
-      { emoji: "🔊", rotulo: "Arte Sonora (Sound Art)", descricao: "Linguagem interdisciplinar onde o som e a escuta ativa são o meio principal para criar experiências plásticas tridimensionais.", cor: "#0891b2", fotoUrl: instalacao },
-      { emoji: "🏙️", rotulo: "Paisagem Sonora", descricao: "Conjunto de todos os sons que ocorrem em um ambiente (ruídos, natureza, falas), formando a identidade acústica daquele lugar.", cor: "#dc2626", fotoUrl: cidade },
-      { emoji: "🎼", rotulo: "Escultura Invisível", descricao: "O som ESCULPE o espaço sem forma visível — a instalação existe pelos ouvidos, não pelos olhos.", cor: "#7c3aed", fotoUrl: ponte },
-      { emoji: "🤫", rotulo: "Silêncio Conceitual", descricao: "Uso do silêncio ou sussurro como resistência artística contra o excesso de ruído industrializado das cidades modernas.", cor: "#0f766e", fotoUrl: silencio },
+      {
+        emoji: "🔊",
+        rotulo: "Arte Sonora (Sound Art)",
+        descricao:
+          "Linguagem interdisciplinar onde o som e a escuta ativa são o meio principal para criar experiências plásticas tridimensionais.",
+        cor: "#0891b2",
+        fotoUrl: instalacao,
+      },
+      {
+        emoji: "🏙️",
+        rotulo: "Paisagem Sonora",
+        descricao:
+          "Conjunto de todos os sons que ocorrem em um ambiente (ruídos, natureza, falas), formando a identidade acústica daquele lugar.",
+        cor: "#dc2626",
+        fotoUrl: cidade,
+      },
+      {
+        emoji: "🎼",
+        rotulo: "Escultura Invisível",
+        descricao:
+          "O som ESCULPE o espaço sem forma visível — a instalação existe pelos ouvidos, não pelos olhos.",
+        cor: "#7c3aed",
+        fotoUrl: ponte,
+      },
+      {
+        emoji: "🤫",
+        rotulo: "Silêncio Conceitual",
+        descricao:
+          "Uso do silêncio ou sussurro como resistência artística contra o excesso de ruído industrializado das cidades modernas.",
+        cor: "#0f766e",
+        fotoUrl: silencio,
+      },
     ],
-    falaFinal: "Sua missão: virar Engenheiro de Paisagens Sonoras — esculpir o espaço com frequências.",
+    falaFinal:
+      "Sua missão: virar Engenheiro de Paisagens Sonoras — esculpir o espaço com frequências.",
   },
 
   cena02_previsao: {
     tipo: "quizCores",
     aurora: "Calibra o ouvido crítico.",
     perguntas: [
-      { pergunta: "Uma artista esconde alto-falantes sob uma PONTE de concreto e projeta sua voz cantando canções folclóricas. Qual é o efeito da obra?", fotoUrl: ponte, alternativas: [
-        { texto: "Transforma o espaço cinza urbano em ambiente carregado de melancolia e memória poética", correta: true },
-        { texto: "Apenas oculta as canções para que ninguém as escute", correta: false },
-      ], feedbackAcerto: "Perfeito! Susan Philipsz esculpe o espaço com sua voz.", feedbackErro: "Não é esconder — é INVADIR poeticamente o espaço público." },
-      { pergunta: "Uma sala de museu vazia e escura só toca dezenas de despertadores tocando ao mesmo tempo. O que a obra ESCULPE?", fotoUrl: instalacao, alternativas: [
-        { texto: "Uma sensação de ansiedade e pressa usando apenas ondas sonoras", correta: true },
-        { texto: "Nada — é só barulho aleatório sem intenção artística", correta: false },
-      ], feedbackAcerto: "Isso! Som puro esculpe emoções tridimensionais.", feedbackErro: "Som + intenção = arte sonora conceitual." },
-      { pergunta: "O barulho INDUSTRIAL constante das metrópoles se chama:", fotoUrl: cidade, alternativas: [
-        { texto: "Poluição sonora — debate estético central da arte contemporânea", correta: true },
-        { texto: "Trilha sonora comercial produzida pela cidade", correta: false },
-      ], feedbackAcerto: "Correto! A arte sonora denuncia esse excesso.", feedbackErro: "Poluição sonora é involuntária — não é composição." },
+      {
+        pergunta:
+          "Uma artista esconde alto-falantes sob uma PONTE de concreto e projeta sua voz cantando canções folclóricas. Qual é o efeito da obra?",
+        fotoUrl: ponte,
+        alternativas: [
+          {
+            texto:
+              "Transforma o espaço cinza urbano em ambiente carregado de melancolia e memória poética",
+            correta: true,
+          },
+          { texto: "Apenas oculta as canções para que ninguém as escute", correta: false },
+
+          { texto: "Não corresponde à análise", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
+        ],
+        feedbackAcerto: "Perfeito! Susan Philipsz esculpe o espaço com sua voz.",
+        feedbackErro: "Não é esconder — é INVADIR poeticamente o espaço público.",
+      },
+      {
+        pergunta:
+          "Uma sala de museu vazia e escura só toca dezenas de despertadores tocando ao mesmo tempo. O que a obra ESCULPE?",
+        fotoUrl: instalacao,
+        alternativas: [
+          {
+            texto: "Uma sensação de ansiedade e pressa usando apenas ondas sonoras",
+            correta: true,
+          },
+          { texto: "Nada — é só barulho aleatório sem intenção artística", correta: false },
+
+          { texto: "Não corresponde à análise", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
+        ],
+        feedbackAcerto: "Isso! Som puro esculpe emoções tridimensionais.",
+        feedbackErro: "Som + intenção = arte sonora conceitual.",
+      },
+      {
+        pergunta: "O barulho INDUSTRIAL constante das metrópoles se chama:",
+        fotoUrl: cidade,
+        alternativas: [
+          {
+            texto: "Poluição sonora — debate estético central da arte contemporânea",
+            correta: true,
+          },
+          { texto: "Trilha sonora comercial produzida pela cidade", correta: false },
+
+          { texto: "Não corresponde à análise", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
+        ],
+        feedbackAcerto: "Correto! A arte sonora denuncia esse excesso.",
+        feedbackErro: "Poluição sonora é involuntária — não é composição.",
+      },
     ],
   },
 
@@ -50,10 +120,35 @@ export const aula01: AulaArteV1 = {
     tipo: "vocabularioCards",
     aurora: "Vocabulário do engenheiro de paisagens sonoras.",
     cards: [
-      { termo: "Arte Sonora", definicao: "Linguagem artística onde o som e a escuta ativa são o meio principal da experiência plástica.", emoji: "🔊", cor: "#0891b2", fotoUrl: instalacao },
-      { termo: "Paisagem Sonora", definicao: "Conjunto de sons que forma a identidade acústica de um ambiente específico.", emoji: "🏙️", cor: "#dc2626", fotoUrl: cidade },
-      { termo: "Escultura Invisível", definicao: "Instalação que existe pelos ouvidos — o som molda o espaço sem forma visível.", emoji: "🎼", cor: "#7c3aed", fotoUrl: ponte },
-      { termo: "Silêncio Conceitual", definicao: "Uso do silêncio como resistência artística ao excesso de ruído das cidades.", emoji: "🤫", cor: "#0f766e", fotoUrl: silencio },
+      {
+        termo: "Arte Sonora",
+        definicao:
+          "Linguagem artística onde o som e a escuta ativa são o meio principal da experiência plástica.",
+        emoji: "🔊",
+        cor: "#0891b2",
+        fotoUrl: instalacao,
+      },
+      {
+        termo: "Paisagem Sonora",
+        definicao: "Conjunto de sons que forma a identidade acústica de um ambiente específico.",
+        emoji: "🏙️",
+        cor: "#dc2626",
+        fotoUrl: cidade,
+      },
+      {
+        termo: "Escultura Invisível",
+        definicao: "Instalação que existe pelos ouvidos — o som molda o espaço sem forma visível.",
+        emoji: "🎼",
+        cor: "#7c3aed",
+        fotoUrl: ponte,
+      },
+      {
+        termo: "Silêncio Conceitual",
+        definicao: "Uso do silêncio como resistência artística ao excesso de ruído das cidades.",
+        emoji: "🤫",
+        cor: "#0f766e",
+        fotoUrl: silencio,
+      },
     ],
   },
 
@@ -69,10 +164,34 @@ export const aula01: AulaArteV1 = {
       "O oposto do ruído é o SILÊNCIO CONCEITUAL: um minuto de silêncio absoluto em uma sala revela sons ocultos (relógio, respiração, pássaros distantes) que a poluição sonora escondia. O silêncio também é obra.",
     ],
     pigmentos: [
-      { nome: "Arte Sonora", hex: "#0891b2", fonte: "Som como escultura", emoji: "🔊", fotoUrl: instalacao },
-      { nome: "Paisagem", hex: "#dc2626", fonte: "Identidade acústica de um lugar", emoji: "🏙️", fotoUrl: cidade },
-      { nome: "Philipsz", hex: "#7c3aed", fonte: "Voz sob pontes urbanas", emoji: "🎼", fotoUrl: ponte },
-      { nome: "Silêncio", hex: "#0f766e", fonte: "Resistência ao ruído", emoji: "🤫", fotoUrl: silencio },
+      {
+        nome: "Arte Sonora",
+        hex: "#0891b2",
+        fonte: "Som como escultura",
+        emoji: "🔊",
+        fotoUrl: instalacao,
+      },
+      {
+        nome: "Paisagem",
+        hex: "#dc2626",
+        fonte: "Identidade acústica de um lugar",
+        emoji: "🏙️",
+        fotoUrl: cidade,
+      },
+      {
+        nome: "Philipsz",
+        hex: "#7c3aed",
+        fonte: "Voz sob pontes urbanas",
+        emoji: "🎼",
+        fotoUrl: ponte,
+      },
+      {
+        nome: "Silêncio",
+        hex: "#0f766e",
+        fonte: "Resistência ao ruído",
+        emoji: "🤫",
+        fotoUrl: silencio,
+      },
     ],
   },
 
@@ -80,18 +199,56 @@ export const aula01: AulaArteV1 = {
     tipo: "quizCores",
     aurora: "Confere o caderno acústico!",
     perguntas: [
-      { pergunta: "O que diferencia ARTE SONORA de uma música comum de rádio?", fotoUrl: instalacao, alternativas: [
-        { texto: "O som é o MEIO principal da experiência plástica tridimensional — esculpe o espaço", correta: true },
-        { texto: "Não há diferença nenhuma entre as duas linguagens", correta: false },
-      ], feedbackAcerto: "Correto! Arte sonora existe pra esculpir, não pra tocar em playlist.", feedbackErro: "Rádio entretém; arte sonora ESCULPE emoção tridimensional." },
-      { pergunta: "Como podemos definir PAISAGEM SONORA?", fotoUrl: cidade, alternativas: [
-        { texto: "Conjunto de manifestações sonoras que formam a identidade acústica de um ambiente", correta: true },
-        { texto: "Quadro pintado com tinta acrílica retratando músicos", correta: false },
-      ], feedbackAcerto: "Excelente! Cada lugar tem sua paisagem sonora única.", feedbackErro: "Quadro é imagem — paisagem sonora é SOM." },
-      { pergunta: "Por que o silêncio conceitual é considerado arte contemporânea?", fotoUrl: silencio, alternativas: [
-        { texto: "Revela sons ocultos escondidos pela poluição sonora — resistência estética", correta: true },
-        { texto: "Ausência de conteúdo — não é arte", correta: false },
-      ], feedbackAcerto: "Perfeito! O silêncio é composição intencional.", feedbackErro: "Silêncio escolhido é composição — não é ausência." },
+      {
+        pergunta: "O que diferencia ARTE SONORA de uma música comum de rádio?",
+        fotoUrl: instalacao,
+        alternativas: [
+          {
+            texto:
+              "O som é o MEIO principal da experiência plástica tridimensional — esculpe o espaço",
+            correta: true,
+          },
+          { texto: "Não há diferença nenhuma entre as duas linguagens", correta: false },
+
+          { texto: "Não corresponde à análise", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
+        ],
+        feedbackAcerto: "Correto! Arte sonora existe pra esculpir, não pra tocar em playlist.",
+        feedbackErro: "Rádio entretém; arte sonora ESCULPE emoção tridimensional.",
+      },
+      {
+        pergunta: "Como podemos definir PAISAGEM SONORA?",
+        fotoUrl: cidade,
+        alternativas: [
+          {
+            texto:
+              "Conjunto de manifestações sonoras que formam a identidade acústica de um ambiente",
+            correta: true,
+          },
+          { texto: "Quadro pintado com tinta acrílica retratando músicos", correta: false },
+
+          { texto: "Não corresponde à análise", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
+        ],
+        feedbackAcerto: "Excelente! Cada lugar tem sua paisagem sonora única.",
+        feedbackErro: "Quadro é imagem — paisagem sonora é SOM.",
+      },
+      {
+        pergunta: "Por que o silêncio conceitual é considerado arte contemporânea?",
+        fotoUrl: silencio,
+        alternativas: [
+          {
+            texto: "Revela sons ocultos escondidos pela poluição sonora — resistência estética",
+            correta: true,
+          },
+          { texto: "Ausência de conteúdo — não é arte", correta: false },
+
+          { texto: "Não corresponde à análise", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
+        ],
+        feedbackAcerto: "Perfeito! O silêncio é composição intencional.",
+        feedbackErro: "Silêncio escolhido é composição — não é ausência.",
+      },
     ],
   },
 
@@ -99,9 +256,45 @@ export const aula01: AulaArteV1 = {
     tipo: "pintarAnimais",
     aurora: "Classifica cada obra sonora!",
     animais: [
-      { nome: "Voz cantando escondida sob uma ponte urbana", emoji: "🎼", fotoUrl: ponte, corAlvo: { nome: "Instalação Sonora Site-Specific", hex: "#7c3aed" }, opcoes: [{ nome: "Instalação Sonora Site-Specific", hex: "#7c3aed" }, { nome: "Show comercial", hex: "#78716c" }, { nome: "Trilha de filme", hex: "#78716c" }], falaAcerto: "Isso! Philipsz esculpe o espaço com voz." },
-      { nome: "Sala escura com despertadores tocando ao mesmo tempo", emoji: "🔊", fotoUrl: instalacao, corAlvo: { nome: "Escultura Invisível", hex: "#0891b2" }, opcoes: [{ nome: "Escultura Invisível", hex: "#0891b2" }, { nome: "Pintura Renascentista", hex: "#78716c" }, { nome: "Aquarela", hex: "#78716c" }], falaAcerto: "Correto! Som esculpe ansiedade em 3D." },
-      { nome: "Um minuto sem eletrônicos em casa", emoji: "🤫", fotoUrl: silencio, corAlvo: { nome: "Silêncio Conceitual", hex: "#0f766e" }, opcoes: [{ nome: "Silêncio Conceitual", hex: "#0f766e" }, { nome: "Barulho industrial", hex: "#dc2626" }, { nome: "Show de rock", hex: "#78716c" }], falaAcerto: "Perfeito! Silêncio como resistência estética." },
+      {
+        nome: "Voz cantando escondida sob uma ponte urbana",
+        emoji: "🎼",
+        fotoUrl: ponte,
+        corAlvo: { nome: "Instalação Sonora Site-Specific", hex: "#7c3aed" },
+        opcoes: [
+          { nome: "Instalação Sonora Site-Specific", hex: "#7c3aed" },
+          { nome: "Show comercial", hex: "#78716c" },
+          { nome: "Trilha de filme", hex: "#78716c" },
+          { nome: "Outra opção", hex: "#94a3b8" },
+        ],
+        falaAcerto: "Isso! Philipsz esculpe o espaço com voz.",
+      },
+      {
+        nome: "Sala escura com despertadores tocando ao mesmo tempo",
+        emoji: "🔊",
+        fotoUrl: instalacao,
+        corAlvo: { nome: "Escultura Invisível", hex: "#0891b2" },
+        opcoes: [
+          { nome: "Escultura Invisível", hex: "#0891b2" },
+          { nome: "Pintura Renascentista", hex: "#78716c" },
+          { nome: "Aquarela", hex: "#78716c" },
+          { nome: "Outra opção", hex: "#94a3b8" },
+        ],
+        falaAcerto: "Correto! Som esculpe ansiedade em 3D.",
+      },
+      {
+        nome: "Um minuto sem eletrônicos em casa",
+        emoji: "🤫",
+        fotoUrl: silencio,
+        corAlvo: { nome: "Silêncio Conceitual", hex: "#0f766e" },
+        opcoes: [
+          { nome: "Silêncio Conceitual", hex: "#0f766e" },
+          { nome: "Barulho industrial", hex: "#dc2626" },
+          { nome: "Show de rock", hex: "#78716c" },
+          { nome: "Outra opção", hex: "#94a3b8" },
+        ],
+        falaAcerto: "Perfeito! Silêncio como resistência estética.",
+      },
     ],
   },
 
@@ -109,11 +302,42 @@ export const aula01: AulaArteV1 = {
     tipo: "sequenciaMistura",
     aurora: "Ordena os 5 passos para criar uma instalação sonora de protesto ecológico.",
     passos: [
-      { id: "p1", texto: "Escolho o TEMA crítico (ex: desmatamento, poluição, ansiedade urbana)", emoji: "🌲", ordem: 1, fotoUrl: cidade },
-      { id: "p2", texto: "Capto os 4 SONS principais com o microfone (motosserra, pássaro digital, batimento)", emoji: "🎤", ordem: 2, fotoUrl: microfone },
-      { id: "p3", texto: "Desenho a PARTITURA visual: traços ondulados, blocos e pontos numa linha do tempo", emoji: "🎼", ordem: 3, fotoUrl: partitura },
-      { id: "p4", texto: "Distribuo os ALTO-FALANTES pelo espaço para criar direção tridimensional do som", emoji: "🔊", ordem: 4, fotoUrl: instalacao },
-      { id: "p5", texto: "Ativo a instalação — visitantes atravessam a escultura invisível", emoji: "🚶", ordem: 5, fotoUrl: ponte },
+      {
+        id: "p1",
+        texto: "Escolho o TEMA crítico (ex: desmatamento, poluição, ansiedade urbana)",
+        emoji: "🌲",
+        ordem: 1,
+        fotoUrl: cidade,
+      },
+      {
+        id: "p2",
+        texto:
+          "Capto os 4 SONS principais com o microfone (motosserra, pássaro digital, batimento)",
+        emoji: "🎤",
+        ordem: 2,
+        fotoUrl: microfone,
+      },
+      {
+        id: "p3",
+        texto: "Desenho a PARTITURA visual: traços ondulados, blocos e pontos numa linha do tempo",
+        emoji: "🎼",
+        ordem: 3,
+        fotoUrl: partitura,
+      },
+      {
+        id: "p4",
+        texto: "Distribuo os ALTO-FALANTES pelo espaço para criar direção tridimensional do som",
+        emoji: "🔊",
+        ordem: 4,
+        fotoUrl: instalacao,
+      },
+      {
+        id: "p5",
+        texto: "Ativo a instalação — visitantes atravessam a escultura invisível",
+        emoji: "🚶",
+        ordem: 5,
+        fotoUrl: ponte,
+      },
     ],
     falaAcerto: "Sua instalação sonora está pronta pra estrear!",
   },
@@ -123,17 +347,27 @@ export const aula01: AulaArteV1 = {
     aurora: "Agora VOCÊ lê o diário do engenheiro sonoro.",
     titulo: "Diário do Engenheiro Acústico",
     trechos: [
-      { texto: "Sou engenheiro de paisagens sonoras. Trabalho com", palavraDestaque: "arte sonora", corDestaque: "#0891b2" },
+      {
+        texto: "Sou engenheiro de paisagens sonoras. Trabalho com",
+        palavraDestaque: "arte sonora",
+        corDestaque: "#0891b2",
+      },
       { texto: "Cada bairro tem uma", palavraDestaque: "paisagem sonora", corDestaque: "#dc2626" },
-      { texto: "própria. Combato a poluição sonora com o", palavraDestaque: "silêncio conceitual", corDestaque: "#0f766e" },
+      {
+        texto: "própria. Combato a poluição sonora com o",
+        palavraDestaque: "silêncio conceitual",
+        corDestaque: "#0f766e",
+      },
       { texto: "e crio", palavraDestaque: "esculturas invisíveis", corDestaque: "#7c3aed" },
       { texto: "que existem pelos ouvidos, não pelos olhos." },
     ],
   },
 
   cena09_minijogo: {
-    tipo: "cenaTematica", variante: "minijogo",
-    aurora: "🎤 O Capturador de Ruídos Urbanos! Isola frequências de poluição sonora e transforma em notas musicais.",
+    tipo: "cenaTematica",
+    variante: "minijogo",
+    aurora:
+      "🎤 O Capturador de Ruídos Urbanos! Isola frequências de poluição sonora e transforma em notas musicais.",
     titulo: "🎤 O Capturador de Ruídos",
     instrucao: "Captura e organiza os sons!",
     tempoSeg: 40,
@@ -149,16 +383,58 @@ export const aula01: AulaArteV1 = {
   },
 
   cena10_revisao: {
-    tipo: "cenaTematica", variante: "revisar",
+    tipo: "cenaTematica",
+    variante: "revisar",
     aurora: "Consolida o caderno acústico!",
     titulo: "🔊 Caderno da Arte Sonora",
     itens: [
-      { emoji: "🔊", rotulo: "Arte Sonora", descricao: "Som como meio principal — escultura tridimensional invisível que existe pelos ouvidos.", cor: "#0891b2", fotoUrl: instalacao },
-      { emoji: "🏙️", rotulo: "Paisagem Sonora", descricao: "Identidade acústica de um lugar — conceito criado por Murray Schafer.", cor: "#dc2626", fotoUrl: cidade },
-      { emoji: "🌉", rotulo: "Susan Philipsz", descricao: "Voz cantando escondida sob pontes urbanas — melancolia e memória no cinza da cidade.", cor: "#7c3aed", fotoUrl: ponte },
-      { emoji: "🤫", rotulo: "Silêncio Conceitual", descricao: "Resistência estética ao excesso de ruído industrializado — o silêncio também é obra.", cor: "#0f766e", fotoUrl: silencio },
-      { emoji: "🎼", rotulo: "Partitura Visual", descricao: "Anotação gráfica com traços, blocos e pontos representando sons numa linha do tempo.", cor: "#b45309", fotoUrl: partitura },
-      { emoji: "🎤", rotulo: "Microfone de Captura", descricao: "Ferramenta central para gravar a paisagem sonora do bairro e transformar em obra.", cor: "#16a34a", fotoUrl: microfone },
+      {
+        emoji: "🔊",
+        rotulo: "Arte Sonora",
+        descricao:
+          "Som como meio principal — escultura tridimensional invisível que existe pelos ouvidos.",
+        cor: "#0891b2",
+        fotoUrl: instalacao,
+      },
+      {
+        emoji: "🏙️",
+        rotulo: "Paisagem Sonora",
+        descricao: "Identidade acústica de um lugar — conceito criado por Murray Schafer.",
+        cor: "#dc2626",
+        fotoUrl: cidade,
+      },
+      {
+        emoji: "🌉",
+        rotulo: "Susan Philipsz",
+        descricao:
+          "Voz cantando escondida sob pontes urbanas — melancolia e memória no cinza da cidade.",
+        cor: "#7c3aed",
+        fotoUrl: ponte,
+      },
+      {
+        emoji: "🤫",
+        rotulo: "Silêncio Conceitual",
+        descricao:
+          "Resistência estética ao excesso de ruído industrializado — o silêncio também é obra.",
+        cor: "#0f766e",
+        fotoUrl: silencio,
+      },
+      {
+        emoji: "🎼",
+        rotulo: "Partitura Visual",
+        descricao:
+          "Anotação gráfica com traços, blocos e pontos representando sons numa linha do tempo.",
+        cor: "#b45309",
+        fotoUrl: partitura,
+      },
+      {
+        emoji: "🎤",
+        rotulo: "Microfone de Captura",
+        descricao:
+          "Ferramenta central para gravar a paisagem sonora do bairro e transformar em obra.",
+        cor: "#16a34a",
+        fotoUrl: microfone,
+      },
     ],
     falaFinal: "Pavilhão Acústico do Códice RESTAURADO!",
   },
@@ -167,14 +443,28 @@ export const aula01: AulaArteV1 = {
     tipo: "avaliacaoFinal",
     aurora: "Missão final, engenheiro acústico!",
     quiz: {
-      pergunta: "Como podemos definir o conceito de 'Paisagem Sonora' trabalhado pelos artistas contemporâneos?",
+      pergunta:
+        "Como podemos definir o conceito de 'Paisagem Sonora' trabalhado pelos artistas contemporâneos?",
       alternativas: [
-        { texto: "O conjunto de manifestações sonoras e ruídos característicos que formam a identidade de um ambiente específico", correta: true },
-        { texto: "Um quadro pintado com tinta acrílica que retrata músicos tocando instrumentos na praia", correta: false },
+        {
+          texto:
+            "O conjunto de manifestações sonoras e ruídos característicos que formam a identidade de um ambiente específico",
+          correta: true,
+        },
+        {
+          texto:
+            "Um quadro pintado com tinta acrílica que retrata músicos tocando instrumentos na praia",
+          correta: false,
+        },
+
+        { texto: "Não corresponde à análise", correta: false },
+        { texto: "Outra resposta sem relação", correta: false },
       ],
-      feedback: "Excelente! Ouvir o mundo criticamente é o primeiro passo para compreender como a arquitetura e a vida moderna afetam nossos corpos e mentes. Susan Philipsz usa a voz sob pontes; Murray Schafer criou o conceito de soundscape. A arte sonora contemporânea prova que o som ESCULPE o espaço sem imagem — a obra existe pelos ouvidos.",
+      feedback:
+        "Excelente! Ouvir o mundo criticamente é o primeiro passo para compreender como a arquitetura e a vida moderna afetam nossos corpos e mentes. Susan Philipsz usa a voz sob pontes; Murray Schafer criou o conceito de soundscape. A arte sonora contemporânea prova que o som ESCULPE o espaço sem imagem — a obra existe pelos ouvidos.",
     },
-    missaoFamilia: "🤫 O Minuto do Silêncio Ativo: reúna a família, apague todos os aparelhos e fiquem 1 minuto em silêncio absoluto. Depois cada um lista 3 sons ocultos que ouviu (geladeira, pássaro, relógio). Registrem no álbum!",
+    missaoFamilia:
+      "🤫 O Minuto do Silêncio Ativo: reúna a família, apague todos os aparelhos e fiquem 1 minuto em silêncio absoluto. Depois cada um lista 3 sons ocultos que ouviu (geladeira, pássaro, relógio). Registrem no álbum!",
     recompensaTitulo: "🔊 O Pavilhão Acústico do Códice RESTAURADO.",
     recompensaItem: "🎧 Sintonizador de Ondas de Escuta Ativa",
   },

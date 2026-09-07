@@ -55,12 +55,41 @@ export const aula01: AulaArteV1 = {
     titulo: "🔍 O Chão de Pedras da Cidade Romana",
     instrucao: "Toca em cada pista pra investigar",
     itens: [
-      { emoji: "🏛️", rotulo: "Mosaicos Romanos (Pompéia)", descricao: "Pisos e paredes decorados com pedrinhas coloridas. Retratavam heróis, deuses e cenas do dia a dia.", cor: "#b45309", fotoUrl: mapaMosaico },
-      { emoji: "✨", rotulo: "Mosaicos Bizantinos (Istambul)", descricao: "Paredes de igrejas cobertas de vidro dourado e azul — brilhavam à luz das velas.", cor: "#eab308", fotoUrl: mapaBizantino },
-      { emoji: "🪨", rotulo: "Tesselas: as pedrinhas mágicas", descricao: "Cada pedacinho quadrado se chama TESSELA. Podia ser pedra, vidro, cerâmica ou mármore.", cor: "#0f766e", fotoUrl: mapaTesselas },
-      { emoji: "🦋", rotulo: "Simetria: o espelho invisível", descricao: "Como a borboleta: dobra ao meio e os dois lados encaixam perfeitamente. Isso é SIMETRIA.", cor: "#7c3aed", fotoUrl: mapaSimetria },
+      {
+        emoji: "🏛️",
+        rotulo: "Mosaicos Romanos (Pompéia)",
+        descricao:
+          "Pisos e paredes decorados com pedrinhas coloridas. Retratavam heróis, deuses e cenas do dia a dia.",
+        cor: "#b45309",
+        fotoUrl: mapaMosaico,
+      },
+      {
+        emoji: "✨",
+        rotulo: "Mosaicos Bizantinos (Istambul)",
+        descricao:
+          "Paredes de igrejas cobertas de vidro dourado e azul — brilhavam à luz das velas.",
+        cor: "#eab308",
+        fotoUrl: mapaBizantino,
+      },
+      {
+        emoji: "🪨",
+        rotulo: "Tesselas: as pedrinhas mágicas",
+        descricao:
+          "Cada pedacinho quadrado se chama TESSELA. Podia ser pedra, vidro, cerâmica ou mármore.",
+        cor: "#0f766e",
+        fotoUrl: mapaTesselas,
+      },
+      {
+        emoji: "🦋",
+        rotulo: "Simetria: o espelho invisível",
+        descricao:
+          "Como a borboleta: dobra ao meio e os dois lados encaixam perfeitamente. Isso é SIMETRIA.",
+        cor: "#7c3aed",
+        fotoUrl: mapaSimetria,
+      },
     ],
-    falaFinal: "Eles usavam MATEMÁTICA e SIMETRIA pra montar uma ilusão perfeita de ordem e beleza.",
+    falaFinal:
+      "Eles usavam MATEMÁTICA e SIMETRIA pra montar uma ilusão perfeita de ordem e beleza.",
   },
 
   cena02_previsao: {
@@ -73,16 +102,23 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Pinceladas", correta: false },
           { texto: "Tesselas", correta: true },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
         feedbackAcerto: "Isso! Tesselas — as pedrinhas quadradas, cortadas uma a uma.",
         feedbackErro: "Pinceladas são de pintura. No mosaico, o pedacinho é a TESSELA.",
       },
       {
-        pergunta: "Quando dobramos uma imagem ao meio e os dois lados ficam IDÊNTICOS, dizemos que ela tem…",
+        pergunta:
+          "Quando dobramos uma imagem ao meio e os dois lados ficam IDÊNTICOS, dizemos que ela tem…",
         fotoUrl: mapaSimetria,
         alternativas: [
           { texto: "Simetria (eixo simétrico)", correta: true },
           { texto: "Zoom", correta: false },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
         feedbackAcerto: "Perfeito! Simetria = espelho invisível no meio da obra.",
         feedbackErro: "Zoom é aproximar. Quando dois lados são iguais, é SIMETRIA.",
@@ -93,6 +129,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "No chão e nas paredes dos palácios", correta: true },
           { texto: "Nas roupas dos soldados", correta: false },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
         feedbackAcerto: "Certo! Piso e parede — pra durar séculos.",
         feedbackErro: "Roupas não. Pisos e paredes de palácios e banhos públicos.",
@@ -104,10 +143,35 @@ export const aula01: AulaArteV1 = {
     tipo: "vocabularioCards",
     aurora: "Palavras da expedição — toca em cada uma pra desbloquear seu diário.",
     cards: [
-      { termo: "Mosaico", definicao: "Imagem grande formada juntando MUITOS pedaços pequenos de pedra, vidro ou cerâmica.", emoji: "🔷", cor: "#b45309", fotoUrl: vocabMosaico },
-      { termo: "Tesselas", definicao: "Os PEQUENOS FRAGMENTOS quadrados que formam o mosaico.", emoji: "🪨", cor: "#0f766e", fotoUrl: vocabTesselas },
-      { termo: "Simetria", definicao: "Linha imaginária que divide uma figura em duas partes IGUAIS.", emoji: "🦋", cor: "#7c3aed", fotoUrl: vocabSimetria },
-      { termo: "Equilíbrio", definicao: "Distribuição harmoniosa das partes — nada pesa mais de um lado.", emoji: "🏛️", cor: "#0891b2", fotoUrl: vocabEquilibrio },
+      {
+        termo: "Mosaico",
+        definicao:
+          "Imagem grande formada juntando MUITOS pedaços pequenos de pedra, vidro ou cerâmica.",
+        emoji: "🔷",
+        cor: "#b45309",
+        fotoUrl: vocabMosaico,
+      },
+      {
+        termo: "Tesselas",
+        definicao: "Os PEQUENOS FRAGMENTOS quadrados que formam o mosaico.",
+        emoji: "🪨",
+        cor: "#0f766e",
+        fotoUrl: vocabTesselas,
+      },
+      {
+        termo: "Simetria",
+        definicao: "Linha imaginária que divide uma figura em duas partes IGUAIS.",
+        emoji: "🦋",
+        cor: "#7c3aed",
+        fotoUrl: vocabSimetria,
+      },
+      {
+        termo: "Equilíbrio",
+        definicao: "Distribuição harmoniosa das partes — nada pesa mais de um lado.",
+        emoji: "🏛️",
+        cor: "#0891b2",
+        fotoUrl: vocabEquilibrio,
+      },
     ],
   },
 
@@ -121,10 +185,34 @@ export const aula01: AulaArteV1 = {
       "Os romanos gostavam de pedras naturais (bege, vermelho, preto). Os bizantinos preferiam VIDRO com folha de OURO por dentro — brilhava à luz das velas nas igrejas!",
     ],
     pigmentos: [
-      { nome: "Mármore branco", hex: "#f5f5f4", fonte: "Pedra polida de montanhas italianas", emoji: "⚪", fotoUrl: vocabTesselas },
-      { nome: "Vidro azul-cobalto", hex: "#1e40af", fonte: "Areia + óxido de cobalto derretidos", emoji: "🟦", fotoUrl: mapaBizantino },
-      { nome: "Vidro dourado", hex: "#eab308", fonte: "Folha de ouro entre 2 camadas de vidro", emoji: "🟡", fotoUrl: mapaBizantino },
-      { nome: "Terracota vermelha", hex: "#b91c1c", fonte: "Argila cozida em forno", emoji: "🟥", fotoUrl: vocabMosaico },
+      {
+        nome: "Mármore branco",
+        hex: "#f5f5f4",
+        fonte: "Pedra polida de montanhas italianas",
+        emoji: "⚪",
+        fotoUrl: vocabTesselas,
+      },
+      {
+        nome: "Vidro azul-cobalto",
+        hex: "#1e40af",
+        fonte: "Areia + óxido de cobalto derretidos",
+        emoji: "🟦",
+        fotoUrl: mapaBizantino,
+      },
+      {
+        nome: "Vidro dourado",
+        hex: "#eab308",
+        fonte: "Folha de ouro entre 2 camadas de vidro",
+        emoji: "🟡",
+        fotoUrl: mapaBizantino,
+      },
+      {
+        nome: "Terracota vermelha",
+        hex: "#b91c1c",
+        fonte: "Argila cozida em forno",
+        emoji: "🟥",
+        fotoUrl: vocabMosaico,
+      },
     ],
   },
 
@@ -138,6 +226,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Desenhando o esboço no chão primeiro", correta: true },
           { texto: "Colando as pedras sem planejamento nenhum", correta: false },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
         feedbackAcerto: "Sim! O esboço vinha ANTES — depois as tesselas seguiam o desenho.",
         feedbackErro: "Nada de improviso. O artista SEMPRE desenhava o esboço primeiro.",
@@ -148,16 +239,23 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Folha de OURO dentro das tesselas de vidro", correta: true },
           { texto: "Uma lâmpada elétrica escondida", correta: false },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
         feedbackAcerto: "Isso! Vidro + ouro por dentro = brilho mágico à luz das velas.",
         feedbackErro: "Eletricidade não existia. O brilho vinha da FOLHA DE OURO no vidro.",
       },
       {
-        pergunta: "Quando pinto 3 quadradinhos azuis à direita do centro, pra manter a SIMETRIA eu preciso…",
+        pergunta:
+          "Quando pinto 3 quadradinhos azuis à direita do centro, pra manter a SIMETRIA eu preciso…",
         fotoUrl: vocabSimetria,
         alternativas: [
           { texto: "Pintar 3 quadradinhos azuis à esquerda também", correta: true },
           { texto: "Deixar o outro lado em branco", correta: false },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
         feedbackAcerto: "Perfeito! Simetria = mesma coisa dos dois lados do eixo.",
         feedbackErro: "Se deixar um lado em branco, quebra a simetria. Tem que espelhar!",
@@ -167,35 +265,48 @@ export const aula01: AulaArteV1 = {
 
   cena06_personagensLugar: {
     tipo: "pintarAnimais",
-    aurora: "Cada obra veio de um povo diferente. Escolhe a paleta de cores certa pra cada mosaico!",
+    aurora:
+      "Cada obra veio de um povo diferente. Escolhe a paleta de cores certa pra cada mosaico!",
     animais: [
       {
-        nome: "Mosaico romano de piso (Pompéia)", emoji: "🏛️", fotoUrl: mapaMosaico,
+        nome: "Mosaico romano de piso (Pompéia)",
+        emoji: "🏛️",
+        fotoUrl: mapaMosaico,
         corAlvo: { nome: "Bege + terracota + preto", hex: "#b45309" },
         opcoes: [
           { nome: "Rosa-neon fluorescente", hex: "#ec4899" },
           { nome: "Bege + terracota + preto", hex: "#b45309" },
           { nome: "Verde-limão elétrico", hex: "#84cc16" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Isso! Cores da terra italiana — bege, vermelho terracota e preto.",
       },
       {
-        nome: "Mosaico bizantino de igreja (Istambul)", emoji: "✨", fotoUrl: mapaBizantino,
+        nome: "Mosaico bizantino de igreja (Istambul)",
+        emoji: "✨",
+        fotoUrl: mapaBizantino,
         corAlvo: { nome: "Ouro + azul-cobalto", hex: "#eab308" },
         opcoes: [
           { nome: "Cinza urbano", hex: "#6b7280" },
           { nome: "Ouro + azul-cobalto", hex: "#eab308" },
           { nome: "Marrom fosco", hex: "#78350f" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Perfeito! Ouro e azul — as cores sagradas dos bizantinos.",
       },
       {
-        nome: "Calçada portuguesa (Lisboa/Rio)", emoji: "⚫", fotoUrl: cotidianoCalcada,
+        nome: "Calçada portuguesa (Lisboa/Rio)",
+        emoji: "⚫",
+        fotoUrl: cotidianoCalcada,
         corAlvo: { nome: "Preto + branco (basalto e calcário)", hex: "#1f2937" },
         opcoes: [
           { nome: "Vermelho e amarelo brilhante", hex: "#dc2626" },
           { nome: "Preto + branco (basalto e calcário)", hex: "#1f2937" },
           { nome: "Roxo e rosa pastel", hex: "#c084fc" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Certo! Calçada portuguesa clássica: pedras pretas e brancas.",
       },
@@ -206,10 +317,34 @@ export const aula01: AulaArteV1 = {
     tipo: "sequenciaMistura",
     aurora: "Ordena os 4 passos pra montar SEU mosaico caseiro — com papel de revista!",
     passos: [
-      { id: "p1", texto: "CORTO pedacinhos quadrados de revistas coloridas", emoji: "✂️", ordem: 1, fotoUrl: passo1 },
-      { id: "p2", texto: "DESENHO o contorno de um vaso ou figura no papel", emoji: "✏️", ordem: 2, fotoUrl: passo2 },
-      { id: "p3", texto: "COLO os quadradinhos um do lado do outro, preenchendo o desenho", emoji: "🧴", ordem: 3, fotoUrl: passo3 },
-      { id: "p4", texto: "COMPLETO todos os espaços — meu mosaico está pronto!", emoji: "🎨", ordem: 4, fotoUrl: passo4 },
+      {
+        id: "p1",
+        texto: "CORTO pedacinhos quadrados de revistas coloridas",
+        emoji: "✂️",
+        ordem: 1,
+        fotoUrl: passo1,
+      },
+      {
+        id: "p2",
+        texto: "DESENHO o contorno de um vaso ou figura no papel",
+        emoji: "✏️",
+        ordem: 2,
+        fotoUrl: passo2,
+      },
+      {
+        id: "p3",
+        texto: "COLO os quadradinhos um do lado do outro, preenchendo o desenho",
+        emoji: "🧴",
+        ordem: 3,
+        fotoUrl: passo3,
+      },
+      {
+        id: "p4",
+        texto: "COMPLETO todos os espaços — meu mosaico está pronto!",
+        emoji: "🎨",
+        ordem: 4,
+        fotoUrl: passo4,
+      },
     ],
     falaAcerto: "Seu mosaico está PRONTO! Mesma técnica que os romanos usavam há 2.000 anos.",
   },
@@ -219,9 +354,21 @@ export const aula01: AulaArteV1 = {
     aurora: "Agora VOCÊ lê o diário do explorador. Toca nas palavras coloridas pra ouvir.",
     titulo: "Diário do Explorador — Ruínas de Pompéia",
     trechos: [
-      { texto: "Desci na cidade romana e vi um chão de", palavraDestaque: "mosaico", corDestaque: "#b45309" },
-      { texto: "Cada pedacinho quadrado é uma", palavraDestaque: "tessela", corDestaque: "#0f766e" },
-      { texto: "Os dois lados do desenho eram iguais — tinha", palavraDestaque: "simetria", corDestaque: "#7c3aed" },
+      {
+        texto: "Desci na cidade romana e vi um chão de",
+        palavraDestaque: "mosaico",
+        corDestaque: "#b45309",
+      },
+      {
+        texto: "Cada pedacinho quadrado é uma",
+        palavraDestaque: "tessela",
+        corDestaque: "#0f766e",
+      },
+      {
+        texto: "Os dois lados do desenho eram iguais — tinha",
+        palavraDestaque: "simetria",
+        corDestaque: "#7c3aed",
+      },
       { texto: "Tudo parecia em perfeito", palavraDestaque: "equilíbrio", corDestaque: "#0891b2" },
       { texto: "Sou um Explorador do Tempo — a página 2 está sendo restaurada!" },
     ],
@@ -230,7 +377,8 @@ export const aula01: AulaArteV1 = {
   cena09_minijogo: {
     tipo: "cenaTematica",
     variante: "minijogo",
-    aurora: "🪞 Espelho de Pastilhas! Toca em CADA peça correta pra completar o lado direito do mosaico antes do tempo acabar.",
+    aurora:
+      "🪞 Espelho de Pastilhas! Toca em CADA peça correta pra completar o lado direito do mosaico antes do tempo acabar.",
     titulo: "🪞 Espelho de Pastilhas",
     instrucao: "Toque em todas as tesselas na ordem certa!",
     tempoSeg: 40,
@@ -251,27 +399,75 @@ export const aula01: AulaArteV1 = {
     aurora: "Fecha o caderno da expedição repassando cada achado. Toca em cada verbete!",
     titulo: "📓 Caderno da Expedição dos Mosaicos",
     itens: [
-      { emoji: "🔷", rotulo: "Mosaico", descricao: "Imagem feita com muitas pedrinhas ou tesselas coladas.", cor: "#b45309", fotoUrl: vocabMosaico },
-      { emoji: "🪨", rotulo: "Tesselas", descricao: "Cada pedacinho quadrado do mosaico.", cor: "#0f766e", fotoUrl: vocabTesselas },
-      { emoji: "🦋", rotulo: "Simetria", descricao: "Espelho invisível: dois lados iguais.", cor: "#7c3aed", fotoUrl: vocabSimetria },
-      { emoji: "🏛️", rotulo: "Mosaico Romano", descricao: "Pisos de palácios com pedras naturais.", cor: "#b45309", fotoUrl: mapaMosaico },
-      { emoji: "✨", rotulo: "Mosaico Bizantino", descricao: "Igrejas com vidro dourado e azul.", cor: "#eab308", fotoUrl: mapaBizantino },
-      { emoji: "⚫", rotulo: "Calçada Portuguesa", descricao: "Descendente moderna dos mosaicos.", cor: "#1f2937", fotoUrl: cotidianoCalcada },
-      { emoji: "🎮", rotulo: "Pixels de videogame", descricao: "Cada pixel = uma tessela digital!", cor: "#7c3aed", fotoUrl: vocabTesselas },
+      {
+        emoji: "🔷",
+        rotulo: "Mosaico",
+        descricao: "Imagem feita com muitas pedrinhas ou tesselas coladas.",
+        cor: "#b45309",
+        fotoUrl: vocabMosaico,
+      },
+      {
+        emoji: "🪨",
+        rotulo: "Tesselas",
+        descricao: "Cada pedacinho quadrado do mosaico.",
+        cor: "#0f766e",
+        fotoUrl: vocabTesselas,
+      },
+      {
+        emoji: "🦋",
+        rotulo: "Simetria",
+        descricao: "Espelho invisível: dois lados iguais.",
+        cor: "#7c3aed",
+        fotoUrl: vocabSimetria,
+      },
+      {
+        emoji: "🏛️",
+        rotulo: "Mosaico Romano",
+        descricao: "Pisos de palácios com pedras naturais.",
+        cor: "#b45309",
+        fotoUrl: mapaMosaico,
+      },
+      {
+        emoji: "✨",
+        rotulo: "Mosaico Bizantino",
+        descricao: "Igrejas com vidro dourado e azul.",
+        cor: "#eab308",
+        fotoUrl: mapaBizantino,
+      },
+      {
+        emoji: "⚫",
+        rotulo: "Calçada Portuguesa",
+        descricao: "Descendente moderna dos mosaicos.",
+        cor: "#1f2937",
+        fotoUrl: cotidianoCalcada,
+      },
+      {
+        emoji: "🎮",
+        rotulo: "Pixels de videogame",
+        descricao: "Cada pixel = uma tessela digital!",
+        cor: "#7c3aed",
+        fotoUrl: vocabTesselas,
+      },
     ],
-    falaFinal: "Página 2 do Atlas dos Exploradores DESBLOQUEADA — O Labirinto dos Mosaicos de Vidro!",
+    falaFinal:
+      "Página 2 do Atlas dos Exploradores DESBLOQUEADA — O Labirinto dos Mosaicos de Vidro!",
   },
 
   cena11_avaliacao: {
     tipo: "avaliacaoFinal",
     aurora: "Missão final da expedição, arqueólogo — mostra o que aprendeu!",
     quiz: {
-      pergunta: "Como são chamados os pequenos pedacinhos de pedra, vidro ou azulejo usados para montar um mosaico?",
+      pergunta:
+        "Como são chamados os pequenos pedacinhos de pedra, vidro ou azulejo usados para montar um mosaico?",
       alternativas: [
         { texto: "Tesselas", correta: true },
         { texto: "Pinceladas", correta: false },
+
+        { texto: "Não corresponde ao tema", correta: false },
+        { texto: "Outra resposta sem relação", correta: false },
       ],
-      feedback: "Excelente investigação! As tesselas eram cortadas minuciosamente pelos mestres mosaicistas da antiguidade — cada uma escolhida a dedo.",
+      feedback:
+        "Excelente investigação! As tesselas eram cortadas minuciosamente pelos mestres mosaicistas da antiguidade — cada uma escolhida a dedo.",
     },
     missaoFamilia:
       "🔷 Detetives do Padrão: procurem em família por pisos ou calçadas do bairro que repitam padrões geométricos. Contem quantas cores diferentes aparecem e conversem sobre como o construtor planejou o encaixe.",

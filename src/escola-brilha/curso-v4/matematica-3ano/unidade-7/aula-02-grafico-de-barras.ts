@@ -133,7 +133,7 @@ export const aula02_graficoBarras: AulaV4 = {
   momento10_avaliacao: {
     perguntas: [
       { pergunta: "A=7, B=3. Diferença?", opcoes: ["4", "10", "5"], correta: 0, feedbackAcerto: "🎉 4.", feedbackErro: "7−3=4." },
-      { pergunta: "Maior barra = ?", opcoes: ["Vencedor", "Perdedor", "Empate"], correta: 0, feedbackAcerto: "🎉 Vencedor.", feedbackErro: "Barra alta ganha." },
+      { pergunta: "Em um gráfico de frequência, a maior barra representa:", opcoes: ["A maior frequência", "A menor frequência", "Um empate obrigatório"], correta: 0, feedbackAcerto: "🎉 A altura maior indica a categoria com maior frequência.", feedbackErro: "Compare as alturas: a maior barra representa a maior quantidade registrada." },
       { pergunta: "Total 5+7+8?", opcoes: ["20", "18", "22"], correta: 0, feedbackAcerto: "🎉 20.", feedbackErro: "5+7+8=20." },
     ],
   },

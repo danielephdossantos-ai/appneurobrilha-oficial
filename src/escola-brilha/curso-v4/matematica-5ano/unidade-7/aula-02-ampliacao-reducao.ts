@@ -4,7 +4,7 @@ export const aula02_ampliacaoReducao: AulaV4 = {
   slug: "u7-02-ampliacao-reducao",
   titulo: "Ampliar e reduzir figuras",
   iconeTrilha: "🔍",
-  bncc: ["EF05MA17"],
+  bncc: ["EF05MA18"],
   duracaoMin: 20,
   metodologias: ["cpa"],
 

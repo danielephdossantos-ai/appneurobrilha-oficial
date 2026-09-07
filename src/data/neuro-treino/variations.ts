@@ -56,6 +56,7 @@ export type CategoriaSlug =
   | "ritmo-e-sopro"
   | "paromatopeias-corpo"
   | "tracado-letras"
+  | "direcao-letras-numeros"
   
   
   | "triagem-categorias"
@@ -271,6 +272,15 @@ export const CATEGORIAS: Record<CategoriaSlug, CategoriaMeta> = {
     cor: "from-success/25 to-success/5",
     objetivo: "Cobertura de pontilhado com setas direcionais",
     instrucao: "Siga as setas em ordem para cobrir a letra.",
+  },
+  "direcao-letras-numeros": {
+    slug: "direcao-letras-numeros",
+    nome: "Letras no Caminho Certo",
+    emoji: "↗️",
+    grupo: "Coordenação Motor-Escrita",
+    cor: "from-sky/25 to-success/5",
+    objetivo: "Orientação espacial, ponto inicial e direção do traçado de letras e números",
+    instrucao: "Observe o ponto verde e escolha a forma que segue o caminho correto.",
   },
 
   "triagem-categorias": {
@@ -595,7 +605,7 @@ const SONS_BANK = [
     letra: "P",
     correta: { emoji: "🦆", nome: "PATO" },
     distratoras: [
-      { emoji: "🐶", nome: "DOG" },
+      { emoji: "🐶", nome: "CÃO" },
       { emoji: "🌙", nome: "LUA" },
       { emoji: "⚽", nome: "BOLA" },
     ],
@@ -955,7 +965,7 @@ const PALAVRAS_SILABAS = [
   ["SO", "FÁ"],
   ["MA", "ÇÃ"],
   ["CA", "VA", "LO"],
-  ["BO", "RBO", "LE", "TA"],
+  ["BOR", "BO", "LE", "TA"],
 ];
 const PEDACINHOS_VARS: Variation[] = range(30).map((i) => {
   const s = PALAVRAS_SILABAS[i % PALAVRAS_SILABAS.length];
@@ -1509,8 +1519,8 @@ const SOPRO_BANK = [
 ];
 const SOPRO_VARS: Variation[] = range(30).map((i) => {
   const b = SOPRO_BANK[i % SOPRO_BANK.length];
-  const dificuldade = 1 + (i % 5); // 1..5
-  return { id: `rs-${i + 1}`, payload: { ...b, dificuldade, holdSeconds: 2 + dificuldade * 0.8 } };
+  const dificuldade = 1 + Math.floor(i / 10);
+  return { id: `rs-${i + 1}`, payload: { ...b, dificuldade, holdSeconds: 1 + dificuldade } };
 });
 
 // 18. SONS DO CORPO / PAROMATOPEIAS — som → ação correta
@@ -1609,6 +1619,27 @@ const ALFABETO_BANK: LetraDef[] = [
 const TRACADO_VARS: Variation[] = range(ALFABETO_BANK.length).map((i) => {
   const b = ALFABETO_BANK[i];
   return { id: `tl-${i + 1}`, payload: { letra: b.letra, palavra: b.palavra, emoji: b.emoji, guias: b.guias } };
+});
+
+const DIRECAO_ESCRITA_BANK = [
+  { simbolo: "b", inicio: "em cima", sentido: "desça e faça a barriga para a direita", nivel: 1 },
+  { simbolo: "d", inicio: "no meio", sentido: "faça a volta e depois suba", nivel: 1 },
+  { simbolo: "p", inicio: "em cima", sentido: "desça e faça a barriga para a direita", nivel: 1 },
+  { simbolo: "q", inicio: "no meio", sentido: "faça a volta e termine descendo", nivel: 1 },
+  { simbolo: "2", inicio: "em cima", sentido: "faça a curva e termine para a direita", nivel: 2 },
+  { simbolo: "3", inicio: "em cima", sentido: "faça duas curvas para a direita", nivel: 2 },
+  { simbolo: "5", inicio: "em cima", sentido: "desça, vire e faça a barriga", nivel: 2 },
+  { simbolo: "6", inicio: "em cima", sentido: "desça fazendo a volta", nivel: 2 },
+  { simbolo: "7", inicio: "em cima", sentido: "vá para a direita e desça", nivel: 2 },
+  { simbolo: "9", inicio: "no alto", sentido: "faça a volta e depois desça", nivel: 2 },
+] as const;
+
+const DIRECAO_ESCRITA_VARS: Variation[] = range(30).map((i) => {
+  const item = DIRECAO_ESCRITA_BANK[i % DIRECAO_ESCRITA_BANK.length];
+  return {
+    id: `deln-${i + 1}`,
+    payload: { ...item, espelhadaPrimeiro: i % 2 === 0 },
+  };
 });
 
 
@@ -2345,6 +2376,7 @@ export const VARIATIONS: Record<CategoriaSlug, Variation[]> = {
   "ritmo-e-sopro": SOPRO_VARS,
   "paromatopeias-corpo": CORPO_VARS,
   "tracado-letras": TRACADO_VARS,
+  "direcao-letras-numeros": DIRECAO_ESCRITA_VARS,
   "triagem-categorias": TRIAGEM_VARS,
   "expressao-emocao": EMOCAO_VARS,
   // FONO CLÍNICO
@@ -2414,6 +2446,7 @@ export const GRUPOS = [
       "copiar-figura",
       "alvo-movel",
       "tracado-letras",
+      "direcao-letras-numeros",
       
       
     ] as CategoriaSlug[],
@@ -2428,6 +2461,7 @@ export const GRUPOS = [
       "reacao-rapida",
       "seguir-instrucao",
       "ordem-inversa",
+      "foco-sustentado",
     ] as CategoriaSlug[],
   },
   {
@@ -2435,11 +2469,28 @@ export const GRUPOS = [
     emoji: "🗣️",
     cor: "from-coral/25 to-coral/5",
     slugs: [
+      "sons-iniciais",
       "motorzinho-dos-sons",
+      "rimas",
+      "pedacinhos-da-palavra",
+      "consciencia-fonologica",
+      "consciencia-silabica",
       "onomatopeias-animadas",
       "ritmo-e-sopro",
       "paromatopeias-corpo",
-      "discriminacao-auditiva",
+    ] as CategoriaSlug[],
+  },
+  {
+    nome: "Alfabetização 📚",
+    emoji: "📚",
+    cor: "from-amber/25 to-amber/5",
+    slugs: [
+      "letra-som",
+      "palavra-imagem",
+      "formando-palavras",
+      "leitura-palavras",
+      "completar-letra",
+      "compreensao-leitora",
     ] as CategoriaSlug[],
   },
   {

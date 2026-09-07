@@ -53,6 +53,19 @@ export const aula02: AulaGeoV1 = {
         emoji: "🚜",
         cor: "from-emerald-400 to-amber-500",
       },
+
+      {
+        id: "extra-1",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
+      {
+        id: "extra-2",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
     ],
     respostaCerta: "campo",
     feedbackAcerto:
@@ -163,10 +176,19 @@ export const aula02: AulaGeoV1 = {
           { id: "fazenda", emoji: "🐄", titulo: "Fazenda", cor: "from-emerald-400 to-lime-600" },
           { id: "horta", emoji: "🥬", titulo: "Horta", cor: "from-lime-500 to-emerald-600" },
           { id: "roca", emoji: "🌽", titulo: "Roça", cor: "from-amber-500 to-orange-600" },
+
+          {
+            id: "extra-3",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "fazenda",
-        feedbackAcerto: "Isso! Leite fresco vem da FAZENDA 🐄 — direto da vaca ordenhada de manhã cedo.",
-        feedbackErro: "Quase! Leite fresco só sai da vaca — vem da FAZENDA 🐄, não da horta nem da roça.",
+        feedbackAcerto:
+          "Isso! Leite fresco vem da FAZENDA 🐄 — direto da vaca ordenhada de manhã cedo.",
+        feedbackErro:
+          "Quase! Leite fresco só sai da vaca — vem da FAZENDA 🐄, não da horta nem da roça.",
       },
       {
         id: "q2",
@@ -176,10 +198,19 @@ export const aula02: AulaGeoV1 = {
           { id: "roca", emoji: "🌽", titulo: "Roça", cor: "from-amber-500 to-orange-600" },
           { id: "horta", emoji: "🥬", titulo: "Horta", cor: "from-lime-500 to-emerald-600" },
           { id: "fazenda", emoji: "🐄", titulo: "Fazenda", cor: "from-emerald-400 to-lime-600" },
+
+          {
+            id: "extra-4",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "horta",
-        feedbackAcerto: "Boa! Verdura e cheiro-verde nascem na HORTA 🥬 — plantação pequena, colhida à mão.",
-        feedbackErro: "Repara: alface e tomate são de HORTA 🥬, não de roça grande nem de fazenda de gado.",
+        feedbackAcerto:
+          "Boa! Verdura e cheiro-verde nascem na HORTA 🥬 — plantação pequena, colhida à mão.",
+        feedbackErro:
+          "Repara: alface e tomate são de HORTA 🥬, não de roça grande nem de fazenda de gado.",
       },
       {
         id: "q3",
@@ -189,10 +220,19 @@ export const aula02: AulaGeoV1 = {
           { id: "fazenda", emoji: "🐄", titulo: "Fazenda", cor: "from-emerald-400 to-lime-600" },
           { id: "horta", emoji: "🥬", titulo: "Horta", cor: "from-lime-500 to-emerald-600" },
           { id: "roca", emoji: "🌽", titulo: "Roça", cor: "from-amber-500 to-orange-600" },
+
+          {
+            id: "extra-5",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "roca",
-        feedbackAcerto: "Exato! Mandioca e milho saem da ROÇA 🌽 — plantação grande no chão vermelho.",
-        feedbackErro: "Ops! Mandioca é plantação grande — sai da ROÇA 🌽, não da horta e nem da fazenda de leite.",
+        feedbackAcerto:
+          "Exato! Mandioca e milho saem da ROÇA 🌽 — plantação grande no chão vermelho.",
+        feedbackErro:
+          "Ops! Mandioca é plantação grande — sai da ROÇA 🌽, não da horta e nem da fazenda de leite.",
       },
     ],
     falaFinal:
@@ -240,41 +280,48 @@ export const aula02: AulaGeoV1 = {
         id: "vaca",
         emoji: "🐄",
         rotulo: "Vaca no pasto",
-        descricao: "A vaca leiteira passa o dia no pasto, comendo capim e produzindo leite pra alimentar a bezerra e sobrar pra gente.",
+        descricao:
+          "A vaca leiteira passa o dia no pasto, comendo capim e produzindo leite pra alimentar a bezerra e sobrar pra gente.",
       },
       {
         id: "ordenha",
         emoji: "🥛",
         rotulo: "Ordenha na fazenda",
-        descricao: "De madrugada, seu Antônio ordenha as vacas e o leite vai pra um tanque gelado pra não estragar.",
+        descricao:
+          "De madrugada, seu Antônio ordenha as vacas e o leite vai pra um tanque gelado pra não estragar.",
       },
       {
         id: "caminhao",
         emoji: "🚚",
         rotulo: "Caminhão-tanque",
-        descricao: "Um caminhão refrigerado passa cedo, leva o leite fresquinho até o laticínio da cidade.",
+        descricao:
+          "Um caminhão refrigerado passa cedo, leva o leite fresquinho até o laticínio da cidade.",
       },
       {
         id: "laticinio",
         emoji: "🏭",
         rotulo: "Laticínio na cidade",
-        descricao: "No laticínio, o leite é fervido, embalado em caixa e transformado em queijo, iogurte e manteiga.",
+        descricao:
+          "No laticínio, o leite é fervido, embalado em caixa e transformado em queijo, iogurte e manteiga.",
       },
       {
         id: "mercado",
         emoji: "🛒",
         rotulo: "Mercado do bairro",
-        descricao: "Do laticínio o leite vai pro mercado. Sua família compra, leva pra casa e coloca na geladeira.",
+        descricao:
+          "Do laticínio o leite vai pro mercado. Sua família compra, leva pra casa e coloca na geladeira.",
       },
       {
         id: "cafe",
         emoji: "☕",
         rotulo: "Café da manhã",
-        descricao: "De manhã, o leite esquenta, mistura com café e vira o café com leite do seu dia. Rota fechada!",
+        descricao:
+          "De manhã, o leite esquenta, mistura com café e vira o café com leite do seu dia. Rota fechada!",
       },
     ],
     ordemCerta: ["vaca", "ordenha", "caminhao", "laticinio", "mercado", "cafe"],
-    feedbackAcerto: "Rota do leite completa! Da vaca até o café, sem pular etapa. Isso é PRODUÇÃO + CIRCULAÇÃO + CONSUMO.",
+    feedbackAcerto:
+      "Rota do leite completa! Da vaca até o café, sem pular etapa. Isso é PRODUÇÃO + CIRCULAÇÃO + CONSUMO.",
     feedbackErro:
       "Essa não é a próxima parada. Pensa: nasce na VACA, é ORDENHADA, sobe no CAMINHÃO, vira produto no LATICÍNIO, chega ao MERCADO e só depois vai pro seu CAFÉ.",
     falaFinal:
@@ -343,7 +390,8 @@ export const aula02: AulaGeoV1 = {
         id: "r2",
         municipioA: { nome: "Feira", emoji: "🛒", cor: "from-sky-500 to-indigo-700" },
         municipioB: { nome: "Pé de alface", emoji: "🥬", cor: "from-lime-400 to-emerald-600" },
-        contexto: "Chegou um caixote de ALFACE colhido de manhã, ainda com terra vermelha na raiz. De onde vem?",
+        contexto:
+          "Chegou um caixote de ALFACE colhido de manhã, ainda com terra vermelha na raiz. De onde vem?",
         pecaCertaId: "horta",
         feedbackAcerto: "Boa! Alface do pé, colhido de manhã, é direto da HORTA 🥬.",
         feedbackErro: "Ops! Alface é planta pequena de folha — só nasce na HORTA 🥬.",
@@ -351,8 +399,13 @@ export const aula02: AulaGeoV1 = {
       {
         id: "r3",
         municipioA: { nome: "Feira", emoji: "🛒", cor: "from-sky-500 to-indigo-700" },
-        municipioB: { nome: "Farinha de mandioca", emoji: "🌾", cor: "from-amber-500 to-orange-600" },
-        contexto: "Chegou um saco de FARINHA de mandioca torrada na casa de farinha da comunidade. De onde saiu a matéria-prima?",
+        municipioB: {
+          nome: "Farinha de mandioca",
+          emoji: "🌾",
+          cor: "from-amber-500 to-orange-600",
+        },
+        contexto:
+          "Chegou um saco de FARINHA de mandioca torrada na casa de farinha da comunidade. De onde saiu a matéria-prima?",
         pecaCertaId: "roca",
         feedbackAcerto: "Isso! A mandioca é raiz grande — só sai da ROÇA 🌽.",
         feedbackErro: "Repensa: mandioca é raiz grande de plantação grande — vem da ROÇA 🌽.",
@@ -361,7 +414,8 @@ export const aula02: AulaGeoV1 = {
         id: "r4",
         municipioA: { nome: "Feira", emoji: "🛒", cor: "from-sky-500 to-indigo-700" },
         municipioB: { nome: "Queijo minas", emoji: "🧀", cor: "from-slate-100 to-yellow-200" },
-        contexto: "Chegou um QUEIJO minas branquinho embalado hoje cedo. De qual origem veio a matéria-prima dele?",
+        contexto:
+          "Chegou um QUEIJO minas branquinho embalado hoje cedo. De qual origem veio a matéria-prima dele?",
         pecaCertaId: "fazenda",
         feedbackAcerto: "Perfeito! Queijo é leite transformado — o leite sai da FAZENDA 🐄.",
         feedbackErro: "Atenção: queijo é feito de leite, e leite vem da FAZENDA 🐄.",
@@ -370,7 +424,8 @@ export const aula02: AulaGeoV1 = {
         id: "r5",
         municipioA: { nome: "Feira", emoji: "🛒", cor: "from-sky-500 to-indigo-700" },
         municipioB: { nome: "Cheiro-verde", emoji: "🌿", cor: "from-lime-400 to-emerald-600" },
-        contexto: "Chegou um maço de CHEIRO-VERDE (salsa e cebolinha) fresquinho, ainda molhado do orvalho. De onde vem?",
+        contexto:
+          "Chegou um maço de CHEIRO-VERDE (salsa e cebolinha) fresquinho, ainda molhado do orvalho. De onde vem?",
         pecaCertaId: "horta",
         feedbackAcerto: "Combo perfeito! Cheiro-verde é tempero de horta pequena — HORTA 🥬.",
         feedbackErro: "Repara: cheiro-verde é tempero delicado — cresce só na HORTA 🥬.",
@@ -394,7 +449,12 @@ export const aula02: AulaGeoV1 = {
         cor: "#16a34a",
         descricao:
           "70% da comida que chega na feira NASCE no campo: leite e queijo vêm da FAZENDA, alface e tomate vêm da HORTA, mandioca e milho vêm da ROÇA. Sem o campo produzindo, a feira fica vazia.",
-        exemplos: ["Leite da fazenda", "Alface da horta", "Mandioca da roça", "Queijo, ovo, farinha"],
+        exemplos: [
+          "Leite da fazenda",
+          "Alface da horta",
+          "Mandioca da roça",
+          "Queijo, ovo, farinha",
+        ],
       },
       {
         id: "fatia-cidade",
@@ -404,7 +464,12 @@ export const aula02: AulaGeoV1 = {
         cor: "#0ea5e9",
         descricao:
           "30% do trabalho é da CIDADE: o laticínio transforma leite em queijo, a padaria transforma farinha em pão, o mercado vende tudo pronto pra família levar pra casa. A cidade não produz a matéria-prima — ela transforma e entrega.",
-        exemplos: ["Laticínio faz queijo", "Padaria faz pão", "Mercado vende", "Restaurante prepara"],
+        exemplos: [
+          "Laticínio faz queijo",
+          "Padaria faz pão",
+          "Mercado vende",
+          "Restaurante prepara",
+        ],
       },
     ],
     falaFinal:
@@ -423,8 +488,15 @@ export const aula02: AulaGeoV1 = {
           "Sua mãe compra QUEIJO no mercado. Qual foi a rota mais provável do queijo até chegar em você?",
         opcoes: [
           { id: "a", texto: "Foi feito direto no mercado, do nada." },
-          { id: "b", texto: "Vaca deu leite na fazenda → caminhão levou → laticínio transformou em queijo → mercado vendeu.", correta: true },
+          {
+            id: "b",
+            texto:
+              "Vaca deu leite na fazenda → caminhão levou → laticínio transformou em queijo → mercado vendeu.",
+            correta: true,
+          },
           { id: "c", texto: "Nasceu numa horta e virou queijo sozinho." },
+
+          { id: "extra-6", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto:
           "Isso! Queijo é LEITE TRANSFORMADO. A rota passa pela fazenda, pelo caminhão, pelo laticínio e só depois chega no mercado.",
@@ -436,19 +508,34 @@ export const aula02: AulaGeoV1 = {
         pergunta: "O que é MATÉRIA-PRIMA?",
         opcoes: [
           { id: "a", texto: "É o alimento pronto que a gente compra no mercado." },
-          { id: "b", texto: "É o ingrediente CRU que sai da natureza — como leite, mandioca, tomate — antes de virar produto.", correta: true },
+          {
+            id: "b",
+            texto:
+              "É o ingrediente CRU que sai da natureza — como leite, mandioca, tomate — antes de virar produto.",
+            correta: true,
+          },
           { id: "c", texto: "É o dinheiro que a gente paga na feira." },
+
+          { id: "extra-7", texto: "Outra possibilidade", correta: false },
         ],
-        feedbackAcerto: "Perfeito! Matéria-prima é o ingrediente CRU. Leite, mandioca, trigo, tomate — todos são matéria-prima.",
-        feedbackErro: "Quase! Matéria-prima é o ingrediente CRU que sai da natureza, antes de virar produto pronto na cidade.",
+        feedbackAcerto:
+          "Perfeito! Matéria-prima é o ingrediente CRU. Leite, mandioca, trigo, tomate — todos são matéria-prima.",
+        feedbackErro:
+          "Quase! Matéria-prima é o ingrediente CRU que sai da natureza, antes de virar produto pronto na cidade.",
       },
       {
         id: "p3",
         pergunta: "Se um dia o CAMPO parasse de produzir, o que aconteceria com a cidade?",
         opcoes: [
-          { id: "a", texto: "A feira, o mercado e a padaria ficariam vazios — a cidade passaria fome." , correta: true },
+          {
+            id: "a",
+            texto: "A feira, o mercado e a padaria ficariam vazios — a cidade passaria fome.",
+            correta: true,
+          },
           { id: "b", texto: "Nada — a cidade produz a própria comida." },
           { id: "c", texto: "A cidade ficaria mais bonita." },
+
+          { id: "extra-8", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto:
           "Exato! A cidade DEPENDE do campo pra comer. Sem produção rural, feira e mercado ficariam vazios em pouco tempo.",

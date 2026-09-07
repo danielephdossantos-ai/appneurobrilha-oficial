@@ -162,8 +162,8 @@ export function CronogramaVisual({ onClose }: { onClose: () => void }) {
         </button>
       </div>
 
-      <p className="mt-6 text-[10px] text-slate-400 text-center">
-        Base clínica: Visual Schedules — TEACCH (Schopler & Mesibov) — previsibilidade reduz ansiedade em TEA.
+      <p className="mt-6 text-sm text-slate-500 text-center">
+        Apoio visual para antecipar a sequência do dia. A rotina pode mudar quando for necessário.
       </p>
     </div>
   );

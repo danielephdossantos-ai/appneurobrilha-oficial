@@ -1,13 +1,13 @@
 import type { UnidadeGeoV1 } from "../../types";
-import { aula01 } from "./aula-01-origem-estrutura-textos";
+import { aula01 } from "./aula-01-relacao-mito-rito-simbolo";
 
 export const unidade7: UnidadeGeoV1 = {
   slug: "unidade-7",
   numero: 7,
-  titulo: "Como Nasce um Livro Sagrado",
-  subtitulo: "Origem, estrutura e função dos textos religiosos (EF06ER07)",
+  titulo: "Da Narrativa à Celebração",
+  subtitulo: "Relações entre mito, rito e símbolo (EF06ER07)",
   descricao:
-    "De escriba egípcio a monge medieval: como um texto vira sagrado e por que segue vivo depois de milênios.",
+    "Como narrativas, ações rituais e símbolos se conectam em práticas celebrativas de diferentes tradições.",
   corTema: "#6366f1",
   aulas: [aula01],
 };

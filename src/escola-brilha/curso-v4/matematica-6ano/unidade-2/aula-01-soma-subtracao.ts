@@ -57,7 +57,7 @@ export const aula01_somaSubtracao: AulaV4 = {
         },
       },
       {
-        texto: "Na subtração, se a casa de cima é MENOR, pega EMPRESTADO da casa vizinha.",
+        texto: "Na subtração, quando faltam unidades em uma casa, REAGRUPAMOS 1 unidade da casa à esquerda em 10 unidades da casa atual.",
         exemploReal: {
           contexto: "500.000 − 267.348",
           contaPassoAPasso: {
@@ -119,7 +119,7 @@ export const aula01_somaSubtracao: AulaV4 = {
       opcoes: [{ nome: "564.360" }, { nome: "574.360" }, { nome: "465.640" }],
       respostaCerta: "564.360",
       feedbackAcerto: "🎯 Empréstimo em cadeia.",
-      feedbackErro: "Pega emprestado da casa vizinha.",
+      feedbackErro: "Reagrupe uma unidade da casa à esquerda em 10 unidades da casa atual.",
     },
   },
 
@@ -147,7 +147,7 @@ export const aula01_somaSubtracao: AulaV4 = {
   momento10_avaliacao: {
     perguntas: [
       { pergunta: "125.000 + 75.000 =", opcoes: ["200.000", "195.000", "205.000"], correta: 0, feedbackAcerto: "🎉", feedbackErro: "Some UM+UM etc." },
-      { pergunta: "1.000.000 − 1 =", opcoes: ["999.999", "999.000", "1.000.001"], correta: 0, feedbackAcerto: "🎉", feedbackErro: "Emprestimo em cadeia." },
+      { pergunta: "1.000.000 − 1 =", opcoes: ["999.999", "999.000", "1.000.001"], correta: 0, feedbackAcerto: "🎉", feedbackErro: "Faça os reagrupamentos pelas casas de valor." },
       { pergunta: "450.320 + 199.680 =", opcoes: ["650.000", "649.000", "649.900"], correta: 0, feedbackAcerto: "🎉", feedbackErro: "Casa a casa." },
     ],
   },

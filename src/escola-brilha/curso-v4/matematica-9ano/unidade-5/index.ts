@@ -4,6 +4,7 @@ import { aula02_relacoesMetricas } from "./aula-02-relacoes-metricas";
 import { aula03_razoesTrigonometricas } from "./aula-03-razoes-trigonometricas";
 import { aula04_angulosNotaveis } from "./aula-04-angulos-notaveis";
 import { aula05_missaoEngenheiro } from "./aula-05-missao-engenheiro";
+import { aulaPoligonoRegular, aulaPontoMedioDistancia } from "../aulas-bncc-complementares";
 
 export const unidade5: Unidade = {
   slug: "unidade-5-pitagoras-trigonometria",
@@ -19,5 +20,7 @@ export const unidade5: Unidade = {
     aula03_razoesTrigonometricas,
     aula04_angulosNotaveis,
     aula05_missaoEngenheiro,
+    aulaPoligonoRegular,
+    aulaPontoMedioDistancia,
   ],
 };

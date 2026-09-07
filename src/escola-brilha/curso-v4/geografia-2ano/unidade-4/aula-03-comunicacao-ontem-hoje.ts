@@ -22,7 +22,7 @@ export const aula03: AulaPortuguesV4 = {
   slug: "aula-03-comunicacao-ontem-hoje",
   titulo: "Comunicação de Ontem e de Hoje",
   iconeTrilha: "📱",
-  bncc: ["EF02GE07"],
+  bncc: [],
   duracaoMin: 15,
 
   momento01_motivacao: {
@@ -64,10 +64,10 @@ export const aula03: AulaPortuguesV4 = {
         },
         { texto: "Fazer um bolo de aniversário.", imagemUrl: familia },
         { texto: "Aprender a plantar uma árvore.", imagemUrl: livro },
+        { texto: "Sobre outra possibilidade relacionada ao tema.", imagemUrl: telefoneAntigo },
       ],
       respostaCerta: 0,
-      feedbackAcerto:
-        "🎉 Isso! Vamos evoluir carta → celular, rádio → TV, disco → tablet.",
+      feedbackAcerto: "🎉 Isso! Vamos evoluir carta → celular, rádio → TV, disco → tablet.",
       feedbackErro:
         "Olhe as pistas: telefone antigo, rádio, celular. A missão é COMPARAR ontem e hoje.",
     },
@@ -80,24 +80,21 @@ export const aula03: AulaPortuguesV4 = {
         palavra: "comunicação",
         explicacao:
           "É quando a gente PASSA UMA MENSAGEM pra outra pessoa: falando, escrevendo, ligando, mandando áudio.",
-        exemplo:
-          "O celular é um meio de COMUNICAÇÃO rápido.",
+        exemplo: "O celular é um meio de COMUNICAÇÃO rápido.",
         imagemUrl: celular,
       },
       {
         palavra: "mensagem",
         explicacao:
           "É o RECADO que a gente manda: 'Feliz aniversário', 'Estou chegando', 'Te amo'. Pode ser escrita, falada ou de áudio.",
-        exemplo:
-          "Mandei uma MENSAGEM de áudio pra vovó.",
+        exemplo: "Mandei uma MENSAGEM de áudio pra vovó.",
         imagemUrl: tablet,
       },
       {
         palavra: "evolução",
         explicacao:
           "É quando algo MUDA e MELHORA com o tempo. O telefone de disco EVOLUIU e virou celular.",
-        exemplo:
-          "A EVOLUÇÃO da comunicação: carta → telefone → celular → internet.",
+        exemplo: "A EVOLUÇÃO da comunicação: carta → telefone → celular → internet.",
         imagemUrl: cameraAntiga,
       },
     ],
@@ -109,14 +106,7 @@ export const aula03: AulaPortuguesV4 = {
       titulo: "Como as notícias chegavam antigamente",
       imagemUrl: album,
       legendaImagem: "Antes a notícia demorava dias; hoje, segundos.",
-      destacar: [
-        "carta",
-        "telefone",
-        "rádio",
-        "televisão",
-        "celular",
-        "internet",
-      ],
+      destacar: ["carta", "telefone", "rádio", "televisão", "celular", "internet"],
       paragrafos: [
         "ANTIGAMENTE, pra dar uma notícia distante, a pessoa escrevia uma CARTA. A carta viajava DIAS ou SEMANAS de trem, navio ou avião.",
         "Depois inventaram o TELEFONE de disco. Dava pra CONVERSAR na hora — mas só de casa, com fio na parede.",
@@ -131,42 +121,34 @@ export const aula03: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "Antigamente, pra mandar notícia LONGE, escreviam...",
-        opcoes: ["Um e-mail", "Uma carta", "Um vídeo"],
+        opcoes: ["Um e-mail", "Uma carta", "Um vídeo", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 Isso! CARTA.",
-        feedbackErro:
-          "O texto diz: 'ANTIGAMENTE… a pessoa escrevia uma CARTA'.",
+        feedbackErro: "O texto diz: 'ANTIGAMENTE… a pessoa escrevia uma CARTA'.",
         ondeEstaNoTexto: "…a pessoa escrevia uma CARTA…",
       },
       {
         pergunta: "O que o RÁDIO trouxe pro sofá?",
-        opcoes: [
-          "As notícias do mundo",
-          "Sopa quentinha",
-          "Roupas novas",
-        ],
+        opcoes: ["As notícias do mundo", "Sopa quentinha", "Roupas novas", "Outra possibilidade"],
         correta: 0,
         feedbackAcerto: "🎉 Boa! As NOTÍCIAS.",
-        feedbackErro:
-          "O texto diz: 'O RÁDIO trouxe as notícias do mundo pro sofá'.",
+        feedbackErro: "O texto diz: 'O RÁDIO trouxe as notícias do mundo pro sofá'.",
         ondeEstaNoTexto: "…O RÁDIO trouxe as notícias do mundo…",
       },
       {
         pergunta: "O que a TELEVISÃO trouxe A MAIS que o rádio?",
-        opcoes: ["Imagens", "Cheiro", "Comida"],
+        opcoes: ["Imagens", "Cheiro", "Comida", "Outra possibilidade"],
         correta: 0,
         feedbackAcerto: "🎉 IMAGENS.",
-        feedbackErro:
-          "O texto diz: 'a TELEVISÃO trouxe as IMAGENS também'.",
+        feedbackErro: "O texto diz: 'a TELEVISÃO trouxe as IMAGENS também'.",
         ondeEstaNoTexto: "…a TELEVISÃO trouxe as IMAGENS também…",
       },
       {
         pergunta: "Hoje, em quanto tempo a mensagem chega?",
-        opcoes: ["Semanas", "Dias", "Segundos"],
+        opcoes: ["Semanas", "Dias", "Segundos", "Outra possibilidade"],
         correta: 2,
         feedbackAcerto: "🎉 SEGUNDOS!",
-        feedbackErro:
-          "O texto diz: 'a gente manda… em SEGUNDOS pra qualquer lugar'.",
+        feedbackErro: "O texto diz: 'a gente manda… em SEGUNDOS pra qualquer lugar'.",
         ondeEstaNoTexto: "…em SEGUNDOS pra qualquer lugar!",
       },
     ],
@@ -177,39 +159,35 @@ export const aula03: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "🕰️ Antes de existir celular, a pessoa ligava com o quê?",
-        opcoes: ["Tablet", "Telefone de disco", "Rádio"],
-        opcoesImagens: [tablet, telefoneAntigo, radioAntigo],
+        opcoes: ["Tablet", "Telefone de disco", "Rádio", "Outra possibilidade"],
+        opcoesImagens: [tablet, telefoneAntigo, radioAntigo, tablet],
         correta: 1,
         feedbackAcerto: "🎉 O TELEFONE DE DISCO.",
-        feedbackErro:
-          "Antes do celular, usavam o TELEFONE de DISCO, preso na parede.",
+        feedbackErro: "Antes do celular, usavam o TELEFONE de DISCO, preso na parede.",
       },
       {
         pergunta: "📻 Antes da TV, como escutavam as notícias?",
-        opcoes: ["Pelo rádio", "Pelo tablet", "Pelo celular"],
-        opcoesImagens: [radioAntigo, tablet, celular],
+        opcoes: ["Pelo rádio", "Pelo tablet", "Pelo celular", "Outra possibilidade"],
+        opcoesImagens: [radioAntigo, tablet, celular, radioAntigo],
         correta: 0,
         feedbackAcerto: "🎉 Pelo RÁDIO.",
-        feedbackErro:
-          "Antes da TV, o RÁDIO era o meio principal de notícia em casa.",
+        feedbackErro: "Antes da TV, o RÁDIO era o meio principal de notícia em casa.",
       },
       {
         pergunta: "📷 Antes da câmera do celular, tiravam foto com...",
-        opcoes: ["Câmera antiga (de filme)", "Tablet", "Rádio"],
-        opcoesImagens: [cameraAntiga, tablet, radioAntigo],
+        opcoes: ["Câmera antiga (de filme)", "Tablet", "Rádio", "Outra possibilidade"],
+        opcoesImagens: [cameraAntiga, tablet, radioAntigo, cameraAntiga],
         correta: 0,
         feedbackAcerto: "🎉 CÂMERA ANTIGA (de filme).",
-        feedbackErro:
-          "As fotos vinham de CÂMERAS ANTIGAS com FILME — e demoravam pra revelar.",
+        feedbackErro: "As fotos vinham de CÂMERAS ANTIGAS com FILME — e demoravam pra revelar.",
       },
       {
         pergunta: "📱 Hoje, o que faz TUDO junto: liga, filma, manda áudio?",
-        opcoes: ["Telefone de disco", "Celular / smartphone", "Livro"],
-        opcoesImagens: [telefoneAntigo, celular, livro],
+        opcoes: ["Telefone de disco", "Celular / smartphone", "Livro", "Outra possibilidade"],
+        opcoesImagens: [telefoneAntigo, celular, livro, telefoneAntigo],
         correta: 1,
         feedbackAcerto: "🎉 O CELULAR (smartphone).",
-        feedbackErro:
-          "O CELULAR moderno faz TUDO: chama, filma, tira foto e manda áudio.",
+        feedbackErro: "O CELULAR moderno faz TUDO: chama, filma, tira foto e manda áudio.",
       },
     ],
   },
@@ -226,8 +204,7 @@ export const aula03: AulaPortuguesV4 = {
         { id: "s5", texto: "5) CELULAR e INTERNET", imagemUrl: celular },
       ],
       ordemCerta: ["s1", "s2", "s3", "s4", "s5"],
-      feedbackAcerto:
-        "🎉 Evolução completa! Carta → telefone → rádio → TV → celular.",
+      feedbackAcerto: "🎉 Evolução completa! Carta → telefone → rádio → TV → celular.",
       feedbackErro:
         "A carta veio primeiro; depois telefone, rádio, TV, e por último o celular com internet.",
     },
@@ -247,12 +224,11 @@ export const aula03: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "Quantos dias a CARTA demorava pra chegar na vovó?",
-        opcoes: ["10 dias", "5 minutos", "1 segundo"],
-        opcoesImagens: [album, celular, tablet],
+        opcoes: ["10 dias", "5 minutos", "1 segundo", "Outra possibilidade"],
+        opcoesImagens: [album, celular, tablet, album],
         correta: 0,
         feedbackAcerto: "🎉 10 DIAS.",
-        feedbackErro:
-          "O texto diz: 'A carta levava uns 10 DIAS pra chegar'.",
+        feedbackErro: "O texto diz: 'A carta levava uns 10 DIAS pra chegar'.",
         ondeEstaNoTexto: "…A carta levava uns 10 DIAS…",
       },
       {
@@ -261,22 +237,20 @@ export const aula03: AulaPortuguesV4 = {
           "Escrevendo uma carta",
           "Chamada de vídeo pelo celular",
           "Mandando um rádio pelo correio",
+          "Outra possibilidade",
         ],
-        opcoesImagens: [album, celular, radioAntigo],
+        opcoesImagens: [album, celular, radioAntigo, album],
         correta: 1,
         feedbackAcerto: "🎉 CHAMADA DE VÍDEO pelo CELULAR.",
-        feedbackErro:
-          "O texto diz: 'faz uma CHAMADA DE VÍDEO pelo CELULAR'.",
-        ondeEstaNoTexto:
-          "…faz uma CHAMADA DE VÍDEO pelo CELULAR…",
+        feedbackErro: "O texto diz: 'faz uma CHAMADA DE VÍDEO pelo CELULAR'.",
+        ondeEstaNoTexto: "…faz uma CHAMADA DE VÍDEO pelo CELULAR…",
       },
     ],
   },
 
   momento_minijogo: {
     titulo: "⚡ Upgrade! Antes × Hoje",
-    instrucao:
-      "Cada CARTELA é uma MENSAGEM. Coloque no meio ANTIGO ou no meio MODERNO.",
+    instrucao: "Cada CARTELA é uma MENSAGEM. Coloque no meio ANTIGO ou no meio MODERNO.",
     jogo: {
       tipo: "arrastarParaAlvo",
       titulo: "Arrastar para o Alvo",
@@ -306,8 +280,7 @@ export const aula03: AulaPortuguesV4 = {
           { id: "i7", texto: "Vídeo no tablet", alvoId: "moderno", imagemUrl: tablet },
           { id: "i8", texto: "TV com imagem colorida", alvoId: "moderno", imagemUrl: tvModerna },
         ],
-        feedbackAcerto:
-          "🎉 Evolução completa! Antes demorava DIAS; hoje, SEGUNDOS.",
+        feedbackAcerto: "🎉 Evolução completa! Antes demorava DIAS; hoje, SEGUNDOS.",
         feedbackErro:
           "Carta, disco, rádio e câmera de filme são ANTIGOS. Celular, tablet, chamada de vídeo e TV colorida são MODERNOS.",
       },
@@ -324,11 +297,10 @@ export const aula03: AulaPortuguesV4 = {
     ],
     miniDesafio: {
       pergunta: "Qual é o meio MAIS RÁPIDO de mandar 'oi' pra vovó longe?",
-      opcoes: ["Carta", "Chamada pelo celular", "Rádio antigo"],
+      opcoes: ["Carta", "Chamada pelo celular", "Rádio antigo", "Outra possibilidade"],
       correta: 1,
       feedbackAcerto: "🎉 CHAMADA PELO CELULAR.",
-      feedbackErro:
-        "O celular manda a mensagem em SEGUNDOS — a carta demoraria dias.",
+      feedbackErro: "O celular manda a mensagem em SEGUNDOS — a carta demoraria dias.",
     },
   },
 
@@ -340,38 +312,36 @@ export const aula03: AulaPortuguesV4 = {
           "Andar de carro",
           "Passar uma mensagem pra outra pessoa",
           "Cozinhar",
+          "Outra possibilidade",
         ],
         correta: 1,
         feedbackAcerto: "🎉 Isso!",
-        feedbackErro:
-          "COMUNICAÇÃO é passar uma MENSAGEM pra outra pessoa.",
+        feedbackErro: "COMUNICAÇÃO é passar uma MENSAGEM pra outra pessoa.",
       },
       {
         pergunta: "2/5 — Meio de comunicação ANTIGO:",
-        opcoes: ["Celular", "Carta", "Tablet"],
+        opcoes: ["Celular", "Carta", "Tablet", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 CARTA.",
-        feedbackErro:
-          "CARTA é antigo — celular e tablet são modernos.",
+        feedbackErro: "CARTA é antigo — celular e tablet são modernos.",
       },
       {
         pergunta: "3/5 — Meio de comunicação MODERNO:",
-        opcoes: ["Chamada de vídeo", "Telefone de disco", "Carta"],
+        opcoes: ["Chamada de vídeo", "Telefone de disco", "Carta", "Outra possibilidade"],
         correta: 0,
         feedbackAcerto: "🎉 CHAMADA DE VÍDEO.",
-        feedbackErro:
-          "Chamada de vídeo é MODERNO. Telefone de disco e carta são antigos.",
+        feedbackErro: "Chamada de vídeo é MODERNO. Telefone de disco e carta são antigos.",
       },
       {
         pergunta: "4/5 — O que a TELEVISÃO trouxe A MAIS que o rádio?",
-        opcoes: ["Cheiro", "Imagem", "Comida"],
+        opcoes: ["Cheiro", "Imagem", "Comida", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 IMAGEM.",
         feedbackErro: "A TV trouxe IMAGEM junto com o som.",
       },
       {
         pergunta: "5/5 — Hoje, mensagem chega em...",
-        opcoes: ["Semanas", "Dias", "Segundos"],
+        opcoes: ["Semanas", "Dias", "Segundos", "Outra possibilidade"],
         correta: 2,
         feedbackAcerto: "🎉 SEGUNDOS.",
         feedbackErro: "Com celular + internet, chega em SEGUNDOS.",
@@ -388,8 +358,7 @@ export const aula03: AulaPortuguesV4 = {
       "3) Desenhe esse objeto ao lado do CELULAR moderno.",
       "4) Escreva 1 palavra pra cada: 'DEMORA' e 'RÁPIDO'.",
     ],
-    registro:
-      "📸 Uma foto do seu desenho: ANTIGO × MODERNO.",
+    registro: "📸 Uma foto do seu desenho: ANTIGO × MODERNO.",
   },
 
   recompensa: {

@@ -7,6 +7,105 @@
 
 import type { UnidadeFund2 } from "../geografia-6ano/dados-fund2";
 
+type Tema9 = [string, string, string, string];
+const criar9 = (t: Tema9, i: number): UnidadeFund2 => ({
+  unidade: i + 8,
+  slug: `unidade-${i + 8}-${t[0].toLowerCase()}`,
+  titulo: t[1],
+  habilidade: t[0],
+  introducao_academica: `Analise ${t[1].toLowerCase()} com conceitos, fontes e diferentes escalas.`,
+  conteudo_pedagogico: {
+    conceito_chave: t[2],
+    texto_teorico: `${t[2]} A análise deve relacionar processos históricos, redes, atores, desigualdades e efeitos territoriais.`,
+    exemplo_visual: t[3],
+    imagem_analise: "",
+    etapas_teoricas: [
+      { titulo: "Conceito", texto: t[2], exemplo_real: t[3] },
+      {
+        titulo: "Evidências",
+        texto: "Mapas, gráficos, indicadores e fontes históricas permitem testar explicações.",
+        exemplo_real: "Confira fonte, data, escala e interesses envolvidos.",
+      },
+      {
+        titulo: "Síntese",
+        texto: "Relacione causas, consequências e alternativas.",
+        exemplo_real: `Explique: ${t[3]}`,
+      },
+    ],
+    exemplo_pratico_visual: `Construa um mapa conceitual sobre ${t[1]}.`,
+  },
+  quiz_relampago: [
+    {
+      pergunta: `Como analisar ${t[1].toLowerCase()}?`,
+      opcoes: [
+        {
+          texto: "Relacionando fontes, escalas e atores",
+          correta: true,
+          explicacao: "A análise é fundamentada e contextualizada.",
+        },
+        { texto: "Usando opinião sem evidência", correta: false, explicacao: "Faltam fontes." },
+        { texto: "Ignorando o território", correta: false, explicacao: "O espaço é essencial." },
+        {
+          texto: "Generalizando todos os lugares",
+          correta: false,
+          explicacao: "Há diferenças territoriais.",
+        },
+      ],
+    },
+  ],
+  desafio_critico: {
+    pergunta: `Qual procedimento aplica ${t[2]}?`,
+    opcoes: [
+      { texto: `Relacionar ${t[3]} às causas e consequências.`, correta: true },
+      { texto: "Ignorar fontes.", correta: false },
+      { texto: "Apagar diferenças regionais.", correta: false },
+      { texto: "Repetir sem explicar.", correta: false },
+    ],
+    explicacao_professor: `${t[2]} Compare evidências e escalas.`,
+  },
+  recompensas: { xp: 700, moedas: 500, titulo: `Especialista em ${t[1]}` },
+});
+const LACUNAS_9ANO: UnidadeFund2[] = (
+  [
+    [
+      "EF09GE03",
+      "Corporações e Organismos Mundiais",
+      "Corporações e organismos econômicos influenciam decisões políticas, produtivas e territoriais.",
+      "FMI, Banco Mundial, OMC e multinacionais atuam de maneiras diferentes sobre economias nacionais.",
+    ],
+    [
+      "EF09GE04",
+      "Manifestações Culturais e Minorias",
+      "Diversidade cultural e reivindicações de minorias transformam territórios e relações de poder.",
+      "Movimentos linguísticos, religiosos e étnicos defendem reconhecimento e direitos.",
+    ],
+    [
+      "EF09GE05",
+      "Europa e Ásia na Ordem Mundial",
+      "Europa e Ásia exercem papéis econômicos, políticos e culturais distintos e interdependentes.",
+      "União Europeia, China, Índia, Japão e Rússia articulam redes globais.",
+    ],
+    [
+      "EF09GE14",
+      "Produção Agropecuária Europeia e Asiática",
+      "Características naturais, tecnologia e políticas agrárias moldam a produção agropecuária.",
+      "Agricultura intensiva europeia e sistemas asiáticos variam em escala e trabalho.",
+    ],
+    [
+      "EF09GE15",
+      "Industrialização Europeia e Asiática",
+      "Industrialização, energia, trabalho e inovação reorganizam cidades, redes e impactos ambientais.",
+      "Corredores industriais conectam fábricas, centros tecnológicos e portos.",
+    ],
+    [
+      "EF09GE18",
+      "Cartografia da Europa, Ásia e Oceania",
+      "Mapas temáticos e anamorfoses representam dados populacionais, econômicos e ambientais.",
+      "Uma anamorfose amplia países conforme população ou PIB, não área territorial.",
+    ],
+  ] as Tema9[]
+).map(criar9);
+
 export const UNIDADES_9ANO: UnidadeFund2[] = [
   // ============================================================
   // UNIDADE 1 — Da Bipolaridade à Multipolaridade
@@ -77,13 +176,15 @@ export const UNIDADES_9ANO: UnidadeFund2[] = [
         pergunta: "O que caracterizou a Guerra Fria (1945–1991)?",
         opcoes: [
           {
-            texto: "Uma disputa ideológica, militar e tecnológica entre EUA (capitalista) e URSS (socialista), sem confronto direto, baseada no medo mútuo do apocalipse nuclear.",
+            texto:
+              "Uma disputa ideológica, militar e tecnológica entre EUA (capitalista) e URSS (socialista), sem confronto direto, baseada no medo mútuo do apocalipse nuclear.",
             correta: true,
             explicacao:
               "Exato. Foi 'fria' justamente porque as duas superpotências nunca se enfrentaram diretamente — o custo (aniquilação nuclear) era alto demais. Elas se enfrentavam por procuração em conflitos regionais.",
           },
           {
-            texto: "Uma guerra convencional aberta entre EUA e URSS, com invasões diretas de territórios das duas potências.",
+            texto:
+              "Uma guerra convencional aberta entre EUA e URSS, com invasões diretas de territórios das duas potências.",
             correta: false,
             explicacao:
               "Não. Se tivesse havido confronto direto, teria sido uma 3ª Guerra Mundial — provavelmente nuclear. O termo 'fria' existe justamente porque o confronto direto NUNCA aconteceu.",
@@ -94,29 +195,37 @@ export const UNIDADES_9ANO: UnidadeFund2[] = [
             explicacao:
               "Falso. A dimensão militar (corrida armamentista, OTAN × Pacto de Varsóvia) e ideológica (capitalismo × socialismo) foi central. A economia era apenas UMA das frentes.",
           },
+
+          { texto: "Outra possibilidade", correta: false, explicacao: "Compare com o conceito." },
         ],
       },
       {
-        pergunta: "Por que dizemos que a Nova Ordem Mundial é MULTIPOLAR economicamente, mas UNIPOLAR militarmente?",
+        pergunta:
+          "Por que dizemos que a Nova Ordem Mundial é MULTIPOLAR economicamente, mas UNIPOLAR militarmente?",
         opcoes: [
           {
-            texto: "Porque, economicamente, existem vários polos fortes (EUA, UE, China, Japão, BRICS), mas militarmente os EUA ainda mantêm uma superioridade global isolada, com bases em mais de 80 países.",
+            texto:
+              "Porque, economicamente, existem vários polos fortes (EUA, UE, China, Japão, BRICS), mas militarmente os EUA ainda mantêm uma superioridade global isolada, com bases em mais de 80 países.",
             correta: true,
             explicacao:
               "Perfeito. Essa assimetria é uma das chaves para entender a política global do séc. XXI: negociar economia com muitos, mas ninguém rivaliza militarmente com os EUA em escala global.",
           },
           {
-            texto: "Porque só existe UM polo econômico (os EUA), mas VÁRIOS polos militares no mundo.",
+            texto:
+              "Porque só existe UM polo econômico (os EUA), mas VÁRIOS polos militares no mundo.",
             correta: false,
             explicacao:
               "Inverso. Economicamente já não há um só líder — a China deve ultrapassar os EUA em PIB nominal nesta década. Militarmente, sim, os EUA seguem isolados no topo.",
           },
           {
-            texto: "Porque o mundo voltou a ser bipolar após 2001, com EUA e Rússia disputando novamente a hegemonia.",
+            texto:
+              "Porque o mundo voltou a ser bipolar após 2001, com EUA e Rússia disputando novamente a hegemonia.",
             correta: false,
             explicacao:
               "Não. A Rússia atual tem PIB menor que o do Brasil e não sustenta um bloco global à altura da antiga URSS. O rival estrutural dos EUA hoje é a China, não a Rússia.",
           },
+
+          { texto: "Outra possibilidade", correta: false, explicacao: "Compare com o conceito." },
         ],
       },
       {
@@ -135,11 +244,14 @@ export const UNIDADES_9ANO: UnidadeFund2[] = [
               "É sim um polo relevante — juntas, as economias da UE somam um PIB comparável ao dos EUA e da China.",
           },
           {
-            texto: "BRICS ampliado — economias emergentes com peso demográfico e produtivo crescente.",
+            texto:
+              "BRICS ampliado — economias emergentes com peso demográfico e produtivo crescente.",
             correta: false,
             explicacao:
               "É um dos principais polos emergentes: respondem por mais de 40% da população mundial.",
           },
+
+          { texto: "Outra possibilidade", correta: false, explicacao: "Compare com o conceito." },
         ],
       },
     ],
@@ -153,12 +265,18 @@ export const UNIDADES_9ANO: UnidadeFund2[] = [
         { id: "multipolar", titulo: "Nova Ordem Multipolar (1991–hoje)", cor: "amber" },
       ],
       cartoes: [
-        { texto: "Muro de Berlim dividindo a Alemanha em capitalista e socialista.", categoriaId: "bipolar" },
+        {
+          texto: "Muro de Berlim dividindo a Alemanha em capitalista e socialista.",
+          categoriaId: "bipolar",
+        },
         { texto: "Criação dos BRICS reunindo economias emergentes.", categoriaId: "multipolar" },
         { texto: "Crise dos Mísseis de Cuba entre EUA e URSS (1962).", categoriaId: "bipolar" },
         { texto: "Corrida por microchips e 5G entre EUA e China.", categoriaId: "multipolar" },
         { texto: "OTAN × Pacto de Varsóvia — alianças militares rivais.", categoriaId: "bipolar" },
-        { texto: "Reuniões do G20 decidindo regras globais de comércio e clima.", categoriaId: "multipolar" },
+        {
+          texto: "Reuniões do G20 decidindo regras globais de comércio e clima.",
+          categoriaId: "multipolar",
+        },
       ],
     },
 
@@ -176,6 +294,9 @@ export const UNIDADES_9ANO: UnidadeFund2[] = [
             "O tamanho absoluto do exército regular de infantaria e a quantidade total de ogivas nucleares estocadas em silos subterrâneos.",
           correta: false,
         },
+
+        { texto: "Outra possibilidade sem relação com o conceito.", correta: false },
+        { texto: "Outra possibilidade sem relação com o conceito.", correta: false },
       ],
       explicacao_professor:
         "Sensacional! Na Nova Ordem Mundial, o conceito de poder foi reconfigurado. Ter indústrias de ponta, alta capacidade de inovação tecnológica e estabilidade econômica passou a ditar quem lidera as regras do jogo geopolítico internacional.",
@@ -252,7 +373,8 @@ export const UNIDADES_9ANO: UnidadeFund2[] = [
         pergunta: "Por que a CECA (1951) é considerada o embrião da União Europeia?",
         opcoes: [
           {
-            texto: "Porque integrou justamente as indústrias de carvão e aço da França e Alemanha — insumos-chave para fabricar armas — tornando uma nova guerra materialmente inviável.",
+            texto:
+              "Porque integrou justamente as indústrias de carvão e aço da França e Alemanha — insumos-chave para fabricar armas — tornando uma nova guerra materialmente inviável.",
             correta: true,
             explicacao:
               "Exato. Ao dividir o controle dos recursos usados para fazer canhões e tanques, os dois países se tornaram economicamente dependentes um do outro. Guerra ficou impossível.",
@@ -260,8 +382,7 @@ export const UNIDADES_9ANO: UnidadeFund2[] = [
           {
             texto: "Porque criou uma moeda única europeia já em 1951.",
             correta: false,
-            explicacao:
-              "Falso. O Euro só entrou em circulação em 2002 — 51 anos depois da CECA.",
+            explicacao: "Falso. O Euro só entrou em circulação em 2002 — 51 anos depois da CECA.",
           },
           {
             texto: "Porque unificou os exércitos europeus em uma única força militar.",
@@ -269,13 +390,17 @@ export const UNIDADES_9ANO: UnidadeFund2[] = [
             explicacao:
               "Não existe exército único europeu até hoje. A defesa continua nacional (ou via OTAN). A UE tem forças integradas apenas em missões pontuais.",
           },
+
+          { texto: "Outra possibilidade", correta: false, explicacao: "Compare com o conceito." },
         ],
       },
       {
-        pergunta: "Qual foi a principal consequência de a Grécia estar na Zona do Euro durante a crise de 2009-2015?",
+        pergunta:
+          "Qual foi a principal consequência de a Grécia estar na Zona do Euro durante a crise de 2009-2015?",
         opcoes: [
           {
-            texto: "Ela perdeu autonomia monetária: não podia desvalorizar sua moeda para se recuperar, precisando aplicar austeridade fiscal sob supervisão da 'troika' (BCE, FMI, Comissão Europeia).",
+            texto:
+              "Ela perdeu autonomia monetária: não podia desvalorizar sua moeda para se recuperar, precisando aplicar austeridade fiscal sob supervisão da 'troika' (BCE, FMI, Comissão Europeia).",
             correta: true,
             explicacao:
               "Perfeito. É a grande lição da Zona do Euro: quem cede a moeda cede também instrumentos de ajuste. Se você não pode desvalorizar, precisa cortar salários — muito mais doloroso politicamente.",
@@ -289,16 +414,18 @@ export const UNIDADES_9ANO: UnidadeFund2[] = [
           {
             texto: "Ela adotou o Dólar americano como nova moeda oficial.",
             correta: false,
-            explicacao:
-              "Nada disso. A Grécia continua na Zona do Euro até hoje.",
+            explicacao: "Nada disso. A Grécia continua na Zona do Euro até hoje.",
           },
+
+          { texto: "Outra possibilidade", correta: false, explicacao: "Compare com o conceito." },
         ],
       },
       {
         pergunta: "O que mostrou o Brexit (2016-2020) sobre o projeto europeu?",
         opcoes: [
           {
-            texto: "Que a integração europeia é reversível e sensível a temas como imigração, soberania nacional e contribuições financeiras ao bloco.",
+            texto:
+              "Que a integração europeia é reversível e sensível a temas como imigração, soberania nacional e contribuições financeiras ao bloco.",
             correta: true,
             explicacao:
               "Correto. Nenhum tratado assegura que a UE é 'para sempre'. O Brexit ativou o Artigo 50 do Tratado da UE, que sempre previu a saída de membros.",
@@ -306,8 +433,7 @@ export const UNIDADES_9ANO: UnidadeFund2[] = [
           {
             texto: "Que o Reino Unido nunca havia sido membro da UE.",
             correta: false,
-            explicacao:
-              "Falso. Foi membro de 1973 a 2020 (47 anos).",
+            explicacao: "Falso. Foi membro de 1973 a 2020 (47 anos).",
           },
           {
             texto: "Que a UE se dissolveu após 2020.",
@@ -315,6 +441,8 @@ export const UNIDADES_9ANO: UnidadeFund2[] = [
             explicacao:
               "Errado. A UE continua com 27 membros e ampliou-se após o Brexit (Croácia entrou em 2013; Ucrânia é candidata desde 2022).",
           },
+
+          { texto: "Outra possibilidade", correta: false, explicacao: "Compare com o conceito." },
         ],
       },
     ],
@@ -329,12 +457,21 @@ export const UNIDADES_9ANO: UnidadeFund2[] = [
         { id: "fora", titulo: "Fora da UE", cor: "emerald" },
       ],
       cartoes: [
-        { texto: "Alemanha — motor econômico do bloco, adotou o Euro em 2002.", categoriaId: "eurozona" },
-        { texto: "Suécia — membro da UE mas manteve a Coroa Sueca como moeda.", categoriaId: "ue_sem_euro" },
+        {
+          texto: "Alemanha — motor econômico do bloco, adotou o Euro em 2002.",
+          categoriaId: "eurozona",
+        },
+        {
+          texto: "Suécia — membro da UE mas manteve a Coroa Sueca como moeda.",
+          categoriaId: "ue_sem_euro",
+        },
         { texto: "Reino Unido — saiu da UE em 2020 pelo Brexit.", categoriaId: "fora" },
         { texto: "França — fundadora da CECA e do Euro.", categoriaId: "eurozona" },
         { texto: "Suíça — nunca foi UE, mas participa do Espaço Schengen.", categoriaId: "fora" },
-        { texto: "Dinamarca — membro da UE que rejeitou o Euro em referendo.", categoriaId: "ue_sem_euro" },
+        {
+          texto: "Dinamarca — membro da UE que rejeitou o Euro em referendo.",
+          categoriaId: "ue_sem_euro",
+        },
       ],
     },
 
@@ -352,6 +489,9 @@ export const UNIDADES_9ANO: UnidadeFund2[] = [
             "Os dois eventos comprovam que a integração europeia é um sucesso sem contradições e que a UE se tornou uma federação política plenamente consolidada, sem tensões internas relevantes.",
           correta: false,
         },
+
+        { texto: "Outra possibilidade sem relação com o conceito.", correta: false },
+        { texto: "Outra possibilidade sem relação com o conceito.", correta: false },
       ],
       explicacao_professor:
         "Excelente análise. Você entendeu a dialética central da UE: integração e soberania nacional puxam em direções opostas. Cada nova crise força a UE a escolher entre aprofundar a união (mais integração) ou recuar (renacionalizar competências). É por isso que analistas dizem que a UE 'só avança em crise' — e também que 'só recua em crise'.",
@@ -425,10 +565,12 @@ export const UNIDADES_9ANO: UnidadeFund2[] = [
 
     quiz_relampago: [
       {
-        pergunta: "Por que a Rússia herdou o assento permanente da URSS no Conselho de Segurança da ONU?",
+        pergunta:
+          "Por que a Rússia herdou o assento permanente da URSS no Conselho de Segurança da ONU?",
         opcoes: [
           {
-            texto: "Porque foi reconhecida como Estado sucessor da URSS: herdou território majoritário, arsenal nuclear e obrigações internacionais soviéticas.",
+            texto:
+              "Porque foi reconhecida como Estado sucessor da URSS: herdou território majoritário, arsenal nuclear e obrigações internacionais soviéticas.",
             correta: true,
             explicacao:
               "Correto. Um Estado sucessor herda direitos e deveres internacionais do Estado extinto. As outras 14 repúblicas foram tratadas como Estados novos.",
@@ -442,16 +584,19 @@ export const UNIDADES_9ANO: UnidadeFund2[] = [
           {
             texto: "Porque comprou o assento dos EUA.",
             correta: false,
-            explicacao:
-              "Assentos na ONU não são negociáveis financeiramente.",
+            explicacao: "Assentos na ONU não são negociáveis financeiramente.",
           },
+
+          { texto: "Outra possibilidade", correta: false, explicacao: "Compare com o conceito." },
         ],
       },
       {
-        pergunta: "Do ponto de vista russo, o que representou a expansão da OTAN em direção ao Leste Europeu?",
+        pergunta:
+          "Do ponto de vista russo, o que representou a expansão da OTAN em direção ao Leste Europeu?",
         opcoes: [
           {
-            texto: "Um cerco militar percebido como ameaça direta à segurança nacional, aproximando bases da OTAN de fronteiras russas históricas.",
+            texto:
+              "Um cerco militar percebido como ameaça direta à segurança nacional, aproximando bases da OTAN de fronteiras russas históricas.",
             correta: true,
             explicacao:
               "Exato. Para Moscou, ver bálticas e Polônia entrando na OTAN foi equivalente a ver tanques americanos a poucas horas de suas cidades. É a leitura russa oficial.",
@@ -468,19 +613,24 @@ export const UNIDADES_9ANO: UnidadeFund2[] = [
             explicacao:
               "A OTAN é uma aliança militar — o Artigo 5 obriga defesa mútua entre membros.",
           },
+
+          { texto: "Outra possibilidade", correta: false, explicacao: "Compare com o conceito." },
         ],
       },
       {
-        pergunta: "Qual foi o impacto imediato da invasão russa da Ucrânia (2022) sobre a matriz energética europeia?",
+        pergunta:
+          "Qual foi o impacto imediato da invasão russa da Ucrânia (2022) sobre a matriz energética europeia?",
         opcoes: [
           {
-            texto: "Acelerou drasticamente a diversificação de fornecedores (EUA, Catar), o retorno de energia nuclear em alguns países e o investimento em renováveis, reduzindo a dependência do gás russo.",
+            texto:
+              "Acelerou drasticamente a diversificação de fornecedores (EUA, Catar), o retorno de energia nuclear em alguns países e o investimento em renováveis, reduzindo a dependência do gás russo.",
             correta: true,
             explicacao:
               "Perfeito. A dependência energética virou vulnerabilidade estratégica em questão de semanas. Isso reorganizou a matriz europeia mais em 2 anos do que em 20.",
           },
           {
-            texto: "Aumentou a dependência europeia do gás russo, com novos gasodutos sendo construídos.",
+            texto:
+              "Aumentou a dependência europeia do gás russo, com novos gasodutos sendo construídos.",
             correta: false,
             explicacao:
               "Inverso. O gasoduto Nord Stream 2 foi cancelado, e o Nord Stream 1 foi sabotado. A UE cortou drasticamente o consumo de gás russo.",
@@ -491,14 +641,15 @@ export const UNIDADES_9ANO: UnidadeFund2[] = [
             explicacao:
               "Falso. Foi o maior choque energético europeu desde a crise do petróleo de 1973.",
           },
+
+          { texto: "Outra possibilidade", correta: false, explicacao: "Compare com o conceito." },
         ],
       },
     ],
 
     mini_jogo: {
       tipo: "categorizar",
-      instrucao:
-        "Classifique cada país conforme sua posição atual no antigo espaço soviético.",
+      instrucao: "Classifique cada país conforme sua posição atual no antigo espaço soviético.",
       categorias: [
         { id: "otan", titulo: "Ex-soviético agora na OTAN", cor: "cyan" },
         { id: "aliado_rus", titulo: "Ainda aliado da Rússia", cor: "amber" },
@@ -506,11 +657,24 @@ export const UNIDADES_9ANO: UnidadeFund2[] = [
       ],
       cartoes: [
         { texto: "Estônia — república báltica, membro da OTAN desde 2004.", categoriaId: "otan" },
-        { texto: "Belarus — vizinha da Rússia, aliada estratégica do Kremlin.", categoriaId: "aliado_rus" },
-        { texto: "Ucrânia — invadida pela Rússia em 2022, candidata à UE.", categoriaId: "conflito" },
+        {
+          texto: "Belarus — vizinha da Rússia, aliada estratégica do Kremlin.",
+          categoriaId: "aliado_rus",
+        },
+        {
+          texto: "Ucrânia — invadida pela Rússia em 2022, candidata à UE.",
+          categoriaId: "conflito",
+        },
         { texto: "Lituânia — báltica, membro da OTAN e da UE.", categoriaId: "otan" },
-        { texto: "Cazaquistão — parceiro econômico próximo da Rússia, membro da EAEU.", categoriaId: "aliado_rus" },
-        { texto: "Geórgia — sofreu invasão russa em 2008, tem territórios ocupados (Ossétia do Sul).", categoriaId: "conflito" },
+        {
+          texto: "Cazaquistão — parceiro econômico próximo da Rússia, membro da EAEU.",
+          categoriaId: "aliado_rus",
+        },
+        {
+          texto:
+            "Geórgia — sofreu invasão russa em 2008, tem territórios ocupados (Ossétia do Sul).",
+          categoriaId: "conflito",
+        },
       ],
     },
 
@@ -528,6 +692,9 @@ export const UNIDADES_9ANO: UnidadeFund2[] = [
             "A dependência energética entre países vizinhos é sempre segura e não gera riscos políticos relevantes, desde que haja contratos comerciais assinados entre empresas privadas.",
           correta: false,
         },
+
+        { texto: "Outra possibilidade sem relação com o conceito.", correta: false },
+        { texto: "Outra possibilidade sem relação com o conceito.", correta: false },
       ],
       explicacao_professor:
         "Excelente. Você compreendeu que geopolítica energética é um dos vetores mais importantes da política internacional contemporânea. Depender de fornecedor único é apostar que o cenário político permanecerá estável — aposta que raramente se sustenta em prazos longos. Por isso, hoje, matriz diversificada + renováveis + estoque estratégico viraram vocabulário obrigatório de qualquer país sério.",
@@ -604,13 +771,15 @@ export const UNIDADES_9ANO: UnidadeFund2[] = [
         pergunta: "O que caracteriza o 'socialismo de mercado' chinês?",
         opcoes: [
           {
-            texto: "Combinação de controle político monopartidário do PCC com abertura econômica, propriedade privada e livre mercado em zonas específicas.",
+            texto:
+              "Combinação de controle político monopartidário do PCC com abertura econômica, propriedade privada e livre mercado em zonas específicas.",
             correta: true,
             explicacao:
               "Exato. A China separa política (fechada, controlada) de economia (aberta, capitalista) — algo que nenhum outro país sustentou em escala e duração comparáveis.",
           },
           {
-            texto: "Sistema economicamente idêntico ao capitalismo dos EUA, com democracia liberal.",
+            texto:
+              "Sistema economicamente idêntico ao capitalismo dos EUA, com democracia liberal.",
             correta: false,
             explicacao:
               "Falso. Politicamente a China é regime de partido único, sem eleições multipartidárias.",
@@ -621,19 +790,23 @@ export const UNIDADES_9ANO: UnidadeFund2[] = [
             explicacao:
               "Inverso. Deng Xiaoping abandonou o maoísmo econômico justamente para permitir crescimento via mercado.",
           },
+
+          { texto: "Outra possibilidade", correta: false, explicacao: "Compare com o conceito." },
         ],
       },
       {
         pergunta: "Qual é a principal função geopolítica da Belt & Road Initiative (BRI)?",
         opcoes: [
           {
-            texto: "Ampliar a influência chinesa através de infraestrutura estratégica (portos, ferrovias, cabos), criando cadeias comerciais menos dependentes de rotas controladas pelos EUA.",
+            texto:
+              "Ampliar a influência chinesa através de infraestrutura estratégica (portos, ferrovias, cabos), criando cadeias comerciais menos dependentes de rotas controladas pelos EUA.",
             correta: true,
             explicacao:
               "Correto. É poder projetado por concreto e trilhos, não por navios de guerra. Cada porto financiado é uma cabeça-de-ponte comercial e geopolítica.",
           },
           {
-            texto: "Fornecer ajuda humanitária gratuita e sem contrapartidas aos países mais pobres.",
+            texto:
+              "Fornecer ajuda humanitária gratuita e sem contrapartidas aos países mais pobres.",
             correta: false,
             explicacao:
               "Não. São empréstimos comerciais com juros, geralmente com garantia de exploração da própria infraestrutura financiada.",
@@ -644,13 +817,16 @@ export const UNIDADES_9ANO: UnidadeFund2[] = [
             explicacao:
               "É uma referência simbólica ao passado, mas o objetivo é estritamente econômico-geopolítico.",
           },
+
+          { texto: "Outra possibilidade", correta: false, explicacao: "Compare com o conceito." },
         ],
       },
       {
         pergunta: "Por que Taiwan é chamada de 'epicentro geopolítico mundial dos chips'?",
         opcoes: [
           {
-            texto: "Porque a TSMC (empresa taiwanesa) fabrica cerca de 90% dos chips avançados do mundo — insumo crítico para smartphones, carros, computadores e sistemas militares.",
+            texto:
+              "Porque a TSMC (empresa taiwanesa) fabrica cerca de 90% dos chips avançados do mundo — insumo crítico para smartphones, carros, computadores e sistemas militares.",
             correta: true,
             explicacao:
               "Perfeito. Um conflito na região paralisaria a economia digital global. Por isso EUA, China, UE e Japão fazem esforços gigantes para relocalizar produção de chips.",
@@ -667,6 +843,8 @@ export const UNIDADES_9ANO: UnidadeFund2[] = [
             explicacao:
               "Existem outros produtores (Coreia do Sul, EUA, China), mas a TSMC domina o segmento AVANÇADO (chips abaixo de 5nm).",
           },
+
+          { texto: "Outra possibilidade", correta: false, explicacao: "Compare com o conceito." },
         ],
       },
     ],
@@ -681,10 +859,16 @@ export const UNIDADES_9ANO: UnidadeFund2[] = [
       ],
       cartoes: [
         { texto: "Belt & Road Initiative (BRI) — infraestrutura global.", categoriaId: "china" },
-        { texto: "CHIPS Act (2022) — subsídios para fabricar chips em solo americano.", categoriaId: "eua" },
+        {
+          texto: "CHIPS Act (2022) — subsídios para fabricar chips em solo americano.",
+          categoriaId: "eua",
+        },
         { texto: "Made in China 2025 — autossuficiência tecnológica.", categoriaId: "china" },
         { texto: "Sanções à Huawei bloqueando chips americanos.", categoriaId: "eua" },
-        { texto: "AUKUS (aliança militar EUA-Reino Unido-Austrália no Pacífico).", categoriaId: "eua" },
+        {
+          texto: "AUKUS (aliança militar EUA-Reino Unido-Austrália no Pacífico).",
+          categoriaId: "eua",
+        },
         { texto: "Yuan digital (CBDC) para reduzir dependência do dólar.", categoriaId: "china" },
       ],
     },
@@ -703,6 +887,9 @@ export const UNIDADES_9ANO: UnidadeFund2[] = [
             "A China representa apenas uma potência regional sem qualquer capacidade de projeção global, incapaz de rivalizar economicamente ou tecnologicamente com os EUA em qualquer setor relevante.",
           correta: false,
         },
+
+        { texto: "Outra possibilidade sem relação com o conceito.", correta: false },
+        { texto: "Outra possibilidade sem relação com o conceito.", correta: false },
       ],
       explicacao_professor:
         "Perfeito. Você entendeu o cerne: a China não é apenas 'mais uma economia grande'. É uma proposta CIVILIZACIONAL alternativa à ocidental — que combina mercado + Estado forte + planejamento de longo prazo. Isso reabre um debate que a queda do Muro havia dado como encerrado: pode existir prosperidade sem democracia liberal? A resposta chinesa incomoda porque parece, empiricamente, que sim.",
@@ -721,7 +908,8 @@ export const UNIDADES_9ANO: UnidadeFund2[] = [
     introducao_academica:
       "O Oriente Médio concentra as maiores reservas de petróleo do mundo, os três grandes monoteísmos (Judaísmo, Cristianismo, Islamismo) e fronteiras artificiais desenhadas por potências europeias no séc. XX. Essa combinação explosiva explica boa parte dos conflitos regionais que ocupam manchetes há mais de 70 anos.",
     conteudo_pedagogico: {
-      conceito_chave: "Petróleo, fronteiras Sykes-Picot, conflito israelo-palestino e sunitas × xiitas",
+      conceito_chave:
+        "Petróleo, fronteiras Sykes-Picot, conflito israelo-palestino e sunitas × xiitas",
       texto_teorico:
         "Entender o Oriente Médio exige superpor três camadas: recursos naturais (petróleo/gás), religião (divisões dentro do Islã e fé no monoteísmo abraâmico) e geopolítica externa (fronteiras coloniais + rivalidade EUA-Rússia-China na região).",
       etapas_teoricas: [
@@ -776,10 +964,12 @@ export const UNIDADES_9ANO: UnidadeFund2[] = [
 
     quiz_relampago: [
       {
-        pergunta: "Por que o Acordo Sykes-Picot (1916) é considerado uma das raízes históricas dos conflitos atuais no Oriente Médio?",
+        pergunta:
+          "Por que o Acordo Sykes-Picot (1916) é considerado uma das raízes históricas dos conflitos atuais no Oriente Médio?",
         opcoes: [
           {
-            texto: "Porque desenhou fronteiras em linhas retas ignorando divisões étnicas, tribais e religiosas locais, criando Estados internamente instáveis por design.",
+            texto:
+              "Porque desenhou fronteiras em linhas retas ignorando divisões étnicas, tribais e religiosas locais, criando Estados internamente instáveis por design.",
             correta: true,
             explicacao:
               "Exato. Iraque, Síria, Líbano e Jordânia carregam até hoje as tensões geradas por essa divisão colonial arbitrária.",
@@ -796,13 +986,17 @@ export const UNIDADES_9ANO: UnidadeFund2[] = [
             explicacao:
               "Inverso. Sykes-Picot fragmentou o Império Otomano em vários Estados — não unificou nada.",
           },
+
+          { texto: "Outra possibilidade", correta: false, explicacao: "Compare com o conceito." },
         ],
       },
       {
-        pergunta: "O que caracteriza a rivalidade entre Arábia Saudita e Irã na geopolítica regional?",
+        pergunta:
+          "O que caracteriza a rivalidade entre Arábia Saudita e Irã na geopolítica regional?",
         opcoes: [
           {
-            texto: "Uma disputa por hegemonia regional que combina rivalidade religiosa (sunismo saudita × xiismo iraniano) e disputa por influência em conflitos (Iêmen, Síria, Líbano).",
+            texto:
+              "Uma disputa por hegemonia regional que combina rivalidade religiosa (sunismo saudita × xiismo iraniano) e disputa por influência em conflitos (Iêmen, Síria, Líbano).",
             correta: true,
             explicacao:
               "Correto. É a principal 'guerra fria' regional do séc. XXI, travada indiretamente em vários países vizinhos.",
@@ -819,13 +1013,16 @@ export const UNIDADES_9ANO: UnidadeFund2[] = [
             explicacao:
               "Inverso. Arábia Saudita e Irã são rivais estratégicos — chegaram a romper relações diplomáticas em 2016, restabelecidas em 2023 com mediação chinesa.",
           },
+
+          { texto: "Outra possibilidade", correta: false, explicacao: "Compare com o conceito." },
         ],
       },
       {
         pergunta: "Qual é a importância geopolítica do Estreito de Ormuz?",
         opcoes: [
           {
-            texto: "Passam por ali cerca de 20% do petróleo mundial diariamente, tornando-o o gargalo marítimo mais crítico da economia global de energia.",
+            texto:
+              "Passam por ali cerca de 20% do petróleo mundial diariamente, tornando-o o gargalo marítimo mais crítico da economia global de energia.",
             correta: true,
             explicacao:
               "Perfeito. Um bloqueio de Ormuz elevaria o preço do barril a níveis catastróficos em dias. É por isso que EUA mantêm a 5ª Frota Naval permanentemente na região.",
@@ -842,6 +1039,8 @@ export const UNIDADES_9ANO: UnidadeFund2[] = [
             explicacao:
               "As alternativas (oleodutos terrestres) têm capacidade muito limitada frente ao volume que passa por Ormuz.",
           },
+
+          { texto: "Outra possibilidade", correta: false, explicacao: "Compare com o conceito." },
         ],
       },
     ],
@@ -856,12 +1055,18 @@ export const UNIDADES_9ANO: UnidadeFund2[] = [
         { id: "outros", titulo: "Outros (não-árabe/não-islâmico majoritário)", cor: "emerald" },
       ],
       cartoes: [
-        { texto: "Arábia Saudita — guardiã de Meca e Medina, monarquia sunita.", categoriaId: "sunita" },
+        {
+          texto: "Arábia Saudita — guardiã de Meca e Medina, monarquia sunita.",
+          categoriaId: "sunita",
+        },
         { texto: "Irã — república islâmica xiita desde 1979.", categoriaId: "xiita" },
         { texto: "Israel — Estado judaico criado em 1948.", categoriaId: "outros" },
         { texto: "Iraque — maioria da população é xiita.", categoriaId: "xiita" },
         { texto: "Egito — maior país árabe, majoritariamente sunita.", categoriaId: "sunita" },
-        { texto: "Turquia — sunita majoritário, mas laica e não-árabe, membro da OTAN.", categoriaId: "outros" },
+        {
+          texto: "Turquia — sunita majoritário, mas laica e não-árabe, membro da OTAN.",
+          categoriaId: "outros",
+        },
       ],
     },
 
@@ -879,6 +1084,9 @@ export const UNIDADES_9ANO: UnidadeFund2[] = [
             "Os conflitos são consequência exclusiva de diferenças religiosas milenares intransponíveis, sem qualquer relação com interesses econômicos, fronteiras coloniais ou disputas geopolíticas contemporâneas.",
           correta: false,
         },
+
+        { texto: "Outra possibilidade sem relação com o conceito.", correta: false },
+        { texto: "Outra possibilidade sem relação com o conceito.", correta: false },
       ],
       explicacao_professor:
         "Sensacional. A análise geopolítica séria rejeita determinismos culturais/religiosos. Religião é UM dos vetores — não O vetor. Sem petróleo e sem fronteiras traçadas por Sykes-Picot, as mesmas divisões religiosas provavelmente não gerariam guerras da escala que geram. Ler geopolítica exige superpor camadas econômicas, políticas e culturais — nunca uma só.",
@@ -955,7 +1163,8 @@ export const UNIDADES_9ANO: UnidadeFund2[] = [
         pergunta: "Por que cientistas propõem chamar a era atual de 'Antropoceno'?",
         opcoes: [
           {
-            texto: "Porque, pela primeira vez, uma espécie (a humana) altera o sistema climático, os oceanos e a biosfera em escala planetária e geológica.",
+            texto:
+              "Porque, pela primeira vez, uma espécie (a humana) altera o sistema climático, os oceanos e a biosfera em escala planetária e geológica.",
             correta: true,
             explicacao:
               "Exato. Antropoceno = era do humano. Marca a primeira vez que uma espécie biológica se torna força geológica dominante do planeta.",
@@ -972,19 +1181,24 @@ export const UNIDADES_9ANO: UnidadeFund2[] = [
             explicacao:
               "Falso. Antropoceno significa justamente o oposto: a era em que o ser humano é a força dominante.",
           },
+
+          { texto: "Outra possibilidade", correta: false, explicacao: "Compare com o conceito." },
         ],
       },
       {
-        pergunta: "O que estabelece o princípio das 'responsabilidades comuns porém diferenciadas' (Rio-92)?",
+        pergunta:
+          "O que estabelece o princípio das 'responsabilidades comuns porém diferenciadas' (Rio-92)?",
         opcoes: [
           {
-            texto: "Todos os países têm responsabilidade sobre o clima, mas os industrializados (responsáveis pela maior parte das emissões históricas) devem cortar mais rápido e financiar a transição dos mais pobres.",
+            texto:
+              "Todos os países têm responsabilidade sobre o clima, mas os industrializados (responsáveis pela maior parte das emissões históricas) devem cortar mais rápido e financiar a transição dos mais pobres.",
             correta: true,
             explicacao:
               "Correto. É o princípio de JUSTIÇA CLIMÁTICA que estrutura toda a diplomacia ambiental desde 1992.",
           },
           {
-            texto: "Todos os países devem cortar exatamente a mesma quantidade de emissões, sem diferenciação de renda ou histórico.",
+            texto:
+              "Todos os países devem cortar exatamente a mesma quantidade de emissões, sem diferenciação de renda ou histórico.",
             correta: false,
             explicacao:
               "Isso seria injusto: os países ricos causaram a crise; os pobres pagariam o mesmo custo sem terem contribuído para ela.",
@@ -992,16 +1206,18 @@ export const UNIDADES_9ANO: UnidadeFund2[] = [
           {
             texto: "Apenas países pobres devem cortar emissões, poupando os ricos.",
             correta: false,
-            explicacao:
-              "Também injusto — e o inverso do princípio estabelecido nas convenções.",
+            explicacao: "Também injusto — e o inverso do princípio estabelecido nas convenções.",
           },
+
+          { texto: "Outra possibilidade", correta: false, explicacao: "Compare com o conceito." },
         ],
       },
       {
         pergunta: "Por que o Brasil ocupa posição singular na geopolítica climática?",
         opcoes: [
           {
-            texto: "Tem matriz elétrica majoritariamente renovável, mas é grande emissor por desmatamento — controlar a Amazônia reduziria drasticamente suas emissões nacionais.",
+            texto:
+              "Tem matriz elétrica majoritariamente renovável, mas é grande emissor por desmatamento — controlar a Amazônia reduziria drasticamente suas emissões nacionais.",
             correta: true,
             explicacao:
               "Perfeito. É o único grande país em que o principal alvo climático é uso da terra, não indústria ou transporte.",
@@ -1018,14 +1234,15 @@ export const UNIDADES_9ANO: UnidadeFund2[] = [
             explicacao:
               "Inverso. Brasil sediou Rio-92 e é ator central em todas as COPs, especialmente por conta da Amazônia.",
           },
+
+          { texto: "Outra possibilidade", correta: false, explicacao: "Compare com o conceito." },
         ],
       },
     ],
 
     mini_jogo: {
       tipo: "categorizar",
-      instrucao:
-        "Classifique cada iniciativa/acordo conforme sua natureza principal.",
+      instrucao: "Classifique cada iniciativa/acordo conforme sua natureza principal.",
       categorias: [
         { id: "acordo", titulo: "Acordo Internacional Climático", cor: "cyan" },
         { id: "solucao", titulo: "Solução Tecnológica/Setorial", cor: "amber" },
@@ -1055,6 +1272,9 @@ export const UNIDADES_9ANO: UnidadeFund2[] = [
             "A lentidão das COPs se deve exclusivamente à má vontade dos cientistas, que resistem a apresentar dados climáticos claros aos governos, impedindo qualquer decisão internacional coordenada.",
           correta: false,
         },
+
+        { texto: "Outra possibilidade sem relação com o conceito.", correta: false },
+        { texto: "Outra possibilidade sem relação com o conceito.", correta: false },
       ],
       explicacao_professor:
         "Sensacional. Você percebeu que o problema climático é tanto científico quanto POLÍTICO e INSTITUCIONAL. Não existe autoridade global capaz de OBRIGAR países a cumprir metas — só há acordos voluntários. Sem essa 'governança global' com força vinculante, cada país aposta que os outros farão o esforço enquanto ele próprio poupa custos. É um clássico dilema do prisioneiro em escala planetária.",
@@ -1128,10 +1348,12 @@ export const UNIDADES_9ANO: UnidadeFund2[] = [
 
     quiz_relampago: [
       {
-        pergunta: "Por que o Brasil é classificado como 'potência intermediária' na geopolítica global?",
+        pergunta:
+          "Por que o Brasil é classificado como 'potência intermediária' na geopolítica global?",
         opcoes: [
           {
-            texto: "Porque é grande demais para ser periférico (território, população, PIB) mas ainda pequeno em capacidade tecnológica, militar e financeira comparado a EUA, China e UE.",
+            texto:
+              "Porque é grande demais para ser periférico (território, população, PIB) mas ainda pequeno em capacidade tecnológica, militar e financeira comparado a EUA, China e UE.",
             correta: true,
             explicacao:
               "Perfeito. Somos convocados para mesas globais, mas raramente ditamos as regras. Isso define a diplomacia multilateral do Itamaraty há décadas.",
@@ -1143,18 +1365,22 @@ export const UNIDADES_9ANO: UnidadeFund2[] = [
               "Ainda não. Somos potência regional na América Latina, mas não superpotência global no mesmo patamar.",
           },
           {
-            texto: "Porque somos um país totalmente periférico sem qualquer relevância internacional.",
+            texto:
+              "Porque somos um país totalmente periférico sem qualquer relevância internacional.",
             correta: false,
             explicacao:
               "Inverso. Somos parte dos BRICS, do G20, temos assento no Conselho de Segurança da ONU rotativo várias vezes. Não somos periféricos.",
           },
+
+          { texto: "Outra possibilidade", correta: false, explicacao: "Compare com o conceito." },
         ],
       },
       {
         pergunta: "O que caracteriza a 'reprimarização' da economia brasileira?",
         opcoes: [
           {
-            texto: "Aumento da participação de produtos primários (commodities agrícolas e minerais) na pauta de exportação, em detrimento de manufaturados industrializados.",
+            texto:
+              "Aumento da participação de produtos primários (commodities agrícolas e minerais) na pauta de exportação, em detrimento de manufaturados industrializados.",
             correta: true,
             explicacao:
               "Correto. Isso vulnerabiliza a economia a preços internacionais e reduz empregos qualificados.",
@@ -1171,19 +1397,24 @@ export const UNIDADES_9ANO: UnidadeFund2[] = [
             explicacao:
               "Falso. 'Reprimarização' é conceito econômico, não político. Vem de 'produtos primários'.",
           },
+
+          { texto: "Outra possibilidade", correta: false, explicacao: "Compare com o conceito." },
         ],
       },
       {
-        pergunta: "Por que a Amazônia é considerada o principal ATIVO GEOPOLÍTICO do Brasil no séc. XXI?",
+        pergunta:
+          "Por que a Amazônia é considerada o principal ATIVO GEOPOLÍTICO do Brasil no séc. XXI?",
         opcoes: [
           {
-            texto: "Regula o clima global, abriga a maior biodiversidade do planeta, concentra parte enorme da água doce mundial e dá ao Brasil protagonismo natural em qualquer negociação ambiental internacional.",
+            texto:
+              "Regula o clima global, abriga a maior biodiversidade do planeta, concentra parte enorme da água doce mundial e dá ao Brasil protagonismo natural em qualquer negociação ambiental internacional.",
             correta: true,
             explicacao:
               "Exato. Nenhum outro país tem esse peso natural nas negociações climáticas. É uma 'moeda de barganha' diplomática única.",
           },
           {
-            texto: "Porque a Amazônia é rica em petróleo e gás natural mais que qualquer outra região do mundo.",
+            texto:
+              "Porque a Amazônia é rica em petróleo e gás natural mais que qualquer outra região do mundo.",
             correta: false,
             explicacao:
               "Falso. Amazônia tem petróleo (bacia do Solimões), mas o Pré-Sal (oceânico) é muito maior. O valor amazônico é biodiversidade + clima + água, não petróleo.",
@@ -1194,6 +1425,8 @@ export const UNIDADES_9ANO: UnidadeFund2[] = [
             explicacao:
               "Inverso. É a região mais biodiversa do planeta, com mais de 30 milhões de habitantes.",
           },
+
+          { texto: "Outra possibilidade", correta: false, explicacao: "Compare com o conceito." },
         ],
       },
     ],
@@ -1208,11 +1441,23 @@ export const UNIDADES_9ANO: UnidadeFund2[] = [
       ],
       cartoes: [
         { texto: "Matriz elétrica majoritariamente renovável (85%).", categoriaId: "vantagem" },
-        { texto: "Dependência de commodities e preços internacionais voláteis.", categoriaId: "vulnerabilidade" },
+        {
+          texto: "Dependência de commodities e preços internacionais voláteis.",
+          categoriaId: "vulnerabilidade",
+        },
         { texto: "Maior floresta tropical do mundo (Amazônia).", categoriaId: "vantagem" },
-        { texto: "Alta desigualdade social e concentração de renda.", categoriaId: "vulnerabilidade" },
-        { texto: "Concentração da pauta exportadora em poucos parceiros (China ~30%).", categoriaId: "vulnerabilidade" },
-        { texto: "Maior parte da produção mundial de soja, café, laranja e carne bovina.", categoriaId: "vantagem" },
+        {
+          texto: "Alta desigualdade social e concentração de renda.",
+          categoriaId: "vulnerabilidade",
+        },
+        {
+          texto: "Concentração da pauta exportadora em poucos parceiros (China ~30%).",
+          categoriaId: "vulnerabilidade",
+        },
+        {
+          texto: "Maior parte da produção mundial de soja, café, laranja e carne bovina.",
+          categoriaId: "vantagem",
+        },
       ],
     },
 
@@ -1230,12 +1475,16 @@ export const UNIDADES_9ANO: UnidadeFund2[] = [
             "O Brasil deve abandonar completamente qualquer participação em fóruns internacionais (BRICS, G20, COPs), adotar isolamento diplomático e depender exclusivamente de importações para questões estratégicas — mantendo sua posição periférica e evitando qualquer projeção global.",
           correta: false,
         },
+
+        { texto: "Outra possibilidade sem relação com o conceito.", correta: false },
+        { texto: "Outra possibilidade sem relação com o conceito.", correta: false },
       ],
       explicacao_professor:
         "Excelente. VOCÊ CONCLUIU O ENSINO FUNDAMENTAL 2 DE GEOGRAFIA. Você agora enxerga o mundo através de camadas — bipolaridade × multipolaridade, integração × soberania, dependência × autonomia, sustentabilidade × desenvolvimento. E entende que geopolítica não é 'coisa de país distante' — cada preço de café, cada gasoduto, cada COP decidida em outro continente afeta a sua vida diária. Esse é o olhar geográfico maduro. Parabéns. Você está pronto para o Ensino Médio.",
     },
     recompensas: { xp: 1500, moedas: 900, titulo: "Analista Geopolítico do Brasil Contemporâneo" },
   },
+  ...LACUNAS_9ANO,
 ];
 
 export function getUnidade9ano(slug: string): UnidadeFund2 | undefined {

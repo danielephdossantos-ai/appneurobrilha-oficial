@@ -115,8 +115,11 @@ export const aula01_feiraDasFrutas: AulaV4 = {
     enunciado: "Agora é com você! Sem dica dessa vez. Conte as bananas:",
     interacao: {
       tipo: "contarQuiz",
-      grupos: [{ imagemUrl: banana, quantidade: 27, rotulo: "Bananas" }],
-      pergunta: "Quantas bananas tem no cacho?",
+      grupos: [
+        { imagemUrl: banana, quantidade: 2, rotulo: "2 grupos de 10" },
+        { imagemUrl: banana, quantidade: 7, rotulo: "7 unidades" },
+      ],
+      pergunta: "2 dezenas e 7 unidades formam quantas bananas?",
       opcoes: ["24", "27", "30"],
       correta: 1,
       feedbackAcerto:

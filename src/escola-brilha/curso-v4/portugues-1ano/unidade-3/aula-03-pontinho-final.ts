@@ -24,7 +24,7 @@ export const aula03: AulaPortuguesV4 = {
   momento01_motivacao: {
     titulo: "O robô das três vozes",
     historia:
-      "Brilha ganhou um robozinho engraçado. Quando a frase termina com PONTO, ele fala calmo. Quando termina com INTERROGAÇÃO (?), ele pergunta curioso. Quando termina com EXCLAMAÇÃO (!), ele grita animado! Vamos descobrir os três jeitinhos dele?",
+      "Brilha ganhou um robozinho engraçado. Com PONTO, ele conta. Com INTERROGAÇÃO (?), ele pergunta. Com EXCLAMAÇÃO (!), ele fala com emoção ou ênfase, sem precisar gritar. Vamos descobrir os três jeitinhos dele?",
     imagemUrl: robo,
   },
 
@@ -70,7 +70,7 @@ export const aula03: AulaPortuguesV4 = {
       },
       {
         palavra: "ponto de exclamação",
-        explicacao: "Sinal ( ! ) que mostra surpresa, alegria ou susto.",
+        explicacao: "Sinal ( ! ) que pode mostrar surpresa, alegria, susto, ordem ou ênfase.",
         exemplo: "Que legal!",
         imagemUrl: estrela,
       },
@@ -86,7 +86,7 @@ export const aula03: AulaPortuguesV4 = {
         frases: [
           { texto: "O menino brinca no parque.", explicacao: "Ponto final: fala calma, contando algo." },
           { texto: "O menino brinca no parque?", explicacao: "Interrogação: voz de pergunta, sobe no final." },
-          { texto: "O menino brinca no parque!", explicacao: "Exclamação: voz animada ou de susto." },
+          { texto: "O menino brinca no parque!", explicacao: "Exclamação: leitura expressiva, com emoção ou ênfase." },
         ],
       },
     ],
@@ -144,7 +144,7 @@ export const aula03: AulaPortuguesV4 = {
         opcoes: ["Ponto ( . )", "Interrogação ( ? )", "Exclamação ( ! )"],
         correta: 2,
         feedbackAcerto: "🎉 Isso! A EXCLAMAÇÃO mostra emoção forte.",
-        feedbackErro: "O sinal ( ! ) aparece quando há surpresa, alegria ou susto.",
+        feedbackErro: "O sinal ( ! ) pode marcar emoção, surpresa, aviso, ordem ou ênfase.",
       },
     ],
   },

@@ -21,7 +21,7 @@ export const aula04: AulaPortuguesV4 = {
   slug: "aula-04-cartazes-avisos",
   titulo: "Cartazes e Avisos",
   iconeTrilha: "📢",
-  bncc: ["EF02LP09", "EF02LP10", "EF02LP11", "EF02LP13"],
+  bncc: ["EF02LP18", "EF12LP10", "EF15LP01", "EF15LP03", "EF15LP04"],
   duracaoMin: 15,
 
   momento01_motivacao: {

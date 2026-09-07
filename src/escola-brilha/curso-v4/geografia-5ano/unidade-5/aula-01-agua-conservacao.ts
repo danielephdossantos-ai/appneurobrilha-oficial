@@ -9,7 +9,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-agua-conservacao",
   titulo: "O Uso da Água e a Conservação",
   iconeTrilha: "💧",
-  bncc: ["EF05GE08"],
+  bncc: [],
   duracaoMin: 22,
 
   cena01_motivacao: {
@@ -41,10 +41,22 @@ export const aula01: AulaGeoV1 = {
         emoji: "🚜",
         cor: "from-emerald-400 to-green-600",
       },
+
+      {
+        id: "extra-1",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
+      {
+        id: "extra-2",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
     ],
     respostaCerta: "agri",
-    feedbackAcerto:
-      "Isso! Mais de 70% da água doce vai pra IRRIGAR plantações. Casa é só 10%.",
+    feedbackAcerto: "Isso! Mais de 70% da água doce vai pra IRRIGAR plantações. Casa é só 10%.",
     feedbackErro: "Casa gasta pouco (10%). AGRICULTURA gasta 70% — irrigação de lavouras.",
     falaFinal: "Agricultura lidera. Mas todo mundo precisa economizar.",
   },
@@ -68,8 +80,7 @@ export const aula01: AulaGeoV1 = {
         capa: "2. Irrigação",
         emoji: "🚜",
         cor: "from-emerald-500 to-green-700",
-        conteudo:
-          "IRRIGAÇÃO é regar plantações com água. Consome 70% da água doce do Brasil.",
+        conteudo: "IRRIGAÇÃO é regar plantações com água. Consome 70% da água doce do Brasil.",
         exemplo: "Ex.: pivô central girando sobre soja no cerrado.",
         fotoUrl: irrigacao,
       },
@@ -109,8 +120,7 @@ export const aula01: AulaGeoV1 = {
         emoji: "🌾",
         cor: "from-emerald-500 to-green-700",
         titulo: "AGRICULTURA (70%)",
-        texto:
-          "Irrigar soja, cana, arroz e frutas gasta a maior parte da água doce do Brasil.",
+        texto: "Irrigar soja, cana, arroz e frutas gasta a maior parte da água doce do Brasil.",
       },
       {
         id: "industria",
@@ -119,8 +129,7 @@ export const aula01: AulaGeoV1 = {
         emoji: "🏭",
         cor: "from-slate-500 to-gray-700",
         titulo: "INDÚSTRIA (20%)",
-        texto:
-          "Fábricas usam água pra resfriar máquinas, lavar produtos e fazer bebidas.",
+        texto: "Fábricas usam água pra resfriar máquinas, lavar produtos e fazer bebidas.",
       },
       {
         id: "casa",
@@ -129,8 +138,7 @@ export const aula01: AulaGeoV1 = {
         emoji: "🏠",
         cor: "from-sky-500 to-blue-700",
         titulo: "CASAS (10%)",
-        texto:
-          "Chuveiro, torneira, vaso sanitário e cozinha. Parece muito, mas é o MENOR pedaço.",
+        texto: "Chuveiro, torneira, vaso sanitário e cozinha. Parece muito, mas é o MENOR pedaço.",
       },
       {
         id: "chuveiro",
@@ -159,6 +167,13 @@ export const aula01: AulaGeoV1 = {
           { id: "ag", emoji: "🚜", titulo: "Agricultura", cor: "from-emerald-500 to-green-700" },
           { id: "ca", emoji: "🏠", titulo: "Casas", cor: "from-sky-500 to-blue-700" },
           { id: "es", emoji: "🏫", titulo: "Escolas", cor: "from-amber-500 to-orange-700" },
+
+          {
+            id: "extra-3",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "ag",
         feedbackAcerto: "Isso! AGRICULTURA = 70% da água doce.",
@@ -169,8 +184,20 @@ export const aula01: AulaGeoV1 = {
         pergunta: "O que é DESPERDÍCIO de água?",
         cards: [
           { id: "ec", emoji: "🧠", titulo: "Uso planejado", cor: "from-purple-500 to-fuchsia-700" },
-          { id: "des", emoji: "🚰", titulo: "Torneira aberta à toa", cor: "from-red-500 to-rose-700" },
+          {
+            id: "des",
+            emoji: "🚰",
+            titulo: "Torneira aberta à toa",
+            cor: "from-red-500 to-rose-700",
+          },
           { id: "ch", emoji: "🌧️", titulo: "Chuva forte", cor: "from-sky-500 to-blue-700" },
+
+          {
+            id: "extra-4",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "des",
         feedbackAcerto: "Perfeito! DESPERDÍCIO = jogar fora sem usar.",
@@ -182,8 +209,25 @@ export const aula01: AulaGeoV1 = {
         fotoUrl: consciente,
         cards: [
           { id: "co", emoji: "🚿", titulo: "Banho curto", cor: "from-emerald-500 to-green-700" },
-          { id: "ma", emoji: "💦", titulo: "Torneira sempre aberta", cor: "from-red-500 to-rose-700" },
-          { id: "la", emoji: "🚰", titulo: "Lavar calçada com mangueira", cor: "from-amber-500 to-orange-700" },
+          {
+            id: "ma",
+            emoji: "💦",
+            titulo: "Torneira sempre aberta",
+            cor: "from-red-500 to-rose-700",
+          },
+          {
+            id: "la",
+            emoji: "🚰",
+            titulo: "Lavar calçada com mangueira",
+            cor: "from-amber-500 to-orange-700",
+          },
+
+          {
+            id: "extra-5",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "co",
         feedbackAcerto: "Isso! BANHO CURTO economiza dezenas de litros por dia.",
@@ -257,20 +301,17 @@ export const aula01: AulaGeoV1 = {
     paragrafos: [
       {
         id: "p1",
-        texto:
-          "Só 3% da ÁGUA do planeta é DOCE. E boa parte está congelada nos polos.",
+        texto: "Só 3% da ÁGUA do planeta é DOCE. E boa parte está congelada nos polos.",
         chaves: ["água", "doce"],
       },
       {
         id: "p2",
-        texto:
-          "A AGRICULTURA consome 70% da água doce, principalmente na IRRIGAÇÃO.",
+        texto: "A AGRICULTURA consome 70% da água doce, principalmente na IRRIGAÇÃO.",
         chaves: ["agricultura", "irrigação"],
       },
       {
         id: "p3",
-        texto:
-          "DESPERDÍCIO é jogar água fora sem uso — torneira aberta, banho longo, cano furado.",
+        texto: "DESPERDÍCIO é jogar água fora sem uso — torneira aberta, banho longo, cano furado.",
         chaves: ["desperdício", "torneira"],
       },
       {
@@ -396,6 +437,8 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Deixar torneiras abertas pra água circular", correta: false },
           { id: "b", texto: "Evitar desperdício e cobrar indústria/fazenda", correta: true },
           { id: "c", texto: "Não escovar os dentes", correta: false },
+
+          { id: "extra-6", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Isso! Evitar desperdício em casa + cobrar quem gasta muito.",
         feedbackErro: "Torneira aberta desperdiça. O certo é EVITAR DESPERDÍCIO.",
@@ -407,6 +450,8 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Agricultura (70%)", correta: true },
           { id: "b", texto: "Casas (70%)", correta: false },
           { id: "c", texto: "Escolas (70%)", correta: false },
+
+          { id: "extra-7", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Perfeito! AGRICULTURA gasta 70% da água doce.",
         feedbackErro: "Casa é 10%, escola menos. AGRICULTURA = 70%.",
@@ -418,6 +463,8 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Banho de 30 minutos", correta: false },
           { id: "b", texto: "Fechar torneira ao ensaboar", correta: true },
           { id: "c", texto: "Lavar calçada com mangueira", correta: false },
+
+          { id: "extra-8", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Isso! Fechar torneira = uso consciente e economia.",
         feedbackErro: "Banho longo e mangueira desperdiçam. Consciente = FECHAR TORNEIRA.",

@@ -11,15 +11,18 @@ export default defineConfig({
       mcpPlugin(),
       VitePWA({
       registerType: "prompt",
-      includeAssets: ["favicon.ico", "apple-touch-icon.png", "mask-icon.svg"],
+      includeAssets: ["favicon.ico", "apple-touch-icon.png", "pwa-192x192.png", "pwa-512x512.png", "pwa-maskable-512x512.png"],
       manifest: {
         name: "NeuroBrilha Kids",
         short_name: "NeuroBrilha",
         description: "Sistema neuroeducacional para crianças",
-        theme_color: "#ffffff",
+        theme_color: "#087fe5",
+        background_color: "#087fe5",
+        display: "standalone",
         icons: [
-          { src: "pwa-192x192.png", sizes: "192x192", type: "image/png" },
-          { src: "pwa-512x512.png", sizes: "512x512", type: "image/png" },
+          { src: "pwa-192x192.png", sizes: "192x192", type: "image/png", purpose: "any" },
+          { src: "pwa-512x512.png", sizes: "512x512", type: "image/png", purpose: "any" },
+          { src: "pwa-maskable-512x512.png", sizes: "512x512", type: "image/png", purpose: "maskable" },
         ],
       },
       workbox: {

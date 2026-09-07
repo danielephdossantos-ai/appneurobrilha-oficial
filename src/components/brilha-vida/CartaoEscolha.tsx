@@ -155,8 +155,8 @@ export function CartaoEscolha({ onClose }: { onClose: () => void }) {
         </button>
       </div>
 
-      <p className="mt-6 text-[10px] text-slate-400 text-center">
-        Base clínica: Choice Boards (ABA / DTT) — oferecer escolhas controladas reduz recusa e amplia autonomia.
+      <p className="mt-6 text-sm text-slate-500 text-center">
+        Ofereça escolhas reais e possíveis. A criança também pode pedir ajuda ou uma pausa.
       </p>
     </div>
   );

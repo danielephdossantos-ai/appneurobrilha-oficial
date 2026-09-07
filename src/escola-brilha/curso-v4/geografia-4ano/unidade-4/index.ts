@@ -1,5 +1,6 @@
 import type { UnidadeGeoV1 } from "../../types";
 import { aula01 } from "./aula-01-clima-e-biomas";
+import { aula02 } from "./aula-02-territorios-tradicionais";
 
 export const unidade4: UnidadeGeoV1 = {
   slug: "unidade-4",
@@ -9,5 +10,5 @@ export const unidade4: UnidadeGeoV1 = {
   descricao:
     "Brilha e Aurora atravessam os 6 biomas brasileiros pra entender como cada clima cria seu próprio conjunto de plantas e bichos — e por que cuidar deles é cuidar do Brasil.",
   corTema: "#10b981",
-  aulas: [aula01],
+  aulas: [aula01, aula02],
 };

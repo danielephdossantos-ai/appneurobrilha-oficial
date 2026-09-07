@@ -1,0 +1,11 @@
+-- Assistente Pedagógico Brilha · cota diária sem armazenar prompt, perfil ou resposta.
+CREATE TABLE IF NOT EXISTS public.teacher_pedagogical_assistant_usage (teacher_user_id uuid NOT NULL REFERENCES public.teacher_profiles(user_id) ON DELETE CASCADE,usage_date date NOT NULL DEFAULT current_date,request_count integer NOT NULL DEFAULT 0 CHECK(request_count BETWEEN 0 AND 30),updated_at timestamptz NOT NULL DEFAULT now(),PRIMARY KEY(teacher_user_id,usage_date));
+ALTER TABLE public.teacher_pedagogical_assistant_usage ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Teachers read own assistant quota" ON public.teacher_pedagogical_assistant_usage;
+CREATE POLICY "Teachers read own assistant quota" ON public.teacher_pedagogical_assistant_usage FOR SELECT TO authenticated USING(teacher_user_id=auth.uid() OR public.has_role(auth.uid(),'admin'));
+CREATE OR REPLACE FUNCTION public.teacher_consume_pedagogical_assistant_quota() RETURNS TABLE(allowed boolean,remaining integer) LANGUAGE plpgsql SECURITY DEFINER SET search_path=public AS $$ DECLARE current_count integer; BEGIN IF auth.uid() IS NULL THEN RAISE EXCEPTION 'AUTH_REQUIRED'; END IF; IF NOT EXISTS(SELECT 1 FROM public.teacher_profiles p WHERE p.user_id=auth.uid() AND p.status='active' AND p.access_expires_at>=now()) THEN RAISE EXCEPTION 'TEACHER_ACCESS_REQUIRED'; END IF; INSERT INTO public.teacher_pedagogical_assistant_usage(teacher_user_id,usage_date,request_count) VALUES(auth.uid(),current_date,1) ON CONFLICT(teacher_user_id,usage_date) DO UPDATE SET request_count=teacher_pedagogical_assistant_usage.request_count+1,updated_at=now() WHERE teacher_pedagogical_assistant_usage.request_count<30 RETURNING request_count INTO current_count; RETURN QUERY SELECT current_count IS NOT NULL,greatest(0,30-coalesce(current_count,30)); END; $$;
+REVOKE ALL ON public.teacher_pedagogical_assistant_usage FROM anon,authenticated;
+GRANT SELECT ON public.teacher_pedagogical_assistant_usage TO authenticated;
+REVOKE ALL ON FUNCTION public.teacher_consume_pedagogical_assistant_quota() FROM PUBLIC;
+GRANT EXECUTE ON FUNCTION public.teacher_consume_pedagogical_assistant_quota() TO authenticated;
+COMMENT ON TABLE public.teacher_pedagogical_assistant_usage IS 'Somente contagem diária; prompts, perfis e respostas não são persistidos.';

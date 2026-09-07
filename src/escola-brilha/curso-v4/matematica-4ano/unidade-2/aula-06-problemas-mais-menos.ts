@@ -4,20 +4,20 @@ export const aula06_problemasMaisMenos: AulaV4 = {
   slug: "u2-06-problemas-mais-menos",
   titulo: "Problemas de somar e subtrair",
   iconeTrilha: "🧩",
-  bncc: ["EF04MA13", "EF04MA05"],
+  bncc: ["EF04MA03", "EF04MA05"],
   duracaoMin: 22,
   metodologias: ["vergnaud", "rme", "skemp"],
 
   momento01_motivacao: {
     titulo: "Ler o problema",
     historia:
-      "{NOME}, decidir + ou − depende da HISTÓRIA. 'Chegaram mais' = soma. 'Foram embora' = subtração. 'Diferença entre' = subtração.",
+      "{NOME}, decidir a operação depende da relação entre as quantidades: o que havia, o que mudou e o que a pergunta quer descobrir.",
   },
   momento02_exploracao: {
-    instrucao: "Pistas de linguagem.",
+    instrucao: "Organize os dados da história antes de escolher a operação.",
     cenas: [
-      { tipo: "texto", texto: "Soma: chegaram, ganhou, no total, juntou.", destaque: true },
-      { tipo: "texto", texto: "Subtração: sobrou, foi embora, tirou, diferença, quantos a mais/a menos." },
+      { tipo: "texto", texto: "Composição: conhecemos as partes e procuramos o total.", destaque: true },
+      { tipo: "texto", texto: "Transformação ou comparação: analisamos o valor inicial, a mudança e o valor desconhecido." },
     ],
   },
   momento03_descoberta: {
@@ -75,13 +75,13 @@ export const aula06_problemasMaisMenos: AulaV4 = {
   },
   momento05_modelagem: {
     enunciado: "Tinha 4.230 reais. Gastou 1.560. Quanto sobrou?",
-    passos: ["Palavra-chave: gastou → subtração.", "4.230 − 1.560 = 2.670."],
+    passos: ["A quantidade inicial diminuiu em 1.560; procuramos quanto restou.", "4.230 − 1.560 = 2.670."],
     resposta: "R$ 2.670",
     casasValor: { numero: 2670, mostrarDecomposicao: true, extenso: "dois mil, seiscentos e setenta" },
   },
   momento06_praticaGuiada: {
     enunciado: "A cidade tinha 3.450 moradores. Chegaram 1.276 novos. Quantos agora?",
-    dica: "'Chegaram' = soma.",
+    dica: "A população inicial recebeu um acréscimo e a pergunta pede o novo total.",
     interacao: {
       tipo: "escolhaVisual",
       pergunta: "Escolha:",
@@ -119,9 +119,9 @@ export const aula06_problemasMaisMenos: AulaV4 = {
   },
   momento10_avaliacao: {
     perguntas: [
-      { pergunta: "Tinha 5.000 reais. Ganhou 2.350. Ficou com:", opcoes: ["7.350", "2.650", "7.250"], correta: 0, feedbackAcerto: "🎉 7.350.", feedbackErro: "Ganhou = soma: 5.000+2.350=7.350." },
-      { pergunta: "Escola com 3.200 alunos, saíram 1.450. Ficaram:", opcoes: ["1.750", "1.650", "1.850"], correta: 0, feedbackAcerto: "🎉 1.750.", feedbackErro: "Saíram = subtração: 3.200−1.450=1.750." },
-      { pergunta: "Time A: 4.500 pontos. Time B: 3.780. Diferença:", opcoes: ["720", "620", "820"], correta: 0, feedbackAcerto: "🎉 720.", feedbackErro: "Diferença = subtração: 4.500−3.780=720." },
+      { pergunta: "Tinha 5.000 reais. Ganhou 2.350. Ficou com:", opcoes: ["7.350", "2.650", "7.250"], correta: 0, feedbackAcerto: "O valor inicial aumentou em 2.350: 5.000 + 2.350 = 7.350.", feedbackErro: "A mudança acrescenta 2.350 ao valor inicial; calcule 5.000 + 2.350." },
+      { pergunta: "Escola com 3.200 alunos, saíram 1.450. Ficaram:", opcoes: ["1.750", "1.650", "1.850"], correta: 0, feedbackAcerto: "A quantidade diminuiu em 1.450: 3.200 − 1.450 = 1.750.", feedbackErro: "Parta de 3.200 e retire a mudança de 1.450 para encontrar o valor final." },
+      { pergunta: "Time A: 4.500 pontos. Time B: 3.780. Diferença:", opcoes: ["720", "620", "820"], correta: 0, feedbackAcerto: "A diferença é encontrada comparando os valores: 4.500 − 3.780 = 720.", feedbackErro: "Compare o maior valor com o menor: 4.500 − 3.780." },
     ],
   },
   momento11_missaoFamilia: {

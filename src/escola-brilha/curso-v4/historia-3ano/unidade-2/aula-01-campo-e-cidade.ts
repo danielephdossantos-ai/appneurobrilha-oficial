@@ -22,7 +22,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-campo-e-cidade",
   titulo: "O Campo e a Cidade: Vidas Conectadas",
   iconeTrilha: "🚛",
-  bncc: ["EF03HI03", "EF03HI04"],
+  bncc: [],
   duracaoMin: 22,
 
   cena01_motivacao: {
@@ -60,6 +60,8 @@ export const aula01: AulaGeoV1 = {
         cor: "from-slate-500 to-slate-700",
         fotoUrl: imgCidade,
       },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "dependencia",
     feedbackAcerto:
@@ -181,6 +183,7 @@ export const aula01: AulaGeoV1 = {
           { id: "mp", emoji: "🌾", titulo: "Matéria-prima", cor: "from-emerald-500 to-emerald-700" },
           { id: "pi", emoji: "🏭", titulo: "Produto industrializado", cor: "from-slate-500 to-slate-700" },
           { id: "ab", emoji: "🚛", titulo: "Abastecimento", cor: "from-amber-500 to-orange-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "mp",
         feedbackAcerto:
@@ -195,6 +198,8 @@ export const aula01: AulaGeoV1 = {
         cards: [
           { id: "mp", emoji: "🌾", titulo: "Matéria-prima", cor: "from-emerald-500 to-emerald-700" },
           { id: "pi", emoji: "👕", titulo: "Produto industrializado", cor: "from-slate-500 to-slate-700" },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "pi",
         feedbackAcerto:
@@ -209,6 +214,8 @@ export const aula01: AulaGeoV1 = {
         cards: [
           { id: "ab", emoji: "🚛", titulo: "O abastecimento (transporte)", cor: "from-amber-500 to-orange-700" },
           { id: "ma", emoji: "✨", titulo: "Aparece por mágica", cor: "from-rose-500 to-rose-700" },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "ab",
         feedbackAcerto:
@@ -471,6 +478,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Matéria-prima.", correta: true },
           { id: "b", texto: "Produtos digitais." },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto:
           "Certificado. Matéria-prima é a base de tudo que consumimos. Sem ela, nenhuma fábrica funciona.",
@@ -484,6 +493,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "O abastecimento (transporte por caminhões e rodovias).", correta: true },
           { id: "b", texto: "Nada. O alimento aparece direto no supermercado." },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto:
           "Correto. Abastecimento é a logística. Sem estradas boas, o Brasil pararia de comer.",
@@ -497,6 +508,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Na cidade. Trator é fabricado na indústria urbana.", correta: true },
           { id: "b", texto: "No campo. Trator nasce nas fazendas." },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto:
           "Certificação concluída. É por isso que a cidade também abastece o campo — com máquinas, ferramentas e serviços.",

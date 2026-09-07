@@ -9,7 +9,7 @@ export const aula07: AulaGeoV1 = {
   slug: "aula-07-onu-organismos",
   titulo: "ONU e Organismos Multilaterais na Ordem Mundial",
   iconeTrilha: "🕊️",
-  bncc: ["EF09HI35"],
+  bncc: ["EF09HI15", "EF09HI16"],
   duracaoMin: 30,
   estilo: "teen",
 
@@ -32,6 +32,8 @@ export const aula07: AulaGeoV1 = {
     opcoes: [
       { id: "paz", titulo: "MANTER A PAZ MUNDIAL", subtitulo: "evitar uma nova guerra mundial após 1945", emoji: "🕊️", cor: "from-sky-800 to-slate-950" },
       { id: "com", titulo: "CRIAR UM ÚNICO GOVERNO MUNDIAL", subtitulo: "substituir todos os governos nacionais", emoji: "❌", cor: "from-amber-900 to-slate-950" },
+          { id: "extra2", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "extra3", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "paz",
     feedbackAcerto: "Correto. Após duas guerras mundiais e o Holocausto, os países fundaram a ONU em 1945 para promover a paz, a cooperação e os direitos humanos.",
@@ -70,9 +72,9 @@ export const aula07: AulaGeoV1 = {
     aurora: "Três perguntas rápidas.",
     instrucao: "Toque no card correto",
     perguntas: [
-      { id: "q1", pergunta: "Em que ano a ONU foi fundada?", fotoUrl: imgClima, cards: [{ id: "45", emoji: "🕊️", titulo: "1945", cor: "from-sky-600 to-slate-900" }, { id: "19", emoji: "📜", titulo: "1919", cor: "from-amber-600 to-slate-900" }, { id: "95", emoji: "🌐", titulo: "1995", cor: "from-slate-600 to-slate-900" }], correta: "45", feedbackAcerto: "Correto. Fundada em 1945, após a Segunda Guerra Mundial.", feedbackErro: "É 1945. 1919 foi a Liga das Nações; 1995 é a OMC." },
-      { id: "q2", pergunta: "Quais são os 5 membros permanentes do Conselho de Segurança da ONU?", fotoUrl: imgSmart, cards: [{ id: "cs", emoji: "🌍", titulo: "EUA, Rússia, China, França e Reino Unido", cor: "from-sky-600 to-slate-900" }, { id: "eu", emoji: "🇪🇺", titulo: "Todos os países da União Europeia", cor: "from-amber-600 to-slate-900" }, { id: "am", emoji: "🌎", titulo: "Todos os países americanos", cor: "from-slate-600 to-slate-900" }], correta: "cs", feedbackAcerto: "Correto. Esses 5 países têm poder de veto no Conselho de Segurança.", feedbackErro: "São EUA, Rússia, China, França e Reino Unido." },
-      { id: "q3", pergunta: "O FMI foi criado em qual conferência, em 1944?", fotoUrl: imgNyc, cards: [{ id: "bw", emoji: "💰", titulo: "Bretton Woods", cor: "from-teal-600 to-slate-900" }, { id: "ya", emoji: "❄️", titulo: "Yalta", cor: "from-amber-600 to-slate-900" }, { id: "pa", emoji: "🌡️", titulo: "Paris (clima)", cor: "from-slate-600 to-slate-900" }], correta: "bw", feedbackAcerto: "Correto. Conferência de Bretton Woods, 1944, também criou o Banco Mundial.", feedbackErro: "É Bretton Woods. Yalta (1945) tratou da divisão do pós-guerra." },
+      { id: "q1", pergunta: "Em que ano a ONU foi fundada?", fotoUrl: imgClima, cards: [{ id: "45", emoji: "🕊️", titulo: "1945", cor: "from-sky-600 to-slate-900" }, { id: "19", emoji: "📜", titulo: "1919", cor: "from-amber-600 to-slate-900" }, { id: "95", emoji: "🌐", titulo: "1995", cor: "from-slate-600 to-slate-900" }, { id: "extra", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" }], correta: "45", feedbackAcerto: "Correto. Fundada em 1945, após a Segunda Guerra Mundial.", feedbackErro: "É 1945. 1919 foi a Liga das Nações; 1995 é a OMC." },
+      { id: "q2", pergunta: "Quais são os 5 membros permanentes do Conselho de Segurança da ONU?", fotoUrl: imgSmart, cards: [{ id: "cs", emoji: "🌍", titulo: "EUA, Rússia, China, França e Reino Unido", cor: "from-sky-600 to-slate-900" }, { id: "eu", emoji: "🇪🇺", titulo: "Todos os países da União Europeia", cor: "from-amber-600 to-slate-900" }, { id: "am", emoji: "🌎", titulo: "Todos os países americanos", cor: "from-slate-600 to-slate-900" }, { id: "extra", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" }], correta: "cs", feedbackAcerto: "Correto. Esses 5 países têm poder de veto no Conselho de Segurança.", feedbackErro: "São EUA, Rússia, China, França e Reino Unido." },
+      { id: "q3", pergunta: "O FMI foi criado em qual conferência, em 1944?", fotoUrl: imgNyc, cards: [{ id: "bw", emoji: "💰", titulo: "Bretton Woods", cor: "from-teal-600 to-slate-900" }, { id: "ya", emoji: "❄️", titulo: "Yalta", cor: "from-amber-600 to-slate-900" }, { id: "pa", emoji: "🌡️", titulo: "Paris (clima)", cor: "from-slate-600 to-slate-900" }, { id: "extra", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" }], correta: "bw", feedbackAcerto: "Correto. Conferência de Bretton Woods, 1944, também criou o Banco Mundial.", feedbackErro: "É Bretton Woods. Yalta (1945) tratou da divisão do pós-guerra." },
     ],
     falaFinal: "Você já domina o funcionamento da ONU e organismos multilaterais.",
   },

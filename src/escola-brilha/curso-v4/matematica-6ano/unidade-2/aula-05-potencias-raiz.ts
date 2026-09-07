@@ -2,16 +2,16 @@ import type { AulaV4 } from "../../types";
 
 export const aula05_potenciasRaiz: AulaV4 = {
   slug: "u2-05-potencias-raiz",
-  titulo: "Potências e raiz quadrada exata",
+  titulo: "Potências com números naturais",
   iconeTrilha: "⚡",
-  bncc: ["EF06MA11", "EF06MA12"],
+  bncc: ["EF06MA03"],
   duracaoMin: 24,
   metodologias: ["cpa", "skemp"],
 
   momento01_motivacao: {
     titulo: "Multiplicação turbinada",
     historia:
-      "{NOME}, quando um número se multiplica por ele MESMO várias vezes, ganha uma anotação especial: a POTÊNCIA. E a operação que 'volta' é a RAIZ.",
+      "{NOME}, quando um número aparece como fator várias vezes, podemos registrar essa multiplicação de forma curta usando uma POTÊNCIA.",
   },
 
   momento02_exploracao: {
@@ -36,13 +36,13 @@ export const aula05_potenciasRaiz: AulaV4 = {
   },
 
   momento03_descoberta: {
-    perguntaGuia: "Qual a raiz quadrada de 49?",
-    pista: "Que número, elevado ao QUADRADO, dá 49?",
-    revelacao: "7² = 49 → √49 = 7. Raiz é a operação inversa do quadrado.",
+    perguntaGuia: "Qual é o valor de 7²?",
+    pista: "O expoente 2 indica dois fatores iguais a 7.",
+    revelacao: "7² = 7 × 7 = 49.",
   },
 
   momento04_explicacao: {
-    titulo: "Potências, quadrados perfeitos e raiz",
+    titulo: "Potências e quadrados perfeitos",
     etapas: [
       {
         texto: "Quadrados perfeitos: 1, 4, 9, 16, 25, 36, 49, 64, 81, 100.",
@@ -64,11 +64,11 @@ export const aula05_potenciasRaiz: AulaV4 = {
               { rotulo: "10", valores: ["10", "100"] },
             ],
           },
-          destaque: "Se está nessa lista, tem raiz quadrada EXATA.",
+          destaque: "Cada resultado da tabela é o quadrado de um número natural.",
         },
       },
       {
-        texto: "Potência de 10 = número de zeros = expoente.",
+        texto: "Nas potências de 10, cada multiplicação por 10 muda o valor posicional uma casa para a esquerda.",
         exemploReal: {
           contexto: "10¹ = 10, 10² = 100, 10³ = 1.000, 10⁶ = 1.000.000.",
           visualMat: {
@@ -85,19 +85,19 @@ export const aula05_potenciasRaiz: AulaV4 = {
         },
       },
       {
-        texto: "Raiz quadrada de quadrados perfeitos: dá o número inteiro que gerou.",
+        texto: "Podemos reconhecer um quadrado perfeito pela multiplicação que o formou.",
         exemploReal: {
-          contexto: "√81",
-          destaque: "9² = 81 → √81 = 9.",
+          contexto: "81 = 9²",
+          destaque: "9 × 9 = 81; por isso 81 é um quadrado perfeito.",
         },
       },
     ],
   },
 
   momento05_modelagem: {
-    enunciado: "Calcule 5² + √36.",
+    enunciado: "Calcule 5² + 6.",
     resposta: "31",
-    passos: ["5² = 25.", "√36 = 6 (porque 6² = 36).", "25 + 6 = 31."],
+    passos: ["5² = 5 × 5.", "5 × 5 = 25.", "25 + 6 = 31."],
   },
 
   momento06_praticaGuiada: {
@@ -114,27 +114,27 @@ export const aula05_potenciasRaiz: AulaV4 = {
   },
 
   momento07_praticaIndependente: {
-    enunciado: "Quanto é √100 + 3²?",
+    enunciado: "Quanto é 10² + 3²?",
     interacao: {
       tipo: "escolhaVisual",
       pergunta: "Resultado:",
-      opcoes: [{ nome: "19" }, { nome: "13" }, { nome: "109" }],
-      respostaCerta: "19",
-      feedbackAcerto: "🎯 10 + 9 = 19.",
-      feedbackErro: "√100 = 10 e 3² = 9.",
+      opcoes: [{ nome: "109" }, { nome: "19" }, { nome: "169" }],
+      respostaCerta: "109",
+      feedbackAcerto: "🎯 100 + 9 = 109.",
+      feedbackErro: "10² = 100 e 3² = 9.",
     },
   },
 
   momento08_aplicacao: {
-    contexto: "Uma sala quadrada tem 64 m² de piso.",
-    problema: "Qual o lado da sala?",
+    contexto: "Uma sala quadrada tem lado de 8 m.",
+    problema: "Qual é a área da sala?",
     interacao: {
       tipo: "escolhaVisual",
       pergunta: "Escolha:",
-      opcoes: [{ nome: "8 m" }, { nome: "16 m" }, { nome: "6 m" }],
-      respostaCerta: "8 m",
-      feedbackAcerto: "🎯 lado = √64 = 8.",
-      feedbackErro: "Área do quadrado = lado² → lado = √área.",
+      opcoes: [{ nome: "64 m²" }, { nome: "16 m²" }, { nome: "32 m²" }],
+      respostaCerta: "64 m²",
+      feedbackAcerto: "🎯 Área = 8² = 64 m².",
+      feedbackErro: "Área do quadrado = lado × lado = 8 × 8.",
     },
   },
 
@@ -142,14 +142,14 @@ export const aula05_potenciasRaiz: AulaV4 = {
     pontos: [
       "Potência = multiplicação repetida.",
       "10ⁿ = 1 seguido de n zeros.",
-      "Raiz quadrada 'desfaz' o quadrado.",
+      "Quadrado perfeito é o resultado de um natural multiplicado por ele mesmo.",
     ],
   },
 
   momento10_avaliacao: {
     perguntas: [
       { pergunta: "2⁴ =", opcoes: ["16", "8", "24"], correta: 0, feedbackAcerto: "🎉", feedbackErro: "2×2×2×2." },
-      { pergunta: "√25 =", opcoes: ["5", "25", "50"], correta: 0, feedbackAcerto: "🎉", feedbackErro: "5² = 25." },
+      { pergunta: "Qual é um quadrado perfeito?", opcoes: ["25", "20", "30"], correta: 0, feedbackAcerto: "🎉", feedbackErro: "25 = 5²." },
       { pergunta: "10⁶ =", opcoes: ["1.000.000", "100.000", "1.000.000.000"], correta: 0, feedbackAcerto: "🎉", feedbackErro: "6 zeros = milhão." },
     ],
   },

@@ -27,7 +27,7 @@ export const aula04: AulaPortuguesV4 = {
   slug: "aula-04-texto-instrucional",
   titulo: "O Manual do Clube",
   iconeTrilha: "📋",
-  bncc: ["EF03LP19", "EF03LP20", "EF35LP17"],
+  bncc: ["EF03LP11", "EF03LP14", "EF15LP01", "EF15LP03"],
   duracaoMin: 20,
 
   momento01_motivacao: {

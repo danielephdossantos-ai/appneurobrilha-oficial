@@ -41,9 +41,9 @@ export const aula05_missao: AulaV4 = {
     titulo: "Combinando",
     etapas: [
       {
-        texto: "Expressão com frações: siga a hierarquia normal.",
+        texto: "Em adições com denominadores diferentes, transforme as frações em equivalentes com denominador comum.",
         exemploReal: {
-          contexto: "1/2 + 1/3 × 1/4",
+          contexto: "1/2 + 1/3",
           visualMat: {
             tipo: "tabela",
             cabecalhos: ["Passo", "Cálculo"],
@@ -53,7 +53,7 @@ export const aula05_missao: AulaV4 = {
               { rotulo: "3", valores: ["MMC=12", "6/12 + 1/12 = 7/12"] },
             ],
           },
-          destaque: "= 7/12.",
+          destaque: "1/2 + 1/3 = 3/6 + 2/6 = 5/6.",
         },
       },
       {
@@ -73,9 +73,9 @@ export const aula05_missao: AulaV4 = {
         },
       },
       {
-        texto: "Dividir fração: inverta a segunda e multiplique.",
+        texto: "Para encontrar uma fração de uma quantidade, divida pelo denominador e considere o número de partes indicado pelo numerador.",
         exemploReal: {
-          contexto: "3/4 ÷ 2/5",
+          contexto: "3/4 de 20",
           visualMat: {
             tipo: "tabela",
             cabecalhos: ["Passo", "Cálculo"],
@@ -84,15 +84,15 @@ export const aula05_missao: AulaV4 = {
               { rotulo: "2", valores: ["multiplica", "15/8"] },
             ],
           },
-          destaque: "3/4 ÷ 2/5 = 15/8.",
+          destaque: "20 ÷ 4 = 5; 5 × 3 = 15.",
         },
       },
     ],
   },
 
   momento05_modelagem: {
-    enunciado: "Metade de 3/5 vale quanto?",
-    resposta: "3/10",
+    enunciado: "Quanto é 3/5 de 40?",
+    resposta: "24",
     visualMat: {
       tipo: "tabela",
       cabecalhos: ["Passo", "Cálculo"],
@@ -119,14 +119,14 @@ export const aula05_missao: AulaV4 = {
   },
 
   momento07_praticaIndependente: {
-    enunciado: "2/3 × 3/8.",
+    enunciado: "Quanto é 2/3 de 24?",
     interacao: {
       tipo: "escolhaVisual",
       pergunta: "Resultado (simplificado):",
-      opcoes: [{ nome: "1/4" }, { nome: "6/24" }, { nome: "2/8" }],
-      respostaCerta: "1/4",
-      feedbackAcerto: "🎯 6/24 = 1/4.",
-      feedbackErro: "Multiplique e simplifique.",
+      opcoes: [{ nome: "16" }, { nome: "8" }, { nome: "26" }],
+      respostaCerta: "16",
+      feedbackAcerto: "🎯 24 ÷ 3 × 2 = 16.",
+      feedbackErro: "Divida 24 em 3 partes iguais e considere 2.",
     },
   },
 
@@ -150,7 +150,7 @@ export const aula05_missao: AulaV4 = {
   momento10_avaliacao: {
     perguntas: [
       { pergunta: "1/2 + 1/2 =", opcoes: ["1", "2/4", "1/4"], correta: 0, feedbackAcerto: "🎉", feedbackErro: "2/2 = 1." },
-      { pergunta: "1/3 × 3 =", opcoes: ["1", "3/9", "9/3"], correta: 0, feedbackAcerto: "🎉", feedbackErro: "3/3." },
+      { pergunta: "1/3 de 30 =", opcoes: ["10", "9", "27"], correta: 0, feedbackAcerto: "🎉", feedbackErro: "30 ÷ 3 = 10." },
       { pergunta: "2/3 é maior que 1/2?", opcoes: ["Sim", "Não"], correta: 0, feedbackAcerto: "🎉", feedbackErro: "4/6 > 3/6." },
     ],
   },

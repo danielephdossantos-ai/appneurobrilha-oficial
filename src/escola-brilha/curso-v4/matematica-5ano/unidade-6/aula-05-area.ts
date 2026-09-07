@@ -10,12 +10,13 @@ export const aula05_area: AulaV4 = {
 
   momento01_motivacao: {
     titulo: "Quanto cobre?",
-    historia: "{NOME}, ÁREA mede o quanto uma figura COBRE. Em retângulos: base × altura.",
+    historia: "{NOME}, área mede a superfície que uma figura cobre; perímetro mede o contorno. Figuras podem ter o mesmo perímetro e áreas diferentes — ou a mesma área e perímetros diferentes.",
   },
   momento02_exploracao: {
     instrucao: "Unidades e figuras.",
     cenas: [
       { tipo: "texto", texto: "1 m² = 10.000 cm². Chão é m². Papel é cm².", destaque: true },
+      { tipo: "texto", texto: "Área usa unidades quadradas; perímetro usa unidades de comprimento. São grandezas diferentes." },
       {
         tipo: "figuraPlana",
         forma: "retangulo",
@@ -31,9 +32,9 @@ export const aula05_area: AulaV4 = {
     ],
   },
   momento03_descoberta: {
-    perguntaGuia: "Retângulo 5 × 3 m?",
-    pista: "Multiplique.",
-    revelacao: "15 m².",
+    perguntaGuia: "Retângulos 6 × 2 e 4 × 3 têm a mesma área? E o mesmo perímetro?",
+    pista: "Calcule a área e some os quatro lados de cada figura.",
+    revelacao: "As duas áreas valem 12 unidades quadradas. Os perímetros são diferentes: 16 e 14 unidades.",
   },
   momento04_explicacao: {
     titulo: "Exemplos",
@@ -64,6 +65,7 @@ export const aula05_area: AulaV4 = {
         },
       },
       { texto: "Área composta: some as partes." },
+      { texto: "Para comparar área e perímetro, calcule cada grandeza separadamente. Mesma área não garante mesmo perímetro, e mesmo perímetro não garante mesma área." },
     ],
   },
   momento05_modelagem: {
@@ -122,13 +124,13 @@ export const aula05_area: AulaV4 = {
     perguntas: [
       { pergunta: "Retângulo 6×4:", opcoes: ["24", "20", "28"], correta: 0, feedbackAcerto: "🎉", feedbackErro: "24." },
       { pergunta: "Quadrado 7:", opcoes: ["49", "28", "14"], correta: 0, feedbackAcerto: "🎉", feedbackErro: "49." },
-      { pergunta: "Retângulo 10×5:", opcoes: ["50", "30", "40"], correta: 0, feedbackAcerto: "🎉", feedbackErro: "50." },
+      { pergunta: "Retângulos 6×2 e 4×3 têm:", opcoes: ["mesma área e perímetros diferentes", "mesmo perímetro e áreas diferentes", "áreas e perímetros iguais"], correta: 0, feedbackAcerto: "🎉 Ambas as áreas são 12; os perímetros são 16 e 14.", feedbackErro: "Calcule separadamente: área e perímetro não são a mesma grandeza." },
     ],
   },
   momento11_missaoFamilia: {
     titulo: "Área do quarto",
     materiais: ["Trena"],
-    passos: ["Meça largura e comprimento do quarto.", "Calcule a área em m²."],
+    passos: ["Com ajuda de um adulto, meça largura e comprimento de um cômodo.", "Calcule a área em m² e o perímetro em metros.", "Compare as duas grandezas e suas unidades."],
     registro: "📸 Foto.",
   },
   recompensa: { xp: 150, moedas: 80 },

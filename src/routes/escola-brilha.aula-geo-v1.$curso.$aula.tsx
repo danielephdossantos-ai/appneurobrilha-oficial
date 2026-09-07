@@ -9,6 +9,7 @@ import {
   getCursoGeoV1,
   getProximaAulaGeoV1,
 } from "@/escola-brilha/curso-v4/registry";
+import { advancePlanFlow, completePlanItem } from "@/lib/plan-flow";
 
 
 export const Route = createFileRoute("/escola-brilha/aula-geo-v1/$curso/$aula")({
@@ -42,7 +43,7 @@ function marcarConcluida(cursoSlug: string, aulaSlug: string) {
 function AulaGeoV1Page() {
   const { curso, aula } = Route.useParams();
   const navigate = useNavigate();
-  const { handleBack } = useBackNavigation();
+  const { handleBack, context: navContext } = useBackNavigation();
   const dados = getAulaGeoV1FromCurso(curso, aula);
   const [mostrarFinal, setMostrarFinal] = useState(false);
   const [proximaPendente, setProximaPendente] = useState<string | null>(null);
@@ -106,8 +107,18 @@ function AulaGeoV1Page() {
     }
   };
 
-  const concluir = () => {
+  const concluir = async () => {
     marcarConcluida(curso, aula);
+    if (navContext?.isPlanFlow) {
+      await completePlanItem(navContext);
+      const nextRoute = advancePlanFlow(navContext);
+      if (nextRoute) {
+        navigate({ to: nextRoute });
+        return;
+      }
+      sair();
+      return;
+    }
     const proxima = getProximaAulaGeoV1(curso, aula);
     if (proxima) {
       tocarCheck();

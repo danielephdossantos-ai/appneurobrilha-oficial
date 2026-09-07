@@ -4,7 +4,7 @@ export const aula03_ladosVertices: AulaV4 = {
   slug: "u6-03-lados-vertices",
   titulo: "Lados, Vértices e Ângulos",
   iconeTrilha: "📐",
-  bncc: ["EF03MA14"],
+  bncc: ["EF03MA15"],
   duracaoMin: 20,
   metodologias: ["skemp", "cpa"],
   momento01_motivacao: {

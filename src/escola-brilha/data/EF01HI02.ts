@@ -94,7 +94,8 @@ const aula: Aula = {
         { nome: "familia", imagemUrl: familiaAvosNetaImg },
         { nome: "bola", imagemUrl: bolaImg },
         { nome: "casa", imagemUrl: casaImg },
-      ],
+      
+        { nome: "outra-opcao-4", imagemUrl: maeImg },],
       respostaCerta: "familia",
     },
   },
@@ -124,35 +125,35 @@ const aula: Aula = {
       perguntas: [
         {
           pergunta: "Mãe, pai e filha morando juntos. Isso é uma família?",
-          opcoes: ["Sim", "Não", "Só às vezes"],
+          opcoes: ["Sim", "Não", "Só às vezes", "Preciso observar melhor"],
           correta: 0,
           explicacao: "Mãe, pai e filhos formam uma família.",
           visual: { tipo: "itens", imagemUrl: familiaTradicionalImg, quantidade: 1, rotulo: "👨‍👩‍👧" },
         },
         {
           pergunta: "Uma mãe morando só com o filho. Isso é uma família?",
-          opcoes: ["Sim", "Não", "Só se tiver o pai"],
+          opcoes: ["Sim", "Não", "Só se tiver o pai", "Preciso observar melhor"],
           correta: 0,
           explicacao: "Mãe e filho já formam uma família.",
           visual: { tipo: "itens", imagemUrl: familiaMaeFilhoImg, quantidade: 1, rotulo: "👩‍👦" },
         },
         {
           pergunta: "Uma criança que mora com os AVÓS tem família?",
-          opcoes: ["Sim", "Não", "Só a mãe é família"],
+          opcoes: ["Sim", "Não", "Só a mãe é família", "Preciso observar melhor"],
           correta: 0,
           explicacao: "Quem cuida e ama a criança é família.",
           visual: { tipo: "itens", imagemUrl: familiaAvosNetaImg, quantidade: 1, rotulo: "👵👴" },
         },
         {
           pergunta: "O que é MAIS importante em uma família?",
-          opcoes: ["Amor e respeito", "Casa grande", "Muitos brinquedos"],
+          opcoes: ["Amor e respeito", "Casa grande", "Muitos brinquedos", "Preciso observar melhor"],
           correta: 0,
           explicacao: "O que faz família é o afeto, não os objetos.",
           visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "💖" },
         },
         {
           pergunta: "Devemos respeitar famílias diferentes da nossa?",
-          opcoes: ["Sim, sempre", "Não", "Só se forem iguais"],
+          opcoes: ["Sim, sempre", "Não", "Só se forem iguais", "Preciso observar melhor"],
           correta: 0,
           explicacao: "Toda família merece respeito.",
           visual: { tipo: "itens", imagemUrl: abracoImg, quantidade: 1, rotulo: "🤗" },
@@ -175,28 +176,28 @@ const aula: Aula = {
   quiz: [
     {
       pergunta: "Todas as famílias são iguais?",
-      opcoes: ["Não", "Sim", "Apenas algumas"],
+      opcoes: ["Não", "Sim", "Apenas algumas", "Preciso observar melhor"],
       correta: 0,
       explicacao: "Cada família é diferente — e isso é bonito.",
       visual: { tipo: "itens", imagemUrl: familiaTradicionalImg, quantidade: 1, rotulo: "👨‍👩‍👧" },
     },
     {
       pergunta: "O que é MAIS importante em uma família?",
-      opcoes: ["Amor, cuidado e respeito", "Ter uma casa grande", "Ter muitos brinquedos"],
+      opcoes: ["Amor, cuidado e respeito", "Ter uma casa grande", "Ter muitos brinquedos", "Preciso observar melhor"],
       correta: 0,
       explicacao: "O que faz família é o afeto.",
       visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "💖" },
     },
     {
       pergunta: "Os avós podem fazer parte da família?",
-      opcoes: ["Sim", "Não", "Apenas às vezes"],
+      opcoes: ["Sim", "Não", "Apenas às vezes", "Preciso observar melhor"],
       correta: 0,
       explicacao: "Avós também são família.",
       visual: { tipo: "itens", imagemUrl: familiaAvosNetaImg, quantidade: 1, rotulo: "👵👴" },
     },
     {
       pergunta: "Devemos respeitar famílias diferentes da nossa?",
-      opcoes: ["Sim", "Não", "Apenas algumas"],
+      opcoes: ["Sim", "Não", "Apenas algumas", "Preciso observar melhor"],
       correta: 0,
       explicacao: "Toda família merece respeito.",
       visual: { tipo: "itens", imagemUrl: abracoImg, quantidade: 1, rotulo: "🤗" },
@@ -207,7 +208,7 @@ const aula: Aula = {
         "Cada família possui sua própria história",
         "Todas as famílias são iguais",
         "Só existe um tipo de família",
-      ],
+       "Preciso observar melhor"],
       correta: 0,
       explicacao: "Cada família tem sua história — e todas são especiais.",
       visual: { tipo: "itens", imagemUrl: arvoreImg, quantidade: 1, rotulo: "🌳" },
@@ -289,7 +290,9 @@ const aula: Aula = {
       opcoes: [
         { nome: "SIM", imagemUrl: coracaoImg, rotulo: "✅ SIM, as duas são famílias!" },
         { nome: "NAO", imagemUrl: casaImg, rotulo: "❌ NÃO" },
-      ],
+      
+        { nome: "outra-opcao-3", imagemUrl: maeImg },
+        { nome: "outra-opcao-4", imagemUrl: maeImg },],
       correta: 0,
       acerto: "💖 Isso! As duas SÃO famílias — cada uma do seu jeito.",
       erro: "Toda família é uma família — não importa o tamanho ou quem mora junto.",
@@ -353,7 +356,8 @@ const aula: Aula = {
             { nome: "Avós", imagemUrl: familiaAvosNetaImg, rotulo: "👵👴 AVÓS" },
             { nome: "Tia", imagemUrl: tiaImg, rotulo: "👩 TIA" },
             { nome: "Amigos", imagemUrl: criancasGrupoImg, rotulo: "👦 AMIGOS" },
-          ],
+          
+            { nome: "outra-opcao-4", imagemUrl: maeImg },],
         },
         {
           label: "Quem faz parte da sua história?",
@@ -375,21 +379,21 @@ const aula: Aula = {
     facil: [
       {
         pergunta: "A MÃE pode fazer parte da família?",
-        opcoes: ["Sim", "Não", "Só se tiver o pai junto"],
+        opcoes: ["Sim", "Não", "Só se tiver o pai junto", "Preciso observar melhor"],
         correta: 0,
         explicacao: "A mãe faz parte da família.",
         visual: { tipo: "itens", imagemUrl: maeImg, quantidade: 1, rotulo: "👩" },
       },
       {
         pergunta: "Quem cuida da criança pode ser chamado de família?",
-        opcoes: ["Sim", "Não", "Só a mãe"],
+        opcoes: ["Sim", "Não", "Só a mãe", "Preciso observar melhor"],
         correta: 0,
         explicacao: "Quem cuida, ama e protege é família.",
         visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "💖" },
       },
       {
         pergunta: "Uma casa com AVÓS e neta é uma família?",
-        opcoes: ["Sim", "Não", "Só se a mãe estiver"],
+        opcoes: ["Sim", "Não", "Só se a mãe estiver", "Preciso observar melhor"],
         correta: 0,
         explicacao: "Avós e neta formam uma família.",
         visual: { tipo: "itens", imagemUrl: familiaAvosNetaImg, quantidade: 1, rotulo: "👵👴" },
@@ -398,21 +402,21 @@ const aula: Aula = {
     medio: [
       {
         pergunta: "Qual dessas atitudes ajuda a família?",
-        opcoes: ["Ajudar em casa", "Brigar sempre", "Gritar"],
+        opcoes: ["Ajudar em casa", "Brigar sempre", "Gritar", "Preciso observar melhor"],
         correta: 0,
         explicacao: "Ajudar faz a família crescer feliz.",
         visual: { tipo: "itens", imagemUrl: ajudarImg, quantidade: 1, rotulo: "🤝" },
       },
       {
         pergunta: "Duas famílias diferentes podem ser as duas famílias?",
-        opcoes: ["Sim", "Não", "Só se forem iguais"],
+        opcoes: ["Sim", "Não", "Só se forem iguais", "Preciso observar melhor"],
         correta: 0,
         explicacao: "Cada família tem seu jeito — todas são famílias.",
         visual: { tipo: "itens", imagemUrl: familiaMaeFilhoImg, quantidade: 1, rotulo: "👩‍👦" },
       },
       {
         pergunta: "O que devemos fazer com famílias diferentes da nossa?",
-        opcoes: ["Respeitar", "Rir", "Ignorar"],
+        opcoes: ["Respeitar", "Rir", "Ignorar", "Preciso observar melhor"],
         correta: 0,
         explicacao: "Toda família merece respeito.",
         visual: { tipo: "itens", imagemUrl: abracoImg, quantidade: 1, rotulo: "🤗" },
@@ -421,21 +425,21 @@ const aula: Aula = {
     dificil: [
       {
         pergunta: "O que faz uma família ser FAMÍLIA?",
-        opcoes: ["Amor, cuidado e respeito", "O tamanho da casa", "O número de pessoas"],
+        opcoes: ["Amor, cuidado e respeito", "O tamanho da casa", "O número de pessoas", "Preciso observar melhor"],
         correta: 0,
         explicacao: "O afeto é o que faz uma família.",
         visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "💖" },
       },
       {
         pergunta: "Cada família tem uma HISTÓRIA:",
-        opcoes: ["Própria e diferente", "Igual às outras", "Sem história"],
+        opcoes: ["Própria e diferente", "Igual às outras", "Sem história", "Preciso observar melhor"],
         correta: 0,
         explicacao: "Cada família tem sua própria história.",
         visual: { tipo: "itens", imagemUrl: arvoreImg, quantidade: 1, rotulo: "🌳" },
       },
       {
         pergunta: "Fazer parte de uma família é:",
-        opcoes: ["Sentir-se cuidado e amado", "Morar sozinho", "Ter muitos brinquedos"],
+        opcoes: ["Sentir-se cuidado e amado", "Morar sozinho", "Ter muitos brinquedos", "Preciso observar melhor"],
         correta: 0,
         explicacao: "Pertencer é sentir que faz parte de um lar com afeto.",
         visual: { tipo: "itens", imagemUrl: familiaTradicionalImg, quantidade: 1, rotulo: "👨‍👩‍👧" },

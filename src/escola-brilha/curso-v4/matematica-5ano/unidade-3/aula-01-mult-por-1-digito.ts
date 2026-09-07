@@ -4,7 +4,7 @@ export const aula01_multPor1Digito: AulaV4 = {
   slug: "u3-01-mult-por-1-digito",
   titulo: "Multiplicar por 1 dígito (até 4 algarismos)",
   iconeTrilha: "✖️",
-  bncc: ["EF05MA07"],
+  bncc: ["EF05MA08"],
   duracaoMin: 22,
   metodologias: ["cpa", "skemp"],
 

@@ -16,7 +16,7 @@ export const aula01: AulaGeoV1 = {
   titulo: "Projeto Científico Integrador",
   iconeTrilha: "🏆",
   recompensa: { xp: 160, moedas: 70, medalha: "Cientista Formado" },
-  bncc: ["EF08CI13"],
+  bncc: ["EF08CI15", "EF08CI16"],
   duracaoMin: 50,
 
   cena01_motivacao: {
@@ -41,6 +41,7 @@ export const aula01: AulaGeoV1 = {
       { id: "opiniao", titulo: "'Qual a melhor cor?'", subtitulo: "opinião, não fato", emoji: "🎨", cor: "from-slate-500 to-slate-700", fotoUrl: congressoImg },
       { id: "boa", titulo: "'A ilha de calor no bairro X é maior que no parque?'", subtitulo: "mensurável, comparável", emoji: "🌡️", cor: "from-emerald-500 to-teal-700", fotoUrl: congressoImg },
       { id: "impossivel", titulo: "'Existe vida em outra galáxia?'", subtitulo: "sem instrumentos do 8º ano", emoji: "🛸", cor: "from-red-500 to-rose-700", fotoUrl: congressoImg },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "boa",
     feedbackAcerto:
@@ -91,6 +92,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🧪", titulo: "Ser testável (pode ser confirmada ou refutada)", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "❤️", titulo: "Ser bonita", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🎯", titulo: "Sempre estar certa", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Sim. Se não pode ser testada, não é hipótese científica.",
         feedbackErro: "Hipótese pode ESTAR ERRADA — o importante é ser TESTÁVEL." },
@@ -99,6 +101,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "⚖️", titulo: "A base de comparação", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🎨", titulo: "A estética do pôster", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "⏰", titulo: "O tempo do experimento", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. Sem controle, não sabemos se o efeito veio do que testamos ou de outra causa.",
         feedbackErro: "Controle = base para COMPARAR. Sem ele, o resultado não prova nada." },
@@ -107,6 +110,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "📊", titulo: "Um gráfico + tabela", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "📝", titulo: "Uma longa lista de números em texto corrido", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🎨", titulo: "Um desenho artístico", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Sim. Gráfico e tabela revelam padrões que texto esconde.",
         feedbackErro: "Dados quantitativos pedem TABELA + GRÁFICO. Texto corrido esconde padrões." },
@@ -209,6 +213,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Sim — e isso ainda é ciência de qualidade", correta: true },
           { id: "b", texto: "Não — hipótese sempre precisa estar certa" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. Refutar uma hipótese é resultado científico legítimo. Descartar hipóteses erradas é como a ciência avança.",
         feedbackErro: "Ciência é FALSIFICÁVEL. Refutar hipótese é resultado válido e importante." },
@@ -216,6 +222,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Tabela + gráfico + comentário", correta: true },
           { id: "b", texto: "Texto corrido citando os 30 valores um a um" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. Dados quantitativos pedem TABELA e GRÁFICO — leitura rápida e visual.",
         feedbackErro: "Nunca escreva 30 números em texto corrido. Use tabela e gráfico." },
@@ -223,6 +231,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Ser HONESTO sobre resultados, mesmo se refutaram a hipótese", correta: true },
           { id: "b", texto: "Esconder resultados que não bateram com a hipótese" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Perfeito. Integridade é o coração da ciência. Falsificar dados destrói toda a pesquisa.",
         feedbackErro: "NUNCA esconda dados. Ciência exige HONESTIDADE — mesmo quando os dados refutam a hipótese." },

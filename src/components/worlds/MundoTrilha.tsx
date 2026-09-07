@@ -80,7 +80,7 @@ export function TrocarMundoButton({ className = "" }: { className?: string }) {
 }
 
 /**
- * Envolve uma trilha estilo Duolingo: usa o mundo escolhido pela criança como
+ * Envolve a jornada visual NeuroBrilha: usa o mundo escolhido pela criança como
  * fundo. Sem mundo escolhido, mantém o gradiente original (`fallbackClass`).
  */
 export function MundoTrilha({

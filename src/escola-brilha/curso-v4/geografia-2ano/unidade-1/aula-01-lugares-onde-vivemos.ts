@@ -25,7 +25,7 @@ export const aula01: AulaPortuguesV4 = {
   slug: "aula-01-lugares-onde-vivemos",
   titulo: "Os Lugares Onde Vivemos",
   iconeTrilha: "🗺️",
-  bncc: ["EF02GE01"],
+  bncc: [],
   duracaoMin: 15,
 
   // 1 · MOTIVAÇÃO
@@ -75,6 +75,7 @@ export const aula01: AulaPortuguesV4 = {
           texto: "Sobre os planetas do sistema solar.",
           imagemUrl: estrela,
         },
+        { texto: "Sobre outra possibilidade relacionada ao tema.", imagemUrl: casa },
       ],
       respostaCerta: 0,
       feedbackAcerto:
@@ -86,13 +87,11 @@ export const aula01: AulaPortuguesV4 = {
 
   // 3 · VOCABULÁRIO — 2 palavras-chave
   momento03_vocabulario: {
-    instrucao:
-      "Antes de investigar, conheça 2 palavras que vão aparecer na missão.",
+    instrucao: "Antes de investigar, conheça 2 palavras que vão aparecer na missão.",
     cards: [
       {
         palavra: "moradia",
-        explicacao:
-          "É o lugar onde uma família MORA. Pode ser uma casa, um apartamento, uma oca…",
+        explicacao: "É o lugar onde uma família MORA. Pode ser uma casa, um apartamento, uma oca…",
         exemplo: "A moradia do Pedro é um apartamento no 3º andar.",
         imagemUrl: casa,
       },
@@ -108,8 +107,7 @@ export const aula01: AulaPortuguesV4 = {
 
   // 4 · LEITURA GUIADA
   momento04_leituraGuiada: {
-    instrucao:
-      "Aurora vai LER com você. Preste atenção nas palavras em amarelo — elas são pistas.",
+    instrucao: "Aurora vai LER com você. Preste atenção nas palavras em amarelo — elas são pistas.",
     leitura: {
       titulo: "Cada casa tem um porquê",
       imagemUrl: cidade,
@@ -125,8 +123,7 @@ export const aula01: AulaPortuguesV4 = {
 
   // 5 · COMPREENSÃO
   momento05_compreensao: {
-    instrucao:
-      "As respostas estão TODAS escritas no texto. Volte lá se precisar.",
+    instrucao: "As respostas estão TODAS escritas no texto. Volte lá se precisar.",
     perguntas: [
       {
         pergunta: "Por que na cidade grande muita gente mora em PRÉDIO?",
@@ -134,12 +131,11 @@ export const aula01: AulaPortuguesV4 = {
           "Porque é mais bonito",
           "Pra caber várias famílias em pouco chão",
           "Porque não tem outra opção",
+          "Outra possibilidade",
         ],
         correta: 1,
-        feedbackAcerto:
-          "🎉 Exato! Está escrito: 'cabem várias famílias em POUCO CHÃO'.",
-        feedbackErro:
-          "Olhe o primeiro parágrafo — a resposta está logo depois de 'prédios'.",
+        feedbackAcerto: "🎉 Exato! Está escrito: 'cabem várias famílias em POUCO CHÃO'.",
+        feedbackErro: "Olhe o primeiro parágrafo — a resposta está logo depois de 'prédios'.",
         ondeEstaNoTexto: "…cabem várias famílias em pouco chão.",
       },
       {
@@ -148,13 +144,12 @@ export const aula01: AulaPortuguesV4 = {
           "Porque as famílias brigam",
           "Porque cada família tem espaço pra plantar e criar animais",
           "Porque o chão é frio",
+          "Outra possibilidade",
         ],
         correta: 1,
         feedbackAcerto: "🎉 Boa! Cada família precisa de ESPAÇO no campo.",
-        feedbackErro:
-          "A resposta está no segundo parágrafo, logo depois de 'porque'.",
-        ondeEstaNoTexto:
-          "…cada família tem espaço pra plantar e criar animais.",
+        feedbackErro: "A resposta está no segundo parágrafo, logo depois de 'porque'.",
+        ondeEstaNoTexto: "…cada família tem espaço pra plantar e criar animais.",
       },
       {
         pergunta: "Por que a casa RIBEIRINHA fica em cima de estacas altas?",
@@ -162,12 +157,11 @@ export const aula01: AulaPortuguesV4 = {
           "Pra ficar mais bonita",
           "Pra pegar sol",
           "Pra quando o rio encher, a água passar por baixo",
+          "Outra possibilidade",
         ],
         correta: 2,
-        feedbackAcerto:
-          "🎉 Isso! Quando o rio enche, a família fica em SEGURANÇA lá em cima.",
-        feedbackErro:
-          "Olhe o último parágrafo — a resposta está depois de 'estacas altas'.",
+        feedbackAcerto: "🎉 Isso! Quando o rio enche, a família fica em SEGURANÇA lá em cima.",
+        feedbackErro: "Olhe o último parágrafo — a resposta está depois de 'estacas altas'.",
         ondeEstaNoTexto:
           "…quando o rio enche, a água passa por baixo e a família fica em segurança.",
       },
@@ -176,34 +170,38 @@ export const aula01: AulaPortuguesV4 = {
 
   // 6 · PERSONAGENS & CENÁRIO (aqui: onde acontece cada moradia)
   momento06_personagensCenario: {
-    instrucao:
-      "Cada moradia tem um LUGAR. Vamos ver se você lembra onde cada uma fica.",
+    instrucao: "Cada moradia tem um LUGAR. Vamos ver se você lembra onde cada uma fica.",
     perguntas: [
       {
         pergunta: "Onde ficam as CASAS RIBEIRINHAS?",
-        opcoes: ["No topo de uma montanha", "Na beira de um rio", "Debaixo da terra"],
+        opcoes: [
+          "No topo de uma montanha",
+          "Na beira de um rio",
+          "Debaixo da terra",
+          "Outra possibilidade",
+        ],
         correta: 1,
-        feedbackAcerto:
-          "🎉 Isso! RIBEIRINHA vem de 'beira do rio'.",
-        feedbackErro:
-          "A palavra RIBEIRINHA quer dizer 'que fica na BEIRA DO RIO'.",
+        feedbackAcerto: "🎉 Isso! RIBEIRINHA vem de 'beira do rio'.",
+        feedbackErro: "A palavra RIBEIRINHA quer dizer 'que fica na BEIRA DO RIO'.",
       },
       {
         pergunta: "Em que LUGAR muita gente mora em prédios?",
-        opcoes: ["Na cidade grande", "No meio da floresta", "Numa ilha deserta"],
+        opcoes: [
+          "Na cidade grande",
+          "No meio da floresta",
+          "Numa ilha deserta",
+          "Outra possibilidade",
+        ],
         correta: 0,
-        feedbackAcerto:
-          "🎉 Certo! Na CIDADE GRANDE o espaço é pouco, então crescem pra cima.",
-        feedbackErro:
-          "Pense onde tem MUITA gente e POUCO chão — a cidade grande.",
+        feedbackAcerto: "🎉 Certo! Na CIDADE GRANDE o espaço é pouco, então crescem pra cima.",
+        feedbackErro: "Pense onde tem MUITA gente e POUCO chão — a cidade grande.",
       },
     ],
   },
 
   // 7 · SEQUÊNCIA — o rio enche, a casa fica em segurança
   momento07_sequencia: {
-    instrucao:
-      "As páginas dessa história do rio embaralharam. Coloque na ordem certa.",
+    instrucao: "As páginas dessa história do rio embaralharam. Coloque na ordem certa.",
     bloco: {
       instrucao: "Começo → meio → fim.",
       itens: [
@@ -224,8 +222,7 @@ export const aula01: AulaPortuguesV4 = {
         },
       ],
       ordemCerta: ["s1", "s2", "s3"],
-      feedbackAcerto:
-        "🎉 Perfeito! Você contou a história do rio do jeito certo.",
+      feedbackAcerto: "🎉 Perfeito! Você contou a história do rio do jeito certo.",
       feedbackErro:
         "Pense: primeiro o rio está CALMO. Depois CHOVE e o rio ENCHE. Por último, a água PASSA POR BAIXO e a casa fica seca.",
     },
@@ -246,8 +243,8 @@ export const aula01: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "Como se chama a moradia dos povos indígenas da aldeia?",
-        opcoes: ["Oca", "Prédio", "Apartamento"],
-        opcoesImagens: [ocaPalha, cidade, apartamento],
+        opcoes: ["Oca", "Prédio", "Apartamento", "Outra possibilidade"],
+        opcoesImagens: [ocaPalha, cidade, apartamento, ocaPalha],
         correta: 0,
         feedbackAcerto: "🎉 Isso! OCA.",
         feedbackErro: "Está na primeira frase: '…moram numa …'.",
@@ -259,17 +256,17 @@ export const aula01: AulaPortuguesV4 = {
           "Concreto e vidro",
           "Madeira, folhas e cipó",
           "Ferro e plástico",
+          "Outra possibilidade",
         ],
         opcoesImagens: [
           materialConcretoVidro,
           materialMadeiraFolhas,
           materialFerroPlastico,
+          materialConcretoVidro,
         ],
         correta: 1,
-        feedbackAcerto:
-          "🎉 Boa! MADEIRA, FOLHAS e CIPÓ — tudo da floresta.",
-        feedbackErro:
-          "Está no segundo parágrafo, logo depois de 'FLORESTA oferece:'.",
+        feedbackAcerto: "🎉 Boa! MADEIRA, FOLHAS e CIPÓ — tudo da floresta.",
+        feedbackErro: "Está no segundo parágrafo, logo depois de 'FLORESTA oferece:'.",
         ondeEstaNoTexto: "…madeira, folhas e cipó.",
       },
     ],
@@ -284,8 +281,7 @@ export const aula01: AulaPortuguesV4 = {
       tipo: "arquitetoLugar",
       titulo: "Arquiteto do Lugar Certo",
       bloco: {
-        instrucao:
-          "Olhe o LUGAR e QUEM mora ali. Depois toque na moradia certa embaixo.",
+        instrucao: "Olhe o LUGAR e QUEM mora ali. Depois toque na moradia certa embaixo.",
         rodadas: [
           {
             id: "r1",
@@ -300,12 +296,12 @@ export const aula01: AulaPortuguesV4 = {
               { id: "ribeirinha", nome: "Casa em estacas", imagemUrl: casaAntiga },
               { id: "apto", nome: "Prédio alto", imagemUrl: cidade },
               { id: "oca", nome: "Oca de palha", imagemUrl: ocaPalha },
+              { id: "outra-opcao-2", nome: "Outra possibilidade", imagemUrl: casaAntiga },
             ],
             correta: "ribeirinha",
             feedbackAcerto:
               "🎉 Perfeito! Casa RIBEIRINHA em ESTACAS — quando o rio enche, a água passa por baixo.",
-            feedbackErro:
-              "Lembre: perto do RIO, a casa fica em ESTACAS pra a água não entrar.",
+            feedbackErro: "Lembre: perto do RIO, a casa fica em ESTACAS pra a água não entrar.",
           },
           {
             id: "r2",
@@ -313,13 +309,13 @@ export const aula01: AulaPortuguesV4 = {
               nome: "Cidade grande",
               emojiLugar: "🏙️",
               emojiMorador: "👨‍👩‍👧",
-              pista:
-                "MUITA gente quer morar aqui, mas o chão é POUCO. Como resolver?",
+              pista: "MUITA gente quer morar aqui, mas o chão é POUCO. Como resolver?",
             },
             opcoes: [
               { id: "apto", nome: "Prédio de apartamentos", imagemUrl: cidade },
               { id: "fazenda", nome: "Casa de fazenda", imagemUrl: casaModerna },
               { id: "ribeirinha", nome: "Casa em estacas", imagemUrl: casaAntiga },
+              { id: "outra-opcao-3", nome: "Outra possibilidade", imagemUrl: cidade },
             ],
             correta: "apto",
             feedbackAcerto:
@@ -333,17 +329,16 @@ export const aula01: AulaPortuguesV4 = {
               nome: "Campo",
               emojiLugar: "🌾",
               emojiMorador: "👩‍🌾",
-              pista:
-                "A família PLANTA e cria animais. Precisa de MUITO espaço.",
+              pista: "A família PLANTA e cria animais. Precisa de MUITO espaço.",
             },
             opcoes: [
               { id: "fazenda", nome: "Casa de fazenda", imagemUrl: casaModerna },
               { id: "apto", nome: "Prédio alto", imagemUrl: cidade },
               { id: "oca", nome: "Oca de palha", imagemUrl: ocaPalha },
+              { id: "outra-opcao-4", nome: "Outra possibilidade", imagemUrl: casaModerna },
             ],
             correta: "fazenda",
-            feedbackAcerto:
-              "🎉 Boa! No CAMPO cabe casa com QUINTAL, plantação e animais.",
+            feedbackAcerto: "🎉 Boa! No CAMPO cabe casa com QUINTAL, plantação e animais.",
             feedbackErro:
               "No campo a família precisa de ESPAÇO — a casa de fazenda tem quintal grande.",
           },
@@ -353,13 +348,13 @@ export const aula01: AulaPortuguesV4 = {
               nome: "Floresta / Aldeia",
               emojiLugar: "🌳",
               emojiMorador: "🏹",
-              pista:
-                "É uma aldeia de povos indígenas. Constroem com o que a FLORESTA oferece.",
+              pista: "É uma aldeia de povos indígenas. Constroem com o que a FLORESTA oferece.",
             },
             opcoes: [
               { id: "oca", nome: "Oca de madeira e palha", imagemUrl: ocaPalha },
               { id: "apto", nome: "Prédio alto", imagemUrl: cidade },
               { id: "fazenda", nome: "Casa de fazenda", imagemUrl: casaModerna },
+              { id: "outra-opcao-5", nome: "Outra possibilidade", imagemUrl: ocaPalha },
             ],
             correta: "oca",
             feedbackAcerto:
@@ -374,15 +369,13 @@ export const aula01: AulaPortuguesV4 = {
     },
   },
 
-
   // LABORATÓRIO — ativa clima e vê a casa ribeirinha reagir
   momento_laboratorio: {
     titulo: "Laboratório do Explorador",
     instrucao:
       "Aperte os botões e VEJA o que acontece com a casa ribeirinha em tempo real. Depois, toque em 🔊 pra ouvir a explicação.",
     bloco: {
-      instrucao:
-        "Ligue e desligue Sol ☀️, Chuva 🌧️ e Rio 🌊. Observe o CÉU, a ÁGUA e a CASA.",
+      instrucao: "Ligue e desligue Sol ☀️, Chuva 🌧️ e Rio 🌊. Observe o CÉU, a ÁGUA e a CASA.",
       cena: "casaRibeirinha",
       controles: [
         { id: "sol", rotulo: "Sol", emoji: "☀️", ligadoInicial: true },
@@ -407,8 +400,7 @@ export const aula01: AulaPortuguesV4 = {
         },
         "rio+sol": {
           titulo: "Sol + Rio",
-          texto:
-            "Dia bonito na beira do rio. A água está calma e a família pode até pescar!",
+          texto: "Dia bonito na beira do rio. A água está calma e a família pode até pescar!",
         },
         "chuva+rio": {
           titulo: "Chuva + Rio (o rio enche!)",
@@ -427,23 +419,21 @@ export const aula01: AulaPortuguesV4 = {
         },
         "": {
           titulo: "Tudo desligado",
-          texto:
-            "Ligue pelo menos um controle pra ver o que acontece na cena!",
+          texto: "Ligue pelo menos um controle pra ver o que acontece na cena!",
         },
       },
       desafio: {
-        pergunta:
-          "Por que a casa ribeirinha precisa ficar em cima de ESTACAS ALTAS?",
+        pergunta: "Por que a casa ribeirinha precisa ficar em cima de ESTACAS ALTAS?",
         opcoes: [
           "Pra ficar mais bonita",
           "Pra quando chover muito e o rio encher, a água passar por baixo",
           "Pra pegar mais sol",
+          "Outra possibilidade",
         ],
         correta: 1,
         feedbackAcerto:
           "🎉 Isso! Você viu no laboratório: quando o rio enche, a casa fica em segurança lá em cima.",
-        feedbackErro:
-          "Volte e ative CHUVA + RIO. Veja o que acontece com a água e a casa.",
+        feedbackErro: "Volte e ative CHUVA + RIO. Veja o que acontece com a água e a casa.",
       },
     },
   },
@@ -457,18 +447,16 @@ export const aula01: AulaPortuguesV4 = {
       "Aldeia: oca de madeira e palha — com o que a floresta oferece.",
     ],
     miniDesafio: {
-      pergunta:
-        "Por que cada moradia é DIFERENTE das outras?",
+      pergunta: "Por que cada moradia é DIFERENTE das outras?",
       opcoes: [
         "Porque as pessoas escolhem por moda",
         "Porque cada moradia combina com o LUGAR onde a família vive",
         "Porque construir errado é mais barato",
+        "Outra possibilidade",
       ],
       correta: 1,
-      feedbackAcerto:
-        "🎉 Isso! A moradia combina com o LUGAR — clima, natureza e espaço.",
-      feedbackErro:
-        "Cada moradia é feita pra combinar com o LUGAR: cidade, rio, campo ou aldeia.",
+      feedbackAcerto: "🎉 Isso! A moradia combina com o LUGAR — clima, natureza e espaço.",
+      feedbackErro: "Cada moradia é feita pra combinar com o LUGAR: cidade, rio, campo ou aldeia.",
     },
   },
 
@@ -481,6 +469,7 @@ export const aula01: AulaPortuguesV4 = {
           "Um tipo de brinquedo",
           "O lugar onde uma família mora",
           "Uma comida gostosa",
+          "Outra possibilidade",
         ],
         correta: 1,
         feedbackAcerto: "🎉 O lugar onde a família mora.",
@@ -492,11 +481,11 @@ export const aula01: AulaPortuguesV4 = {
           "Porque é mais bonito",
           "Pra caber várias famílias em pouco chão",
           "Porque é obrigatório",
+          "Outra possibilidade",
         ],
         correta: 1,
         feedbackAcerto: "🎉 Isso!",
-        feedbackErro:
-          "Na cidade tem MUITA gente e POUCO chão — por isso crescem pra cima.",
+        feedbackErro: "Na cidade tem MUITA gente e POUCO chão — por isso crescem pra cima.",
       },
       {
         pergunta: "3/5 — A casa RIBEIRINHA fica em cima de estacas altas porque…",
@@ -504,19 +493,23 @@ export const aula01: AulaPortuguesV4 = {
           "É bonito",
           "Quando o rio enche, a água passa por baixo",
           "É mais barato",
+          "Outra possibilidade",
         ],
         correta: 1,
         feedbackAcerto: "🎉 Boa! A água passa por baixo, a família fica seca.",
-        feedbackErro:
-          "As estacas SEGURAM a casa alta pra a ÁGUA passar por baixo.",
+        feedbackErro: "As estacas SEGURAM a casa alta pra a ÁGUA passar por baixo.",
       },
       {
         pergunta: "4/5 — A OCA fica em qual lugar?",
-        opcoes: ["Na cidade grande", "Na aldeia dos povos indígenas", "No topo de um prédio"],
+        opcoes: [
+          "Na cidade grande",
+          "Na aldeia dos povos indígenas",
+          "No topo de um prédio",
+          "Outra possibilidade",
+        ],
         correta: 1,
         feedbackAcerto: "🎉 Isso! Na aldeia.",
-        feedbackErro:
-          "A oca é a moradia das aldeias dos povos indígenas.",
+        feedbackErro: "A oca é a moradia das aldeias dos povos indígenas.",
       },
       {
         pergunta: "5/5 — Cada moradia é diferente porque…",
@@ -524,12 +517,11 @@ export const aula01: AulaPortuguesV4 = {
           "Combina com o LUGAR onde a família vive",
           "Foi feita de qualquer jeito",
           "Todo mundo copia igual",
+          "Outra possibilidade",
         ],
         correta: 0,
-        feedbackAcerto:
-          "🎉 COMBINA com o LUGAR! Investigador de Moradias — parabéns! 🌟",
-        feedbackErro:
-          "A moradia é feita pra COMBINAR com o LUGAR: clima, natureza e espaço.",
+        feedbackAcerto: "🎉 COMBINA com o LUGAR! Investigador de Moradias — parabéns! 🌟",
+        feedbackErro: "A moradia é feita pra COMBINAR com o LUGAR: clima, natureza e espaço.",
       },
     ],
   },
@@ -544,8 +536,7 @@ export const aula01: AulaPortuguesV4 = {
       "3) Faça um DESENHO da sua casa mostrando 2 coisas dela.",
       "4) Escreva ou fale: 'A minha casa é assim porque…'.",
     ],
-    registro:
-      "📸 Uma foto do desenho ou um pequeno áudio contando 'a minha casa é assim porque…'.",
+    registro: "📸 Uma foto do desenho ou um pequeno áudio contando 'a minha casa é assim porque…'.",
   },
 
   recompensa: {

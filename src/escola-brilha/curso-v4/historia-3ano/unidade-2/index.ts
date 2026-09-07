@@ -1,5 +1,6 @@
 import type { UnidadeGeoV1 } from "../../types";
 import { aula01 } from "./aula-01-campo-e-cidade";
+import { aula02, aula03 } from "./aulas-comunidades-trabalho";
 
 export const unidade2: UnidadeGeoV1 = {
   slug: "unidade-2",
@@ -9,5 +10,5 @@ export const unidade2: UnidadeGeoV1 = {
   descricao:
     "Restaura a Página 2 do Grande Livro das Cidades: A Rota dos Alimentos. O aluno rastreia uma camiseta desde o pé de algodão até a loja e entende por que campo e cidade formam uma rede de interdependência.",
   corTema: "#7c2d12",
-  aulas: [aula01],
+  aulas: [aula01, aula02, aula03],
 };

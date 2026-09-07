@@ -4,7 +4,7 @@ export const aula02_operarDecimais: AulaV4 = {
   slug: "u5-02-operar-decimais",
   titulo: "Somar, subtrair, multiplicar e dividir decimais",
   iconeTrilha: "🧮",
-  bncc: ["EF06MA08"],
+  bncc: ["EF06MA11"],
   duracaoMin: 26,
   metodologias: ["cpa", "skemp"],
 
@@ -55,7 +55,7 @@ export const aula02_operarDecimais: AulaV4 = {
         },
       },
       {
-        texto: "Multiplicação: some as casas decimais dos dois números; ponha a vírgula no fim.",
+        texto: "Na multiplicação, estime primeiro e use o valor posicional para localizar a vírgula no produto.",
         exemploReal: {
           contexto: "0,4 × 0,3",
           visualMat: {
@@ -66,7 +66,7 @@ export const aula02_operarDecimais: AulaV4 = {
               { rotulo: "2", valores: ["1 + 1 = 2 casas", "0,12"] },
             ],
           },
-          destaque: "0,4 × 0,3 = 0,12.",
+          destaque: "4 décimos × 3 décimos = 12 centésimos = 0,12. A posição da vírgula vem do valor das partes.",
         },
       },
       {
@@ -102,7 +102,7 @@ export const aula02_operarDecimais: AulaV4 = {
       opcoes: [{ nome: "2,0" }, { nome: "20" }, { nome: "0,20" }],
       respostaCerta: "2,0",
       feedbackAcerto: "🎯 = 2.",
-      feedbackErro: "1 casa decimal no resultado.",
+      feedbackErro: "0,5 representa metade; quatro metades formam 2 inteiros.",
     },
   },
 

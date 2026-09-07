@@ -23,13 +23,7 @@ export const aula05: AulaPortuguesV4 = {
   slug: "aula-05-meu-primeiro-livro",
   titulo: "Publicando Meu Primeiro Livro",
   iconeTrilha: "🏅",
-  bncc: [
-    "EF02LP21",
-    "EF02LP22",
-    "EF02LP23",
-    "EF02LP24",
-    "EF02LP25",
-  ],
+  bncc: ["EF02LP01", "EF12LP05", "EF15LP05", "EF15LP06", "EF15LP07", "EF15LP08"],
   duracaoMin: 20,
 
   momento01_motivacao: {

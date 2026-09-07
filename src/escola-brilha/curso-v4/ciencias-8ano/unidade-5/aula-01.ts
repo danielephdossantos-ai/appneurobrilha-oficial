@@ -15,7 +15,7 @@ export const aula01: AulaGeoV1 = {
   titulo: "Centro de Engenharia",
   iconeTrilha: "⚡",
   recompensa: { xp: 140, moedas: 55, medalha: "Engenheiro Júnior" },
-  bncc: ["EF08CI05", "EF08CI06"],
+  bncc: ["EF08CI01", "EF08CI02", "EF08CI03", "EF08CI04", "EF08CI05", "EF08CI06"],
   duracaoMin: 45,
 
   cena01_motivacao: {
@@ -40,6 +40,7 @@ export const aula01: AulaGeoV1 = {
       { id: "led", titulo: "Lâmpada LED (10 W)", subtitulo: "fica ligada muito tempo", emoji: "💡", cor: "from-slate-500 to-slate-700", fotoUrl: circuitoImg },
       { id: "chuveiro", titulo: "Chuveiro elétrico (5.500 W)", subtitulo: "esquenta água instantâneo", emoji: "🚿", cor: "from-emerald-500 to-teal-700", fotoUrl: painelImg },
       { id: "celular", titulo: "Celular carregando (5 W)", subtitulo: "cabo o dia inteiro", emoji: "📱", cor: "from-red-500 to-rose-700", fotoUrl: circuitoImg },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "chuveiro",
     feedbackAcerto:
@@ -90,6 +91,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "💪", titulo: "Watt (W)", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🔌", titulo: "Volt (V)", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "⚡", titulo: "Ampère (A)", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Sim. Watt. Volt = tensão. Ampère = corrente.",
         feedbackErro: "Tensão = V. Corrente = A. POTÊNCIA = W (Watt)." },
@@ -98,6 +100,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🌞", titulo: "Solar fotovoltaica", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🛢️", titulo: "Petróleo", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "⚫", titulo: "Carvão mineral", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Sim. Sol se renova todo dia. Petróleo e carvão levam milhões de anos para se formar.",
         feedbackErro: "Petróleo e carvão são FÓSSEIS — não se renovam. Solar SIM." },
@@ -106,6 +109,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🧮", titulo: "Potência (kW) × tempo (h)", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🔌", titulo: "Só a tensão em volts", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "📅", titulo: "Só o número de dias do mês", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Sim. É assim que a conta de luz calcula.",
         feedbackErro: "Consumo (kWh) = POTÊNCIA em kW × TEMPO em horas." },
@@ -208,6 +212,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Energia consumida por unidade de tempo, medida em Watts", correta: true },
           { id: "b", texto: "A quantidade de fios em um aparelho" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. P = V · I, medida em Watt.",
         feedbackErro: "Potência é energia por tempo, em WATTS. Não é número de fios." },
@@ -215,6 +221,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "1 kWh (100 W × 10 h = 1.000 Wh = 1 kWh)", correta: true },
           { id: "b", texto: "10 kWh" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Perfeito. 100 W × 10 h = 1.000 Wh = 1 kWh.",
         feedbackErro: "Cuidado com a unidade: 100 W = 0,1 kW. 0,1 × 10 = 1 kWh." },
@@ -222,6 +230,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Emitem menos CO₂ e não se esgotam na natureza", correta: true },
           { id: "b", texto: "São mais bonitas" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. Reduzem aquecimento global e garantem energia para o futuro.",
         feedbackErro: "Não é estética — é IMPACTO. Menos CO₂ e recurso inesgotável." },

@@ -5,7 +5,7 @@ export const aula02_termosSemelhantes: AulaV4 = {
   slug: "u4-02-termos-semelhantes",
   titulo: "Juntar o que é Igual",
   iconeTrilha: "🧩",
-  bncc: ["EF07MA13", "EF07MA14"],
+  bncc: ["EF07MA16"],
   duracaoMin: 30,
   metodologias: ["skemp"],
 
@@ -31,7 +31,7 @@ export const aula02_termosSemelhantes: AulaV4 = {
           { rotulo: "6", valores: ["9 e 4", "nenhuma letra", "Sim → 13"] },
         ],
       },
-      { tipo: "texto", texto: "🔑 Ao juntar termos semelhantes, some ou subtraia apenas os coeficientes. A parte literal se repete igual, nunca muda." },
+      { tipo: "texto", texto: "🔑 Ao juntar termos semelhantes, some ou subtraia apenas os coeficientes. A nova escrita é equivalente à original: muda a forma, mas não o valor nem a regularidade representada." },
     ],
   },
 

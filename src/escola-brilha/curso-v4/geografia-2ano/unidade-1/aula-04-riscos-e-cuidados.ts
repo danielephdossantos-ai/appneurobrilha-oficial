@@ -30,7 +30,7 @@ export const aula04: AulaPortuguesV4 = {
   slug: "aula-04-riscos-e-cuidados",
   titulo: "Riscos e Cuidados no meu Lugar",
   iconeTrilha: "🛡️",
-  bncc: ["EF02GE04"],
+  bncc: [],
   duracaoMin: 15,
 
   // 1 · MOTIVAÇÃO
@@ -43,8 +43,7 @@ export const aula04: AulaPortuguesV4 = {
 
   // 2 · PREVISÃO
   momento02_previsao: {
-    instrucao:
-      "Aurora colou um AVISO no muro do bairro. Leia com atenção.",
+    instrucao: "Aurora colou um AVISO no muro do bairro. Leia com atenção.",
     bloco: {
       titulo: "Missão do Guardião",
       capaImagemUrl: bairro,
@@ -82,10 +81,10 @@ export const aula04: AulaPortuguesV4 = {
           texto: "Sobre como catar estrelas do céu.",
           imagemUrl: estrela,
         },
+        { texto: "Sobre outra possibilidade relacionada ao tema.", imagemUrl: coracao },
       ],
       respostaCerta: 0,
-      feedbackAcerto:
-        "🎉 Isso! Carro, fogo e sabonete são pistas de RISCO e de CUIDADO.",
+      feedbackAcerto: "🎉 Isso! Carro, fogo e sabonete são pistas de RISCO e de CUIDADO.",
       feedbackErro:
         "As pistas mostram carro (rua), fogo e sabonete — coisas de RISCO e de CUIDADO.",
     },
@@ -99,16 +98,14 @@ export const aula04: AulaPortuguesV4 = {
         palavra: "risco",
         explicacao:
           "É uma coisa que pode MACHUCAR ou fazer mal se a gente não tomar cuidado — como carro na rua, fogo, ou piso molhado.",
-        exemplo:
-          "Atravessar a rua sem olhar é um RISCO grande.",
+        exemplo: "Atravessar a rua sem olhar é um RISCO grande.",
         imagemUrl: carro,
       },
       {
         palavra: "cuidado",
         explicacao:
           "É o que a gente FAZ pra se PROTEGER do risco — olhar pros dois lados, lavar as mãos, dar a mão pro adulto.",
-        exemplo:
-          "Antes de atravessar, o CUIDADO é olhar pros dois lados.",
+        exemplo: "Antes de atravessar, o CUIDADO é olhar pros dois lados.",
         imagemUrl: lavarMaos,
       },
     ],
@@ -116,8 +113,7 @@ export const aula04: AulaPortuguesV4 = {
 
   // 4 · LEITURA GUIADA
   momento04_leituraGuiada: {
-    instrucao:
-      "Aurora vai LER com você. Repare nas palavras destacadas.",
+    instrucao: "Aurora vai LER com você. Repare nas palavras destacadas.",
     leitura: {
       titulo: "Cuidados na rua",
       imagemUrl: rua,
@@ -133,8 +129,7 @@ export const aula04: AulaPortuguesV4 = {
 
   // 5 · COMPREENSÃO
   momento05_compreensao: {
-    instrucao:
-      "As respostas estão TODAS no texto. Volte lá se precisar.",
+    instrucao: "As respostas estão TODAS no texto. Volte lá se precisar.",
     perguntas: [
       {
         pergunta: "Antes de atravessar a rua, o que a gente faz?",
@@ -142,14 +137,12 @@ export const aula04: AulaPortuguesV4 = {
           "Sai correndo sem parar",
           "PARA, olha pros dois lados e escuta",
           "Fecha os olhos e vai",
+          "Outra possibilidade",
         ],
         correta: 1,
-        feedbackAcerto:
-          "🎉 Isso! PARAR, OLHAR e ESCUTAR — nessa ordem.",
-        feedbackErro:
-          "O texto diz: 'a gente sempre PARA, OLHA pros dois lados e ESCUTA'.",
-        ondeEstaNoTexto:
-          "…sempre PARA, OLHA pros dois lados e ESCUTA…",
+        feedbackAcerto: "🎉 Isso! PARAR, OLHAR e ESCUTAR — nessa ordem.",
+        feedbackErro: "O texto diz: 'a gente sempre PARA, OLHA pros dois lados e ESCUTA'.",
+        ondeEstaNoTexto: "…sempre PARA, OLHA pros dois lados e ESCUTA…",
       },
       {
         pergunta: "Quando a criança atravessa a rua, ela vai…",
@@ -157,21 +150,19 @@ export const aula04: AulaPortuguesV4 = {
           "Sozinha, correndo",
           "Dando a mão pro adulto",
           "Só se ninguém estiver olhando",
+          "Outra possibilidade",
         ],
         correta: 1,
         feedbackAcerto: "🎉 Boa! Sempre dando a MÃO pro adulto.",
-        feedbackErro:
-          "O texto diz: 'atravessa dando a mão pro ADULTO'.",
-        ondeEstaNoTexto:
-          "…atravessa dando a mão pro ADULTO…",
+        feedbackErro: "O texto diz: 'atravessa dando a mão pro ADULTO'.",
+        ondeEstaNoTexto: "…atravessa dando a mão pro ADULTO…",
       },
       {
         pergunta: "O que a gente usa na cabeça pra andar de bicicleta?",
-        opcoes: ["Um chapéu de sol", "Um capacete", "Nada, é chato"],
+        opcoes: ["Um chapéu de sol", "Um capacete", "Nada, é chato", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 Isso! CAPACETE protege a cabeça.",
-        feedbackErro:
-          "O texto diz: 'coloca o CAPACETE — a cabeça agradece'.",
+        feedbackErro: "O texto diz: 'coloca o CAPACETE — a cabeça agradece'.",
         ondeEstaNoTexto: "…coloca o CAPACETE…",
       },
     ],
@@ -179,45 +170,53 @@ export const aula04: AulaPortuguesV4 = {
 
   // 6 · PERSONAGENS & CENÁRIO — risco × cuidado
   momento06_personagensCenario: {
-    instrucao:
-      "Cada RISCO tem um CUIDADO certo. Vamos ver se você reparou.",
+    instrucao: "Cada RISCO tem um CUIDADO certo. Vamos ver se você reparou.",
     perguntas: [
       {
         pergunta: "Se a mão está SUJA antes de comer, o cuidado é…",
-        opcoes: ["Comer assim mesmo", "Lavar com água e sabonete", "Passar na roupa"],
-        opcoesImagens: [bola, sabonete, coracao],
+        opcoes: [
+          "Comer assim mesmo",
+          "Lavar com água e sabonete",
+          "Passar na roupa",
+          "Outra possibilidade",
+        ],
+        opcoesImagens: [bola, sabonete, coracao, bola],
         correta: 1,
         feedbackAcerto: "🎉 Isso! Água e SABONETE — sempre.",
-        feedbackErro:
-          "MÃO SUJA = lavar com ÁGUA e SABONETE antes de comer.",
+        feedbackErro: "MÃO SUJA = lavar com ÁGUA e SABONETE antes de comer.",
       },
       {
         pergunta: "Se tem FOGO no fogão, o cuidado é…",
-        opcoes: ["Chegar bem perto pra ver", "Não chegar perto sem um adulto", "Jogar água em cima"],
-        opcoesImagens: [fogo, familia, chuva],
+        opcoes: [
+          "Chegar bem perto pra ver",
+          "Não chegar perto sem um adulto",
+          "Jogar água em cima",
+          "Outra possibilidade",
+        ],
+        opcoesImagens: [fogo, familia, chuva, fogo],
         correta: 1,
-        feedbackAcerto:
-          "🎉 Certo! FOGO só com ADULTO por perto.",
-        feedbackErro:
-          "FOGO queima. Só perto do fogão COM ADULTO.",
+        feedbackAcerto: "🎉 Certo! FOGO só com ADULTO por perto.",
+        feedbackErro: "FOGO queima. Só perto do fogão COM ADULTO.",
       },
       {
         pergunta: "Se o chão está MOLHADO, o cuidado é…",
-        opcoes: ["Correr por cima", "Andar devagar pra não escorregar", "Deitar no chão"],
-        opcoesImagens: [carro, chuva, coracao],
+        opcoes: [
+          "Correr por cima",
+          "Andar devagar pra não escorregar",
+          "Deitar no chão",
+          "Outra possibilidade",
+        ],
+        opcoesImagens: [carro, chuva, coracao, carro],
         correta: 1,
-        feedbackAcerto:
-          "🎉 Boa! Chão molhado = andar DEVAGAR.",
-        feedbackErro:
-          "Chão molhado ESCORREGA. Cuidado é ANDAR DEVAGAR.",
+        feedbackAcerto: "🎉 Boa! Chão molhado = andar DEVAGAR.",
+        feedbackErro: "Chão molhado ESCORREGA. Cuidado é ANDAR DEVAGAR.",
       },
     ],
   },
 
   // 7 · SEQUÊNCIA — atravessando a rua
   momento07_sequencia: {
-    instrucao:
-      "Coloque em ordem os passos de ATRAVESSAR A RUA com segurança.",
+    instrucao: "Coloque em ordem os passos de ATRAVESSAR A RUA com segurança.",
     bloco: {
       instrucao: "Começo → meio → fim.",
       itens: [
@@ -238,17 +237,14 @@ export const aula04: AulaPortuguesV4 = {
         },
       ],
       ordemCerta: ["s1", "s2", "s3"],
-      feedbackAcerto:
-        "🎉 Perfeito! Parar → olhar → atravessar. Assim a rua fica segura.",
-      feedbackErro:
-        "Pense: PRIMEIRO paro. DEPOIS olho pros dois lados. POR FIM atravesso.",
+      feedbackAcerto: "🎉 Perfeito! Parar → olhar → atravessar. Assim a rua fica segura.",
+      feedbackErro: "Pense: PRIMEIRO paro. DEPOIS olho pros dois lados. POR FIM atravesso.",
     },
   },
 
   // 8 · LEITURA INDEPENDENTE
   momento08_leituraIndependente: {
-    instrucao:
-      "Agora leia sozinho e responda as duas perguntas.",
+    instrucao: "Agora leia sozinho e responda as duas perguntas.",
     leitura: {
       titulo: "Cuidando do meu lugar",
       imagemUrl: bairro,
@@ -261,12 +257,11 @@ export const aula04: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "Onde o lixo deve ser jogado?",
-        opcoes: ["No chão da rua", "Na LIXEIRA", "Dentro do rio"],
-        opcoesImagens: [rua, lixeiraReciclagem, chuva],
+        opcoes: ["No chão da rua", "Na LIXEIRA", "Dentro do rio", "Outra possibilidade"],
+        opcoesImagens: [rua, lixeiraReciclagem, chuva, rua],
         correta: 1,
         feedbackAcerto: "🎉 Isso! Lixo SEMPRE na LIXEIRA.",
-        feedbackErro:
-          "O texto diz: 'LIXO vai na LIXEIRA — nunca no chão nem no rio'.",
+        feedbackErro: "O texto diz: 'LIXO vai na LIXEIRA — nunca no chão nem no rio'.",
         ondeEstaNoTexto: "…LIXO vai na LIXEIRA…",
       },
       {
@@ -275,12 +270,12 @@ export const aula04: AulaPortuguesV4 = {
           "Deixa aberta pra fazer barulho",
           "FECHA pra não desperdiçar água",
           "Coloca a boca embaixo",
+          "Outra possibilidade",
         ],
-        opcoesImagens: [chuva, sabonete, coracao],
+        opcoesImagens: [chuva, sabonete, coracao, chuva],
         correta: 1,
         feedbackAcerto: "🎉 Boa! FECHA a torneira.",
-        feedbackErro:
-          "O texto diz: 'fecho quando escovo os dentes'.",
+        feedbackErro: "O texto diz: 'fecho quando escovo os dentes'.",
         ondeEstaNoTexto: "…fecho quando escovo os dentes…",
       },
     ],
@@ -289,14 +284,12 @@ export const aula04: AulaPortuguesV4 = {
   // MINIJOGO — Guardião: risco × cuidado
   momento_minijogo: {
     titulo: "🛡️ Guardião do Lugar",
-    instrucao:
-      "Cada rodada mostra uma SITUAÇÃO. Escolha o CUIDADO certo pra ficar seguro.",
+    instrucao: "Cada rodada mostra uma SITUAÇÃO. Escolha o CUIDADO certo pra ficar seguro.",
     jogo: {
       tipo: "arquitetoLugar",
       titulo: "Guardião do Lugar",
       bloco: {
-        instrucao:
-          "Olhe o RISCO da cena. Toque na atitude segura embaixo.",
+        instrucao: "Olhe o RISCO da cena. Toque na atitude segura embaixo.",
         rodadas: [
           {
             id: "r1",
@@ -304,19 +297,17 @@ export const aula04: AulaPortuguesV4 = {
               nome: "Na rua",
               emojiLugar: "🚗",
               emojiMorador: "⚽",
-              pista:
-                "A bola caiu no meio da RUA. Passam carros. O que fazer?",
+              pista: "A bola caiu no meio da RUA. Passam carros. O que fazer?",
             },
             opcoes: [
               { id: "adulto", nome: "Chamar um adulto pra ajudar", imagemUrl: familia },
               { id: "correr", nome: "Correr pra pegar sem olhar", imagemUrl: carro },
               { id: "chorar", nome: "Ficar parado sem falar nada", imagemUrl: rua },
+              { id: "outra-opcao-2", nome: "Outra possibilidade", imagemUrl: familia },
             ],
             correta: "adulto",
-            feedbackAcerto:
-              "🎉 Isso! Rua é risco — CHAMA o adulto pra ajudar.",
-            feedbackErro:
-              "Correr na rua sem olhar é MUITO perigoso. Chame um ADULTO.",
+            feedbackAcerto: "🎉 Isso! Rua é risco — CHAMA o adulto pra ajudar.",
+            feedbackErro: "Correr na rua sem olhar é MUITO perigoso. Chame um ADULTO.",
           },
           {
             id: "r2",
@@ -324,19 +315,17 @@ export const aula04: AulaPortuguesV4 = {
               nome: "Na cozinha",
               emojiLugar: "🍳",
               emojiMorador: "🔥",
-              pista:
-                "O fogão está com FOGO aceso e um adulto cozinhando. O que fazer?",
+              pista: "O fogão está com FOGO aceso e um adulto cozinhando. O que fazer?",
             },
             opcoes: [
               { id: "longe", nome: "Ficar longe do fogão", imagemUrl: coracao },
               { id: "perto", nome: "Encostar pra ver como acende", imagemUrl: fogo },
               { id: "brincar", nome: "Brincar embaixo do fogão", imagemUrl: bola },
+              { id: "outra-opcao-3", nome: "Outra possibilidade", imagemUrl: coracao },
             ],
             correta: "longe",
-            feedbackAcerto:
-              "🎉 Certo! FOGO queima. A gente fica LONGE.",
-            feedbackErro:
-              "Fogo é RISCO grande. Fique LONGE do fogão.",
+            feedbackAcerto: "🎉 Certo! FOGO queima. A gente fica LONGE.",
+            feedbackErro: "Fogo é RISCO grande. Fique LONGE do fogão.",
           },
           {
             id: "r3",
@@ -344,19 +333,17 @@ export const aula04: AulaPortuguesV4 = {
               nome: "Antes do almoço",
               emojiLugar: "🍽️",
               emojiMorador: "🖐️",
-              pista:
-                "Você acabou de brincar no quintal e vai comer. O que fazer primeiro?",
+              pista: "Você acabou de brincar no quintal e vai comer. O que fazer primeiro?",
             },
             opcoes: [
               { id: "lavar", nome: "Lavar as mãos com sabonete", imagemUrl: lavarMaos },
               { id: "comer", nome: "Comer com as mãos como estão", imagemUrl: bola },
               { id: "cachorro", nome: "Dar comida pro cachorro primeiro", imagemUrl: cachorro },
+              { id: "outra-opcao-4", nome: "Outra possibilidade", imagemUrl: lavarMaos },
             ],
             correta: "lavar",
-            feedbackAcerto:
-              "🎉 Boa! LAVAR as mãos — evita doença.",
-            feedbackErro:
-              "Mão suja tem germe. Antes de comer, LAVA com água e sabonete.",
+            feedbackAcerto: "🎉 Boa! LAVAR as mãos — evita doença.",
+            feedbackErro: "Mão suja tem germe. Antes de comer, LAVA com água e sabonete.",
           },
           {
             id: "r4",
@@ -364,19 +351,17 @@ export const aula04: AulaPortuguesV4 = {
               nome: "Na chuva forte",
               emojiLugar: "🌧️",
               emojiMorador: "⚡",
-              pista:
-                "Está chovendo muito forte com raio. O que fazer?",
+              pista: "Está chovendo muito forte com raio. O que fazer?",
             },
             opcoes: [
               { id: "casa", nome: "Ficar dentro de casa", imagemUrl: coracao },
               { id: "praca", nome: "Ir brincar na praça molhada", imagemUrl: praca },
               { id: "poste", nome: "Ficar embaixo do poste", imagemUrl: rua },
+              { id: "outra-opcao-5", nome: "Outra possibilidade", imagemUrl: coracao },
             ],
             correta: "casa",
-            feedbackAcerto:
-              "🎉 Isso! Chuva forte com raio: FICAR EM CASA.",
-            feedbackErro:
-              "Raio é MUITO perigoso. O cuidado é ficar EM CASA.",
+            feedbackAcerto: "🎉 Isso! Chuva forte com raio: FICAR EM CASA.",
+            feedbackErro: "Raio é MUITO perigoso. O cuidado é ficar EM CASA.",
           },
         ],
         feedbackFinal:
@@ -398,10 +383,10 @@ export const aula04: AulaPortuguesV4 = {
         "Jogar lixo no chão pra ver o que acontece",
         "Lavar as mãos, olhar pros dois lados e chamar adulto quando precisa",
         "Correr na rua com os olhos fechados",
+        "Outra possibilidade",
       ],
       correta: 1,
-      feedbackAcerto:
-        "🎉 Isso! Guardião cuida da segurança E do lugar.",
+      feedbackAcerto: "🎉 Isso! Guardião cuida da segurança E do lugar.",
       feedbackErro:
         "Guardião faz o CUIDADO certo: mão lavada, olhar antes de atravessar, e chama adulto quando precisa.",
     },
@@ -416,35 +401,37 @@ export const aula04: AulaPortuguesV4 = {
           "Sai correndo sem parar",
           "Para, olha pros dois lados e dá a mão pro adulto",
           "Fecha os olhos",
+          "Outra possibilidade",
         ],
         correta: 1,
         feedbackAcerto: "🎉 Certo! PARA, OLHA e dá a MÃO pro adulto.",
-        feedbackErro:
-          "Cuidado na rua: PARAR, OLHAR, dar a MÃO pro adulto.",
+        feedbackErro: "Cuidado na rua: PARAR, OLHAR, dar a MÃO pro adulto.",
       },
       {
         pergunta: "2/5 — Antes de comer, você…",
-        opcoes: ["Lava as mãos com sabonete", "Come com a mão suja", "Nem lembra"],
+        opcoes: [
+          "Lava as mãos com sabonete",
+          "Come com a mão suja",
+          "Nem lembra",
+          "Outra possibilidade",
+        ],
         correta: 0,
         feedbackAcerto: "🎉 Boa! LAVA as mãos.",
-        feedbackErro:
-          "Mão suja tem germe. LAVA antes de comer.",
+        feedbackErro: "Mão suja tem germe. LAVA antes de comer.",
       },
       {
         pergunta: "3/5 — O que a gente faz com o LIXO?",
-        opcoes: ["Joga na lixeira", "Joga no chão", "Joga no rio"],
+        opcoes: ["Joga na lixeira", "Joga no chão", "Joga no rio", "Outra possibilidade"],
         correta: 0,
         feedbackAcerto: "🎉 Isso! Lixo na LIXEIRA.",
-        feedbackErro:
-          "LIXO sempre na LIXEIRA — nunca no chão nem no rio.",
+        feedbackErro: "LIXO sempre na LIXEIRA — nunca no chão nem no rio.",
       },
       {
         pergunta: "4/5 — Pra andar de BICICLETA, você usa…",
-        opcoes: ["Capacete", "Chinelo de dedo na cabeça", "Nada"],
+        opcoes: ["Capacete", "Chinelo de dedo na cabeça", "Nada", "Outra possibilidade"],
         correta: 0,
         feedbackAcerto: "🎉 CAPACETE protege a cabeça.",
-        feedbackErro:
-          "Bicicleta = CAPACETE. Sempre.",
+        feedbackErro: "Bicicleta = CAPACETE. Sempre.",
       },
       {
         pergunta: "5/5 — Se acontecer algo perigoso, você…",
@@ -452,12 +439,11 @@ export const aula04: AulaPortuguesV4 = {
           "Resolve sozinho e não conta pra ninguém",
           "Chama um ADULTO de confiança",
           "Corre pra outro lugar",
+          "Outra possibilidade",
         ],
         correta: 1,
-        feedbackAcerto:
-          "🎉 Isso! Sempre CHAMA um adulto de confiança.",
-        feedbackErro:
-          "Em risco, a atitude é CHAMAR um ADULTO de confiança.",
+        feedbackAcerto: "🎉 Isso! Sempre CHAMA um adulto de confiança.",
+        feedbackErro: "Em risco, a atitude é CHAMAR um ADULTO de confiança.",
       },
     ],
   },
@@ -465,10 +451,7 @@ export const aula04: AulaPortuguesV4 = {
   // 11 · MISSÃO EM FAMÍLIA
   momento11_missaoFamilia: {
     titulo: "🛡️ Mapa dos Cuidados",
-    materiais: [
-      "Papel e lápis de cor",
-      "Um adulto pra caminhar pelo bairro",
-    ],
+    materiais: ["Papel e lápis de cor", "Um adulto pra caminhar pelo bairro"],
     passos: [
       "1) A criança sai pra dar UMA volta no quarteirão com um adulto.",
       "2) Aponta 3 RISCOS que viu (ex.: rua com carro rápido, chão molhado, poste com fio solto).",
@@ -476,8 +459,7 @@ export const aula04: AulaPortuguesV4 = {
       "4) Marca com ⚠️ os 3 pontos de risco.",
       "5) Escreve/diz o CUIDADO pra cada um.",
     ],
-    registro:
-      "📸 Uma foto do MAPA dos Cuidados feito com a família.",
+    registro: "📸 Uma foto do MAPA dos Cuidados feito com a família.",
   },
 
   recompensa: {

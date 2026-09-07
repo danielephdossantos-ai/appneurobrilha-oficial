@@ -247,7 +247,7 @@ function fontesDaEtapa(etapa: EtapaPrimeirosAnos): Fonte[] {
     fontes.push(
       fonteEI(porSerie(cursosEI, serieEI), "portugues-ei", "portugues-ei", "Códice de Português", 1),
       fonteEI(
-        porSerie(cursosMatematicaEI, serieEI) ?? porSerie(cursosMatematicaEI, "maternal"),
+        porSerie(cursosMatematicaEI, serieEI),
         "matematica-ei",
         "matematica-ei",
         "Matemática Kawaii",

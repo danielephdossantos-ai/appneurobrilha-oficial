@@ -19,7 +19,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-mapa-do-brasil-e-regioes",
   titulo: "O Mapa do Brasil e Suas 5 Regiões",
   iconeTrilha: "🗺️",
-  bncc: ["EF04GE01"],
+  bncc: [],
   duracaoMin: 22,
 
   cena01_motivacao: {
@@ -36,8 +36,7 @@ export const aula01: AulaGeoV1 = {
 
   cena02_previsao: {
     tipo: "votoExplorador",
-    aurora:
-      "Palpite rápido, explorador: por que será que o IBGE dividiu o Brasil em 5 regiões?",
+    aurora: "Palpite rápido, explorador: por que será que o IBGE dividiu o Brasil em 5 regiões?",
     pergunta: "Pra que serve dividir o Brasil em regiões?",
     opcoes: [
       {
@@ -53,6 +52,19 @@ export const aula01: AulaGeoV1 = {
         subtitulo: "facilitar o estudo e cuidar de um país gigante",
         emoji: "🗂️",
         cor: "from-emerald-400 to-green-600",
+      },
+
+      {
+        id: "extra-1",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
+      {
+        id: "extra-2",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
       },
     ],
     respostaCerta: "organizar",
@@ -77,8 +89,7 @@ export const aula01: AulaGeoV1 = {
         cor: "from-emerald-500 to-green-700",
         conteudo:
           "A MAIOR região do Brasil em tamanho! Aqui vive a Floresta Amazônica, o Rio Amazonas e muitos povos indígenas. Clima quente e úmido o ano todo.",
-        exemplo:
-          "Estados: Amazonas, Pará, Acre, Rondônia, Roraima, Amapá e Tocantins.",
+        exemplo: "Estados: Amazonas, Pará, Acre, Rondônia, Roraima, Amapá e Tocantins.",
         fotoUrl: norte,
       },
       {
@@ -208,6 +219,13 @@ export const aula01: AulaGeoV1 = {
           { id: "norte", emoji: "🌳", titulo: "Norte", cor: "from-emerald-500 to-green-700" },
           { id: "sul", emoji: "🍇", titulo: "Sul", cor: "from-sky-500 to-blue-700" },
           { id: "sudeste", emoji: "🏙️", titulo: "Sudeste", cor: "from-red-500 to-rose-700" },
+
+          {
+            id: "extra-3",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "norte",
         feedbackAcerto: "Isso! A Amazônia fica no NORTE 🌳 — a maior região do Brasil.",
@@ -219,8 +237,20 @@ export const aula01: AulaGeoV1 = {
         fotoUrl: centroOeste,
         cards: [
           { id: "nordeste", emoji: "🏖️", titulo: "Nordeste", cor: "from-amber-400 to-yellow-600" },
-          { id: "centro-oeste", emoji: "⭐", titulo: "Centro-Oeste", cor: "from-orange-400 to-amber-600" },
+          {
+            id: "centro-oeste",
+            emoji: "⭐",
+            titulo: "Centro-Oeste",
+            cor: "from-orange-400 to-amber-600",
+          },
           { id: "sul", emoji: "🍇", titulo: "Sul", cor: "from-sky-500 to-blue-700" },
+
+          {
+            id: "extra-4",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "centro-oeste",
         feedbackAcerto: "Perfeito! Brasília fica no CENTRO-OESTE ⭐ — no coração do Brasil.",
@@ -234,11 +264,17 @@ export const aula01: AulaGeoV1 = {
           { id: "norte", emoji: "🌳", titulo: "Norte", cor: "from-emerald-500 to-green-700" },
           { id: "sudeste", emoji: "🏙️", titulo: "Sudeste", cor: "from-red-500 to-rose-700" },
           { id: "sul", emoji: "🍇", titulo: "Sul", cor: "from-sky-500 to-blue-700" },
+
+          {
+            id: "extra-5",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "sul",
         feedbackAcerto: "Exato! A região SUL 🍇 é a menor e a mais fria — pode até nevar!",
-        feedbackErro:
-          "Repara: friozinho, serras e vinhedos ficam no SUL 🍇 — lá embaixo no mapa.",
+        feedbackErro: "Repara: friozinho, serras e vinhedos ficam no SUL 🍇 — lá embaixo no mapa.",
       },
     ],
     falaFinal:
@@ -339,8 +375,7 @@ export const aula01: AulaGeoV1 = {
     ],
     ordemCerta: ["s1-norte", "s2-nordeste", "s3-centro", "s4-sudeste", "s5-sul"],
     feedbackAcerto: "Viagem completa! Você atravessou o Brasil INTEIRO de norte a sul.",
-    feedbackErro:
-      "Essa não é a próxima. Lembra: NORTE → NORDESTE → CENTRO-OESTE → SUDESTE → SUL.",
+    feedbackErro: "Essa não é a próxima. Lembra: NORTE → NORDESTE → CENTRO-OESTE → SUDESTE → SUL.",
     falaFinal:
       "5 regiões, uma seguida da outra. Agora você sabe a ordem oficial do mapa do Brasil.",
   },
@@ -377,8 +412,7 @@ export const aula01: AulaGeoV1 = {
         chaves: ["paisagem", "juntos", "país"],
       },
     ],
-    falaFinal:
-      "Você leu sozinho e já sabe explicar por que temos 5 regiões. Bora pro minijogo!",
+    falaFinal: "Você leu sozinho e já sabe explicar por que temos 5 regiões. Bora pro minijogo!",
   },
 
   cena09_minijogo: {
@@ -397,7 +431,11 @@ export const aula01: AulaGeoV1 = {
     rodadas: [
       {
         id: "r1",
-        municipioA: { nome: "Floresta Amazônica", emoji: "🌳", cor: "from-emerald-500 to-green-700" },
+        municipioA: {
+          nome: "Floresta Amazônica",
+          emoji: "🌳",
+          cor: "from-emerald-500 to-green-700",
+        },
         municipioB: { nome: "Rio Amazonas", emoji: "🐟", cor: "from-lime-400 to-emerald-600" },
         contexto:
           "A maior floresta tropical do mundo fica aqui. Onças, macacos e o boto-cor-de-rosa vivem por essas águas. Qual região é?",
@@ -407,7 +445,11 @@ export const aula01: AulaGeoV1 = {
       },
       {
         id: "r2",
-        municipioA: { nome: "Praias e coqueiros", emoji: "🏖️", cor: "from-amber-400 to-yellow-600" },
+        municipioA: {
+          nome: "Praias e coqueiros",
+          emoji: "🏖️",
+          cor: "from-amber-400 to-yellow-600",
+        },
         municipioB: { nome: "Forró e acarajé", emoji: "🎶", cor: "from-yellow-400 to-orange-600" },
         contexto:
           "Terra do axé, do forró, das praias famosas e do acarajé. Nove estados formam essa região. Quem é?",
@@ -417,8 +459,16 @@ export const aula01: AulaGeoV1 = {
       },
       {
         id: "r3",
-        municipioA: { nome: "Brasília, a capital", emoji: "⭐", cor: "from-orange-400 to-amber-600" },
-        municipioB: { nome: "Cerrado e Pantanal", emoji: "🐊", cor: "from-amber-400 to-yellow-600" },
+        municipioA: {
+          nome: "Brasília, a capital",
+          emoji: "⭐",
+          cor: "from-orange-400 to-amber-600",
+        },
+        municipioB: {
+          nome: "Cerrado e Pantanal",
+          emoji: "🐊",
+          cor: "from-amber-400 to-yellow-600",
+        },
         contexto:
           "Coração do Brasil! Aqui fica a capital, o Cerrado e o Pantanal com jacarés e capivaras. Qual região?",
         pecaCertaId: "centro-oeste",
@@ -448,7 +498,11 @@ export const aula01: AulaGeoV1 = {
       {
         id: "r6",
         municipioA: { nome: "Fazendas de soja", emoji: "🌾", cor: "from-orange-400 to-amber-600" },
-        municipioB: { nome: "Mato Grosso e Goiás", emoji: "🐂", cor: "from-amber-400 to-yellow-600" },
+        municipioB: {
+          nome: "Mato Grosso e Goiás",
+          emoji: "🐂",
+          cor: "from-amber-400 to-yellow-600",
+        },
         contexto:
           "Grandes fazendas de soja, milho e gado alimentam o Brasil e o mundo. Estados: Mato Grosso, Goiás e MS. Qual região?",
         pecaCertaId: "centro-oeste",
@@ -456,8 +510,7 @@ export const aula01: AulaGeoV1 = {
         feedbackErro: "Pensa nos estados MT, MS e GO: são todos do CENTRO-OESTE ⭐.",
       },
     ],
-    falaFinal:
-      "5 regiões dominadas! Você já é um verdadeiro Explorador Relâmpago do Brasil.",
+    falaFinal: "5 regiões dominadas! Você já é um verdadeiro Explorador Relâmpago do Brasil.",
   },
 
   cena10_revisao: {
@@ -504,6 +557,8 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "3 regiões", correta: false },
           { id: "b", texto: "5 regiões", correta: true },
           { id: "c", texto: "26 regiões", correta: false },
+
+          { id: "extra-6", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Isso! 5 regiões: Norte, Nordeste, Centro-Oeste, Sudeste e Sul.",
         feedbackErro: "Repensa: são 5 regiões. 26 é o número de ESTADOS.",
@@ -515,6 +570,8 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Centro-Oeste", correta: true },
           { id: "b", texto: "Sudeste", correta: false },
           { id: "c", texto: "Norte", correta: false },
+
+          { id: "extra-7", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Perfeito! Brasília fica no coração do país — Centro-Oeste.",
         feedbackErro: "Repensa: a capital fica bem no MEIO do mapa. Centro-Oeste.",
@@ -526,9 +583,10 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Pra separar as pessoas.", correta: false },
           { id: "b", texto: "Pra facilitar o estudo e a organização do país.", correta: true },
           { id: "c", texto: "Pra ninguém visitar outros estados.", correta: false },
+
+          { id: "extra-8", texto: "Outra possibilidade", correta: false },
         ],
-        feedbackAcerto:
-          "Isso! Regiões AJUDAM a estudar, governar e cuidar de um país tão grande.",
+        feedbackAcerto: "Isso! Regiões AJUDAM a estudar, governar e cuidar de um país tão grande.",
         feedbackErro:
           "Repensa: brasileiro pode ir a qualquer região. As divisões AJUDAM a organizar.",
       },

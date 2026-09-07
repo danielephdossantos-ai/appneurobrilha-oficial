@@ -14,7 +14,7 @@ import { url as imgPassadoDiario } from "@/assets/historia-2ano/passado-diario-a
 import { url as imgTempoLinha } from "@/assets/historia-2ano/tempo-passado-presente-futuro-brilha.png.asset.json";
 /**
  * História · 2º Ano · Unidade 1 · Aula 01
- * "Ontem, Hoje e Amanhã" — EF02HI06 + EF02HI07
+ * "Ontem, Hoje e Amanhã" — EF02HI06
  *
  * Skin "Máquina do Tempo do Brilha" via imagens temáticas kawaii:
  *  - FOTO ANTIGA: retrato sépia dos anos 40 (usada na lupa / cadernos)
@@ -45,7 +45,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-ontem-hoje-amanha",
   titulo: "Ontem, Hoje e Amanhã",
   iconeTrilha: "⏳",
-  bncc: ["EF02HI06", "EF02HI07"],
+  bncc: ["EF02HI06"],
   duracaoMin: 20,
 
   cena01_motivacao: {
@@ -83,6 +83,8 @@ export const aula01: AulaGeoV1 = {
         cor: "from-sky-400 to-blue-500",
         fotoUrl: IMG_PRESENTE_BRILHA,
       },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "roupas-cores",
     feedbackAcerto:
@@ -193,6 +195,7 @@ export const aula01: AulaGeoV1 = {
           { id: "p", emoji: "📸", titulo: "Passado", cor: "from-amber-400 to-orange-600" },
           { id: "pr", emoji: "⏰", titulo: "Presente", cor: "from-emerald-400 to-teal-600" },
           { id: "f", emoji: "🚀", titulo: "Futuro", cor: "from-sky-400 to-indigo-600" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "p",
         feedbackAcerto:
@@ -208,6 +211,7 @@ export const aula01: AulaGeoV1 = {
           { id: "p", emoji: "📸", titulo: "Passado", cor: "from-amber-400 to-orange-600" },
           { id: "pr", emoji: "⏰", titulo: "Presente", cor: "from-emerald-400 to-teal-600" },
           { id: "f", emoji: "🚀", titulo: "Futuro", cor: "from-sky-400 to-indigo-600" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "pr",
         feedbackAcerto: "Exato! Agora é AGORA — isso é PRESENTE.",
@@ -222,6 +226,7 @@ export const aula01: AulaGeoV1 = {
           { id: "p", emoji: "📸", titulo: "Passado", cor: "from-amber-400 to-orange-600" },
           { id: "pr", emoji: "⏰", titulo: "Presente", cor: "from-emerald-400 to-teal-600" },
           { id: "f", emoji: "🚀", titulo: "Futuro", cor: "from-sky-400 to-indigo-600" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "f",
         feedbackAcerto:
@@ -495,6 +500,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Passado (Ontem)", correta: true },
           { id: "b", texto: "Futuro (Amanhã)" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto:
           "Incrível! Esse diário é uma máquina do tempo em formato de papel, guardando memórias do PASSADO!",
@@ -509,6 +516,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Passado" },
           { id: "b", texto: "Presente", correta: true },
           { id: "c", texto: "Futuro" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Isso! O agora é sempre PRESENTE.",
         feedbackErro: "Pensa: você está lendo AGORA. Isso é PRESENTE.",
@@ -520,6 +528,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Passado" },
           { id: "b", texto: "Futuro", correta: true },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Combo! Amanhã ainda não chegou — é FUTURO.",
         feedbackErro: "Ainda não aconteceu, né? Então é FUTURO.",

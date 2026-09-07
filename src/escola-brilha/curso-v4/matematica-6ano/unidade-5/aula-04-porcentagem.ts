@@ -57,10 +57,10 @@ export const aula04_porcentagem: AulaV4 = {
         },
       },
       {
-        texto: "Truque do 10%: divida por 10.",
+        texto: "Como 10% = 10/100 = 1/10, encontrar 10% significa dividir a quantidade em 10 partes iguais.",
         exemploReal: {
           contexto: "10% de 380 = 38.",
-          destaque: "Para 20% → dobre o 10%; para 5% → metade.",
+          destaque: "20% corresponde a duas partes de 10%; 5% corresponde à metade de 10%.",
         },
       },
       {

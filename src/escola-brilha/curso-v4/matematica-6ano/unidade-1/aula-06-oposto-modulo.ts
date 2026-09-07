@@ -1,183 +1,36 @@
 import type { AulaV4 } from "../../types";
 
+// Nome do arquivo e da exportação preservados para manter compatibilidade.
 export const aula06_opostoModulo: AulaV4 = {
-  slug: "u1-06-oposto-modulo",
-  titulo: "Oposto e módulo",
-  iconeTrilha: "🪞",
+  slug: "u1-06-problemas-naturais",
+  titulo: "Problemas com números naturais",
+  iconeTrilha: "🧠",
   bncc: ["EF06MA03"],
-  duracaoMin: 22,
+  duracaoMin: 24,
   metodologias: ["skemp"],
-
-  momento01_motivacao: {
-    titulo: "O espelho do zero",
-    historia:
-      "{NOME}, cada número tem um GÊMEO do outro lado do zero — o OPOSTO. E cada número tem uma DISTÂNCIA até o zero — o MÓDULO.",
-  },
-
-  momento02_exploracao: {
-    instrucao: "Observe: 4 e −4 são espelhados no zero.",
-    cenas: [
-      { tipo: "texto", texto: "OPOSTO: mesmo número, sinal trocado. Oposto de 5 é −5.", destaque: true },
-      { tipo: "texto", texto: "MÓDULO |x|: distância até zero. Sempre ≥ 0." },
-      {
-        tipo: "retaNumerica",
-        min: -6,
-        max: 6,
-        passo: 1,
-        destacar: [
-          { valor: -4, rotulo: "−4", cor: "#f97316" },
-          { valor: 0, rotulo: "0" },
-          { valor: 4, rotulo: "4", cor: "#0ea5e9" },
-        ],
-        intervalos: [
-          { de: -4, ate: 0, cor: "#fdba74", rotulo: "4 passos" },
-          { de: 0, ate: 4, cor: "#7dd3fc", rotulo: "4 passos" },
-        ],
-        legenda: "|−4| = 4 e |4| = 4 → mesma distância do zero.",
-      },
-    ],
-  },
-
-  momento03_descoberta: {
-    perguntaGuia: "Quanto vale |−9|?",
-    pista: "Distância do −9 até o zero: conte os passos.",
-    revelacao: "|−9| = 9. Nove passos até o zero.",
-  },
-
-  momento04_explicacao: {
-    titulo: "Regras práticas",
-    etapas: [
-      {
-        texto: "Oposto: troca só o sinal.",
-        exemploReal: {
-          contexto: "Oposto de 12 é −12. Oposto de −3 é 3.",
-          visualMat: {
-            tipo: "retaNumerica",
-            min: -15,
-            max: 15,
-            passo: 3,
-            destacar: [
-              { valor: -12, rotulo: "−12", cor: "#ef4444" },
-              { valor: 0, rotulo: "0" },
-              { valor: 12, rotulo: "12", cor: "#22c55e" },
-            ],
-          },
-          destaque: "Sempre à mesma distância do zero, em lados opostos.",
-        },
-      },
-      {
-        texto: "Módulo tira o sinal negativo.",
-        exemploReal: {
-          contexto: "|−15| = 15 · |8| = 8 · |0| = 0.",
-          visualMat: {
-            tipo: "tabela",
-            titulo: "Módulos",
-            cabecalhos: ["Número", "Módulo"],
-            linhas: [
-              { rotulo: "−15", valores: ["−15", "15"] },
-              { rotulo: "8", valores: ["8", "8"] },
-              { rotulo: "0", valores: ["0", "0"] },
-              { rotulo: "−7", valores: ["−7", "7"] },
-            ],
-          },
-          destaque: "Módulo é sempre ≥ 0.",
-        },
-      },
-      {
-        texto: "Oposto do oposto = número original.",
-        exemploReal: {
-          contexto: "Oposto de (oposto de 4) = oposto de −4 = 4.",
-          destaque: "Dois espelhos consecutivos voltam ao mesmo lugar.",
-        },
-      },
-    ],
-  },
-
-  momento05_modelagem: {
-    enunciado: "Ache o oposto e o módulo de −12.",
-    resposta: "Oposto = 12 · Módulo = 12",
-    visualMat: {
-      tipo: "retaNumerica",
-      min: -15,
-      max: 15,
-      passo: 3,
-      destacar: [
-        { valor: -12, rotulo: "−12", cor: "#ef4444" },
-        { valor: 0, rotulo: "0" },
-        { valor: 12, rotulo: "12 (oposto)", cor: "#22c55e" },
-      ],
-      intervalos: [{ de: -12, ate: 0, cor: "#fca5a5", rotulo: "|−12| = 12" }],
-    },
-    passos: [
-      "Oposto: troca o sinal. −12 → 12.",
-      "Módulo: distância até 0 = 12 passos.",
-      "Coincidem em valor porque estão à mesma distância do zero.",
-    ],
-  },
-
-  momento06_praticaGuiada: {
-    enunciado: "Oposto de −7?",
-    dica: "Troca o sinal.",
-    interacao: {
-      tipo: "escolhaVisual",
-      pergunta: "Escolha:",
-      opcoes: [{ nome: "7" }, { nome: "−7" }, { nome: "0" }],
-      respostaCerta: "7",
-      feedbackAcerto: "🎯 Sinal trocado.",
-      feedbackErro: "Só troca o sinal: −7 → 7.",
-    },
-  },
-
-  momento07_praticaIndependente: {
-    enunciado: "Qual vale mais: |−10| ou 8?",
-    interacao: {
-      tipo: "escolhaVisual",
-      pergunta: "Escolha:",
-      opcoes: [{ nome: "|−10| = 10" }, { nome: "8" }, { nome: "Iguais" }],
-      respostaCerta: "|−10| = 10",
-      feedbackAcerto: "🎯 10 > 8.",
-      feedbackErro: "|−10| = 10, e 10 > 8.",
-    },
-  },
-
-  momento08_aplicacao: {
-    contexto: "Elevador saiu do térreo (0). Foi ao −3 (subsolo 3) e depois ao +5 (5º andar).",
-    problema: "Andou mais na descida ou na subida?",
-    interacao: {
-      tipo: "escolhaVisual",
-      pergunta: "Escolha:",
-      opcoes: [{ nome: "Na subida (|+5|=5)" }, { nome: "Na descida (|−3|=3)" }, { nome: "Igual" }],
-      respostaCerta: "Na subida (|+5|=5)",
-      feedbackAcerto: "🎯 5 > 3.",
-      feedbackErro: "|+5| = 5 e |−3| = 3.",
-    },
-  },
-
-  momento09_revisao: {
-    pontos: [
-      "Oposto: troca o sinal.",
-      "Módulo: distância até 0, sempre ≥ 0.",
-      "|−a| = |a|. Oposto do oposto = original.",
-    ],
-  },
-
-  momento10_avaliacao: {
-    perguntas: [
-      { pergunta: "Oposto de 6:", opcoes: ["−6", "6", "0"], correta: 0, feedbackAcerto: "🎉", feedbackErro: "Troca o sinal." },
-      { pergunta: "|−15|:", opcoes: ["15", "−15", "0"], correta: 0, feedbackAcerto: "🎉", feedbackErro: "Módulo é sempre ≥ 0." },
-      { pergunta: "Oposto de −20:", opcoes: ["20", "−20", "0"], correta: 0, feedbackAcerto: "🎉", feedbackErro: "−20 → 20." },
-    ],
-  },
-
-  momento11_missaoFamilia: {
-    titulo: "Reta com espelho",
-    materiais: ["Papel, régua"],
-    passos: [
-      "Desenhe uma reta de −5 a 5.",
-      "Marque 3 pares OPOSTOS (ex.: 2 e −2).",
-      "Escreva o módulo de cada um.",
-    ],
-    registro: "📸 Foto.",
-  },
+  momento01_motivacao: { titulo: "Escolher antes de calcular", historia: "{NOME}, resolver não é procurar uma palavra mágica. Primeiro entendemos a situação, depois escolhemos as operações, calculamos e conferimos se a resposta faz sentido." },
+  momento02_exploracao: { instrucao: "Use quatro perguntas para organizar o raciocínio.", cenas: [
+    { tipo: "tabela", titulo: "Rota da resolução", cabecalhos: ["Etapa", "Pergunta"], linhas: [
+      { rotulo: "1", valores: ["Entender", "O que já sei?"] }, { rotulo: "2", valores: ["Descobrir", "O que preciso encontrar?"] }, { rotulo: "3", valores: ["Planejar", "Como as quantidades se relacionam?"] }, { rotulo: "4", valores: ["Conferir", "A resposta faz sentido?"] },
+    ] },
+    { tipo: "texto", texto: "A mesma palavra pode aparecer em problemas diferentes. Leia a relação entre as quantidades.", destaque: true },
+  ] },
+  momento03_descoberta: { perguntaGuia: "Uma biblioteca tinha 1.250 livros, recebeu 375 e doou 120. Quantos ficaram?", pista: "Primeiro entram 375; depois saem 120.", revelacao: "1.250 + 375 = 1.625; 1.625 − 120 = 1.505 livros." },
+  momento04_explicacao: { titulo: "Cálculo exato e estimativa", etapas: [
+    { texto: "Modele a história com uma expressão.", exemploReal: { contexto: "1.250 + 375 − 120", destaque: "A expressão registra a ordem dos acontecimentos." } },
+    { texto: "Estime antes para prever a grandeza.", exemploReal: { contexto: "1.250 ≈ 1.300; 375 ≈ 400; 120 ≈ 100.", destaque: "O resultado deve ficar perto de 1.600." } },
+    { texto: "Calcule e verifique.", exemploReal: { contexto: "1.250 + 375 − 120 = 1.505.", destaque: "1.505 está perto da estimativa; o resultado é coerente." } },
+  ] },
+  momento05_modelagem: { enunciado: "Uma escola comprou 24 caixas com 36 lápis em cada uma e distribuiu 640. Quantos sobraram?", resposta: "224 lápis", passos: ["24 × 36 = 864 lápis.", "864 − 640 = 224 lápis.", "Conferência: 640 + 224 = 864."], visualMat: { tipo: "tabela", cabecalhos: ["Ação", "Cálculo", "Resultado"], linhas: [{ rotulo: "Comprar", valores: ["24 × 36", "864"] }, { rotulo: "Distribuir", valores: ["864 − 640", "224"] }] } },
+  momento06_praticaGuiada: { enunciado: "945 cadernos foram divididos igualmente em 9 armários. Quantos em cada armário?", dica: "Divida o total pelo número de grupos iguais.", interacao: { tipo: "escolhaVisual", pergunta: "Escolha:", opcoes: [{ nome: "105" }, { nome: "95" }, { nome: "115" }, { nome: "936" }], respostaCerta: "105", feedbackAcerto: "🎯 945 ÷ 9 = 105.", feedbackErro: "9 × 105 = 945." } },
+  momento07_praticaIndependente: { enunciado: "Um auditório tem 18 fileiras com 25 lugares. Se 387 foram ocupados, quantos ficaram vazios?", interacao: { tipo: "escolhaVisual", pergunta: "Escolha:", opcoes: [{ nome: "63" }, { nome: "450" }, { nome: "362" }, { nome: "43" }], respostaCerta: "63", feedbackAcerto: "🎯 18 × 25 = 450; 450 − 387 = 63.", feedbackErro: "Calcule o total e retire os lugares ocupados." } },
+  momento08_aplicacao: { contexto: "Uma campanha separou 2.760 livros em caixas de 40.", problema: "Quantas caixas completas foram preenchidas?", interacao: { tipo: "escolhaVisual", pergunta: "Escolha:", opcoes: [{ nome: "69 caixas" }, { nome: "68 caixas" }, { nome: "70 caixas" }, { nome: "27 caixas" }], respostaCerta: "69 caixas", feedbackAcerto: "🎯 2.760 ÷ 40 = 69.", feedbackErro: "40 × 69 = 2.760." } },
+  momento09_revisao: { pontos: ["Entenda os dados e a pergunta antes de operar.", "Estime para prever a grandeza.", "Calcule e confira pela operação inversa ou pelo contexto."] },
+  momento10_avaliacao: { perguntas: [
+    { pergunta: "32 pacotes com 15 figurinhas totalizam:", opcoes: ["480", "470", "47", "2"], correta: 0, feedbackAcerto: "🎉", feedbackErro: "32 × 15 = 480." },
+    { pergunta: "1.200 itens divididos em 30 grupos iguais:", opcoes: ["40", "30", "400", "1.170"], correta: 0, feedbackAcerto: "🎉", feedbackErro: "1.200 ÷ 30 = 40." },
+    { pergunta: "Uma estimativa serve para:", opcoes: ["Prever e conferir a grandeza", "Substituir sempre o cálculo exato", "Escolher ao acaso", "Apagar os dados"], correta: 0, feedbackAcerto: "🎉", feedbackErro: "Ela ajuda a avaliar se o resultado é razoável." },
+  ] },
+  momento11_missaoFamilia: { titulo: "Problema do cotidiano", materiais: ["Papel e lápis"], passos: ["Crie um problema com duas operações e números naturais.", "Resolva mostrando dados, plano, cálculo e conferência.", "Peça a alguém da família para conferir."], registro: "📸 Foto da resolução." },
   recompensa: { xp: 170, moedas: 90 },
 };

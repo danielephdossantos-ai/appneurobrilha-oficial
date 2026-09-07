@@ -4,7 +4,7 @@ export const aula04_estatistica: AulaV4 = {
   slug: "u7-04-estatistica",
   titulo: "Gráficos e estatística",
   iconeTrilha: "📊",
-  bncc: ["EF06MA31", "EF06MA32"],
+  bncc: ["EF06MA31", "EF06MA32", "EF06MA33"],
   duracaoMin: 22,
   metodologias: ["skemp"],
 

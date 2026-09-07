@@ -40,10 +40,38 @@ export const aula01: AulaArteV1 = {
     titulo: "🌿 O Setor que Respira",
     instrucao: "Toca em cada estrutura orgânica",
     itens: [
-      { emoji: "🏞️", rotulo: "Casa da Cascata (Fallingwater, 1935)", descricao: "Frank Lloyd Wright projetou uma casa INTEIRA sobre uma cachoeira real. As pedras entram nas salas, a água canta no chão. Engenharia + topografia = arquitetura orgânica.", cor: "#0f766e", fotoUrl: fallingwaterExt },
-      { emoji: "🐉", rotulo: "Casa Batlló (Gaudí)", descricao: "Antoni Gaudí curvou toda a fachada como se fosse o dorso de um dragão. Nada de linha reta — só curvas biomórficas.", cor: "#dc2626", fotoUrl: casaBatllo },
-      { emoji: "🌳", rotulo: "Colunas-árvore (Sagrada Família)", descricao: "Gaudí desenhou colunas que se ramificam como galhos de floresta. A estrutura da igreja imita o crescimento das árvores.", cor: "#7c2d12", fotoUrl: sagradaColunas },
-      { emoji: "🏢", rotulo: "Bosco Verticale (Milão)", descricao: "Torre residencial coberta por 900 árvores e 20 mil plantas. Um bosque VERTICAL que filtra ar e reduz calor urbano.", cor: "#059669", fotoUrl: boscoVerticale },
+      {
+        emoji: "🏞️",
+        rotulo: "Casa da Cascata (Fallingwater, 1935)",
+        descricao:
+          "Frank Lloyd Wright projetou uma casa INTEIRA sobre uma cachoeira real. As pedras entram nas salas, a água canta no chão. Engenharia + topografia = arquitetura orgânica.",
+        cor: "#0f766e",
+        fotoUrl: fallingwaterExt,
+      },
+      {
+        emoji: "🐉",
+        rotulo: "Casa Batlló (Gaudí)",
+        descricao:
+          "Antoni Gaudí curvou toda a fachada como se fosse o dorso de um dragão. Nada de linha reta — só curvas biomórficas.",
+        cor: "#dc2626",
+        fotoUrl: casaBatllo,
+      },
+      {
+        emoji: "🌳",
+        rotulo: "Colunas-árvore (Sagrada Família)",
+        descricao:
+          "Gaudí desenhou colunas que se ramificam como galhos de floresta. A estrutura da igreja imita o crescimento das árvores.",
+        cor: "#7c2d12",
+        fotoUrl: sagradaColunas,
+      },
+      {
+        emoji: "🏢",
+        rotulo: "Bosco Verticale (Milão)",
+        descricao:
+          "Torre residencial coberta por 900 árvores e 20 mil plantas. Um bosque VERTICAL que filtra ar e reduz calor urbano.",
+        cor: "#059669",
+        fotoUrl: boscoVerticale,
+      },
     ],
     falaFinal: "Você vai aprender a projetar cidades que respiram junto com a natureza.",
   },
@@ -53,33 +81,68 @@ export const aula01: AulaArteV1 = {
     aurora: "Calibra o olho de arquiteto biomórfico!",
     perguntas: [
       {
-        pergunta: "Frank Lloyd Wright projetou a Fallingwater DIRETAMENTE sobre uma cachoeira real. O que ele quis provar com isso?",
+        pergunta:
+          "Frank Lloyd Wright projetou a Fallingwater DIRETAMENTE sobre uma cachoeira real. O que ele quis provar com isso?",
         fotoUrl: fallingwaterInt,
         alternativas: [
-          { texto: "Que a arquitetura pode se INTEGRAR à topografia natural — a casa e a paisagem viram uma coisa só", correta: true },
-          { texto: "Que era mais barato construir na água do que em terreno plano", correta: false },
+          {
+            texto:
+              "Que a arquitetura pode se INTEGRAR à topografia natural — a casa e a paisagem viram uma coisa só",
+            correta: true,
+          },
+          {
+            texto: "Que era mais barato construir na água do que em terreno plano",
+            correta: false,
+          },
+
+          { texto: "Não corresponde à análise", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
-        feedbackAcerto: "Isso! Wright fundiu engenharia humana e geografia natural — nasceu ali a Arquitetura Orgânica.",
-        feedbackErro: "Construir sobre cascata é bem mais caro. O objetivo era filosófico: integrar prédio + natureza.",
+        feedbackAcerto:
+          "Isso! Wright fundiu engenharia humana e geografia natural — nasceu ali a Arquitetura Orgânica.",
+        feedbackErro:
+          "Construir sobre cascata é bem mais caro. O objetivo era filosófico: integrar prédio + natureza.",
       },
       {
-        pergunta: "Um projeto se inspira no favo de mel hexagonal das abelhas. Por que essa forma é tão eficiente?",
+        pergunta:
+          "Um projeto se inspira no favo de mel hexagonal das abelhas. Por que essa forma é tão eficiente?",
         fotoUrl: favoMel,
         alternativas: [
-          { texto: "Máxima resistência mecânica usando a MENOR quantidade de material possível — matemática da natureza", correta: true },
-          { texto: "Porque hexágonos são a única forma que abelhas conseguem enxergar", correta: false },
+          {
+            texto:
+              "Máxima resistência mecânica usando a MENOR quantidade de material possível — matemática da natureza",
+            correta: true,
+          },
+          {
+            texto: "Porque hexágonos são a única forma que abelhas conseguem enxergar",
+            correta: false,
+          },
+
+          { texto: "Não corresponde à análise", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
-        feedbackAcerto: "Perfeito! O hexágono é o polígono mais eficiente pra encaixar sem sobras — biomimética pura.",
-        feedbackErro: "Abelhas enxergam várias formas. O motivo é geométrico: hexágono maximiza espaço com mínimo material.",
+        feedbackAcerto:
+          "Perfeito! O hexágono é o polígono mais eficiente pra encaixar sem sobras — biomimética pura.",
+        feedbackErro:
+          "Abelhas enxergam várias formas. O motivo é geométrico: hexágono maximiza espaço com mínimo material.",
       },
       {
-        pergunta: "Qual é o principal objetivo de projetar um teto ecoeficiente inspirado nas asas das aves marinhas?",
+        pergunta:
+          "Qual é o principal objetivo de projetar um teto ecoeficiente inspirado nas asas das aves marinhas?",
         fotoUrl: boscoVerticale,
         alternativas: [
-          { texto: "A curva desvia o vento forte e canaliza água da chuva pros reservatórios — economia real", correta: true },
+          {
+            texto:
+              "A curva desvia o vento forte e canaliza água da chuva pros reservatórios — economia real",
+            correta: true,
+          },
           { texto: "Deixar a fachada só bonita, sem função prática nenhuma", correta: false },
+
+          { texto: "Não corresponde à análise", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
-        feedbackAcerto: "Correto! Biomimética une estética E função — natureza como manual de engenharia.",
+        feedbackAcerto:
+          "Correto! Biomimética une estética E função — natureza como manual de engenharia.",
         feedbackErro: "Ecoeficiente = economiza recursos. Só bonito não basta pra ser sustentável.",
       },
     ],
@@ -89,10 +152,38 @@ export const aula01: AulaArteV1 = {
     tipo: "vocabularioCards",
     aurora: "Vocabulário técnico do arquiteto biomórfico.",
     cards: [
-      { termo: "Arquitetura Orgânica", definicao: "Filosofia que promove a HARMONIA entre habitação humana e mundo natural — construções parecem extensões da natureza.", emoji: "🌿", cor: "#0f766e", fotoUrl: fallingwaterExt },
-      { termo: "Biomorfismo", definicao: "Adotar formas, padrões e contornos que IMITAM organismos vivos (plantas, animais, esqueletos) no design.", emoji: "🐚", cor: "#dc2626", fotoUrl: nautilus },
-      { termo: "Sustentabilidade Espacial", definicao: "Planejamento arquitetônico que prioriza recursos renováveis, captação de água, ventilação natural e áreas verdes integradas.", emoji: "♻️", cor: "#059669", fotoUrl: boscoVerticale },
-      { termo: "Integração Topográfica", definicao: "Adaptar a construção AO terreno em vez de nivelar a paisagem — usa rochas, desníveis e vegetação como parte do prédio.", emoji: "⛰️", cor: "#7c2d12", fotoUrl: fallingwaterInt },
+      {
+        termo: "Arquitetura Orgânica",
+        definicao:
+          "Filosofia que promove a HARMONIA entre habitação humana e mundo natural — construções parecem extensões da natureza.",
+        emoji: "🌿",
+        cor: "#0f766e",
+        fotoUrl: fallingwaterExt,
+      },
+      {
+        termo: "Biomorfismo",
+        definicao:
+          "Adotar formas, padrões e contornos que IMITAM organismos vivos (plantas, animais, esqueletos) no design.",
+        emoji: "🐚",
+        cor: "#dc2626",
+        fotoUrl: nautilus,
+      },
+      {
+        termo: "Sustentabilidade Espacial",
+        definicao:
+          "Planejamento arquitetônico que prioriza recursos renováveis, captação de água, ventilação natural e áreas verdes integradas.",
+        emoji: "♻️",
+        cor: "#059669",
+        fotoUrl: boscoVerticale,
+      },
+      {
+        termo: "Integração Topográfica",
+        definicao:
+          "Adaptar a construção AO terreno em vez de nivelar a paisagem — usa rochas, desníveis e vegetação como parte do prédio.",
+        emoji: "⛰️",
+        cor: "#7c2d12",
+        fotoUrl: fallingwaterInt,
+      },
     ],
   },
 
@@ -107,10 +198,34 @@ export const aula01: AulaArteV1 = {
       "Nas cidades contemporâneas, isso vira SUSTENTABILIDADE ESPACIAL: o Bosco Verticale de Milão tem 900 árvores plantadas em varandas — um bosque vertical que filtra o ar. Torres em favo de mel, tetos-asa, jardins verticais e painéis solares geométricos criam cidades que RESPIRAM em simbiose com o meio ambiente.",
     ],
     pigmentos: [
-      { nome: "Fallingwater", hex: "#0f766e", fonte: "Wright + topografia real", emoji: "🏞️", fotoUrl: fallingwaterExt },
-      { nome: "Casa Batlló", hex: "#dc2626", fonte: "Gaudí + curvas de dragão", emoji: "🐉", fotoUrl: casaBatllo },
-      { nome: "Colunas-árvore", hex: "#7c2d12", fonte: "Sagrada Família", emoji: "🌳", fotoUrl: sagradaColunas },
-      { nome: "Bosque Vertical", hex: "#059669", fonte: "Torres com 900 árvores", emoji: "🌲", fotoUrl: boscoVerticale },
+      {
+        nome: "Fallingwater",
+        hex: "#0f766e",
+        fonte: "Wright + topografia real",
+        emoji: "🏞️",
+        fotoUrl: fallingwaterExt,
+      },
+      {
+        nome: "Casa Batlló",
+        hex: "#dc2626",
+        fonte: "Gaudí + curvas de dragão",
+        emoji: "🐉",
+        fotoUrl: casaBatllo,
+      },
+      {
+        nome: "Colunas-árvore",
+        hex: "#7c2d12",
+        fonte: "Sagrada Família",
+        emoji: "🌳",
+        fotoUrl: sagradaColunas,
+      },
+      {
+        nome: "Bosque Vertical",
+        hex: "#059669",
+        fonte: "Torres com 900 árvores",
+        emoji: "🌲",
+        fotoUrl: boscoVerticale,
+      },
     ],
   },
 
@@ -119,34 +234,67 @@ export const aula01: AulaArteV1 = {
     aurora: "Verifica o caderno do arquiteto biomórfico!",
     perguntas: [
       {
-        pergunta: "O que a Casa da Cascata (Fallingwater) faz de tão revolucionário na história da arquitetura?",
+        pergunta:
+          "O que a Casa da Cascata (Fallingwater) faz de tão revolucionário na história da arquitetura?",
         fotoUrl: fallingwaterInt,
         alternativas: [
-          { texto: "Foi construída DIRETO sobre uma cachoeira real, integrando pedras e som da água à estrutura das salas", correta: true },
-          { texto: "Foi a primeira casa com telhado de vidro totalmente transparente", correta: false },
+          {
+            texto:
+              "Foi construída DIRETO sobre uma cachoeira real, integrando pedras e som da água à estrutura das salas",
+            correta: true,
+          },
+          {
+            texto: "Foi a primeira casa com telhado de vidro totalmente transparente",
+            correta: false,
+          },
+
+          { texto: "Não corresponde à análise", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
-        feedbackAcerto: "Correto! Wright fez a casa nascer do lugar — engenharia + topografia = organicismo puro.",
-        feedbackErro: "Não era sobre teto de vidro — era sobre nascer da natureza. A cascata continua correndo debaixo dela.",
+        feedbackAcerto:
+          "Correto! Wright fez a casa nascer do lugar — engenharia + topografia = organicismo puro.",
+        feedbackErro:
+          "Não era sobre teto de vidro — era sobre nascer da natureza. A cascata continua correndo debaixo dela.",
       },
       {
         pergunta: "Como Gaudí construiu as colunas gigantes da Sagrada Família?",
         fotoUrl: sagradaColunas,
         alternativas: [
-          { texto: "Fez colunas que se RAMIFICAM como galhos de árvores, imitando uma floresta de pedra", correta: true },
-          { texto: "Usou colunas totalmente retas e iguais como as templos gregos", correta: false },
+          {
+            texto:
+              "Fez colunas que se RAMIFICAM como galhos de árvores, imitando uma floresta de pedra",
+            correta: true,
+          },
+          {
+            texto: "Usou colunas totalmente retas e iguais como as templos gregos",
+            correta: false,
+          },
+
+          { texto: "Não corresponde à análise", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
-        feedbackAcerto: "Isso! Colunas-árvore que se abrem em galhos: biomorfismo em escala catedral.",
+        feedbackAcerto:
+          "Isso! Colunas-árvore que se abrem em galhos: biomorfismo em escala catedral.",
         feedbackErro: "O jeito grego é o oposto: Gaudí quis quebrar essa rigidez com formas vivas.",
       },
       {
         pergunta: "O que é o Bosco Verticale de Milão?",
         fotoUrl: boscoVerticale,
         alternativas: [
-          { texto: "Torre residencial coberta por CENTENAS de árvores plantadas nas varandas — um bosque vertical", correta: true },
+          {
+            texto:
+              "Torre residencial coberta por CENTENAS de árvores plantadas nas varandas — um bosque vertical",
+            correta: true,
+          },
           { texto: "Um parque no chão sem prédio nenhum, só grama e caminhos", correta: false },
+
+          { texto: "Não corresponde à análise", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
-        feedbackAcerto: "Perfeito! Prédio + floresta = filtragem de ar, sombra e biodiversidade em plena cidade.",
-        feedbackErro: "Se fosse só parque no chão não seria 'verticale'. A ideia é SUBIR o bosque pra dentro do prédio.",
+        feedbackAcerto:
+          "Perfeito! Prédio + floresta = filtragem de ar, sombra e biodiversidade em plena cidade.",
+        feedbackErro:
+          "Se fosse só parque no chão não seria 'verticale'. A ideia é SUBIR o bosque pra dentro do prédio.",
       },
     ],
   },
@@ -156,32 +304,44 @@ export const aula01: AulaArteV1 = {
     aurora: "Classifica cada obra pelo PRINCÍPIO orgânico que ela usa!",
     animais: [
       {
-        nome: "Fallingwater sobre a cascata", emoji: "🏞️", fotoUrl: fallingwaterExt,
+        nome: "Fallingwater sobre a cascata",
+        emoji: "🏞️",
+        fotoUrl: fallingwaterExt,
         corAlvo: { nome: "Integração Topográfica", hex: "#0f766e" },
         opcoes: [
           { nome: "Integração Topográfica", hex: "#0f766e" },
           { nome: "Estrutura Hexagonal", hex: "#f59e0b" },
           { nome: "Biomorfismo Curvo", hex: "#dc2626" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Isso! Prédio nascendo da paisagem = integração topográfica.",
       },
       {
-        nome: "Colunas ramificadas da Sagrada Família", emoji: "🌳", fotoUrl: sagradaColunas,
+        nome: "Colunas ramificadas da Sagrada Família",
+        emoji: "🌳",
+        fotoUrl: sagradaColunas,
         corAlvo: { nome: "Biomorfismo (formas vivas)", hex: "#dc2626" },
         opcoes: [
           { nome: "Biomorfismo (formas vivas)", hex: "#dc2626" },
           { nome: "Integração Topográfica", hex: "#0f766e" },
           { nome: "Sustentabilidade Vegetal", hex: "#059669" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Correto! Colunas imitando árvores = biomorfismo direto.",
       },
       {
-        nome: "Bosco Verticale coberto de árvores", emoji: "🌲", fotoUrl: boscoVerticale,
+        nome: "Bosco Verticale coberto de árvores",
+        emoji: "🌲",
+        fotoUrl: boscoVerticale,
         corAlvo: { nome: "Sustentabilidade Vegetal", hex: "#059669" },
         opcoes: [
           { nome: "Sustentabilidade Vegetal", hex: "#059669" },
           { nome: "Estrutura Hexagonal", hex: "#f59e0b" },
           { nome: "Biomorfismo (formas vivas)", hex: "#dc2626" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Perfeito! 900 árvores plantadas em varandas = sustentabilidade espacial.",
       },
@@ -192,11 +352,41 @@ export const aula01: AulaArteV1 = {
     tipo: "sequenciaMistura",
     aurora: "Ordena os 5 passos pra projetar um edifício biomórfico!",
     passos: [
-      { id: "p1", texto: "Escolho uma FORMA NATURAL de referência (vitória-régia, favo, nautilus, semente)", emoji: "🔍", ordem: 1, fotoUrl: vitoriaRegia },
-      { id: "p2", texto: "Analiso a GEOMETRIA eficiente dessa forma (hexágono, espiral, camadas)", emoji: "📐", ordem: 2, fotoUrl: favoMel },
-      { id: "p3", texto: "Adapto a estrutura pro terreno — INTEGRAÇÃO com relevo, sol e vento", emoji: "⛰️", ordem: 3, fotoUrl: fallingwaterExt },
-      { id: "p4", texto: "Adiciono ecoeficiência: jardins verticais, painéis solares, captação de água", emoji: "🌿", ordem: 4, fotoUrl: boscoVerticale },
-      { id: "p5", texto: "Curvo as fachadas com detalhes biomórficos — o prédio VIRA parte da paisagem", emoji: "🐚", ordem: 5, fotoUrl: casaBatllo },
+      {
+        id: "p1",
+        texto: "Escolho uma FORMA NATURAL de referência (vitória-régia, favo, nautilus, semente)",
+        emoji: "🔍",
+        ordem: 1,
+        fotoUrl: vitoriaRegia,
+      },
+      {
+        id: "p2",
+        texto: "Analiso a GEOMETRIA eficiente dessa forma (hexágono, espiral, camadas)",
+        emoji: "📐",
+        ordem: 2,
+        fotoUrl: favoMel,
+      },
+      {
+        id: "p3",
+        texto: "Adapto a estrutura pro terreno — INTEGRAÇÃO com relevo, sol e vento",
+        emoji: "⛰️",
+        ordem: 3,
+        fotoUrl: fallingwaterExt,
+      },
+      {
+        id: "p4",
+        texto: "Adiciono ecoeficiência: jardins verticais, painéis solares, captação de água",
+        emoji: "🌿",
+        ordem: 4,
+        fotoUrl: boscoVerticale,
+      },
+      {
+        id: "p5",
+        texto: "Curvo as fachadas com detalhes biomórficos — o prédio VIRA parte da paisagem",
+        emoji: "🐚",
+        ordem: 5,
+        fotoUrl: casaBatllo,
+      },
     ],
     falaAcerto: "Você acabou de projetar o primeiro Eco-Distrito Flutuante da Cidade Suspensa!",
   },
@@ -206,10 +396,23 @@ export const aula01: AulaArteV1 = {
     aurora: "Lê o diário do arquiteto biomórfico. Toca nas palavras coloridas.",
     titulo: "Diário do Arquiteto Biomórfico",
     trechos: [
-      { texto: "Sou arquiteto biomórfico. Minhas obras seguem a filosofia da", palavraDestaque: "Arquitetura Orgânica", corDestaque: "#0f766e" },
+      {
+        texto: "Sou arquiteto biomórfico. Minhas obras seguem a filosofia da",
+        palavraDestaque: "Arquitetura Orgânica",
+        corDestaque: "#0f766e",
+      },
       { texto: "e imitam formas vivas —", palavraDestaque: "biomorfismo", corDestaque: "#dc2626" },
-      { texto: "puro. Wright integrou a casa à cachoeira; Gaudí curvou pedras como", palavraDestaque: "árvores", corDestaque: "#7c2d12" },
-      { texto: "e usei favos de mel pra máxima eficiência estrutural. Hoje projeto torres com jardins verticais que garantem", palavraDestaque: "sustentabilidade", corDestaque: "#059669" },
+      {
+        texto: "puro. Wright integrou a casa à cachoeira; Gaudí curvou pedras como",
+        palavraDestaque: "árvores",
+        corDestaque: "#7c2d12",
+      },
+      {
+        texto:
+          "e usei favos de mel pra máxima eficiência estrutural. Hoje projeto torres com jardins verticais que garantem",
+        palavraDestaque: "sustentabilidade",
+        corDestaque: "#059669",
+      },
       { texto: "espacial. A cidade precisa RESPIRAR." },
     ],
   },
@@ -238,12 +441,52 @@ export const aula01: AulaArteV1 = {
     aurora: "Fecha a página do Eco-Distrito Flutuante!",
     titulo: "📓 Caderno do Arquiteto Biomórfico",
     itens: [
-      { emoji: "🏞️", rotulo: "Fallingwater (Wright, 1935)", descricao: "Casa construída sobre cachoeira real — engenharia integrada à topografia natural.", cor: "#0f766e", fotoUrl: fallingwaterExt },
-      { emoji: "🐉", rotulo: "Casa Batlló (Gaudí)", descricao: "Fachada curva como dorso de dragão — biomorfismo extremo em Barcelona.", cor: "#dc2626", fotoUrl: casaBatllo },
-      { emoji: "🌳", rotulo: "Colunas-árvore (Sagrada Família)", descricao: "Colunas ramificadas como galhos — floresta de pedra dentro da igreja.", cor: "#7c2d12", fotoUrl: sagradaColunas },
-      { emoji: "⬡", rotulo: "Estrutura em favo de mel", descricao: "Máxima resistência mecânica com mínimo de material — geometria eficiente da natureza.", cor: "#f59e0b", fotoUrl: favoMel },
-      { emoji: "🐚", rotulo: "Espiral do nautilus", descricao: "Referência de biomimética para escadas, rampas e crescimento orgânico das estruturas.", cor: "#0891b2", fotoUrl: nautilus },
-      { emoji: "🌲", rotulo: "Bosco Verticale (Milão)", descricao: "Torre com 900 árvores plantadas nas varandas — bosque vertical que filtra ar urbano.", cor: "#059669", fotoUrl: boscoVerticale },
+      {
+        emoji: "🏞️",
+        rotulo: "Fallingwater (Wright, 1935)",
+        descricao:
+          "Casa construída sobre cachoeira real — engenharia integrada à topografia natural.",
+        cor: "#0f766e",
+        fotoUrl: fallingwaterExt,
+      },
+      {
+        emoji: "🐉",
+        rotulo: "Casa Batlló (Gaudí)",
+        descricao: "Fachada curva como dorso de dragão — biomorfismo extremo em Barcelona.",
+        cor: "#dc2626",
+        fotoUrl: casaBatllo,
+      },
+      {
+        emoji: "🌳",
+        rotulo: "Colunas-árvore (Sagrada Família)",
+        descricao: "Colunas ramificadas como galhos — floresta de pedra dentro da igreja.",
+        cor: "#7c2d12",
+        fotoUrl: sagradaColunas,
+      },
+      {
+        emoji: "⬡",
+        rotulo: "Estrutura em favo de mel",
+        descricao:
+          "Máxima resistência mecânica com mínimo de material — geometria eficiente da natureza.",
+        cor: "#f59e0b",
+        fotoUrl: favoMel,
+      },
+      {
+        emoji: "🐚",
+        rotulo: "Espiral do nautilus",
+        descricao:
+          "Referência de biomimética para escadas, rampas e crescimento orgânico das estruturas.",
+        cor: "#0891b2",
+        fotoUrl: nautilus,
+      },
+      {
+        emoji: "🌲",
+        rotulo: "Bosco Verticale (Milão)",
+        descricao:
+          "Torre com 900 árvores plantadas nas varandas — bosque vertical que filtra ar urbano.",
+        cor: "#059669",
+        fotoUrl: boscoVerticale,
+      },
     ],
     falaFinal: "Eco-Distrito Flutuante RESTAURADO — a Cidade Suspensa começa a respirar!",
   },
@@ -252,16 +495,29 @@ export const aula01: AulaArteV1 = {
     tipo: "avaliacaoFinal",
     aurora: "Missão final, arquiteto biomórfico!",
     quiz: {
-      pergunta: "Qual é o OBJETIVO PRINCIPAL do Biomorfismo aplicado ao design das habitações e cidades contemporâneas?",
+      pergunta:
+        "Qual é o OBJETIVO PRINCIPAL do Biomorfismo aplicado ao design das habitações e cidades contemporâneas?",
       alternativas: [
-        { texto: "Copiar formas e estruturas EFICIENTES da natureza para criar construções mais harmônicas e integradas ao meio ambiente", correta: true },
-        { texto: "Fazer com que todas as casas sejam pintadas obrigatoriamente de verde e marrom", correta: false },
+        {
+          texto:
+            "Copiar formas e estruturas EFICIENTES da natureza para criar construções mais harmônicas e integradas ao meio ambiente",
+          correta: true,
+        },
+        {
+          texto: "Fazer com que todas as casas sejam pintadas obrigatoriamente de verde e marrom",
+          correta: false,
+        },
+
+        { texto: "Não corresponde à análise", correta: false },
+        { texto: "Outra resposta sem relação", correta: false },
       ],
-      feedback: "Excelente! O biomorfismo une engenharia natural (Wright, Gaudí, favos de mel, nautilus) à criatividade artística para resolver problemas urbanos reais: economia de material, ventilação passiva, captação de água e integração com o relevo. A cor não é o ponto — o PRINCÍPIO ESTRUTURAL da natureza é o que importa.",
+      feedback:
+        "Excelente! O biomorfismo une engenharia natural (Wright, Gaudí, favos de mel, nautilus) à criatividade artística para resolver problemas urbanos reais: economia de material, ventilação passiva, captação de água e integração com o relevo. A cor não é o ponto — o PRINCÍPIO ESTRUTURAL da natureza é o que importa.",
     },
     missaoFamilia:
       "🌿 Engenharia da Natureza: no quintal, parque ou praça, coletem em família formas naturais — uma pinha, uma folha seca, uma concha, um graveto trançado. Analisem a engenharia geométrica de cada uma. Depois desenhem juntos como seria uma estação de transporte público inspirada em uma dessas formas. Registrem foto + desenho no álbum.",
-    recompensaTitulo: "🌿 Eco-Distrito Flutuante restaurado — a Cidade Suspensa aprendeu a respirar.",
+    recompensaTitulo:
+      "🌿 Eco-Distrito Flutuante restaurado — a Cidade Suspensa aprendeu a respirar.",
     recompensaItem: "🧭 Compasso Áureo de Fibra de Carbono",
   },
 

@@ -8,7 +8,7 @@ export const aula07: AulaPortuguesV4 = {
   slug: "aula-07-entrevista-protocolo",
   titulo: "A Entrevista: Extraindo Dados",
   iconeTrilha: "🎙️",
-  bncc: ["EF67LP08", "EF67LP10"],
+  bncc: ["EF67LP14"],
   duracaoMin: 25,
   momento01_motivacao: {
     titulo: "Extração de Dados: A Fonte Direta",

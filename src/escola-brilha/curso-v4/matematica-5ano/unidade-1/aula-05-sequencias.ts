@@ -4,7 +4,7 @@ export const aula05_sequencias: AulaV4 = {
   slug: "u1-05-sequencias",
   titulo: "Sequências e regularidades",
   iconeTrilha: "🔁",
-  bncc: ["EF05MA10"],
+  bncc: ["EF05MA01"],
   duracaoMin: 20,
   metodologias: ["skemp"],
 

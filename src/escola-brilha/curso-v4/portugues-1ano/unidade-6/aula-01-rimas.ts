@@ -7,6 +7,7 @@ import { url as sol } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
 import { url as flor } from "@/assets/neuro-treino/objetos/flor.png.asset.json";
 import { url as estrela } from "@/assets/neuro-treino/objetos/estrela-brilhante.png.asset.json";
 import { url as livro } from "@/assets/neuro-treino/objetos/livro.png.asset.json";
+import { url as coracao } from "@/assets/neuro-treino/objetos/coracao.png.asset.json";
 
 /**
  * Aula 1 — Palavras que Rimam
@@ -180,15 +181,15 @@ export const aula01: AulaPortuguesV4 = {
           { id: "gato", texto: "GATO", imagemUrl: gato, alvoId: "pato" },
           { id: "rato", texto: "RATO", imagemUrl: rato, alvoId: "pato" },
           { id: "pao", texto: "PÃO", alvoId: "mao" },
-          { id: "flor", texto: "FLOR", imagemUrl: flor, alvoId: "sol" },
+          { id: "flor", texto: "FLOR", imagemUrl: flor, alvoId: "amor" },
         ],
         alvos: [
           { id: "pato", nome: "PATO", imagemUrl: pato, descricao: "Rima com ATO" },
           { id: "mao", nome: "MÃO", descricao: "Rima com ÃO" },
-          { id: "sol", nome: "SOL", imagemUrl: sol, descricao: "Rima com OL" },
+          { id: "amor", nome: "AMOR", imagemUrl: coracao, descricao: "Rima com OR" },
         ],
         feedbackAcerto: "🎉 Isso! Você juntou as palavras que terminam com o mesmo som.",
-        feedbackErro: "Escute o final das palavras: GATO e RATO terminam em ATO; PÃO termina em ÃO como MÃO; FLOR termina em OL como SOL.",
+        feedbackErro: "Escute o final: GATO e RATO têm ATO; PÃO e MÃO têm ÃO; FLOR e AMOR têm OR.",
       },
     },
   },

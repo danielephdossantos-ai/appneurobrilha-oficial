@@ -212,9 +212,12 @@ function Secao({ id, label, children }: { id: string; label: string; children: R
       <div className="mb-2 flex items-center justify-between">
         <div className="text-xs uppercase tracking-wider text-amber-300">{label}</div>
         <button 
+          type="button"
           onClick={ouvir}
+          aria-label={falando ? `Parar leitura da seção ${label}` : `Ouvir seção ${label}`}
+          aria-pressed={falando}
           className={cn(
-            "p-1.5 rounded-full transition-all",
+            "p-1.5 rounded-full transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d1f55]",
             falando ? "bg-rose-500 text-white animate-pulse" : "bg-white/5 text-white/40 hover:bg-white/10 hover:text-white"
           )}
           title="Ouvir seção"

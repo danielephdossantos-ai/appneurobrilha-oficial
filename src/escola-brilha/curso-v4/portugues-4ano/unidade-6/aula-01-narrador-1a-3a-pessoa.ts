@@ -23,7 +23,7 @@ export const aula01: AulaPortuguesV4 = {
   slug: "aula-01-narrador-1a-3a-pessoa",
   titulo: "Narrador: quem conta a história",
   iconeTrilha: "🧭",
-  bncc: ["EF35LP27", "EF04LP24"],
+  bncc: ["EF35LP26", "EF35LP29"],
   duracaoMin: 20,
 
   momento01_motivacao: {

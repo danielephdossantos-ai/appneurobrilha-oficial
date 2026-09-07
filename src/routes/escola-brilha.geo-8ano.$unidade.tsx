@@ -7,6 +7,7 @@ import {
   getProximaUnidade8ano,
 } from "@/escola-brilha/curso-v4/geografia-8ano/dados-fund2";
 import { useState } from "react";
+import { useAppState } from "@/core/store";
 
 export const Route = createFileRoute("/escola-brilha/geo-8ano/$unidade")({
   head: ({ params }) => ({
@@ -24,6 +25,7 @@ export const Route = createFileRoute("/escola-brilha/geo-8ano/$unidade")({
 function Page() {
   const { unidade } = Route.useParams();
   const navigate = useNavigate();
+  const { activeChild } = useAppState();
   const [certificado, setCertificado] = useState(false);
 
   const dados = getUnidade8ano(unidade);
@@ -45,6 +47,7 @@ function Page() {
   if (certificado) {
     return (
       <CertificadoFund2
+        nome={activeChild?.nome}
         titulo={dados.recompensas.titulo}
         disciplina="Geografia"
         ano="8º Ano · Ensino Fundamental 2"
@@ -58,6 +61,7 @@ function Page() {
       numeroTotal={UNIDADES_8ANO.length}
       ehFinal={ehFinal}
       onConcluir={() => {
+        let cicloCompleto = false;
         try {
           const raw = localStorage.getItem(`eb.geo8ano.progresso.${localStorage.getItem("neurobrilha:activeChildId") || "sem-crianca"}`);
           const arr: string[] = raw ? JSON.parse(raw) : [];
@@ -65,11 +69,14 @@ function Page() {
             arr.push(unidade);
             localStorage.setItem(`eb.geo8ano.progresso.${localStorage.getItem("neurobrilha:activeChildId") || "sem-crianca"}`, JSON.stringify(arr));
           }
+          cicloCompleto = UNIDADES_8ANO.every((item) => arr.includes(item.slug));
         } catch {
           /* ignore */
         }
-        if (ehFinal) {
+        if (ehFinal && cicloCompleto) {
           setCertificado(true);
+        } else if (ehFinal) {
+          navigate({ to: "/escola-brilha/trilha-fund2/$serie/$disc", params: { serie: "8ano", disc: "geografia" } });
         } else if (proxima) {
           navigate({ to: "/escola-brilha/geo-8ano/$unidade", params: { unidade: proxima.slug } });
         }

@@ -33,7 +33,7 @@ const aula: Aula = {
     contexto:
       "O esquilo Brilha recebeu uma missão importante. Os animais da floresta estão organizando uma grande festa, mas ninguém sabe se há frutas suficientes para todos. A Dona Coelha colheu cenouras, o Macaco separou bananas e a Tartaruga juntou folhas — ninguém contou nada ainda!",
     problema:
-      "Se contarem errado, vai faltar comida na festa. Será que dá pra contar rápido e sem errar?",
+      "Se contarem errado, pode faltar comida na festa. Como organizar a contagem para não pular nem repetir objetos?",
     convite: "Vamos ajudar os animais a contar de vários jeitos?",
   },
 
@@ -44,25 +44,77 @@ const aula: Aula = {
   ],
 
   missao:
-    "Descobrir que existem várias maneiras de contar: um a um, formando pares, agrupando e comparando coleções.",
+    "Descobrir maneiras de contar com precisão e também fazer uma estimativa antes de conferir.",
 
   objetivos: [
     "Contar objetos um a um sem pular nenhum.",
-    "Formar grupos iguais para contar mais rápido.",
+    "Formar grupos iguais para organizar e conferir a contagem.",
     "Parear objetos (um pra um) para descobrir a quantidade.",
     "Comparar duas coleções e dizer qual tem mais ou menos.",
+    "Estimar uma quantidade e depois contar para verificar se a estimativa ficou próxima.",
   ],
 
   motivacao:
-    "Nem sempre a gente precisa contar de um em um. Quando tem muita coisa, dá pra fazer grupinhos e contar bem mais rápido. Bora aprender esses truques com os animais da floresta?",
+    "Nem sempre a gente precisa contar de um em um. Quando há muitos objetos, podemos organizar em grupos. Também podemos olhar, fazer uma estimativa e depois contar para conferir. Vamos praticar com os animais da floresta?",
 
   explicacao:
-    "Hoje você vai aprender que existem VÁRIAS maneiras de contar:\n\n• UM A UM — aponte cada objeto e diga o número: 1, 2, 3, 4, 5.\n• EM PARES — junte de dois em dois: 2, 4, 6, 8.\n• EM GRUPOS — faça grupinhos iguais (de 3, de 5, de 10) e conte os grupos.\n• COMPARANDO — coloque duas coleções lado a lado e veja qual tem mais.\n\nCada situação pede uma estratégia diferente. Quando tem POUCA coisa, contar um a um é fácil. Quando tem MUITA, agrupar salva a vida.",
+    "Hoje você vai aprender maneiras diferentes de contar:\n\n• UM A UM — aponte cada objeto uma única vez e diga a sequência: 1, 2, 3, 4, 5. O último número dito informa o total.\n• EM PARES OU GRUPOS — organize quantidades iguais e conte sem pular nem repetir objetos.\n• ESTIMANDO — antes de contar, diga aproximadamente quantos objetos você acha que há. Depois conte e confira se a estimativa ficou próxima.\n• COMPARANDO — faça pares, colocando um objeto de uma coleção para cada objeto da outra. A coleção em que sobram objetos tem mais.\n\nCom poucos objetos, contar um a um costuma ser simples. Com muitos, organizar em grupos ajuda a manter a precisão.",
+
+  explicacaoAtiva: [
+    {
+      texto: "Para contar exatamente, toque ou aponte cada objeto uma única vez. O último número dito é o total.",
+      exemplo: "Ao apontar cinco cenouras: 1, 2, 3, 4, 5. Há 5 cenouras.",
+      imagem: cenouraImg,
+      imagemAlt: "Uma cenoura usada no treino de contagem",
+      checagem: {
+        pergunta: "O que informa o total na contagem um a um?",
+        opcoes: ["O último número dito", "O primeiro número dito", "A cor dos objetos"],
+        correta: 0,
+        explicacao: "Depois de apontar todos uma vez, o último número dito informa quantos há.",
+      },
+    },
+    {
+      texto: "Agrupar ajuda a enxergar a organização. Três grupos com três maçãs podem ser contados assim: 3, 6, 9.",
+      exemplo: "3 + 3 + 3 = 9.",
+      imagem: macaImg,
+      imagemAlt: "Maçã usada para formar grupos iguais",
+      checagem: {
+        pergunta: "Três grupos de três objetos têm quantos objetos ao todo?",
+        opcoes: ["6", "8", "9"],
+        correta: 2,
+        explicacao: "Conte os grupos: 3, 6, 9.",
+      },
+    },
+    {
+      texto: "Estimar é dizer uma quantidade aproximada antes de contar. Não precisa acertar exatamente: depois contamos para verificar.",
+      exemplo: "Acho que há perto de 10 sementes. Agora vou contar uma a uma para conferir.",
+      imagem: sementeImg,
+      imagemAlt: "Semente usada para fazer uma estimativa",
+      checagem: {
+        pergunta: "Depois de fazer uma estimativa, o que devemos fazer?",
+        opcoes: ["Contar para conferir", "Apagar os objetos", "Escolher outro desenho"],
+        correta: 0,
+        explicacao: "A contagem exata permite comparar o total com a estimativa.",
+      },
+    },
+    {
+      texto: "Para comparar sem depender do espaço ocupado, forme pares: um objeto de um grupo com um objeto do outro. Se sobrar em um grupo, ele tem mais.",
+      exemplo: "Se todas as seis joaninhas de um grupo formam pares e ainda sobram duas, esse grupo tem mais.",
+      imagem: joaninhaImg,
+      imagemAlt: "Joaninha usada na comparação por pares",
+      checagem: {
+        pergunta: "Na comparação por pares, qual grupo tem mais?",
+        opcoes: ["O grupo em que sobram objetos", "O grupo mais espalhado", "O grupo mais colorido"],
+        correta: 0,
+        explicacao: "Objetos espalhados podem ocupar mais espaço; os pares mostram a diferença real.",
+      },
+    },
+  ],
 
   explicacoesNiveis: {
-    nivel1: "Podemos contar de vários jeitos: um a um, em pares ou em grupos.",
+    nivel1: "Podemos contar exatamente ou estimar e depois conferir.",
     nivel2:
-      "3 grupos de 3 maçãs = 9 maçãs. Contar em grupos é mais rápido.",
+      "3 grupos de 3 maçãs = 9 maçãs. Os grupos ajudam a não pular nem repetir.",
     nivel3:
       "Se cada passarinho encontra um ninho, dá pra saber a quantidade sem errar.",
     nivel4:
@@ -92,7 +144,7 @@ const aula: Aula = {
       "O Macaco separou as bananas em 3 grupos iguais, com 3 bananas em cada grupo. Quantas bananas ele tem ao todo?",
     resposta: "9 bananas — 3 grupos de 3 dão 9.",
     explicacao:
-      "Quando fazemos grupos iguais, é só pular de 3 em 3: 3, 6, 9. Contar em grupos é muito mais rápido do que contar uma por uma.",
+      "Cada grupo tem 3 bananas. Conte acumulando: o primeiro termina em 3, o segundo em 6 e o terceiro em 9. Assim, 3 + 3 + 3 = 9.",
     visual: {
       tipo: "grupos",
       pergunta:
@@ -117,7 +169,7 @@ const aula: Aula = {
     },
     {
       enunciado:
-        "🍎 O Macaco tem 9 maçãs organizadas em 3 grupos de 3. Qual estratégia é mais rápida?",
+        "🍎 O Macaco tem 9 maçãs organizadas em 3 grupos de 3. Como contar sem perder a organização?",
       resposta: "Contar em grupos: 3, 6, 9.",
       dica: "Cada grupo tem 3. Pule de 3 em 3.",
     },
@@ -169,7 +221,8 @@ const aula: Aula = {
     pontos: [
       "Contar um a um funciona bem quando tem poucas coisas.",
       "Formar pares (um pra um) mostra se falta ou sobra.",
-      "Agrupar em quantidades iguais ajuda a contar rápido.",
+      "Agrupar em quantidades iguais ajuda a contar sem pular nem repetir.",
+      "Estimar é dizer aproximadamente quantos há e depois contar para conferir.",
       "Comparar coleções mostra qual tem mais e qual tem menos.",
     ],
     dica: "Antes de contar, olha o tamanho do monte e escolhe a estratégia certa.",
@@ -177,10 +230,10 @@ const aula: Aula = {
 
   quiz: [
     {
-      pergunta: "Qual é a melhor maneira de contar MUITOS objetos iguais?",
+      pergunta: "Qual estratégia ajuda a organizar a contagem de muitos objetos iguais?",
       opcoes: ["Contar em grupos", "Fechar os olhos", "Escolher qualquer número"],
       correta: 0,
-      explicacao: "Grupos iguais deixam a contagem muito mais rápida.",
+      explicacao: "Grupos iguais ajudam a acompanhar o que já foi contado.",
     },
     {
       pergunta:
@@ -199,10 +252,10 @@ const aula: Aula = {
     },
     {
       pergunta:
-        "Você tinha 3 estrelas e agora tem 5. Quantas estrelas foram acrescentadas?",
-      opcoes: ["1", "2", "3"],
-      correta: 1,
-      explicacao: "De 3 pra 5 são 2 estrelas a mais (3 + 2 = 5).",
+        "Você olha um grupo e diz: 'acho que há perto de 10 sementes'. O que deve fazer depois?",
+      opcoes: ["Contar para conferir", "Dizer que a estimativa é sempre exata", "Escolher pela cor"],
+      correta: 0,
+      explicacao: "Estimativa é uma aproximação. Depois contamos para descobrir o total exato.",
     },
   ],
 
@@ -410,7 +463,7 @@ const aula: Aula = {
       },
       {
         pergunta:
-          "Você quer contar 20 tampinhas rápido. Qual estratégia é melhor?",
+          "Você quer contar 20 tampinhas sem pular nem repetir. Qual estratégia ajuda?",
         opcoes: [
           "Uma por uma",
           "Formando grupos iguais",
@@ -418,7 +471,7 @@ const aula: Aula = {
         ],
         correta: 1,
         explicacao:
-          "Formando grupos (por exemplo, 4 grupos de 5) fica muito mais rápido.",
+          "Formando grupos, por exemplo 4 grupos de 5, fica mais fácil acompanhar o que já foi contado.",
         visual: {
           tipo: "grupos",
           grupos: [

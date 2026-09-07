@@ -8,7 +8,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-revolucao-francesa",
   titulo: "A Revolução Francesa: Liberdade, Igualdade, Fraternidade",
   iconeTrilha: "🇫🇷",
-  bncc: ["EF08HI06", "EF08HI07"],
+  bncc: ["EF08HI04"],
   duracaoMin: 30,
   estilo: "teen",
 
@@ -33,6 +33,8 @@ export const aula01: AulaGeoV1 = {
     opcoes: [
       { id: "des", titulo: "DESIGUALDADE E FOME", subtitulo: "3% de privilégios; 97% sem nada", emoji: "🥖", cor: "from-teal-800 to-slate-950" },
       { id: "inv", titulo: "INVASÃO ESTRANGEIRA", subtitulo: "outro país atacou a França", emoji: "❌", cor: "from-amber-900 to-slate-950" },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "des",
     feedbackAcerto:

@@ -17,7 +17,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-municipio-e-meio-ambiente",
   titulo: "O Município e o Meio Ambiente",
   iconeTrilha: "🌱",
-  bncc: ["EF03HI11", "EF03HI12"],
+  bncc: [],
   duracaoMin: 22,
 
   cena01_motivacao: {
@@ -55,6 +55,8 @@ export const aula01: AulaGeoV1 = {
         cor: "from-red-500 to-red-700",
         fotoUrl: imgEnchente,
       },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "impermeavel",
     feedbackAcerto:
@@ -175,6 +177,8 @@ export const aula01: AulaGeoV1 = {
         cards: [
           { id: "im", emoji: "⚠️", titulo: "Impacto Negativo", cor: "from-red-600 to-orange-800" },
           { id: "su", emoji: "🌱", titulo: "Ação Sustentável", cor: "from-emerald-600 to-teal-800" },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "im",
         feedbackAcerto:
@@ -189,6 +193,8 @@ export const aula01: AulaGeoV1 = {
         cards: [
           { id: "im", emoji: "⚠️", titulo: "Impacto Negativo", cor: "from-red-600 to-orange-800" },
           { id: "su", emoji: "🌱", titulo: "Ação Sustentável", cor: "from-emerald-600 to-teal-800" },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "su",
         feedbackAcerto:
@@ -203,6 +209,8 @@ export const aula01: AulaGeoV1 = {
         cards: [
           { id: "im", emoji: "⚠️", titulo: "Impacto Negativo", cor: "from-red-600 to-orange-800" },
           { id: "su", emoji: "🌱", titulo: "Ação Sustentável", cor: "from-emerald-600 to-teal-800" },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "su",
         feedbackAcerto:
@@ -463,6 +471,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Sustentabilidade.", correta: true },
           { id: "b", texto: "Urbanização acelerada." },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto:
           "Certificado. Sustentabilidade garante o equilíbrio entre crescimento urbano e saúde do planeta.",
@@ -476,6 +486,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Criar um parque linear e replantar a mata ciliar.", correta: true },
           { id: "b", texto: "Cobrir o rio com mais concreto." },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto:
           "Correto. Parque linear + mata ciliar devolvem espaço ao rio e absorvem a chuva.",
@@ -489,6 +501,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Separar o lixo reciclável em casa e não jogar papel na rua.", correta: true },
           { id: "b", texto: "Cortar todas as árvores da calçada." },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto:
           "Certificação concluída. Coleta seletiva e ruas limpas evitam bueiros entupidos e enchentes.",

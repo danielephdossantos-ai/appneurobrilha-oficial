@@ -26,7 +26,7 @@ export const aula03: AulaPortuguesV4 = {
   slug: "aula-03-trabalho-campo-cidade",
   titulo: "Trabalho no Campo e na Cidade",
   iconeTrilha: "🚜",
-  bncc: ["EF02GE03"],
+  bncc: ["EF02GE04"],
   duracaoMin: 15,
 
   // 1 · MOTIVAÇÃO
@@ -39,8 +39,7 @@ export const aula03: AulaPortuguesV4 = {
 
   // 2 · PREVISÃO
   momento02_previsao: {
-    instrucao:
-      "Aurora colocou um bilhete no caderno de investigação. Leia com atenção.",
+    instrucao: "Aurora colocou um bilhete no caderno de investigação. Leia com atenção.",
     bloco: {
       titulo: "Missão do Trabalho",
       capaImagemUrl: mapa,
@@ -78,6 +77,7 @@ export const aula03: AulaPortuguesV4 = {
           texto: "Sobre viagens pra outro planeta.",
           imagemUrl: cidade,
         },
+        { texto: "Sobre outra possibilidade relacionada ao tema.", imagemUrl: campo },
       ],
       respostaCerta: 0,
       feedbackAcerto:
@@ -95,16 +95,14 @@ export const aula03: AulaPortuguesV4 = {
         palavra: "campo",
         explicacao:
           "É o lugar com muita TERRA, plantação e animais. Fica longe da cidade — tem sítio, fazenda e roça.",
-        exemplo:
-          "No CAMPO, o agricultor planta arroz e cria galinhas.",
+        exemplo: "No CAMPO, o agricultor planta arroz e cria galinhas.",
         imagemUrl: campo,
       },
       {
         palavra: "cidade",
         explicacao:
           "É o lugar com muitas CASAS, prédios, ruas, lojas e serviços perto uns dos outros.",
-        exemplo:
-          "Na CIDADE, o padeiro faz pão e a professora dá aula.",
+        exemplo: "Na CIDADE, o padeiro faz pão e a professora dá aula.",
         imagemUrl: cidade,
       },
     ],
@@ -112,8 +110,7 @@ export const aula03: AulaPortuguesV4 = {
 
   // 4 · LEITURA GUIADA
   momento04_leituraGuiada: {
-    instrucao:
-      "Aurora vai LER com você. Repare nas palavras destacadas — são pistas do texto.",
+    instrucao: "Aurora vai LER com você. Repare nas palavras destacadas — são pistas do texto.",
     leitura: {
       titulo: "O pão que veio de longe",
       imagemUrl: padaria,
@@ -129,8 +126,7 @@ export const aula03: AulaPortuguesV4 = {
 
   // 5 · COMPREENSÃO
   momento05_compreensao: {
-    instrucao:
-      "As respostas estão TODAS no texto. Volte lá se precisar.",
+    instrucao: "As respostas estão TODAS no texto. Volte lá se precisar.",
     perguntas: [
       {
         pergunta: "Quem PLANTA o trigo?",
@@ -138,31 +134,27 @@ export const aula03: AulaPortuguesV4 = {
           "O padeiro na cidade",
           "O agricultor no campo",
           "A professora na escola",
+          "Outra possibilidade",
         ],
         correta: 1,
-        feedbackAcerto:
-          "🎉 Isso! É o AGRICULTOR, lá no CAMPO.",
-        feedbackErro:
-          "O primeiro parágrafo diz: 'o agricultor… planta o TRIGO'.",
-        ondeEstaNoTexto:
-          "…o agricultor acorda cedo, planta o TRIGO na terra…",
+        feedbackAcerto: "🎉 Isso! É o AGRICULTOR, lá no CAMPO.",
+        feedbackErro: "O primeiro parágrafo diz: 'o agricultor… planta o TRIGO'.",
+        ondeEstaNoTexto: "…o agricultor acorda cedo, planta o TRIGO na terra…",
       },
       {
         pergunta: "Como o trigo vai do campo pra cidade?",
-        opcoes: ["Num caminhão", "Nadando no rio", "Voando sozinho"],
+        opcoes: ["Num caminhão", "Nadando no rio", "Voando sozinho", "Outra possibilidade"],
         correta: 0,
         feedbackAcerto: "🎉 Certo! No CAMINHÃO.",
-        feedbackErro:
-          "O texto diz: 'o trigo vai num CAMINHÃO até a cidade'.",
+        feedbackErro: "O texto diz: 'o trigo vai num CAMINHÃO até a cidade'.",
         ondeEstaNoTexto: "…o trigo vai num CAMINHÃO até a CIDADE…",
       },
       {
         pergunta: "Quem faz o PÃO na cidade?",
-        opcoes: ["O motorista", "O padeiro", "O agricultor"],
+        opcoes: ["O motorista", "O padeiro", "O agricultor", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 Boa! O PADEIRO faz o pão.",
-        feedbackErro:
-          "O segundo parágrafo diz: 'o padeiro… faz o pão quentinho'.",
+        feedbackErro: "O segundo parágrafo diz: 'o padeiro… faz o pão quentinho'.",
         ondeEstaNoTexto: "…o padeiro pega a farinha… e faz o pão…",
       },
     ],
@@ -170,44 +162,38 @@ export const aula03: AulaPortuguesV4 = {
 
   // 6 · PERSONAGENS & CENÁRIO — profissão × lugar
   momento06_personagensCenario: {
-    instrucao:
-      "Cada profissão trabalha num LUGAR. Vamos ver se você reparou.",
+    instrucao: "Cada profissão trabalha num LUGAR. Vamos ver se você reparou.",
     perguntas: [
       {
         pergunta: "Onde o AGRICULTOR trabalha?",
-        opcoes: ["Na cidade grande", "No campo", "Dentro do ônibus"],
-        opcoesImagens: [cidade, campo, carro],
+        opcoes: ["Na cidade grande", "No campo", "Dentro do ônibus", "Outra possibilidade"],
+        opcoesImagens: [cidade, campo, carro, cidade],
         correta: 1,
         feedbackAcerto: "🎉 Isso! Agricultor trabalha no CAMPO.",
-        feedbackErro:
-          "AGRICULTOR planta e cria animais — isso é no CAMPO.",
+        feedbackErro: "AGRICULTOR planta e cria animais — isso é no CAMPO.",
       },
       {
         pergunta: "Onde a PROFESSORA costuma trabalhar?",
-        opcoes: ["Na escola da cidade", "No meio da roça", "No mercado"],
-        opcoesImagens: [escola, campo, mercado],
+        opcoes: ["Na escola da cidade", "No meio da roça", "No mercado", "Outra possibilidade"],
+        opcoesImagens: [escola, campo, mercado, escola],
         correta: 0,
-        feedbackAcerto:
-          "🎉 Certo! Escola é um lugar típico da CIDADE.",
-        feedbackErro:
-          "PROFESSORA trabalha na ESCOLA — que fica na cidade.",
+        feedbackAcerto: "🎉 Certo! Escola é um lugar típico da CIDADE.",
+        feedbackErro: "PROFESSORA trabalha na ESCOLA — que fica na cidade.",
       },
       {
         pergunta: "Quem CUIDA das VACAS e das galinhas?",
-        opcoes: ["O padeiro", "O agricultor", "O motorista de trem"],
-        opcoesImagens: [padaria, vaca, trem],
+        opcoes: ["O padeiro", "O agricultor", "O motorista de trem", "Outra possibilidade"],
+        opcoesImagens: [padaria, vaca, trem, padaria],
         correta: 1,
         feedbackAcerto: "🎉 Boa! É o AGRICULTOR lá no campo.",
-        feedbackErro:
-          "O texto diz: '(o agricultor) também cuida das vacas e das galinhas'.",
+        feedbackErro: "O texto diz: '(o agricultor) também cuida das vacas e das galinhas'.",
       },
     ],
   },
 
   // 7 · SEQUÊNCIA — o caminho do pão
   momento07_sequencia: {
-    instrucao:
-      "Coloque a história do PÃO em ordem: começo → meio → fim.",
+    instrucao: "Coloque a história do PÃO em ordem: começo → meio → fim.",
     bloco: {
       instrucao: "Começo → meio → fim.",
       itens: [
@@ -228,17 +214,14 @@ export const aula03: AulaPortuguesV4 = {
         },
       ],
       ordemCerta: ["s1", "s2", "s3"],
-      feedbackAcerto:
-        "🎉 Perfeito! Plantou → transportou → virou pão. Campo e cidade se AJUDAM.",
-      feedbackErro:
-        "Pense: PRIMEIRO planta (campo). DEPOIS transporta. POR FIM vira pão (cidade).",
+      feedbackAcerto: "🎉 Perfeito! Plantou → transportou → virou pão. Campo e cidade se AJUDAM.",
+      feedbackErro: "Pense: PRIMEIRO planta (campo). DEPOIS transporta. POR FIM vira pão (cidade).",
     },
   },
 
   // 8 · LEITURA INDEPENDENTE
   momento08_leituraIndependente: {
-    instrucao:
-      "Agora leia sozinho e responda as duas perguntas.",
+    instrucao: "Agora leia sozinho e responda as duas perguntas.",
     leitura: {
       titulo: "Trabalhos da cidade",
       imagemUrl: cidade,
@@ -251,22 +234,20 @@ export const aula03: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "Quem CUIDA da saúde no posto?",
-        opcoes: ["A professora", "O médico", "O motorista"],
-        opcoesImagens: [professora, postoSaude, carro],
+        opcoes: ["A professora", "O médico", "O motorista", "Outra possibilidade"],
+        opcoesImagens: [professora, postoSaude, carro, professora],
         correta: 1,
         feedbackAcerto: "🎉 Isso! O MÉDICO cuida da saúde.",
-        feedbackErro:
-          "O texto diz: 'O MÉDICO cuida da saúde no posto'.",
+        feedbackErro: "O texto diz: 'O MÉDICO cuida da saúde no posto'.",
         ondeEstaNoTexto: "…O MÉDICO cuida da saúde no posto…",
       },
       {
         pergunta: "Quem LEVA as pessoas de ônibus?",
-        opcoes: ["A cozinheira", "O motorista", "O agricultor"],
-        opcoesImagens: [cozinheira, carro, vaca],
+        opcoes: ["A cozinheira", "O motorista", "O agricultor", "Outra possibilidade"],
+        opcoesImagens: [cozinheira, carro, vaca, cozinheira],
         correta: 1,
         feedbackAcerto: "🎉 Boa! O MOTORISTA.",
-        feedbackErro:
-          "O texto diz: 'O MOTORISTA leva as pessoas de ônibus'.",
+        feedbackErro: "O texto diz: 'O MOTORISTA leva as pessoas de ônibus'.",
         ondeEstaNoTexto: "…O MOTORISTA leva as pessoas de ônibus…",
       },
     ],
@@ -281,8 +262,7 @@ export const aula03: AulaPortuguesV4 = {
       tipo: "arquitetoLugar",
       titulo: "Campo ou Cidade?",
       bloco: {
-        instrucao:
-          "Olhe o TRABALHO que está acontecendo. Toque na resposta certa embaixo.",
+        instrucao: "Olhe o TRABALHO que está acontecendo. Toque na resposta certa embaixo.",
         rodadas: [
           {
             id: "r1",
@@ -290,19 +270,17 @@ export const aula03: AulaPortuguesV4 = {
               nome: "Ordenhando a vaca",
               emojiLugar: "🐄",
               emojiMorador: "👩‍🌾",
-              pista:
-                "Uma pessoa está TIRANDO O LEITE da vaca bem cedo. Esse trabalho é onde?",
+              pista: "Uma pessoa está TIRANDO O LEITE da vaca bem cedo. Esse trabalho é onde?",
             },
             opcoes: [
               { id: "campo", nome: "No CAMPO", imagemUrl: campo },
               { id: "cidade", nome: "Na CIDADE", imagemUrl: cidade },
               { id: "escola", nome: "Na escola", imagemUrl: escola },
+              { id: "outra-opcao-2", nome: "Outra possibilidade", imagemUrl: campo },
             ],
             correta: "campo",
-            feedbackAcerto:
-              "🎉 Isso! Criar vaca e tirar leite é trabalho do CAMPO.",
-            feedbackErro:
-              "Vaca vive na TERRA, no CAMPO. É lá que se tira o leite.",
+            feedbackAcerto: "🎉 Isso! Criar vaca e tirar leite é trabalho do CAMPO.",
+            feedbackErro: "Vaca vive na TERRA, no CAMPO. É lá que se tira o leite.",
           },
           {
             id: "r2",
@@ -317,12 +295,11 @@ export const aula03: AulaPortuguesV4 = {
               { id: "cidade", nome: "Na CIDADE", imagemUrl: padaria },
               { id: "campo", nome: "No CAMPO", imagemUrl: campo },
               { id: "rio", nome: "No meio do rio", imagemUrl: trem },
+              { id: "outra-opcao-3", nome: "Outra possibilidade", imagemUrl: padaria },
             ],
             correta: "cidade",
-            feedbackAcerto:
-              "🎉 Certo! Padaria é típica da CIDADE.",
-            feedbackErro:
-              "PADARIA fica na CIDADE — perto das casas.",
+            feedbackAcerto: "🎉 Certo! Padaria é típica da CIDADE.",
+            feedbackErro: "PADARIA fica na CIDADE — perto das casas.",
           },
           {
             id: "r3",
@@ -337,12 +314,11 @@ export const aula03: AulaPortuguesV4 = {
               { id: "campo", nome: "No CAMPO", imagemUrl: regador },
               { id: "cidade", nome: "Na CIDADE", imagemUrl: cidade },
               { id: "posto", nome: "No posto de saúde", imagemUrl: postoSaude },
+              { id: "outra-opcao-4", nome: "Outra possibilidade", imagemUrl: regador },
             ],
             correta: "campo",
-            feedbackAcerto:
-              "🎉 Boa! Plantação e galinheiro são coisas do CAMPO.",
-            feedbackErro:
-              "Plantar e criar galinha é trabalho do CAMPO.",
+            feedbackAcerto: "🎉 Boa! Plantação e galinheiro são coisas do CAMPO.",
+            feedbackErro: "Plantar e criar galinha é trabalho do CAMPO.",
           },
           {
             id: "r4",
@@ -357,12 +333,11 @@ export const aula03: AulaPortuguesV4 = {
               { id: "cidade", nome: "Na CIDADE (escola)", imagemUrl: escola },
               { id: "campo", nome: "No meio do pasto", imagemUrl: vaca },
               { id: "mercado", nome: "Dentro do mercado", imagemUrl: mercado },
+              { id: "outra-opcao-5", nome: "Outra possibilidade", imagemUrl: escola },
             ],
             correta: "cidade",
-            feedbackAcerto:
-              "🎉 Isso! ESCOLA fica na CIDADE.",
-            feedbackErro:
-              "PROFESSORA dá aula na ESCOLA, que fica na CIDADE.",
+            feedbackAcerto: "🎉 Isso! ESCOLA fica na CIDADE.",
+            feedbackErro: "PROFESSORA dá aula na ESCOLA, que fica na CIDADE.",
           },
         ],
         feedbackFinal:
@@ -379,18 +354,16 @@ export const aula03: AulaPortuguesV4 = {
       "O que a gente come na cidade quase sempre VEM DO CAMPO — os dois lugares se AJUDAM.",
     ],
     miniDesafio: {
-      pergunta:
-        "Por que o campo e a cidade precisam UM DO OUTRO?",
+      pergunta: "Por que o campo e a cidade precisam UM DO OUTRO?",
       opcoes: [
         "Porque não gostam de ficar sozinhos",
         "Porque o campo produz comida e a cidade transforma, vende e usa",
         "Porque um copia o outro",
+        "Outra possibilidade",
       ],
       correta: 1,
-      feedbackAcerto:
-        "🎉 Isso! CAMPO produz, CIDADE transforma e usa. Trabalham JUNTOS.",
-      feedbackErro:
-        "O campo PRODUZ o alimento; a cidade TRANSFORMA e USA. Por isso se ajudam.",
+      feedbackAcerto: "🎉 Isso! CAMPO produz, CIDADE transforma e usa. Trabalham JUNTOS.",
+      feedbackErro: "O campo PRODUZ o alimento; a cidade TRANSFORMA e USA. Por isso se ajudam.",
     },
   },
 
@@ -403,11 +376,11 @@ export const aula03: AulaPortuguesV4 = {
           "Muitos prédios e ônibus",
           "Plantação e animais na terra",
           "Só shopping",
+          "Outra possibilidade",
         ],
         correta: 1,
         feedbackAcerto: "🎉 CAMPO = terra, plantação e animais.",
-        feedbackErro:
-          "No CAMPO tem PLANTAÇÃO e ANIMAIS — não prédio.",
+        feedbackErro: "No CAMPO tem PLANTAÇÃO e ANIMAIS — não prédio.",
       },
       {
         pergunta: "2/5 — O que a gente encontra na CIDADE?",
@@ -415,27 +388,25 @@ export const aula03: AulaPortuguesV4 = {
           "Muita rua, casas e lojas perto",
           "Só mato e pasto",
           "Só galinha correndo",
+          "Outra possibilidade",
         ],
         correta: 0,
         feedbackAcerto: "🎉 CIDADE = casas, ruas e lojas perto.",
-        feedbackErro:
-          "CIDADE tem muita CASA, RUA e LOJA junto.",
+        feedbackErro: "CIDADE tem muita CASA, RUA e LOJA junto.",
       },
       {
         pergunta: "3/5 — Onde o AGRICULTOR trabalha?",
-        opcoes: ["No campo", "Na escola", "No shopping"],
+        opcoes: ["No campo", "Na escola", "No shopping", "Outra possibilidade"],
         correta: 0,
         feedbackAcerto: "🎉 No CAMPO — plantando e criando animais.",
-        feedbackErro:
-          "AGRICULTOR trabalha no CAMPO.",
+        feedbackErro: "AGRICULTOR trabalha no CAMPO.",
       },
       {
         pergunta: "4/5 — Onde o PADEIRO trabalha?",
-        opcoes: ["No pasto", "Na padaria da cidade", "Na plantação"],
+        opcoes: ["No pasto", "Na padaria da cidade", "Na plantação", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 Isso! Na PADARIA, na cidade.",
-        feedbackErro:
-          "PADEIRO faz pão na PADARIA — que fica na CIDADE.",
+        feedbackErro: "PADEIRO faz pão na PADARIA — que fica na CIDADE.",
       },
       {
         pergunta: "5/5 — De onde vem o LEITE que você toma?",
@@ -443,12 +414,11 @@ export const aula03: AulaPortuguesV4 = {
           "Nasce direto na caixinha",
           "Da VACA, lá no campo",
           "Da máquina do mercado",
+          "Outra possibilidade",
         ],
         correta: 1,
-        feedbackAcerto:
-          "🎉 Certo! O leite vem da VACA, no CAMPO. Depois chega na cidade.",
-        feedbackErro:
-          "O leite vem da VACA (campo). Depois é transportado até a cidade.",
+        feedbackAcerto: "🎉 Certo! O leite vem da VACA, no CAMPO. Depois chega na cidade.",
+        feedbackErro: "O leite vem da VACA (campo). Depois é transportado até a cidade.",
       },
     ],
   },
@@ -456,18 +426,14 @@ export const aula03: AulaPortuguesV4 = {
   // 11 · MISSÃO EM FAMÍLIA
   momento11_missaoFamilia: {
     titulo: "🚜 Investigador do Trabalho",
-    materiais: [
-      "Papel e lápis",
-      "Um adulto pra conversar",
-    ],
+    materiais: ["Papel e lápis", "Um adulto pra conversar"],
     passos: [
       "1) A criança escolhe 3 comidas da casa (ex.: leite, pão, banana).",
       "2) Pergunta pro adulto: 'De onde vem?' — do CAMPO, da CIDADE, ou dos dois.",
       "3) Desenha um caminho: 🌾 CAMPO → 🚚 CAMINHÃO → 🏙️ CIDADE → 🏠 nossa casa.",
       "4) Escolhe UMA profissão da família e diz se ela é mais do CAMPO ou da CIDADE.",
     ],
-    registro:
-      "📸 Uma foto do desenho do caminho da comida, do campo até a mesa.",
+    registro: "📸 Uma foto do desenho do caminho da comida, do campo até a mesa.",
   },
 
   recompensa: {
@@ -476,4 +442,3 @@ export const aula03: AulaPortuguesV4 = {
     medalha: "Investigador(a) do Trabalho",
   },
 };
-

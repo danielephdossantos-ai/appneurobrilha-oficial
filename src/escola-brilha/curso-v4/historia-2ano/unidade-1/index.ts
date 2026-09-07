@@ -1,5 +1,6 @@
 import type { UnidadeGeoV1 } from "../../types";
 import { aula01 } from "./aula-01-ontem-hoje-amanha";
+import { aula02 } from "./aula-02-marcadores-tempo";
 
 export const unidade1: UnidadeGeoV1 = {
   slug: "unidade-1",
@@ -9,5 +10,5 @@ export const unidade1: UnidadeGeoV1 = {
   descricao:
     "Investigar como as coisas mudam ou permanecem iguais ao longo do tempo e construir a primeira sala do museu: a Linha do Tempo da própria vida.",
   corTema: "#b45309",
-  aulas: [aula01],
+  aulas: [aula01, aula02],
 };

@@ -62,11 +62,11 @@ const aula: Aula = {
     "Hoje você vai aprender a COMPARAR duas coleções:\n\n• TEM MAIS — quando um grupo tem uma quantidade maior.\n• TEM MENOS — quando um grupo tem uma quantidade menor.\n• MESMA QUANTIDADE — quando cada objeto de um grupo tem um par no outro (correspondência um a um).\n\nA gente pode primeiro OBSERVAR (estimativa) e depois CONTAR pra confirmar. Se sobrou objeto num lado, esse lado tem mais. Se ficou tudo pareadinho, é a mesma quantidade.",
 
   explicacoesNiveis: {
-    nivel1: "Olhando dois grupos, dá pra ver qual é maior antes de contar.",
+    nivel1: "Primeiro podemos estimar qual grupo parece ter mais; depois contamos ou formamos pares para conferir.",
     nivel2:
       "Se cada coelho encontrar uma cenoura sem sobrar, os dois grupos têm a mesma quantidade.",
     nivel3:
-      "Estimativa: olhe rápido e chute qual é maior. Depois conte pra conferir.",
+      "Estimativa: observe sem contar e diga qual grupo parece ter mais. Depois conte para conferir.",
     nivel4:
       "Comparar quantidades é a base pra somar, subtrair e resolver problemas de matemática.",
   },
@@ -99,16 +99,15 @@ const aula: Aula = {
     explicacao:
       "Quando cada objeto de um grupo forma um par com um do outro grupo e não sobra nenhum, os grupos têm a mesma quantidade.",
     visual: {
-      tipo: "grupos",
+      tipo: "comparar",
       pergunta:
-        "Toque em cada grupo para contar em voz alta. Existe um ninho para cada passarinho?",
-      imagemUrl: passaroImg,
-      itemSingular: "passarinho",
-      itemPlural: "passarinhos",
-      quantidadeGrupos: 2,
-      itensPorGrupo: 4,
-      opcoes: [4, 6, 8],
-      correta: 2,
+        "Forme pares com os olhos: existe um ninho para cada passarinho?",
+      lados: [
+        { imagemUrl: passaroImg, quantidade: 4, rotulo: "4 passarinhos", cor: "#60A5FA" },
+        { imagemUrl: ninhoImg, quantidade: 4, rotulo: "4 ninhos", cor: "#FB923C" },
+      ],
+      opcoes: ["Sim, mesma quantidade", "Sobram passarinhos", "Sobram ninhos"],
+      correta: 0,
     },
   },
 
@@ -279,7 +278,7 @@ const aula: Aula = {
     {
       tipo: "contarQuiz",
       titulo: "Fase 4 · Observe primeiro",
-      instrucao: "Olhe rápido, sem contar. Qual grupo parece MAIOR? Depois confira contando.",
+      instrucao: "Observe sem contar. Qual grupo parece ter MAIS? Depois confira contando.",
       grupos: [
         { imagemUrl: estrelaImg, quantidade: 8, rotulo: "Grupo A" },
         { imagemUrl: estrelaImg, quantidade: 5, rotulo: "Grupo B" },

@@ -86,7 +86,7 @@ const aula: Aula = {
     "Saber escrever a data ajuda a lembrar de aniversários, festas, passeios e do início das férias!",
 
   explicacao:
-    "Toda data tem 3 partes 📅:\n\n• DIA — o número do dia (1 a 31)\n• MÊS — Janeiro, Fevereiro… Dezembro\n• ANO — o ano em que estamos\n\nEscrevemos assim: 15/08/2026 ou 15 de agosto de 2026. As duas formas mostram a MESMA data.",
+    "Uma data registra DIA, MÊS e ANO. No padrão usado no Brasil, escrevemos dia/mês/ano: 15/08/2026 ou 15 de agosto de 2026. O calendário precisa ser consultado para saber o dia da semana. Nem todo mês tem 31 dias: há meses com 30, fevereiro tem 28 e, em ano bissexto, 29. Antes de escrever uma data, confira se aquele dia existe no mês indicado.",
 
   explicacoesNiveis: {
     nivel1: "Uma data tem DIA / MÊS / ANO. Exemplo: 15/08/2026.",

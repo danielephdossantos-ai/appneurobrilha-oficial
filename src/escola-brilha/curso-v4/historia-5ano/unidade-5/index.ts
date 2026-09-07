@@ -1,5 +1,6 @@
 import type { UnidadeGeoV1 } from "../../types";
 import { aula01 } from "./aula-01-patrimonio-unesco";
+import { aula02 } from "./aula-02-memoria-marcos";
 
 export const unidade5: UnidadeGeoV1 = {
   slug: "unidade-5",
@@ -9,5 +10,5 @@ export const unidade5: UnidadeGeoV1 = {
   descricao:
     "Brilha e Aurora acendem a quinta Tocha: O Templo da Memória Humana. O aluno investiga como a UNESCO protege patrimônios culturais e naturais no Brasil e no mundo.",
   corTema: "#0f766e",
-  aulas: [aula01],
+  aulas: [aula01, aula02],
 };

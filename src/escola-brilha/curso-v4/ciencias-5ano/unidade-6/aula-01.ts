@@ -8,7 +8,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-terra-universo-clima",
   titulo: "Terra, Universo e Clima",
   iconeTrilha: "🌍",
-  bncc: ["EF05CI10"],
+  bncc: [],
   duracaoMin: 30,
 
   cena01_motivacao: {
@@ -29,6 +29,7 @@ export const aula01: AulaGeoV1 = {
       { id: "sombra", titulo: "SOMBRA DA TERRA", subtitulo: "encobre a Lua", emoji: "🌑", cor: "from-slate-500 to-slate-700" },
       { id: "iluminacao", titulo: "ILUMINAÇÃO DO SOL", subtitulo: "muda com a órbita", emoji: "☀️", cor: "from-amber-400 to-orange-700" },
       { id: "nuvens", titulo: "NUVENS", subtitulo: "cobrem a Lua", emoji: "☁️", cor: "from-cyan-400 to-sky-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "iluminacao",
     feedbackAcerto: "Sim. Conforme a Lua orbita a Terra, o SOL a ilumina de ângulos diferentes — daí as fases.",
@@ -96,6 +97,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🌀", titulo: "Rotação (giro no próprio eixo)", cor: "from-teal-500 to-emerald-700" },
           { id: "b", emoji: "🔄", titulo: "Translação (volta ao Sol)", cor: "from-slate-500 to-slate-700" },
           { id: "c", emoji: "☁️", titulo: "Nuvens", cor: "from-cyan-500 to-sky-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Sim. Terra gira em 24h — lado iluminado é dia, lado escuro é noite.",
         feedbackErro: "Translação dura 1 ano e causa as estações. Dia/noite é ROTAÇÃO." },
@@ -105,6 +107,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "⭐", titulo: "Estrela — emite luz própria", cor: "from-amber-500 to-orange-700" },
           { id: "b", emoji: "🪐", titulo: "Planeta — não emite luz", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🌙", titulo: "Satélite", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. Sol é uma estrela — planetas apenas refletem a luz dele.",
         feedbackErro: "Planetas não emitem luz. Sol EMITE luz própria — é ESTRELA." },
@@ -114,6 +117,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🧲", titulo: "Gravidade do Sol", cor: "from-fuchsia-500 to-purple-700" },
           { id: "b", emoji: "💨", titulo: "Vento espacial", cor: "from-cyan-500 to-sky-700" },
           { id: "c", emoji: "🔥", titulo: "Calor do Sol", cor: "from-red-500 to-rose-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Sim. Massa gigante do Sol gera GRAVIDADE que puxa todos os planetas.",
         feedbackErro: "Vento e calor não mantêm órbita. É a GRAVIDADE do Sol." },
@@ -261,6 +265,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Uma rotação — dia e noite", correta: true },
           { id: "b", texto: "Uma volta ao redor do Sol" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. 24h = ROTAÇÃO. Volta ao Sol dura 365 dias.",
         feedbackErro: "Volta ao Sol dura 1 ano. Em 24h é uma ROTAÇÃO." },
@@ -269,6 +275,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Estrela — emite luz própria", correta: true },
           { id: "b", texto: "Planeta — só reflete luz" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. Sol emite luz e calor próprios — é ESTRELA.",
         feedbackErro: "Sol EMITE luz. Planetas só refletem. Sol é ESTRELA." },
@@ -277,6 +285,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "O ângulo da luz do Sol conforme a Lua orbita", correta: true },
           { id: "b", texto: "Nuvens cobrindo parte da Lua" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. Órbita da Lua muda o ângulo de iluminação — daí as fases.",
         feedbackErro: "Nuvens não causam fases. É o ÂNGULO da luz do Sol." },

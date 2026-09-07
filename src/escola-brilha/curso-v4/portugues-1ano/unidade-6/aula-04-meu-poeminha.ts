@@ -190,8 +190,8 @@ export const aula04: AulaPortuguesV4 = {
   momento09_revisao: {
     pontos: [
       "POEMINHA é feito de VERSOS — cada linha é um verso.",
-      "Os versos combinam quando o FIM deles RIMA.",
-      "Para criar um poeminha: escolha duas palavras que rimam e monte uma frase terminando em cada uma.",
+      "Alguns poemas usam rimas; outros exploram ritmo, imagens e diferentes formas de organizar as palavras.",
+      "Nesta atividade, vamos criar um poema rimado: escolha duas palavras que rimam e escreva um verso terminando em cada uma.",
     ],
     miniDesafio: {
       pergunta: "Para terminar o verso 'Eu ganhei um balão…', qual palavra rima melhor?",
@@ -238,7 +238,7 @@ export const aula04: AulaPortuguesV4 = {
         feedbackErro: "sol e flor estão no meio dos versos. A rima está no FIM: saiu / abriu.",
       },
       {
-        pergunta: "5/5 — Para escrever meu poeminha eu preciso…",
+        pergunta: "5/5 — Para criar o poema RIMADO desta atividade, começo escolhendo…",
         opcoes: [
           "De duas palavras que rimam",
           "De duas palavras que começam iguais",
@@ -246,8 +246,8 @@ export const aula04: AulaPortuguesV4 = {
           "De nenhuma ideia",
         ],
         correta: 0,
-        feedbackAcerto: "🎉 Isso! Duas palavras que rimam já viram um poeminha.",
-        feedbackErro: "Começar igual não é rima. Escolha duas palavras que terminam com o mesmo som e monte um verso terminando em cada uma.",
+        feedbackAcerto: "🎉 Isso! Agora use cada palavra no final de um verso com sentido.",
+        feedbackErro: "Para esta proposta rimada, escolha duas palavras com sons finais parecidos e crie um verso para cada uma.",
       },
     ],
   },

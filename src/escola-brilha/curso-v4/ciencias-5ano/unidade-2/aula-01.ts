@@ -9,7 +9,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-ecossistemas",
   titulo: "Vida nos Ecossistemas",
   iconeTrilha: "🌿",
-  bncc: ["EF05CI04"],
+  bncc: [],
   duracaoMin: 30,
 
   cena01_motivacao: {
@@ -30,6 +30,7 @@ export const aula01: AulaGeoV1 = {
       { id: "produtor", titulo: "PRODUTOR", subtitulo: "planta", emoji: "🌱", cor: "from-emerald-400 to-green-700" },
       { id: "consumidor", titulo: "CONSUMIDOR", subtitulo: "animal", emoji: "🐆", cor: "from-amber-400 to-orange-700" },
       { id: "decompositor", titulo: "DECOMPOSITOR", subtitulo: "fungo", emoji: "🍄", cor: "from-fuchsia-400 to-purple-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "produtor",
     feedbackAcerto: "Certo. Plantas capturam energia SOLAR — ninguém mais faz isso. Toda cadeia começa nelas.",
@@ -97,6 +98,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "☀️", titulo: "Do Sol, através das plantas", cor: "from-amber-500 to-orange-700" },
           { id: "b", emoji: "🌍", titulo: "Do centro da Terra", cor: "from-slate-500 to-slate-700" },
           { id: "c", emoji: "🌧️", titulo: "Da chuva", cor: "from-cyan-500 to-sky-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Isso. Toda energia biológica vem do Sol, capturada pelas plantas.",
         feedbackErro: "A fonte é sempre o Sol. Plantas convertem luz em alimento — daí a energia flui." },
@@ -106,6 +108,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🗑️", titulo: "Restos se acumulariam e nutrientes acabariam", cor: "from-fuchsia-500 to-purple-700" },
           { id: "b", emoji: "🎉", titulo: "Nada mudaria", cor: "from-slate-500 to-slate-700" },
           { id: "c", emoji: "🌳", titulo: "Mais árvores nasceriam", cor: "from-red-500 to-rose-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. Sem decompositores, os nutrientes não voltam ao solo e as plantas morrem.",
         feedbackErro: "Decompositores fecham o ciclo. Sem eles, o solo vira estéril." },
@@ -115,6 +118,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "➡️", titulo: "Cadeia é linear; teia tem vários cruzamentos", cor: "from-teal-500 to-emerald-700" },
           { id: "b", emoji: "🤝", titulo: "São a mesma coisa", cor: "from-slate-500 to-slate-700" },
           { id: "c", emoji: "🕸️", titulo: "Só teia tem plantas", cor: "from-red-500 to-rose-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Sim. Cadeia é uma sequência simples; teia é a rede real, com muitos elos cruzados.",
         feedbackErro: "Cadeia = linha reta. Teia = rede com várias cadeias interligadas." },
@@ -258,6 +262,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Ficariam sem base de energia e morreriam", correta: true },
           { id: "b", texto: "Nada, animais podem viver sem plantas" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Isso. Plantas são a base — sem elas, toda a cadeia colapsa.",
         feedbackErro: "Toda energia da cadeia vem das plantas. Sem elas, ninguém come." },
@@ -266,6 +272,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Reciclar matéria morta e alimentar o solo", correta: true },
           { id: "b", texto: "Só causar doenças" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. A maioria dos fungos e bactérias trabalha reciclando — não causando doença.",
         feedbackErro: "Sem decompositores, o planeta seria uma pilha de matéria morta." },
@@ -274,6 +282,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Produtor (planta)", correta: true },
           { id: "b", texto: "Consumidor (animal)" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. Sempre começa no produtor — quem captura a energia solar.",
         feedbackErro: "Sem produtor, não há energia. A base é sempre a planta." },

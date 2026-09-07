@@ -22,7 +22,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-metodo-cientista",
   titulo: "O Método do Cientista",
   iconeTrilha: "🔬",
-  bncc: ["EF02CI01"],
+  bncc: [],
   duracaoMin: 25,
 
   cena01_motivacao: {
@@ -65,6 +65,13 @@ export const aula01: AulaGeoV1 = {
         subtitulo: "tubo bem frio",
         emoji: "🧊",
         cor: "from-cyan-400 to-sky-600",
+      },
+      {
+        id: "semagua",
+        titulo: "Sem ÁGUA",
+        subtitulo: "terra seca",
+        emoji: "🏜️",
+        cor: "from-amber-500 to-orange-700",
       },
     ],
     respostaCerta: "sol",
@@ -196,6 +203,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "👀", titulo: "Observa", cor: "from-purple-400 to-fuchsia-600" },
           { id: "b", emoji: "📚", titulo: "Decora", cor: "from-slate-400 to-slate-600" },
           { id: "c", emoji: "🎲", titulo: "Adivinha", cor: "from-orange-400 to-red-600" },
+          { id: "d", emoji: "🙈", titulo: "Ignora", cor: "from-blue-400 to-indigo-700" },
         ],
         correta: "a",
         feedbackAcerto: "Isso! Toda ciência começa OBSERVANDO o mundo com atenção.",
@@ -209,6 +217,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "✅", titulo: "Resposta certa", cor: "from-emerald-400 to-green-600" },
           { id: "b", emoji: "💭", titulo: "Palpite pra testar", cor: "from-cyan-400 to-sky-600" },
           { id: "c", emoji: "🧸", titulo: "Brinquedo", cor: "from-pink-400 to-rose-600" },
+          { id: "d", emoji: "🎲", titulo: "Resultado inventado", cor: "from-orange-400 to-red-600" },
         ],
         correta: "b",
         feedbackAcerto: "Certeza! HIPÓTESE é um palpite que a gente TESTA.",
@@ -222,6 +231,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "😭", titulo: "Desistir", cor: "from-slate-400 to-slate-600" },
           { id: "b", emoji: "🔁", titulo: "Aprender e testar de novo", cor: "from-purple-400 to-fuchsia-600" },
           { id: "c", emoji: "🤥", titulo: "Mentir", cor: "from-red-400 to-rose-600" },
+          { id: "d", emoji: "🙈", titulo: "Esconder o resultado", cor: "from-blue-400 to-indigo-700" },
         ],
         correta: "b",
         feedbackAcerto: "PERFEITO! Cientistas erram, aprendem e testam de novo.",
@@ -467,6 +477,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Observa com atenção", correta: true },
           { id: "b", texto: "Adivinha e pronto" },
+          { id: "c", texto: "Ignora o que aconteceu" },
+          { id: "d", texto: "Copia sem observar" },
         ],
         feedbackAcerto: "Isso! Toda ciência começa OBSERVANDO.",
         feedbackErro: "Ciência começa OBSERVANDO — não adivinhando.",
@@ -478,6 +490,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Um palpite pra testar", correta: true },
           { id: "b", texto: "A resposta certa" },
+          { id: "c", texto: "Uma brincadeira sem pergunta" },
+          { id: "d", texto: "Um resultado inventado" },
         ],
         feedbackAcerto: "Certeza! HIPÓTESE é palpite pra testar.",
         feedbackErro: "Hipótese NÃO é a resposta certa. É palpite pra testar.",
@@ -489,6 +503,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Aprender e testar outra", correta: true },
           { id: "b", texto: "Desistir de ser cientista" },
+          { id: "c", texto: "Esconder o resultado" },
+          { id: "d", texto: "Dizer que acertou" },
         ],
         feedbackAcerto: "PERFEITO! Errar faz parte da ciência.",
         feedbackErro: "Cientista NÃO desiste. Erra, aprende e tenta de novo.",

@@ -22,7 +22,7 @@ export const aula4: AulaPortuguesV4 = {
   slug: "aula-04-revisar-e-publicar",
   titulo: "Revisar e publicar",
   iconeTrilha: "🔍",
-  bncc: ["EF05LP25", "EF05LP27"],
+  bncc: ["EF05LP26", "EF15LP06", "EF15LP07", "EF15LP08"],
   duracaoMin: 25,
 
   momento01_motivacao: {

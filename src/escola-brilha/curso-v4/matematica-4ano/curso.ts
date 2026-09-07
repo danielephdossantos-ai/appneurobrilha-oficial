@@ -10,13 +10,13 @@ import { unidade7 } from "./unidade-7";
 /**
  * Curso: Matemática 4º Ano — "O Reino dos Números"
  * -------------------------------------------------
- *  U1 · Bem-vindo(a) ao Reino dos Números              (EF04MA01–03)
- *  U2 · Somar e Subtrair até 10.000                    (EF04MA03, 05, 13)
- *  U3 · Multiplicando no Reino                         (EF04MA04, 06, 26)
- *  U4 · Dividindo no Reino                             (EF04MA07, 27)
+ *  U1 · Bem-vindo(a) ao Reino dos Números              (EF04MA01–03, 11)
+ *  U2 · Somar, Subtrair e Igualdade                    (EF04MA03, 05, 13–15)
+ *  U3 · Multiplicando no Reino                         (EF04MA04, 06, 08)
+ *  U4 · Dividindo e Padrões de Restos                  (EF04MA07, 12)
  *  U5 · Frações e Decimais                             (EF04MA09, 10, 25)
- *  U6 · Medidas do Reino                               (EF04MA20–24)
- *  U7 · Geometria, Dados e Missão do Reino             (EF04MA17–19, 23, 26–28)
+ *  U6 · Medidas do Reino                               (EF04MA20–25)
+ *  U7 · Geometria, Localização, Dados e Probabilidade  (EF04MA16–19, 26–28)
  *
  * Fecha a série do 4º ano. Culmina em Matemático(a) do Reino.
  */

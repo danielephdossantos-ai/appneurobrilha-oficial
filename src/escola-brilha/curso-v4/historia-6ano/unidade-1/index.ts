@@ -1,5 +1,6 @@
 import type { UnidadeGeoV1 } from "../../types";
 import { aula01 } from "./aula-01-ciencia-da-historia";
+import { aula02 } from "./aula-02-tempo-periodizacao";
 
 export const unidade1: UnidadeGeoV1 = {
   slug: "unidade-1",
@@ -9,5 +10,5 @@ export const unidade1: UnidadeGeoV1 = {
   descricao:
     "PILOTO do 6º Ano de História (Categoria Teen). Brilha e Aurora abrem O Códice dos Impérios Perdidos e desbloqueiam o primeiro fragmento: O Selo do Cronista Crítico. O aluno aprende o MÉTODO antes de aplicar em qualquer civilização.",
   corTema: "#0f766e",
-  aulas: [aula01],
+  aulas: [aula01, aula02],
 };

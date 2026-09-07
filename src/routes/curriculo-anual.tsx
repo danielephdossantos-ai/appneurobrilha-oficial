@@ -39,6 +39,7 @@ import { garantirPlanoSeNecessario } from "@/modules/primeiros-anos/persist";
 import { usePushNotifications } from "@/hooks/usePushNotifications";
 
 import { useNavigationStore } from "@/lib/navigation-context";
+import { TrilhaPlanoVisual } from "@/components/planos/TrilhaPlanoVisual";
 
 
 export const Route = createFileRoute("/curriculo-anual")({
@@ -163,6 +164,14 @@ function CurriculoAnualPage() {
 
 
   async function trocarSemana(sem: 1 | 2, wk: number) {
+    if (plano) {
+      const atual = semanaAtual(plano.gerado_em, plano.semanas_por_semestre);
+      const futura = sem > atual.semestre || (sem === atual.semestre && wk > atual.semana);
+      if (futura) {
+        toast.info("Essa semana ainda está bloqueada. Conclua a jornada atual primeiro.");
+        return;
+      }
+    }
     setSemestre(sem);
     setSemana(wk);
     await recarregar(sem, wk);
@@ -213,6 +222,9 @@ function CurriculoAnualPage() {
 
   const dias = plano?.dias_por_semana ?? 5;
   const pct = progresso.total ? Math.round((progresso.concluidas / progresso.total) * 100) : 0;
+  const periodoAtual = plano ? semanaAtual(plano.gerado_em, plano.semanas_por_semestre) : null;
+  const periodoSelecionadoEhAtual = !!periodoAtual && semestre === periodoAtual.semestre && semana === periodoAtual.semana;
+  const periodoSelecionadoEhPassado = !!periodoAtual && (semestre < periodoAtual.semestre || (semestre === periodoAtual.semestre && semana < periodoAtual.semana));
 
   return (
     <Shell>
@@ -323,11 +335,12 @@ function CurriculoAnualPage() {
             {([1, 2] as const).map((s) => (
               <button
                 key={s}
+                disabled={!!periodoAtual && s > periodoAtual.semestre}
                 onClick={() => trocarSemana(s, 1)}
                 className={`btn-tap flex-1 rounded-xl px-4 py-2 font-black border-2 ${
                   semestre === s
                     ? "bg-primary text-primary-foreground border-primary"
-                    : "bg-background border-border"
+                    : "bg-background border-border disabled:opacity-40 disabled:cursor-not-allowed"
                 }`}
               >
                 {s}º semestre
@@ -339,11 +352,12 @@ function CurriculoAnualPage() {
             {Array.from({ length: plano.semanas_por_semestre }, (_, i) => i + 1).map((wk) => (
               <button
                 key={wk}
+                disabled={!!periodoAtual && (semestre > periodoAtual.semestre || (semestre === periodoAtual.semestre && wk > periodoAtual.semana))}
                 onClick={() => trocarSemana(semestre, wk)}
                 className={`btn-tap shrink-0 rounded-lg w-10 h-10 font-bold border-2 ${
                   semana === wk
                     ? "bg-primary text-primary-foreground border-primary"
-                    : "bg-background border-border"
+                    : "bg-background border-border disabled:opacity-40 disabled:cursor-not-allowed"
                 }`}
               >
                 {wk}
@@ -352,7 +366,12 @@ function CurriculoAnualPage() {
           </div>
 
           {/* Aulas da semana */}
-          <div className="space-y-4">
+          <TrilhaPlanoVisual
+            itens={itens}
+            tipo="school"
+            bloquearDiasFuturos={!periodoSelecionadoEhPassado && periodoSelecionadoEhAtual}
+          />
+          <div className="hidden" aria-hidden="true">
             {Array.from({ length: dias }, (_, i) => i + 1).map((dia) => {
               const lista = porDia.get(dia) ?? [];
               const hora = horarios.find((h) => h.dia_semana === dia)?.hora ?? "17:00";

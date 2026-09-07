@@ -4,7 +4,7 @@ export const aula07_missaoFinalU4: AulaV4 = {
   slug: "u4-07-missao-final",
   titulo: "Missão Final: Repartidor(a) do Reino",
   iconeTrilha: "🏆",
-  bncc: ["EF04MA07", "EF04MA27"],
+  bncc: ["EF04MA07", "EF04MA12"],
   duracaoMin: 25,
   metodologias: ["cpa", "vergnaud", "skemp"],
 
@@ -84,7 +84,7 @@ export const aula07_missaoFinalU4: AulaV4 = {
     perguntas: [
       { pergunta: "144 ÷ 4 = ?", opcoes: ["36", "34", "38"], correta: 0, feedbackAcerto: "🎉 36.", feedbackErro: "14÷4=3(r 2), 24÷4=6 → 36." },
       { pergunta: "85 ÷ 6 = ?", opcoes: ["14, resto 1", "13, resto 7", "15, resto −5"], correta: 0, feedbackAcerto: "🎉 14 e sobra 1.", feedbackErro: "6×14=84; 85−84=1." },
-      { pergunta: "3.000 ÷ 100 = ?", opcoes: ["30", "3", "300"], correta: 0, feedbackAcerto: "🎉 30.", feedbackErro: "Apagar 2 zeros." },
+      { pergunta: "3.000 ÷ 100 = ?", opcoes: ["30", "3", "300"], correta: 0, feedbackAcerto: "🎉 Três milhares divididos por cem tornam-se três dezenas: 30.", feedbackErro: "Dividir por 100 desloca o valor duas casas para a direita: 3.000 → 30." },
       { pergunta: "Terça parte de 96 = ?", opcoes: ["32", "30", "34"], correta: 0, feedbackAcerto: "🎉 32.", feedbackErro: "96÷3=32." },
       { pergunta: "108 alunos em 9 turmas: por turma?", opcoes: ["12", "10", "14"], correta: 0, feedbackAcerto: "🎉 12.", feedbackErro: "108÷9=12." },
     ],

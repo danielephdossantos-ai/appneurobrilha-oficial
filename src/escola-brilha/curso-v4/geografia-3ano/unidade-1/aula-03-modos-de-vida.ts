@@ -47,6 +47,19 @@ export const aula03: AulaGeoV1 = {
         emoji: "🌈",
         cor: "from-emerald-400 to-sky-500",
       },
+
+      {
+        id: "extra-1",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
+      {
+        id: "extra-2",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
     ],
     respostaCerta: "diferente",
     feedbackAcerto:
@@ -70,7 +83,8 @@ export const aula03: AulaGeoV1 = {
         cor: "from-sky-500 to-blue-700",
         conteudo:
           "É quem mora na BEIRA DO RIO. Anda de canoa, pesca, planta na várzea e conhece as cheias e secas melhor que ninguém.",
-        exemplo: "Uma família ribeirinha usa o rio pra chegar na escola, na feira e no posto de saúde.",
+        exemplo:
+          "Uma família ribeirinha usa o rio pra chegar na escola, na feira e no posto de saúde.",
       },
       {
         id: "quilombola",
@@ -79,7 +93,8 @@ export const aula03: AulaGeoV1 = {
         cor: "from-orange-500 to-red-700",
         conteudo:
           "É a comunidade formada por descendentes de africanos que se libertaram e mantêm até hoje a terra, a comida, a dança e as festas dos antepassados.",
-        exemplo: "No quilombo se reza, se planta e se cozinha do jeito que os avós ensinaram há muito tempo.",
+        exemplo:
+          "No quilombo se reza, se planta e se cozinha do jeito que os avós ensinaram há muito tempo.",
       },
       {
         id: "indigena",
@@ -88,7 +103,8 @@ export const aula03: AulaGeoV1 = {
         cor: "from-emerald-500 to-lime-700",
         conteudo:
           "São os povos ORIGINÁRIOS da terra. Vivem em aldeia, falam sua própria língua, cuidam da floresta e passam os saberes de geração em geração.",
-        exemplo: "Numa aldeia, as crianças aprendem a pescar, tecer e ouvir histórias com os mais velhos.",
+        exemplo:
+          "Numa aldeia, as crianças aprendem a pescar, tecer e ouvir histórias com os mais velhos.",
       },
       {
         id: "agricultor",
@@ -164,38 +180,90 @@ export const aula03: AulaGeoV1 = {
     perguntas: [
       {
         id: "q1",
-        pergunta: "Qual comunidade usa CANOA pra ir na escola e sobe a casa em palafita quando o rio enche?",
+        pergunta:
+          "Qual comunidade usa CANOA pra ir na escola e sobe a casa em palafita quando o rio enche?",
         cards: [
           { id: "ribeirinho", emoji: "🛶", titulo: "Ribeirinha", cor: "from-sky-500 to-blue-700" },
-          { id: "agricultor", emoji: "🌱", titulo: "Agricultor familiar", cor: "from-amber-500 to-yellow-600" },
+          {
+            id: "agricultor",
+            emoji: "🌱",
+            titulo: "Agricultor familiar",
+            cor: "from-amber-500 to-yellow-600",
+          },
           { id: "indigena", emoji: "🪶", titulo: "Indígena", cor: "from-emerald-500 to-lime-700" },
+
+          {
+            id: "extra-3",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "ribeirinho",
-        feedbackAcerto: "Isso! Quem mora na beira do rio é RIBEIRINHO 🛶. A vida gira em torno do rio.",
+        feedbackAcerto:
+          "Isso! Quem mora na beira do rio é RIBEIRINHO 🛶. A vida gira em torno do rio.",
         feedbackErro: "Quase! Canoa, palafita, cheia do rio = comunidade RIBEIRINHA 🛶.",
       },
       {
         id: "q2",
-        pergunta: "Onde as crianças aprendem PRIMEIRO a língua do próprio povo e depois o português?",
+        pergunta:
+          "Onde as crianças aprendem PRIMEIRO a língua do próprio povo e depois o português?",
         cards: [
-          { id: "quilombola", emoji: "🥁", titulo: "Quilombola", cor: "from-orange-500 to-red-700" },
-          { id: "indigena", emoji: "🪶", titulo: "Aldeia indígena", cor: "from-emerald-500 to-lime-700" },
+          {
+            id: "quilombola",
+            emoji: "🥁",
+            titulo: "Quilombola",
+            cor: "from-orange-500 to-red-700",
+          },
+          {
+            id: "indigena",
+            emoji: "🪶",
+            titulo: "Aldeia indígena",
+            cor: "from-emerald-500 to-lime-700",
+          },
           { id: "ribeirinho", emoji: "🛶", titulo: "Ribeirinha", cor: "from-sky-500 to-blue-700" },
+
+          {
+            id: "extra-4",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "indigena",
-        feedbackAcerto: "Boa! Na ALDEIA INDÍGENA 🪶 a criança aprende primeiro a língua do povo dela.",
-        feedbackErro: "Repara: essa é a marca dos povos INDÍGENAS 🪶 — cada povo tem sua própria língua.",
+        feedbackAcerto:
+          "Boa! Na ALDEIA INDÍGENA 🪶 a criança aprende primeiro a língua do povo dela.",
+        feedbackErro:
+          "Repara: essa é a marca dos povos INDÍGENAS 🪶 — cada povo tem sua própria língua.",
       },
       {
         id: "q3",
         pergunta: "Quem planta no sítio, tira leite e leva verdura pra feira do sábado?",
         cards: [
-          { id: "quilombola", emoji: "🥁", titulo: "Quilombola", cor: "from-orange-500 to-red-700" },
+          {
+            id: "quilombola",
+            emoji: "🥁",
+            titulo: "Quilombola",
+            cor: "from-orange-500 to-red-700",
+          },
           { id: "ribeirinho", emoji: "🛶", titulo: "Ribeirinho", cor: "from-sky-500 to-blue-700" },
-          { id: "agricultor", emoji: "🌱", titulo: "Agricultor familiar", cor: "from-amber-500 to-yellow-600" },
+          {
+            id: "agricultor",
+            emoji: "🌱",
+            titulo: "Agricultor familiar",
+            cor: "from-amber-500 to-yellow-600",
+          },
+
+          {
+            id: "extra-5",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "agricultor",
-        feedbackAcerto: "Exato! O AGRICULTOR FAMILIAR 🌱 planta pro sustento e vende o que sobra na feira.",
+        feedbackAcerto:
+          "Exato! O AGRICULTOR FAMILIAR 🌱 planta pro sustento e vende o que sobra na feira.",
         feedbackErro: "Ops! Sítio + leite + feira = AGRICULTOR FAMILIAR 🌱.",
       },
     ],
@@ -272,7 +340,8 @@ export const aula03: AulaGeoV1 = {
       },
     ],
     ordemCerta: ["acordar", "canoa", "escola", "roca", "feira"],
-    feedbackAcerto: "Rota do ribeirinho completa! Um dia inteiro girando ao redor do rio, sem pular etapa.",
+    feedbackAcerto:
+      "Rota do ribeirinho completa! Um dia inteiro girando ao redor do rio, sem pular etapa.",
     feedbackErro:
       "Essa não é a próxima parada. Pensa: primeiro ACORDA, depois vai pro rio, depois cuida das crianças e da roça, e no fim VENDE o que pescou.",
     falaFinal:
@@ -415,11 +484,20 @@ export const aula03: AulaGeoV1 = {
         pergunta: "O que é um MODO DE VIDA de uma comunidade?",
         opcoes: [
           { id: "a", texto: "O carro que a família usa pra passear no fim de semana." },
-          { id: "b", texto: "O jeito de acordar, trabalhar, comer e festejar ligado ao lugar onde a comunidade mora.", correta: true },
+          {
+            id: "b",
+            texto:
+              "O jeito de acordar, trabalhar, comer e festejar ligado ao lugar onde a comunidade mora.",
+            correta: true,
+          },
           { id: "c", texto: "A cor da casa que a família escolheu pintar." },
+
+          { id: "extra-6", texto: "Outra possibilidade", correta: false },
         ],
-        feedbackAcerto: "Isso! Modo de vida é o JEITO da comunidade viver, ligado ao lugar onde ela mora.",
-        feedbackErro: "Quase! Modo de vida é o JEITO de acordar, trabalhar e festejar — combinado com o lugar.",
+        feedbackAcerto:
+          "Isso! Modo de vida é o JEITO da comunidade viver, ligado ao lugar onde ela mora.",
+        feedbackErro:
+          "Quase! Modo de vida é o JEITO de acordar, trabalhar e festejar — combinado com o lugar.",
       },
       {
         id: "p2",
@@ -428,6 +506,8 @@ export const aula03: AulaGeoV1 = {
           { id: "a", texto: "Comunidade quilombola." },
           { id: "b", texto: "Comunidade ribeirinha.", correta: true },
           { id: "c", texto: "Agricultor familiar do sítio." },
+
+          { id: "extra-7", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Perfeito! Canoa + várzea + rio = comunidade RIBEIRINHA.",
         feedbackErro: "Ops! Canoa, várzea e beira do rio são marca da comunidade RIBEIRINHA.",
@@ -437,11 +517,20 @@ export const aula03: AulaGeoV1 = {
         pergunta: "Por que existem MODOS DE VIDA diferentes no mesmo município?",
         opcoes: [
           { id: "a", texto: "Porque uns são melhores que os outros." },
-          { id: "b", texto: "Porque cada comunidade vive em um LUGAR diferente e mantém os saberes dos seus antepassados.", correta: true },
+          {
+            id: "b",
+            texto:
+              "Porque cada comunidade vive em um LUGAR diferente e mantém os saberes dos seus antepassados.",
+            correta: true,
+          },
           { id: "c", texto: "Porque o prefeito escolheu quem vive de cada jeito." },
+
+          { id: "extra-8", texto: "Outra possibilidade", correta: false },
         ],
-        feedbackAcerto: "Exato! Cada LUGAR ensina um jeito diferente — e cada grupo carrega os saberes dos avós.",
-        feedbackErro: "Repensa: cada comunidade vive num LUGAR diferente e traz os saberes dos antepassados. Nenhum é melhor que o outro.",
+        feedbackAcerto:
+          "Exato! Cada LUGAR ensina um jeito diferente — e cada grupo carrega os saberes dos avós.",
+        feedbackErro:
+          "Repensa: cada comunidade vive num LUGAR diferente e traz os saberes dos antepassados. Nenhum é melhor que o outro.",
       },
     ],
     selo: {

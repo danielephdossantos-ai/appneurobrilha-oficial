@@ -209,6 +209,19 @@ export type Aula = {
           correta: number;
         }
       | {
+          /** Compara coleções diferentes por contagem ou correspondência um a um. */
+          tipo: "comparar";
+          pergunta: string;
+          lados: Array<{
+            imagemUrl: string;
+            quantidade: number;
+            rotulo: string;
+            cor?: string;
+          }>;
+          opcoes: string[];
+          correta: number;
+        }
+      | {
           /**
            * Cena de POSIÇÃO ESPACIAL — sujeito posicionado de verdade
            * (em cima, embaixo, dentro, fora, direita, esquerda, atrás,

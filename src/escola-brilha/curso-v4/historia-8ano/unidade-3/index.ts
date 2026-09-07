@@ -1,5 +1,6 @@
 import type { UnidadeGeoV1 } from "../../types";
 import { aula01 } from "./aula-01-revolucao-francesa";
+import { aula02 } from "./aula-02-rebelioes-america-portuguesa";
 
 export const unidade3: UnidadeGeoV1 = {
   slug: "unidade-3",
@@ -9,5 +10,5 @@ export const unidade3: UnidadeGeoV1 = {
   descricao:
     "O povo toma a Bastilha, executa o rei e proclama os direitos universais. Uma década que mudou o mundo pra sempre.",
   corTema: "#0e7490",
-  aulas: [aula01],
+  aulas: [aula01, aula02],
 };

@@ -294,7 +294,7 @@ export const aula05: AulaPortuguesV4 = {
         opcoes: ["Dizer quase a mesma coisa", "Dizer o contrário", "Contar números", "Fazer desenho"],
         correta: 0,
         feedbackAcerto: "🎉 Isso!",
-        feedbackErro: "Parecidas = mesmo sentido. Opostas = sentido contrário.",
+        feedbackErro: "Palavras parecidas têm sentidos próximos; palavras opostas apresentam sentidos contrários no contexto.",
       },
     ],
   },

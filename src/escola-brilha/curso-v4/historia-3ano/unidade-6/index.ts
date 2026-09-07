@@ -1,5 +1,6 @@
 import type { UnidadeGeoV1 } from "../../types";
 import { aula01 } from "./aula-01-municipio-e-meio-ambiente";
+import { aula02 } from "./aula-02-espacos-cidade";
 
 export const unidade6: UnidadeGeoV1 = {
   slug: "unidade-6",
@@ -9,5 +10,5 @@ export const unidade6: UnidadeGeoV1 = {
   descricao:
     "Restaura a Página 6 do Grande Livro das Cidades: O Painel da Natureza Protegida. O aluno investiga como o crescimento urbano altera rios, matas e clima — e o que a cidade pode fazer pra crescer sem destruir.",
   corTema: "#059669",
-  aulas: [aula01],
+  aulas: [aula01, aula02],
 };

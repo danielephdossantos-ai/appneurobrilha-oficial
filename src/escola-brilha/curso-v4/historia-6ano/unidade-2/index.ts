@@ -1,5 +1,6 @@
 import type { UnidadeGeoV1 } from "../../types";
 import { aula01 } from "./aula-01-evolucao-humana";
+import { aula02 } from "./aula-02-origens-povoamento";
 
 export const unidade2: UnidadeGeoV1 = {
   slug: "unidade-2",
@@ -9,5 +10,5 @@ export const unidade2: UnidadeGeoV1 = {
   descricao:
     "Brilha e Aurora seguem as pegadas do Homo sapiens — da savana africana até Luzia, em Minas Gerais. Fragmento 2: O Crânio Ancestral.",
   corTema: "#b45309",
-  aulas: [aula01],
+  aulas: [aula01, aula02],
 };

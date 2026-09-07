@@ -14,6 +14,9 @@ import { url as luaImg } from "@/assets/neuro-treino/objetos/lua.png.asset.json"
 import { url as diamanteImg } from "@/assets/neuro-treino/objetos/diamante.png.asset.json";
 import { url as moedaImg } from "@/assets/neuro-treino/objetos/moeda.png.asset.json";
 import { url as macaImg } from "@/assets/neuro-treino/objetos/maca.png.asset.json";
+import { url as bananaImg } from "@/assets/neuro-treino/objetos/banana.png.asset.json";
+import { url as circuloImg } from "@/assets/neuro-treino/objetos/circulo.png.asset.json";
+import { url as trianguloImg } from "@/assets/neuro-treino/objetos/triangulo.png.asset.json";
 
 /**
  * EF01MA10 — Aula 010 · Biblioteca Pedagógica Escola Brilha
@@ -51,17 +54,48 @@ const aula: Aula = {
     "Descobrir o PADRÃO (regularidade) em sequências de números e figuras e completar o elemento que está faltando.",
 
   objetivos: [
-    "Identificar sequências numéricas.",
-    "Perceber padrões em figuras e objetos.",
-    "Completar sequências.",
-    "Desenvolver raciocínio lógico e observação.",
+    "Reconhecer e explicar a regra de sequências numéricas, de objetos e figuras.",
+    "Diferenciar o bloco que se repete da sequência completa.",
+    "Descobrir elementos ausentes no início, no meio ou no fim.",
+    "Conferir se a resposta mantém a regularidade nos dois lados da lacuna.",
   ],
 
   motivacao:
     "Padrões estão no arco-íris, nas músicas, nos pisos e até nas flores. Descobrir padrões é como resolver um mistério!",
 
   explicacao:
-    "🔎 SEQUÊNCIA é uma ordem que segue uma REGRA.\n\nExemplo com números:\n1 — 2 — 3 — 4 — 5\nA regra é: cada número aumenta 1.\n\nExemplo com figuras:\n🔴 🔵 🔴 🔵 🔴 🔵\nA regra é: vermelho e azul se repetem.\n\nPra descobrir o que falta, observe:\n✔ O que muda?\n✔ O que se repete?\n✔ Qual é a REGRA?",
+    "SEQUÊNCIA é uma lista de elementos numa ordem. REGULARIDADE é a regra que permite continuar a lista e descobrir o que falta.\n\nNuma sequência repetitiva, encontre o menor bloco que volta a aparecer. Em círculo, triângulo, círculo, triângulo, o bloco é 'círculo, triângulo'.\n\nNuma sequência numérica recursiva, cada número é obtido a partir do anterior. Em 2, 4, 6, 8, a regra é acrescentar 2.\n\nPara preencher uma lacuna, diga a regra, teste o elemento e confira o que aparece antes e depois. A posição do desenho não basta: é a regra que prova a resposta.",
+
+  explicacaoAtiva: [
+    {
+      texto: "Em padrões repetitivos, descubra o menor bloco que se repete.",
+      exemplo: "Círculo, triângulo | círculo, triângulo | círculo, ...",
+      imagem: circuloImg,
+      imagemAlt: "Círculo que inicia um bloco repetitivo",
+      checagem: { pergunta: "No padrão círculo, triângulo, círculo, triângulo, qual é o bloco?", opcoes: ["Só círculo", "Círculo e triângulo", "Dois triângulos"], correta: 1, explicacao: "O menor trecho que volta inteiro é círculo, triângulo." },
+    },
+    {
+      texto: "Em sequências numéricas, compare números vizinhos para descobrir quanto foi acrescentado.",
+      exemplo: "2, 4, 6, 8: cada número é o anterior mais 2.",
+      imagem: moedaImg,
+      imagemAlt: "Moeda usada numa sequência numérica",
+      checagem: { pergunta: "Qual é a regra de 3, 5, 7, 9?", opcoes: ["Acrescentar 1", "Acrescentar 2", "Retirar 2"], correta: 1, explicacao: "De um número ao seguinte entram duas unidades." },
+    },
+    {
+      texto: "A lacuna pode estar no meio. A resposta precisa funcionar com o elemento anterior e com o seguinte.",
+      exemplo: "4, 6, __, 10. Pela regra +2, falta 8: 6 + 2 = 8 e 8 + 2 = 10.",
+      imagem: diamanteImg,
+      imagemAlt: "Diamante representando uma posição ausente",
+      checagem: { pergunta: "Em 5, 7, __, 11, qual falta?", opcoes: ["8", "9", "10"], correta: 1, explicacao: "A regra é +2: 5, 7, 9, 11." },
+    },
+    {
+      texto: "Depois de completar, leia a sequência inteira e explique a regra em palavras.",
+      exemplo: "Estrela, coração, coração se repete. Depois de estrela vêm dois corações.",
+      imagem: estrelaImg,
+      imagemAlt: "Estrela iniciando um bloco de três figuras",
+      checagem: { pergunta: "⭐ ❤️ ❤️ ⭐ ❤️ __. Qual falta?", opcoes: ["⭐", "❤️", "🌙"], correta: 1, explicacao: "O bloco ⭐ ❤️ ❤️ está se repetindo." },
+    },
+  ],
 
   explicacoesNiveis: {
     nivel1: "Sequência é uma ordem que segue uma regra. Descubra a regra e você acha o que falta.",
@@ -75,40 +109,40 @@ const aula: Aula = {
 
   exemploResolvido: {
     enunciado:
-      "Observe a sequência de flores: 🌸 🌸 🌸 🌸 🌸. Depois vamos contar.",
+      "Observe: girassol, tulipa, girassol, tulipa, __. Qual flor falta?",
     passos: [
-      "Olhe a sequência com atenção.",
-      "Conte cada flor: 1, 2, 3, 4, 5.",
-      "Cada posição aumenta 1 — essa é a regra.",
-      "Se faltasse a última, viria 5.",
+      "Compare os elementos na ordem.",
+      "Encontre o bloco que se repete: girassol, tulipa.",
+      "O último elemento mostrado é tulipa.",
+      "O bloco recomeça com girassol.",
     ],
-    resposta: "A regra é 'aumentar 1'. O próximo é 5.",
+    resposta: "Falta o girassol. O bloco é girassol, tulipa.",
     interativo: {
       tipo: "contagem",
-      imagemUrl: florImg,
-      quantidade: 5,
+      imagemUrl: girassolImg,
+      quantidade: 3,
       nomeItem: "flor",
       nomeItemPlural: "flores",
-      pergunta: "Toque em cada flor e conte!",
+      pergunta: "Quantos girassóis aparecem depois de completar o padrão?",
     },
   },
 
   atividadeGuiada: {
     enunciado:
-      "Olhe os corações da trilha: ❤️ ❤️ ❤️ ❤️. Quantos corações vêm em seguida se a regra for 'sempre + 1'?",
-    resposta: "5 corações.",
+      "Observe a sequência: 2 — 4 — 6 — __ — 10. Qual número está faltando?",
+    resposta: "8. A regra é acrescentar 2.",
     explicacao:
-      "A regra é aumentar 1 a cada posição. Depois de 4 vem 5.",
+      "Compare os vizinhos: 2 para 4 e 4 para 6 aumenta 2. Então 6 + 2 = 8 e 8 + 2 = 10.",
     visual: {
       tipo: "grupos",
-      pergunta: "Depois de 4 corações, quantos vêm?",
-      imagemUrl: coracaoImg,
-      itemSingular: "coração",
-      itemPlural: "corações",
+      pergunta: "Qual número completa 2, 4, 6, __, 10?",
+      imagemUrl: diamanteImg,
+      itemSingular: "diamante",
+      itemPlural: "diamantes",
       quantidadeGrupos: 1,
-      itensPorGrupo: 5,
-      opcoes: [3, 4, 5],
-      correta: 2,
+      itensPorGrupo: 8,
+      opcoes: [7, 8, 9],
+      correta: 1,
     },
   },
 
@@ -123,7 +157,7 @@ const aula: Aula = {
   desafio: {
     enunciado:
       "Desafio Brilha: complete os cristais que sumiram da trilha mágica!",
-    resposta: "5 · 10 · coração · maçã.",
+    resposta: "5 · 10 · círculo · banana.",
     visual: {
       cena: [
         { personagem: "Cristal Estrela", itemImagemUrl: estrelaImg, quantidade: 5, cor: "#FBBF24" },
@@ -170,21 +204,21 @@ const aula: Aula = {
           visual: {
             tipo: "comparar",
             lados: [
-              { imagemUrl: estrelaImg, quantidade: 3, rotulo: "Estrelas na sequência", cor: "#FBBF24" },
-              { imagemUrl: coracaoImg, quantidade: 2, rotulo: "Corações — falta 1", cor: "#EF4444" },
+              { imagemUrl: trianguloImg, quantidade: 2, rotulo: "Triângulos", cor: "#FBBF24" },
+              { imagemUrl: circuloImg, quantidade: 2, rotulo: "Círculos — falta 1", cor: "#60A5FA" },
             ],
           },
         },
         {
-          pergunta: "🍎 🍐 🍎 🍐 🍎 __. Qual vem?",
-          opcoes: ["🍎", "🍐", "🍌"],
+          pergunta: "🍎 🍌 🍎 🍌 🍎 __. Qual vem?",
+          opcoes: ["🍎", "🍌", "⭐"],
           correta: 1,
-          explicacao: "Alterna maçã e pera. Depois da maçã vem a pera.",
+          explicacao: "Alterna maçã e banana. Depois da maçã vem a banana.",
           visual: {
             tipo: "comparar",
             lados: [
               { imagemUrl: macaImg, quantidade: 3, rotulo: "Maçãs", cor: "#EF4444" },
-              { imagemUrl: macaImg, quantidade: 2, rotulo: "Peras — falta 1", cor: "#34D399" },
+              { imagemUrl: bananaImg, quantidade: 2, rotulo: "Bananas — falta 1", cor: "#34D399" },
             ],
           },
         },
@@ -197,7 +231,9 @@ const aula: Aula = {
       "SEQUÊNCIA = ordem com REGRA.",
       "Observe: o que muda? o que se repete?",
       "Quando a regra é 'aumenta 1', o próximo é o número seguinte.",
+      "Algumas regras acrescentam 2 ou outra quantidade; compare os números vizinhos.",
       "Quando figuras se alternam, a próxima é a que 'falta a vez'.",
+      "Confira a resposta com o elemento anterior e com o seguinte.",
     ],
     dica: "Antes de responder, diga a REGRA em voz alta. Se souber a regra, sabe o que falta.",
   },

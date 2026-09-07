@@ -5,6 +5,7 @@ import { url as estrelaImg } from "@/assets/neuro-treino/objetos/estrela.png.ass
 import { url as macaImg } from "@/assets/neuro-treino/objetos/maca.png.asset.json";
 import { url as castanhaImg } from "@/assets/neuro-treino/objetos/castanha.png.asset.json";
 import { url as blocoImg } from "@/assets/neuro-treino/objetos/bloco.png.asset.json";
+import { url as cenouraImg } from "@/assets/neuro-treino/vegetais/cenoura.png.asset.json";
 
 /**
  * EF01MA08 — Aula 008 · Biblioteca Pedagógica Escola Brilha
@@ -33,41 +34,74 @@ const aula: Aula = {
 
   conhecimentosPrevios: [
     "Somar dois grupos até 10.",
-    "Tirar (subtrair) até 10.",
-    "Reconhecer os sinais + (juntar) e − (tirar).",
+    "Contar objetos e reconhecer números de até duas ordens.",
+    "Compor e decompor quantidades em partes.",
   ],
 
   missao:
-    "Resolver problemas simples de adição e subtração, entendendo situações de 'ganhou' (+) e 'perdeu' (−), usando estratégias próprias pra calcular.",
+    "Resolver e elaborar problemas de adição e subtração, identificando o que havia, o que mudou e o que precisa ser descoberto.",
 
   objetivos: [
     "Resolver problemas simples de adição.",
     "Resolver problemas simples de subtração.",
-    "Entender situações de 'ganhou' e 'perdeu'.",
+    "Compreender situações de juntar, acrescentar, separar e retirar.",
     "Escolher a operação certa para cada história.",
+    "Resolver situações com números de até duas ordens.",
+    "Elaborar um problema a partir de uma operação e conferir a resposta.",
   ],
 
   motivacao:
     "Todo dia a gente ganha e perde coisas. A matemática nos ajuda a saber quanto ficou!",
 
   explicacao:
-    "Problemas de matemática são pequenas HISTÓRIAS.\n\n➕ JUNTAR / GANHAR: quando alguém RECEBE mais coisas, usamos a ADIÇÃO (+).\n\n➖ TIRAR / PERDER: quando alguém PERDE ou DÁ coisas, usamos a SUBTRAÇÃO (−).\n\nO segredo é escutar a história com calma antes de calcular:\n• Ganhou? Some.\n• Perdeu? Tira.",
+    "Problemas de matemática contam uma situação e fazem uma pergunta. Não escolha a conta olhando apenas uma palavra. Primeiro descubra: 1) o que havia no começo; 2) o que entrou, saiu ou foi separado; 3) o que a pergunta quer saber.\n\nQuando conhecemos as partes e queremos o total, usamos adição. Exemplo: 12 blocos com mais 5 formam 17: 12 + 5 = 17. Quando conhecemos o total e uma parte e queremos descobrir o que restou ou a parte que falta, usamos subtração. Exemplo: havia 18 moedas e 6 foram retiradas: 18 − 6 = 12.\n\nA resposta precisa ter número e nome do que foi contado: '12 moedas'. Depois, confira se ela combina com a história.",
+
+  explicacaoAtiva: [
+    {
+      texto: "Leia a pergunta antes de escolher a operação. Se duas partes são conhecidas e a pergunta pede o total, junte as partes.",
+      exemplo: "Lia tinha 6 estrelas e ganhou 3. Quantas tem agora? 6 + 3 = 9 estrelas.",
+      imagem: estrelaImg,
+      imagemAlt: "Estrela usada num problema de adição",
+      checagem: { pergunta: "Há 7 blocos azuis e 2 amarelos. Quantos blocos ao todo?", opcoes: ["7 − 2", "7 + 2", "2 − 7"], correta: 1, explicacao: "A pergunta pede o total de duas partes: 7 + 2 = 9." },
+    },
+    {
+      texto: "Se o total é conhecido e uma quantidade foi retirada, descubra quanto restou.",
+      exemplo: "Havia 10 moedas e 4 saíram. Restaram 6: 10 − 4 = 6.",
+      imagem: moedaImg,
+      imagemAlt: "Moeda usada num problema de subtração",
+      checagem: { pergunta: "Havia 9 maçãs e 3 foram retiradas. Quantas restaram?", opcoes: ["5", "6", "7"], correta: 1, explicacao: "Retire três do total nove: 9 − 3 = 6." },
+    },
+    {
+      texto: "A mesma palavra pode aparecer num problema diferente. Observe sempre qual quantidade está faltando.",
+      exemplo: "Bia ganhou 3 moedas e ficou com 8. Antes ela tinha 5, pois 8 − 3 = 5.",
+      imagem: moedaImg,
+      imagemAlt: "Moedas mostrando uma parte desconhecida",
+      checagem: { pergunta: "Caio ganhou 2 estrelas e agora tem 7. Quantas tinha antes?", opcoes: ["5", "7", "9"], correta: 0, explicacao: "O total final é 7. Retire as 2 recebidas: 7 − 2 = 5." },
+    },
+    {
+      texto: "Com números de duas ordens, represente a mudança e calcule por partes. Depois confira refazendo a história.",
+      exemplo: "12 + 5 = 17 e 18 − 6 = 12.",
+      imagem: blocoImg,
+      imagemAlt: "Bloco usado em cálculos com números de duas ordens",
+      checagem: { pergunta: "Uma caixa tinha 14 blocos e recebeu mais 3. Quantos há agora?", opcoes: ["11", "16", "17"], correta: 2, explicacao: "O total aumenta: 14 + 3 = 17 blocos." },
+    },
+  ],
 
   explicacoesNiveis: {
-    nivel1: "Ganhou → soma (+). Perdeu → tira (−).",
+    nivel1: "Veja o começo, a mudança e a pergunta. Junte partes para achar o total; retire uma parte para achar o restante.",
     nivel2:
       "Se você tinha 5 balas e ganhou 3, você conta 5, 6, 7, 8. Ficam 8. Isso é +.",
     nivel3:
       "Se você tinha 10 moedas e perdeu 4, tira 4 dedos e conta o que sobrou: 6. Isso é −.",
     nivel4:
-      "Às vezes a história tem DUAS PARTES: ganhou 2 e depois comeu 3. Faz na ordem, uma de cada vez.",
+      "Se a quantidade inicial é desconhecida, use o total final e a mudança para descobri-la. Não dependa apenas de palavras-chave.",
   },
 
   exemploResolvido: {
     enunciado:
       "Brilha tinha 5 estrelas. Ganhou mais 3 estrelas. Quantas estrelas ele tem agora?",
     passos: [
-      "A história diz 'GANHOU', então usamos + (soma).",
+      "A pergunta pede o total depois que uma nova parte entrou; por isso, usamos +.",
       "Comece pelo total que ele já tinha: 5.",
       "Conte mais 3 a partir do 5: 6, 7, 8.",
       "Resposta: 8 estrelas.",
@@ -108,6 +142,9 @@ const aula: Aula = {
     { enunciado: "6 + 4 = ?", resposta: "10", dica: "6 + 4 completa a dezena: 10." },
     { enunciado: "10 − 5 = ?", resposta: "5", dica: "Metade de 10." },
     { enunciado: "5 + 5 = ?", resposta: "10", dica: "Duas mãos cheias!" },
+    { enunciado: "Uma caixa tinha 12 blocos e recebeu 5. Quantos há agora?", resposta: "17 blocos", dica: "A pergunta pede o novo total: 12 + 5." },
+    { enunciado: "Havia 18 moedas e 6 foram retiradas. Quantas restaram?", resposta: "12 moedas", dica: "O total diminuiu: 18 − 6." },
+    { enunciado: "Crie uma história que represente 9 + 4 e resolva.", resposta: "Resposta pessoal. A história deve juntar ou acrescentar 9 e 4; total 13.", dica: "Diga o que havia, o que entrou e pergunte o total." },
   ],
 
   desafio: {
@@ -179,12 +216,13 @@ const aula: Aula = {
 
   revisao: {
     pontos: [
-      "GANHOU / JUNTOU → usar + (adição).",
-      "PERDEU / TIROU → usar − (subtração).",
-      "Leia a história inteira antes de calcular.",
+      "Leia a pergunta e descubra qual quantidade é desconhecida.",
+      "Para achar o total de partes conhecidas, use adição.",
+      "Para achar o restante de um total depois de retirar uma parte, use subtração.",
+      "Uma palavra sozinha não decide a conta: represente a história.",
       "Dá pra usar dedos, moedas ou desenhos pra ajudar.",
     ],
-    dica: "Sublinhe as palavras 'ganhou', 'ficou com', 'perdeu', 'sobraram' — elas dizem qual sinal usar.",
+    dica: "Marque os números, desenhe o começo e a mudança, escolha a conta e confira se a resposta combina com a pergunta.",
   },
 
   quiz: [
@@ -231,7 +269,7 @@ const aula: Aula = {
       pergunta: "Qual operação representa 'ganhou 3'?",
       opcoes: ["− 3", "+ 3", "× 3"],
       correta: 1,
-      explicacao: "Ganhar sempre é soma (+3).",
+      explicacao: "Nesta situação, a quantidade inicial é conhecida e mais 3 entram; por isso usamos +3.",
       visual: {
         tipo: "comparar",
         lados: [
@@ -277,7 +315,7 @@ const aula: Aula = {
       pergunta: "5 + 3 = ?",
       opcoes: ["6", "7", "8"],
       correta: 2,
-      acerto: "Muito bem! 5 + 3 = 8 estrelas. Ganhar é sempre somar!",
+      acerto: "Muito bem! As 3 novas estrelas entram no grupo inicial: 5 + 3 = 8.",
       erro: "Comece no 5 e conte mais 3: 6, 7, 8.",
     },
 
@@ -306,7 +344,7 @@ const aula: Aula = {
       pergunta: "10 − 4 = ?",
       opcoes: ["5", "6", "7"],
       correta: 1,
-      acerto: "🎉 Isso! Sobraram 6 moedas. Perder é sempre tirar.",
+      acerto: "🎉 Isso! O total era 10 e 4 saíram; sobraram 6 moedas.",
       erro: "Comece no 10 e tire 4: 9, 8, 7, 6.",
     },
 
@@ -317,7 +355,7 @@ const aula: Aula = {
       instrucao:
         "Os coelhos tinham 6 cenouras e GANHARAM mais 2. Aperte MOSTRAR pra somar.",
       operacao: "soma",
-      imagemUrl: castanhaImg,
+      imagemUrl: cenouraImg,
       itemPlural: "cenouras",
       a: 6,
       b: 2,
@@ -330,7 +368,7 @@ const aula: Aula = {
       instrucao:
         "Agora eram 8 cenouras. Os coelhos COMERAM 3. Aperte MOSTRAR pra ver sumindo.",
       operacao: "subtracao",
-      imagemUrl: castanhaImg,
+      imagemUrl: cenouraImg,
       itemPlural: "cenouras",
       a: 8,
       b: 3,
@@ -342,7 +380,7 @@ const aula: Aula = {
       titulo: "Fase 3 · Quantas cenouras sobraram?",
       instrucao: "Começou com 6, ganhou 2, comeu 3. Quantas ficam?",
       grupos: [
-        { imagemUrl: castanhaImg, quantidade: 5, rotulo: "Sobraram" },
+        { imagemUrl: cenouraImg, quantidade: 5, rotulo: "Sobraram" },
       ],
       pergunta: "6 + 2 − 3 = ?",
       opcoes: ["4", "5", "6"],
@@ -572,7 +610,7 @@ const aula: Aula = {
         pergunta: "Qual operação representa 'perdeu 4'?",
         opcoes: ["+ 4", "− 4", "× 4"],
         correta: 1,
-        explicacao: "Perder é sempre subtração (−).",
+        explicacao: "Aqui o total inicial é conhecido e 4 saem; a operação é subtração (−4).",
         visual: {
           tipo: "comparar",
           lados: [

@@ -1,5 +1,6 @@
 import type { UnidadeGeoV1 } from "../../types";
 import { aula01 } from "./aula-01";
+import { aula02, aula03, aula04 } from "./aulas-luz-radiacoes";
 
 export const unidade4: UnidadeGeoV1 = {
   slug: "unidade-4",
@@ -9,5 +10,5 @@ export const unidade4: UnidadeGeoV1 = {
   descricao:
     "Movimento, Leis de Newton, trabalho, potência, energia, ondas, som, luz e óptica.",
   corTema: "#f59e0b",
-  aulas: [aula01],
+  aulas: [aula01, aula02, aula03, aula04],
 };

@@ -15,7 +15,7 @@ export const aula01: AulaGeoV1 = {
   titulo: "Instituto de Genética",
   iconeTrilha: "🧬",
   recompensa: { xp: 160, moedas: 65, medalha: "Geneticista Júnior" },
-  bncc: ["EF09CI08", "EF09CI09", "EF09CI10", "EF09CI11", "EF09CI12"],
+  bncc: ["EF09CI08", "EF09CI09", "EF09CI11"],
   duracaoMin: 45,
 
   cena01_motivacao: {
@@ -40,6 +40,7 @@ export const aula01: AulaGeoV1 = {
       { id: "combi", titulo: "Combinação de genes", subtitulo: "cada filho recebe um sorteio diferente dos alelos", emoji: "🎲", cor: "from-emerald-500 to-teal-700" },
       { id: "ambiente", titulo: "É só o ambiente", subtitulo: "genes não influenciam", emoji: "🌦️", cor: "from-slate-500 to-slate-700" },
       { id: "acaso", titulo: "Puro acaso, sem causa", subtitulo: "não tem explicação", emoji: "❓", cor: "from-red-500 to-rose-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "combi",
     feedbackAcerto:
@@ -90,6 +91,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🔢", titulo: "46 (23 pares)", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🔢", titulo: "23 no total", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🔢", titulo: "100", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. 46 = 23 pares. Metade vem do pai, metade da mãe.",
         feedbackErro: "São 46 (23 pares). Gametas (óvulo/espermatozoide) é que têm só 23." },
@@ -98,6 +100,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "👑", titulo: "Versão que se manifesta mesmo em dose única", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "❌", titulo: "Um gene defeituoso", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🤷", titulo: "Alelo que só existe em animais", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Sim. Basta uma cópia para o traço aparecer (ex.: olho marrom sobre azul).",
         feedbackErro: "Dominante = manda mesmo em dose única. Recessivo precisa de duas cópias." },
@@ -106,6 +109,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🐦", titulo: "Seleção natural", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🎲", titulo: "Sorteio da natureza", cor: "from-slate-500 to-slate-700" },
           { id: "c", emoji: "🙏", titulo: "Vontade do indivíduo", cor: "from-red-500 to-rose-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. Indivíduos mais adaptados deixam mais descendentes.",
         feedbackErro: "Darwin (1859): seleção natural. Indivíduos mais adaptados sobrevivem e se reproduzem mais." },
@@ -196,6 +200,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Trecho de DNA com a receita de uma proteína ou característica", correta: true },
           { id: "b", texto: "Uma organela do citoplasma" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. Gene = pedaço de DNA com uma receita.",
         feedbackErro: "Gene NÃO é organela — é um trecho de DNA." },
@@ -203,6 +209,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "25% (1 em 4)", correta: true },
           { id: "b", texto: "0% — impossível" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Perfeito. Quadro de Mendel: BB / Bb / Bb / bb → 25% bb.",
         feedbackErro: "Cruzando Bb x Bb: 1 BB + 2 Bb + 1 bb → 25% de bb (olho azul)." },
@@ -210,6 +218,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Seleção natural sobre variações genéticas (Darwin, 1859)", correta: true },
           { id: "b", texto: "Vontade individual dos animais" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. Variação + seleção ao longo de gerações.",
         feedbackErro: "Darwin: seleção natural age sobre a variação genética já existente." },

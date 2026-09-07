@@ -22,7 +22,7 @@ export const aula1: AulaPortuguesV4 = {
   slug: "aula-01-planejar-o-texto",
   titulo: "Planejar o texto",
   iconeTrilha: "🗺️",
-  bncc: ["EF05LP25", "EF05LP26"],
+  bncc: ["EF15LP05", "EF35LP25"],
   duracaoMin: 25,
 
   momento01_motivacao: {

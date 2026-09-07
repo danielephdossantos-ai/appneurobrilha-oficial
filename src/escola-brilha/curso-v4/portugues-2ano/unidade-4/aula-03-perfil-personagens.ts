@@ -16,7 +16,7 @@ export const aula03: AulaPortuguesV4 = {
   slug: "aula-03-perfil-personagens",
   titulo: "Conhecendo Melhor os Personagens",
   iconeTrilha: "🎭",
-  bncc: ["EF02LP17", "EF02LP19"],
+  bncc: ["EF02LP28", "EF15LP16", "EF15LP18"],
   duracaoMin: 15,
 
   momento01_motivacao: {

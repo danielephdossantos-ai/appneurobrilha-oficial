@@ -14,7 +14,7 @@ export const aula03: AulaPortuguesV4 = {
   slug: "aula-03-revisar-como-autor",
   titulo: "Revisando Como um Autor",
   iconeTrilha: "🔍",
-  bncc: ["EF02LP23", "EF02LP24"],
+  bncc: ["EF02LP01", "EF15LP06"],
   duracaoMin: 15,
 
   momento01_motivacao: {

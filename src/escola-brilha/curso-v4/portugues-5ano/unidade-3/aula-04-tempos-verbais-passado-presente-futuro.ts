@@ -20,7 +20,7 @@ export const aula4: AulaPortuguesV4 = {
   slug: "aula-04-tempos-verbais-passado-presente-futuro",
   titulo: "Tempos verbais: passado, presente e futuro",
   iconeTrilha: "⏳",
-  bncc: ["EF05LP06"],
+  bncc: ["EF05LP05", "EF35LP07"],
   duracaoMin: 25,
 
   momento01_motivacao: {

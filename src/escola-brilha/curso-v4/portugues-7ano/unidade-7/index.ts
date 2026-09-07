@@ -7,6 +7,7 @@ import { aula34 } from "./aula-34-conjuncoes";
 export const unidade7: any = {
   numero: 7,
   id: "unidade-7",
+  slug: "unidade-7",
   titulo: "O Mundo das Classes",
   aulas: [aula17, aula31, aula32, aula33, aula34],
 };

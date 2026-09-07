@@ -39,6 +39,7 @@ export const aula03: AulaGeoV1 = {
       { id: "musculo_osso", titulo: "Músculo se contrai e move o osso", subtitulo: "sistema muscular + ósseo juntos", emoji: "💪", cor: "from-red-500 to-rose-700", fotoUrl: sistemasImg },
       { id: "osso_solo", titulo: "O osso se move sozinho", subtitulo: "sem ajuda de músculo", emoji: "🦴", cor: "from-slate-500 to-slate-800", fotoUrl: bancadaImg },
       { id: "pele", titulo: "A pele empurra a perna", subtitulo: "força vem de fora", emoji: "🖐️", cor: "from-amber-500 to-orange-700", fotoUrl: bancadaImg },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "musculo_osso",
     feedbackAcerto:
@@ -87,6 +88,7 @@ export const aula03: AulaGeoV1 = {
           { id: "a", emoji: "🔗", titulo: "Tendão", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🩸", titulo: "Veia", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🕸️", titulo: "Nervo", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Isso. TENDÃO é a estrutura que transmite a força do músculo ao osso.",
         feedbackErro: "Veia transporta sangue e nervo transmite sinal elétrico. Quem LIGA músculo a osso é o TENDÃO." },
@@ -95,6 +97,7 @@ export const aula03: AulaGeoV1 = {
           { id: "a", emoji: "🧠", titulo: "Sistema nervoso", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🦴", titulo: "O próprio osso", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🩹", titulo: "A pele", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. O SISTEMA NERVOSO envia o sinal elétrico que ativa a contração muscular.",
         feedbackErro: "Osso e pele não comandam contração. É o SISTEMA NERVOSO que dá a ordem inicial." },
@@ -103,6 +106,7 @@ export const aula03: AulaGeoV1 = {
           { id: "a", emoji: "🦵", titulo: "Ponto de encontro entre ossos que permite movimento", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "💪", titulo: "Um tipo de músculo", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🔗", titulo: "Um tipo de tendão", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Perfeito. Articulação conecta ossos e permite o movimento entre eles.",
         feedbackErro: "Não é músculo nem tendão. ARTICULAÇÃO é o ponto entre dois ossos que permite movimento." },
@@ -196,6 +200,8 @@ export const aula03: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "O tendão", correta: true },
           { id: "b", texto: "A veia" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. TENDÃO conecta músculo a osso e transmite a força da contração.",
         feedbackErro: "Veia transporta sangue. Quem liga músculo a osso é o TENDÃO." },
@@ -203,6 +209,8 @@ export const aula03: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "O sistema nervoso", correta: true },
           { id: "b", texto: "O próprio osso" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. O SISTEMA NERVOSO envia o sinal que inicia a contração muscular.",
         feedbackErro: "Osso não comanda nada por conta própria. A ordem vem do SISTEMA NERVOSO." },
@@ -210,6 +218,8 @@ export const aula03: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Porque trabalham juntos para produzir cada movimento do corpo", correta: true },
           { id: "b", texto: "Porque funcionam de forma totalmente independente" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Exato. Nenhum dos três produz movimento completo sozinho — precisam trabalhar em conjunto.",
         feedbackErro: "Eles NÃO são independentes. Cada movimento depende dos três sistemas trabalhando JUNTOS." },

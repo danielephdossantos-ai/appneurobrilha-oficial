@@ -35,6 +35,7 @@ export const aula01: AulaGeoV1 = {
       { id: "dormir", titulo: "Dormir", subtitulo: "continuar", emoji: "💤", cor: "from-indigo-400 to-purple-700" },
       { id: "acordar", titulo: "Acordar", subtitulo: "e ir à escola", emoji: "☀️", cor: "from-yellow-400 to-orange-600" },
       { id: "jantar", titulo: "Jantar", subtitulo: "comer", emoji: "🍽️", cor: "from-red-400 to-rose-700" },
+      { id: "outra", titulo: "Outra opção", subtitulo: "não combina", emoji: "❓", cor: "from-blue-400 to-indigo-700" },
     ],
     respostaCerta: "acordar",
     feedbackAcerto: "Isso! Toda manhã a gente ACORDA, toma café e vai pra escola.",
@@ -76,9 +77,9 @@ export const aula01: AulaGeoV1 = {
     aurora: "3 perguntas.",
     instrucao: "Toque no card certo",
     perguntas: [
-      { id: "q1", pergunta: "De manhã cedo:", fotoUrl: manhaImg, cards: [{ id: "a", emoji: "☀️", titulo: "Acordar", cor: "from-yellow-400 to-orange-600" }, { id: "b", emoji: "💤", titulo: "Dormir", cor: "from-indigo-400 to-purple-700" }, { id: "c", emoji: "🌙", titulo: "Ver lua", cor: "from-slate-700 to-indigo-900" }], correta: "a", feedbackAcerto: "ACORDAR — sol nasceu!", feedbackErro: "De manhã é hora de ACORDAR." },
-      { id: "q2", pergunta: "Quando a gente vai à escola?", fotoUrl: escolaImg, cards: [{ id: "a", emoji: "📅", titulo: "Seg a sex", cor: "from-blue-400 to-indigo-700" }, { id: "b", emoji: "🎮", titulo: "Sáb e dom", cor: "from-emerald-400 to-green-700" }, { id: "c", emoji: "🎉", titulo: "Só ano novo", cor: "from-pink-400 to-rose-600" }], correta: "a", feedbackAcerto: "Segunda a sexta!", feedbackErro: "Escola tem 5 dias — seg a sex." },
-      { id: "q3", pergunta: "Quantas estações do ano?", fotoUrl: estacoesImg, cards: [{ id: "a", emoji: "4️⃣", titulo: "4 estações", cor: "from-orange-400 to-red-600" }, { id: "b", emoji: "7️⃣", titulo: "7 estações", cor: "from-emerald-400 to-green-700" }, { id: "c", emoji: "1️⃣", titulo: "1 estação", cor: "from-slate-400 to-slate-700" }], correta: "a", feedbackAcerto: "4: primavera, verão, outono, inverno!", feedbackErro: "São 4 estações do ano." },
+      { id: "q1", pergunta: "De manhã cedo:", fotoUrl: manhaImg, cards: [{ id: "a", emoji: "☀️", titulo: "Acordar", cor: "from-yellow-400 to-orange-600" }, { id: "b", emoji: "💤", titulo: "Dormir", cor: "from-indigo-400 to-purple-700" }, { id: "c", emoji: "🌙", titulo: "Ver lua", cor: "from-slate-700 to-indigo-900" }, { id: "d", emoji: "❓", titulo: "Outra resposta", cor: "from-blue-400 to-indigo-700" }], correta: "a", feedbackAcerto: "ACORDAR — sol nasceu!", feedbackErro: "De manhã é hora de ACORDAR." },
+      { id: "q2", pergunta: "Quando a gente vai à escola?", fotoUrl: escolaImg, cards: [{ id: "a", emoji: "📅", titulo: "Seg a sex", cor: "from-blue-400 to-indigo-700" }, { id: "b", emoji: "🎮", titulo: "Sáb e dom", cor: "from-emerald-400 to-green-700" }, { id: "c", emoji: "🎉", titulo: "Só ano novo", cor: "from-pink-400 to-rose-600" }, { id: "d", emoji: "❓", titulo: "Outra resposta", cor: "from-blue-400 to-indigo-700" }], correta: "a", feedbackAcerto: "Segunda a sexta!", feedbackErro: "Escola tem 5 dias — seg a sex." },
+      { id: "q3", pergunta: "Quantas estações do ano?", fotoUrl: estacoesImg, cards: [{ id: "a", emoji: "4️⃣", titulo: "4 estações", cor: "from-orange-400 to-red-600" }, { id: "b", emoji: "7️⃣", titulo: "7 estações", cor: "from-emerald-400 to-green-700" }, { id: "c", emoji: "1️⃣", titulo: "1 estação", cor: "from-slate-400 to-slate-700" }, { id: "d", emoji: "❓", titulo: "Outra resposta", cor: "from-blue-400 to-indigo-700" }], correta: "a", feedbackAcerto: "4: primavera, verão, outono, inverno!", feedbackErro: "São 4 estações do ano." },
     ],
     falaFinal: "Você entende os ritmos!",
   },
@@ -119,7 +120,7 @@ export const aula01: AulaGeoV1 = {
     subtitulo: "Página 6 — Ciclos do tempo",
     paragrafos: [
       { id: "p1", texto: "Nossa ROTINA se REPETE todo dia: acordar, comer, escola, brincar, dormir. Isso ajuda o corpo a saber a HORA de cada coisa.", chaves: ["rotina", "repete"], definicoes: { rotina: "Coisas que a gente faz sempre na mesma ordem.", repete: "Acontece de novo, várias vezes." }, fotoUrl: rotinaImg },
-      { id: "p2", texto: "A SEMANA também se repete: 5 dias de escola e 2 de descanso. E o ANO tem 4 ESTAÇÕES — primavera, verão, outono e inverno — que voltam sempre.", chaves: ["semana", "estações"], definicoes: { semana: "7 dias em seguida.", estações: "4 partes do ano com clima diferente." }, fotoUrl: estacoesImg },
+      { id: "p2", texto: "A SEMANA tem 7 dias, e as atividades podem mudar entre dias letivos e dias de descanso. O ANO tem 4 ESTAÇÕES — primavera, verão, outono e inverno — percebidas de formas diferentes nas regiões do Brasil.", chaves: ["semana", "estações"], definicoes: { semana: "7 dias em seguida.", estações: "Períodos do ano relacionados a mudanças de luz, temperatura e chuvas, que variam conforme a região." }, fotoUrl: estacoesImg },
     ],
     falaFinal: "Tudo na natureza tem ciclo!",
   },
@@ -145,7 +146,7 @@ export const aula01: AulaGeoV1 = {
 
   cena10_revisao: {
     tipo: "pizzaMunicipio",
-    aurora: "Ano tem 4 estações — metade quente, metade fria.",
+    aurora: "O ano tem 4 estações, mas elas não são iguais em todas as regiões.",
     instrucao: "🍕 Toque nas fatias",
     fotoUrl: estacoesImg,
     fatias: [
@@ -161,9 +162,9 @@ export const aula01: AulaGeoV1 = {
     instrucao: "3 perguntas",
     fotoUrl: brilhaImg,
     perguntas: [
-      { id: "q1", pergunta: "De manhã a gente:", fotoUrl: manhaImg, opcoes: [{ id: "a", texto: "Acorda", correta: true }, { id: "b", texto: "Dorme" }], feedbackAcerto: "Isso!", feedbackErro: "De manhã ACORDA." },
-      { id: "q2", pergunta: "Fim de semana:", fotoUrl: fimSemanaImg, opcoes: [{ id: "a", texto: "Sábado e domingo", correta: true }, { id: "b", texto: "Segunda e terça" }], feedbackAcerto: "Certo!", feedbackErro: "Sábado + domingo." },
-      { id: "q3", pergunta: "Quantas estações:", fotoUrl: estacoesImg, opcoes: [{ id: "a", texto: "4", correta: true }, { id: "b", texto: "7" }], feedbackAcerto: "PERFEITO!", feedbackErro: "4 estações." },
+      { id: "q1", pergunta: "De manhã a gente:", fotoUrl: manhaImg, opcoes: [{ id: "a", texto: "Acorda", correta: true }, { id: "b", texto: "Dorme" }, { id: "c", texto: "Outra resposta" }, { id: "d", texto: "Nenhuma das anteriores" }], feedbackAcerto: "Isso!", feedbackErro: "De manhã ACORDA." },
+      { id: "q2", pergunta: "Fim de semana:", fotoUrl: fimSemanaImg, opcoes: [{ id: "a", texto: "Sábado e domingo", correta: true }, { id: "b", texto: "Segunda e terça" }, { id: "c", texto: "Outra resposta" }, { id: "d", texto: "Nenhuma das anteriores" }], feedbackAcerto: "Certo!", feedbackErro: "Sábado + domingo." },
+      { id: "q3", pergunta: "Quantas estações:", fotoUrl: estacoesImg, opcoes: [{ id: "a", texto: "4", correta: true }, { id: "b", texto: "7" }, { id: "c", texto: "Outra resposta" }, { id: "d", texto: "Nenhuma das anteriores" }], feedbackAcerto: "PERFEITO!", feedbackErro: "4 estações." },
     ],
     selo: { nome: "Cristal dos Ritmos", subtitulo: "6º cristal — última missão!", emoji: "💎", cor: "from-yellow-400 via-orange-500 to-red-700" },
     falaFinal: "TODOS os cristais recuperados! Missão Cientistas cumprida!",

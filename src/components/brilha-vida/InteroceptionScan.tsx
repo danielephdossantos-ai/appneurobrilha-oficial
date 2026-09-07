@@ -291,8 +291,8 @@ export function InteroceptionScan({ onClose }: { onClose: () => void }) {
         </motion.div>
       )}
 
-      <p className="mt-6 text-[10px] text-slate-400 text-center max-w-xs">
-        Base clínica: interocepção guiada (Mahler, Craig) — pré-requisito da autorregulação.
+      <p className="mt-6 text-sm text-slate-500 text-center max-w-sm">
+        Atividade educativa para perceber sinais do corpo. Ela não faz diagnóstico.
       </p>
     </div>
   );

@@ -3,6 +3,7 @@ import { Shell, PageHeader } from "@/components/Layout";
 import { useAppState } from "@/core/store";
 import { ClipboardList } from "lucide-react";
 import { MissaoTarefa } from "@/components/missao-tarefa/MissaoTarefa";
+import { TarefasEnviadasProfessor } from "@/components/missao-tarefa/TarefasEnviadasProfessor";
 
 export const Route = createFileRoute("/missao-tarefa")({
   component: MissaoTarefaPage,
@@ -24,7 +25,10 @@ function MissaoTarefaPage() {
             Cadastre uma criança no perfil pra começar.
           </div>
         ) : (
-          <MissaoTarefa childId={activeChild.id} />
+          <>
+            <TarefasEnviadasProfessor childId={activeChild.id} />
+            <MissaoTarefa childId={activeChild.id} />
+          </>
         )}
       </div>
     </Shell>

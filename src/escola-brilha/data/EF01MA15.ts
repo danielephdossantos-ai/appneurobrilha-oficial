@@ -61,7 +61,7 @@ const aula: Aula = {
   ],
 
   missao:
-    "Comparar objetos por comprimento, altura, massa e capacidade — usando só a observação, sem régua nem balança.",
+    "Comparar comprimento, altura, massa e capacidade com procedimentos diretos e unidades não padronizadas.",
 
   objetivos: [
     "Comparar comprimentos (mais comprido / mais curto).",
@@ -72,10 +72,10 @@ const aula: Aula = {
   ],
 
   motivacao:
-    "Nem sempre precisamos de régua ou balança. Basta observar com atenção — cientistas de verdade fazem assim!",
+    "Primeiro podemos estimar; depois comparamos ou medimos para confirmar. Observar é o começo, não a prova final.",
 
   explicacao:
-    "📏 COMPRIMENTO — 🪵 madeira longa vs ✏️ lápis curto: qual é mais comprido?\n\n📦 CAPACIDADE — 🥛 copo pequeno vs 🪣 balde: em qual cabe mais água?\n\n⚖️ MASSA — 🪨 pedra vs 🍃 folha: qual é mais pesado?\n\n📐 ALTURA — 🌳 árvore vs 🌼 flor: qual é mais alto?",
+    "COMPRIMENTO e ALTURA: alinhe os objetos na mesma origem e compare onde terminam; também podemos usar clipes ou palmos como unidades. MASSA: segure com cuidado ou use uma balança de pratos; tamanho sozinho não garante maior massa. CAPACIDADE: encha um recipiente com copinhos iguais e conte quantos cabem; aparência sozinha pode enganar. Primeiro estime, depois teste e registre o resultado.",
 
   explicacoesNiveis: {
     nivel1:

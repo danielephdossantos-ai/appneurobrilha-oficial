@@ -4,7 +4,7 @@ export const aula05_graficos: AulaV4 = {
   slug: "u7-05-graficos",
   titulo: "Gráficos: colunas, linha e pizza",
   iconeTrilha: "📊",
-  bncc: ["EF05MA24"],
+  bncc: ["EF05MA24", "EF05MA25"],
   duracaoMin: 22,
   metodologias: ["skemp"],
 

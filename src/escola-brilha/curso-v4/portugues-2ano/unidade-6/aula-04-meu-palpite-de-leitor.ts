@@ -17,7 +17,7 @@ export const aula04: AulaPortuguesV4 = {
   slug: "aula-04-meu-palpite-de-leitor",
   titulo: "Meu Palpite de Leitor",
   iconeTrilha: "💭",
-  bncc: ["EF02LP01", "EF02LP28"],
+  bncc: ["EF02LP01", "EF15LP13", "EF15LP16"],
   duracaoMin: 15,
 
   momento01_motivacao: {

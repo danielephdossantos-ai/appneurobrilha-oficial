@@ -61,15 +61,15 @@ export const aula06_probabilidade: AulaV4 = {
     },
   },
   momento08_aplicacao: {
-    contexto: "Baralho de 52 cartas.",
-    problema: "Chance de tirar um ÁS?",
+    contexto: "Conjunto de 20 cartões numerados de 1 a 20.",
+    problema: "Chance de tirar um múltiplo de 5?",
     interacao: {
       tipo: "escolhaVisual",
       pergunta: "Escolha:",
-      opcoes: [{ nome: "4/52 = 1/13" }, { nome: "1/4" }, { nome: "1/52" }],
-      respostaCerta: "4/52 = 1/13",
-      feedbackAcerto: "🎯",
-      feedbackErro: "4 ases em 52.",
+      opcoes: [{ nome: "4/20 = 1/5" }, { nome: "1/4" }, { nome: "1/20" }, { nome: "5/20 = 1/4" }],
+      respostaCerta: "4/20 = 1/5",
+      feedbackAcerto: "🎯 Há 4 múltiplos de 5: 5, 10, 15 e 20.",
+      feedbackErro: "São 4 resultados favoráveis entre 20 cartões: 4/20 = 1/5.",
     },
   },
   momento09_revisao: {

@@ -5,7 +5,7 @@ export const aula04_multiplicacaoRacionais: AulaV4 = {
   slug: "u2-04-multiplicacao-racionais",
   titulo: "Multiplicar e Dividir Racionais",
   iconeTrilha: "✳️",
-  bncc: ["EF07MA08"],
+  bncc: ["EF07MA11", "EF07MA12"],
   duracaoMin: 30,
   metodologias: ["skemp"],
 
@@ -35,7 +35,7 @@ export const aula04_multiplicacaoRacionais: AulaV4 = {
   momento03_descoberta: {
     perguntaGuia: "Por que 1/2 ÷ 1/4 dá 2, um número MAIOR que os dois?",
     pista: "A pergunta real é: quantos quartos cabem em meia unidade?",
-    revelacao: "Cabem 2 quartos em 1/2. Dividir por número menor que 1 sempre AUMENTA o resultado.",
+    revelacao: "Cabem 2 quartos em 1/2. Para uma quantidade positiva, dividir por um número positivo menor que 1 produz um quociente maior que a quantidade inicial.",
     visualMat: {
       tipo: "trinomioPassoAPasso",
       trinomio: "1/2 ÷ 1/4",

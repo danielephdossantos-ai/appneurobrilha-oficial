@@ -22,7 +22,7 @@ export const aula2: AulaPortuguesV4 = {
   slug: "aula-02-paragrafo-e-topico-frasal",
   titulo: "Parágrafo e tópico frasal",
   iconeTrilha: "🧱",
-  bncc: ["EF05LP24", "EF05LP26"],
+  bncc: ["EF35LP07", "EF35LP09"],
   duracaoMin: 25,
 
   momento01_motivacao: {

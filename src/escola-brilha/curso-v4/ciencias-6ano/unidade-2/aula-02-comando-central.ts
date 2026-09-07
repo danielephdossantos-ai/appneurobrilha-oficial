@@ -39,6 +39,7 @@ export const aula02: AulaGeoV1 = {
       { id: "reflexo", titulo: "Um arco reflexo na medula espinhal", subtitulo: "não passa pelo cérebro primeiro", emoji: "⚡", cor: "from-amber-500 to-orange-700", fotoUrl: sistemasImg },
       { id: "musculo", titulo: "O músculo decide sozinho", subtitulo: "sem nervos envolvidos", emoji: "💪", cor: "from-red-500 to-rose-700", fotoUrl: bancadaImg },
       { id: "sorte", titulo: "Foi coincidência", subtitulo: "não há explicação biológica", emoji: "🎲", cor: "from-slate-500 to-slate-800", fotoUrl: bancadaImg },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "reflexo",
     feedbackAcerto:
@@ -90,6 +91,7 @@ export const aula02: AulaGeoV1 = {
           { id: "a", emoji: "🧠", titulo: "Sistema nervoso central (encéfalo e medula)", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "💪", titulo: "O próprio músculo do dedo", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🩸", titulo: "O sangue que circula ali", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Isso. Dor é captada por receptores e processada pelo SNC — encéfalo e medula.",
         feedbackErro: "Músculo não processa dor, e sangue transporta oxigênio, não interpreta sinais. Quem processa é o SISTEMA NERVOSO CENTRAL." },
@@ -98,6 +100,7 @@ export const aula02: AulaGeoV1 = {
           { id: "a", emoji: "⚡", titulo: "Resposta rápida comandada pela medula, sem esperar o cérebro", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🧠", titulo: "Decisão consciente e pensada", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "😴", titulo: "Ausência total de resposta nervosa", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. O reflexo é rápido justamente porque não espera o cérebro decidir — a medula já responde.",
         feedbackErro: "Reflexo não é pensado nem ausência de resposta. É uma resposta RÁPIDA comandada pela medula espinhal." },
@@ -106,6 +109,7 @@ export const aula02: AulaGeoV1 = {
           { id: "a", emoji: "⚡", titulo: "Na sinapse", cor: "from-emerald-500 to-teal-700" },
           { id: "b", emoji: "🦴", titulo: "No osso", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🩹", titulo: "Na pele", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Perfeito. Sinapse é o ponto de contato onde neurotransmissores passam a mensagem adiante.",
         feedbackErro: "Osso e pele não fazem sinapse. A comunicação entre neurônios acontece na SINAPSE." },
@@ -199,6 +203,8 @@ export const aula02: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Medula espinhal, no arco reflexo", correta: true },
           { id: "b", texto: "O músculo, que age sozinho" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. A medula processa o arco reflexo antes do cérebro perceber.",
         feedbackErro: "Músculo não decide sozinho. É a MEDULA ESPINHAL que comanda o arco reflexo." },
@@ -206,6 +212,8 @@ export const aula02: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Ponto de comunicação química/elétrica entre neurônios", correta: true },
           { id: "b", texto: "Um tipo de osso do crânio" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. Sinapse é onde um neurônio passa a mensagem ao próximo.",
         feedbackErro: "Não é osso. SINAPSE é o ponto de comunicação entre neurônios." },
@@ -213,6 +221,8 @@ export const aula02: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Conectar o SNC aos músculos e órgãos do corpo", correta: true },
           { id: "b", texto: "Produzir hormônios digestivos" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Exato. Os nervos periféricos são o elo entre o SNC e o restante do corpo.",
         feedbackErro: "Hormônios são do sistema endócrino. O SNP CONECTA o SNC ao corpo." },

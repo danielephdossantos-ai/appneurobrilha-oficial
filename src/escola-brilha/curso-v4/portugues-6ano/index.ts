@@ -7,12 +7,12 @@ import { unidade6 } from "./unidade-6";
 import { unidade7 } from "./unidade-7";
 import { unidade8 } from "./unidade-8";
 import { unidade9 } from "./unidade-9";
+import { unidade10 } from "./unidade-10";
 
 export const cursoPortugues6Ano = {
   id: "portugues-6ano",
   titulo: "Língua Portuguesa - 6º Ano",
-  unidades: [unidade1, unidade2, unidade3, unidade4, unidade5, unidade6, unidade7, unidade8, unidade9]
+  unidades: [unidade1, unidade2, unidade3, unidade4, unidade5, unidade6, unidade7, unidade8, unidade9, unidade10]
 };
-
 
 

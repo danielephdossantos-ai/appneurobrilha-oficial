@@ -93,10 +93,10 @@ export function MoodMeterRuler({ onClose }: { onClose: () => void }) {
   const legendaEixos = useMemo(
     () => (
       <>
-        <div className="absolute left-1/2 -translate-x-1/2 -top-5 text-[10px] font-black text-slate-500 uppercase">
+        <div className="absolute left-1/2 -translate-x-1/2 -top-6 text-xs font-black text-slate-600 uppercase">
           ↑ Muita energia
         </div>
-        <div className="absolute left-1/2 -translate-x-1/2 -bottom-5 text-[10px] font-black text-slate-500 uppercase">
+        <div className="absolute left-1/2 -translate-x-1/2 -bottom-6 text-xs font-black text-slate-600 uppercase">
           Pouca energia ↓
         </div>
         <div className="absolute -left-3 top-1/2 -translate-y-1/2 -rotate-90 text-[10px] font-black text-slate-500 uppercase">
@@ -154,7 +154,7 @@ export function MoodMeterRuler({ onClose }: { onClose: () => void }) {
                   quadrante: e.quadrante,
                 });
               }}
-              className="absolute -translate-x-1/2 -translate-y-1/2 text-[10px] font-black bg-white/90 hover:bg-white text-slate-800 px-2 py-1 rounded-full shadow-md border-2 border-white hover:scale-110 transition-transform"
+              className="absolute -translate-x-1/2 -translate-y-1/2 text-xs font-black bg-white/95 hover:bg-white text-slate-800 px-2 py-1.5 rounded-full shadow-md border-2 border-white hover:scale-110 transition-transform"
               style={{
                 left: `${e.x}%`,
                 top: `${100 - e.y}%`, // y invertido (topo = alta energia)
@@ -225,8 +225,8 @@ export function MoodMeterRuler({ onClose }: { onClose: () => void }) {
               placeholder="Escreva ou peça pra um adulto escrever com você."
               className="w-full p-4 rounded-2xl border-2 border-slate-200 focus:border-primary focus:outline-none font-medium text-slate-800 resize-none"
             />
-            <p className="text-xs text-slate-500 font-medium mt-2 text-center">
-              Nomear a emoção diminui a intensidade dela em até 40% (Lieberman et al., 2007).
+            <p className="text-sm text-slate-600 font-medium mt-2 text-center">
+              Dar um nome ao que você sente pode ajudar a explicar isso a um adulto de confiança.
             </p>
           </motion.div>
         )}
@@ -253,10 +253,8 @@ export function MoodMeterRuler({ onClose }: { onClose: () => void }) {
         </button>
       </div>
 
-      <div className="mt-4 text-[10px] text-slate-500 font-medium text-center max-w-md">
-        Base clínica: Mood Meter · RULER Approach (Marc Brackett, Yale Center for
-        Emotional Intelligence). Vocabulário emocional expandido baseado no modelo
-        circumplexo de Russell (1980).
+      <div className="mt-4 text-sm text-slate-600 font-medium text-center max-w-md">
+        Este mapa ajuda a reconhecer palavras para emoções e níveis de energia. Ele não faz diagnóstico.
       </div>
     </div>
   );

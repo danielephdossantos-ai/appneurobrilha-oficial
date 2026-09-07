@@ -1,16 +1,14 @@
 import type { Unidade } from "../../types";
-import { aula01_razao } from "./aula-01-razao";
-import { aula02_proporcao } from "./aula-02-proporcao";
-import { aula03_sequencias } from "./aula-03-sequencias";
+import { aula01_igualdade } from "./aula-01-igualdade";
+import { aula02_partilhas } from "./aula-02-partilhas";
 import { aula04_equacoes } from "./aula-04-equacoes";
-import { aula05_missao } from "./aula-05-missao";
 
 export const unidade6: Unidade = {
-  slug: "unidade-6-razao-proporcao-algebra",
+  slug: "unidade-6-igualdade-partilhas",
   numero: 6,
-  titulo: "Razão, Proporção e Álgebra Inicial",
-  subtitulo: "Regra de três, sequências e as primeiras equações",
-  descricao: "Brilha entra no mundo da álgebra: razões, regra de três, padrões e equações do 1º grau.",
+  titulo: "Igualdade e Partilhas",
+  subtitulo: "Equilíbrio nos dois membros, valor desconhecido e partilhas desiguais",
+  descricao: "Brilha aprende por que uma igualdade permanece verdadeira e resolve partilhas desiguais por relações aditivas e multiplicativas.",
   corTema: "#7c3aed",
-  aulas: [aula01_razao, aula02_proporcao, aula03_sequencias, aula04_equacoes, aula05_missao],
+  aulas: [aula01_igualdade, aula02_partilhas, aula04_equacoes],
 };

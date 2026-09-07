@@ -1,5 +1,6 @@
 import type { UnidadeGeoV1 } from "../../types";
 import { aula01 } from "./aula-01";
+import { aula02, aula03 } from "./aulas-materia-transformacoes";
 
 export const unidade3: UnidadeGeoV1 = {
   slug: "unidade-3",
@@ -9,5 +10,5 @@ export const unidade3: UnidadeGeoV1 = {
   descricao:
     "Estrutura atômica, tabela periódica, ligações, reações químicas, balanceamento, ácidos e bases.",
   corTema: "#0891b2",
-  aulas: [aula01],
+  aulas: [aula01, aula02, aula03],
 };

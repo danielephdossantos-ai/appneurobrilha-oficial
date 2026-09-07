@@ -158,7 +158,7 @@ export const aula01: AulaPortuguesV4 = {
         opcoes: ["A borboleta", "A coelhinha Fiona", "A cenoura"],
         correta: 1,
         feedbackAcerto: "🎉 Isso! A história é sobre a coelhinha FIONA, do começo ao fim.",
-        feedbackErro: "A personagem que aparece em TODAS as partes da história é a coelhinha.",
+        feedbackErro: "A narrativa acompanha principalmente Fiona e o que acontece com ela.",
       },
       {
         pergunta: "Onde essa história acontece?",
@@ -240,16 +240,16 @@ export const aula01: AulaPortuguesV4 = {
 
   momento09_revisao: {
     pontos: [
-      "Toda história tem COMEÇO (apresenta a personagem), MEIO (o problema) e FIM (a solução).",
+      "Uma narrativa pode ser organizada em COMEÇO, MEIO e FIM. Algumas apresentam um problema e uma solução; outras contam acontecimentos diferentes.",
       "Se embaralhar a ordem, a história não faz mais sentido.",
       "Pra descobrir a ordem certa, a gente pensa: o que aconteceu PRIMEIRO?",
     ],
     miniDesafio: {
-      pergunta: "A parte da história onde acontece o problema é o…",
+      pergunta: "Nesta história, em qual parte aparece o problema de Fiona?",
       opcoes: ["Começo", "Meio", "Fim"],
       correta: 1,
       feedbackAcerto: "🎉 Isso! O problema aparece no MEIO da história.",
-      feedbackErro: "O problema não é a primeira nem a última parte — é o MEIO.",
+      feedbackErro: "Na história de Fiona, ela se perde no MEIO. Em outras histórias, a organização pode ser diferente.",
     },
   },
 

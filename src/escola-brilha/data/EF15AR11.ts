@@ -1,0 +1,2 @@
+import { criarAulaArte1 } from "./criarAulaArte1";
+export default criarAulaArte1({ codigo: "EF15AR11", titulo: "Inventando uma Dança", foco: "Criar e improvisar movimentos dançados individualmente e em grupo", objeto: "criação e improvisação em dança", exemplos: ["Inventar e combinar movimentos", "Repetir sem escolher", "Resolver uma subtração", "Copiar um mapa"], resposta: "Escolher movimentos, combiná-los e transformar a sequência após experimentar.", proxima: "EF15AR12" });

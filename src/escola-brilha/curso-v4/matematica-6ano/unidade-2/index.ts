@@ -10,7 +10,7 @@ export const unidade2: Unidade = {
   slug: "unidade-2-operacoes",
   numero: 2,
   titulo: "Investigando as Operações",
-  subtitulo: "+ − × ÷, expressões, potências e raiz",
+  subtitulo: "+ − × ÷, expressões e potências com números naturais",
   descricao:
     "Brilha domina as 4 operações com números grandes, aprende a ordem correta em expressões e descobre potências e raiz quadrada.",
   corTema: "#7c3aed",

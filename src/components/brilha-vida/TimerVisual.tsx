@@ -178,8 +178,8 @@ export function TimerVisual({ onClose }: { onClose: () => void }) {
         </div>
       )}
 
-      <p className="mt-6 text-[10px] text-slate-400 text-center">
-        Base clínica: Time Timer® (Rogers) — visualização concreta do tempo, suporte TEACCH para TEA/TDAH.
+      <p className="mt-6 text-sm text-slate-500 text-center">
+        O relógio mostra o tempo de forma visual. Ele não deve ser usado para pressionar ou punir.
       </p>
     </div>
   );

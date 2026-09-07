@@ -22,7 +22,7 @@ export const aula04: AulaPortuguesV4 = {
   slug: "aula-04-caca-erros",
   titulo: "Caça aos Erros",
   iconeTrilha: "🔍",
-  bncc: ["EF02LP06", "EF02LP07", "EF02LP08"],
+  bncc: ["EF02LP01", "EF02LP03", "EF02LP07", "EF02LP08", "EF02LP09", "EF15LP06"],
   duracaoMin: 15,
 
   momento01_motivacao: {

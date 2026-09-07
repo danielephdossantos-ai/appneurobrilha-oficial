@@ -9,7 +9,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-energia-tecnologia",
   titulo: "Energia e Tecnologia",
   iconeTrilha: "⚡",
-  bncc: ["EF05CI03"],
+  bncc: [],
   duracaoMin: 30,
 
   cena01_motivacao: {
@@ -30,6 +30,7 @@ export const aula01: AulaGeoV1 = {
       { id: "hidro", titulo: "HIDRELÉTRICA", subtitulo: "força da água", emoji: "💧", cor: "from-cyan-400 to-sky-700" },
       { id: "solar", titulo: "SOLAR", subtitulo: "luz do sol", emoji: "☀️", cor: "from-amber-400 to-orange-700" },
       { id: "eolica", titulo: "EÓLICA", subtitulo: "força do vento", emoji: "💨", cor: "from-slate-400 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "hidro",
     feedbackAcerto: "Certo. Cerca de 60% da eletricidade do Brasil vem de HIDRELÉTRICAS.",
@@ -97,6 +98,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "☀️", titulo: "Sol (renovável)", cor: "from-amber-500 to-orange-700" },
           { id: "b", emoji: "🛢️", titulo: "Petróleo (não renovável)", cor: "from-slate-500 to-slate-700" },
           { id: "c", emoji: "🪨", titulo: "Carvão (não renovável)", cor: "from-red-500 to-rose-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Sim. Sol é a fonte renovável mais abundante do planeta.",
         feedbackErro: "Petróleo e carvão são FINITOS. O SOL é renovável." },
@@ -106,6 +108,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "💧", titulo: "Água em queda gira turbinas", cor: "from-cyan-500 to-sky-700" },
           { id: "b", emoji: "🔥", titulo: "Queimando água", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "🌡️", titulo: "Aquecendo água", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. Força mecânica da água em queda gira turbinas — que geram eletricidade.",
         feedbackErro: "Não se queima nem se aquece água. A QUEDA gira a turbina." },
@@ -115,6 +118,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🌍", titulo: "O planeta — menos usinas, menos poluição", cor: "from-emerald-500 to-green-700" },
           { id: "b", emoji: "🤷", titulo: "Nada, não faz diferença", cor: "from-slate-500 to-slate-700" },
           { id: "c", emoji: "💸", titulo: "Só a conta de luz", cor: "from-red-500 to-rose-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Sim. Menos consumo = menos usinas necessárias = menos impacto ambiental.",
         feedbackErro: "Consumo consciente reduz demanda por energia — beneficia PLANETA todo, não só sua conta." },
@@ -259,6 +263,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Renovável", correta: true },
           { id: "b", texto: "Não renovável" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. Fonte que se repõe = RENOVÁVEL.",
         feedbackErro: "Fonte que não acaba é RENOVÁVEL. Não renovável = finita." },
@@ -267,6 +273,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Vento", correta: true },
           { id: "b", texto: "Petróleo" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. Vento é renovável — sempre existirá enquanto houver atmosfera.",
         feedbackErro: "Petróleo é fóssil finito. VENTO é renovável." },
@@ -275,6 +283,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Sim, gasta muito menos energia", correta: true },
           { id: "b", texto: "Não, é igual" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. LED gasta até 80% menos que lâmpadas antigas.",
         feedbackErro: "LED é MUITO mais eficiente. Diferença enorme no consumo." },

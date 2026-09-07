@@ -5,7 +5,7 @@ export const aula05_missaoMedidas: AulaV4 = {
   slug: "u6-05-missao-medidas",
   titulo: "Missão: O Projeto da Praça",
   iconeTrilha: "🏗️",
-  bncc: ["EF07MA30", "EF07MA32", "EF07MA33"],
+  bncc: ["EF07MA29", "EF07MA30", "EF07MA32", "EF07MA33"],
   duracaoMin: 34,
   metodologias: ["skemp"],
 
@@ -31,6 +31,7 @@ export const aula05_missaoMedidas: AulaV4 = {
       },
       { tipo: "figuraPlana", forma: "retangulo", medidasLados: ["20 m", "15 m", "20 m", "15 m"], mostrarAngulos: true, legenda: "Terreno da praça." },
       { tipo: "texto", texto: "🔑 Cada pergunta pede uma grandeza: cerca → m, grama → m², água → litros.", destaque: true },
+      { tipo: "texto", texto: "📏 Toda medida feita no mundo real é aproximada: a régua tem divisões limitadas e a leitura pode variar alguns milímetros. Registre a unidade e uma precisão coerente, sem inventar casas decimais." },
     ],
   },
 
@@ -109,12 +110,30 @@ export const aula05_missaoMedidas: AulaV4 = {
                 explica: "Conversão.",
                 status: "ok",
                 professor:
-                  "Uma família de quatro pessoas consome cerca de 500 L por dia. Uma caixa de 3000 L segura aproximadamente seis dias sem abastecimento — é assim que engenheiros dimensionam reservatórios.",
+                  "A conversão vem da equivalência entre unidades: 1 m³ = 1000 dm³ e cada 1 dm³ corresponde a 1 litro. Assim, 3 m³ = 3000 L.",
               },
             ],
             fatorada: "3000 litros",
           },
           destaque: "1 m³ = 1000 L.",
+        },
+      },
+      {
+        texto: "MEDIÇÃO EMPÍRICA: o valor medido depende da precisão do instrumento e deve ser apresentado como aproximação.",
+        exemploReal: {
+          titulo: "🔎 Medir sem falsa precisão",
+          contexto: "Uma fita marcada de centímetro em centímetro indica um banco entre 149 cm e 150 cm.",
+          visualMat: {
+            tipo: "trinomioPassoAPasso",
+            trinomio: "Leitura coerente da medida",
+            passos: [
+              { expr: "menor divisão da fita = 1 cm", explica: "Esse é o limite visível do instrumento.", status: "neutro" },
+              { expr: "comprimento observado ≈ 150 cm", explica: "Uso o sinal de aproximação.", status: "ok" },
+              { expr: "escrever 150,000 cm seria falsa precisão", explica: "A fita não permite garantir milésimos.", status: "x" },
+            ],
+            fatorada: "Medida empírica = valor aproximado + unidade",
+          },
+          destaque: "Instrumento mais preciso reduz a incerteza, mas nenhuma medição real é absolutamente exata.",
         },
       },
     ],

@@ -21,7 +21,7 @@ export const aula2: AulaPortuguesV4 = {
   slug: "aula-02-texto-teatral",
   titulo: "Texto teatral",
   iconeTrilha: "🎭",
-  bncc: ["EF05LP29", "EF15LP19"],
+  bncc: ["EF05LP25", "EF35LP22", "EF35LP24", "EF35LP30", "EF15LP16", "EF15LP19"],
   duracaoMin: 25,
 
   momento01_motivacao: {

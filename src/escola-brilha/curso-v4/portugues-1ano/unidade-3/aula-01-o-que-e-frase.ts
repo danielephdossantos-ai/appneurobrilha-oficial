@@ -49,7 +49,7 @@ export const aula01: AulaPortuguesV4 = {
       ],
       respostaCerta: 0,
       feedbackAcerto:
-        "🎉 Isso! É uma FRASE completa: começa com letra maiúscula e termina com ponto, e conta uma ideia inteira.",
+        "🎉 Isso! É uma frase escrita completa: transmite uma ideia, começa com maiúscula e termina com pontuação.",
       feedbackErro:
         "Leia de novo: 'A sala está aberta.' Isso conta uma ideia sobre a sala — não é lista nem nome.",
     },
@@ -75,7 +75,7 @@ export const aula01: AulaPortuguesV4 = {
   },
 
   momento_ensinoVisual: {
-    titulo: "Toda frase tem começo e fim",
+    titulo: "A frase escrita tem começo e sinal no fim",
     instrucao:
       "Veja: a primeira letra é MAIÚSCULA (verde) e no final tem um PONTO (vermelho).",
     blocos: [
@@ -100,7 +100,7 @@ export const aula01: AulaPortuguesV4 = {
       paragrafos: [
         "Ana acordou cedo. Ela escovou os dentes.",
         "Depois, Ana pegou o lápis e desenhou um gato.",
-        "Cada uma dessas ideias é uma frase: começa com letra grande e termina com ponto.",
+        "Cada uma dessas ideias é uma frase escrita: começa com letra maiúscula e termina com um sinal de pontuação.",
       ],
     },
   },
@@ -131,11 +131,11 @@ export const aula01: AulaPortuguesV4 = {
     instrucao: "Vamos pensar sobre as frases que lemos.",
     perguntas: [
       {
-        pergunta: "Toda frase precisa terminar com...",
-        opcoes: ["Uma vírgula", "Um ponto", "Nada"],
-        correta: 1,
-        feedbackAcerto: "🎉 Isso! O PONTO final mostra que a frase acabou.",
-        feedbackErro: "Olhe as frases do texto: todas terminam com uma bolinha, o PONTO.",
+        pergunta: "Uma frase escrita completa termina com...",
+        opcoes: ["Um sinal de pontuação", "Uma letra maiúscula", "Um espaço vazio"],
+        correta: 0,
+        feedbackAcerto: "🎉 Isso! Pode ser ponto final, interrogação ou exclamação.",
+        feedbackErro: "No fim usamos um sinal de pontuação: ponto final, interrogação ou exclamação.",
       },
       {
         pergunta: "Qual dessas é uma frase completa?",
@@ -200,7 +200,7 @@ export const aula01: AulaPortuguesV4 = {
   // ------------------------------------------------------------
   momento_escrita: {
     titulo: "Minhas primeiras frases escritas",
-    instrucao: "Frase começa com letra maiúscula e termina com ponto. Escreva as suas.",
+    instrucao: "Na escrita, comece com letra maiúscula e termine com o sinal adequado. Escreva suas frases.",
     blocos: [
       {
         tipo: "tracadoLetra",
@@ -231,8 +231,8 @@ export const aula01: AulaPortuguesV4 = {
   momento09_revisao: {
     pontos: [
       "Uma FRASE é um grupo de palavras com sentido completo.",
-      "Toda frase começa com letra MAIÚSCULA.",
-      "Toda frase termina com PONTO.",
+      "Na escrita, a frase começa com letra MAIÚSCULA.",
+      "A frase escrita termina com pontuação: ponto final, interrogação ou exclamação.",
       "Palavras soltas e fora de ordem NÃO formam uma frase.",
     ],
     miniDesafio: {
@@ -266,11 +266,11 @@ export const aula01: AulaPortuguesV4 = {
         feedbackErro: "A primeira letra da frase é sempre MAIÚSCULA. O ponto fica no fim.",
       },
       {
-        pergunta: "3/5 — Toda frase termina com...",
-        opcoes: ["Ponto final", "Vírgula", "Um espaço", "Letra maiúscula"],
+        pergunta: "3/5 — Uma frase escrita completa termina com...",
+        opcoes: ["Um sinal de pontuação", "Somente vírgula", "Um espaço", "Letra maiúscula"],
         correta: 0,
-        feedbackAcerto: "🎉 PONTO!",
-        feedbackErro: "A maiúscula abre a frase; o PONTO FINAL é quem fecha.",
+        feedbackAcerto: "🎉 Isso! Pode ser ponto final, interrogação ou exclamação.",
+        feedbackErro: "A maiúscula inicia; um sinal de pontuação encerra a frase escrita.",
       },
       {
         pergunta: "4/5 — Qual é uma frase completa?",

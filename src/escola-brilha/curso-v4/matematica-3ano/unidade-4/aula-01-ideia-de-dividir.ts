@@ -4,7 +4,7 @@ export const aula01_ideiaDividir: AulaV4 = {
   slug: "u4-01-ideia-dividir",
   titulo: "Repartir Igualmente",
   iconeTrilha: "➗",
-  bncc: ["EF03MA10"],
+  bncc: ["EF03MA08"],
   duracaoMin: 20,
   metodologias: ["skemp", "cpa"],
   momento01_motivacao: {
@@ -28,18 +28,23 @@ export const aula01_ideiaDividir: AulaV4 = {
     etapas: [
       {
         texto: "Temos 15 doces e 3 crianças (A, B, C). Vamos dar 1 doce pra cada uma, dando a volta várias vezes, até acabar. No final, contamos quantos cada uma recebeu.",
+        exemploReal: { contexto: "Separe 15 tampinhas e marque três espaços: A, B e C.", destaque: "Cada rodada distribui exatamente 3 tampinhas." },
       },
       {
         texto: "Rodada 1 — dou 1 pra A, 1 pra B, 1 pra C. Já dei 3 doces. Sobram 15 − 3 = 12. Cada uma tem 1.",
+        exemploReal: { contexto: "15 − 3 = 12.", destaque: "Depois da primeira rodada, cada criança tem 1 e restam 12." },
       },
       {
         texto: "Rodada 2 — dou mais 1 pra A, B e C. Já dei 6 doces. Sobram 15 − 6 = 9. Cada uma tem 2.",
+        exemploReal: { contexto: "12 − 3 = 9.", destaque: "Depois da segunda rodada, cada criança tem 2." },
       },
       {
         texto: "Rodada 3 — dou mais 1 pra cada. Já dei 9. Sobram 15 − 9 = 6. Cada uma tem 3.",
+        exemploReal: { contexto: "9 − 3 = 6.", destaque: "Depois da terceira rodada, cada criança tem 3." },
       },
       {
         texto: "Rodada 4 — dou mais 1 pra cada. Já dei 12. Sobram 15 − 12 = 3. Cada uma tem 4.",
+        exemploReal: { contexto: "6 − 3 = 3.", destaque: "Depois da quarta rodada, cada criança tem 4." },
       },
       {
         texto: "Rodada 5 — dou o último pra cada. Já dei 15. Sobram 0. Cada uma tem 5. Acabou!",
@@ -50,6 +55,7 @@ export const aula01_ideiaDividir: AulaV4 = {
       },
       {
         texto: "Atalho da tabuada: qual número vezes 3 dá 15? 5 × 3 = 15. Então 15 ÷ 3 = 5. Dividir é o inverso de multiplicar.",
+        exemploReal: { contexto: "Confira o resultado juntando novamente os três grupos de 5.", destaque: "3 × 5 = 15 confirma que 15 ÷ 3 = 5." },
       },
     ],
   },
@@ -112,9 +118,9 @@ export const aula01_ideiaDividir: AulaV4 = {
   },
   momento10_avaliacao: {
     perguntas: [
-      { pergunta: "12 ÷ 3 = ?", opcoes: ["4", "3", "5"], correta: 0, feedbackAcerto: "🎉 4.", feedbackErro: "4×3=12." },
-      { pergunta: "30 ÷ 5 = ?", opcoes: ["6", "5", "7"], correta: 0, feedbackAcerto: "🎉 6.", feedbackErro: "6×5=30." },
-      { pergunta: "28 ÷ 4 = ?", opcoes: ["7", "6", "8"], correta: 0, feedbackAcerto: "🎉 7.", feedbackErro: "7×4=28." },
+      { pergunta: "12 ÷ 3 = ?", opcoes: ["4", "3", "5"], correta: 0, feedbackAcerto: "🎉 Repartindo 12 em 3 grupos iguais, cada grupo recebe 4.", feedbackErro: "Confira pela multiplicação: 4 grupos de 3 formam 12." },
+      { pergunta: "30 ÷ 5 = ?", opcoes: ["6", "5", "7"], correta: 0, feedbackAcerto: "🎉 Repartindo 30 em 5 grupos iguais, cada grupo recebe 6.", feedbackErro: "Procure o fator que completa 5 × ? = 30; ele é 6." },
+      { pergunta: "28 ÷ 4 = ?", opcoes: ["7", "6", "8"], correta: 0, feedbackAcerto: "🎉 Repartindo 28 em 4 grupos iguais, cada grupo recebe 7.", feedbackErro: "Confira pela operação inversa: 7 × 4 = 28." },
     ],
   },
   momento11_missaoFamilia: {

@@ -4,7 +4,7 @@ export const aula02_divisaoComResto: AulaV4 = {
   slug: "u4-02-divisao-com-resto",
   titulo: "Divisão com resto",
   iconeTrilha: "🍰",
-  bncc: ["EF05MA07"],
+  bncc: ["EF05MA08"],
   duracaoMin: 20,
   metodologias: ["skemp"],
 

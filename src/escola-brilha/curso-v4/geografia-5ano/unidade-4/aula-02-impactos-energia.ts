@@ -13,7 +13,7 @@ export const aula02: AulaGeoV1 = {
   slug: "aula-02-impactos-energia",
   titulo: "Energia e Meio Ambiente",
   iconeTrilha: "🌱",
-  bncc: ["EF05GE07"],
+  bncc: [],
   duracaoMin: 22,
 
   cena01_motivacao: {
@@ -44,6 +44,19 @@ export const aula02: AulaGeoV1 = {
         subtitulo: "queima e faz fumaça preta",
         emoji: "🏭",
         cor: "from-slate-500 to-gray-700",
+      },
+
+      {
+        id: "extra-1",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
+      {
+        id: "extra-2",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
       },
     ],
     respostaCerta: "solar",
@@ -113,7 +126,8 @@ export const aula02: AulaGeoV1 = {
         emoji: "💧",
         cor: "from-sky-500 to-blue-700",
         titulo: "HIDRELÉTRICA (Itaipu, Belo Monte)",
-        texto: "Barragem alaga áreas enormes de floresta, desabriga indígenas e ribeirinhos. Mas gera muita energia limpa.",
+        texto:
+          "Barragem alaga áreas enormes de floresta, desabriga indígenas e ribeirinhos. Mas gera muita energia limpa.",
       },
       {
         id: "term",
@@ -161,6 +175,13 @@ export const aula02: AulaGeoV1 = {
           { id: "sol", emoji: "☀️", titulo: "Sol", cor: "from-yellow-500 to-orange-600" },
           { id: "pet", emoji: "🛢️", titulo: "Petróleo", cor: "from-slate-500 to-gray-700" },
           { id: "car", emoji: "🏭", titulo: "Carvão", cor: "from-red-500 to-rose-700" },
+
+          {
+            id: "extra-3",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "sol",
         feedbackAcerto: "Isso! Sol é RENOVÁVEL — brilha sempre.",
@@ -171,9 +192,26 @@ export const aula02: AulaGeoV1 = {
         pergunta: "Hidrelétrica gera energia LIMPA, mas causa impacto principal em...",
         fotoUrl: IMG_HIDRO,
         cards: [
-          { id: "flor", emoji: "🌳", titulo: "Alagar floresta", cor: "from-emerald-500 to-green-700" },
+          {
+            id: "flor",
+            emoji: "🌳",
+            titulo: "Alagar floresta",
+            cor: "from-emerald-500 to-green-700",
+          },
           { id: "ar", emoji: "💨", titulo: "Poluir o ar", cor: "from-slate-500 to-gray-700" },
-          { id: "lixo", emoji: "🗑️", titulo: "Gerar lixo tóxico", cor: "from-amber-500 to-orange-700" },
+          {
+            id: "lixo",
+            emoji: "🗑️",
+            titulo: "Gerar lixo tóxico",
+            cor: "from-amber-500 to-orange-700",
+          },
+
+          {
+            id: "extra-4",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "flor",
         feedbackAcerto: "Perfeito! Barragem ALAGA floresta e desabriga gente.",
@@ -186,6 +224,13 @@ export const aula02: AulaGeoV1 = {
           { id: "ar", emoji: "💨", titulo: "O ar (CO₂)", cor: "from-slate-500 to-gray-700" },
           { id: "solo", emoji: "🌱", titulo: "Só o solo", cor: "from-amber-500 to-orange-700" },
           { id: "n", emoji: "✨", titulo: "Não polui nada", cor: "from-emerald-500 to-green-700" },
+
+          {
+            id: "extra-5",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "ar",
         feedbackAcerto: "Isso! Queima solta CO₂ no AR = aquecimento global.",
@@ -258,7 +303,8 @@ export const aula02: AulaGeoV1 = {
     paragrafos: [
       {
         id: "p1",
-        texto: "RENOVÁVEL é fonte que não acaba: sol, vento, água. FÓSSIL acaba e polui: petróleo, carvão, gás.",
+        texto:
+          "RENOVÁVEL é fonte que não acaba: sol, vento, água. FÓSSIL acaba e polui: petróleo, carvão, gás.",
         chaves: ["renovável", "fóssil"],
       },
       {
@@ -342,7 +388,11 @@ export const aula02: AulaGeoV1 = {
       {
         id: "r6",
         municipioA: { nome: "Escola do ", emoji: "🏫", cor: "from-yellow-400 to-orange-600" },
-        municipioB: { nome: "bairro com telhado grande", emoji: "🏢", cor: "from-amber-400 to-orange-600" },
+        municipioB: {
+          nome: "bairro com telhado grande",
+          emoji: "🏢",
+          cor: "from-amber-400 to-orange-600",
+        },
         contexto: "Escola quer instalar energia limpa no telhado. Melhor?",
         pecaCertaId: "solar",
         feedbackAcerto: "Perfeito! Telhado + painel = SOLAR.",
@@ -363,7 +413,8 @@ export const aula02: AulaGeoV1 = {
         emoji: "♻️",
         percentual: 82,
         cor: "#10b981",
-        descricao: "Hidrelétrica, eólica, solar e biomassa. O Brasil é um dos países mais LIMPOS do mundo.",
+        descricao:
+          "Hidrelétrica, eólica, solar e biomassa. O Brasil é um dos países mais LIMPOS do mundo.",
         exemplos: ["💧 Itaipu", "💨 Vento do RN", "☀️ Sol do Nordeste"],
       },
       {
@@ -391,6 +442,8 @@ export const aula02: AulaGeoV1 = {
           { id: "a", texto: "Petróleo, carvão e gás", correta: false },
           { id: "b", texto: "Sol, vento e água", correta: true },
           { id: "c", texto: "Só carvão", correta: false },
+
+          { id: "extra-6", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Isso! Sol, vento e água são RENOVÁVEIS.",
         feedbackErro: "Petróleo e carvão são FÓSSEIS. Renováveis = SOL, VENTO, ÁGUA.",
@@ -402,6 +455,8 @@ export const aula02: AulaGeoV1 = {
           { id: "a", texto: "Alagar floresta e desabrigar comunidades", correta: true },
           { id: "b", texto: "Emitir muito CO₂ no ar", correta: false },
           { id: "c", texto: "Não tem impacto nenhum", correta: false },
+
+          { id: "extra-7", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Perfeito! ALAGA floresta e desabriga gente.",
         feedbackErro: "Hidrelétrica não emite CO₂. Impacto é ALAGAR terra.",
@@ -413,6 +468,8 @@ export const aula02: AulaGeoV1 = {
           { id: "a", texto: "Porque só funcionam à noite", correta: false },
           { id: "b", texto: "São limpas, renováveis e não acabam", correta: true },
           { id: "c", texto: "Porque poluem menos que a água", correta: false },
+
+          { id: "extra-8", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto: "Isso! LIMPAS, RENOVÁVEIS e infinitas.",
         feedbackErro: "Solar e eólica são LIMPAS e RENOVÁVEIS — não acabam nunca.",

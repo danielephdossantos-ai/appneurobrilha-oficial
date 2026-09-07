@@ -33,17 +33,18 @@ const aula: Aula = {
 
   conhecimentosPrevios: [
     "Somar dois grupos até 10 (aula anterior).",
-    "Contar até 10 sem pular.",
+    "Contar e reconhecer números até 20.",
     "Reconhecer o sinal de + como 'juntar'.",
   ],
 
   missao:
-    "Aprender que um mesmo número pode ser COMPOSTO por partes diferentes — ex.: 6 = 5 + 1 = 4 + 2 = 3 + 3 — usando moedas, blocos e imagens.",
+    "Aprender a COMPOR e DECOMPOR números de até duas ordens usando diferentes adições, objetos e agrupamentos de dez.",
 
   objetivos: [
     "Formar um mesmo número usando diferentes quantidades.",
     "Compreender que um número pode ser representado de várias formas.",
-    "Iniciar a compreensão de partes e todo (dezenas e unidades).",
+    "Compor e decompor números em dezenas e unidades.",
+    "Registrar diferentes adições que formam o mesmo total.",
     "Desenvolver estratégias de cálculo mental.",
   ],
 
@@ -51,7 +52,38 @@ const aula: Aula = {
     "Cada número é como um baú — pode ser aberto por várias chaves diferentes!",
 
   explicacao:
-    "COMPOR um número é JUNTAR duas partes pra formar um total.\n\nDECOMPOR é o contrário: quebrar o número em duas partes.\n\nOlha só o número 6:\n• 5 + 1 = 6\n• 4 + 2 = 6\n• 3 + 3 = 6\n\nTodas essas contas dão o mesmo número — 6! Um mesmo número pode ser formado de várias maneiras diferentes.",
+    "COMPOR um número é JUNTAR partes para formar um todo. DECOMPOR é separar o todo em partes sem mudar a quantidade total.\n\nO número 6 pode ser decomposto assim: 6 = 5 + 1, 6 = 4 + 2 e 6 = 3 + 3. Também podemos usar zero: 6 = 6 + 0.\n\nNos números de duas ordens, um grupo de 10 forma uma DEZENA. O que sobra são UNIDADES. Por exemplo: 14 é 1 dezena e 4 unidades, então 14 = 10 + 4. Ele também pode ser formado por outras partes, como 14 = 7 + 7 ou 14 = 8 + 6.",
+
+  explicacaoAtiva: [
+    {
+      texto: "Compor é juntar partes para formar o todo.",
+      exemplo: "3 moedas e mais 2 moedas formam 5 moedas: 3 + 2 = 5.",
+      imagem: moedaImg,
+      imagemAlt: "Moeda usada para representar partes de um número",
+      checagem: { pergunta: "Qual total é formado por 3 + 2?", opcoes: ["4", "5", "6"], correta: 1, explicacao: "As duas partes, 3 e 2, formam o todo 5." },
+    },
+    {
+      texto: "Decompor é separar o todo em partes. As partes continuam formando a mesma quantidade.",
+      exemplo: "Podemos separar 8 em 5 e 3: 8 = 5 + 3.",
+      imagem: blocoImg,
+      imagemAlt: "Bloco usado para separar um todo em partes",
+      checagem: { pergunta: "Qual dupla forma o número 8?", opcoes: ["5 + 2", "5 + 3", "6 + 3"], correta: 1, explicacao: "Cinco e três são duas partes que, juntas, formam oito." },
+    },
+    {
+      texto: "Um mesmo todo pode ser separado de maneiras diferentes.",
+      exemplo: "10 = 9 + 1, 10 = 8 + 2, 10 = 7 + 3 e 10 = 5 + 5.",
+      imagem: estrelaImg,
+      imagemAlt: "Estrela usada para mostrar diferentes composições",
+      checagem: { pergunta: "Qual outra dupla forma 10?", opcoes: ["6 + 3", "6 + 4", "7 + 4"], correta: 1, explicacao: "Seis mais quatro formam dez." },
+    },
+    {
+      texto: "Nos números de duas ordens, separe primeiro um grupo de 10. Esse grupo é uma dezena; os itens restantes são unidades.",
+      exemplo: "14 = 10 + 4: uma dezena e quatro unidades.",
+      imagem: blocoImg,
+      imagemAlt: "Bloco usado para representar dezena e unidades",
+      checagem: { pergunta: "Como decompomos 17 em dezena e unidades?", opcoes: ["10 + 7", "10 + 6", "7 + 1"], correta: 0, explicacao: "Dezessete tem uma dezena e sete unidades: 17 = 10 + 7." },
+    },
+  ],
 
   explicacoesNiveis: {
     nivel1: "Um número pode ser formado por partes diferentes. 5 é 4 + 1, mas também é 3 + 2.",
@@ -60,7 +92,7 @@ const aula: Aula = {
     nivel3:
       "Imagine 8 blocos numa mesa. Você pode fazer duas pilhas: uma com 5 e outra com 3. Ou uma com 6 e outra com 2. Sempre 8 no total.",
     nivel4:
-      "Na vida: você tem 10 reais. Pode gastar 6 num lanche e 4 num suco, ou 7 e 3. Sempre 10 no total.",
+      "Com duas ordens, separe dezenas e unidades: 18 = 10 + 8. Outras partes também formam 18, como 9 + 9 e 12 + 6.",
   },
 
   exemploResolvido: {
@@ -90,14 +122,13 @@ const aula: Aula = {
     explicacao:
       "Compor um número é juntar suas partes. Duas partes, um total. Neste caso, 3 + 2 formou o número 5.",
     visual: {
-      tipo: "grupos",
+      tipo: "comparar",
       pergunta: "Qual número foi FORMADO juntando os dois montes?",
-      imagemUrl: moedaImg,
-      itemSingular: "moeda",
-      itemPlural: "moedas",
-      quantidadeGrupos: 2,
-      itensPorGrupo: 3,
-      opcoes: [4, 5, 6],
+      lados: [
+        { imagemUrl: moedaImg, quantidade: 3, rotulo: "Monte A · 3", cor: "#FBBF24" },
+        { imagemUrl: moedaImg, quantidade: 2, rotulo: "Monte B · 2", cor: "#F472B6" },
+      ],
+      opcoes: ["4", "5", "6"],
       correta: 1,
     },
   },
@@ -182,6 +213,7 @@ const aula: Aula = {
       "COMPOR = juntar duas partes pra formar um número.",
       "DECOMPOR = separar um número em duas partes.",
       "Um mesmo número tem VÁRIAS formas: 6 = 5+1 = 4+2 = 3+3.",
+      "Um grupo de 10 é uma dezena: 14 = 10 + 4.",
       "Moedas, blocos e dedos ajudam a descobrir novas combinações.",
     ],
     dica: "Comece pela parte MAIOR e complete até o total. Pra formar 8 com 5+_, veja quanto falta do 5 até o 8 (é 3).",
@@ -388,14 +420,14 @@ const aula: Aula = {
     {
       tipo: "operacao",
       titulo: "Fase 5 · O Baú Misterioso",
-      instrucao: "O baú tinha 10 moedas. O Brilha já tirou 6. Quantas ficaram lá dentro?",
-      operacao: "subtracao",
+      instrucao: "O baú recebeu 6 moedas e depois mais 4. Veja as partes formarem o total 10.",
+      operacao: "soma",
       imagemUrl: moedaImg,
       itemPlural: "moedas",
-      a: 10,
-      b: 6,
+      a: 6,
+      b: 4,
       cor: "#FBBF24",
-      legenda: "10 − 6 = 4",
+      legenda: "6 + 4 = 10",
     },
     {
       tipo: "contarQuiz",

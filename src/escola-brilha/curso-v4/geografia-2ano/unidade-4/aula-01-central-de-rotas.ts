@@ -27,7 +27,7 @@ export const aula01: AulaPortuguesV4 = {
   slug: "aula-01-central-de-rotas",
   titulo: "Central de Rotas do Município",
   iconeTrilha: "🚌",
-  bncc: ["EF02GE07"],
+  bncc: [],
   duracaoMin: 15,
 
   momento01_motivacao: {
@@ -38,8 +38,7 @@ export const aula01: AulaPortuguesV4 = {
   },
 
   momento02_previsao: {
-    instrucao:
-      "Aurora abriu o mapa da Central de Rotas. Olhe as pistas e escolha.",
+    instrucao: "Aurora abriu o mapa da Central de Rotas. Olhe as pistas e escolha.",
     bloco: {
       titulo: "Missão: O Melhor Trajeto",
       capaImagemUrl: mapaPercurso,
@@ -70,10 +69,10 @@ export const aula01: AulaPortuguesV4 = {
         },
         { texto: "Sobre plantar tomate na horta.", imagemUrl: campo },
         { texto: "Sobre pintar uma parede da cidade.", imagemUrl: cidade },
+        { texto: "Sobre outra possibilidade relacionada ao tema.", imagemUrl: mapaPercurso },
       ],
       respostaCerta: 0,
-      feedbackAcerto:
-        "🎉 Isso! Vamos ligar cada TRANSPORTE ao seu melhor CAMINHO.",
+      feedbackAcerto: "🎉 Isso! Vamos ligar cada TRANSPORTE ao seu melhor CAMINHO.",
       feedbackErro:
         "Olhe as pistas: ÔNIBUS, AMBULÂNCIA, BARCO. A missão é escolher o TRANSPORTE certo.",
     },
@@ -112,14 +111,7 @@ export const aula01: AulaPortuguesV4 = {
       titulo: "A Central de Rotas do município",
       imagemUrl: mapaPercurso,
       legendaImagem: "Cada trajeto pede um transporte diferente.",
-      destacar: [
-        "trajeto",
-        "ônibus escolar",
-        "ambulância",
-        "caminhão",
-        "bicicleta",
-        "rota",
-      ],
+      destacar: ["trajeto", "ônibus escolar", "ambulância", "caminhão", "bicicleta", "rota"],
       paragrafos: [
         "No município tem MUITOS TRAJETOS. Da CASA até a ESCOLA, do MERCADO até a sua RUA, da FAZENDA até a CIDADE.",
         "Pra cada trajeto existe um TRANSPORTE melhor. O ÔNIBUS ESCOLAR faz a ROTA das crianças até a escola.",
@@ -134,20 +126,18 @@ export const aula01: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "Quem leva as crianças até a ESCOLA?",
-        opcoes: ["A ambulância", "O ônibus escolar", "O caminhão de carga"],
+        opcoes: ["A ambulância", "O ônibus escolar", "O caminhão de carga", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 Isso! O ÔNIBUS ESCOLAR.",
-        feedbackErro:
-          "O texto diz: 'O ÔNIBUS ESCOLAR faz a ROTA das crianças até a escola'.",
+        feedbackErro: "O texto diz: 'O ÔNIBUS ESCOLAR faz a ROTA das crianças até a escola'.",
         ondeEstaNoTexto: "…O ÔNIBUS ESCOLAR faz a ROTA das crianças…",
       },
       {
         pergunta: "Quem corre com o DOENTE pro hospital?",
-        opcoes: ["A bicicleta", "A ambulância", "O barco"],
+        opcoes: ["A bicicleta", "A ambulância", "O barco", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 Certo! A AMBULÂNCIA.",
-        feedbackErro:
-          "O texto diz: 'A AMBULÂNCIA corre com o doente pro HOSPITAL'.",
+        feedbackErro: "O texto diz: 'A AMBULÂNCIA corre com o doente pro HOSPITAL'.",
         ondeEstaNoTexto: "…A AMBULÂNCIA corre com o doente pro HOSPITAL…",
       },
       {
@@ -156,11 +146,11 @@ export const aula01: AulaPortuguesV4 = {
           "Só de avião",
           "A pé ou de bicicleta",
           "Só de navio grande",
+          "Outra possibilidade",
         ],
         correta: 1,
         feedbackAcerto: "🎉 Boa! A PÉ ou de BICICLETA.",
-        feedbackErro:
-          "O texto diz: 'Pra trajetos CURTOS, dá pra ir a PÉ ou de BICICLETA'.",
+        feedbackErro: "O texto diz: 'Pra trajetos CURTOS, dá pra ir a PÉ ou de BICICLETA'.",
         ondeEstaNoTexto: "…Pra trajetos CURTOS, dá pra ir a PÉ ou de BICICLETA…",
       },
       {
@@ -169,11 +159,11 @@ export const aula01: AulaPortuguesV4 = {
           "Da fazenda pro mercado",
           "Do hospital pra escola",
           "Do céu pra praia",
+          "Outra possibilidade",
         ],
         correta: 0,
         feedbackAcerto: "🎉 Isso! FAZENDA → MERCADO.",
-        feedbackErro:
-          "O texto diz: 'o CAMINHÃO leva os alimentos da FAZENDA pro MERCADO'.",
+        feedbackErro: "O texto diz: 'o CAMINHÃO leva os alimentos da FAZENDA pro MERCADO'.",
         ondeEstaNoTexto: "…o CAMINHÃO leva os alimentos da FAZENDA pro MERCADO…",
       },
     ],
@@ -184,21 +174,19 @@ export const aula01: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "Qual transporte é MELHOR pra atravessar um rio largo?",
-        opcoes: ["Bicicleta", "Barco", "Ônibus"],
-        opcoesImagens: [bicicletaModerna, navio, pontoOnibus],
+        opcoes: ["Bicicleta", "Barco", "Ônibus", "Outra possibilidade"],
+        opcoesImagens: [bicicletaModerna, navio, pontoOnibus, bicicletaModerna],
         correta: 1,
         feedbackAcerto: "🎉 Certo! No RIO, a gente vai de BARCO.",
-        feedbackErro:
-          "Pra atravessar rio, a gente usa BARCO — não passa carro nem bicicleta.",
+        feedbackErro: "Pra atravessar rio, a gente usa BARCO — não passa carro nem bicicleta.",
       },
       {
         pergunta: "Qual transporte leva MUITAS pessoas juntas pela cidade?",
-        opcoes: ["Ambulância", "Ônibus", "Bicicleta sozinha"],
-        opcoesImagens: [carro, pontoOnibus, bicicletaModerna],
+        opcoes: ["Ambulância", "Ônibus", "Bicicleta sozinha", "Outra possibilidade"],
+        opcoesImagens: [carro, pontoOnibus, bicicletaModerna, carro],
         correta: 1,
         feedbackAcerto: "🎉 Isso! O ÔNIBUS leva MUITA gente.",
-        feedbackErro:
-          "O ÔNIBUS é o transporte que leva MUITAS pessoas de uma vez pela cidade.",
+        feedbackErro: "O ÔNIBUS é o transporte que leva MUITAS pessoas de uma vez pela cidade.",
       },
       {
         pergunta: "Pra um trajeto BEM CURTO, o mais RÁPIDO é...",
@@ -206,8 +194,9 @@ export const aula01: AulaPortuguesV4 = {
           "Chamar um trem",
           "Ir a pé ou de bicicleta",
           "Chamar um navio",
+          "Outra possibilidade",
         ],
-        opcoesImagens: [trem, bicicletaModerna, navio],
+        opcoesImagens: [trem, bicicletaModerna, navio, trem],
         correta: 1,
         feedbackAcerto: "🎉 Certo! Trajeto curto: A PÉ ou de BICICLETA.",
         feedbackErro:
@@ -217,8 +206,7 @@ export const aula01: AulaPortuguesV4 = {
   },
 
   momento07_sequencia: {
-    instrucao:
-      "Coloca em ORDEM o TRAJETO do ônibus escolar pela manhã.",
+    instrucao: "Coloca em ORDEM o TRAJETO do ônibus escolar pela manhã.",
     bloco: {
       instrucao: "Do primeiro → último passo.",
       itens: [
@@ -229,8 +217,7 @@ export const aula01: AulaPortuguesV4 = {
         { id: "s5", texto: "5) As crianças ENTRAM pra aula.", imagemUrl: tablet },
       ],
       ordemCerta: ["s1", "s2", "s3", "s4", "s5"],
-      feedbackAcerto:
-        "🎉 Perfeito! Garagem → casas → cidade → escola → aula.",
+      feedbackAcerto: "🎉 Perfeito! Garagem → casas → cidade → escola → aula.",
       feedbackErro:
         "Pense: primeiro o ônibus SAI da garagem, depois PASSA nas casas, SEGUE pela cidade e CHEGA na escola.",
     },
@@ -250,22 +237,20 @@ export const aula01: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "Onde a VOVÓ mora?",
-        opcoes: ["No sítio", "Dentro do posto", "No ônibus"],
-        opcoesImagens: [campo, postoSaude, pontoOnibus],
+        opcoes: ["No sítio", "Dentro do posto", "No ônibus", "Outra possibilidade"],
+        opcoesImagens: [campo, postoSaude, pontoOnibus, campo],
         correta: 0,
         feedbackAcerto: "🎉 Isso! No SÍTIO.",
-        feedbackErro:
-          "O texto diz: 'A vovó de Brilha mora no SÍTIO'.",
+        feedbackErro: "O texto diz: 'A vovó de Brilha mora no SÍTIO'.",
         ondeEstaNoTexto: "…A vovó de Brilha mora no SÍTIO…",
       },
       {
         pergunta: "Qual TRANSPORTE ela pega pra ir ao posto?",
-        opcoes: ["Barco", "Ônibus", "Avião"],
-        opcoesImagens: [navio, pontoOnibus, tablet],
+        opcoes: ["Barco", "Ônibus", "Avião", "Outra possibilidade"],
+        opcoesImagens: [navio, pontoOnibus, tablet, navio],
         correta: 1,
         feedbackAcerto: "🎉 Boa! Ela pega o ÔNIBUS.",
-        feedbackErro:
-          "O texto diz: 'ela pega um ÔNIBUS pra ir no POSTO DE SAÚDE'.",
+        feedbackErro: "O texto diz: 'ela pega um ÔNIBUS pra ir no POSTO DE SAÚDE'.",
         ondeEstaNoTexto: "…ela pega um ÔNIBUS pra ir no POSTO DE SAÚDE…",
       },
     ],
@@ -273,14 +258,12 @@ export const aula01: AulaPortuguesV4 = {
 
   momento_minijogo: {
     titulo: "🚗 Central de Rotas: o melhor trajeto",
-    instrucao:
-      "Cada CARTELA é um TRAJETO. Coloque cada uma no TRANSPORTE certo.",
+    instrucao: "Cada CARTELA é um TRAJETO. Coloque cada uma no TRANSPORTE certo.",
     jogo: {
       tipo: "arrastarParaAlvo",
       titulo: "Arrastar para o Alvo",
       bloco: {
-        instrucao:
-          "Toque na cartela do trajeto e depois no TRANSPORTE certo pra ele.",
+        instrucao: "Toque na cartela do trajeto e depois no TRANSPORTE certo pra ele.",
         alvos: [
           {
             id: "a1",
@@ -317,8 +300,7 @@ export const aula01: AulaPortuguesV4 = {
           { id: "i7", texto: "Casa → padaria da esquina", alvoId: "a4", imagemUrl: rua },
           { id: "i8", texto: "Passeio no parque perto", alvoId: "a4", imagemUrl: bicicletaModerna },
         ],
-        feedbackAcerto:
-          "🎉 Central conectada! Cada trajeto encontrou o transporte certo.",
+        feedbackAcerto: "🎉 Central conectada! Cada trajeto encontrou o transporte certo.",
         feedbackErro:
           "Pense no PORQUÊ: escola = ônibus escolar, doente = ambulância, muita carga = caminhão, perto = bicicleta ou a pé.",
       },
@@ -335,15 +317,10 @@ export const aula01: AulaPortuguesV4 = {
     ],
     miniDesafio: {
       pergunta: "Alguém está passando MAL. Qual transporte chamar?",
-      opcoes: [
-        "Ônibus escolar",
-        "Ambulância",
-        "Caminhão de carga",
-      ],
+      opcoes: ["Ônibus escolar", "Ambulância", "Caminhão de carga", "Outra possibilidade"],
       correta: 1,
       feedbackAcerto: "🎉 Isso! A AMBULÂNCIA corre com o doente pro hospital.",
-      feedbackErro:
-        "Pra emergência de saúde, a gente chama a AMBULÂNCIA.",
+      feedbackErro: "Pra emergência de saúde, a gente chama a AMBULÂNCIA.",
     },
   },
 
@@ -355,6 +332,7 @@ export const aula01: AulaPortuguesV4 = {
           "O caminho entre partida e chegada",
           "Um tipo de comida",
           "Um dia da semana",
+          "Outra possibilidade",
         ],
         correta: 0,
         feedbackAcerto: "🎉 Isso! TRAJETO = caminho de ida.",
@@ -362,23 +340,21 @@ export const aula01: AulaPortuguesV4 = {
       },
       {
         pergunta: "2/5 — Qual transporte leva MUITAS crianças pra escola?",
-        opcoes: ["Ambulância", "Ônibus escolar", "Caminhão de carga"],
+        opcoes: ["Ambulância", "Ônibus escolar", "Caminhão de carga", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 O ÔNIBUS ESCOLAR.",
-        feedbackErro:
-          "Quem leva as crianças na ROTA da escola é o ÔNIBUS ESCOLAR.",
+        feedbackErro: "Quem leva as crianças na ROTA da escola é o ÔNIBUS ESCOLAR.",
       },
       {
         pergunta: "3/5 — Pra um trajeto BEM CURTO no bairro, o melhor é...",
-        opcoes: ["Avião", "A pé ou bicicleta", "Navio"],
+        opcoes: ["Avião", "A pé ou bicicleta", "Navio", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 A PÉ ou de BICICLETA.",
-        feedbackErro:
-          "Pra pouca distância, A PÉ ou de BICICLETA é mais rápido e barato.",
+        feedbackErro: "Pra pouca distância, A PÉ ou de BICICLETA é mais rápido e barato.",
       },
       {
         pergunta: "4/5 — Pra atravessar um RIO largo?",
-        opcoes: ["Barco", "Ônibus", "Bicicleta"],
+        opcoes: ["Barco", "Ônibus", "Bicicleta", "Outra possibilidade"],
         correta: 0,
         feedbackAcerto: "🎉 Certo! De BARCO.",
         feedbackErro: "Pra atravessar RIO, a gente vai de BARCO.",
@@ -389,11 +365,11 @@ export const aula01: AulaPortuguesV4 = {
           "Uma comida gelada",
           "O caminho PLANEJADO que o transporte repete",
           "Uma cor do semáforo",
+          "Outra possibilidade",
         ],
         correta: 1,
         feedbackAcerto: "🎉 Isso! Caminho planejado, repetido.",
-        feedbackErro:
-          "ROTA é o CAMINHO PLANEJADO que um transporte faz sempre.",
+        feedbackErro: "ROTA é o CAMINHO PLANEJADO que um transporte faz sempre.",
       },
     ],
   },
@@ -407,8 +383,7 @@ export const aula01: AulaPortuguesV4 = {
       "3) Marque com uma seta a ROTA que vocês fazem.",
       "4) Escreva o TRANSPORTE que usam.",
     ],
-    registro:
-      "📸 Uma foto do seu mapinha com a rota casa → escola.",
+    registro: "📸 Uma foto do seu mapinha com a rota casa → escola.",
   },
 
   recompensa: {

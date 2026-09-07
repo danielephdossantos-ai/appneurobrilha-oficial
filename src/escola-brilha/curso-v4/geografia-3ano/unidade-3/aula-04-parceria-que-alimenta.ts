@@ -18,7 +18,7 @@ export const aula04: AulaGeoV1 = {
   slug: "aula-04-parceria-que-alimenta",
   titulo: "A Parceria que Alimenta",
   iconeTrilha: "🤝",
-  bncc: ["EF03GE03"],
+  bncc: [],
   duracaoMin: 22,
 
   cena01_motivacao: {
@@ -53,14 +53,26 @@ export const aula04: AulaGeoV1 = {
         emoji: "🥺",
         cor: "from-rose-500 to-pink-700",
       },
+
+      {
+        id: "extra-1",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
+      {
+        id: "extra-2",
+        titulo: "Outra possibilidade",
+        emoji: "🔎",
+        cor: "from-slate-400 to-slate-600",
+      },
     ],
     respostaCerta: "faltaria",
     feedbackAcerto:
       "Isso! Sem o campo mandando alimento, a cidade fica com prateleiras vazias em poucos dias. É dependência TOTAL.",
     feedbackErro:
       "Pensa: cidade tem prédio, asfalto e loja — mas não tem horta. Se o campo parar, o mercado esvazia rapidinho.",
-    falaFinal:
-      "Guarda esse susto. Bora ver por que essa parceria é vital.",
+    falaFinal: "Guarda esse susto. Bora ver por que essa parceria é vital.",
   },
 
   cena03_vocabulario: {
@@ -76,8 +88,7 @@ export const aula04: AulaGeoV1 = {
         cor: "from-sky-500 to-blue-700",
         conteudo:
           "É a ESTRADA que liga o campo à cidade. Todo dia, milhares de caminhões passam levando leite, verdura, trigo, carne. Sem rodovia, o alimento não sai da fazenda.",
-        exemplo:
-          "Numa rodovia grande passam mais de 5 mil caminhões de comida por dia.",
+        exemplo: "Numa rodovia grande passam mais de 5 mil caminhões de comida por dia.",
         fotoUrl: caminhoesRodovia,
       },
       {
@@ -87,8 +98,7 @@ export const aula04: AulaGeoV1 = {
         cor: "from-amber-500 to-orange-700",
         conteudo:
           "É o prédio grande no centro da cidade onde chega comida de MUITOS lugares diferentes. Fruta do sítio, queijo da fazenda, peixe do rio — tudo num lugar só.",
-        exemplo:
-          "O Mercado Municipal de uma cidade média recebe 200 tipos de produto por dia.",
+        exemplo: "O Mercado Municipal de uma cidade média recebe 200 tipos de produto por dia.",
         fotoUrl: mercadoMunicipal,
       },
       {
@@ -98,8 +108,7 @@ export const aula04: AulaGeoV1 = {
         cor: "from-rose-500 to-pink-700",
         conteudo:
           "É onde você conhece o FEIRANTE pelo nome. Ele traz o que colheu no sítio direto pra sua rua. Mais barato e mais fresco que o supermercado.",
-        exemplo:
-          "Numa manhã de sábado, uma feira de bairro vende 3 toneladas de fruta.",
+        exemplo: "Numa manhã de sábado, uma feira de bairro vende 3 toneladas de fruta.",
         fotoUrl: feiranteCliente,
       },
       {
@@ -109,8 +118,7 @@ export const aula04: AulaGeoV1 = {
         cor: "from-emerald-500 to-green-700",
         conteudo:
           "É a loja gigante da cidade com prateleira de tudo. Recebe caminhões cheios do campo e da indústria. Sua família vai lá com o carrinho e leva a compra da semana.",
-        exemplo:
-          "Um supermercado grande recebe uns 30 caminhões por dia, do campo e das fábricas.",
+        exemplo: "Um supermercado grande recebe uns 30 caminhões por dia, do campo e das fábricas.",
         fotoUrl: familiaSupermercado,
       },
     ],
@@ -176,8 +184,7 @@ export const aula04: AulaGeoV1 = {
 
   cena05_compreensao: {
     tipo: "quizRadar",
-    aurora:
-      "Radar do explorador ligado! 3 perguntas pra revisar tudo que a Unidade 3 te mostrou.",
+    aurora: "Radar do explorador ligado! 3 perguntas pra revisar tudo que a Unidade 3 te mostrou.",
     instrucao: "Toque no card certo pra o radar pousar",
     perguntas: [
       {
@@ -188,12 +195,17 @@ export const aula04: AulaGeoV1 = {
           { id: "rodovia", emoji: "🛣️", titulo: "Rodovia", cor: "from-sky-500 to-blue-700" },
           { id: "praca", emoji: "🌳", titulo: "Praça", cor: "from-emerald-500 to-green-700" },
           { id: "estadio", emoji: "🏟️", titulo: "Estádio", cor: "from-rose-500 to-pink-700" },
+
+          {
+            id: "extra-3",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "rodovia",
-        feedbackAcerto:
-          "Isso! A RODOVIA 🛣️ é a artéria que leva alimento do campo pra cidade.",
-        feedbackErro:
-          "Pensa: onde os caminhões passam carregados de comida? Na RODOVIA 🛣️.",
+        feedbackAcerto: "Isso! A RODOVIA 🛣️ é a artéria que leva alimento do campo pra cidade.",
+        feedbackErro: "Pensa: onde os caminhões passam carregados de comida? Na RODOVIA 🛣️.",
       },
       {
         id: "q2",
@@ -204,28 +216,38 @@ export const aula04: AulaGeoV1 = {
           { id: "cheio", emoji: "📦", titulo: "Fica igual", cor: "from-emerald-500 to-green-700" },
           { id: "vazio", emoji: "🥺", titulo: "Vai esvaziando", cor: "from-rose-500 to-pink-700" },
           { id: "cresce", emoji: "🎉", titulo: "Vende mais", cor: "from-amber-500 to-orange-700" },
+
+          {
+            id: "extra-4",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "vazio",
-        feedbackAcerto:
-          "Exato! Sem caminhão chegando, o mercado esvazia 🥺 em poucos dias.",
+        feedbackAcerto: "Exato! Sem caminhão chegando, o mercado esvazia 🥺 em poucos dias.",
         feedbackErro:
           "Repensa: sem caminhão trazendo alimento, não tem como o mercado ficar cheio.",
       },
       {
         id: "q3",
-        pergunta:
-          "Onde sua família encontra o FEIRANTE pelo nome, geralmente no sábado de manhã?",
+        pergunta: "Onde sua família encontra o FEIRANTE pelo nome, geralmente no sábado de manhã?",
         fotoUrl: feiranteCliente,
         cards: [
           { id: "feira", emoji: "🍅", titulo: "Feira do bairro", cor: "from-rose-500 to-pink-700" },
           { id: "shopping", emoji: "🛍️", titulo: "Shopping", cor: "from-slate-500 to-zinc-700" },
           { id: "banco", emoji: "🏦", titulo: "Banco", cor: "from-sky-500 to-blue-700" },
+
+          {
+            id: "extra-5",
+            titulo: "Outra possibilidade",
+            emoji: "🔎",
+            cor: "from-slate-400 to-slate-600",
+          },
         ],
         correta: "feira",
-        feedbackAcerto:
-          "Perfeito! Na FEIRA 🍅 do bairro, o feirante vira quase família.",
-        feedbackErro:
-          "Pensa: onde tem barraca listrada na rua no sábado? Na FEIRA 🍅 do bairro.",
+        feedbackAcerto: "Perfeito! Na FEIRA 🍅 do bairro, o feirante vira quase família.",
+        feedbackErro: "Pensa: onde tem barraca listrada na rua no sábado? Na FEIRA 🍅 do bairro.",
       },
     ],
     falaFinal:
@@ -244,7 +266,7 @@ export const aula04: AulaGeoV1 = {
         rotulo: "Tudo que o CAMPO manda",
         emoji: "🌾",
         cor: "from-emerald-500 to-green-700",
-        rect: { x: 5, y: 45, w: 45 , h: 50 },
+        rect: { x: 5, y: 45, w: 45, h: 50 },
         descricao:
           "Leite, queijo, ovos, alface, tomate, cenoura, laranja, banana, trigo, milho, carne, feijão. TUDO que vira comida de verdade sai do campo.",
       },
@@ -294,8 +316,7 @@ export const aula04: AulaGeoV1 = {
         id: "s4-familia",
         emoji: "🛒",
         rotulo: "Sua família comprando",
-        descricao:
-          "Sua família chega com sacola ou carrinho, escolhe, paga e leva pra casa.",
+        descricao: "Sua família chega com sacola ou carrinho, escolhe, paga e leva pra casa.",
       },
       {
         id: "s5-mesa",
@@ -367,12 +388,10 @@ export const aula04: AulaGeoV1 = {
         id: "r1",
         municipioA: { nome: "Trator no sítio", emoji: "🚜", cor: "from-emerald-500 to-green-700" },
         municipioB: { nome: "Horta cuidada", emoji: "🥬", cor: "from-lime-400 to-emerald-600" },
-        contexto:
-          "Cuida da terra e da lavoura o dia inteiro. Colhe, ordenha, cria bicho. Quem é?",
+        contexto: "Cuida da terra e da lavoura o dia inteiro. Colhe, ordenha, cria bicho. Quem é?",
         pecaCertaId: "produtor",
         feedbackAcerto: "Boa! É o PRODUTOR 🌾 — a raiz de toda a parceria.",
-        feedbackErro:
-          "Repara: quem trabalha na fazenda ou sítio é o PRODUTOR 🌾.",
+        feedbackErro: "Repara: quem trabalha na fazenda ou sítio é o PRODUTOR 🌾.",
       },
       {
         id: "r2",
@@ -381,10 +400,8 @@ export const aula04: AulaGeoV1 = {
         contexto:
           "Dirige o caminhão baú pela rodovia. Sai da fazenda de madrugada e chega na cidade cedinho. Quem é?",
         pecaCertaId: "caminhoneiro",
-        feedbackAcerto:
-          "Perfeito! É o CAMINHONEIRO 🚛 — a ponte de rodagem entre campo e cidade.",
-        feedbackErro:
-          "Pensa: quem passa a noite dirigindo pela rodovia é o CAMINHONEIRO 🚛.",
+        feedbackAcerto: "Perfeito! É o CAMINHONEIRO 🚛 — a ponte de rodagem entre campo e cidade.",
+        feedbackErro: "Pensa: quem passa a noite dirigindo pela rodovia é o CAMINHONEIRO 🚛.",
       },
       {
         id: "r3",
@@ -393,38 +410,43 @@ export const aula04: AulaGeoV1 = {
         contexto:
           "Monta a barraca na rua no sábado, empilha as frutas e conversa com cada cliente. Quem é?",
         pecaCertaId: "feirante",
-        feedbackAcerto:
-          "Isso! É o FEIRANTE 🍅 — o rosto conhecido da manhã de sábado.",
-        feedbackErro:
-          "Ops: quem monta barraca na rua e chama pelo nome é o FEIRANTE 🍅.",
+        feedbackAcerto: "Isso! É o FEIRANTE 🍅 — o rosto conhecido da manhã de sábado.",
+        feedbackErro: "Ops: quem monta barraca na rua e chama pelo nome é o FEIRANTE 🍅.",
       },
       {
         id: "r4",
-        municipioA: { nome: "Caixa registradora", emoji: "💳", cor: "from-emerald-500 to-green-700" },
-        municipioB: { nome: "Prateleiras cheias", emoji: "🛒", cor: "from-green-400 to-emerald-600" },
+        municipioA: {
+          nome: "Caixa registradora",
+          emoji: "💳",
+          cor: "from-emerald-500 to-green-700",
+        },
+        municipioB: {
+          nome: "Prateleiras cheias",
+          emoji: "🛒",
+          cor: "from-green-400 to-emerald-600",
+        },
         contexto:
           "Recebe os caminhões, organiza nas prateleiras e atende as famílias que chegam com carrinho. Quem é?",
         pecaCertaId: "supermercadista",
-        feedbackAcerto:
-          "Perfeito! É o SUPERMERCADISTA 🛒 — quem cuida da loja grande da cidade.",
-        feedbackErro:
-          "Repensa: quem trabalha no SUPERMERCADO é o SUPERMERCADISTA 🛒.",
+        feedbackAcerto: "Perfeito! É o SUPERMERCADISTA 🛒 — quem cuida da loja grande da cidade.",
+        feedbackErro: "Repensa: quem trabalha no SUPERMERCADO é o SUPERMERCADISTA 🛒.",
       },
       {
         id: "r5",
         municipioA: { nome: "Gado no pasto", emoji: "🐄", cor: "from-emerald-500 to-green-700" },
         municipioB: { nome: "Balde de leite", emoji: "🥛", cor: "from-lime-400 to-emerald-600" },
-        contexto:
-          "Acorda cedo, ordenha as vacas, cuida do curral. Quem é?",
+        contexto: "Acorda cedo, ordenha as vacas, cuida do curral. Quem é?",
         pecaCertaId: "produtor",
-        feedbackAcerto:
-          "Combo! O PRODUTOR 🌾 também é quem tira o leite todo amanhecer.",
-        feedbackErro:
-          "Pensa: quem cuida da vaca e ordenha é o PRODUTOR 🌾 rural.",
+        feedbackAcerto: "Combo! O PRODUTOR 🌾 também é quem tira o leite todo amanhecer.",
+        feedbackErro: "Pensa: quem cuida da vaca e ordenha é o PRODUTOR 🌾 rural.",
       },
       {
         id: "r6",
-        municipioA: { nome: "Reposição de gôndola", emoji: "📦", cor: "from-emerald-500 to-green-700" },
+        municipioA: {
+          nome: "Reposição de gôndola",
+          emoji: "📦",
+          cor: "from-emerald-500 to-green-700",
+        },
         municipioB: { nome: "Corredor gelado", emoji: "❄️", cor: "from-green-400 to-emerald-600" },
         contexto:
           "Repõe as caixas de leite no corredor gelado e coloca preço nas prateleiras. Quem é?",
@@ -478,15 +500,18 @@ export const aula04: AulaGeoV1 = {
     perguntas: [
       {
         id: "av1",
-        pergunta:
-          "Qual frase resume MELHOR a Unidade 3 inteira?",
+        pergunta: "Qual frase resume MELHOR a Unidade 3 inteira?",
         opcoes: [
           { id: "a", texto: "Campo e cidade vivem separados e não precisam um do outro." },
           {
             id: "b",
-            texto: "Campo e cidade são PARCEIROS: um planta, o outro vende, e juntos alimentam o município.",
+            texto:
+              "Campo e cidade são PARCEIROS: um planta, o outro vende, e juntos alimentam o município.",
             correta: true,
           },
+
+          { id: "extra-6", texto: "Outra possibilidade", correta: false },
+          { id: "extra-7", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto:
           "Exato! Toda a Unidade 3 provou isso: leite, feira e pão são histórias diferentes da MESMA parceria.",
@@ -495,8 +520,7 @@ export const aula04: AulaGeoV1 = {
       },
       {
         id: "av2",
-        pergunta:
-          "Qual estrutura é ESSENCIAL pra ligar campo e cidade todos os dias?",
+        pergunta: "Qual estrutura é ESSENCIAL pra ligar campo e cidade todos os dias?",
         opcoes: [
           {
             id: "a",
@@ -504,6 +528,9 @@ export const aula04: AulaGeoV1 = {
             correta: true,
           },
           { id: "b", texto: "O parquinho, porque tem espaço grande." },
+
+          { id: "extra-8", texto: "Outra possibilidade", correta: false },
+          { id: "extra-9", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto:
           "Isso! Sem rodovia, o alimento não sai da fazenda. É a artéria do município.",
@@ -521,6 +548,9 @@ export const aula04: AulaGeoV1 = {
             texto: "Mercado, feira e padaria esvaziariam. As famílias ficariam sem comida fresca.",
             correta: true,
           },
+
+          { id: "extra-10", texto: "Outra possibilidade", correta: false },
+          { id: "extra-11", texto: "Outra possibilidade", correta: false },
         ],
         feedbackAcerto:
           "Perfeito! A cidade não fabrica alimento — só vende. Sem campo mandando, prateleira vazia rapidinho.",

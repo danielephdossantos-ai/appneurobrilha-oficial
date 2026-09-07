@@ -25,7 +25,8 @@ export const Route = createFileRoute("/auth")({
 function Auth() {
   const navigate = useNavigate();
   const { next } = Route.useSearch();
-  const dest = next || "/";
+  const [accountType, setAccountType] = useState<"family" | "teacher" | null>(null);
+  const dest = next || (accountType === "teacher" ? "/area-professor" : "/");
   const [mode, setMode] = useState<"login" | "signup">("login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -121,6 +122,28 @@ function Auth() {
     );
   }
 
+  if (!accountType) {
+    return (
+      <div className="min-h-screen bg-sidebar grid place-items-center p-4">
+        <div className="w-full max-w-2xl space-y-6">
+          <div className="text-center">
+            <div className="mx-auto h-20 w-20 rounded-[2rem] bg-gradient-to-br from-primary to-success grid place-items-center text-5xl shadow-glow">🌱</div>
+            <h1 className="mt-4 text-3xl font-black">Como você vai usar o NeuroBrilha?</h1>
+            <p className="text-muted-foreground mt-2">Cada perfil entra em uma área separada.</p>
+          </div>
+          <div className="grid sm:grid-cols-2 gap-4">
+            <button onClick={() => setAccountType("family")} className="min-h-48 rounded-3xl border-2 bg-white p-6 text-left hover:border-primary transition-colors">
+              <div className="text-4xl">👨‍👩‍👧</div><h2 className="mt-4 text-xl font-black">Família e criança</h2><p className="mt-2 text-sm text-muted-foreground">Assinatura familiar, perfil da criança, rotina, progresso e Área dos Pais.</p>
+            </button>
+            <button onClick={() => setAccountType("teacher")} className="min-h-48 rounded-3xl border-2 bg-white p-6 text-left hover:border-indigo-500 transition-colors">
+              <div className="text-4xl">🧑‍🏫</div><h2 className="mt-4 text-xl font-black">Professor</h2><p className="mt-2 text-sm text-muted-foreground">Materiais para ensinar e imprimir. Conectar aluno assinante é opcional.</p>
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-sidebar grid place-items-center p-4">
       <div className="w-full max-w-sm flex flex-col items-center gap-5">
@@ -139,7 +162,7 @@ function Auth() {
           className="w-full bg-background/90 backdrop-blur rounded-3xl border-2 border-white/30 p-5 flex flex-col gap-3 shadow-xl"
         >
           <h2 className="text-lg font-black text-foreground text-center">
-            {mode === "login" ? "Entrar" : "Criar conta"}
+            {mode === "login" ? "Entrar" : "Criar conta"} · {accountType === "teacher" ? "Professor" : "Família"}
           </h2>
           <p className="text-xs text-muted-foreground text-center -mt-2">
             Login uma única vez — o app lembra de você neste aparelho.
@@ -175,6 +198,10 @@ function Auth() {
           >
             {loading && <Loader2 className="h-4 w-4 animate-spin" />}
             {mode === "login" ? "Entrar" : "Criar conta"}
+          </button>
+
+          <button type="button" onClick={() => setAccountType(null)} className="text-xs font-bold text-muted-foreground hover:underline">
+            Trocar tipo de acesso
           </button>
 
           <div className="flex items-center gap-2 my-1">

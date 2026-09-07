@@ -8,7 +8,7 @@ export const aula04: AulaPortuguesV4 = {
   slug: "aula-04-hipertexto-e-links",
   titulo: "Hipertexto: A Rede de Dados",
   iconeTrilha: "🔗",
-  bncc: ["EF67LP02", "EF67LP07"],
+  bncc: ["EF67LP01"],
   duracaoMin: 25,
   momento01_motivacao: {
     titulo: "Navegação Não-Linear: O Hiperlink",

@@ -56,13 +56,46 @@ const aula: Aula = {
     "Identificar posições espaciais em cenas.",
     "Compreender instruções de direção.",
     "Usar corretamente palavras de localização.",
+    "Indicar o objeto ou a pessoa usada como referencial.",
+    "Distinguir a própria direita da direita de uma pessoa que está de frente.",
   ],
 
   motivacao:
     "Saber onde as coisas estão nos ajuda a achar brinquedos, seguir mapas, brincar de esconde-esconde e nunca nos perdermos!",
 
   explicacao:
-    "🧭 As palavras de LOCALIZAÇÃO nos dizem ONDE cada coisa está.\n\n⬆️ EM CIMA — no alto de algo.\n⬇️ EMBAIXO — na parte de baixo.\n🚪 DENTRO — no interior.\n🌳 FORA — no exterior.\n👧 AO LADO — bem pertinho, do lado.\n👦 ENTRE — no meio de duas coisas.\n➡️ À DIREITA — para o lado direito.\n⬅️ À ESQUERDA — para o lado esquerdo.\n👀 À FRENTE — na frente.\n👣 ATRÁS — nas costas.",
+    "As palavras de localização dizem onde algo está EM RELAÇÃO A um referencial. Na frase 'a bola está à direita do baú', o baú é a referência.\n\nEM CIMA e EMBAIXO indicam posição vertical. DENTRO é no interior; FORA é no exterior, mesmo que esteja perto. AO LADO significa numa posição lateral, e não apenas perto. ENTRE significa no espaço que separa dois referenciais. À FRENTE e ATRÁS dependem da orientação do referencial.\n\nPara DIREITA e ESQUERDA, diga o ponto de vista. Nesta aula, quando olhamos uma cena, usamos a direita e a esquerda da TELA. Se a pergunta falar da direita do personagem, imagine o corpo dele: quando ele está de frente para nós, a direita dele aparece do nosso lado esquerdo.",
+
+  explicacaoAtiva: [
+    {
+      texto: "Toda descrição espacial precisa de um referencial: onde está o sujeito em relação a quê?",
+      exemplo: "O livro está em cima do baú. Livro é o sujeito; baú é o referencial.",
+      imagem: livroImg,
+      imagemAlt: "Livro localizado em relação a um baú",
+      checagem: { pergunta: "Em 'a bola está ao lado da árvore', qual é o referencial?", opcoes: ["A bola", "A árvore", "O lado"], correta: 1, explicacao: "A posição da bola é descrita em relação à árvore." },
+    },
+    {
+      texto: "Dentro e fora falam do limite de um lugar ou recipiente. Distância é outra característica.",
+      exemplo: "Um presente pode estar fora da caixa e ainda encostado nela.",
+      imagem: presenteImg,
+      imagemAlt: "Presente usado para distinguir fora de longe",
+      checagem: { pergunta: "Um objeto pode estar fora da caixa e perto dela?", opcoes: ["Sim", "Não", "Só se estiver em cima"], correta: 0, explicacao: "Fora indica exterior; perto indica distância." },
+    },
+    {
+      texto: "Ao lado indica posição lateral. Perto indica distância. As duas ideias não significam a mesma coisa.",
+      exemplo: "A bola pode estar perto e na frente do baú, sem estar ao lado dele.",
+      imagem: bolaImg,
+      imagemAlt: "Bola usada para comparar posição e distância",
+      checagem: { pergunta: "Qual expressão indica uma posição lateral?", opcoes: ["Perto", "Ao lado", "Longe"], correta: 1, explicacao: "Ao lado indica posição lateral." },
+    },
+    {
+      texto: "Direita e esquerda dependem do ponto de vista. Descubra se vale a tela, o seu corpo ou o corpo do personagem.",
+      exemplo: "Nesta aula, sem outra indicação, usamos a direita e a esquerda da tela.",
+      imagem: estrelaImg,
+      imagemAlt: "Estrela usada para praticar direita e esquerda na tela",
+      checagem: { pergunta: "Antes de responder direita ou esquerda, o que precisamos saber?", opcoes: ["A cor", "O ponto de vista", "A quantidade"], correta: 1, explicacao: "O lado muda conforme o referencial e a orientação." },
+    },
+  ],
 
   explicacoesNiveis: {
     nivel1:
@@ -113,7 +146,7 @@ const aula: Aula = {
     { enunciado: "🐰 entrou na toca. Está…", resposta: "Dentro", dica: "Entrou = dentro." },
     { enunciado: "🐻 🐰 🦊 — quem está entre?", resposta: "🐰 Coelho", dica: "O do meio." },
     { enunciado: "🐱 saiu da caixa. Agora está…", resposta: "Fora", dica: "Saiu = fora." },
-    { enunciado: "A bola está bem pertinho da cadeira. Está…", resposta: "Ao lado", dica: "Pertinho = ao lado." },
+    { enunciado: "A bola está numa posição lateral à cadeira. Está…", resposta: "Ao lado", dica: "Posição lateral = ao lado." },
   ],
 
   desafio: {
@@ -170,10 +203,10 @@ const aula: Aula = {
           },
         },
         {
-          pergunta: "A bola está bem pertinho do baú. Onde ela está?",
+          pergunta: "A bola está na lateral do baú. Onde ela está?",
           opcoes: ["Em cima", "Ao lado", "Atrás"],
           correta: 1,
-          explicacao: "Pertinho, do lado = AO LADO.",
+          explicacao: "Na posição lateral do baú = AO LADO.",
           visual: {
             tipo: "cena",
             posicao: "aoLado",
@@ -233,7 +266,7 @@ const aula: Aula = {
       pergunta: "O presente saiu da caixa. Onde ele está?",
       opcoes: ["Dentro", "Fora", "Em cima"],
       correta: 1,
-      explicacao: "Ele está longe da caixa — FORA.",
+      explicacao: "Ele está no exterior da caixa — FORA.",
       visual: {
         tipo: "cena",
         posicao: "fora",
@@ -244,7 +277,7 @@ const aula: Aula = {
       },
     },
     {
-      pergunta: "Olhe as duas estrelas. A estrela laranja está à:",
+      pergunta: "Usando os lados da tela, a estrela laranja está à:",
       opcoes: ["Esquerda", "Direita", "Em cima"],
       correta: 1,
       explicacao: "A seta ➡️ mostra: a estrela laranja está à DIREITA.",
@@ -423,7 +456,7 @@ const aula: Aula = {
           pergunta: "Onde está o Brilha?",
           opcoes: ["Em cima", "Ao lado", "Dentro"],
           correta: 1,
-          acerto: "Boa! Bem pertinho, do lado = AO LADO.",
+          acerto: "Boa! Na posição lateral = AO LADO.",
           erro: "Ele está grudadinho do lado da árvore = AO LADO.",
         },
         {
@@ -458,16 +491,27 @@ const aula: Aula = {
     // ==== MINI JOGO · Explorador ====
     {
       tipo: "arrastar",
-      titulo: "Mini Jogo · Explorador da Floresta",
+      titulo: "Mini Jogo · Borboleta sobre a flor",
       instrucao:
-        "Coloque a 🦋 borboleta EM CIMA da flor. Coloque o 🐰 coelho AO LADO da árvore.",
+        "Coloque a borboleta EM CIMA da flor.",
       itemImagem: borboletaImg,
       alvosVisuais: [
         { nome: "EM CIMA da flor 🌼", cor: "#F472B6", capacidade: 1, imagemUrl: florImg },
-        { nome: "AO LADO da árvore 🌳", cor: "#10B981", capacidade: 1, imagemUrl: arvoreImg },
       ],
       pares: [
         { item: "🦋 Borboleta", alvo: "EM CIMA da flor 🌼" },
+      ],
+    },
+    {
+      tipo: "arrastar",
+      titulo: "Mini Jogo · Coelho ao lado da árvore",
+      instrucao:
+        "Coloque o coelho AO LADO da árvore.",
+      itemImagem: coelhoImg,
+      alvosVisuais: [
+        { nome: "AO LADO da árvore 🌳", cor: "#10B981", capacidade: 1, imagemUrl: arvoreImg },
+      ],
+      pares: [
         { item: "🐰 Coelho", alvo: "AO LADO da árvore 🌳" },
       ],
     },
@@ -541,10 +585,10 @@ const aula: Aula = {
         },
       },
       {
-        pergunta: "A bola está pertinho do baú. Onde ela está?",
+        pergunta: "A bola está na lateral do baú. Onde ela está?",
         opcoes: ["Em cima", "Ao lado", "Atrás"],
         correta: 1,
-        explicacao: "Pertinho, do lado = AO LADO.",
+        explicacao: "Na posição lateral do baú = AO LADO.",
         visual: {
           tipo: "cena",
           posicao: "aoLado",
@@ -560,7 +604,7 @@ const aula: Aula = {
         pergunta: "O presente saiu da caixa. Onde ele está?",
         opcoes: ["Dentro", "Fora", "Em cima"],
         correta: 1,
-        explicacao: "Longe da caixa = FORA.",
+        explicacao: "No exterior da caixa = FORA.",
         visual: {
           tipo: "cena",
           posicao: "fora",
@@ -571,7 +615,7 @@ const aula: Aula = {
         },
       },
       {
-        pergunta: "Olhe: a estrela está de que lado do Brilha?",
+        pergunta: "Usando os lados da tela, a estrela está de que lado do Brilha?",
         opcoes: ["Esquerda", "Direita", "Em cima"],
         correta: 1,
         explicacao: "A seta ➡️ mostra: à DIREITA.",

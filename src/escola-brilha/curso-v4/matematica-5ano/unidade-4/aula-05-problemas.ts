@@ -4,7 +4,7 @@ export const aula05_problemas: AulaV4 = {
   slug: "u4-05-problemas",
   titulo: "Problemas de divisão",
   iconeTrilha: "🧩",
-  bncc: ["EF05MA07"],
+  bncc: ["EF05MA08"],
   duracaoMin: 20,
   metodologias: ["vergnaud"],
 
@@ -93,7 +93,7 @@ export const aula05_problemas: AulaV4 = {
   momento11_missaoFamilia: {
     titulo: "Divisão do dia",
     materiais: ["Papel"],
-    passos: ["Ache uma conta de casa (mensalidade, aluguel).", "Divida por 2, 3 ou 4 pessoas."],
+    passos: ["Escolha entre 12 e 40 objetos seguros, como tampinhas ou lápis.", "Reparta igualmente entre 2, 3 ou 4 grupos e registre o quociente e o resto."],
     registro: "📸 Foto.",
   },
   recompensa: { xp: 150, moedas: 80 },

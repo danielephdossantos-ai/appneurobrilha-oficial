@@ -60,10 +60,38 @@ export const aula01: AulaArteV1 = {
     titulo: "📷 A Matriz da Percepção",
     instrucao: "Toca em cada pista pra investigar",
     itens: [
-      { emoji: "📜", rotulo: "Alhazen (séc. XI)", descricao: "O cientista árabe Ibn al-Haytham (Alhazen) escreveu tratados ópticos descrevendo como a luz atravessa um pequeno furo e projeta o mundo de cabeça pra baixo.", cor: "#78350f", fotoUrl: mapaAlhazen },
-      { emoji: "🖼️", rotulo: "Vermeer (séc. XVII)", descricao: "O pintor holandês Johannes Vermeer usava uma câmera escura pra projetar a cena real na tela e copiar a luz com precisão fotográfica.", cor: "#b45309", fotoUrl: mapaVermeer },
-      { emoji: "🕳️", rotulo: "O Estenopo (pinhole)", descricao: "Um furinho minúsculo, do tamanho certo, é a peça-chave: grande demais borra a imagem, pequeno demais escurece tudo.", cor: "#1e3a8a", fotoUrl: mapaPinhole },
-      { emoji: "🌒", rotulo: "Eclipse projetado", descricao: "Em eclipses solares, um furo entre folhas de árvore projeta no chão várias luas crescentes — a mesma física do estenopo!", cor: "#f59e0b", fotoUrl: mapaEclipse },
+      {
+        emoji: "📜",
+        rotulo: "Alhazen (séc. XI)",
+        descricao:
+          "O cientista árabe Ibn al-Haytham (Alhazen) escreveu tratados ópticos descrevendo como a luz atravessa um pequeno furo e projeta o mundo de cabeça pra baixo.",
+        cor: "#78350f",
+        fotoUrl: mapaAlhazen,
+      },
+      {
+        emoji: "🖼️",
+        rotulo: "Vermeer (séc. XVII)",
+        descricao:
+          "O pintor holandês Johannes Vermeer usava uma câmera escura pra projetar a cena real na tela e copiar a luz com precisão fotográfica.",
+        cor: "#b45309",
+        fotoUrl: mapaVermeer,
+      },
+      {
+        emoji: "🕳️",
+        rotulo: "O Estenopo (pinhole)",
+        descricao:
+          "Um furinho minúsculo, do tamanho certo, é a peça-chave: grande demais borra a imagem, pequeno demais escurece tudo.",
+        cor: "#1e3a8a",
+        fotoUrl: mapaPinhole,
+      },
+      {
+        emoji: "🌒",
+        rotulo: "Eclipse projetado",
+        descricao:
+          "Em eclipses solares, um furo entre folhas de árvore projeta no chão várias luas crescentes — a mesma física do estenopo!",
+        cor: "#f59e0b",
+        fotoUrl: mapaEclipse,
+      },
     ],
     falaFinal: "Você vai dominar a engenharia da luz igual os grandes cientistas e pintores!",
   },
@@ -76,21 +104,36 @@ export const aula01: AulaArteV1 = {
         pergunta: "Por que a imagem dentro da câmera escura aparece de cabeça pra baixo?",
         fotoUrl: qInversao,
         alternativas: [
-          { texto: "Porque a luz viaja em linha reta e os raios se cruzam ao passar pelo furo", correta: true },
+          {
+            texto: "Porque a luz viaja em linha reta e os raios se cruzam ao passar pelo furo",
+            correta: true,
+          },
           { texto: "Porque o furo tem um espelho escondido dentro", correta: false },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
         feedbackAcerto: "Perfeito! Propagação retilínea da luz faz os raios se cruzarem no furo.",
-        feedbackErro: "Não tem espelho nenhum! A luz viaja RETA e os raios se CRUZAM no estenopo, invertendo a imagem.",
+        feedbackErro:
+          "Não tem espelho nenhum! A luz viaja RETA e os raios se CRUZAM no estenopo, invertendo a imagem.",
       },
       {
         pergunta: "Vermeer usava a câmera escura pra…",
         fotoUrl: qVermeer,
         alternativas: [
-          { texto: "Projetar a cena real na tela e copiar luz e sombra com precisão", correta: true },
+          {
+            texto: "Projetar a cena real na tela e copiar luz e sombra com precisão",
+            correta: true,
+          },
           { texto: "Misturar tintas mais rápido", correta: false },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
-        feedbackAcerto: "Isso! A projeção óptica ajudava Vermeer a pintar com realismo fotográfico.",
-        feedbackErro: "Nada a ver com misturar tinta. A câmera escura PROJETAVA a cena pra ele copiar.",
+        feedbackAcerto:
+          "Isso! A projeção óptica ajudava Vermeer a pintar com realismo fotográfico.",
+        feedbackErro:
+          "Nada a ver com misturar tinta. A câmera escura PROJETAVA a cena pra ele copiar.",
       },
       {
         pergunta: "O tamanho do estenopo (furo) afeta…",
@@ -98,8 +141,12 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "A nitidez e o brilho da imagem projetada", correta: true },
           { texto: "A cor da parede da caixa", correta: false },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
-        feedbackAcerto: "Correto! Furo pequeno = mais nítido e mais escuro; furo grande = mais brilho e mais borrado.",
+        feedbackAcerto:
+          "Correto! Furo pequeno = mais nítido e mais escuro; furo grande = mais brilho e mais borrado.",
         feedbackErro: "A cor da caixa não muda nada. O furo controla NITIDEZ x BRILHO da imagem.",
       },
     ],
@@ -109,10 +156,38 @@ export const aula01: AulaArteV1 = {
     tipo: "vocabularioCards",
     aurora: "Vocabulário da engenharia da luz. Toca em cada card!",
     cards: [
-      { termo: "Propagação Retilínea", definicao: "A luz sempre viaja em linha reta, a menos que algo a desvie. É essa lei que faz a câmera escura funcionar.", emoji: "📏", cor: "#1e3a8a", fotoUrl: vocabRetilinea },
-      { termo: "Estenopo", definicao: "Furo minúsculo por onde a luz passa. Também chamado de 'pinhole'. É o coração óptico da câmera escura.", emoji: "🕳️", cor: "#b45309", fotoUrl: vocabEstenopo },
-      { termo: "Inversão da Imagem", definicao: "Como os raios de luz se cruzam no furo, o que está em cima projeta embaixo e vice-versa.", emoji: "🙃", cor: "#78350f", fotoUrl: vocabInversao },
-      { termo: "Foco e Brilho", definicao: "Equilíbrio entre diâmetro do furo, nitidez da imagem e quantidade de luz que entra na caixa.", emoji: "🔆", cor: "#f59e0b", fotoUrl: vocabFoco },
+      {
+        termo: "Propagação Retilínea",
+        definicao:
+          "A luz sempre viaja em linha reta, a menos que algo a desvie. É essa lei que faz a câmera escura funcionar.",
+        emoji: "📏",
+        cor: "#1e3a8a",
+        fotoUrl: vocabRetilinea,
+      },
+      {
+        termo: "Estenopo",
+        definicao:
+          "Furo minúsculo por onde a luz passa. Também chamado de 'pinhole'. É o coração óptico da câmera escura.",
+        emoji: "🕳️",
+        cor: "#b45309",
+        fotoUrl: vocabEstenopo,
+      },
+      {
+        termo: "Inversão da Imagem",
+        definicao:
+          "Como os raios de luz se cruzam no furo, o que está em cima projeta embaixo e vice-versa.",
+        emoji: "🙃",
+        cor: "#78350f",
+        fotoUrl: vocabInversao,
+      },
+      {
+        termo: "Foco e Brilho",
+        definicao:
+          "Equilíbrio entre diâmetro do furo, nitidez da imagem e quantidade de luz que entra na caixa.",
+        emoji: "🔆",
+        cor: "#f59e0b",
+        fotoUrl: vocabFoco,
+      },
     ],
   },
 
@@ -127,10 +202,34 @@ export const aula01: AulaArteV1 = {
       "Hoje construímos câmeras escuras com caixa de sapato preta e papel vegetal na tela — a mesma física de Alhazen, usada por Vermeer, ainda vive nas câmeras fotográficas modernas.",
     ],
     pigmentos: [
-      { nome: "Caixa de sapato preta", hex: "#1f2937", fonte: "Corpo da câmera escura", emoji: "📦", fotoUrl: matCaixa },
-      { nome: "Papel vegetal", hex: "#f5f5dc", fonte: "Tela onde a imagem invertida se projeta", emoji: "📄", fotoUrl: matPapelVegetal },
-      { nome: "Agulha fina", hex: "#94a3b8", fonte: "Fura o estenopo com precisão", emoji: "📌", fotoUrl: matAgulha },
-      { nome: "Fita isolante preta", hex: "#111827", fonte: "Veda a luz que não deve entrar", emoji: "🎞️", fotoUrl: matFita },
+      {
+        nome: "Caixa de sapato preta",
+        hex: "#1f2937",
+        fonte: "Corpo da câmera escura",
+        emoji: "📦",
+        fotoUrl: matCaixa,
+      },
+      {
+        nome: "Papel vegetal",
+        hex: "#f5f5dc",
+        fonte: "Tela onde a imagem invertida se projeta",
+        emoji: "📄",
+        fotoUrl: matPapelVegetal,
+      },
+      {
+        nome: "Agulha fina",
+        hex: "#94a3b8",
+        fonte: "Fura o estenopo com precisão",
+        emoji: "📌",
+        fotoUrl: matAgulha,
+      },
+      {
+        nome: "Fita isolante preta",
+        hex: "#111827",
+        fonte: "Veda a luz que não deve entrar",
+        emoji: "🎞️",
+        fotoUrl: matFita,
+      },
     ],
   },
 
@@ -139,31 +238,50 @@ export const aula01: AulaArteV1 = {
     aurora: "Verifica o que ficou no caderno do engenheiro da luz!",
     perguntas: [
       {
-        pergunta: "Qual cientista do século XI descreveu a propagação retilínea da luz em tratados ópticos?",
+        pergunta:
+          "Qual cientista do século XI descreveu a propagação retilínea da luz em tratados ópticos?",
         fotoUrl: mapaAlhazen,
         alternativas: [
           { texto: "Alhazen (Ibn al-Haytham)", correta: true },
           { texto: "Vermeer", correta: false },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
         feedbackAcerto: "Perfeito! Alhazen é considerado o pai da óptica moderna.",
-        feedbackErro: "Vermeer é o pintor que usou a técnica no XVII. Quem descreveu a física foi ALHAZEN.",
+        feedbackErro:
+          "Vermeer é o pintor que usou a técnica no XVII. Quem descreveu a física foi ALHAZEN.",
       },
       {
         pergunta: "Por que a imagem projetada pela câmera escura aparece invertida?",
         fotoUrl: qInversao,
         alternativas: [
-          { texto: "Porque os raios de luz viajam em linha reta e se cruzam ao passar pelo estenopo", correta: true },
+          {
+            texto:
+              "Porque os raios de luz viajam em linha reta e se cruzam ao passar pelo estenopo",
+            correta: true,
+          },
           { texto: "Porque a caixa de sapato é escura por dentro", correta: false },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
         feedbackAcerto: "Isso! É a propagação retilínea cruzando os raios no furo.",
-        feedbackErro: "A cor escura só evita reflexos indesejados. A INVERSÃO vem do cruzamento dos raios retos.",
+        feedbackErro:
+          "A cor escura só evita reflexos indesejados. A INVERSÃO vem do cruzamento dos raios retos.",
       },
       {
         pergunta: "Vermeer usava a câmera escura como ferramenta para…",
         fotoUrl: qVermeer,
         alternativas: [
-          { texto: "Projetar a cena real e copiar luz e proporção com precisão na pintura", correta: true },
+          {
+            texto: "Projetar a cena real e copiar luz e proporção com precisão na pintura",
+            correta: true,
+          },
           { texto: "Aquecer as tintas antes de pintar", correta: false },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
         feedbackAcerto: "Fantástico! É a base da engenharia óptica aplicada à arte.",
         feedbackErro: "Nada de aquecer tinta! A câmera escura servia pra PROJETAR a cena real.",
@@ -176,32 +294,44 @@ export const aula01: AulaArteV1 = {
     aurora: "Cada exemplo usa um conceito da câmera escura. Combina certinho!",
     animais: [
       {
-        nome: "Furo minúsculo na caixa", emoji: "🕳️", fotoUrl: mapaPinhole,
+        nome: "Furo minúsculo na caixa",
+        emoji: "🕳️",
+        fotoUrl: mapaPinhole,
         corAlvo: { nome: "Estenopo (pinhole)", hex: "#1e3a8a" },
         opcoes: [
           { nome: "Estenopo (pinhole)", hex: "#1e3a8a" },
           { nome: "Cor-luz RGB", hex: "#dc2626" },
           { nome: "Anamorfose catóptrica", hex: "#64748b" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Isso! O furo minúsculo é o estenopo que projeta a imagem.",
       },
       {
-        nome: "Imagem de ponta-cabeça na tela", emoji: "🙃", fotoUrl: vocabInversao,
+        nome: "Imagem de ponta-cabeça na tela",
+        emoji: "🙃",
+        fotoUrl: vocabInversao,
         corAlvo: { nome: "Inversão da imagem", hex: "#78350f" },
         opcoes: [
           { nome: "Inversão da imagem", hex: "#78350f" },
           { nome: "Persistência retiniana", hex: "#0ea5e9" },
           { nome: "Pontilhismo", hex: "#a855f7" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Perfeito! Raios retos cruzados no furo invertem a cena.",
       },
       {
-        nome: "Pintura de Vermeer com luz precisa", emoji: "🖼️", fotoUrl: mapaVermeer,
+        nome: "Pintura de Vermeer com luz precisa",
+        emoji: "🖼️",
+        fotoUrl: mapaVermeer,
         corAlvo: { nome: "Câmera escura na pintura barroca", hex: "#b45309" },
         opcoes: [
           { nome: "Câmera escura na pintura barroca", hex: "#b45309" },
           { nome: "Linhas de fuga do Renascimento", hex: "#7c2d12" },
           { nome: "Vitral gótico", hex: "#f59e0b" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Correto! Vermeer projetava a cena real pra copiar com fidelidade.",
       },
@@ -212,11 +342,41 @@ export const aula01: AulaArteV1 = {
     tipo: "sequenciaMistura",
     aurora: "Ordena os 5 passos pra construir sua PRÓPRIA câmera escura.",
     passos: [
-      { id: "p1", texto: "PINTO o interior de uma caixa de sapatos de preto fosco", emoji: "📦", ordem: 1, fotoUrl: passo1 },
-      { id: "p2", texto: "FURO um lado da caixa com uma agulha, criando o estenopo", emoji: "📌", ordem: 2, fotoUrl: passo2 },
-      { id: "p3", texto: "COLO papel vegetal no lado oposto, como tela de projeção", emoji: "📄", ordem: 3, fotoUrl: passo3 },
-      { id: "p4", texto: "APONTO o furo pra uma cena bem iluminada lá fora", emoji: "🌞", ordem: 4, fotoUrl: passo4 },
-      { id: "p5", texto: "OBSERVO no papel vegetal a imagem projetada de cabeça pra baixo!", emoji: "🙃", ordem: 5, fotoUrl: passo5 },
+      {
+        id: "p1",
+        texto: "PINTO o interior de uma caixa de sapatos de preto fosco",
+        emoji: "📦",
+        ordem: 1,
+        fotoUrl: passo1,
+      },
+      {
+        id: "p2",
+        texto: "FURO um lado da caixa com uma agulha, criando o estenopo",
+        emoji: "📌",
+        ordem: 2,
+        fotoUrl: passo2,
+      },
+      {
+        id: "p3",
+        texto: "COLO papel vegetal no lado oposto, como tela de projeção",
+        emoji: "📄",
+        ordem: 3,
+        fotoUrl: passo3,
+      },
+      {
+        id: "p4",
+        texto: "APONTO o furo pra uma cena bem iluminada lá fora",
+        emoji: "🌞",
+        ordem: 4,
+        fotoUrl: passo4,
+      },
+      {
+        id: "p5",
+        texto: "OBSERVO no papel vegetal a imagem projetada de cabeça pra baixo!",
+        emoji: "🙃",
+        ordem: 5,
+        fotoUrl: passo5,
+      },
     ],
     falaAcerto: "Sua câmera escura funciona igualzinho à de Alhazen e Vermeer!",
   },
@@ -226,10 +386,22 @@ export const aula01: AulaArteV1 = {
     aurora: "Agora VOCÊ lê o diário do engenheiro da luz. Toca nas palavras coloridas.",
     titulo: "Diário do Engenheiro da Luz",
     trechos: [
-      { texto: "Sou um caçador de luz. Uso a", palavraDestaque: "propagação retilínea", corDestaque: "#1e3a8a" },
-      { texto: "pra projetar imagens através de um", palavraDestaque: "estenopo", corDestaque: "#b45309" },
+      {
+        texto: "Sou um caçador de luz. Uso a",
+        palavraDestaque: "propagação retilínea",
+        corDestaque: "#1e3a8a",
+      },
+      {
+        texto: "pra projetar imagens através de um",
+        palavraDestaque: "estenopo",
+        corDestaque: "#b45309",
+      },
       { texto: "A imagem sempre aparece com", palavraDestaque: "inversão", corDestaque: "#78350f" },
-      { texto: "No século XI, Alhazen já entendia isso; no XVII,", palavraDestaque: "Vermeer", corDestaque: "#b45309" },
+      {
+        texto: "No século XI, Alhazen já entendia isso; no XVII,",
+        palavraDestaque: "Vermeer",
+        corDestaque: "#b45309",
+      },
       { texto: "Eu domino a engenharia da luz — igual os grandes mestres!" },
     ],
   },
@@ -237,7 +409,8 @@ export const aula01: AulaArteV1 = {
   cena09_minijogo: {
     tipo: "cenaTematica",
     variante: "minijogo",
-    aurora: "🎯 O Foco de Vermeer! Toca em CADA componente do sistema óptico antes do tempo acabar.",
+    aurora:
+      "🎯 O Foco de Vermeer! Toca em CADA componente do sistema óptico antes do tempo acabar.",
     titulo: "🎯 O Foco de Vermeer",
     instrucao: "Toque em todos os elementos antes do tempo acabar!",
     tempoSeg: 35,
@@ -258,12 +431,48 @@ export const aula01: AulaArteV1 = {
     aurora: "Fecha o caderno da câmera escura. Toca em cada verbete!",
     titulo: "📓 Caderno da Câmera Escura",
     itens: [
-      { emoji: "📜", rotulo: "Alhazen (séc. XI)", descricao: "Tratados ópticos descrevendo a propagação retilínea da luz.", cor: "#78350f", fotoUrl: mapaAlhazen },
-      { emoji: "🖼️", rotulo: "Vermeer (séc. XVII)", descricao: "Usava a câmera escura pra projetar cenas e pintar com precisão.", cor: "#b45309", fotoUrl: mapaVermeer },
-      { emoji: "🕳️", rotulo: "Estenopo", descricao: "Furo minúsculo que projeta a imagem — quanto menor, mais nítido.", cor: "#1e3a8a", fotoUrl: vocabEstenopo },
-      { emoji: "🙃", rotulo: "Inversão da Imagem", descricao: "Raios de luz retos se cruzam no furo e invertem a cena projetada.", cor: "#78350f", fotoUrl: vocabInversao },
-      { emoji: "🔆", rotulo: "Foco e Brilho", descricao: "Equilíbrio entre diâmetro do furo, nitidez e luminosidade da imagem.", cor: "#f59e0b", fotoUrl: vocabFoco },
-      { emoji: "🌒", rotulo: "Eclipse projetado", descricao: "Furos entre folhas projetam luas crescentes no chão durante eclipses.", cor: "#dc2626", fotoUrl: mapaEclipse },
+      {
+        emoji: "📜",
+        rotulo: "Alhazen (séc. XI)",
+        descricao: "Tratados ópticos descrevendo a propagação retilínea da luz.",
+        cor: "#78350f",
+        fotoUrl: mapaAlhazen,
+      },
+      {
+        emoji: "🖼️",
+        rotulo: "Vermeer (séc. XVII)",
+        descricao: "Usava a câmera escura pra projetar cenas e pintar com precisão.",
+        cor: "#b45309",
+        fotoUrl: mapaVermeer,
+      },
+      {
+        emoji: "🕳️",
+        rotulo: "Estenopo",
+        descricao: "Furo minúsculo que projeta a imagem — quanto menor, mais nítido.",
+        cor: "#1e3a8a",
+        fotoUrl: vocabEstenopo,
+      },
+      {
+        emoji: "🙃",
+        rotulo: "Inversão da Imagem",
+        descricao: "Raios de luz retos se cruzam no furo e invertem a cena projetada.",
+        cor: "#78350f",
+        fotoUrl: vocabInversao,
+      },
+      {
+        emoji: "🔆",
+        rotulo: "Foco e Brilho",
+        descricao: "Equilíbrio entre diâmetro do furo, nitidez e luminosidade da imagem.",
+        cor: "#f59e0b",
+        fotoUrl: vocabFoco,
+      },
+      {
+        emoji: "🌒",
+        rotulo: "Eclipse projetado",
+        descricao: "Furos entre folhas projetam luas crescentes no chão durante eclipses.",
+        cor: "#dc2626",
+        fotoUrl: mapaEclipse,
+      },
     ],
     falaFinal: "Segunda página do Atlas da Matriz da Percepção DESBLOQUEADA!",
   },
@@ -272,12 +481,21 @@ export const aula01: AulaArteV1 = {
     tipo: "avaliacaoFinal",
     aurora: "Missão final, engenheiro da luz!",
     quiz: {
-      pergunta: "Por que a imagem projetada dentro de uma câmera escura aparece de cabeça pra baixo?",
+      pergunta:
+        "Por que a imagem projetada dentro de uma câmera escura aparece de cabeça pra baixo?",
       alternativas: [
-        { texto: "Porque a luz viaja em linha reta (propagação retilínea) e os raios se cruzam ao passar pelo estenopo", correta: true },
+        {
+          texto:
+            "Porque a luz viaja em linha reta (propagação retilínea) e os raios se cruzam ao passar pelo estenopo",
+          correta: true,
+        },
         { texto: "Porque existe um espelho escondido dentro da caixa", correta: false },
+
+        { texto: "Não corresponde ao tema", correta: false },
+        { texto: "Outra resposta sem relação", correta: false },
       ],
-      feedback: "Perfeito! A propagação retilínea da luz faz com que os raios vindos de cima e de baixo da cena se cruzem exatamente no estenopo, invertendo a imagem projetada. Alhazen descreveu isso no século XI, e Vermeer usou esse princípio para pintar com realismo no século XVII!",
+      feedback:
+        "Perfeito! A propagação retilínea da luz faz com que os raios vindos de cima e de baixo da cena se cruzem exatamente no estenopo, invertendo a imagem projetada. Alhazen descreveu isso no século XI, e Vermeer usou esse princípio para pintar com realismo no século XVII!",
     },
     missaoFamilia:
       "🕳️ O Quarto Escuro Fotográfico: Com seus pais, escureçam totalmente um quarto durante o dia e façam um furo de 1cm numa cortina ou papelão cobrindo a janela. Observem a parede oposta — o mundo lá fora vai aparecer projetado e invertido na parede! Registrem no álbum.",

@@ -18,7 +18,7 @@ export const aula03: AulaPortuguesV4 = {
   slug: "aula-03-ligando-os-pontos",
   titulo: "Ligando os Pontos",
   iconeTrilha: "🧩",
-  bncc: ["EF02LP28"],
+  bncc: ["EF02LP28", "EF15LP16"],
   duracaoMin: 15,
 
   momento01_motivacao: {

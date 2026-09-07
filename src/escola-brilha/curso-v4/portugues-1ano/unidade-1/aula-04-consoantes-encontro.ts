@@ -33,9 +33,9 @@ export const aula04: AulaPortuguesV4 = {
   // 1 · MOTIVAÇÃO
   // ------------------------------------------------------------
   momento01_motivacao: {
-    titulo: "A letra que não conseguia falar sozinha",
+    titulo: "A consoante que encontrou uma vogal",
     historia:
-      "A letra B estava tristinha num canto da biblioteca. — Eu tento falar e só sai 'b...b...b...'! Aurora sorriu: — É que você é CONSOANTE, B. Consoante precisa de uma VOGAL do lado pra ganhar voz. Chame o A! E então aconteceu: B + A = BA! A letra B deu um pulo de alegria.",
+      "A letra B estava procurando uma parceira para formar um pedacinho de palavra. Aurora mostrou a vogal A. Quando as duas ficaram lado a lado, apareceu BA, como no começo de BALA. B e A comemoraram: juntas, formaram uma sílaba!",
     imagemUrl: esquiloBrilha,
   },
 
@@ -75,7 +75,7 @@ export const aula04: AulaPortuguesV4 = {
       {
         palavra: "consoante",
         explicacao:
-          "É toda letra do alfabeto que NÃO é vogal: B, C, D, F, G... Ela precisa de uma vogal do lado pra ganhar voz.",
+          "É toda letra do alfabeto que não é vogal: B, C, D, F, G... Nas palavras, consoantes e vogais se combinam de várias maneiras.",
         exemplo: "Em BOLA, o B é consoante e o O é vogal.",
         imagemUrl: bola,
       },
@@ -121,7 +121,7 @@ export const aula04: AulaPortuguesV4 = {
       legendaImagem: "O livro das sílabas",
       destacar: ["vogal", "consoante", "sílaba", "BA", "CA", "PA"],
       paragrafos: [
-        "A vogal dá voz para a consoante.",
+        "Consoantes e vogais podem se combinar para formar sílabas.",
         "B com A faz BA. C com A faz CA. P com A faz PA.",
         "Quando duas sílabas se juntam, nasce uma palavra: BO-LA, CA-SA, PA-TO.",
       ],
@@ -135,12 +135,12 @@ export const aula04: AulaPortuguesV4 = {
     instrucao: "Volte no texto se precisar. Tudo está escrito lá.",
     perguntas: [
       {
-        pergunta: "Quem dá voz para a consoante?",
-        opcoes: ["A vogal", "O ponto final", "Outra consoante"],
+        pergunta: "O que consoantes e vogais podem formar quando se combinam?",
+        opcoes: ["Sílabas", "Números", "Desenhos"],
         correta: 0,
-        feedbackAcerto: "🎉 Isso! 'A vogal dá voz para a consoante.'",
+        feedbackAcerto: "🎉 Isso! Consoantes e vogais podem se combinar para formar sílabas.",
         feedbackErro: "Leia a primeira frase do texto de novo.",
-        ondeEstaNoTexto: "A vogal dá voz para a consoante.",
+        ondeEstaNoTexto: "Consoantes e vogais podem se combinar para formar sílabas.",
       },
       {
         pergunta: "O que o C com o A formam?",
@@ -316,7 +316,7 @@ export const aula04: AulaPortuguesV4 = {
   momento09_revisao: {
     pontos: [
       "Consoante é toda letra que não é vogal.",
-      "A vogal dá voz para a consoante: B + A = BA.",
+      "Consoante e vogal podem formar uma sílaba simples: B + A = BA.",
       "Sílaba é o pedacinho que a gente fala numa batida só.",
       "Duas sílabas juntas formam uma palavra: BO-LA.",
     ],
@@ -346,7 +346,7 @@ export const aula04: AulaPortuguesV4 = {
         opcoes: ["CA", "AC", "CE", "CO"],
         correta: 0,
         feedbackAcerto: "🎉 Certo! CA, como no começo de CASA.",
-        feedbackErro: "A consoante vem primeiro: C depois A = CA. Trocar a ordem dá AC, que não fala.",
+        feedbackErro: "Nesta pergunta, a ordem mostrada é C primeiro e A depois. Por isso, C + A = CA, como no começo de CASA.",
       },
       {
         pergunta: "3/5 — Quantas sílabas tem CASA?",
@@ -363,18 +363,18 @@ export const aula04: AulaPortuguesV4 = {
         feedbackErro: "Fale devagar: primeiro PA, depois TO. Cada sílaba tem uma vogal.",
       },
       {
-        pergunta: "5/5 — Por que a consoante precisa da vogal?",
+        pergunta: "5/5 — O que B e A formam quando aparecem nessa ordem?",
         opcoes: [
-          "Porque a vogal dá voz a ela",
-          "Porque a vogal vem sempre primeiro",
-          "Porque a consoante é a última letra",
-          "Porque a vogal é uma letra maior",
+          "A sílaba BA",
+          "A sílaba AB",
+          "A palavra BOLA",
+          "O número 2",
         ],
         correta: 0,
         feedbackAcerto:
-          "🎉 Perfeito! Sem vogal a consoante não fala. Você conquistou a Chave do Alfabeto! 🔑",
+          "🎉 Perfeito! B primeiro e A depois formam BA. Você conquistou a Chave do Alfabeto! 🔑",
         feedbackErro:
-          "Lembre da letra B tristinha: só depois que o A chegou ela conseguiu falar BA. A vogal dá VOZ.",
+          "Observe a ordem: primeiro B, depois A. Juntas, elas formam BA, como no começo de BALA.",
       },
     ],
   },

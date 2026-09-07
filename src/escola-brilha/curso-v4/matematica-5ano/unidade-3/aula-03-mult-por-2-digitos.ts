@@ -4,7 +4,7 @@ export const aula03_multPor2Digitos: AulaV4 = {
   slug: "u3-03-mult-por-2-digitos",
   titulo: "Multiplicar por 2 dígitos",
   iconeTrilha: "✖️",
-  bncc: ["EF05MA07"],
+  bncc: ["EF05MA08"],
   duracaoMin: 24,
   metodologias: ["skemp", "cpa"],
 
@@ -16,7 +16,7 @@ export const aula03_multPor2Digitos: AulaV4 = {
     instrucao: "Uma linha por dígito de baixo.",
     cenas: [
       { tipo: "texto", texto: "1ª linha: multiplica pela UNIDADE do de baixo.", destaque: true },
-      { tipo: "texto", texto: "2ª linha: multiplica pela DEZENA e desloca UMA CASA pra esquerda (ou põe um 0)." },
+      { tipo: "texto", texto: "2ª linha: multiplica pelo valor da DEZENA. Em 24, o 2 vale 20; por isso calculamos o produto por 20." },
       { tipo: "texto", texto: "Some as duas linhas." },
     ],
   },
@@ -30,7 +30,7 @@ export const aula03_multPor2Digitos: AulaV4 = {
     etapas: [
       { texto: "Arme: 347 em cima, 24 embaixo (D | U alinhados)." },
       { texto: "1ª linha: 347 × 4 = 1.388. Escreva alinhado à direita." },
-      { texto: "2ª linha: 347 × 2 = 694 e coloque um 0 no fim → 6.940." },
+      { texto: "2ª linha: o 2 de 24 vale 20; então 347 × 20 = 6.940." },
       { texto: "Some: 1.388 + 6.940 = 8.328." },
     ],
   },

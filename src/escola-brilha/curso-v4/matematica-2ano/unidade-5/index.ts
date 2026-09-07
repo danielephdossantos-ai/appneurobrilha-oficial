@@ -4,6 +4,7 @@ import { aula02_problemasSubtracao } from "./aula-02-problemas-subtracao";
 import { aula03_qualOperacao } from "./aula-03-qual-operacao";
 import { aula04_duasEtapas } from "./aula-04-duas-etapas";
 import { aula05_missaoFinal } from "./aula-05-missao-final";
+import { aula06_dobroMetadeTerca } from "./aula-06-dobro-metade-terca";
 
 /**
  * Unidade 5 — "O Mercado dos Problemas Matemáticos"
@@ -27,5 +28,6 @@ export const unidade5: Unidade = {
     aula03_qualOperacao,
     aula04_duasEtapas,
     aula05_missaoFinal,
+    aula06_dobroMetadeTerca,
   ],
 };

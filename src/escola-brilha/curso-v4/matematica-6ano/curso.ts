@@ -18,13 +18,13 @@ import { unidade7 } from "./unidade-7";
  *
  *  U1 · Bem-vindo(a) ao Laboratório dos Números       ✅
  *       SND até bilhão · comparar · arredondar · reta numérica ·
- *       números negativos · oposto e módulo
+ *       outros sistemas de numeração · problemas com naturais
  *       BNCC: EF06MA01, EF06MA02, EF06MA03
  *
  *  U2 · Investigando as Operações                     ⏳
  *       + − × ÷ com naturais grandes · expressões com parênteses ·
- *       potências de base natural · raiz quadrada exata
- *       BNCC: EF06MA03, EF06MA11, EF06MA12
+ *       potências de base natural
+ *       BNCC: EF06MA03
  *
  *  U3 · Múltiplos, Divisores e Primos                 ⏳
  *       múltiplos, divisores, critérios de divisibilidade,
@@ -32,19 +32,19 @@ import { unidade7 } from "./unidade-7";
  *       BNCC: EF06MA04, EF06MA05, EF06MA06
  *
  *  U4 · Frações no Laboratório                        ⏳
- *       equivalência, comparação, + − × ÷ com frações,
+ *       equivalência, comparação, adição e subtração com frações,
  *       fração de uma quantidade
  *       BNCC: EF06MA07, EF06MA08, EF06MA09, EF06MA10
  *
  *  U5 · Decimais e Porcentagem                        ⏳
  *       ler, comparar, + − × ÷ decimais · relação com frações ·
  *       porcentagem como razão centesimal
- *       BNCC: EF06MA08, EF06MA10, EF06MA13
+ *       BNCC: EF06MA07, EF06MA08, EF06MA11, EF06MA13
  *
- *  U6 · Razão, Proporção e Álgebra Inicial            ⏳
- *       razão, proporção, regra de três simples · sequências ·
- *       primeiras equações do 1º grau (balança)
- *       BNCC: EF06MA13, EF06MA14, EF06MA15, EF06MA16
+ *  U6 · Igualdade e Partilhas                          ✅
+ *       propriedades da igualdade · valor desconhecido ·
+ *       partilhas desiguais aditivas e multiplicativas
+ *       BNCC: EF06MA14, EF06MA15
  *
  *  U7 · Geometria, Medidas, Estatística — Missão Final ⏳
  *       polígonos e ângulos · perímetro e área · volume · SI ·
@@ -57,7 +57,7 @@ const curso: Curso = {
   ano: "6º Ano",
   titulo: "O Laboratório dos Números",
   descricao:
-    "Brilha entra no Laboratório. Aqui, matemática é ciência: cria hipótese, testa em exemplos, generaliza a regra. Descobre bilhões, números negativos, primos, frações formais, decimais, razão, primeiras equações e fecha com Missão Final.",
+    "Brilha entra no Laboratório. Aqui, matemática é ciência: cria hipótese, testa em exemplos e generaliza regras. Estuda números naturais, primos, frações, decimais, razão, álgebra inicial, geometria, medidas e estatística.",
   corPrimaria: "#7c3aed",
   corSecundaria: "#1e1b4b",
   tipoAula: "matematica",

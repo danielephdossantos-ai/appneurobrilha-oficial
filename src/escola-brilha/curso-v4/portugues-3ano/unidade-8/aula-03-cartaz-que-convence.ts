@@ -20,7 +20,7 @@ export const aula03: AulaPortuguesV4 = {
   slug: "aula-03-cartaz-que-convence",
   titulo: "O Cartaz que Quer te Convencer",
   iconeTrilha: "📣",
-  bncc: ["EF03LP21", "EF03LP23", "EF35LP15", "EF35LP16", "EF35LP11"],
+  bncc: ["EF03LP19", "EF03LP21", "EF35LP15", "EF15LP01", "EF15LP04"],
   duracaoMin: 20,
 
   momento01_motivacao: {

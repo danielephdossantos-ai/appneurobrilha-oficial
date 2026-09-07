@@ -88,9 +88,10 @@ const aula01: AulaEI = {
         { nome: "bebê", imagemUrl: bebe, correta: true },
         { nome: "sol", imagemUrl: sol, correta: false },
         { nome: "mãe", imagemUrl: mae, correta: false },
+        { nome: "pai", imagemUrl: pai, correta: false },
       ],
-      feedbackAcerto: "Isso! Bola e bebê começam com o som BÊ!",
-      feedbackErro: "Escuta de novo: bola começa com BÊ. Qual outra começa com BÊ?",
+      feedbackAcerto: "Isso! Bola e bebê começam com o mesmo som de B!",
+      feedbackErro: "Escuta o começo devagar: bola, bebê. As duas começam com o som de B.",
     },
     {
       tipo: "ritmoCorpo",
@@ -116,6 +117,7 @@ const aula01: AulaEI = {
         { nome: "cachorro", imagemUrl: cachorro, correta: true },
         { nome: "bebê", imagemUrl: bebe, correta: false },
         { nome: "mãe", imagemUrl: mae, correta: false },
+        { nome: "gato", imagemUrl: gato, correta: false },
       ],
       feedbackAcerto: "Isso mesmo! Era o cachorrinho Toby!",
       feedbackErro: "Vamos escutar a história de novo? Era um cachorrinho chamado Toby!",
@@ -174,7 +176,8 @@ const aula02: AulaEI = {
       { nome: "cachorro", imagemUrl: cachorro, correta: true },
       { nome: "sol", imagemUrl: sol, correta: false },
       { nome: "mamãe", imagemUrl: mae, correta: false },
-    ], feedbackAcerto: "Isso! Casa e cachorro começam com o som CÊ!", feedbackErro: "Escuta de novo: casa começa com CÊ. Qual outra começa com o som CÊ?" },
+      { nome: "pato", imagemUrl: pato, correta: false },
+    ], feedbackAcerto: "Isso! Casa e cachorro começam com o mesmo som de C!", feedbackErro: "Escuta o começo devagar: casa, cachorro. As duas começam com o som de C." },
     { tipo: "ritmoCorpo", instrucaoAudio: "Vamos bater palma no ritmo:", palavra: "CA-SA", silabas: 2, imagemUrl: casa, elogio: "Boa! Casa tem duas palmas!" },
     { tipo: "historiaIlustrada", titulo: "O gatinho da lua", cenas: [
       { imagemUrl: gato, narracao: "Era uma vez um gatinho branco chamado Miau. Ele morava em uma casa aconchegante." },
@@ -185,6 +188,7 @@ const aula02: AulaEI = {
       { nome: "lua", imagemUrl: lua, correta: true },
       { nome: "bola", imagemUrl: bola, correta: false },
       { nome: "casa", imagemUrl: casa, correta: false },
+      { nome: "estrela", imagemUrl: estrela, correta: false },
     ], feedbackAcerto: "Isso! Miau adorava olhar a lua brilhar!", feedbackErro: "Escuta de novo: ele ficava olhando a lua no céu!" },
     { tipo: "fazDeConta", imagemUrl: gato, convite: "Faz de conta que você é o Miau! Faz miau baixinho, e depois se espreguiça bem devagar." },
     { tipo: "rodaConversa", imagemUrl: casa, pergunta: "Qual o seu lugar favorito lá na sua casa? Conta pro Brilha!", exemplos: [
@@ -225,6 +229,7 @@ const aula03: AulaEI = {
       { nome: "rato", imagemUrl: rato, correta: true },
       { nome: "sol", imagemUrl: sol, correta: false },
       { nome: "casa", imagemUrl: casa, correta: false },
+      { nome: "lua", imagemUrl: lua, correta: false },
     ], feedbackAcerto: "Isso! PA-TO e RA-TO terminam igualzinho: TO!", feedbackErro: "Escuta o finalzinho: pa-TO, ra-TO. Terminam iguais!" },
     { tipo: "ritmoCorpo", instrucaoAudio: "Bate palma no nome do sapinho:", palavra: "SA-PO", silabas: 2, imagemUrl: sapo, elogio: "Duas palmas! Sa-po!" },
     { tipo: "historiaIlustrada", titulo: "O sapo que queria voar", cenas: [
@@ -236,6 +241,7 @@ const aula03: AulaEI = {
       { nome: "borboleta", imagemUrl: borboleta, correta: true },
       { nome: "rato", imagemUrl: rato, correta: false },
       { nome: "gato", imagemUrl: gato, correta: false },
+      { nome: "sapo", imagemUrl: sapo, correta: false },
     ], feedbackAcerto: "Isso! Foi a borboleta amiga!", feedbackErro: "Foi a borboleta que veio conversar com ele." },
     { tipo: "fazDeConta", imagemUrl: sapo, convite: "Salta como o sapo Coa! Um, dois, três saltos bem altos!", dica: "Corpo em movimento ajuda a memorizar sons." },
     { tipo: "rodaConversa", imagemUrl: passaro, pergunta: "Qual bichinho você mais gosta? Fala o nome dele bem devagar pro Brilha!", exemplos: [
@@ -275,6 +281,7 @@ const aula04: AulaEI = {
       { nome: "sapo", imagemUrl: sapo, correta: true },
       { nome: "lua", imagemUrl: lua, correta: false },
       { nome: "gato", imagemUrl: gato, correta: false },
+      { nome: "pato", imagemUrl: pato, correta: false },
     ], feedbackAcerto: "Isso! Sol e sapo começam com S!", feedbackErro: "Escuta o começo: sol, sapo. As duas começam com S." },
     { tipo: "ritmoCorpo", instrucaoAudio: "Bate palma na palavra sol:", palavra: "SOL", silabas: 1, imagemUrl: sol, elogio: "Uma palma só! Sol é palavra pequenininha!" },
     { tipo: "historiaIlustrada", titulo: "A estrela que dormiu tarde", cenas: [
@@ -286,6 +293,7 @@ const aula04: AulaEI = {
       { nome: "sol", imagemUrl: sol, correta: true },
       { nome: "sapo", imagemUrl: sapo, correta: false },
       { nome: "gato", imagemUrl: gato, correta: false },
+      { nome: "lua", imagemUrl: lua, correta: false },
     ], feedbackAcerto: "Isso! O sol veio brilhar de dia!", feedbackErro: "Foi o SOL que chegou de manhã!" },
     { tipo: "fazDeConta", imagemUrl: sol, convite: "Vira sol! Abre bem os bracinhos e sorri bem grande, como se fosse brilhar!" },
     { tipo: "rodaConversa", imagemUrl: sol, pergunta: "O que você gosta de fazer quando o sol está brilhando?", exemplos: [
@@ -325,6 +333,7 @@ const aula05: AulaEI = {
       { nome: "tomar banho", imagemUrl: banho, correta: true },
       { nome: "dormir", imagemUrl: lua, correta: false },
       { nome: "brincar no parque", imagemUrl: parque, correta: false },
+      { nome: "tomar sopa", imagemUrl: sopa, correta: false },
     ], feedbackAcerto: "Isso! Ele acordou e tomou banho!", feedbackErro: "De manhã ele acordou e tomou BANHO." },
     { tipo: "ritmoCorpo", instrucaoAudio: "Bate palma na palavra:", palavra: "BA-NHO", silabas: 2, imagemUrl: banho, elogio: "Duas palminhas! Ba-nho!" },
     { tipo: "historiaIlustrada", titulo: "Um dia da Lili", cenas: [
@@ -343,6 +352,7 @@ const aula05: AulaEI = {
       { nome: "cansada e feliz", imagemUrl: menina, correta: true },
       { nome: "com fome", imagemUrl: sopa, correta: false },
       { nome: "com sono só", imagemUrl: lua, correta: false },
+      { nome: "tomando banho", imagemUrl: banho, correta: false },
     ], feedbackAcerto: "Isso! Cansada e feliz!", feedbackErro: "Ela voltou cansada e feliz de tanto brincar!" },
     { tipo: "missaoFamilia", titulo: "Missão Família", convite: "Na hora do jantar, conta pro adulto: 'Hoje eu fiz isso, isso e isso!'", dicaAdulto: "Relato oral diário treina memória, sequência temporal e narrativa — pilares da alfabetização." },
     { tipo: "celebracao", medalha: "Contador do Dia", mascoteUrl: brilha, falaFinal: "Seu dia foi lindo! Você já sabe contar histórias — e as melhores histórias começam com o que a gente vive!" },
@@ -387,12 +397,14 @@ const aula06: AulaEI = {
       { nome: "casa", imagemUrl: casa, correta: true },
       { nome: "sapo", imagemUrl: sapo, correta: false },
       { nome: "pato", imagemUrl: pato, correta: false },
-    ], feedbackAcerto: "Boa! Coelho e casa começam com CÊ!", feedbackErro: "Escuta: CO-elho, CA-sa. Começam iguais!" },
+      { nome: "lua", imagemUrl: lua, correta: false },
+    ], feedbackAcerto: "Boa! Coelho e casa começam com o mesmo som de C!", feedbackErro: "Escuta o começo: coelho, casa. As duas começam com o som de C." },
     { tipo: "ritmoCorpo", instrucaoAudio: "Bate palma no nome do coelhinho:", palavra: "CO-E-LHO", silabas: 3, imagemUrl: coelho, elogio: "Três palminhas! Co-e-lho!" },
     { tipo: "compreensaoImagem", perguntaAudio: "Na história que a gente começou, o que o coelho achou?", opcoes: [
       { nome: "flor mágica", imagemUrl: flor, correta: true },
       { nome: "sopa", imagemUrl: sopa, correta: false },
       { nome: "bola", imagemUrl: bola, correta: false },
+      { nome: "estrela", imagemUrl: estrela, correta: false },
     ], feedbackAcerto: "Isso mesmo! Uma flor mágica!", feedbackErro: "Ele achou uma FLOR mágica no jardim." },
     { tipo: "missaoFamilia", titulo: "Missão Família", convite: "Inventa uma história pra alguém em casa começando com: 'Era uma vez...'!", dicaAdulto: "Contar histórias inventadas desenvolve estrutura narrativa (começo/meio/fim), essencial pra alfabetização plena." },
     { tipo: "celebracao", medalha: "Pequeno Contador", mascoteUrl: brilha, falaFinal: "Uau! Você inventou uma história linda! O Brilha vai lembrar pra sempre!" },
@@ -430,12 +442,14 @@ const aula07: AulaEI = {
       { nome: "no livro", imagemUrl: livro, correta: true },
       { nome: "na bola", imagemUrl: bola, correta: false },
       { nome: "no sapato", imagemUrl: casa, correta: false },
+      { nome: "no parque", imagemUrl: parque, correta: false },
     ], feedbackAcerto: "Isso! No livro tem historinhas de montão!", feedbackErro: "Historinhas moram nos LIVROS!" },
     { tipo: "fazDeConta", imagemUrl: livros, convite: "Faz de conta que você está lendo um livro pro seu ursinho! Aponta as figuras e conta!" },
     { tipo: "somInicial", instrucaoAudio: "LIVRO começa com o som L. Qual palavra começa igual?", referencia: { nome: "livro", imagemUrl: livro }, opcoes: [
       { nome: "lua", imagemUrl: lua, correta: true },
       { nome: "sapo", imagemUrl: sapo, correta: false },
       { nome: "pato", imagemUrl: pato, correta: false },
+      { nome: "bola", imagemUrl: bola, correta: false },
     ], feedbackAcerto: "Boa! Livro e lua começam com L!", feedbackErro: "Escuta: livro, lua. Começam com L!" },
     { tipo: "ritmoCorpo", instrucaoAudio: "Bate palma na palavra:", palavra: "LI-VRO", silabas: 2, imagemUrl: livro, elogio: "Duas palminhas! Li-vro!" },
     { tipo: "rodaConversa", imagemUrl: livro, pergunta: "Você tem um livro favorito? Conta como ele é pro Brilha!", exemplos: [
@@ -480,11 +494,13 @@ const aula08: AulaEI = {
       { nome: "lápis", imagemUrl: lapis, correta: true },
       { nome: "sopa", imagemUrl: sopa, correta: false },
       { nome: "bola", imagemUrl: bola, correta: false },
+      { nome: "tinta", imagemUrl: tinta, correta: false },
     ], feedbackAcerto: "Isso! Com o LÁ-PIS!", feedbackErro: "A menina usou um LÁ-PIS pra desenhar." },
     { tipo: "somInicial", instrucaoAudio: "LÁPIS começa com L. Qual outra começa igual?", referencia: { nome: "lápis", imagemUrl: lapis }, opcoes: [
       { nome: "livro", imagemUrl: livro, correta: true },
       { nome: "gato", imagemUrl: gato, correta: false },
       { nome: "pato", imagemUrl: pato, correta: false },
+      { nome: "casa", imagemUrl: casa, correta: false },
     ], feedbackAcerto: "Boa! Lápis e livro começam com L!", feedbackErro: "Escuta: lápis, livro. Iguais no começo!" },
     { tipo: "ritmoCorpo", instrucaoAudio: "Bate palma na palavra:", palavra: "LÁ-PIS", silabas: 2, imagemUrl: lapis, elogio: "Duas palminhas! Lá-pis!" },
     { tipo: "fazDeConta", imagemUrl: papel, convite: "Faz de conta que seu dedo é um lápis! Risca no ar um SOL bem redondo, e depois uma CASA!" },
@@ -525,11 +541,13 @@ const aula09: AulaEI = {
       { nome: "sol", imagemUrl: sol, correta: true },
       { nome: "gato", imagemUrl: gato, correta: false },
       { nome: "bola", imagemUrl: bola, correta: false },
+      { nome: "lua", imagemUrl: lua, correta: false },
     ], feedbackAcerto: "Boa! Sapo e sol começam com S!", feedbackErro: "Escuta o começo: sapo, sol. Começam com S!" },
     { tipo: "somInicial", instrucaoAudio: "Qual palavra RIMA com PATO?", referencia: { nome: "pato", imagemUrl: pato }, opcoes: [
       { nome: "rato", imagemUrl: rato, correta: true },
       { nome: "casa", imagemUrl: casa, correta: false },
       { nome: "sol", imagemUrl: sol, correta: false },
+      { nome: "lua", imagemUrl: lua, correta: false },
     ], feedbackAcerto: "Isso! PA-TO / RA-TO!", feedbackErro: "Escuta o finalzinho: pa-TO, ra-TO." },
     { tipo: "ritmoCorpo", instrucaoAudio: "Bate palma na palavra:", palavra: "BOR-BO-LE-TA", silabas: 4, imagemUrl: borboleta, elogio: "QUATRO palminhas! Bor-bo-le-ta! Que palavra grande!" },
     { tipo: "historiaIlustrada", titulo: "A festa da floresta", cenas: [
@@ -541,6 +559,7 @@ const aula09: AulaEI = {
       { nome: "festa", imagemUrl: coracao, correta: true },
       { nome: "dormiram", imagemUrl: lua, correta: false },
       { nome: "brigaram", imagemUrl: sopa, correta: false },
+      { nome: "leram", imagemUrl: livro, correta: false },
     ], feedbackAcerto: "Isso! Fizeram uma FESTA de palavras!", feedbackErro: "Foi uma FESTA linda!" },
     { tipo: "rodaConversa", imagemUrl: brilha, pergunta: "Qual palavra você mais gostou de aprender com o Brilha? Fala bem alto!", exemplos: [
       { nome: "bola", imagemUrl: bola },

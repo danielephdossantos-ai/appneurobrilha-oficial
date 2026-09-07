@@ -20,7 +20,7 @@ export const aula3: AulaPortuguesV4 = {
   slug: "aula-03-ortografia-de-uso",
   titulo: "Ortografia de uso",
   iconeTrilha: "🦉",
-  bncc: ["EF05LP07", "EF35LP13"],
+  bncc: ["EF05LP01", "EF35LP12", "EF35LP13"],
   duracaoMin: 25,
 
   momento01_motivacao: {

@@ -21,7 +21,7 @@ export const aula2: AulaPortuguesV4 = {
   slug: "aula-02-biografia-e-relato",
   titulo: "Biografia e relato",
   iconeTrilha: "📖",
-  bncc: ["EF05LP14", "EF05LP26"],
+  bncc: ["EF35LP21", "EF35LP25", "EF35LP26", "EF35LP29", "EF15LP15", "EF15LP16"],
   duracaoMin: 25,
 
   momento01_motivacao: {

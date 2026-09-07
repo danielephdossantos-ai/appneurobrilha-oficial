@@ -25,13 +25,7 @@ export const aula05: AulaPortuguesV4 = {
   slug: "aula-05-missao-final-exploradores",
   titulo: "Missão Final dos Exploradores",
   iconeTrilha: "🏅",
-  bncc: [
-    "EF02LP09",
-    "EF02LP10",
-    "EF02LP11",
-    "EF02LP12",
-    "EF02LP13",
-  ],
+  bncc: ["EF02LP13", "EF02LP16", "EF12LP04", "EF12LP06", "EF12LP10", "EF15LP01", "EF15LP03"],
   duracaoMin: 15,
 
   momento01_motivacao: {

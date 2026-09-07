@@ -5,7 +5,7 @@ export const aula05_missaoProporcao: AulaV4 = {
   slug: "u3-05-missao-proporcao",
   titulo: "Missão — Repartir com Justiça",
   iconeTrilha: "🏅",
-  bncc: ["EF07MA17"],
+  bncc: ["EF07MA02", "EF07MA17"],
   duracaoMin: 32,
   metodologias: ["skemp"],
 

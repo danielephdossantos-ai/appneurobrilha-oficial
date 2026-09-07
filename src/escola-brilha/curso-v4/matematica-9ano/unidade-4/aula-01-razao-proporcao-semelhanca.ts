@@ -8,7 +8,7 @@ export const aula01_razaoProporcaoSemelhanca: AulaV4 = {
   slug: "u4-01-razao-proporcao-semelhanca",
   titulo: "Mesma Forma, Tamanho Diferente",
   iconeTrilha: "🗺️",
-  bncc: ["EF09MA07", "EF09MA12"],
+  bncc: ["EF09MA12"],
   duracaoMin: 30,
   metodologias: ["vergnaud", "skemp"],
 

@@ -21,8 +21,8 @@ export const aula06_probabilidade: AulaV4 = {
         itens: [
           { evento: "Sol nascer amanhã", nivel: "certo" },
           { evento: "Sair 7 num dado de 6 faces", nivel: "impossivel" },
-          { evento: "Chover em janeiro", nivel: "muito" },
-          { evento: "Ganhar na loteria", nivel: "pouco" },
+          { evento: "Tirar uma bola vermelha de uma sacola com 9 vermelhas e 1 azul", nivel: "muito" },
+          { evento: "Tirar a única bola azul dessa sacola", nivel: "pouco" },
         ],
       },
     ],
@@ -36,10 +36,10 @@ export const aula06_probabilidade: AulaV4 = {
     titulo: "Escala de probabilidade",
     etapas: [
       {
-        texto: "Impossível → Pouco provável → Provável → Muito provável → Certo.",
+        texto: "Impossível → Menor chance → Mesma chance → Maior chance → Certo.",
         exemploReal: {
-          contexto: "Tirar carta vermelha de baralho.",
-          destaque: "Metade → PROVÁVEL.",
+          contexto: "Tirar uma bola vermelha de uma sacola com 5 vermelhas e 5 azuis.",
+          destaque: "5 resultados favoráveis em 10: chance de meio a meio.",
         },
       },
     ],
@@ -55,10 +55,10 @@ export const aula06_probabilidade: AulaV4 = {
     interacao: {
       tipo: "escolhaVisual",
       pergunta: "Escolha:",
-      opcoes: [{ nome: "Provável (meio a meio)" }, { nome: "Certo" }, { nome: "Impossível" }],
-      respostaCerta: "Provável (meio a meio)",
+      opcoes: [{ nome: "Mesma chance: 1 em 2" }, { nome: "Certo" }, { nome: "Impossível" }],
+      respostaCerta: "Mesma chance: 1 em 2",
       feedbackAcerto: "🎯 1 em 2.",
-      feedbackErro: "Metade → provável.",
+      feedbackErro: "Cara e coroa têm a mesma chance em uma moeda equilibrada.",
     },
   },
   momento07_praticaIndependente: {
@@ -90,7 +90,7 @@ export const aula06_probabilidade: AulaV4 = {
   momento10_avaliacao: {
     perguntas: [
       { pergunta: "Sair 3 num dado:", opcoes: ["Pouco provável", "Impossível", "Certo"], correta: 0, feedbackAcerto: "🎉 Pouco provável.", feedbackErro: "1 em 6." },
-      { pergunta: "Sair par ou ímpar no dado:", opcoes: ["Provável (meio a meio)", "Certo", "Impossível"], correta: 0, feedbackAcerto: "🎉 Meio a meio.", feedbackErro: "3 pares, 3 ímpares." },
+      { pergunta: "Comparando sair par com sair ímpar no dado:", opcoes: ["Têm a mesma chance", "Par é certo", "Ímpar é impossível"], correta: 0, feedbackAcerto: "🎉 Mesma chance.", feedbackErro: "Há 3 resultados pares e 3 ímpares." },
       { pergunta: "Peixe voar sozinho:", opcoes: ["Impossível", "Pouco provável", "Certo"], correta: 0, feedbackAcerto: "🎉 Impossível.", feedbackErro: "Não voa naturalmente." },
     ],
   },

@@ -22,7 +22,7 @@ export const aula01: AulaPortuguesV4 = {
   slug: "aula-01-sufixos-prefixos",
   titulo: "A Oficina das Peças da Palavra",
   iconeTrilha: "🧩",
-  bncc: ["EF04LP09", "EF04LP10"],
+  bncc: ["EF04LP08"],
   duracaoMin: 22,
 
   momento01_motivacao: {

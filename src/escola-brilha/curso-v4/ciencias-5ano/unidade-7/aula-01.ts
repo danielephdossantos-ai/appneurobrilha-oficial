@@ -9,7 +9,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-feira-cientifica",
   titulo: "Feira Científica",
   iconeTrilha: "🏆",
-  bncc: ["EF05CI11"],
+  bncc: [],
   duracaoMin: 30,
 
   cena01_motivacao: {
@@ -30,6 +30,7 @@ export const aula01: AulaGeoV1 = {
       { id: "dados", titulo: "DADOS", subtitulo: "medidos e registrados", emoji: "📊", cor: "from-teal-400 to-emerald-700" },
       { id: "roupa", titulo: "ROUPA", subtitulo: "aparência elegante", emoji: "👔", cor: "from-slate-400 to-slate-700" },
       { id: "voz", titulo: "VOZ ALTA", subtitulo: "gritar convence", emoji: "📣", cor: "from-red-400 to-rose-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "dados",
     feedbackAcerto: "Sim. DADOS reais registrados são o coração de qualquer apresentação científica.",
@@ -97,6 +98,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🔢", titulo: "Problema → Método → Resultados → Conclusão", cor: "from-teal-500 to-emerald-700" },
           { id: "b", emoji: "🎲", titulo: "Qualquer ordem funciona", cor: "from-slate-500 to-slate-700" },
           { id: "c", emoji: "🎬", titulo: "Só resultados", cor: "from-red-500 to-rose-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Sim. Essa é a estrutura universal — do primeiro cientista à NASA.",
         feedbackErro: "Ordem importa: primeiro o problema, depois como investigou, depois o que achou." },
@@ -106,6 +108,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🖼️", titulo: "Visual, claro, com gráficos", cor: "from-fuchsia-500 to-purple-700" },
           { id: "b", emoji: "📃", titulo: "Só texto sem imagem", cor: "from-slate-500 to-slate-700" },
           { id: "c", emoji: "🎨", titulo: "Cheio de desenhos aleatórios", cor: "from-red-500 to-rose-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. Pôster comunica visualmente — gráficos, fotos, títulos grandes.",
         feedbackErro: "Ciência entra pelos olhos. Pôster tem que ser VISUAL e claro." },
@@ -115,6 +118,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🙋", titulo: "Reconhece: 'não sei, vou investigar'", cor: "from-emerald-500 to-green-700" },
           { id: "b", emoji: "🎭", titulo: "Inventa uma resposta qualquer", cor: "from-red-500 to-rose-700" },
           { id: "c", emoji: "😶", titulo: "Fica em silêncio", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Sim. Honestidade > invenção. Bom cientista reconhece limites do próprio conhecimento.",
         feedbackErro: "Nunca invente resposta. Reconhecer o que não sabe é ato científico." },
@@ -260,6 +264,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Problema → Método → Resultados → Conclusão", correta: true },
           { id: "b", texto: "Qualquer ordem funciona igual" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. Estrutura universal — do jovem cientista à NASA.",
         feedbackErro: "Ordem existe. Primeiro pergunta, depois investigação, depois dados, depois interpretação." },
@@ -268,6 +274,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Apresentar honestamente — isso também é ciência", correta: true },
           { id: "b", texto: "Mudar os dados pra bater com a hipótese" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. Refutar hipótese é resultado válido. Ciência valoriza honestidade.",
         feedbackErro: "JAMAIS alterar dados — é fraude científica. Apresenta honestamente." },
@@ -276,6 +284,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Pra que outros possam verificar e continuar sua pesquisa", correta: true },
           { id: "b", texto: "Só pra ganhar prêmio" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. Ciência avança quando é compartilhada e verificada por outros.",
         feedbackErro: "Prêmio é consequência. Comunicar serve pra CIÊNCIA AVANÇAR." },

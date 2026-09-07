@@ -4,7 +4,7 @@ export const aula03_somaSub: AulaV4 = {
   slug: "u4-03-soma-sub-fracoes",
   titulo: "Somar e subtrair frações",
   iconeTrilha: "➕",
-  bncc: ["EF06MA09"],
+  bncc: ["EF06MA10"],
   duracaoMin: 24,
   metodologias: ["cpa", "skemp"],
 

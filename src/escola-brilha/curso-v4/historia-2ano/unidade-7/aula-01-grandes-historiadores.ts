@@ -18,7 +18,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-grandes-historiadores",
   titulo: "Grandes Historiadores",
   iconeTrilha: "⏳",
-  bncc: ["EF02HI01", "EF02HI11"],
+  bncc: [],
   duracaoMin: 22,
 
   cena01_motivacao: {
@@ -56,6 +56,8 @@ export const aula01: AulaGeoV1 = {
         cor: "from-slate-400 to-slate-600",
         fotoUrl: imgRelogio,
       },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "id",
     feedbackAcerto:
@@ -166,6 +168,7 @@ export const aula01: AulaGeoV1 = {
           { id: "b", emoji: "🧸", titulo: "Boneca antiga", cor: "from-amber-400 to-orange-600" },
           { id: "v", emoji: "🎙️", titulo: "Voz da vovó", cor: "from-rose-400 to-red-600" },
           { id: "c", emoji: "📜", titulo: "Carta escrita", cor: "from-emerald-400 to-teal-600" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "b",
         feedbackAcerto: "Isso! Boneca é OBJETO = Fonte Material.",
@@ -178,6 +181,8 @@ export const aula01: AulaGeoV1 = {
         cards: [
           { id: "c", emoji: "🏗️", titulo: "Chegaram construções e asfalto", cor: "from-sky-400 to-indigo-600" },
           { id: "s", emoji: "🌑", titulo: "Todo mundo foi embora", cor: "from-slate-400 to-slate-600" },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "c",
         feedbackAcerto: "Combo! Novas construções mostram crescimento.",
@@ -190,6 +195,8 @@ export const aula01: AulaGeoV1 = {
         cards: [
           { id: "p", emoji: "👨‍🏫", titulo: "O professor ensinando", cor: "from-emerald-400 to-teal-600" },
           { id: "pa", emoji: "🚫", titulo: "A palmatória", cor: "from-rose-400 to-red-600" },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "p",
         feedbackAcerto: "Isso! Professor sempre existiu — e continua.",
@@ -437,6 +444,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Entender como as pessoas viviam antes pra saber quem somos hoje e construir um futuro melhor", correta: true },
           { id: "b", texto: "Só decorar datas e nomes antigos pra passar na prova" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Espetacular! A história nos dá superpoderes pra entender o presente e transformar o mundo.",
         feedbackErro: "História não é DECORAR. É ENTENDER quem somos hoje.",
@@ -448,6 +457,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Objetos, textos e memórias que as pessoas do passado deixaram", correta: true },
           { id: "b", texto: "Só as coisas que aparecem na TV" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Isso! Materiais, escritas e orais — todas contam a história.",
         feedbackErro: "TV é do presente. Fontes históricas são PISTAS do passado.",
@@ -459,6 +470,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "A sua identidade — quem você é e como você foi mudando", correta: true },
           { id: "b", texto: "Nada de importante" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Combo final! Sua vida é uma história — e você é o autor dela.",
         feedbackErro: "Cada momento seu importa. A linha da sua vida MOSTRA sua identidade.",

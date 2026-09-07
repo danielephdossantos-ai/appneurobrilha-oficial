@@ -4,6 +4,7 @@ import { aula02_descobrindoGraficos } from "./aula-02-descobrindo-graficos";
 import { aula03_comparandoInformacoes } from "./aula-03-comparando-informacoes";
 import { aula04_descobrindoPadroes } from "./aula-04-descobrindo-padroes";
 import { aula05_missaoFinal } from "./aula-05-missao-final";
+import { aula06_eventosProvaveis } from "./aula-06-eventos-provaveis";
 
 /**
  * Unidade 7 — "Cientistas dos Gráficos e das Descobertas"
@@ -27,5 +28,6 @@ export const unidade7: Unidade = {
     aula03_comparandoInformacoes,
     aula04_descobrindoPadroes,
     aula05_missaoFinal,
+    aula06_eventosProvaveis,
   ],
 };

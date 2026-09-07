@@ -20,7 +20,7 @@ export const aula01: AulaPortuguesV4 = {
   slug: "aula-01-planejar-pesquisa",
   titulo: "O Mapa da Pesquisa",
   iconeTrilha: "🔍",
-  bncc: ["EF15LP05", "EF35LP17", "EF35LP18"],
+  bncc: ["EF04LP21", "EF15LP05", "EF35LP17", "EF35LP18", "EF35LP19"],
   duracaoMin: 22,
 
   momento01_motivacao: {

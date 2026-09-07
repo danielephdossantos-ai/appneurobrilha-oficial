@@ -8,7 +8,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-ditadura-militar",
   titulo: "Ditadura Militar Brasileira (1964–1985)",
   iconeTrilha: "✊",
-  bncc: ["EF09HI15", "EF09HI16"],
+  bncc: [],
   duracaoMin: 30,
   estilo: "teen",
 
@@ -31,6 +31,8 @@ export const aula01: AulaGeoV1 = {
     opcoes: [
       { id: "gol", titulo: "GOLPE MILITAR", subtitulo: "derrubaram um presidente eleito", emoji: "🎖️", cor: "from-amber-800 to-slate-950" },
       { id: "el", titulo: "ELEIÇÃO POPULAR", subtitulo: "venceram com voto direto", emoji: "❌", cor: "from-teal-800 to-slate-950" },
+          { id: "extra2", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "extra3", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "gol",
     feedbackAcerto: "Correto. Foi um GOLPE. Os militares derrubaram João Goulart, presidente eleito, com apoio de setores civis, empresariais e dos EUA (contexto de Guerra Fria).",
@@ -69,9 +71,9 @@ export const aula01: AulaGeoV1 = {
     aurora: "Três perguntas rápidas.",
     instrucao: "Toque no card correto",
     perguntas: [
-      { id: "q1", pergunta: "A ditadura militar brasileira começou com o golpe de:", fotoUrl: imgRes, cards: [{ id: "64", emoji: "🎖️", titulo: "1964", cor: "from-teal-600 to-slate-900" }, { id: "45", emoji: "🕊️", titulo: "1945", cor: "from-amber-600 to-slate-900" }, { id: "85", emoji: "🗳️", titulo: "1985", cor: "from-slate-600 to-slate-900" }], correta: "64", feedbackAcerto: "Correto. 31 de março de 1964.", feedbackErro: "É 1964. 1945 = fim da Era Vargas; 1985 = FIM da ditadura." },
-      { id: "q2", pergunta: "O AI-5 (1968) representou:", fotoUrl: imgTanqueDit, cards: [{ id: "ec", emoji: "⛓️", titulo: "Endurecimento e censura total", cor: "from-teal-600 to-slate-900" }, { id: "ab", emoji: "🕊️", titulo: "Início da abertura democrática", cor: "from-amber-600 to-slate-900" }, { id: "el", emoji: "🗳️", titulo: "Volta das eleições diretas", cor: "from-slate-600 to-slate-900" }], correta: "ec", feedbackAcerto: "Correto. AI-5 abriu os 'anos de chumbo'.", feedbackErro: "É endurecimento. A abertura começa só em 1974." },
-      { id: "q3", pergunta: "O movimento DIRETAS JÁ pedia:", fotoUrl: imgMpb, cards: [{ id: "el", emoji: "🗳️", titulo: "Eleições diretas para presidente", cor: "from-teal-600 to-slate-900" }, { id: "vg", emoji: "🎖️", titulo: "Volta de um general", cor: "from-amber-600 to-slate-900" }, { id: "mu", emoji: "🧱", titulo: "Queda do Muro de Berlim", cor: "from-slate-600 to-slate-900" }], correta: "el", feedbackAcerto: "Correto. Eleições diretas para presidente da República.", feedbackErro: "É eleições diretas — o povo escolhendo o presidente." },
+      { id: "q1", pergunta: "A ditadura militar brasileira começou com o golpe de:", fotoUrl: imgRes, cards: [{ id: "64", emoji: "🎖️", titulo: "1964", cor: "from-teal-600 to-slate-900" }, { id: "45", emoji: "🕊️", titulo: "1945", cor: "from-amber-600 to-slate-900" }, { id: "85", emoji: "🗳️", titulo: "1985", cor: "from-slate-600 to-slate-900" }, { id: "extra", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" }], correta: "64", feedbackAcerto: "Correto. 31 de março de 1964.", feedbackErro: "É 1964. 1945 = fim da Era Vargas; 1985 = FIM da ditadura." },
+      { id: "q2", pergunta: "O AI-5 (1968) representou:", fotoUrl: imgTanqueDit, cards: [{ id: "ec", emoji: "⛓️", titulo: "Endurecimento e censura total", cor: "from-teal-600 to-slate-900" }, { id: "ab", emoji: "🕊️", titulo: "Início da abertura democrática", cor: "from-amber-600 to-slate-900" }, { id: "el", emoji: "🗳️", titulo: "Volta das eleições diretas", cor: "from-slate-600 to-slate-900" }, { id: "extra", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" }], correta: "ec", feedbackAcerto: "Correto. AI-5 abriu os 'anos de chumbo'.", feedbackErro: "É endurecimento. A abertura começa só em 1974." },
+      { id: "q3", pergunta: "O movimento DIRETAS JÁ pedia:", fotoUrl: imgMpb, cards: [{ id: "el", emoji: "🗳️", titulo: "Eleições diretas para presidente", cor: "from-teal-600 to-slate-900" }, { id: "vg", emoji: "🎖️", titulo: "Volta de um general", cor: "from-amber-600 to-slate-900" }, { id: "mu", emoji: "🧱", titulo: "Queda do Muro de Berlim", cor: "from-slate-600 to-slate-900" }, { id: "extra", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" }], correta: "el", feedbackAcerto: "Correto. Eleições diretas para presidente da República.", feedbackErro: "É eleições diretas — o povo escolhendo o presidente." },
     ],
     falaFinal: "Você já mapeia as três fases da ditadura brasileira.",
   },

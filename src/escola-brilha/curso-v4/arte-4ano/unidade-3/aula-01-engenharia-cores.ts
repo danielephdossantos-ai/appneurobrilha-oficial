@@ -63,10 +63,37 @@ export const aula01: AulaArteV1 = {
     titulo: "🔬 As Duas Naturezas da Cor",
     instrucao: "Toca em cada pista pra investigar",
     itens: [
-      { emoji: "🔺", rotulo: "Prisma de Newton (1666)", descricao: "Isaac Newton passou luz branca do sol por um cristal triangular e viu o arco-íris completo aparecer. Dentro da luz mora TODA cor.", cor: "#a855f7", fotoUrl: mapaNewton },
-      { emoji: "🎨", rotulo: "Pontilhismo de Seurat", descricao: "O pintor Georges Seurat cobria telas gigantes só com pontinhos puros. De longe, o olho misturava tudo — mistura óptica.", cor: "#dc2626", fotoUrl: mapaSeurat },
-      { emoji: "📺", rotulo: "Pixels RGB acesos", descricao: "A tela do celular é feita de barrinhas vermelhas, verdes e azuis acesas. Juntas formam qualquer cor — inclusive branco puro.", cor: "#0ea5e9", fotoUrl: mapaRgbPixels },
-      { emoji: "🌈", rotulo: "Espectro completo", descricao: "A luz branca esconde 7 cores. O prisma só REVELA o que já estava lá dentro.", cor: "#f59e0b", fotoUrl: mapaPrismaEspectro },
+      {
+        emoji: "🔺",
+        rotulo: "Prisma de Newton (1666)",
+        descricao:
+          "Isaac Newton passou luz branca do sol por um cristal triangular e viu o arco-íris completo aparecer. Dentro da luz mora TODA cor.",
+        cor: "#a855f7",
+        fotoUrl: mapaNewton,
+      },
+      {
+        emoji: "🎨",
+        rotulo: "Pontilhismo de Seurat",
+        descricao:
+          "O pintor Georges Seurat cobria telas gigantes só com pontinhos puros. De longe, o olho misturava tudo — mistura óptica.",
+        cor: "#dc2626",
+        fotoUrl: mapaSeurat,
+      },
+      {
+        emoji: "📺",
+        rotulo: "Pixels RGB acesos",
+        descricao:
+          "A tela do celular é feita de barrinhas vermelhas, verdes e azuis acesas. Juntas formam qualquer cor — inclusive branco puro.",
+        cor: "#0ea5e9",
+        fotoUrl: mapaRgbPixels,
+      },
+      {
+        emoji: "🌈",
+        rotulo: "Espectro completo",
+        descricao: "A luz branca esconde 7 cores. O prisma só REVELA o que já estava lá dentro.",
+        cor: "#f59e0b",
+        fotoUrl: mapaPrismaEspectro,
+      },
     ],
     falaFinal: "Você vai destrinchar as cores como um designer de tecnologia!",
   },
@@ -81,9 +108,14 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Pontinhos vermelhos, verdes e azuis acesos juntos", correta: true },
           { texto: "Tinta verde real dentro da tela", correta: false },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
-        feedbackAcerto: "Isso! Cor-luz (RGB) — a TV mistura pontinhos de 3 cores acesas pra formar todas as outras.",
-        feedbackErro: "TV não tem tinta! O verde é feito de PONTINHOS de vermelho, verde e azul acesos.",
+        feedbackAcerto:
+          "Isso! Cor-luz (RGB) — a TV mistura pontinhos de 3 cores acesas pra formar todas as outras.",
+        feedbackErro:
+          "TV não tem tinta! O verde é feito de PONTINHOS de vermelho, verde e azul acesos.",
       },
       {
         pergunta: "A impressora colorida usa 4 tintas: ciano, magenta, amarelo e…",
@@ -91,9 +123,13 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Preto (sistema CMYK)", correta: true },
           { texto: "Roxo dourado", correta: false },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
         feedbackAcerto: "Correto! O sistema CMYK é o padrão de qualquer impressora do mundo.",
-        feedbackErro: "Nenhuma impressora tem 'roxo dourado'. O 4º cartucho é sempre o PRETO — CMYK.",
+        feedbackErro:
+          "Nenhuma impressora tem 'roxo dourado'. O 4º cartucho é sempre o PRETO — CMYK.",
       },
       {
         pergunta: "Um arco-íris aparece no céu porque a luz do sol…",
@@ -101,6 +137,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Atravessa gotas de chuva que funcionam como pequenos prismas", correta: true },
           { texto: "Fica cansada e vira colorida", correta: false },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
         feedbackAcerto: "Perfeito! Cada gota de água é um mini-prisma que abre a luz nas 7 cores.",
         feedbackErro: "Luz não fica cansada. As gotas de chuva funcionam como PRISMAS naturais.",
@@ -112,10 +151,38 @@ export const aula01: AulaArteV1 = {
     tipo: "vocabularioCards",
     aurora: "Vocabulário da engenharia das cores. Toca em cada card!",
     cards: [
-      { termo: "Cor-Pigmento (CMYK)", definicao: "Cor das tintas físicas. Primárias: Ciano, Magenta, Amarelo. Todas misturadas = preto.", emoji: "🎨", cor: "#0ea5e9", fotoUrl: vocabCmyk },
-      { termo: "Cor-Luz (RGB)", definicao: "Cor das telas e lanternas. Primárias: Vermelho, Verde, Azul. Todas misturadas = branco puro.", emoji: "💡", cor: "#dc2626", fotoUrl: vocabRgb },
-      { termo: "Cores Terciárias", definicao: "Mistura de uma primária + uma secundária vizinha no círculo (vermelho-alaranjado, azul-arroxeado...).", emoji: "🌸", cor: "#a855f7", fotoUrl: vocabTerciarias },
-      { termo: "Espectro Visível", definicao: "As 7 cores que aparecem quando a luz branca é aberta por um prisma — o arco-íris.", emoji: "🌈", cor: "#f59e0b", fotoUrl: vocabEspectro },
+      {
+        termo: "Cor-Pigmento (CMYK)",
+        definicao:
+          "Cor das tintas físicas. Primárias: Ciano, Magenta, Amarelo. Todas misturadas = preto.",
+        emoji: "🎨",
+        cor: "#0ea5e9",
+        fotoUrl: vocabCmyk,
+      },
+      {
+        termo: "Cor-Luz (RGB)",
+        definicao:
+          "Cor das telas e lanternas. Primárias: Vermelho, Verde, Azul. Todas misturadas = branco puro.",
+        emoji: "💡",
+        cor: "#dc2626",
+        fotoUrl: vocabRgb,
+      },
+      {
+        termo: "Cores Terciárias",
+        definicao:
+          "Mistura de uma primária + uma secundária vizinha no círculo (vermelho-alaranjado, azul-arroxeado...).",
+        emoji: "🌸",
+        cor: "#a855f7",
+        fotoUrl: vocabTerciarias,
+      },
+      {
+        termo: "Espectro Visível",
+        definicao:
+          "As 7 cores que aparecem quando a luz branca é aberta por um prisma — o arco-íris.",
+        emoji: "🌈",
+        cor: "#f59e0b",
+        fotoUrl: vocabEspectro,
+      },
     ],
   },
 
@@ -129,10 +196,34 @@ export const aula01: AulaArteV1 = {
       "O pintor Seurat descobriu que se você coloca pontinhos puros bem juntos, seu olho MISTURA de longe. Isso se chama mistura óptica — a mesma técnica que a TV usa até hoje.",
     ],
     pigmentos: [
-      { nome: "Tintas CMYK", hex: "#06b6d4", fonte: "Cor-pigmento — impressoras", emoji: "🖨️", fotoUrl: matTinta },
-      { nome: "Tela RGB", hex: "#dc2626", fonte: "Cor-luz — celulares e TVs", emoji: "📱", fotoUrl: matTela },
-      { nome: "Canetinhas coloridas", hex: "#f59e0b", fonte: "Pigmentos pra pontilhismo", emoji: "🖍️", fotoUrl: matCanetinhas },
-      { nome: "Prisma de cristal", hex: "#a855f7", fonte: "Abre a luz branca em arco-íris", emoji: "🔺", fotoUrl: matPrisma },
+      {
+        nome: "Tintas CMYK",
+        hex: "#06b6d4",
+        fonte: "Cor-pigmento — impressoras",
+        emoji: "🖨️",
+        fotoUrl: matTinta,
+      },
+      {
+        nome: "Tela RGB",
+        hex: "#dc2626",
+        fonte: "Cor-luz — celulares e TVs",
+        emoji: "📱",
+        fotoUrl: matTela,
+      },
+      {
+        nome: "Canetinhas coloridas",
+        hex: "#f59e0b",
+        fonte: "Pigmentos pra pontilhismo",
+        emoji: "🖍️",
+        fotoUrl: matCanetinhas,
+      },
+      {
+        nome: "Prisma de cristal",
+        hex: "#a855f7",
+        fonte: "Abre a luz branca em arco-íris",
+        emoji: "🔺",
+        fotoUrl: matPrisma,
+      },
     ],
   },
 
@@ -146,6 +237,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Cor Terciária", correta: true },
           { texto: "Cor Neutra", correta: false },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
         feedbackAcerto: "Correto! As terciárias enriquecem a paleta com nuances sutis.",
         feedbackErro: "Neutra é branco, preto e cinza. A mistura primária+secundária é TERCIÁRIA.",
@@ -156,9 +250,14 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Vermelho, Verde e Azul", correta: true },
           { texto: "Amarelo, Rosa e Marrom", correta: false },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
-        feedbackAcerto: "Isso! RGB = Red, Green, Blue. As 3 cores-luz que formam qualquer imagem digital.",
-        feedbackErro: "Amarelo, rosa e marrom não são primárias de luz. As primárias RGB são VERMELHO, VERDE e AZUL.",
+        feedbackAcerto:
+          "Isso! RGB = Red, Green, Blue. As 3 cores-luz que formam qualquer imagem digital.",
+        feedbackErro:
+          "Amarelo, rosa e marrom não são primárias de luz. As primárias RGB são VERMELHO, VERDE e AZUL.",
       },
       {
         pergunta: "No Pontilhismo de Seurat, o olho mistura os pontinhos quando o observador…",
@@ -166,9 +265,14 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Afasta o desenho e olha de longe", correta: true },
           { texto: "Cheira o desenho bem de perto", correta: false },
+
+          { texto: "Não corresponde ao tema", correta: false },
+          { texto: "Outra resposta sem relação", correta: false },
         ],
-        feedbackAcerto: "Perfeito! De longe, os pontinhos se fundem em cores contínuas — mistura óptica.",
-        feedbackErro: "Cheirar não muda cor 😄. O truque é AFASTAR — de longe o olho mistura os pontos.",
+        feedbackAcerto:
+          "Perfeito! De longe, os pontinhos se fundem em cores contínuas — mistura óptica.",
+        feedbackErro:
+          "Cheirar não muda cor 😄. O truque é AFASTAR — de longe o olho mistura os pontos.",
       },
     ],
   },
@@ -178,34 +282,47 @@ export const aula01: AulaArteV1 = {
     aurora: "Cada objeto usa um tipo de cor. Combina cada um com o sistema correto!",
     animais: [
       {
-        nome: "Cartuchos de impressora", emoji: "🖨️", fotoUrl: matTinta,
+        nome: "Cartuchos de impressora",
+        emoji: "🖨️",
+        fotoUrl: matTinta,
         corAlvo: { nome: "Cor-Pigmento CMYK", hex: "#0ea5e9" },
         opcoes: [
           { nome: "Cor-Pigmento CMYK", hex: "#0ea5e9" },
           { nome: "Cor-Luz RGB", hex: "#dc2626" },
           { nome: "Espectro Newton", hex: "#a855f7" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Impressora = TINTA. Cor-Pigmento CMYK.",
       },
       {
-        nome: "Tela de celular acesa", emoji: "📱", fotoUrl: mapaRgbPixels,
+        nome: "Tela de celular acesa",
+        emoji: "📱",
+        fotoUrl: mapaRgbPixels,
         corAlvo: { nome: "Cor-Luz RGB", hex: "#dc2626" },
         opcoes: [
           { nome: "Cor-Pigmento CMYK", hex: "#0ea5e9" },
           { nome: "Cor-Luz RGB", hex: "#dc2626" },
           { nome: "Cores neutras", hex: "#94a3b8" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Celular = LUZ ACESA. Cor-Luz RGB.",
       },
       {
-        nome: "Arco-íris após a chuva", emoji: "🌈", fotoUrl: qArcoiris,
+        nome: "Arco-íris após a chuva",
+        emoji: "🌈",
+        fotoUrl: qArcoiris,
         corAlvo: { nome: "Espectro visível (Newton)", hex: "#f59e0b" },
         opcoes: [
           { nome: "Espectro visível (Newton)", hex: "#f59e0b" },
           { nome: "Sombra opaca", hex: "#1f2937" },
           { nome: "Ponto de fuga", hex: "#dc2626" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
-        falaAcerto: "Isso! O arco-íris é o ESPECTRO VISÍVEL da luz branca aberto por prismas de água.",
+        falaAcerto:
+          "Isso! O arco-íris é o ESPECTRO VISÍVEL da luz branca aberto por prismas de água.",
       },
     ],
   },
@@ -214,11 +331,41 @@ export const aula01: AulaArteV1 = {
     tipo: "sequenciaMistura",
     aurora: "Ordena os 5 passos pra criar sua MAÇÃ pontilhista à la Seurat.",
     passos: [
-      { id: "p1", texto: "DESENHO o contorno de uma maçã simples com lápis", emoji: "✏️", ordem: 1, fotoUrl: passo1 },
-      { id: "p2", texto: "PREENCHO a maçã com pontinhos vermelhos usando canetinha", emoji: "🔴", ordem: 2, fotoUrl: passo2 },
-      { id: "p3", texto: "ADICIONO pontinhos amarelos misturados nas áreas mais claras", emoji: "🟡", ordem: 3, fotoUrl: passo3 },
-      { id: "p4", texto: "COLOCO pontinhos azuis nas sombras (com amarelo perto forma verde óptico)", emoji: "🔵", ordem: 4, fotoUrl: passo4 },
-      { id: "p5", texto: "AFASTO o papel — os pontos se fundem magicamente em uma maçã 3D", emoji: "👁️", ordem: 5, fotoUrl: passo5 },
+      {
+        id: "p1",
+        texto: "DESENHO o contorno de uma maçã simples com lápis",
+        emoji: "✏️",
+        ordem: 1,
+        fotoUrl: passo1,
+      },
+      {
+        id: "p2",
+        texto: "PREENCHO a maçã com pontinhos vermelhos usando canetinha",
+        emoji: "🔴",
+        ordem: 2,
+        fotoUrl: passo2,
+      },
+      {
+        id: "p3",
+        texto: "ADICIONO pontinhos amarelos misturados nas áreas mais claras",
+        emoji: "🟡",
+        ordem: 3,
+        fotoUrl: passo3,
+      },
+      {
+        id: "p4",
+        texto: "COLOCO pontinhos azuis nas sombras (com amarelo perto forma verde óptico)",
+        emoji: "🔵",
+        ordem: 4,
+        fotoUrl: passo4,
+      },
+      {
+        id: "p5",
+        texto: "AFASTO o papel — os pontos se fundem magicamente em uma maçã 3D",
+        emoji: "👁️",
+        ordem: 5,
+        fotoUrl: passo5,
+      },
     ],
     falaAcerto: "Sua maçã pontilhista funciona igualzinho a uma tela de TV!",
   },
@@ -228,10 +375,26 @@ export const aula01: AulaArteV1 = {
     aurora: "Agora VOCÊ lê o diário do designer. Toca nas palavras coloridas.",
     titulo: "Diário do Designer de Cores",
     trechos: [
-      { texto: "As cores das tintas físicas se chamam", palavraDestaque: "cor-pigmento", corDestaque: "#0ea5e9" },
-      { texto: "As cores da tela do celular se chamam", palavraDestaque: "cor-luz", corDestaque: "#dc2626" },
-      { texto: "A mistura de primária + secundária vira", palavraDestaque: "terciária", corDestaque: "#a855f7" },
-      { texto: "Newton usou um prisma pra abrir o", palavraDestaque: "espectro", corDestaque: "#f59e0b" },
+      {
+        texto: "As cores das tintas físicas se chamam",
+        palavraDestaque: "cor-pigmento",
+        corDestaque: "#0ea5e9",
+      },
+      {
+        texto: "As cores da tela do celular se chamam",
+        palavraDestaque: "cor-luz",
+        corDestaque: "#dc2626",
+      },
+      {
+        texto: "A mistura de primária + secundária vira",
+        palavraDestaque: "terciária",
+        corDestaque: "#a855f7",
+      },
+      {
+        texto: "Newton usou um prisma pra abrir o",
+        palavraDestaque: "espectro",
+        corDestaque: "#f59e0b",
+      },
       { texto: "Sou designer — controlo tinta E luz!" },
     ],
   },
@@ -239,7 +402,8 @@ export const aula01: AulaArteV1 = {
   cena09_minijogo: {
     tipo: "cenaTematica",
     variante: "minijogo",
-    aurora: "🎨 O Misturador Óptico de Pixels! Toca em CADA feixe RGB antes do tempo acabar pra projetar as cores solicitadas.",
+    aurora:
+      "🎨 O Misturador Óptico de Pixels! Toca em CADA feixe RGB antes do tempo acabar pra projetar as cores solicitadas.",
     titulo: "🎨 O Misturador Óptico de Pixels",
     instrucao: "Toque em todos os feixes de luz antes do tempo acabar!",
     tempoSeg: 35,
@@ -260,13 +424,55 @@ export const aula01: AulaArteV1 = {
     aurora: "Fecha o caderno de cores. Toca em cada verbete!",
     titulo: "📓 Caderno da Engenharia das Cores",
     itens: [
-      { emoji: "🎨", rotulo: "Cor-Pigmento (CMYK)", descricao: "Ciano, Magenta, Amarelo — tintas. Misturadas = preto.", cor: "#0ea5e9", fotoUrl: vocabCmyk },
-      { emoji: "💡", rotulo: "Cor-Luz (RGB)", descricao: "Vermelho, Verde, Azul — telas. Misturadas = branco.", cor: "#dc2626", fotoUrl: vocabRgb },
-      { emoji: "🌸", rotulo: "Cores Terciárias", descricao: "Primária + secundária vizinha (vermelho-alaranjado etc.).", cor: "#a855f7", fotoUrl: vocabTerciarias },
-      { emoji: "🌈", rotulo: "Espectro Visível", descricao: "As 7 cores dentro da luz branca.", cor: "#f59e0b", fotoUrl: vocabEspectro },
-      { emoji: "🔺", rotulo: "Prisma de Newton", descricao: "Cristal triangular que revela o arco-íris dentro da luz.", cor: "#7c3aed", fotoUrl: mapaNewton },
-      { emoji: "🖌️", rotulo: "Pontilhismo (Seurat)", descricao: "Pontinhos puros que o olho mistura de longe — mistura óptica.", cor: "#ec4899", fotoUrl: mapaSeurat },
-      { emoji: "📺", rotulo: "Pixels RGB", descricao: "Sua TV faz o mesmo que Seurat — mas com luz acesa.", cor: "#16a34a", fotoUrl: mapaRgbPixels },
+      {
+        emoji: "🎨",
+        rotulo: "Cor-Pigmento (CMYK)",
+        descricao: "Ciano, Magenta, Amarelo — tintas. Misturadas = preto.",
+        cor: "#0ea5e9",
+        fotoUrl: vocabCmyk,
+      },
+      {
+        emoji: "💡",
+        rotulo: "Cor-Luz (RGB)",
+        descricao: "Vermelho, Verde, Azul — telas. Misturadas = branco.",
+        cor: "#dc2626",
+        fotoUrl: vocabRgb,
+      },
+      {
+        emoji: "🌸",
+        rotulo: "Cores Terciárias",
+        descricao: "Primária + secundária vizinha (vermelho-alaranjado etc.).",
+        cor: "#a855f7",
+        fotoUrl: vocabTerciarias,
+      },
+      {
+        emoji: "🌈",
+        rotulo: "Espectro Visível",
+        descricao: "As 7 cores dentro da luz branca.",
+        cor: "#f59e0b",
+        fotoUrl: vocabEspectro,
+      },
+      {
+        emoji: "🔺",
+        rotulo: "Prisma de Newton",
+        descricao: "Cristal triangular que revela o arco-íris dentro da luz.",
+        cor: "#7c3aed",
+        fotoUrl: mapaNewton,
+      },
+      {
+        emoji: "🖌️",
+        rotulo: "Pontilhismo (Seurat)",
+        descricao: "Pontinhos puros que o olho mistura de longe — mistura óptica.",
+        cor: "#ec4899",
+        fotoUrl: mapaSeurat,
+      },
+      {
+        emoji: "📺",
+        rotulo: "Pixels RGB",
+        descricao: "Sua TV faz o mesmo que Seurat — mas com luz acesa.",
+        cor: "#16a34a",
+        fotoUrl: mapaRgbPixels,
+      },
     ],
     falaFinal: "Terceira página do Atlas do Laboratório Óptico DESBLOQUEADA!",
   },
@@ -275,12 +481,17 @@ export const aula01: AulaArteV1 = {
     tipo: "avaliacaoFinal",
     aurora: "Missão final, designer de cores!",
     quiz: {
-      pergunta: "Que nome damos à mistura de uma cor primária com uma cor secundária vizinha no círculo cromático?",
+      pergunta:
+        "Que nome damos à mistura de uma cor primária com uma cor secundária vizinha no círculo cromático?",
       alternativas: [
         { texto: "Cor Terciária", correta: true },
         { texto: "Cor Neutra", correta: false },
+
+        { texto: "Não corresponde ao tema", correta: false },
+        { texto: "Outra resposta sem relação", correta: false },
       ],
-      feedback: "Correto! As cores terciárias enriquecem a paleta com nuances sutis — vermelho-alaranjado, azul-arroxeado, amarelo-esverdeado... Cada uma abre uma família de tons.",
+      feedback:
+        "Correto! As cores terciárias enriquecem a paleta com nuances sutis — vermelho-alaranjado, azul-arroxeado, amarelo-esverdeado... Cada uma abre uma família de tons.",
     },
     missaoFamilia:
       "🔍 Caça ao Pixel Escondido: coloquem uma gotinha de água na tela de um celular antigo OU usem uma lente de aumento potente numa tela branca acesa. Vejam a mágica em família: a tela branca é feita de milhares de barrinhas VERMELHAS, VERDES e AZUIS acesas juntas!",

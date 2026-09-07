@@ -32,7 +32,6 @@ const passo4Img = __asset_passo4Img.url;
 import __asset_passo5Img from "@/assets/arte-2ano/u4-passo5-musica.jpg.asset.json";
 const passo5Img = __asset_passo5Img.url;
 
-
 /**
  * Arte · 2º Ano · Unidade 4 · Aula 01 — "Sons do Corpo: minha primeira banda"
  * (EF15AR13 / EF15AR14 / EF15AR15)
@@ -52,10 +51,30 @@ export const aula01: AulaArteV1 = {
     titulo: "Orquestra do Corpo",
     instrucao: "Toque em cada parte para descobrir seu som",
     itens: [
-      { emoji: "👏", rotulo: "Palmas", descricao: "Um som ALTO e SECO. Perfeito pra marcar o ritmo!", cor: "#f97316" },
-      { emoji: "🦶", rotulo: "Pé no chão", descricao: "Som GRAVE, como um TAMBOR gigante.", cor: "#78350f" },
-      { emoji: "🫰", rotulo: "Estalo de dedos", descricao: "Som AGUDINHO e curtinho, tipo pipoca estourando.", cor: "#eab308" },
-      { emoji: "🗣️", rotulo: "Voz cantando", descricao: "O instrumento MAIS BONITO — pode ser grave, agudo, alto ou baixo.", cor: "#dc2626" },
+      {
+        emoji: "👏",
+        rotulo: "Palmas",
+        descricao: "Um som ALTO e SECO. Perfeito pra marcar o ritmo!",
+        cor: "#f97316",
+      },
+      {
+        emoji: "🦶",
+        rotulo: "Pé no chão",
+        descricao: "Som GRAVE, como um TAMBOR gigante.",
+        cor: "#78350f",
+      },
+      {
+        emoji: "🫰",
+        rotulo: "Estalo de dedos",
+        descricao: "Som AGUDINHO e curtinho, tipo pipoca estourando.",
+        cor: "#eab308",
+      },
+      {
+        emoji: "🗣️",
+        rotulo: "Voz cantando",
+        descricao: "O instrumento MAIS BONITO — pode ser grave, agudo, alto ou baixo.",
+        cor: "#dc2626",
+      },
     ],
     falaFinal: "O corpo é a primeira ORQUESTRA que a gente aprende a tocar!",
   },
@@ -69,6 +88,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Rápido e animado", correta: true },
           { texto: "Devagar e triste", correta: false },
+
+          { texto: "Não combina com a proposta", correta: false },
+          { texto: "Outra ação sem relação", correta: false },
         ],
         feedbackAcerto: "Isso! Palmas rápidas = ritmo animado, tipo festa.",
         feedbackErro: "Devagar deixa triste. Rápido deixa ANIMADO.",
@@ -78,6 +100,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Estalo de dedos", correta: false },
           { texto: "Pé batendo no chão", correta: true },
+
+          { texto: "Não combina com a proposta", correta: false },
+          { texto: "Outra ação sem relação", correta: false },
         ],
         feedbackAcerto: "Sim! Pé no chão = som grave, como bumbo.",
         feedbackErro: "Estalo é agudo (fininho). Pé no chão é grave (grosso).",
@@ -87,6 +112,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Um som ALTO", correta: false },
           { texto: "Um som BAIXO", correta: true },
+
+          { texto: "Não combina com a proposta", correta: false },
+          { texto: "Outra ação sem relação", correta: false },
         ],
         feedbackAcerto: "Perfeito! Sussurro é o som mais baixinho que a voz faz.",
         feedbackErro: "Alto é gritar. Sussurro é BAIXO, quase segredo.",
@@ -98,16 +126,41 @@ export const aula01: AulaArteV1 = {
     tipo: "vocabularioCards",
     aurora: "Palavras do músico do corpo — toca em cada uma!",
     cards: [
-      { termo: "Ritmo", definicao: "O 'tum-tum' que se repete, como o coração batendo.", emoji: "❤️", cor: "#dc2626", fotoUrl: vocabRitmo },
-      { termo: "Grave", definicao: "Som GROSSO, fundo. Como o pai falando ou um tambor grande.", emoji: "🥁", cor: "#78350f", fotoUrl: vocabGrave },
-      { termo: "Agudo", definicao: "Som FININHO, alto. Como um passarinho ou um assobio.", emoji: "🎵", cor: "#eab308", fotoUrl: vocabAgudo },
-      { termo: "Percussão", definicao: "Fazer música BATENDO em coisas — palmas, tambor, o corpo.", emoji: "🥁", cor: "#a855f7", fotoUrl: vocabPercussao },
+      {
+        termo: "Ritmo",
+        definicao: "O 'tum-tum' que se repete, como o coração batendo.",
+        emoji: "❤️",
+        cor: "#dc2626",
+        fotoUrl: vocabRitmo,
+      },
+      {
+        termo: "Grave",
+        definicao: "Som GROSSO, fundo. Como o pai falando ou um tambor grande.",
+        emoji: "🥁",
+        cor: "#78350f",
+        fotoUrl: vocabGrave,
+      },
+      {
+        termo: "Agudo",
+        definicao: "Som FININHO, alto. Como um passarinho ou um assobio.",
+        emoji: "🎵",
+        cor: "#eab308",
+        fotoUrl: vocabAgudo,
+      },
+      {
+        termo: "Percussão",
+        definicao: "Fazer música BATENDO em coisas — palmas, tambor, o corpo.",
+        emoji: "🥁",
+        cor: "#a855f7",
+        fotoUrl: vocabPercussao,
+      },
     ],
   },
 
   cena04_leituraGuiada: {
     tipo: "leituraTintas",
-    aurora: "Vou te contar sobre o STOMP — um grupo que faz música só com o corpo e coisas do dia a dia.",
+    aurora:
+      "Vou te contar sobre o STOMP — um grupo que faz música só com o corpo e coisas do dia a dia.",
     paragrafos: [
       "Em um lugar chamado Inglaterra, um grupo chamado STOMP criou música usando VASSOURAS, LATAS, PALMAS e pés!",
       "Eles descobriram que qualquer objeto pode virar instrumento se você bater no ritmo certo.",
@@ -115,10 +168,34 @@ export const aula01: AulaArteV1 = {
       "Isso mostra que a música não precisa de instrumento caro. Ela pode nascer do SEU CORPO agora mesmo!",
     ],
     pigmentos: [
-      { nome: "Batida do peito", hex: "#dc2626", fonte: "Grave e forte", emoji: "🫁", fotoUrl: pigPeito },
-      { nome: "Estalo boca", hex: "#eab308", fonte: "Agudo e curto", emoji: "👄", fotoUrl: pigBoca },
-      { nome: "Tapa na coxa", hex: "#f97316", fonte: "Médio e seco", emoji: "🦵", fotoUrl: pigCoxa },
-      { nome: "Voz vibrando", hex: "#a855f7", fonte: "Diversos tons", emoji: "🗣️", fotoUrl: pigVoz },
+      {
+        nome: "Batida do peito",
+        hex: "#dc2626",
+        fonte: "Grave e forte",
+        emoji: "🫁",
+        fotoUrl: pigPeito,
+      },
+      {
+        nome: "Estalo boca",
+        hex: "#eab308",
+        fonte: "Agudo e curto",
+        emoji: "👄",
+        fotoUrl: pigBoca,
+      },
+      {
+        nome: "Tapa na coxa",
+        hex: "#f97316",
+        fonte: "Médio e seco",
+        emoji: "🦵",
+        fotoUrl: pigCoxa,
+      },
+      {
+        nome: "Voz vibrando",
+        hex: "#a855f7",
+        fonte: "Diversos tons",
+        emoji: "🗣️",
+        fotoUrl: pigVoz,
+      },
     ],
   },
 
@@ -131,6 +208,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Barbatuques", correta: true },
           { texto: "Galinha Pintadinha", correta: false },
+
+          { texto: "Não combina com a proposta", correta: false },
+          { texto: "Outra ação sem relação", correta: false },
         ],
         feedbackAcerto: "Isso! Barbatuques é a orquestra do corpo brasileira.",
         feedbackErro: "Galinha Pintadinha usa instrumentos. Barbatuques só usa o corpo.",
@@ -140,6 +220,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Fazer música batendo em coisas", correta: true },
           { texto: "Cantar em segredo", correta: false },
+
+          { texto: "Não combina com a proposta", correta: false },
+          { texto: "Outra ação sem relação", correta: false },
         ],
         feedbackAcerto: "Certo! Per-CUSSÃO vem de PERCUTIR = bater.",
         feedbackErro: "Percussão é BATER. Cantar em segredo é sussurrar.",
@@ -149,6 +232,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Fino, como assobio de passarinho", correta: true },
           { texto: "Grosso, como trovão", correta: false },
+
+          { texto: "Não combina com a proposta", correta: false },
+          { texto: "Outra ação sem relação", correta: false },
         ],
         feedbackAcerto: "Sim! Agudo = FINO. Grave = grosso.",
         feedbackErro: "Trovão é GRAVE. Agudo é FINO como assobio.",
@@ -161,32 +247,44 @@ export const aula01: AulaArteV1 = {
     aurora: "Cada animal faz um tipo de som. Descobre qual combina!",
     animais: [
       {
-        nome: "Leão rugindo", emoji: "🦁", fotoUrl: animalLeao,
+        nome: "Leão rugindo",
+        emoji: "🦁",
+        fotoUrl: animalLeao,
         corAlvo: { nome: "Grave e potente", hex: "#78350f" },
         opcoes: [
           { nome: "Agudo e fino", hex: "#eab308" },
           { nome: "Grave e potente", hex: "#78350f" },
           { nome: "Suave sussurro", hex: "#f472b6" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Rugido do leão é GRAVE e faz a terra tremer.",
       },
       {
-        nome: "Passarinho", emoji: "🐦", fotoUrl: animalPassarinho,
+        nome: "Passarinho",
+        emoji: "🐦",
+        fotoUrl: animalPassarinho,
         corAlvo: { nome: "Agudo e fino", hex: "#eab308" },
         opcoes: [
           { nome: "Grave e potente", hex: "#78350f" },
           { nome: "Agudo e fino", hex: "#eab308" },
           { nome: "Ritmo de batida", hex: "#dc2626" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Passarinho canta AGUDO, um assobio bem fino.",
       },
       {
-        nome: "Elefante pisando", emoji: "🐘", fotoUrl: animalElefante,
+        nome: "Elefante pisando",
+        emoji: "🐘",
+        fotoUrl: animalElefante,
         corAlvo: { nome: "Grave e potente", hex: "#78350f" },
         opcoes: [
           { nome: "Agudo e fino", hex: "#eab308" },
           { nome: "Suave sussurro", hex: "#f472b6" },
           { nome: "Grave e potente", hex: "#78350f" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Elefante = som gravíssimo, o mais fundo da floresta.",
       },
@@ -201,7 +299,13 @@ export const aula01: AulaArteV1 = {
       { id: "p2", texto: "Bato NA COXA (1x)", emoji: "🦵", ordem: 2, fotoUrl: passo2Img },
       { id: "p3", texto: "ESTALO os dedos (1x)", emoji: "🫰", ordem: 3, fotoUrl: passo3Img },
       { id: "p4", texto: "PISO no chão (1x)", emoji: "🦶", ordem: 4, fotoUrl: passo4Img },
-      { id: "p5", texto: "Repito tudo mais rápido — virou música!", emoji: "🎶", ordem: 5, fotoUrl: passo5Img },
+      {
+        id: "p5",
+        texto: "Repito tudo mais rápido — virou música!",
+        emoji: "🎶",
+        ordem: 5,
+        fotoUrl: passo5Img,
+      },
     ],
     falaAcerto: "Bravo! Você criou seu PRIMEIRO ritmo de percussão corporal.",
   },
@@ -214,7 +318,11 @@ export const aula01: AulaArteV1 = {
       { texto: "Hoje minhas palmas viraram", palavraDestaque: "ritmo", corDestaque: "#dc2626" },
       { texto: "O pé no chão fez um som", palavraDestaque: "grave", corDestaque: "#78350f" },
       { texto: "O estalo dos dedos foi bem", palavraDestaque: "agudo", corDestaque: "#eab308" },
-      { texto: "Descobri que meu corpo é um instrumento de", palavraDestaque: "percussão", corDestaque: "#a855f7" },
+      {
+        texto: "Descobri que meu corpo é um instrumento de",
+        palavraDestaque: "percussão",
+        corDestaque: "#a855f7",
+      },
       { texto: "Amanhã vou ensinar meu irmão a tocar!" },
     ],
   },
@@ -247,7 +355,12 @@ export const aula01: AulaArteV1 = {
       { emoji: "🦶", rotulo: "Pé no chão", descricao: "Som GRAVE, como bumbo.", cor: "#78350f" },
       { emoji: "🫰", rotulo: "Estalo", descricao: "Som AGUDO e curtinho.", cor: "#eab308" },
       { emoji: "❤️", rotulo: "Ritmo", descricao: "A batida que se repete.", cor: "#dc2626" },
-      { emoji: "🎵", rotulo: "Agudo/Grave", descricao: "Agudo = fino. Grave = grosso.", cor: "#a855f7" },
+      {
+        emoji: "🎵",
+        rotulo: "Agudo/Grave",
+        descricao: "Agudo = fino. Grave = grosso.",
+        cor: "#a855f7",
+      },
       { emoji: "🥁", rotulo: "Percussão", descricao: "Fazer música batendo.", cor: "#0ea5e9" },
     ],
     falaFinal: "Agora você é maestro do corpo!",
@@ -257,12 +370,17 @@ export const aula01: AulaArteV1 = {
     tipo: "avaliacaoFinal",
     aurora: "Última missão, músico corporal!",
     quiz: {
-      pergunta: "Como se chama o grupo brasileiro que faz MÚSICA usando SÓ o corpo (palmas, peito, boca, coxas)?",
+      pergunta:
+        "Como se chama o grupo brasileiro que faz MÚSICA usando SÓ o corpo (palmas, peito, boca, coxas)?",
       alternativas: [
         { texto: "Barbatuques", correta: true },
         { texto: "Fundo de Quintal", correta: false },
+
+        { texto: "Não combina com a proposta", correta: false },
+        { texto: "Outra ação sem relação", correta: false },
       ],
-      feedback: "Isso! Barbatuques provou que dá pra fazer música linda sem nenhum instrumento caro.",
+      feedback:
+        "Isso! Barbatuques provou que dá pra fazer música linda sem nenhum instrumento caro.",
     },
     missaoFamilia:
       "🥁 Banda da Sala: criem em família um RITMO de 4 tempos usando SÓ o corpo. Ex: palma-palma-coxa-pé. Gravem em vídeo e apresentem pra vovó!",

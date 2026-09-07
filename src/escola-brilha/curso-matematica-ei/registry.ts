@@ -1,7 +1,13 @@
 import type { CursoEI, AulaEI } from "../curso-portugues-ei/types";
 import { cursoMatematicaMaternal } from "./matematica-maternal";
+import { cursoMatematicaPre1 } from "./matematica-pre1";
+import { cursoMatematicaPre2 } from "./matematica-pre2";
 
-export const cursosMatematicaEI: CursoEI[] = [cursoMatematicaMaternal];
+export const cursosMatematicaEI: CursoEI[] = [
+  cursoMatematicaMaternal,
+  cursoMatematicaPre1,
+  cursoMatematicaPre2,
+];
 
 export function getCursoMatEI(slug: string): CursoEI | undefined {
   return cursosMatematicaEI.find((c) => c.slug === slug);

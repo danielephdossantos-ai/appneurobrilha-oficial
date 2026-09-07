@@ -1,4 +1,9 @@
 import { describe, it, expect, vi } from "vitest";
+
+vi.mock("@/database/supabase/client", () => ({
+  supabase: { from: vi.fn() },
+}));
+
 import { SyncEngine } from "./sync-engine";
 
 describe("Sync Engine", () => {

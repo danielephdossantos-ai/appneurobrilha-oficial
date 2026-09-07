@@ -11,7 +11,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-vida-morte",
   titulo: "Vida, Morte e o Depois",
   iconeTrilha: "🕯️",
-  bncc: ["EF09ER02"],
+  bncc: ["EF09ER04"],
   duracaoMin: 22,
 
   cena01_motivacao: {

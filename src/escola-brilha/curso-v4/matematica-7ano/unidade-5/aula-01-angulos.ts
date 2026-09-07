@@ -5,7 +5,7 @@ export const aula01_angulos: AulaV4 = {
   slug: "u5-01-angulos",
   titulo: "A Medida do Giro",
   iconeTrilha: "📐",
-  bncc: ["EF07MA23", "EF07MA24"],
+  bncc: ["EF07MA23"],
   duracaoMin: 30,
   metodologias: ["skemp"],
 

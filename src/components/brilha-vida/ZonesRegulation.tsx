@@ -74,7 +74,7 @@ const ZONES: Record<
     ferramentas: [
       { emoji: "🌬️", nome: "Respiração 4-4-4", como: "Puxa 4s, segura 4s, solta 4s." },
       { emoji: "🔢", nome: "Contar até 10", como: "Um-dois-três... devagar até dez." },
-      { emoji: "🧊", nome: "Segurar algo gelado", como: "Cubo de gelo na mão traz de volta o foco." },
+      { emoji: "💧", nome: "Beber água", como: "Tome alguns goles de água devagar." },
       { emoji: "🗣️", nome: "Falar o que sinto", como: "Dizer alto o que está me incomodando." },
     ],
   },
@@ -127,7 +127,7 @@ export function ZonesRegulation({ onClose }: { onClose: () => void }) {
       <p className="text-sm text-slate-600 font-medium mb-6 text-center max-w-md">
         {etapa === "identificar" && "Em qual zona você está agora?"}
         {etapa === "gatilho" && "O que fez você entrar nessa zona?"}
-        {etapa === "ferramenta" && "Escolha uma ferramenta pra voltar pra verde."}
+        {etapa === "ferramenta" && "Escolha uma ação que possa ajudar seu corpo agora."}
       </p>
 
       {/* Seleção da zona */}
@@ -154,7 +154,7 @@ export function ZonesRegulation({ onClose }: { onClose: () => void }) {
                 style={{ background: zz.cor }}
               >
                 <div className="text-lg mb-1">{zz.nome}</div>
-                <div className="text-xs font-medium opacity-90 leading-snug">{zz.descricao}</div>
+                <div className="text-base font-medium opacity-95 leading-snug">{zz.descricao}</div>
               </button>
             );
           })}
@@ -265,10 +265,8 @@ export function ZonesRegulation({ onClose }: { onClose: () => void }) {
         </button>
       </div>
 
-      <div className="mt-4 text-[10px] text-slate-500 font-medium text-center max-w-md">
-        Base clínica: Zones of Regulation® (Leah M. Kuypers, 2011). Currículo
-        cognitivo-comportamental de autorregulação amplamente usado em terapia
-        ocupacional e educação especial.
+      <div className="mt-4 text-sm text-slate-600 font-medium text-center max-w-md">
+        As cores ajudam a conversar sobre energia e emoções. Nenhuma cor é errada e a meta não é ficar sempre na mesma cor.
       </div>
     </div>
   );

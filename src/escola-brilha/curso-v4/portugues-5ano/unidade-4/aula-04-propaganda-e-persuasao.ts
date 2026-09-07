@@ -20,7 +20,7 @@ export const aula4: AulaPortuguesV4 = {
   slug: "aula-04-propaganda-e-persuasao",
   titulo: "Propaganda e persuasão",
   iconeTrilha: "📺",
-  bncc: ["EF05LP17"],
+  bncc: ["EF35LP15", "EF15LP01", "EF15LP04"],
   duracaoMin: 25,
 
   momento01_motivacao: {

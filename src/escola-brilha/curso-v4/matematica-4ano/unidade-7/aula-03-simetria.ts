@@ -24,7 +24,7 @@ export const aula03_simetria: AulaV4 = {
   momento03_descoberta: {
     perguntaGuia: "Todo polígono é simétrico?",
     pista: "Depende dos lados.",
-    revelacao: "Só figuras REGULARES (lados iguais) têm muitos eixos. Um triângulo qualquer pode não ter nenhum.",
+    revelacao: "Não. Algumas figuras têm um ou mais eixos de simetria e outras não têm nenhum. Para conferir, dobre ou reflita a figura sobre a linha proposta e veja se as partes coincidem.",
   },
   momento04_explicacao: {
     titulo: "Achar eixos",
@@ -32,7 +32,7 @@ export const aula03_simetria: AulaV4 = {
       {
         texto: "Quadrado: 4 eixos (2 pelos lados, 2 pelas diagonais).",
         exemploReal: {
-          contexto: "Papel dobrado 4 vezes.",
+          contexto: "Teste separadamente as dobras vertical, horizontal e as duas diagonais.",
           destaque: "4 eixos.",
           visualMat: { tipo: "simetria", forma: "quadrado", eixos: ["vertical", "horizontal", "diagonal1", "diagonal2"] },
         },
@@ -97,13 +97,13 @@ export const aula03_simetria: AulaV4 = {
     },
   },
   momento09_revisao: {
-    pontos: ["Eixo = linha que divide em 2 partes IGUAIS.", "Figura regular tem vários eixos."],
+    pontos: ["Eixo de simetria é a linha sobre a qual as duas partes coincidem por reflexão.", "A quantidade de eixos depende da forma da figura."],
   },
   momento10_avaliacao: {
     perguntas: [
       { pergunta: "Quadrado: eixos?", opcoes: ["4", "2", "1"], correta: 0, feedbackAcerto: "🎉 4.", feedbackErro: "Lados médios + diagonais." },
       { pergunta: "Círculo: eixos?", opcoes: ["Infinitos", "1", "4"], correta: 0, feedbackAcerto: "🎉 Infinitos.", feedbackErro: "Toda reta pelo centro." },
-      { pergunta: "Letra A: eixos?", opcoes: ["1", "2", "0"], correta: 0, feedbackAcerto: "🎉 1 (vertical).", feedbackErro: "Espelhando na vertical, A fica igual." },
+      { pergunta: "Retângulo que não é quadrado: eixos?", opcoes: ["2", "4", "1"], correta: 0, feedbackAcerto: "🎉 2.", feedbackErro: "Possui os eixos vertical e horizontal." },
     ],
   },
   momento11_missaoFamilia: {

@@ -13,7 +13,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-direitos-sociais",
   titulo: "A Conquista dos Direitos Sociais e Políticos",
   iconeTrilha: "✊",
-  bncc: ["EF05HI04", "EF05HI05"],
+  bncc: ["EF05HI05"],
   duracaoMin: 25,
 
   cena01_motivacao: {
@@ -34,6 +34,8 @@ export const aula01: AulaGeoV1 = {
     opcoes: [
       { id: "poucos", titulo: "Só homens ricos e alfabetizados", subtitulo: "mulheres, pobres e analfabetos ficavam de fora", emoji: "🎩", cor: "from-amber-600 to-orange-800", fotoUrl: imgUrna },
       { id: "todos", titulo: "Todos os brasileiros já votavam", subtitulo: "voto universal desde a Independência", emoji: "🗳️", cor: "from-slate-500 to-slate-700", fotoUrl: imgSuf },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "poucos",
     feedbackAcerto: "Correto. Voto era CENSITÁRIO: só homens ricos, alfabetizados. Menos de 3% da população votava.",
@@ -59,10 +61,10 @@ export const aula01: AulaGeoV1 = {
     instrucao: "Toque nos pontos da linha do tempo",
     mapaUrl: imgTimeline,
     pontos: [
-      { id: "1891", x: 12, y: 30, emoji: "🎩", cor: "from-amber-600 to-orange-800", fotoUrl: imgConst, titulo: "1. 1891 — VOTO CENSITÁRIO", texto: "Só homens ricos e alfabetizados votavam. Menos de 3% da população brasileira." },
+      { id: "1891", x: 12, y: 30, emoji: "🎩", cor: "from-amber-600 to-orange-800", fotoUrl: imgConst, titulo: "1. 1891 — VOTO MUITO RESTRITO", texto: "A Constituição retirou o critério explícito de renda, mas manteve exclusões: mulheres e pessoas não alfabetizadas, entre outros grupos, não votavam." },
       { id: "1932", x: 40, y: 45, emoji: "👩", cor: "from-emerald-600 to-teal-800", fotoUrl: imgSuf, titulo: "2. 1932 — VOTO FEMININO", texto: "Movimento sufragista conquista o direito ao voto feminino. Bertha Lutz foi uma das principais líderes." },
       { id: "1943", x: 65, y: 60, emoji: "📘", cor: "from-sky-600 to-blue-800", fotoUrl: imgCarteira, titulo: "3. 1943 — CLT", texto: "Criação da CLT (Consolidação das Leis do Trabalho). Carteira de Trabalho, salário mínimo, 8 horas por dia, férias." },
-      { id: "1988", x: 90, y: 75, emoji: "🇧🇷", cor: "from-emerald-600 to-teal-800", fotoUrl: imgConst, titulo: "4. 1988 — VOTO UNIVERSAL", texto: "Constituição Cidadã garante voto pra TODOS: alfabetizados e analfabetos, dos 16 aos 70 anos." },
+      { id: "1988", x: 90, y: 75, emoji: "🇧🇷", cor: "from-emerald-600 to-teal-800", fotoUrl: imgConst, titulo: "4. 1988 — CIDADANIA AMPLIADA", texto: "A Constituição garantiu voto às pessoas não alfabetizadas. O voto é facultativo aos 16 e 17 anos e após os 70; obrigatório, em regra, dos 18 aos 70." },
     ],
     falaFinal: "1891 → 1932 → 1943 → 1988. Cada década ampliou os direitos de mais gente.",
   },

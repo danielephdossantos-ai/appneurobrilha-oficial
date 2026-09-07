@@ -14,7 +14,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-cidadania-global",
   titulo: "Cidadania Global e Meio Ambiente",
   iconeTrilha: "🌍",
-  bncc: ["EF05HI09", "EF05HI10"],
+  bncc: [],
   duracaoMin: 25,
 
   cena01_motivacao: {
@@ -35,6 +35,8 @@ export const aula01: AulaGeoV1 = {
     opcoes: [
       { id: "global", titulo: "Não. Afeta o planeta todo", subtitulo: "fumaça, oceano e clima são globais", emoji: "🌍", cor: "from-emerald-600 to-teal-800", fotoUrl: imgTerra },
       { id: "local", titulo: "Sim. Fica só naquele país", subtitulo: "cada um resolve o seu problema", emoji: "🗺️", cor: "from-slate-500 to-slate-700", fotoUrl: imgSol },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "global",
     feedbackAcerto: "Correto. Ar, oceanos e clima NÃO têm fronteira. Por isso os países precisam cooperar internacionalmente.",
@@ -60,7 +62,7 @@ export const aula01: AulaGeoV1 = {
     instrucao: "Toque nos pontos do cartaz",
     mapaUrl: imgOds,
     pontos: [
-      { id: "o1", x: 15, y: 20, emoji: "🚫", cor: "from-red-600 to-red-800", fotoUrl: imgOds, titulo: "ODS 1 — ERRADICAR A POBREZA", texto: "Acabar com a pobreza extrema no mundo até 2030. Metade da meta já foi cumprida globalmente." },
+      { id: "o1", x: 15, y: 20, emoji: "🚫", cor: "from-red-600 to-red-800", fotoUrl: imgOds, titulo: "ODS 1 — ERRADICAR A POBREZA", texto: "Objetivo de enfrentar a pobreza em todas as suas formas, com metas e indicadores acompanhados internacionalmente." },
       { id: "o4", x: 60, y: 20, emoji: "📚", cor: "from-red-600 to-red-800", fotoUrl: imgOds, titulo: "ODS 4 — EDUCAÇÃO DE QUALIDADE", texto: "Educação inclusiva, equitativa e de qualidade pra TODAS as crianças, jovens e adultos." },
       { id: "o7", x: 32, y: 47, emoji: "☀️", cor: "from-yellow-600 to-yellow-800", fotoUrl: imgSol, titulo: "ODS 7 — ENERGIA LIMPA", texto: "Energia acessível, renovável e limpa. Solar, eólica, hidrelétrica. Menos carvão e petróleo." },
       { id: "o13", x: 47, y: 63, emoji: "🌡️", cor: "from-emerald-600 to-teal-800", fotoUrl: imgTerra, titulo: "ODS 13 — AÇÃO CLIMÁTICA", texto: "Combater a mudança climática. Acordo de Paris (2015) une quase 200 países pra reduzir gases poluentes." },

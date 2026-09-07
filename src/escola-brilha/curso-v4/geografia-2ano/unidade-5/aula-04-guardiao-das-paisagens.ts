@@ -27,7 +27,7 @@ export const aula04: AulaPortuguesV4 = {
   slug: "aula-04-guardiao-das-paisagens",
   titulo: "Guardião das Paisagens",
   iconeTrilha: "🏆",
-  bncc: ["EF02GE05"],
+  bncc: [],
   duracaoMin: 15,
 
   momento01_motivacao: {
@@ -64,18 +64,16 @@ export const aula04: AulaPortuguesV4 = {
       pergunta: "O que essa missão FINAL vai celebrar?",
       hipoteses: [
         {
-          texto:
-            "Que a paisagem MUDA e a gente pode CUIDAR dela ao mesmo tempo.",
+          texto: "Que a paisagem MUDA e a gente pode CUIDAR dela ao mesmo tempo.",
           imagemUrl: cidade,
         },
         { texto: "Que árvore vira sorvete.", imagemUrl: arvore },
         { texto: "Que carro voa sozinho.", imagemUrl: rua },
+        { texto: "Sobre outra possibilidade relacionada ao tema.", imagemUrl: cidade },
       ],
       respostaCerta: 0,
-      feedbackAcerto:
-        "🎉 Isso! A gente PODE transformar, mas com CUIDADO.",
-      feedbackErro:
-        "Olhe as pistas: antiga, nova, preservação. A missão fala em MUDAR e CUIDAR.",
+      feedbackAcerto: "🎉 Isso! A gente PODE transformar, mas com CUIDADO.",
+      feedbackErro: "Olhe as pistas: antiga, nova, preservação. A missão fala em MUDAR e CUIDAR.",
     },
   },
 
@@ -93,8 +91,7 @@ export const aula04: AulaPortuguesV4 = {
         palavra: "sustentável",
         explicacao:
           "É quando a gente USA a natureza sem ACABAR com ela. Plantar, reciclar e economizar água são atitudes SUSTENTÁVEIS.",
-        exemplo:
-          "A cidade SUSTENTÁVEL tem árvore, praça e reciclagem.",
+        exemplo: "A cidade SUSTENTÁVEL tem árvore, praça e reciclagem.",
         imagemUrl: planta,
       },
       {
@@ -112,17 +109,8 @@ export const aula04: AulaPortuguesV4 = {
     leitura: {
       titulo: "O bairro do Brilha",
       imagemUrl: cidade,
-      legendaImagem:
-        "Um bairro que MUDOU e aprendeu a se CUIDAR ao mesmo tempo.",
-      destacar: [
-        "árvores",
-        "prédios",
-        "chuva",
-        "vento",
-        "moradores",
-        "reciclagem",
-        "praça",
-      ],
+      legendaImagem: "Um bairro que MUDOU e aprendeu a se CUIDAR ao mesmo tempo.",
+      destacar: ["árvores", "prédios", "chuva", "vento", "moradores", "reciclagem", "praça"],
       paragrafos: [
         "O bairro do Brilha já foi cheio de ÁRVORES. Hoje tem PRÉDIOS, avenidas e semáforo. A NATUREZA também age: quando a CHUVA é forte, alaga; quando o VENTO é forte, cai galho.",
         "As PESSOAS já sabem: pode CONSTRUIR, mas precisa CUIDAR. Fizeram uma PRAÇA arborizada no meio dos prédios.",
@@ -137,15 +125,10 @@ export const aula04: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "O que o bairro tinha ANTIGAMENTE?",
-        opcoes: [
-          "Só prédios altos",
-          "Cheio de árvores",
-          "Só rios e lagos",
-        ],
+        opcoes: ["Só prédios altos", "Cheio de árvores", "Só rios e lagos", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 ÁRVORES.",
-        feedbackErro:
-          "O texto diz: 'já foi cheio de ÁRVORES'.",
+        feedbackErro: "O texto diz: 'já foi cheio de ÁRVORES'.",
         ondeEstaNoTexto: "…já foi cheio de ÁRVORES…",
       },
       {
@@ -154,13 +137,13 @@ export const aula04: AulaPortuguesV4 = {
           "Constrói prédio",
           "Alaga com chuva e derruba galho com vento",
           "Coloca lixeiras",
+          "Outra possibilidade",
         ],
         correta: 1,
         feedbackAcerto: "🎉 ALAGA e DERRUBA galho.",
         feedbackErro:
           "O texto diz: 'quando a CHUVA é forte, alaga; quando o VENTO é forte, cai galho'.",
-        ondeEstaNoTexto:
-          "…CHUVA é forte, alaga; quando o VENTO é forte, cai galho…",
+        ondeEstaNoTexto: "…CHUVA é forte, alaga; quando o VENTO é forte, cai galho…",
       },
       {
         pergunta: "O que as PESSOAS fizeram pra CUIDAR?",
@@ -168,13 +151,12 @@ export const aula04: AulaPortuguesV4 = {
           "Praça arborizada + reciclagem + mutirão",
           "Cortaram tudo",
           "Jogaram lixo no rio",
+          "Outra possibilidade",
         ],
         correta: 0,
         feedbackAcerto: "🎉 PRAÇA + RECICLAGEM + MUTIRÃO.",
-        feedbackErro:
-          "O texto diz: 'PRAÇA arborizada… LIXEIRAS DE RECICLAGEM… MUTIRÃO'.",
-        ondeEstaNoTexto:
-          "…PRAÇA arborizada… LIXEIRAS DE RECICLAGEM… MUTIRÃO…",
+        feedbackErro: "O texto diz: 'PRAÇA arborizada… LIXEIRAS DE RECICLAGEM… MUTIRÃO'.",
+        ondeEstaNoTexto: "…PRAÇA arborizada… LIXEIRAS DE RECICLAGEM… MUTIRÃO…",
       },
       {
         pergunta: "O que faz um GUARDIÃO(Ã) da paisagem?",
@@ -182,11 +164,11 @@ export const aula04: AulaPortuguesV4 = {
           "Deixa o bairro mudar SEM cuidar",
           "MUDA e CUIDA ao mesmo tempo",
           "Nunca deixa nada mudar",
+          "Outra possibilidade",
         ],
         correta: 1,
         feedbackAcerto: "🎉 MUDA e CUIDA junto.",
-        feedbackErro:
-          "O texto diz: 'MUDA (transformação), mas continua sendo um bom LUGAR'.",
+        feedbackErro: "O texto diz: 'MUDA (transformação), mas continua sendo um bom LUGAR'.",
         ondeEstaNoTexto: "…MUDA…, mas continua sendo um bom LUGAR…",
       },
     ],
@@ -197,58 +179,56 @@ export const aula04: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "🌧️ Rua alagou depois de chuva forte.",
-        opcoes: ["Natureza", "Pessoas cuidando", "Robô"],
-        opcoesImagens: [chuva, funcionarioLimpeza, escola],
+        opcoes: ["Natureza", "Pessoas cuidando", "Robô", "Outra possibilidade"],
+        opcoesImagens: [chuva, funcionarioLimpeza, escola, chuva],
         correta: 0,
         feedbackAcerto: "🎉 NATUREZA.",
-        feedbackErro:
-          "CHUVA forte que alaga é NATUREZA agindo.",
+        feedbackErro: "CHUVA forte que alaga é NATUREZA agindo.",
       },
       {
         pergunta: "♻️ Vizinhos SEPARARAM o lixo em lixeiras coloridas.",
-        opcoes: ["Natureza", "Pessoas CUIDANDO", "Vento"],
-        opcoesImagens: [chuva, lixeiraReciclagem, vento],
+        opcoes: ["Natureza", "Pessoas CUIDANDO", "Vento", "Outra possibilidade"],
+        opcoesImagens: [chuva, lixeiraReciclagem, vento, chuva],
         correta: 1,
         feedbackAcerto: "🎉 PESSOAS CUIDANDO.",
-        feedbackErro:
-          "RECICLAR é atitude de PESSOAS CUIDANDO.",
+        feedbackErro: "RECICLAR é atitude de PESSOAS CUIDANDO.",
       },
       {
         pergunta: "🌿 Escola PLANTOU 10 mudas na entrada.",
-        opcoes: ["Natureza sozinha", "Pessoas cuidando", "Poluição"],
-        opcoesImagens: [chuva, planta, ponte],
+        opcoes: ["Natureza sozinha", "Pessoas cuidando", "Poluição", "Outra possibilidade"],
+        opcoesImagens: [chuva, planta, ponte, chuva],
         correta: 1,
         feedbackAcerto: "🎉 PESSOAS CUIDANDO.",
-        feedbackErro:
-          "PLANTAR muda é PESSOAS cuidando da natureza.",
+        feedbackErro: "PLANTAR muda é PESSOAS cuidando da natureza.",
       },
       {
         pergunta: "🌬️ Vento derrubou uma árvore muito velha.",
-        opcoes: ["Natureza", "Pessoas destruindo", "Ninguém"],
-        opcoesImagens: [vento, funcionarioLimpeza, arvore],
+        opcoes: ["Natureza", "Pessoas destruindo", "Ninguém", "Outra possibilidade"],
+        opcoesImagens: [vento, funcionarioLimpeza, arvore, vento],
         correta: 0,
         feedbackAcerto: "🎉 NATUREZA (vento).",
-        feedbackErro:
-          "Vento é ação da NATUREZA.",
+        feedbackErro: "Vento é ação da NATUREZA.",
       },
     ],
   },
 
   momento07_sequencia: {
-    instrucao:
-      "Ordene a rotina do GUARDIÃO(Ã) num dia (do começo → fim).",
+    instrucao: "Ordene a rotina do GUARDIÃO(Ã) num dia (do começo → fim).",
     bloco: {
       instrucao: "Do primeiro → último passo.",
       itens: [
         { id: "s1", texto: "1) De manhã: FECHAR a torneira ao escovar.", imagemUrl: rio },
-        { id: "s2", texto: "2) Ir pra escola: JOGAR papel na LIXEIRA.", imagemUrl: lixeiraReciclagem },
+        {
+          id: "s2",
+          texto: "2) Ir pra escola: JOGAR papel na LIXEIRA.",
+          imagemUrl: lixeiraReciclagem,
+        },
         { id: "s3", texto: "3) Na aula: aprender a RECICLAR.", imagemUrl: escola },
         { id: "s4", texto: "4) De tarde: AJUDAR a regar a plantinha.", imagemUrl: planta },
         { id: "s5", texto: "5) De noite: APAGAR a luz que não usa.", imagemUrl: familia },
       ],
       ordemCerta: ["s1", "s2", "s3", "s4", "s5"],
-      feedbackAcerto:
-        "🎉 Isso! Rotina de GUARDIÃO(Ã) do começo ao fim do dia.",
+      feedbackAcerto: "🎉 Isso! Rotina de GUARDIÃO(Ã) do começo ao fim do dia.",
       feedbackErro:
         "Pensa: começa de manhã (torneira), depois escola (lixeira, aula), tarde (regar) e noite (apagar luz).",
     },
@@ -272,12 +252,12 @@ export const aula04: AulaPortuguesV4 = {
           "Duas fotos: antes e depois",
           "Só uma foto de bolo",
           "Nada, esqueceu",
+          "Outra possibilidade",
         ],
-        opcoesImagens: [mapaPercurso, familia, campo],
+        opcoesImagens: [mapaPercurso, familia, campo, mapaPercurso],
         correta: 0,
         feedbackAcerto: "🎉 ANTES e DEPOIS!",
-        feedbackErro:
-          "O texto diz: 'colou a foto ANTES… e do outro a foto DEPOIS'.",
+        feedbackErro: "O texto diz: 'colou a foto ANTES… e do outro a foto DEPOIS'.",
         ondeEstaNoTexto: "…foto ANTES… foto DEPOIS…",
       },
       {
@@ -286,23 +266,21 @@ export const aula04: AulaPortuguesV4 = {
           "Que a paisagem MUDA e ele vai CUIDAR",
           "Que a paisagem some pra sempre",
           "Nada",
+          "Outra possibilidade",
         ],
-        opcoesImagens: [familia, chuva, mapa],
+        opcoesImagens: [familia, chuva, mapa, familia],
         correta: 0,
-        feedbackAcerto:
-          "🎉 Que ele é GUARDIÃO(Ã) e vai CUIDAR.",
+        feedbackAcerto: "🎉 Que ele é GUARDIÃO(Ã) e vai CUIDAR.",
         feedbackErro:
           "O texto diz: 'A paisagem MUDA — mas eu sou GUARDIÃO(Ã) e vou CUIDAR sempre!'",
-        ondeEstaNoTexto:
-          "…A paisagem MUDA — mas eu sou GUARDIÃO(Ã)…",
+        ondeEstaNoTexto: "…A paisagem MUDA — mas eu sou GUARDIÃO(Ã)…",
       },
     ],
   },
 
   momento_minijogo: {
     titulo: "🏆 Atlas Final: MUDANÇA × CAUSA × CUIDADO",
-    instrucao:
-      "Cada CARTELA vai numa das 3 páginas do Atlas: NATUREZA, PESSOAS ou CUIDAR.",
+    instrucao: "Cada CARTELA vai numa das 3 páginas do Atlas: NATUREZA, PESSOAS ou CUIDAR.",
     jogo: {
       tipo: "arrastarParaAlvo",
       titulo: "Arrastar para o Alvo",
@@ -335,12 +313,21 @@ export const aula04: AulaPortuguesV4 = {
           { id: "i4", texto: "Construíram um prédio novo", alvoId: "pessoas", imagemUrl: predio },
           { id: "i5", texto: "Abriram uma avenida asfaltada", alvoId: "pessoas", imagemUrl: rua },
           { id: "i6", texto: "Fizeram uma ponte no rio", alvoId: "pessoas", imagemUrl: ponte },
-          { id: "i7", texto: "Colocaram lixeira de reciclagem", alvoId: "cuidar", imagemUrl: lixeiraReciclagem },
+          {
+            id: "i7",
+            texto: "Colocaram lixeira de reciclagem",
+            alvoId: "cuidar",
+            imagemUrl: lixeiraReciclagem,
+          },
           { id: "i8", texto: "Plantaram mudas na praça", alvoId: "cuidar", imagemUrl: planta },
-          { id: "i9", texto: "Mutirão pra limpar o rio", alvoId: "cuidar", imagemUrl: funcionarioLimpeza },
+          {
+            id: "i9",
+            texto: "Mutirão pra limpar o rio",
+            alvoId: "cuidar",
+            imagemUrl: funcionarioLimpeza,
+          },
         ],
-        feedbackAcerto:
-          "🎉 Atlas completo! Você é oficialmente GUARDIÃO(Ã) das Paisagens.",
+        feedbackAcerto: "🎉 Atlas completo! Você é oficialmente GUARDIÃO(Ã) das Paisagens.",
         feedbackErro:
           "Lembra: chuva/vento/sol = NATUREZA; construir/asfaltar/ponte = PESSOAS; reciclar/plantar/mutirão = CUIDAR.",
       },
@@ -361,10 +348,10 @@ export const aula04: AulaPortuguesV4 = {
         "Só destruir",
         "Só olhar sem fazer nada",
         "Cuidar enquanto o bairro muda",
+        "Outra possibilidade",
       ],
       correta: 2,
-      feedbackAcerto:
-        "🎉 CUIDAR enquanto o bairro MUDA.",
+      feedbackAcerto: "🎉 CUIDAR enquanto o bairro MUDA.",
       feedbackErro:
         "GUARDIÃO(Ã) MUDA (constrói, planta, arruma) e CUIDA (recicla, preserva) juntos.",
     },
@@ -374,18 +361,22 @@ export const aula04: AulaPortuguesV4 = {
     perguntas: [
       {
         pergunta: "1/5 — Paisagem mudar é uma coisa...",
-        opcoes: ["Que nunca acontece", "Normal, acontece com o tempo", "Só de outro país"],
+        opcoes: [
+          "Que nunca acontece",
+          "Normal, acontece com o tempo",
+          "Só de outro país",
+          "Outra possibilidade",
+        ],
         correta: 1,
         feedbackAcerto: "🎉 Normal, com o tempo.",
         feedbackErro: "PAISAGEM muda com o TEMPO — é natural.",
       },
       {
         pergunta: "2/5 — Chuva forte + morro sem árvore =",
-        opcoes: ["Prédio novo", "Desmoronamento", "Nada acontece"],
+        opcoes: ["Prédio novo", "Desmoronamento", "Nada acontece", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 DESMORONAMENTO.",
-        feedbackErro:
-          "Sem árvore que segura a terra, a chuva faz DESMORONAMENTO.",
+        feedbackErro: "Sem árvore que segura a terra, a chuva faz DESMORONAMENTO.",
       },
       {
         pergunta: "3/5 — Ação SUSTENTÁVEL é...",
@@ -393,11 +384,11 @@ export const aula04: AulaPortuguesV4 = {
           "Usar sem cuidar",
           "Usar CUIDANDO da natureza",
           "Nunca usar nada",
+          "Outra possibilidade",
         ],
         correta: 1,
         feedbackAcerto: "🎉 Usar CUIDANDO.",
-        feedbackErro:
-          "SUSTENTÁVEL é usar SEM acabar com a natureza.",
+        feedbackErro: "SUSTENTÁVEL é usar SEM acabar com a natureza.",
       },
       {
         pergunta: "4/5 — Praça ARBORIZADA no meio dos prédios é...",
@@ -405,23 +396,18 @@ export const aula04: AulaPortuguesV4 = {
           "Uma péssima ideia",
           "Um pedacinho de natureza preservado",
           "Um estacionamento",
+          "Outra possibilidade",
         ],
         correta: 1,
         feedbackAcerto: "🎉 NATUREZA preservada.",
-        feedbackErro:
-          "Praça arborizada é NATUREZA PRESERVADA no meio da cidade.",
+        feedbackErro: "Praça arborizada é NATUREZA PRESERVADA no meio da cidade.",
       },
       {
         pergunta: "5/5 — O(A) GUARDIÃO(Ã) da paisagem...",
-        opcoes: [
-          "Destrói sempre",
-          "MUDA e CUIDA junto",
-          "Não faz nada",
-        ],
+        opcoes: ["Destrói sempre", "MUDA e CUIDA junto", "Não faz nada", "Outra possibilidade"],
         correta: 1,
         feedbackAcerto: "🎉 MUDA e CUIDA junto!",
-        feedbackErro:
-          "GUARDIÃO(Ã) MUDA (constrói) e CUIDA (preserva) ao mesmo tempo.",
+        feedbackErro: "GUARDIÃO(Ã) MUDA (constrói) e CUIDA (preserva) ao mesmo tempo.",
       },
     ],
   },
@@ -435,8 +421,7 @@ export const aula04: AulaPortuguesV4 = {
       "3) Em CADA quadrinho, faça 1 desenho pequeno de algo que você viu no seu bairro.",
       "4) Assine seu nome com orgulho de GUARDIÃO(Ã).",
     ],
-    registro:
-      "📸 Uma foto da CAPA + do INTERIOR do seu Atlas.",
+    registro: "📸 Uma foto da CAPA + do INTERIOR do seu Atlas.",
   },
 
   recompensa: {

@@ -8,7 +8,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-imperialismo",
   titulo: "O Imperialismo e a Partilha do Mundo",
   iconeTrilha: "🗺️",
-  bncc: ["EF08HI25", "EF08HI26", "EF08HI27"],
+  bncc: ["EF08HI23", "EF08HI26", "EF08HI27"],
   duracaoMin: 30,
   estilo: "teen",
 
@@ -32,6 +32,8 @@ export const aula01: AulaGeoV1 = {
     opcoes: [
       { id: "ind", titulo: "MATÉRIA-PRIMA + MERCADO + LUCRO", subtitulo: "combustível da 2ª Rev. Industrial", emoji: "⚙️", cor: "from-teal-800 to-slate-950" },
       { id: "boa", titulo: "AJUDAR OS POVOS COLONIZADOS", subtitulo: "missão civilizatória altruísta", emoji: "❌", cor: "from-amber-900 to-slate-950" },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "ind",
     feedbackAcerto:

@@ -15,7 +15,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-cidadania-antiguidade",
   titulo: "O Conceito de Cidadania e a Antiguidade",
   iconeTrilha: "⚖️",
-  bncc: ["EF05HI01", "EF05HI04"],
+  bncc: ["EF05HI04"],
   duracaoMin: 25,
 
   cena01_motivacao: {
@@ -53,6 +53,8 @@ export const aula01: AulaGeoV1 = {
         cor: "from-slate-500 to-slate-700",
         fotoUrl: imgAgora,
       },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "restrito",
     feedbackAcerto:
@@ -167,6 +169,7 @@ export const aula01: AulaGeoV1 = {
           { id: "d", emoji: "🗳️", titulo: "Democracia", cor: "from-sky-500 to-blue-700" },
           { id: "m", emoji: "👑", titulo: "Monarquia", cor: "from-amber-500 to-orange-700" },
           { id: "di", emoji: "⛔", titulo: "Ditadura", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "d",
         feedbackAcerto:
@@ -183,6 +186,7 @@ export const aula01: AulaGeoV1 = {
           { id: "h", emoji: "👨", titulo: "Só homens livres, adultos e atenienses", cor: "from-amber-500 to-orange-700" },
           { id: "t", emoji: "👥", titulo: "Todas as pessoas da cidade", cor: "from-slate-500 to-slate-700" },
           { id: "c", emoji: "🧒", titulo: "Só as crianças", cor: "from-emerald-500 to-teal-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "h",
         feedbackAcerto:
@@ -199,6 +203,7 @@ export const aula01: AulaGeoV1 = {
           { id: "r", emoji: "🏛️", titulo: "República", cor: "from-amber-500 to-orange-700" },
           { id: "mo", emoji: "👑", titulo: "Monarquia", cor: "from-slate-500 to-slate-700" },
           { id: "im", emoji: "⚔️", titulo: "Império", cor: "from-red-500 to-orange-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "r",
         feedbackAcerto:
@@ -465,6 +470,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Monarquia absolutista.", correta: false },
           { id: "b", texto: "Democracia.", correta: true },
           { id: "c", texto: "Ditadura.", correta: false },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto! DEMOCRACIA — demos (povo) + kratos (poder).",
         feedbackErro: "Monarquia = governo do rei. Ditadura = governo de um só. Governo do POVO = DEMOCRACIA.",
@@ -477,6 +483,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Todos os moradores da cidade.", correta: false },
           { id: "b", texto: "Só homens livres, adultos, nascidos em Atenas.", correta: true },
           { id: "c", texto: "Só as crianças e mulheres.", correta: false },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto:
           "Correto! Democracia grega era RESTRITA: só homens livres atenienses (~10% da população).",
@@ -491,6 +498,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", texto: "Constituição Imperial.", correta: false },
           { id: "b", texto: "Constituição Cidadã.", correta: true },
           { id: "c", texto: "Constituição Colonial.", correta: false },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto:
           "Isso! CONSTITUIÇÃO CIDADÃ — porque colocou os direitos humanos em primeiro lugar.",

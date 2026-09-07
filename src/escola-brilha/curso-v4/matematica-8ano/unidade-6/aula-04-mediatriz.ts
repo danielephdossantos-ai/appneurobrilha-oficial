@@ -4,7 +4,7 @@ export const aula04_mediatriz: AulaV4 = {
   slug: "u6-04-mediatriz",
   titulo: "Mediatriz e bissetriz",
   iconeTrilha: "📐",
-  bncc: ["EF08MA16"],
+  bncc: ["EF08MA15", "EF08MA17"],
   duracaoMin: 22,
   metodologias: ["skemp"],
   momento01_motivacao: {

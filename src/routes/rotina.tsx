@@ -186,6 +186,7 @@ function Rotina() {
   const done = sorted.filter((i) => i.status === "concluido").length;
   const progress = sorted.length ? Math.round((done / sorted.length) * 100) : 0;
   const pending = sorted.filter((i) => i.status !== "concluido");
+  const pendingPlanCount = pending.filter((i) => i.source === "learning_plan" && i.route).length;
   const clock = new Date(clockTick);
   const nowMinutes = clock.getHours() * 60 + clock.getMinutes();
   const currentItem = useMemo(() => {
@@ -265,7 +266,7 @@ function Rotina() {
           <div className="flex items-center gap-4">
             <div className={`${visualMode ? "text-6xl" : "text-4xl"}`}>{emojiFor(currentItem)}</div>
             <div className="flex-1 min-w-0"><h2 className={`${visualMode ? "text-2xl" : "text-xl"} font-bold`}>{currentItem.title}</h2><p className="text-sm text-muted-foreground">{currentItem.startTime} · {currentItem.durationMinutes} min</p>{nextItem && <p className="text-sm mt-2"><span className="font-bold">Depois:</span> {emojiFor(nextItem)} {nextItem.title}</p>}</div>
-            {currentItem.route ? <button onClick={() => startItem(currentItem)} className="rounded-2xl bg-primary text-primary-foreground px-4 py-3 font-bold inline-flex gap-2 items-center"><Play className="h-5 w-5 fill-current"/> Começar</button> : <button onClick={() => complete(currentItem)} className="rounded-2xl bg-primary text-primary-foreground px-4 py-3 font-bold inline-flex gap-2 items-center"><CheckCircle2 className="h-5 w-5"/> Já fiz!</button>}
+            {currentItem.route ? <button onClick={() => startItem(currentItem)} className="rounded-2xl bg-primary text-primary-foreground px-4 py-3 font-bold inline-flex gap-2 items-center"><Play className="h-5 w-5 fill-current"/> {currentItem.source === "learning_plan" && pendingPlanCount > 1 ? `Começar sequência (${pendingPlanCount})` : "Começar"}</button> : <button onClick={() => complete(currentItem)} className="rounded-2xl bg-primary text-primary-foreground px-4 py-3 font-bold inline-flex gap-2 items-center"><CheckCircle2 className="h-5 w-5"/> Já fiz!</button>}
           </div>
         </Card>
       )}

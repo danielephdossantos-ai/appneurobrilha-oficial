@@ -10,13 +10,13 @@ import { unidade7 } from "./unidade-7";
 /**
  * Curso: Matemática 5º Ano — "O Império dos Números"
  * ---------------------------------------------------
- *  U1 · Bem-vindo(a) ao Império dos Milhões         (EF05MA01–03)
- *  U2 · Somar e Subtrair Grandes Números            (EF05MA07)
- *  U3 · Multiplicando no Império                    (EF05MA07–08)
- *  U4 · Dividindo no Império                        (EF05MA07–08)
- *  U5 · Frações, Decimais e Porcentagem             (EF05MA03–05, 07, 09)
+ *  U1 · Bem-vindo(a) ao Império dos Milhões         (EF05MA01)
+ *  U2 · Operações, Contagem e Álgebra               (EF05MA07, 09–13)
+ *  U3 · Multiplicando no Império                    (EF05MA08)
+ *  U4 · Dividindo no Império                        (EF05MA08)
+ *  U5 · Frações, Decimais e Porcentagem             (EF05MA02–08)
  *  U6 · Grandezas e Medidas do Império              (EF05MA19–22)
- *  U7 · Geometria, Dados e Missão Final             (EF05MA14–18, 23–25)
+ *  U7 · Geometria, Dados e Missão Final             (EF05MA14–18, 22–25)
  *
  * Regra evolutiva: como M/C/D/U já foi consolidado no 3º/4º, o valor posicional
  * só aparece acompanhado de uma CONTA armada — nunca como explicação isolada.

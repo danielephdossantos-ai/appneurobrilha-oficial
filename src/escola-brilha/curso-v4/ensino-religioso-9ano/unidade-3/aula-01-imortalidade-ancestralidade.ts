@@ -11,7 +11,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-imortalidade-ancestralidade",
   titulo: "Imortalidade & Ancestralidade",
   iconeTrilha: "✨",
-  bncc: ["EF09ER03"],
+  bncc: ["EF09ER05"],
   duracaoMin: 22,
 
   cena01_motivacao: {

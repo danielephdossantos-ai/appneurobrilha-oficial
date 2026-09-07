@@ -13,7 +13,7 @@ interface TrilhaItem {
   titulo: string;
   rota: string;
   concluido: boolean;
-  trilha_label: string;
+  trilha_label?: string;
   emoji?: string;
   minutos: number;
   slug?: string;
@@ -22,7 +22,8 @@ interface TrilhaItem {
 interface Props {
   itens: TrilhaItem[];
   onToggle?: (item: any) => void;
-  tipo: "alfa" | "neuro";
+  tipo: "alfa" | "neuro" | "school";
+  bloquearDiasFuturos?: boolean;
 }
 
 function slugFromRoute(route: string): string {
@@ -30,7 +31,7 @@ function slugFromRoute(route: string): string {
   return clean.split("/").filter(Boolean).pop() ?? route;
 }
 
-export function TrilhaPlanoVisual({ itens, tipo }: Props) {
+export function TrilhaPlanoVisual({ itens, tipo, bloquearDiasFuturos = true }: Props) {
   const hoje = diaSemanaHoje();
   const navigate = useNavigate();
   const fundoMundo = useMundoFundo("");
@@ -40,7 +41,7 @@ export function TrilhaPlanoVisual({ itens, tipo }: Props) {
   const diasDisponiveis = Array.from(new Set(itens.map((i) => i.dia_semana))).sort((a, b) => a - b);
 
   const handleItemClick = (item: TrilhaItem) => {
-    if (item.dia_semana > hoje) {
+    if (bloquearDiasFuturos && item.dia_semana > hoje) {
       toast.info(`Esta aula abrirá na ${DIAS_LABEL[item.dia_semana]}! 🔒`);
       return;
     }
@@ -68,16 +69,22 @@ export function TrilhaPlanoVisual({ itens, tipo }: Props) {
         sessionIndex: 0,
       });
     } else {
+      const start = Math.max(0, itensDoDia.findIndex((i) => i.id === item.id));
+      const sessao = itensDoDia.slice(start);
       setNavContext({
         originRoute: location.pathname,
-        originModule: "alfabetizacao",
+        originModule: tipo === "school" ? "escola-brilha" : "alfabetizacao",
         returnPath: location.pathname,
         isPlanFlow: true,
-        planType: "literacy",
+        planType: tipo === "school" ? "school" : "literacy",
         timestamp: Date.now(),
         lessonId: item.id,
         day: item.dia_semana,
-        position: item.ordem ?? 0,
+        position: start,
+        sessionRoutes: sessao.map((i) => i.rota),
+        sessionPlanItemIds: sessao.map((i) => i.id),
+        sessionPlanTypes: sessao.map(() => tipo === "school" ? "school" : "literacy"),
+        sessionIndex: 0,
       });
     }
 
@@ -144,7 +151,7 @@ export function TrilhaPlanoVisual({ itens, tipo }: Props) {
             .sort((a, b) => (a.ordem ?? 0) - (b.ordem ?? 0));
           const pendentes = itensDoDia.filter((i) => !i.concluido);
           const proximo = pendentes[0] ?? itensDoDia[0];
-          const trancado = dia > hoje;
+          const trancado = bloquearDiasFuturos && dia > hoje;
           const ehHoje = dia === hoje;
           const concluido = itensDoDia.length > 0 && itensDoDia.every((i) => i.concluido);
           const isLeft = idx % 2 === 0;
@@ -181,7 +188,7 @@ export function TrilhaPlanoVisual({ itens, tipo }: Props) {
               <div className={`flex-1 px-4 ${isLeft ? "text-left" : "text-right"}`}>
                 <div className={`max-w-[150px] ${isLeft ? "" : "ml-auto"}`}>
                   <h3 className={`text-sm font-black leading-tight ${trancado ? "text-slate-400" : "text-slate-900 dark:text-white"}`}>{proximo?.titulo}</h3>
-                  <div className="text-[10px] font-bold text-muted-foreground mt-1 uppercase">{proximo?.trilha_label}</div>
+                  <div className="text-[10px] font-bold text-muted-foreground mt-1 uppercase">{proximo?.trilha_label ?? (tipo === "school" ? "Plano anual" : "Trilha")}</div>
                   {!concluido && pendentes.length > 1 && <div className="text-[10px] font-bold text-primary mt-1">{pendentes.length} missões restantes</div>}
                 </div>
               </div>

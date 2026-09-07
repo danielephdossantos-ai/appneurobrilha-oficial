@@ -8,7 +8,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-napoleao-corte",
   titulo: "Napoleão e a Vinda da Corte para o Brasil",
   iconeTrilha: "🎩",
-  bncc: ["EF08HI08", "EF08HI09"],
+  bncc: ["EF08HI12"],
   duracaoMin: 30,
   estilo: "teen",
 
@@ -32,6 +32,8 @@ export const aula01: AulaGeoV1 = {
     opcoes: [
       { id: "abr", titulo: "ABERTURA DOS PORTOS", subtitulo: "fim do monopólio comercial português", emoji: "⚓", cor: "from-teal-800 to-slate-950" },
       { id: "nada", titulo: "NADA MUDOU", subtitulo: "seguimos como simples colônia", emoji: "❌", cor: "from-amber-900 to-slate-950" },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "abr",
     feedbackAcerto:

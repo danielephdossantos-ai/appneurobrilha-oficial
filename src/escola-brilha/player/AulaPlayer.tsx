@@ -264,7 +264,9 @@ export function AulaPlayer({
           }}
           className="btn-tap px-8 py-4 rounded-3xl bg-[#FFC93C] text-[#0d1f55] font-black flex items-center gap-2"
         >
-          Voltar para o Plano <ChevronRight className="w-5 h-5" />
+          {(navContext?.sessionIndex ?? 0) + 1 < (navContext?.sessionRoutes?.length ?? 0)
+            ? "Próxima aula"
+            : "Concluir aulas de hoje"} <ChevronRight className="w-5 h-5" />
         </button>
       </div>
     );
@@ -698,4 +700,3 @@ function montarTextoAula(a: Aula): string {
   }
   return partes.join(". ").replace(/\.\.+/g, ".");
 }
-

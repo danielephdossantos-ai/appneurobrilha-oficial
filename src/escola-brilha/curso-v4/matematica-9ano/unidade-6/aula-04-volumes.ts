@@ -4,7 +4,7 @@ export const aula04_volumes: AulaV4 = {
   slug: "u6-04-volumes",
   titulo: "Caixas, Latas e Tendas: Volume de Sólidos",
   iconeTrilha: "🧊",
-  bncc: ["EF09MA19", "EF09MA20"],
+  bncc: ["EF09MA19"],
   duracaoMin: 32,
   metodologias: ["skemp", "vergnaud"],
 

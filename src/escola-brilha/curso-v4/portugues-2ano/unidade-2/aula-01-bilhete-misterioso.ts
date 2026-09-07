@@ -26,7 +26,7 @@ export const aula01: AulaPortuguesV4 = {
   slug: "aula-01-bilhete-misterioso",
   titulo: "O Bilhete Misterioso",
   iconeTrilha: "📩",
-  bncc: ["EF02LP09", "EF02LP10", "EF02LP13"],
+  bncc: ["EF02LP13", "EF02LP16", "EF12LP04", "EF15LP01", "EF15LP03", "EF15LP05"],
   duracaoMin: 15,
 
   momento01_motivacao: {

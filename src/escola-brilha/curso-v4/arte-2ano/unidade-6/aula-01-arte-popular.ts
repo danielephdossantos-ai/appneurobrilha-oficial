@@ -32,7 +32,6 @@ const u6passo4 = __asset_u6passo4.url;
 import __asset_u6passo5 from "@/assets/arte-2ano/u6-passo5-pintar.jpg.asset.json";
 const u6passo5 = __asset_u6passo5.url;
 
-
 /**
  * Arte · 2º Ano · Unidade 6 · Aula 01 — "Arte Popular Brasileira"
  * (EF15AR03 / EF15AR06 / EF15AR25)
@@ -52,10 +51,30 @@ export const aula01: AulaArteV1 = {
     titulo: "Viagem pela Arte Popular Brasileira",
     instrucao: "Toca em cada obra pra descobrir",
     itens: [
-      { emoji: "🎨", rotulo: "Carrancas do São Francisco", descricao: "Cabeças de madeira colocadas na frente dos barcos pra espantar mau agouro.", cor: "#dc2626" },
-      { emoji: "🏺", rotulo: "Cerâmica do Vale do Jequitinhonha", descricao: "Bonecas de barro feitas por mulheres em Minas Gerais.", cor: "#78350f" },
-      { emoji: "📚", rotulo: "Xilogravura de Cordel", descricao: "Desenhos em preto e branco impressos em madeira no Nordeste.", cor: "#1f2937" },
-      { emoji: "🪁", rotulo: "Bumba-meu-boi", descricao: "Boi de pano e festa colorida do Maranhão, Amazonas e Piauí.", cor: "#eab308" },
+      {
+        emoji: "🎨",
+        rotulo: "Carrancas do São Francisco",
+        descricao: "Cabeças de madeira colocadas na frente dos barcos pra espantar mau agouro.",
+        cor: "#dc2626",
+      },
+      {
+        emoji: "🏺",
+        rotulo: "Cerâmica do Vale do Jequitinhonha",
+        descricao: "Bonecas de barro feitas por mulheres em Minas Gerais.",
+        cor: "#78350f",
+      },
+      {
+        emoji: "📚",
+        rotulo: "Xilogravura de Cordel",
+        descricao: "Desenhos em preto e branco impressos em madeira no Nordeste.",
+        cor: "#1f2937",
+      },
+      {
+        emoji: "🪁",
+        rotulo: "Bumba-meu-boi",
+        descricao: "Boi de pano e festa colorida do Maranhão, Amazonas e Piauí.",
+        cor: "#eab308",
+      },
     ],
     falaFinal: "ARTE POPULAR é a arte feita pelo POVO — sem escola, com criatividade!",
   },
@@ -69,6 +88,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "O povo — artistas do dia a dia", correta: true },
           { texto: "Só pintores famosos e ricos", correta: false },
+
+          { texto: "Não combina com a proposta", correta: false },
+          { texto: "Outra ação sem relação", correta: false },
         ],
         feedbackAcerto: "Isso! Arte popular é feita por artesãos comuns.",
         feedbackErro: "Ao contrário! Arte popular é do POVO, não dos famosos.",
@@ -78,6 +100,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Sul", correta: false },
           { texto: "Nordeste", correta: true },
+
+          { texto: "Não combina com a proposta", correta: false },
+          { texto: "Outra ação sem relação", correta: false },
         ],
         feedbackAcerto: "Perfeito! Cordel é a poesia impressa do Nordeste.",
         feedbackErro: "É do NORDESTE! Cordel nasceu na Bahia e Pernambuco.",
@@ -87,6 +112,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Festa com boi de pano e dança", correta: true },
           { texto: "Comida típica quente", correta: false },
+
+          { texto: "Não combina com a proposta", correta: false },
+          { texto: "Outra ação sem relação", correta: false },
         ],
         feedbackAcerto: "Sim! Bumba-meu-boi é festa com música, dança e o boi encantado.",
         feedbackErro: "Não é comida. É FESTA com um boi de pano que dança e ressuscita.",
@@ -98,10 +126,34 @@ export const aula01: AulaArteV1 = {
     tipo: "vocabularioCards",
     aurora: "Palavras da arte popular — toca em cada uma!",
     cards: [
-      { termo: "Artesão", definicao: "Quem faz arte COM AS MÃOS — barro, madeira, palha, tecido.", emoji: "🧑‍🎨", cor: "#78350f", fotoUrl: vocabArtesao },
-      { termo: "Cordel", definicao: "Livrinho de POESIA com xilogravura, pendurado em barbante no Nordeste.", emoji: "📚", cor: "#1f2937", fotoUrl: vocabCordel },
-      { termo: "Cerâmica", definicao: "Arte de moldar o BARRO e depois queimar no forno pra ficar duro.", emoji: "🏺", cor: "#f97316", fotoUrl: vocabCeramica },
-      { termo: "Cultura", definicao: "TUDO que um povo faz: música, comida, arte, festa, dança.", emoji: "🌎", cor: "#16a34a", fotoUrl: vocabCultura },
+      {
+        termo: "Artesão",
+        definicao: "Quem faz arte COM AS MÃOS — barro, madeira, palha, tecido.",
+        emoji: "🧑‍🎨",
+        cor: "#78350f",
+        fotoUrl: vocabArtesao,
+      },
+      {
+        termo: "Cordel",
+        definicao: "Livrinho de POESIA com xilogravura, pendurado em barbante no Nordeste.",
+        emoji: "📚",
+        cor: "#1f2937",
+        fotoUrl: vocabCordel,
+      },
+      {
+        termo: "Cerâmica",
+        definicao: "Arte de moldar o BARRO e depois queimar no forno pra ficar duro.",
+        emoji: "🏺",
+        cor: "#f97316",
+        fotoUrl: vocabCeramica,
+      },
+      {
+        termo: "Cultura",
+        definicao: "TUDO que um povo faz: música, comida, arte, festa, dança.",
+        emoji: "🌎",
+        cor: "#16a34a",
+        fotoUrl: vocabCultura,
+      },
     ],
   },
 
@@ -115,10 +167,34 @@ export const aula01: AulaArteV1 = {
       "No MARANHÃO, todo mês de junho tem BUMBA-MEU-BOI: um boi de pano dança, morre e ressuscita, com música e cores explodindo pelas ruas.",
     ],
     pigmentos: [
-      { nome: "Vermelho da carranca", hex: "#dc2626", fonte: "Madeira pintada", emoji: "🎭", fotoUrl: pigCarranca },
-      { nome: "Barro do Jequitinhonha", hex: "#f97316", fonte: "Argila queimada", emoji: "🏺", fotoUrl: pigBonecas },
-      { nome: "Preto do cordel", hex: "#1f2937", fonte: "Tinta na xilogravura", emoji: "📚", fotoUrl: pigCordel },
-      { nome: "Fita do boi", hex: "#eab308", fonte: "Cetim colorido", emoji: "🪁", fotoUrl: pigBoi },
+      {
+        nome: "Vermelho da carranca",
+        hex: "#dc2626",
+        fonte: "Madeira pintada",
+        emoji: "🎭",
+        fotoUrl: pigCarranca,
+      },
+      {
+        nome: "Barro do Jequitinhonha",
+        hex: "#f97316",
+        fonte: "Argila queimada",
+        emoji: "🏺",
+        fotoUrl: pigBonecas,
+      },
+      {
+        nome: "Preto do cordel",
+        hex: "#1f2937",
+        fonte: "Tinta na xilogravura",
+        emoji: "📚",
+        fotoUrl: pigCordel,
+      },
+      {
+        nome: "Fita do boi",
+        hex: "#eab308",
+        fonte: "Cetim colorido",
+        emoji: "🪁",
+        fotoUrl: pigBoi,
+      },
     ],
   },
 
@@ -131,6 +207,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Na proa (frente do barco)", correta: true },
           { texto: "Dentro do peixe pescado", correta: false },
+
+          { texto: "Não combina com a proposta", correta: false },
+          { texto: "Outra ação sem relação", correta: false },
         ],
         feedbackAcerto: "Isso! Carranca fica na frente, pra proteger o barco.",
         feedbackErro: "Carranca vai na PROA do barco (a frente), pra espantar mau agouro.",
@@ -140,6 +219,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Madeira entalhada e tinta", correta: true },
           { texto: "Tinta plástica em spray", correta: false },
+
+          { texto: "Não combina com a proposta", correta: false },
+          { texto: "Outra ação sem relação", correta: false },
         ],
         feedbackAcerto: "Certo! Entalha a madeira, passa tinta e imprime no papel.",
         feedbackErro: "Não é spray! É MADEIRA entalhada com tinta preta.",
@@ -149,6 +231,9 @@ export const aula01: AulaArteV1 = {
         alternativas: [
           { texto: "Barro (argila)", correta: true },
           { texto: "Vidro derretido", correta: false },
+
+          { texto: "Não combina com a proposta", correta: false },
+          { texto: "Outra ação sem relação", correta: false },
         ],
         feedbackAcerto: "Sim! Molda o barro molhado e queima no forno.",
         feedbackErro: "Vidro é outra arte. Cerâmica é feita com BARRO.",
@@ -161,32 +246,44 @@ export const aula01: AulaArteV1 = {
     aurora: "Cada arte é de uma região do Brasil. Acerta de onde vem!",
     animais: [
       {
-        nome: "Bumba-meu-boi", emoji: "🐂", fotoUrl: animalBoi,
+        nome: "Bumba-meu-boi",
+        emoji: "🐂",
+        fotoUrl: animalBoi,
         corAlvo: { nome: "Maranhão (Nordeste)", hex: "#eab308" },
         opcoes: [
           { nome: "Rio Grande do Sul (Sul)", hex: "#16a34a" },
           { nome: "Maranhão (Nordeste)", hex: "#eab308" },
           { nome: "Amazonas (Norte)", hex: "#0ea5e9" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Bumba-meu-boi é a alma do Maranhão!",
       },
       {
-        nome: "Carranca", emoji: "🎭", fotoUrl: animalCarranca,
+        nome: "Carranca",
+        emoji: "🎭",
+        fotoUrl: animalCarranca,
         corAlvo: { nome: "Rio São Francisco (BA/PE)", hex: "#dc2626" },
         opcoes: [
           { nome: "Rio São Francisco (BA/PE)", hex: "#dc2626" },
           { nome: "Brasília (Centro-Oeste)", hex: "#f97316" },
           { nome: "Serra do Sul", hex: "#0ea5e9" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Rio São Francisco! Barqueiros usavam carrancas na proa.",
       },
       {
-        nome: "Bonecas de barro", emoji: "🏺", fotoUrl: animalBonecas,
+        nome: "Bonecas de barro",
+        emoji: "🏺",
+        fotoUrl: animalBonecas,
         corAlvo: { nome: "Vale do Jequitinhonha (MG)", hex: "#f97316" },
         opcoes: [
           { nome: "Vale do Jequitinhonha (MG)", hex: "#f97316" },
           { nome: "Rio de Janeiro (Sudeste)", hex: "#a855f7" },
           { nome: "Manaus (Norte)", hex: "#16a34a" },
+
+          { nome: "Outra opção", hex: "#94a3b8" },
         ],
         falaAcerto: "Minas Gerais, no Vale do Jequitinhonha!",
       },
@@ -195,13 +292,32 @@ export const aula01: AulaArteV1 = {
 
   cena07_sequencia: {
     tipo: "sequenciaMistura",
-    aurora: "Toca nos passos NA ORDEM CERTA pra fazer uma boneca de barro como as do Jequitinhonha.",
+    aurora:
+      "Toca nos passos NA ORDEM CERTA pra fazer uma boneca de barro como as do Jequitinhonha.",
     passos: [
       { id: "p1", texto: "Cavo o BARRO na beira do rio", emoji: "🌊", ordem: 1, fotoUrl: u6passo1 },
-      { id: "p2", texto: "Amasso bem pra tirar as pedrinhas", emoji: "🖐️", ordem: 2, fotoUrl: u6passo2 },
+      {
+        id: "p2",
+        texto: "Amasso bem pra tirar as pedrinhas",
+        emoji: "🖐️",
+        ordem: 2,
+        fotoUrl: u6passo2,
+      },
       { id: "p3", texto: "MODELO o corpinho da boneca", emoji: "👧", ordem: 3, fotoUrl: u6passo3 },
-      { id: "p4", texto: "Deixo SECAR no sol por um dia", emoji: "☀️", ordem: 4, fotoUrl: u6passo4 },
-      { id: "p5", texto: "Queimo no forno e PINTO com cores fortes", emoji: "🎨", ordem: 5, fotoUrl: u6passo5 },
+      {
+        id: "p4",
+        texto: "Deixo SECAR no sol por um dia",
+        emoji: "☀️",
+        ordem: 4,
+        fotoUrl: u6passo4,
+      },
+      {
+        id: "p5",
+        texto: "Queimo no forno e PINTO com cores fortes",
+        emoji: "🎨",
+        ordem: 5,
+        fotoUrl: u6passo5,
+      },
     ],
     falaAcerto: "Sua boneca virou obra de arte popular brasileira!",
   },
@@ -212,8 +328,16 @@ export const aula01: AulaArteV1 = {
     titulo: "Diário da Pequena Artesã",
     trechos: [
       { texto: "Aprendi a fazer boneca com o", palavraDestaque: "barro", corDestaque: "#f97316" },
-      { texto: "O vovô me contou uma história de", palavraDestaque: "cordel", corDestaque: "#1f2937" },
-      { texto: "No São Francisco, os barcos têm", palavraDestaque: "carrancas", corDestaque: "#dc2626" },
+      {
+        texto: "O vovô me contou uma história de",
+        palavraDestaque: "cordel",
+        corDestaque: "#1f2937",
+      },
+      {
+        texto: "No São Francisco, os barcos têm",
+        palavraDestaque: "carrancas",
+        corDestaque: "#dc2626",
+      },
       { texto: "Sou uma pequena", palavraDestaque: "artesã", corDestaque: "#78350f" },
       { texto: "Vou espalhar a arte do Brasil pelo mundo!" },
     ],
@@ -244,11 +368,36 @@ export const aula01: AulaArteV1 = {
     titulo: "🔁 Roda da Arte Popular",
     itens: [
       { emoji: "🧑‍🎨", rotulo: "Artesão", descricao: "Quem faz arte com as mãos.", cor: "#78350f" },
-      { emoji: "🏺", rotulo: "Cerâmica", descricao: "Arte com barro modelado e queimado.", cor: "#f97316" },
-      { emoji: "📚", rotulo: "Cordel", descricao: "Poesia nordestina com xilogravura.", cor: "#1f2937" },
-      { emoji: "🎭", rotulo: "Carranca", descricao: "Cabeça de madeira na proa dos barcos.", cor: "#dc2626" },
-      { emoji: "🐂", rotulo: "Bumba-boi", descricao: "Festa do boi encantado do Maranhão.", cor: "#eab308" },
-      { emoji: "🇧🇷", rotulo: "Cultura Popular", descricao: "Arte feita pelo povo, sem escola formal.", cor: "#16a34a" },
+      {
+        emoji: "🏺",
+        rotulo: "Cerâmica",
+        descricao: "Arte com barro modelado e queimado.",
+        cor: "#f97316",
+      },
+      {
+        emoji: "📚",
+        rotulo: "Cordel",
+        descricao: "Poesia nordestina com xilogravura.",
+        cor: "#1f2937",
+      },
+      {
+        emoji: "🎭",
+        rotulo: "Carranca",
+        descricao: "Cabeça de madeira na proa dos barcos.",
+        cor: "#dc2626",
+      },
+      {
+        emoji: "🐂",
+        rotulo: "Bumba-boi",
+        descricao: "Festa do boi encantado do Maranhão.",
+        cor: "#eab308",
+      },
+      {
+        emoji: "🇧🇷",
+        rotulo: "Cultura Popular",
+        descricao: "Arte feita pelo povo, sem escola formal.",
+        cor: "#16a34a",
+      },
     ],
     falaFinal: "Você agora é um pequeno GUARDIÃO da cultura brasileira!",
   },
@@ -261,8 +410,12 @@ export const aula01: AulaArteV1 = {
       alternativas: [
         { texto: "Arte feita pelo POVO, com criatividade e materiais simples", correta: true },
         { texto: "Arte só de pintores famosos que estudaram na Europa", correta: false },
+
+        { texto: "Não combina com a proposta", correta: false },
+        { texto: "Outra ação sem relação", correta: false },
       ],
-      feedback: "Isso! Arte popular nasce das mãos do povo, das tradições, sem precisar de faculdade.",
+      feedback:
+        "Isso! Arte popular nasce das mãos do povo, das tradições, sem precisar de faculdade.",
     },
     missaoFamilia:
       "🇧🇷 Museu Brasileiro em Casa: peçam pra vovó ou vovô contar uma HISTÓRIA ou MÚSICA da terra de origem da família. Desenhem essa história como se fosse uma xilogravura (só preto e branco, com traços grossos).",

@@ -4,7 +4,7 @@ export const aula01_multiplos: AulaV4 = {
   slug: "u3-01-multiplos",
   titulo: "Múltiplos — a família da multiplicação",
   iconeTrilha: "🔢",
-  bncc: ["EF06MA04"],
+  bncc: ["EF06MA06"],
   duracaoMin: 20,
   metodologias: ["cpa", "skemp"],
 
@@ -66,7 +66,7 @@ export const aula01_multiplos: AulaV4 = {
         texto: "Todo número é múltiplo de 1 e dele mesmo.",
         exemploReal: {
           contexto: "7 é múltiplo de 1 (7×1) e de 7 (7×1).",
-          destaque: "1 é múltiplo comum de TODOS os números.",
+          destaque: "Todo número natural é múltiplo de 1. Mas 1 só é múltiplo de 1.",
         },
       },
       {

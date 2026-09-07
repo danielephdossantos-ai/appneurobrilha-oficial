@@ -17,7 +17,7 @@ export const unidade4: Unidade = {
   slug: "unidade-4-oficina-das-estrategias",
   numero: 4,
   titulo: "A Oficina das Estratégias de Cálculo",
-  subtitulo: "Pensar rápido, decompor, escolher a ferramenta",
+  subtitulo: "Pensar com estratégia, decompor e escolher a ferramenta",
   descricao:
     "Brilha chega à Oficina do Inventor dos Números. Cada máquina consertada libera uma ferramenta matemática — cálculo mental, decomposição, completar a dezena e escolha de estratégia.",
   corTema: "#f97316",

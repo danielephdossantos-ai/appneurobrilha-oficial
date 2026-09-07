@@ -21,7 +21,7 @@ export const aula01: AulaGeoV1 = {
   slug: "aula-01-diario-de-campo",
   titulo: "Diário de Campo Científico",
   iconeTrilha: "📓",
-  bncc: ["EF04CI01"],
+  bncc: [],
   duracaoMin: 30,
 
   cena01_motivacao: {
@@ -65,6 +65,7 @@ export const aula01: AulaGeoV1 = {
         emoji: "🌑",
         cor: "from-slate-600 to-slate-900",
       },
+      { id: "repetir", titulo: "REPETIR O TESTE", subtitulo: "coletar novas evidências", emoji: "🔁", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "sol",
     feedbackAcerto:
@@ -207,6 +208,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🎲", titulo: "São a mesma coisa", cor: "from-slate-500 to-slate-700" },
           { id: "b", emoji: "🔄", titulo: "Hipótese vem antes, conclusão depois dos dados", cor: "from-teal-500 to-emerald-700" },
           { id: "c", emoji: "❓", titulo: "Só cientistas famosos usam hipótese", cor: "from-red-500 to-rose-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "b",
         feedbackAcerto: "Exato. HIPÓTESE é previsão ANTES do experimento; CONCLUSÃO é a análise DEPOIS dos dados.",
@@ -220,6 +222,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "🔬", titulo: "Grupo sem a variável testada, pra comparar", cor: "from-cyan-500 to-sky-700" },
           { id: "b", emoji: "👨‍🔬", titulo: "O cientista que controla o experimento", cor: "from-slate-500 to-slate-700" },
           { id: "c", emoji: "📋", titulo: "A lista de materiais", cor: "from-orange-500 to-red-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "a",
         feedbackAcerto: "Isso. O grupo controle NÃO recebe a variável testada. Serve como referência de comparação.",
@@ -233,6 +236,7 @@ export const aula01: AulaGeoV1 = {
           { id: "a", emoji: "✏️", titulo: "Mudar os dados pra bater com a hipótese", cor: "from-red-500 to-rose-700" },
           { id: "b", emoji: "📝", titulo: "Registrar honestamente e formular nova hipótese", cor: "from-emerald-500 to-green-700" },
           { id: "c", emoji: "🚮", titulo: "Descartar todo o experimento", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ],
         correta: "b",
         feedbackAcerto: "Ciência real. Refutar uma hipótese é uma DESCOBERTA — leva à próxima pesquisa.",
@@ -496,6 +500,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Ser testável e baseada em observações", correta: true },
           { id: "b", texto: "Estar sempre certa desde o começo" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. Hipótese boa é a que PODE ser testada e refutada — mesmo que se prove errada.",
         feedbackErro: "Hipótese não precisa estar certa. Precisa ser TESTÁVEL — isso é o que a torna científica.",
@@ -507,6 +513,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Pra que outros cientistas possam verificar", correta: true },
           { id: "b", texto: "Só pra decorar o caderno" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. Ciência só é ciência quando outros podem VERIFICAR e REPRODUZIR os resultados.",
         feedbackErro: "O diário é a prova documental. Sem ele, ninguém pode verificar sua pesquisa.",
@@ -518,6 +526,8 @@ export const aula01: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Publica os dados reais e formula nova hipótese", correta: true },
           { id: "b", texto: "Muda os dados pra bater com a hipótese" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Ciência de verdade. Dados alterados destroem toda a pesquisa e a credibilidade da equipe.",
         feedbackErro: "JAMAIS. Alterar dados é fraude científica. Refutar hipótese é resultado válido.",

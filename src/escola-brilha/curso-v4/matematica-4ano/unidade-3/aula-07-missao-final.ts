@@ -4,7 +4,7 @@ export const aula07_missaoFinalU3: AulaV4 = {
   slug: "u3-07-missao-final",
   titulo: "Missão Final: Mestre da Multiplicação",
   iconeTrilha: "🏆",
-  bncc: ["EF04MA04", "EF04MA06", "EF04MA26"],
+  bncc: ["EF04MA04", "EF04MA06"],
   duracaoMin: 25,
   metodologias: ["cpa", "vergnaud", "skemp"],
 
@@ -17,7 +17,7 @@ export const aula07_missaoFinalU3: AulaV4 = {
     instrucao: "Aquecimento.",
     cenas: [
       { tipo: "tabuada", fator: 7, ate: 10, titulo: "Tabuada do 7" },
-      { tipo: "texto", texto: "×10 → 1 zero. ×100 → 2 zeros.", destaque: true },
+      { tipo: "texto", texto: "×10 desloca cada algarismo uma casa para a esquerda; ×100 desloca duas casas.", destaque: true },
     ],
   },
   momento03_descoberta: {
@@ -84,13 +84,13 @@ export const aula07_missaoFinalU3: AulaV4 = {
     },
   },
   momento09_revisao: {
-    pontos: ["Tabuada é a régua.", "×10/100/1000 = colar zeros.", "×2 dígitos = 2 parciais + soma."],
+    pontos: ["Use fatos conhecidos da tabuada.", "×10/100/1000 desloca os valores para casas maiores.", "×2 dígitos = 2 produtos parciais + soma."],
   },
   momento10_avaliacao: {
     perguntas: [
       { pergunta: "9 × 8 = ?", opcoes: ["72", "64", "81"], correta: 0, feedbackAcerto: "🎉 72.", feedbackErro: "Linha do 8: 72." },
       { pergunta: "125 × 4 = ?", opcoes: ["500", "480", "520"], correta: 0, feedbackAcerto: "🎉 500.", feedbackErro: "4×5=20, 4×2+2=10, 4×1+1=5 → 500." },
-      { pergunta: "56 × 100 = ?", opcoes: ["5.600", "560", "56.000"], correta: 0, feedbackAcerto: "🎉 5.600.", feedbackErro: "×100 → 2 zeros." },
+      { pergunta: "56 × 100 = ?", opcoes: ["5.600", "560", "56.000"], correta: 0, feedbackAcerto: "🎉 Em 56 × 100, cada algarismo passa a valer cem vezes mais: 5.600.", feedbackErro: "Desloque os valores duas casas para a esquerda: 5 dezenas viram 5 milhares e 6 unidades viram 6 centenas." },
       { pergunta: "23 × 14 = ?", opcoes: ["322", "312", "332"], correta: 0, feedbackAcerto: "🎉 322.", feedbackErro: "23×4=92, 23×1=23(→230). 92+230=322." },
       { pergunta: "Triplo de 235 = ?", opcoes: ["705", "605", "805"], correta: 0, feedbackAcerto: "🎉 705.", feedbackErro: "235×3=705." },
     ],

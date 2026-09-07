@@ -30,7 +30,7 @@ export const aula04: AulaPortuguesV4 = {
   slug: "aula-04-conectivos",
   titulo: "Conectivos que ligam ideias",
   iconeTrilha: "🔗",
-  bncc: ["EF04LP12", "EF35LP10", "EF04LP01"],
+  bncc: ["EF35LP08"],
   duracaoMin: 20,
 
   momento01_motivacao: {

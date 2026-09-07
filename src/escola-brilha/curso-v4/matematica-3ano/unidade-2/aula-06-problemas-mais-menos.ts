@@ -15,26 +15,26 @@ export const aula06_problemas: AulaV4 = {
   ],
   "momento01_motivacao": {
     "titulo": "Ler o problema com atenção",
-    "historia": "Nem toda pergunta diz 'some'. 'Quanto sobrou' pede subtração. 'Quanto ao todo' pede soma. Aprender a LER o problema é metade da resposta."
+    "historia": "A operação não é escolhida por uma palavra isolada. Precisamos entender o que aconteceu com a quantidade e qual valor a pergunta quer descobrir."
   },
   "momento02_exploracao": {
-    "instrucao": "Palavras-chave dão a pista.",
+    "instrucao": "Organize a história: o que havia no começo, o que mudou e o que precisa ser descoberto.",
     "cenas": [
       {
         "tipo": "texto",
-        "texto": "Ao todo, total, juntos → SOMA."
+        "texto": "Quando conhecemos duas partes e procuramos o total, juntamos as partes."
       },
       {
         "tipo": "texto",
-        "texto": "Sobrou, tirou, quanto a mais → SUBTRAÇÃO.",
+        "texto": "Quando conhecemos o total e uma parte, ou queremos a diferença, procuramos o valor que falta.",
         "destaque": true
       }
     ]
   },
   "momento03_descoberta": {
     "perguntaGuia": "Como saber qual conta usar?",
-    "pista": "Preste atenção nas palavras.",
-    "revelacao": "Leia devagar, marque os números e a pergunta."
+    "pista": "Desenhe a relação entre as quantidades antes de escolher a conta.",
+    "revelacao": "Leia devagar e pergunte: estou juntando partes, acompanhando uma mudança ou comparando quantidades?"
   },
   "momento04_explicacao": {
     "titulo": "Ler antes de calcular",
@@ -50,7 +50,7 @@ export const aula06_problemas: AulaV4 = {
         "texto": "2) Ache a PERGUNTA.",
         "exemploReal": {
           "contexto": "'Quantas figurinhas os dois têm juntos?'",
-          "destaque": "'Juntos' → SOMA."
+          "destaque": "Conhecemos as duas partes e procuramos o total: 234 + 158."
         }
       },
       {
@@ -87,7 +87,7 @@ export const aula06_problemas: AulaV4 = {
         }
       },
       {
-        "texto": "Pergunta 'quanto a mais?' → SUBTRAÇÃO.",
+        "texto": "Quando a pergunta pede a diferença entre duas quantidades, compare o maior valor com o menor.",
         "exemploReal": {
           "contexto": "'Ana tem 234, Pedro 158. Quantas a mais tem Ana?'",
           "destaque": "234 − 158 = 76."
@@ -98,7 +98,7 @@ export const aula06_problemas: AulaV4 = {
   "momento05_modelagem": {
     "enunciado": "Marina tinha R$ 500. Gastou R$ 187. Quanto sobrou?",
     "passos": [
-      "'Sobrou' → SUBTRAÇÃO.",
+      "Havia 500 e uma retirada de 187 diminuiu essa quantidade.",
       "Monte a conta: 500 − 187.",
       "Resolva pela unidade, depois dezena, depois centena.",
       "Resultado: R$ 313."
@@ -132,7 +132,7 @@ export const aula06_problemas: AulaV4 = {
   },
   "momento06_praticaGuiada": {
     "enunciado": "A padaria fez 245 pães de manhã e 168 à tarde. Ao todo?",
-    "dica": "'Ao todo' pede soma.",
+    "dica": "As produções da manhã e da tarde são duas partes; a pergunta pede o total formado por elas.",
     "interacao": {
       "tipo": "escolhaVisual",
       "pergunta": "Escolha:",
@@ -148,8 +148,8 @@ export const aula06_problemas: AulaV4 = {
         }
       ],
       "respostaCerta": "413",
-      "feedbackAcerto": "🎉 'Ao todo' → soma: 413.",
-      "feedbackErro": "245+168=413."
+      "feedbackAcerto": "🎉 Juntamos as duas quantidades: 245 + 168 = 413.",
+      "feedbackErro": "As duas partes formam o total; por isso calculamos 245 + 168 = 413."
     }
   },
   "momento07_praticaIndependente": {
@@ -169,8 +169,8 @@ export const aula06_problemas: AulaV4 = {
         }
       ],
       "respostaCerta": "535",
-      "feedbackAcerto": "🎯 'Ficaram' → subtração: 535.",
-      "feedbackErro": "780−245=535."
+      "feedbackAcerto": "🎯 Partimos de 780 e retiramos 245: 780 − 245 = 535.",
+      "feedbackErro": "A quantidade diminuiu de 780 em 245; por isso 780 − 245 = 535."
     }
   },
   "momento08_aplicacao": {
@@ -199,8 +199,8 @@ export const aula06_problemas: AulaV4 = {
     "pontos": [
       "Leia o problema 2 vezes.",
       "Marque os números.",
-      "Ache a palavra-chave.",
-      "Some ou subtraia."
+      "Conte o que aconteceu com a quantidade.",
+      "Escolha a operação pela relação entre os dados e a pergunta."
     ],
     "miniDesafio": {
       "tipo": "escolhaVisual",
@@ -217,8 +217,8 @@ export const aula06_problemas: AulaV4 = {
         }
       ],
       "respostaCerta": "Subtração",
-      "feedbackAcerto": "🎉 'Quanto a mais' → subtração.",
-      "feedbackErro": "'A mais' compara: subtrai."
+      "feedbackAcerto": "🎉 Para achar a diferença, comparamos as quantidades por subtração.",
+      "feedbackErro": "A pergunta pede a diferença entre duas quantidades; subtraia a menor da maior."
     }
   },
   "momento10_avaliacao": {
@@ -254,7 +254,7 @@ export const aula06_problemas: AulaV4 = {
         ],
         "correta": 0,
         "feedbackAcerto": "🎉 205−128=77.",
-        "feedbackErro": "'A mais' → subtração: 77."
+        "feedbackErro": "Estamos comparando 205 e 128; a diferença é 205 − 128 = 77."
       }
     ]
   },

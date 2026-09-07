@@ -27,7 +27,7 @@ export const aula03: AulaPortuguesV4 = {
   slug: "aula-03-relato-pessoal",
   titulo: "O Relato do Detetive",
   iconeTrilha: "📓",
-  bncc: ["EF03LP18", "EF35LP15", "EF35LP17"],
+  bncc: ["EF35LP07", "EF35LP08", "EF35LP09", "EF15LP05", "EF15LP06"],
   duracaoMin: 20,
 
   momento01_motivacao: {

@@ -29,6 +29,8 @@ export const aula03: AulaGeoV1 = {
     opcoes: [
       { id: "nao", titulo: "NÃO", subtitulo: "variedade de nutrientes importa, não só calorias", emoji: "🥗", cor: "from-emerald-400 to-green-700" },
       { id: "sim", titulo: "SIM", subtitulo: "calorias são tudo que importa", emoji: "🍟", cor: "from-amber-400 to-orange-700" },
+          { id: "c", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
     ],
     respostaCerta: "nao",
     feedbackAcerto: "Certo. Calorias dão energia, mas o corpo também precisa de proteínas, vitaminas e minerais que vêm de alimentos variados.",
@@ -67,7 +69,7 @@ export const aula03: AulaGeoV1 = {
     mapaUrl: alimentacao,
     pontos: [
       { id: "energeticos", x: 25, y: 40, emoji: "🍚", cor: "from-amber-500 to-orange-700",
-        titulo: "Energéticos", texto: "Carboidratos e gorpuras boas dão energia rápida para as atividades do dia.",
+        titulo: "Energéticos", texto: "Carboidratos e gorduras fornecem energia ao organismo; variedade e equilíbrio importam mais do que julgar um alimento isoladamente.",
         fotoUrl: alimentacao },
       { id: "construtores", x: 55, y: 55, emoji: "🍗", cor: "from-red-500 to-rose-700",
         titulo: "Construtores", texto: "Proteínas formam músculos, pele, cabelo e reparam tecidos do corpo.",
@@ -90,6 +92,7 @@ export const aula03: AulaGeoV1 = {
           { id: "a", emoji: "🍗", titulo: "Proteínas", cor: "from-red-500 to-rose-700" },
           { id: "b", emoji: "🍚", titulo: "Carboidratos", cor: "from-amber-500 to-orange-700" },
           { id: "c", emoji: "🍊", titulo: "Vitaminas", cor: "from-emerald-500 to-green-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Sim. PROTEÍNAS são os nutrientes construtores, base dos músculos e tecidos.",
         feedbackErro: "Carboidratos dão energia. Quem CONSTRÓI músculo é a PROTEÍNA." },
@@ -99,6 +102,7 @@ export const aula03: AulaGeoV1 = {
           { id: "a", emoji: "🔥", titulo: "Unidade que mede a energia do alimento", cor: "from-orange-500 to-red-700" },
           { id: "b", emoji: "🍊", titulo: "Um tipo de vitamina", cor: "from-emerald-500 to-green-700" },
           { id: "c", emoji: "🍗", titulo: "Um tipo de proteína", cor: "from-red-500 to-rose-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Correto. Caloria mede quanta ENERGIA um alimento fornece ao corpo.",
         feedbackErro: "Caloria não é vitamina nem proteína — é a UNIDADE que mede energia do alimento." },
@@ -108,6 +112,7 @@ export const aula03: AulaGeoV1 = {
           { id: "a", emoji: "🍽️", titulo: "Cada grupo entrega um nutriente diferente e necessário", cor: "from-teal-500 to-emerald-700" },
           { id: "b", emoji: "🍟", titulo: "Só pra comida ficar mais gostosa", cor: "from-amber-500 to-orange-700" },
           { id: "c", emoji: "⏱️", titulo: "Não faz diferença nenhuma", cor: "from-slate-500 to-slate-700" },
+          { id: "d", emoji: "🔎", titulo: "Preciso comparar outras evidências", cor: "from-blue-500 to-indigo-700" },
         ], correta: "a",
         feedbackAcerto: "Sim. Variar garante energéticos, construtores e reguladores ao mesmo tempo.",
         feedbackErro: "Variar não é só sabor: cada grupo fornece um nutriente que o corpo precisa." },
@@ -252,6 +257,8 @@ export const aula03: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Proteínas", correta: true },
           { id: "b", texto: "Carboidratos" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. PROTEÍNAS constroem e reparam tecidos.",
         feedbackErro: "Carboidratos dão energia. Quem constrói é a PROTEÍNA." },
@@ -260,6 +267,8 @@ export const aula03: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Calorias", correta: true },
           { id: "b", texto: "Vitaminas" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Correto. CALORIAS medem a energia fornecida pelo alimento.",
         feedbackErro: "Vitaminas regulam funções. Quem mede energia é a CALORIA." },
@@ -268,6 +277,8 @@ export const aula03: AulaGeoV1 = {
         opcoes: [
           { id: "a", texto: "Cada grupo fornece um nutriente diferente e necessário", correta: true },
           { id: "b", texto: "Só para o prato ficar mais bonito" },
+          { id: "c", texto: "Preciso comparar outras evidências" },
+          { id: "d", texto: "Preciso comparar outras evidências" },
         ],
         feedbackAcerto: "Sim. Variar garante energia, construção e regulação juntas.",
         feedbackErro: "Não é sobre estética: cada grupo entrega um nutriente essencial." },
