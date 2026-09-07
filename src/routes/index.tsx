@@ -13,6 +13,7 @@ import { useMascot } from "@/contexts/MascotContext";
 import { url as pipaDoutora } from "@/assets/pip-girl-doutora.png.asset.json";
 import { url as pipaProfessora } from "@/assets/pip-girl-professora.png.asset.json";
 import { url as pipaAstronauta } from "@/assets/pip-girl-astronauta.png.asset.json";
+import { resolveAccountDestination } from "@/lib/account-routing";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -151,12 +152,23 @@ function Index() {
   const companionName = childMascotProfile?.active_mascot === "pipa" ? "Pipa" : "Pip";
   const navigate = useNavigate();
   const [showEggHatch, setShowEggHatch] = useState(false);
+  const [roleChecked, setRoleChecked] = useState(false);
 
   useEffect(() => {
-    if (!isLoading && session && allChildren.length === 0) {
+    if (!session?.user) { setRoleChecked(true); return; }
+    void resolveAccountDestination(session.user).then((target) => {
+      if (target !== "/") navigate({ href: target, replace: true });
+      else setRoleChecked(true);
+    }).catch(() => setRoleChecked(true));
+  }, [session?.user?.id, navigate]);
+
+  useEffect(() => {
+    if (roleChecked && !isLoading && session && allChildren.length === 0) {
       navigate({ to: "/anamnese/$childId", params: { childId: "nova" }, replace: true });
     }
-  }, [isLoading, session, allChildren.length, navigate]);
+  }, [roleChecked, isLoading, session, allChildren.length, navigate]);
+
+  if (!roleChecked) return <div className="min-h-screen grid place-items-center"><div className="h-9 w-9 animate-spin rounded-full border-4 border-indigo-200 border-t-indigo-600" /></div>;
 
   useEffect(() => {
     if (activeChild?.id && activeChild.anamnese_completa && shouldShowEggHatch(activeChild.id)) {

@@ -4,6 +4,7 @@ import { Loader2 } from "lucide-react";
 import { supabase } from "@/database/supabase/client";
 import { toast } from "sonner";
 import { lovable } from "@/integrations/lovable";
+import { resolveAccountDestination, saveAccountType, type AccountType } from "@/lib/account-routing";
 
 function safeNext(value: unknown): string {
   if (typeof value !== "string") return "";
@@ -25,7 +26,7 @@ export const Route = createFileRoute("/auth")({
 function Auth() {
   const navigate = useNavigate();
   const { next } = Route.useSearch();
-  const [accountType, setAccountType] = useState<"family" | "teacher" | null>(null);
+  const [accountType, setAccountType] = useState<AccountType | null>(null);
   const dest = next || (accountType === "teacher" ? "/area-professor" : "/");
   const [mode, setMode] = useState<"login" | "signup">("login");
   const [email, setEmail] = useState("");
@@ -48,13 +49,17 @@ function Auth() {
   };
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => {
+    supabase.auth.getSession().then(async ({ data }) => {
       if (data.session) {
         const stored = readStoredNext();
+        const storedType = sessionStorage.getItem("nb:account-type") as AccountType | null;
         try {
           sessionStorage.removeItem("nb:auth-next");
+          sessionStorage.removeItem("nb:account-type");
         } catch {}
-        navigate({ href: stored || dest, replace: true });
+        if (storedType === "teacher" || storedType === "family") await saveAccountType(storedType);
+        const target = await resolveAccountDestination(data.session.user, storedType, stored || next);
+        navigate({ href: target, replace: true });
       } else {
         setChecking(false);
       }
@@ -77,7 +82,10 @@ function Auth() {
             const { error: loginError } = await supabase.auth.signInWithPassword({ email, password });
             if (!loginError) {
               toast.success("Conta encontrada. Você já entrou neste aparelho.");
-              navigate({ href: dest, replace: true });
+              await saveAccountType(accountType!);
+              const { data: current } = await supabase.auth.getUser();
+              const target = current.user ? await resolveAccountDestination(current.user, accountType, next) : dest;
+              navigate({ href: target, replace: true });
               return;
             }
 
@@ -91,7 +99,10 @@ function Auth() {
         const { data } = await supabase.auth.getSession();
         if (data.session) {
           toast.success("Conta criada!");
-          navigate({ href: dest, replace: true });
+          await saveAccountType(accountType!);
+          const { data: current } = await supabase.auth.getUser();
+          const target = current.user ? await resolveAccountDestination(current.user, accountType, next) : dest;
+          navigate({ href: target, replace: true });
         } else {
           toast.success("Conta criada! Verifique seu email para confirmar.");
           setMode("login");
@@ -100,7 +111,10 @@ function Auth() {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
         toast.success("Bem-vindo!");
-        navigate({ href: dest, replace: true });
+        await saveAccountType(accountType!);
+        const { data: current } = await supabase.auth.getUser();
+        const target = current.user ? await resolveAccountDestination(current.user, accountType, next) : dest;
+        navigate({ href: target, replace: true });
       }
     } catch (err: any) {
       if (isAlreadyRegisteredError(err?.message)) {
@@ -127,16 +141,16 @@ function Auth() {
       <div className="min-h-screen bg-sidebar grid place-items-center p-4">
         <div className="w-full max-w-2xl space-y-6">
           <div className="text-center">
-            <div className="mx-auto h-20 w-20 rounded-[2rem] bg-gradient-to-br from-primary to-success grid place-items-center text-5xl shadow-glow">🌱</div>
+            <img src="/app-icon-1024.png" alt="Pip e Pipa" className="mx-auto h-24 w-24 rounded-[2rem] object-cover shadow-xl" />
             <h1 className="mt-4 text-3xl font-black">Como você vai usar o NeuroBrilha?</h1>
             <p className="text-muted-foreground mt-2">Cada perfil entra em uma área separada.</p>
           </div>
           <div className="grid sm:grid-cols-2 gap-4">
             <button onClick={() => setAccountType("family")} className="min-h-48 rounded-3xl border-2 bg-white p-6 text-left hover:border-primary transition-colors">
-              <div className="text-4xl">👨‍👩‍👧</div><h2 className="mt-4 text-xl font-black">Família e criança</h2><p className="mt-2 text-sm text-muted-foreground">Assinatura familiar, perfil da criança, rotina, progresso e Área dos Pais.</p>
+              <img src="/pwa-192x192.png" alt="Mascotes da família" className="h-14 w-14 rounded-2xl object-cover" /><h2 className="mt-4 text-xl font-black">Família e criança</h2><p className="mt-2 text-sm text-muted-foreground">Assinatura familiar, perfil da criança, rotina, progresso e Área dos Pais.</p>
             </button>
             <button onClick={() => setAccountType("teacher")} className="min-h-48 rounded-3xl border-2 bg-white p-6 text-left hover:border-indigo-500 transition-colors">
-              <div className="text-4xl">🧑‍🏫</div><h2 className="mt-4 text-xl font-black">Professor</h2><p className="mt-2 text-sm text-muted-foreground">Materiais para ensinar e imprimir. Conectar aluno assinante é opcional.</p>
+              <img src="/pwa-192x192.png" alt="Mascote do professor" className="h-14 w-14 rounded-2xl object-cover" /><h2 className="mt-4 text-xl font-black">Professor</h2><p className="mt-2 text-sm text-muted-foreground">Materiais para ensinar e imprimir. Conectar aluno assinante é opcional.</p>
             </button>
           </div>
         </div>
@@ -147,9 +161,7 @@ function Auth() {
   return (
     <div className="min-h-screen bg-sidebar grid place-items-center p-4">
       <div className="w-full max-w-sm flex flex-col items-center gap-5">
-        <div className="h-20 w-20 rounded-[2rem] bg-gradient-to-br from-primary to-success grid place-items-center text-5xl shadow-glow transform -rotate-6">
-          🌱
-        </div>
+        <img src="/app-icon-1024.png" alt="Pip e Pipa" className="h-20 w-20 rounded-[2rem] object-cover shadow-xl" />
         <div className="text-center">
           <h1 className="text-3xl font-black tracking-tight text-foreground">NeuroBrilha</h1>
           <p className="text-muted-foreground font-bold uppercase tracking-widest text-[10px] mt-1">
@@ -217,9 +229,10 @@ function Auth() {
               setLoading(true);
               try {
                 sessionStorage.setItem("nb:auth-next", dest);
+                sessionStorage.setItem("nb:account-type", accountType);
               } catch {}
               const res = await lovable.auth.signInWithOAuth("google", {
-                redirect_uri: window.location.origin,
+                redirect_uri: `${window.location.origin}/auth`,
               });
               if (res.error) {
                 toast.error(res.error.message ?? "Erro no login Google");

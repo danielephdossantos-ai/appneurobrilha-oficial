@@ -130,6 +130,11 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const location = useLocation();
+  const isProfessionalArea =
+    location.pathname.startsWith("/area-professor") ||
+    location.pathname.startsWith("/admin") ||
+    location.pathname.startsWith("/auth");
 
   useStopSpeechOnScroll();
   
@@ -159,11 +164,11 @@ function RootComponent() {
               <GradeGuard>
                 <div className="relative min-h-screen">
                 <Outlet />
-                <LGPDConsent />
+                {!isProfessionalArea && <LGPDConsent />}
                 <ConnectivityStatus />
-                <MascotGlobalContainer />
-                <ParentPinGate />
-                <ProfessorBrilhoMount />
+                {!isProfessionalArea && <MascotGlobalContainer />}
+                {!isProfessionalArea && <ParentPinGate />}
+                {!isProfessionalArea && <ProfessorBrilhoMount />}
               </div>
             </GradeGuard>
           </HiperfocoProvider>

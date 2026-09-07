@@ -26,7 +26,7 @@ export const LGPDConsent: React.FC = () => {
     mountedRef.current = true;
 
     // Não mostrar na tela de autenticação
-    if (location.pathname === "/auth") {
+    if (location.pathname === "/auth" || location.pathname.startsWith("/area-professor") || location.pathname.startsWith("/admin")) {
       setShow(false);
       return;
     }

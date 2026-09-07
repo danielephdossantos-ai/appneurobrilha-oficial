@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { BarChart3, BookOpen, BookOpenCheck, ClipboardList, Copy, FileCheck2, GraduationCap, Loader2, Sparkles, Users } from "lucide-react";
 import { toast } from "sonner";
-import { Shell } from "@/components/Layout";
+import { TeacherShell as Shell } from "@/components/teacher/TeacherShell";
 import { supabase } from "@/database/supabase/client";
 
 export const Route = createFileRoute("/area-professor")({ component: TeacherArea });
