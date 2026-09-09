@@ -1,0 +1,332 @@
+import type { AulaPortuguesV4 } from "../../types";
+import { url as brilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
+import { url as menina } from "@/assets/neuro-treino/objetos/menina.png.asset.json";
+import { url as menino } from "@/assets/neuro-treino/objetos/menino.png.asset.json";
+import { url as gato } from "@/assets/neuro-treino/objetos/gato.png.asset.json";
+import { url as cachorro } from "@/assets/neuro-treino/objetos/cachorro.png.asset.json";
+import { url as sol } from "@/assets/neuro-treino/objetos/sol.png.asset.json";
+import { url as lua } from "@/assets/neuro-treino/objetos/lua.png.asset.json";
+import { url as flor } from "@/assets/neuro-treino/objetos/flor.png.asset.json";
+
+/**
+ * Aula 4 — Leio e Entendo a Frase
+ * -------------------------------------------------------------
+ * Fecha a Unidade 3. A criança lê uma frase e escolhe a imagem ou
+ * ideia que combina com ela — consolidando leitura com compreensão.
+ *
+ * BNCC: EF01LP09, EF01LP14, EF12LP04
+ */
+export const aula04: AulaPortuguesV4 = {
+  slug: "aula-04-lendo-frases",
+  titulo: "Leio e Entendo a Frase",
+  iconeTrilha: "🧩",
+  bncc: ["EF01LP09", "EF01LP14", "EF12LP04"],
+  duracaoMin: 15,
+
+  momento01_motivacao: {
+    titulo: "O jogo das frases certas",
+    historia:
+      "Brilha inventou um jogo novo: lê uma frase e escolhe a figurinha que combina com ela. 'O sol brilha no céu.' — qual figurinha combina? Vamos jogar juntos e mostrar que você já sabe ler e entender frases inteiras!",
+    imagemUrl: brilha,
+  },
+
+  momento02_previsao: {
+    instrucao: "Leia a frase e pense: qual imagem combina com ela?",
+    bloco: {
+      titulo: "Qual figurinha combina?",
+      capaImagemUrl: sol,
+      recado: {
+        rotulo: "Frase",
+        icone: "🔎",
+        linhas: ["O sol brilha no céu."],
+        estilo: "cartaz",
+      },
+      pergunta: "Qual figurinha combina com essa frase?",
+      hipoteses: [
+        { texto: "Um sol brilhando", imagemUrl: sol },
+        { texto: "Uma lua no céu escuro", imagemUrl: lua },
+        { texto: "Um cachorro correndo", imagemUrl: cachorro },
+      ],
+      respostaCerta: 0,
+      feedbackAcerto:
+        "🎉 Isso! A frase fala do SOL brilhando — a figurinha certa é o sol.",
+      feedbackErro:
+        "Releia a frase: 'O sol brilha no céu.' A palavra principal é SOL, então a figurinha certa é o sol.",
+    },
+  },
+
+  momento03_vocabulario: {
+    instrucao: "Palavras de hoje.",
+    cards: [
+      {
+        palavra: "entender",
+        explicacao: "É saber o que a frase quer dizer, não só ler as letras.",
+        exemplo: "Eu li a frase e entendi: o gato dorme.",
+        imagemUrl: gato,
+      },
+      {
+        palavra: "combinar",
+        explicacao: "Quando duas coisas ficam juntas porque fazem sentido uma com a outra.",
+        exemplo: "A imagem do sol combina com a frase sobre o dia.",
+        imagemUrl: sol,
+      },
+    ],
+  },
+
+  momento04_leituraGuiada: {
+    instrucao: "Leia com atenção — depois vamos escolher as imagens certas.",
+    leitura: {
+      titulo: "Um dia no jardim",
+      imagemUrl: flor,
+      legendaImagem: "O jardim de Duda",
+      destacar: ["jardim", "flor", "gato"],
+      paragrafos: [
+        "Duda vai ao jardim todo dia. Ela rega as flores com cuidado.",
+        "O gato de Duda dorme perto das flores, tomando sol.",
+      ],
+    },
+  },
+
+  momento05_compreensao: {
+    instrucao: "Volte no texto se precisar.",
+    perguntas: [
+      {
+        pergunta: "O que Duda faz com as flores?",
+        opcoes: ["Ela corta", "Ela rega", "Ela pisa"],
+        correta: 1,
+        feedbackAcerto: "🎉 Isso! Ela rega as flores com cuidado.",
+        feedbackErro: "Releia: 'Ela rega as flores com cuidado.'",
+        ondeEstaNoTexto: "Ela rega as flores com cuidado.",
+      },
+      {
+        pergunta: "Onde o gato dorme?",
+        opcoes: ["Dentro de casa", "Perto das flores", "Na rua"],
+        correta: 1,
+        feedbackAcerto: "🎉 Boa! Ele dorme perto das flores.",
+        feedbackErro: "Está na última frase: 'dorme perto das flores'.",
+        ondeEstaNoTexto: "O gato de Duda dorme perto das flores, tomando sol.",
+      },
+    ],
+  },
+
+  momento06_personagensCenario: {
+    instrucao: "Vamos pensar sobre entender frases.",
+    perguntas: [
+      {
+        pergunta: "Ler e só reconhecer as letras é o mesmo que entender a frase?",
+        opcoes: ["Sim, é a mesma coisa", "Não, entender é saber o que ela quer dizer", "Não importa"],
+        correta: 1,
+        feedbackAcerto:
+          "🎉 Isso! Bom leitor não só lê as letras — ele entende a ideia da frase.",
+        feedbackErro: "Ler letras é só o começo. O importante é entender o que a frase está dizendo.",
+      },
+      {
+        pergunta: "Qual imagem combina com 'O gato dorme perto das flores'?",
+        opcoes: ["Um gato dormindo perto de flores", "Um carro andando", "Um menino correndo"],
+        correta: 0,
+        feedbackAcerto: "🎉 Isso! A imagem precisa combinar com o que a frase diz.",
+        feedbackErro: "Releia a frase — ela fala de um GATO dormindo perto de FLORES.",
+      },
+    ],
+  },
+
+  momento07_sequencia: {
+    instrucao: "Essas frases contam o dia de Duda. Coloque na ordem certa.",
+    bloco: {
+      instrucao: "Começo → meio → fim.",
+      itens: [
+        { id: "d1", texto: "Duda vai ao jardim.", imagemUrl: menina },
+        { id: "d2", texto: "Ela rega as flores.", imagemUrl: flor },
+        { id: "d3", texto: "O gato dorme ao sol.", imagemUrl: gato },
+      ],
+      ordemCerta: ["d1", "d2", "d3"],
+      feedbackAcerto: "🎉 Perfeito! Você entendeu certinho a ordem da história.",
+      feedbackErro: "Pense: primeiro ela VAI ao jardim, depois REGA as flores, por último o gato DORME.",
+    },
+  },
+
+  momento_minijogo: {
+    titulo: "Frase e Figurinha",
+    instrucao: "Leia cada frase e arraste até a imagem que combina com ela.",
+    jogo: {
+      tipo: "arrastarParaAlvo",
+      titulo: "Encontre a imagem certa",
+      bloco: {
+        instrucao: "Arraste cada frase até a figurinha que combina.",
+        itens: [
+          { id: "i1", texto: "O sol brilha no céu.", alvoId: "a-sol" },
+          { id: "i2", texto: "O cachorro late alto.", alvoId: "a-cachorro" },
+          { id: "i3", texto: "A menina brinca no jardim.", alvoId: "a-menina" },
+        ],
+        alvos: [
+          { id: "a-sol", nome: "Sol", imagemUrl: sol },
+          { id: "a-cachorro", nome: "Cachorro", imagemUrl: cachorro },
+          { id: "a-menina", nome: "Menina", imagemUrl: menina },
+        ],
+        feedbackAcerto: "🎉 Isso! Você leu a frase e encontrou a imagem que combina com ela!",
+        feedbackErro: "Releia a frase com calma: a palavra principal mostra qual figurinha combina.",
+      },
+    },
+  },
+
+  momento08_leituraIndependente: {
+    instrucao: "Agora leia sozinho e responda.",
+    leitura: {
+      titulo: "O passeio de Téo",
+      imagemUrl: menino,
+      destacar: ["Téo", "lua"],
+      paragrafos: [
+        "À noite, Téo olha pela janela e vê a lua no céu.",
+        "Ele sorri e pensa: a lua é linda.",
+      ],
+    },
+    perguntas: [
+      {
+        pergunta: "Quando Téo olha pela janela?",
+        opcoes: ["De manhã", "À tarde", "À noite"],
+        correta: 2,
+        feedbackAcerto: "🎉 Isso! É de noite.",
+        feedbackErro: "Releia a primeira frase: 'À noite, Téo olha pela janela...'",
+        ondeEstaNoTexto: "À noite, Téo olha pela janela e vê a lua no céu.",
+      },
+      {
+        pergunta: "O que Téo pensa sobre a lua?",
+        opcoes: ["Que ela é fria", "Que ela é linda", "Que ela é pequena"],
+        correta: 1,
+        feedbackAcerto: "🎉 Isso! Ele pensa que 'a lua é linda'.",
+        feedbackErro: "Está na última frase: 'a lua é linda'.",
+        ondeEstaNoTexto: "Ele sorri e pensa: a lua é linda.",
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // ESCRITA — traçado com o dedo + ditado com sílabas móveis
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Ler e escrever frases inteiras",
+    instrucao: "Você já lê frases. Agora escreva as suas com começo, meio e fim.",
+    blocos: [
+      {
+        tipo: "tracadoLetra",
+        letras: [
+          { letra: "D", exemplo: "D de DUDA", dicaTracado: "desce e faz uma barriga grande" },
+          { letra: "T", exemplo: "T de TÉO", dicaTracado: "desce e põe o chapéu em cima" },
+        ],
+      },
+      {
+        tipo: "ditadoSilabas",
+        palavras: [
+          { palavra: "FLOR", silabas: ["FLOR"], distratores: ["CA", "MI"], dica: "O que Duda rega no jardim." },
+          { palavra: "GATO", silabas: ["GA", "TO"], distratores: ["PA", "LU"], dica: "Quem dorme perto das flores." },
+        ],
+      },
+      {
+        tipo: "escritaReal",
+        formato: "lista",
+        titulo: "O meu dia em frases",
+        comando: "Escreva 4 frases contando o que você fez hoje.",
+        linhas: 4,
+        modelo: ["De manhã eu acordei.", "Eu comi pão.", "Eu brinquei na rua.", "À noite eu dormi."],
+        checklist: ["Comecei com letra maiúscula?", "Deixei espaço entre as palavras?", "Coloquei o ponto no final?"],
+      },
+    ],
+  },
+
+  momento09_revisao: {
+    pontos: [
+      "Entender uma frase é saber o que ela quer dizer, não só ler as letras.",
+      "Cada frase combina com uma imagem ou ideia — a que faz sentido com ela.",
+      "Voltar e reler ajuda a ter certeza da resposta certa.",
+      "Você já sabe ler frases inteiras e mostrar que entendeu!",
+    ],
+    miniDesafio: {
+      pergunta: "Qual imagem combina com 'O sol brilha no céu'?",
+      opcoes: ["Um sol", "Uma lua", "Um cachorro"],
+      correta: 0,
+      feedbackAcerto: "🎉 Isso! A frase fala do sol.",
+      feedbackErro: "Releia a frase — a palavra principal é SOL.",
+    },
+  },
+
+  momento10_avaliacao: {
+    perguntas: [
+      {
+        pergunta: "1/5 — O que é entender uma frase?",
+        opcoes: [
+          "Só reconhecer as letras",
+          "Saber o que ela quer dizer",
+          "Contar quantas palavras tem",
+          "Ler bem rápido",
+        ],
+        correta: 1,
+        feedbackAcerto: "🎉 Isso mesmo!",
+        feedbackErro: "Dá para ler rápido e não entender nada. Entender é saber o SENTIDO da frase.",
+      },
+      {
+        pergunta: "2/5 — Qual imagem combina com 'O cachorro late alto'?",
+        opcoes: [
+          "Um cachorro latindo",
+          "Um cachorro dormindo",
+          "Um gato miando",
+          "Uma flor no vaso",
+        ],
+        correta: 0,
+        feedbackAcerto: "🎉 Isso!",
+        feedbackErro: "Não basta aparecer um cachorro: na frase ele está LATINDO, não dormindo.",
+      },
+      {
+        pergunta: "3/5 — Quando Téo viu a lua?",
+        opcoes: ["De manhã", "À noite", "De tarde", "Ao meio-dia"],
+        correta: 1,
+        feedbackAcerto: "🎉 Isso! À noite.",
+        feedbackErro: "No texto: 'À noite, Téo olha pela janela...'",
+      },
+      {
+        pergunta: "4/5 — O que Duda faz com as flores?",
+        opcoes: ["Ela rega", "Ela colhe", "Ela corta", "Ela joga fora"],
+        correta: 0,
+        feedbackAcerto: "🎉 Isso! Ela rega as flores.",
+        feedbackErro: "No texto: 'Ela rega as flores com cuidado.'",
+      },
+      {
+        pergunta: "5/5 — Pra ter certeza da resposta certa, o que devemos fazer?",
+        opcoes: ["Adivinhar", "Reler o texto", "Perguntar pro colega", "Pular a pergunta"],
+        correta: 1,
+        feedbackAcerto: "🎉 Isso! Reler ajuda a confirmar a resposta.",
+        feedbackErro: "A resposta está no texto: o bom leitor sempre RELÊ para ter certeza.",
+      },
+    ],
+  },
+
+  momento11_missaoFamilia: {
+    titulo: "🏠 Frase e desenho",
+    materiais: ["Papel e lápis de cor"],
+    passos: [
+      "1) Um adulto escreve 3 frases simples (ex.: 'O gato dorme no sofá.').",
+      "2) A criança lê cada frase em voz alta.",
+      "3) Para cada frase, a criança faz um desenho que combina com ela.",
+      "4) Conversem: o desenho combina com o que a frase diz?",
+    ],
+    registro: "🖼️ Foto dos 3 desenhos junto com as frases.",
+  },
+
+  // Fase 9 — fluência por releitura (mesmo texto, 3 leituras).
+  momento_fluencia: {
+    titulo: "Ler de novo, mais solto",
+    instrucao:
+      "Agora a gente lê o MESMO texto três vezes: a primeira comigo, a segunda sozinho e a terceira de novo. Ler de novo faz as palavras ficarem fáceis — você vai sentir a boca soltar.",
+    texto: [
+      "A LUA SUBIU.",
+      "O SOL SUMIU.",
+      "A NOITE CAIU.",
+    ],
+    metaSegundos: 20,
+  },
+
+  recompensa: {
+    xp: 150,
+    moedas: 90,
+    medalha: "Construtor de Frases",
+  },
+};

@@ -1,0 +1,1 @@
+DELETE FROM public.aulas_bncc WHERE id = 'f842082a-b72d-411d-a441-779a5f4e1a33';

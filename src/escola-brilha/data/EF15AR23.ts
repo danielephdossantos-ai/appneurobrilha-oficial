@@ -1,0 +1,2 @@
+import { criarAulaArte1 } from "./criarAulaArte1";
+export default criarAulaArte1({ codigo: "EF15AR23", titulo: "Arte que Mistura Linguagens", foco: "Reconhecer e experimentar projetos que unem artes visuais, dança, música e teatro", objeto: "artes integradas", exemplos: ["Unir imagem, som, movimento e cena", "Usar apenas uma cópia", "Separar todas as linguagens", "Ignorar o projeto"], resposta: "Planejar uma criação que combine pelo menos duas linguagens artísticas.", proxima: "EF15AR24" });

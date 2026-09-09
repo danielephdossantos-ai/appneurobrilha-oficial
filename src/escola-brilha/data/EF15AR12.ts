@@ -1,0 +1,2 @@
+import { criarAulaArte1 } from "./criarAulaArte1";
+export default criarAulaArte1({ codigo: "EF15AR12", titulo: "Conversando Sobre a Dança", foco: "Discutir experiências pessoais e coletivas em dança sem preconceito", objeto: "reflexão e respeito na dança", exemplos: ["Contar o que sentiu e ouvir colegas", "Rir do movimento alheio", "Escolher só um corpo correto", "Proibir novas ideias"], resposta: "Compartilhar percepções com respeito e reconhecer que corpos diferentes dançam.", proxima: "EF15AR13" });

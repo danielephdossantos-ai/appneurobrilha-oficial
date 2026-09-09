@@ -1,0 +1,6 @@
+import { criarAulaGeo1 } from "./criarAulaGeo1";
+export default criarAulaGeo1({ codigo: "EF01GE02", titulo: "Brincadeiras de Outros Tempos e Lugares", tema: "jogos e brincadeiras", explicacao: "Crianças brincam de modos diferentes conforme o lugar, o tempo e a cultura. Algumas brincadeiras atravessam gerações; outras usam materiais e regras próprios de uma comunidade.", exemplo: "Amarelinha aparece em muitos lugares, com desenhos e nomes diferentes.", missao: "Compare uma brincadeira da criança com outra ensinada por um familiar ou comunidade.", proxima: "EF01GE03", questoes: [
+  { pergunta: "Brincadeiras são iguais em todo lugar?", opcoes: ["Não, podem variar entre culturas", "Sim, sempre", "Só existem na escola", "Não têm regras"], correta: 0, explicacao: "Grupos criam e transformam brincadeiras." },
+  { pergunta: "Como descobrir uma brincadeira antiga?", opcoes: ["Perguntando a pessoas mais velhas", "Adivinhando", "Ignorando relatos", "Olhando só brinquedos novos"], correta: 0, explicacao: "Relatos ajudam a conhecer outros tempos." },
+  { pergunta: "O que podemos comparar?", opcoes: ["Regras, materiais e participantes", "Somente a cor", "Apenas o vencedor", "Nada"], correta: 0, explicacao: "Esses elementos mostram semelhanças e diferenças." },
+] });

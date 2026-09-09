@@ -1,0 +1,2638 @@
+import { useState, useRef, useEffect, useMemo, useContext, createContext, Fragment } from "react";
+import { Link, useNavigate } from "@tanstack/react-router";
+import { useBackNavigation } from "@/lib/navigation-context";
+import { Volume2, VolumeX } from "lucide-react";
+import { cn } from "@/utils/utils";
+import type { AulaV4, Interacao } from "../types";
+import { speakChunked, stopSpeaking } from "@/lib/native-tts";
+import { FrutasParaNumero } from "./blocos/FrutasParaNumero";
+import { ContaArmada } from "./blocos/ContaArmada";
+import { MinijogoColheita } from "./blocos/MinijogoColheita";
+import { RenderVisualMat, type VisualMat } from "./blocos/VisuaisMat";
+import { cursoUsaLousa, lousaDeTexto, lousaDePassos } from "./blocos/lousa-auto";
+
+import { MissaoFamiliaFoto } from "@/escola-brilha/curso-v4/player-portugues/blocos/MissaoFamiliaFoto";
+import { AquecimentoRevisao } from "@/escola-brilha/curso-v4/AquecimentoRevisao";
+
+import { METODOLOGIAS_MAT, metodologia } from "@/escola-brilha/curso-v4/metodologias-mat";
+import { useAppState } from "@/core/store";
+
+function aplicarNome(texto: string, nome?: string): string {
+  const primeiro = (nome ?? "").trim().split(/\s+/)[0] ?? "";
+  if (primeiro) {
+    return texto
+      .replace(/\{NOME\}/g, primeiro)
+      .replace(/\{INICIAL\}/g, primeiro.charAt(0).toUpperCase());
+  }
+  // Sem nome: remove o token e limpa pontuação/espaços residuais no início.
+  return texto
+    .replace(/\{NOME\},?\s*/g, "")
+    .replace(/\{INICIAL\},?\s*/g, "")
+    .replace(/^\s*[,\-–—]\s*/, "")
+    .replace(/^./, (c) => c.toUpperCase());
+}
+
+/**
+ * Lousa interativa automática (padrão Pip Teen Roqueiro).
+ * Ativa em todo curso de matemática do 5º ao 9º ano: qualquer conta que
+ * apareça numa cena vira lousa escrita passo a passo, com a fala do
+ * professor em cada linha.
+ */
+const LousaAtivaCtx = createContext(false);
+
+export function useLousaAtiva() {
+  return useContext(LousaAtivaCtx);
+}
+
+/** Renderiza a lousa interativa se houver conta no texto. Senão, null. */
+function LousaConta({ texto }: { texto: string }) {
+  const ativa = useLousaAtiva();
+  const lousa = useMemo(() => (ativa ? lousaDeTexto(texto) : undefined), [ativa, texto]);
+  if (!lousa) return null;
+  return <RenderVisualMat v={lousa} />;
+}
+
+
+/**
+ * Player v4.1 — Escola Brilha (tela única com scroll)
+ * ---------------------------------------------------
+ * Todos os 11 momentos são renderizados em sequência numa única página
+ * rolável. A criança desce a tela livremente. Uma barra lateral mostra
+ * o progresso e permite pular para qualquer momento.
+ */
+
+type Props = {
+  aula: AulaV4;
+  cursoSlug: string;
+  voltarPara: string;
+  onConcluir?: () => void;
+};
+
+const MOMENTOS: Array<{ id: string; label: string; key: keyof AulaV4 }> = [
+  { id: "m1", label: "🎬 Motivação", key: "momento01_motivacao" },
+  { id: "m2", label: "👀 Exploração", key: "momento02_exploracao" },
+  { id: "m3", label: "💡 Descoberta", key: "momento03_descoberta" },
+  { id: "m4", label: "📖 Explicação", key: "momento04_explicacao" },
+  { id: "m5", label: "🧠 Brilha resolve", key: "momento05_modelagem" },
+  { id: "m6", label: "🤝 Nós fazemos", key: "momento06_praticaGuiada" },
+  { id: "m7", label: "💪 Você faz", key: "momento07_praticaIndependente" },
+  { id: "m8", label: "🌎 Na vida real", key: "momento08_aplicacao" },
+  { id: "m9", label: "🔁 Revisão", key: "momento09_revisao" },
+  { id: "m10", label: "✅ O que aprendeu", key: "momento10_avaliacao" },
+  { id: "m11", label: "🏠 Missão em Família", key: "momento11_missaoFamilia" },
+];
+
+export function PlayerV4({ aula, cursoSlug, voltarPara, onConcluir }: Props) {
+  const [ativo, setAtivo] = useState("m1");
+  const navigate = useNavigate();
+  const { handleBack } = useBackNavigation();
+
+  useEffect(() => {
+    const els = MOMENTOS.map((m) => document.getElementById(m.id)).filter(Boolean) as HTMLElement[];
+    if (!els.length) return;
+    const obs = new IntersectionObserver(
+      (entries) => {
+        const vis = entries.filter((e) => e.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        if (vis[0]) setAtivo(vis[0].target.id);
+      },
+      { rootMargin: "-30% 0px -50% 0px", threshold: [0, 0.25, 0.5, 0.75] },
+    );
+    els.forEach((el) => obs.observe(el));
+    return () => obs.disconnect();
+  }, [aula.slug]);
+
+  useEffect(() => () => stopSpeaking(), []);
+
+  return (
+    <LousaAtivaCtx.Provider value={cursoUsaLousa(cursoSlug)}>
+    <div className="min-h-screen bg-gradient-to-b from-[#0d1f55] to-[#1e3a8a] text-white">
+
+      <header className="sticky top-0 z-20 bg-[#0d1f55]/95 backdrop-blur border-b border-white/10">
+        <div className="max-w-5xl mx-auto px-4 py-3 flex items-center gap-3">
+          <button
+            onClick={() => {
+              if (!handleBack(navigate)) {
+                navigate({ to: "/escola-brilha/curso/$slug", params: { slug: cursoSlug } });
+              }
+            }}
+            className="text-sm text-white/70 hover:text-white"
+          >
+            ← Trilha
+          </button>
+          <div className="flex-1 min-w-0">
+            <div className="text-sm font-bold truncate">{aula.titulo}</div>
+            <div className="text-[10px] text-white/60">Role para descer a aula ↓</div>
+          </div>
+        </div>
+      </header>
+
+      <div className="max-w-5xl mx-auto px-4 py-6 lg:flex lg:gap-6">
+        {/* Índice lateral (desktop) */}
+        <aside className="hidden lg:block w-56 shrink-0">
+          <div className="sticky top-24 space-y-1">
+            {MOMENTOS.map((m) => (
+              <a
+                key={m.id}
+                href={`#${m.id}`}
+                className={`block text-xs px-3 py-2 rounded-lg transition ${
+                  ativo === m.id ? "bg-amber-400 text-[#0d1f55] font-bold" : "text-white/70 hover:bg-white/10"
+                }`}
+              >
+                {m.label}
+              </a>
+            ))}
+          </div>
+        </aside>
+
+        <main className="flex-1 space-y-8 min-w-0">
+          <AquecimentoRevisao cursoSlug={cursoSlug} aulaSlug={aula.slug} />
+          <Secao id="m1" label="🎬 Motivação"><Motivacao m={aula.momento01_motivacao} /></Secao>
+          <Secao id="m2" label="👀 Exploração"><Exploracao m={aula.momento02_exploracao} /></Secao>
+          <Secao id="m3" label="💡 Descoberta"><Descoberta m={aula.momento03_descoberta} /></Secao>
+          <Secao id="m4" label="📖 Explicação"><Explicacao m={aula.momento04_explicacao} /></Secao>
+          <Secao id="m5" label="🧠 Brilha resolve"><Modelagem m={aula.momento05_modelagem} /></Secao>
+          <Secao id="m6" label="🤝 Nós fazemos"><PraticaGuiada m={aula.momento06_praticaGuiada} /></Secao>
+          <Secao id="m7" label="💪 Você faz"><PraticaIndep m={aula.momento07_praticaIndependente} /></Secao>
+          <Secao id="m8" label="🌎 Na vida real"><Aplicacao m={aula.momento08_aplicacao} /></Secao>
+          <Secao id="m9" label="🔁 Revisão"><Revisao m={aula.momento09_revisao} /></Secao>
+          <Secao id="m10" label="✅ O que aprendeu"><Avaliacao m={aula.momento10_avaliacao} /></Secao>
+          <Secao id="m11" label="🏠 Missão em Família"><MissaoFamilia m={aula.momento11_missaoFamilia} cursoSlug={cursoSlug} aulaSlug={aula.slug} /></Secao>
+
+          <RodapeMetodologias chaves={aula.metodologias} />
+
+          <div className="pt-6 flex flex-col items-center gap-3">
+            <button
+              onClick={() => onConcluir?.()}
+              className="px-8 py-4 rounded-xl bg-amber-400 text-[#0d1f55] font-black text-lg hover:bg-amber-300"
+            >
+              🎉 Concluir aula
+            </button>
+            <button
+              onClick={() => {
+                if (!handleBack(navigate)) {
+                  navigate({ to: voltarPara });
+                }
+              }}
+              className="text-xs text-white/50 hover:text-white/80"
+            >
+              Sair para a trilha
+            </button>
+          </div>
+        </main>
+      </div>
+
+    </div>
+    </LousaAtivaCtx.Provider>
+  );
+
+}
+
+// ---------- Wrapper de seção ----------------------------------------
+function Secao({ id, label, children }: { id: string; label: string; children: React.ReactNode }) {
+  const [falando, setFalando] = useState(false);
+  useEffect(() => () => { try { window.speechSynthesis?.cancel(); } catch {} }, []);
+  const ouvir = () => {
+    if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
+    if (falando) { window.speechSynthesis.cancel(); setFalando(false); return; }
+    const sec = document.getElementById(id);
+    if (!sec) return;
+    const clone = sec.cloneNode(true) as HTMLElement;
+    clone.querySelectorAll('button, [role="button"], [data-no-tts], input, select, textarea').forEach((n) => n.remove());
+    const txt = (clone.textContent || "").replace(/\s+/g, " ").replace(/[🔊▶✓←→✅❌🎬🔮📚📖🧠🎭🧩💪🎮🔁]/gu, " ").trim();
+    if (!txt) return;
+    speakChunked(txt, {
+      rate: 0.88,
+      pitch: 1,
+      onEnd: () => setFalando(false)
+    });
+    setFalando(true);
+  };
+  return (
+    <section id={id} className="scroll-mt-24 group relative">
+      <div className="mb-2 flex items-center justify-between">
+        <div className="text-xs uppercase tracking-wider text-amber-300">{label}</div>
+        <button 
+          type="button"
+          onClick={ouvir}
+          aria-label={falando ? `Parar leitura da seção ${label}` : `Ouvir seção ${label}`}
+          aria-pressed={falando}
+          className={cn(
+            "p-1.5 rounded-full transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d1f55]",
+            falando ? "bg-rose-500 text-white animate-pulse" : "bg-white/5 text-white/40 hover:bg-white/10 hover:text-white"
+          )}
+          title="Ouvir seção"
+        >
+          {falando ? <Volume2 size={14} /> : <Volume2 size={14} className="opacity-50" />}
+        </button>
+      </div>
+      {children}
+    </section>
+  );
+}
+
+// ---------- Momentos (renderers) ------------------------------------
+
+function Card({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="bg-white/5 border border-white/10 rounded-2xl p-4 sm:p-6 space-y-4">
+      {children}
+    </div>
+  );
+}
+
+function Motivacao({ m }: { m: AulaV4["momento01_motivacao"] }) {
+  const { activeChild } = useAppState();
+  return (
+    <Card>
+      <h2 className="text-2xl font-black">{aplicarNome(m.titulo, activeChild?.nome)}</h2>
+      {m.imagemUrl && <img src={m.imagemUrl} alt="" className="w-40 mx-auto" />}
+      <p className="text-lg leading-relaxed">{aplicarNome(m.historia, activeChild?.nome)}</p>
+    </Card>
+  );
+}
+
+function Exploracao({ m }: { m: AulaV4["momento02_exploracao"] }) {
+  return (
+    <Card>
+      <p className="text-lg">{m.instrucao}</p>
+      <div className="flex flex-wrap gap-3 justify-center w-full min-w-0">
+        {m.cenas.map((c, i) => (
+          <div key={i} className="text-center w-full max-w-full min-w-0 overflow-x-auto">
+            {c.tipo === "imagem" && <img src={c.url} alt={c.alt} className="w-24" />}
+            {c.tipo === "grupoItens" &&
+              Array.from({ length: c.quantidade }).map((_, k) => (
+                <img key={k} src={c.imagemUrl} alt="" className="w-12 inline-block" />
+              ))}
+            {c.tipo === "texto" && (
+              <div className={c.destaque ? "text-2xl font-bold" : ""}>{c.texto}</div>
+            )}
+            {c.tipo === "tabuada" && (
+              <div data-no-tts className={`inline-block rounded-lg px-4 py-3 font-mono ${c.destaque ? "bg-amber-400/20 border border-amber-400" : "bg-white/5"}`}>
+                {c.titulo && <div className="text-base font-bold mb-2 font-sans">{c.titulo}</div>}
+                <div className="flex flex-col gap-1 text-lg leading-tight tabular-nums text-left">
+                  {Array.from({ length: c.ate ?? 10 }).map((_, k) => {
+                    const n = k + 1;
+                    const r = c.fator * n;
+                    return (
+                      <div key={k} className="grid grid-cols-[2ch_1ch_2ch_1ch_3ch] gap-1 justify-items-end">
+                        <span>{c.fator}</span>
+                        <span>×</span>
+                        <span>{n}</span>
+                        <span>=</span>
+                        <span className="font-bold">{r}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+            {(c.tipo === "figuraPlana" || c.tipo === "solido" || c.tipo === "simetria" || c.tipo === "mapaGrade" || c.tipo === "graficoBarras" || c.tipo === "tabela" || c.tipo === "escalaProb" || c.tipo === "retaNumerica" || c.tipo === "trinomioQuadrado" || c.tipo === "trinomioPassoAPasso" || c.tipo === "checklistTQP" || c.tipo === "dizimaGeratriz" || c.tipo === "somaFracoes" || c.tipo === "notacaoCientifica") && (
+              <RenderVisualMat v={c as VisualMat} />
+            )}
+          </div>
+        ))}
+      </div>
+      {m.interacao && <InteracaoView i={m.interacao} />}
+    </Card>
+  );
+}
+
+function Descoberta({ m }: { m: AulaV4["momento03_descoberta"] }) {
+  const [revelou, setRevelou] = useState(false);
+  return (
+    <Card>
+      <div className="text-xl font-bold">{m.perguntaGuia}</div>
+      <div className="text-white/70 mb-4 italic">💡 Pista: {m.pista}</div>
+      {m.visualMat && (
+        <div className="mb-4">
+          <RenderVisualMat v={m.visualMat} />
+        </div>
+      )}
+      {!revelou ? (
+        <button
+          onClick={() => setRevelou(true)}
+          className="w-full py-3 rounded-lg bg-white/10 hover:bg-white/20 border border-white/10 font-bold text-amber-300"
+        >
+          Ver a descoberta ✨
+        </button>
+      ) : (
+        <div className="bg-amber-400/20 border-2 border-amber-400 rounded-2xl p-4 text-lg font-bold text-center animate-in zoom-in duration-500">
+          🎉 {m.revelacao}
+        </div>
+      )}
+    </Card>
+  );
+}
+
+function Explicacao({ m }: { m: AulaV4["momento04_explicacao"] }) {
+  return (
+    <Card>
+      <h2 className="text-xl font-bold">{m.titulo}</h2>
+      <ol className="space-y-4">
+        {m.etapas.map((e, i) => (
+          <li key={i} className="flex gap-3">
+            <div className="w-8 h-8 rounded-full bg-amber-400 text-[#0d1f55] font-bold grid place-items-center shrink-0">
+              {i + 1}
+            </div>
+            <div className="flex-1 min-w-0">
+              <div>{e.texto}</div>
+              {e.exemplo && (
+                <div className="text-sm text-white/70 mt-1">Ex.: {e.exemplo}</div>
+              )}
+              {e.agrupamentos && e.agrupamentos.length > 0 && (
+                <div className="mt-3 flex flex-wrap gap-3 items-start">
+                  <div className="flex-1 min-w-0 sm:min-w-[200px] space-y-3">
+                    {e.agrupamentos.map((ag, idx) => {
+                      const total = ag.tamanhoGrupo * ag.qtdGrupos;
+                      return (
+                        <div key={idx} className="rounded-xl bg-white/5 p-3">
+                          {ag.rotulo && (
+                            <div className="text-xs text-amber-300 font-semibold mb-2">
+                              {ag.rotulo}
+                            </div>
+                          )}
+                          <div className="flex flex-wrap gap-3 items-end">
+                            {Array.from({ length: ag.qtdGrupos }).map((_, gi) => (
+                              <div key={gi} className="flex flex-col items-center">
+                                <div className="grid grid-cols-5 gap-0.5 p-1 rounded-lg bg-amber-400/10 border border-amber-300/30">
+                                  {Array.from({ length: ag.tamanhoGrupo }).map((_, ii) => (
+                                    <img
+                                      key={ii}
+                                      src={ag.imagemUrl}
+                                      alt=""
+                                      className="w-6 h-6 object-contain"
+                                    />
+                                  ))}
+                                </div>
+                                <div className="text-xs text-white/80 mt-1 font-bold">
+                                  {ag.tamanhoGrupo * (gi + 1)}
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                          <div className="text-sm text-white/90 mt-2">
+                            {Array.from({ length: ag.qtdGrupos })
+                              .map(() => ag.tamanhoGrupo)
+                              .join(" + ")}{" "}
+                            = <span className="font-bold text-amber-300">{total}</span>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                  <ContaArmadaEmpilhada agrupamentos={e.agrupamentos} />
+                </div>
+              )}
+
+              {e.frutasParaNumero && (
+                <FrutasParaNumero {...e.frutasParaNumero} />
+              )}
+              {e.contaArmada && <ContaArmada {...e.contaArmada} />}
+              {e.casasValor && <CasasValor {...e.casasValor} />}
+              {!e.agrupamentos && !e.frutasParaNumero && !e.contaArmada && !e.casasValor && (
+                <LousaConta texto={`${e.texto} ${e.exemplo ?? ""}`} />
+              )}
+
+              {!e.agrupamentos && !e.frutasParaNumero && !e.contaArmada && !e.casasValor && e.imagemUrl && (
+                <img src={e.imagemUrl} alt="" className="w-32 mt-2" />
+              )}
+              {e.exemploReal && <ExemploReal {...e.exemploReal} />}
+            </div>
+
+          </li>
+        ))}
+      </ol>
+    </Card>
+  );
+}
+
+function Modelagem({ m }: { m: AulaV4["momento05_modelagem"] }) {
+  const total = m.colecaoVisual?.grupos.reduce((s, n) => s + n, 0) ?? 0;
+  const lousaAtiva = useLousaAtiva();
+  // 5º ao 9º: se a cena não trouxe visual próprio, montamos a lousa interativa
+  // a partir da conta do enunciado (ou dos passos escritos da aula).
+  const lousaAuto = useMemo(() => {
+    if (!lousaAtiva || m.visualMat || m.contaPassoAPasso || m.colecaoVisual) return undefined;
+    return (
+      lousaDeTexto(m.enunciado) ??
+      lousaDePassos({ titulo: m.enunciado, passos: m.passos, resposta: m.resposta })
+    );
+  }, [lousaAtiva, m]);
+
+  return (
+    <Card>
+      <div className="text-sm text-amber-300 mb-2">🧠 Brilha explica na lousa:</div>
+      <div className="text-lg font-bold mb-4">{m.enunciado}</div>
+
+
+      {m.colecaoVisual && (
+        <div className="rounded-2xl bg-white/95 text-[#0d1f55] p-4 border-2 border-amber-300/50">
+          <div className="text-xs font-black uppercase tracking-widest text-amber-600 mb-3">
+            Conte junto com o Brilha ({total}
+            {m.colecaoVisual.itemPlural ? ` ${m.colecaoVisual.itemPlural}` : ""})
+          </div>
+          <div className="flex flex-wrap gap-4 items-end justify-center">
+            {m.colecaoVisual.grupos.map((qtd, gi) => {
+              const acumulado = m.colecaoVisual!.grupos
+                .slice(0, gi + 1)
+                .reduce((s, n) => s + n, 0);
+              const eSolta = qtd < 5;
+              return (
+                <div key={gi} className="flex flex-col items-center">
+                  <div
+                    className={`grid gap-0.5 p-2 rounded-lg border-2 ${
+                      eSolta
+                        ? "border-dashed border-amber-400/60 bg-amber-50"
+                        : "border-amber-500 bg-amber-100"
+                    }`}
+                    style={{
+                      gridTemplateColumns: `repeat(${Math.min(5, qtd)}, minmax(0, 1fr))`,
+                    }}
+                  >
+                    {Array.from({ length: qtd }).map((_, ii) => (
+                      <img
+                        key={ii}
+                        src={m.colecaoVisual!.imagemUrl}
+                        alt=""
+                        className="w-7 h-7 object-contain"
+                      />
+                    ))}
+                  </div>
+                  <div className="text-[11px] font-bold mt-1 text-[#0d1f55]/80">
+                    {eSolta ? `${qtd} solta${qtd > 1 ? "s" : ""}` : `pilha de ${qtd}`}
+                  </div>
+                  <div className="text-xs font-black text-amber-600">
+                    {acumulado}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <div className="mt-3 text-center text-sm font-bold text-[#0d1f55]">
+            {m.colecaoVisual.grupos.join(" + ")} ={" "}
+            <span className="text-emerald-600 text-lg">{total}</span>
+          </div>
+        </div>
+      )}
+
+      {m.contaPassoAPasso ? (
+        <ContaPassoAPasso
+          i={{
+            tipo: "contaPassoAPasso",
+            operacao: m.contaPassoAPasso.operacao,
+            operandos: m.contaPassoAPasso.operandos,
+            resultado: m.contaPassoAPasso.resultado,
+            passos: m.contaPassoAPasso.passos,
+            modo: "explicacao",
+          }}
+        />
+      ) : m.visualMat ? (
+        <RenderVisualMat v={m.visualMat} />
+      ) : (
+        m.casasValor && <CasasValor {...m.casasValor} />
+      )}
+
+      {lousaAuto && <RenderVisualMat v={lousaAuto} />}
+
+      {!m.colecaoVisual && !m.casasValor && !m.contaPassoAPasso && m.visualUrl && (
+        <img src={m.visualUrl} alt="" className="w-40 mx-auto" />
+      )}
+
+      {!lousaAuto && (
+        <div className="space-y-2 bg-white/5 rounded-lg p-4">
+          {m.passos.map((p, i) => (
+            <div key={i} className="flex gap-2">
+              <span className="text-amber-300">→</span>
+              <span>{p}</span>
+            </div>
+          ))}
+        </div>
+      )}
+
+      <div className="text-xl font-bold text-amber-300">
+        Resposta: {m.resposta}
+      </div>
+    </Card>
+  );
+}
+
+/**
+ * Renderiza a explicação passo-a-passo COMPLETA quando o enunciado contém
+ * uma conta (+, −, ×, ÷). Para divisão, monta a chave real com o
+ * algoritmo tradicional; para multiplicação monta a conta armada real;
+ * para +/− usa a conta montada estática. A criança precisa ver o processo
+ * inteiro em Nós fazemos / Você faz / Na vida real, igual em Brilha resolve.
+ */
+function ExplicacaoContaAuto({ texto }: { texto: string }) {
+  const lousaAtiva = useLousaAtiva();
+  const conta = detectarContaNoTexto(texto);
+  const md = detectarMultDivNoTexto(texto);
+  // 5º ao 9º ano: toda conta vira LOUSA INTERATIVA (padrão Pip Teen Roqueiro).
+  // useMemo é obrigatório: sem ele o objeto é recriado a cada render e a
+  // animação da lousa reinicia sozinha (bug da explicação "pulando").
+  const lousa = useMemo(() => (lousaAtiva ? lousaDeTexto(texto) : undefined), [lousaAtiva, texto]);
+  if (lousa) return <RenderVisualMat v={lousa} />;
+
+  if (md?.operacao === "div") {
+
+    const q = Math.floor(md.a / md.b);
+    return (
+      <InteracaoView
+        i={{
+          tipo: "contaPassoAPasso",
+          operacao: "div",
+          operandos: [md.a, md.b],
+          resultado: q,
+          passos: [],
+        }}
+      />
+    );
+  }
+  if (md?.operacao === "mult") {
+    return <MultiplicacaoArmada a={md.a} b={md.b} />;
+  }
+  if (conta) {
+    return <ContaMontadaEstatica a={conta.a} b={conta.b} operacao={conta.operacao} />;
+  }
+  const cmp = detectarComparacaoNoTexto(texto);
+  if (cmp) {
+    return <ComparacaoCasas numeros={cmp} />;
+  }
+  return null;
+}
+
+function PraticaGuiada({ m }: { m: AulaV4["momento06_praticaGuiada"] }) {
+  return (
+    <Card>
+      <div className="text-lg">{m.enunciado}</div>
+      {m.visualMat ? <RenderVisualMat v={m.visualMat} /> : <ExplicacaoContaAuto texto={m.enunciado} />}
+      <div className="text-sm bg-amber-400/20 border border-amber-400/50 rounded-lg p-3">
+        💡 Dica: {m.dica}
+      </div>
+      <InteracaoView i={m.interacao} />
+    </Card>
+  );
+}
+
+function PraticaIndep({ m }: { m: AulaV4["momento07_praticaIndependente"] }) {
+  return (
+    <Card>
+      <div className="text-lg">{m.enunciado}</div>
+      {m.visualMat ? <RenderVisualMat v={m.visualMat} /> : <ExplicacaoContaAuto texto={m.enunciado} />}
+      <InteracaoView i={m.interacao} />
+    </Card>
+  );
+}
+
+
+function Aplicacao({ m }: { m: AulaV4["momento08_aplicacao"] }) {
+  return (
+    <Card>
+      <div className="text-sm text-amber-300">🌎 Na vida real:</div>
+      <div>{m.contexto}</div>
+      <div className="text-lg font-bold">{m.problema}</div>
+      {m.visualMat ? <RenderVisualMat v={m.visualMat} /> : <ExplicacaoContaAuto texto={`${m.contexto} ${m.problema}`} />}
+      <InteracaoView i={m.interacao} />
+    </Card>
+  );
+}
+
+
+function Revisao({ m }: { m: AulaV4["momento09_revisao"] }) {
+  const textoMini = m.miniDesafio
+    ? `${(m.miniDesafio as any).pergunta ?? ""} ${(m.miniDesafio as any).feedbackAcerto ?? ""} ${(m.miniDesafio as any).feedbackErro ?? ""}`
+    : "";
+  const lousaAtiva = useLousaAtiva();
+  const lousaMini = useMemo(
+    () => (lousaAtiva && textoMini ? lousaDeTexto(textoMini) : undefined),
+    [lousaAtiva, textoMini],
+  );
+  const contaMini = textoMini ? detectarContaNoTexto(textoMini) : undefined;
+  const mdMini = textoMini ? detectarMultDivNoTexto(textoMini) : undefined;
+  return (
+    <Card>
+      <div className="text-sm text-amber-300">🔁 Lembrando o que já sabemos:</div>
+      <ul className="space-y-2">
+        {m.pontos.map((p, i) => (
+          <li key={i}>• {p}</li>
+        ))}
+      </ul>
+      {lousaMini && <RenderVisualMat v={lousaMini} />}
+      {!lousaMini && mdMini && mdMini.operacao === "mult" && <MultiplicacaoArmada a={mdMini.a} b={mdMini.b} />}
+      {!lousaMini && mdMini && mdMini.operacao === "div" && (
+        <InteracaoView
+          i={{
+            tipo: "contaPassoAPasso",
+            operacao: "div",
+            operandos: [mdMini.a, mdMini.b],
+            resultado: Math.floor(mdMini.a / mdMini.b),
+            passos: [],
+          }}
+        />
+      )}
+      {!lousaMini && contaMini && (
+        <ContaMontadaEstatica a={contaMini.a} b={contaMini.b} operacao={contaMini.operacao} />
+      )}
+
+      {m.miniDesafio && <InteracaoView i={m.miniDesafio} />}
+    </Card>
+  );
+}
+
+function Avaliacao({ m }: { m: AulaV4["momento10_avaliacao"] }) {
+  const lousaAtiva = useLousaAtiva();
+  // Memoizado: sem isso a lousa é remontada a cada clique e a animação pula.
+  const lousasQ = useMemo(
+    () => m.perguntas.map((q) => (lousaAtiva ? lousaDeTexto(q.pergunta) : undefined)),
+    [lousaAtiva, m.perguntas],
+  );
+
+  const [respostas, setRespostas] = useState<(number | null)[]>(
+    m.perguntas.map(() => null),
+  );
+  const [tirados, setTirados] = useState<boolean[]>(
+    m.perguntas.map(() => false),
+  );
+  return (
+    <Card>
+      <div className="text-sm text-amber-300">✅ Mostra o que aprendeu:</div>
+      {m.perguntas.map((q, qi) => {
+        const grupoUnico = q.visualGrupos && q.visualGrupos.length === 1;
+        const ehSubtracaoInterativa =
+          grupoUnico && typeof q.tirar === "number" && q.tirar! > 0;
+        const jaTirou = tirados[qi];
+        const conta = q.contaArmada ?? detectarContaNoTexto(q.pergunta);
+        const md = detectarMultDivNoTexto(q.pergunta);
+        const lousaQ = lousasQ[qi];
+        const errou = respostas[qi] !== null && respostas[qi] !== q.correta;
+        return (
+        <div key={qi} className="border-t border-white/10 pt-4">
+          <div className="flex items-center gap-2 mb-3">
+            <span className="shrink-0 inline-flex items-center justify-center h-6 w-6 rounded-full bg-amber-400/20 text-amber-200 text-xs font-bold">
+              {qi + 1}
+            </span>
+            <div className="font-medium">{q.pergunta}</div>
+          </div>
+          {lousaQ && <RenderVisualMat v={lousaQ} />}
+          {!lousaQ && md && md.operacao === "mult" && <MultiplicacaoArmada a={md.a} b={md.b} />}
+          {!lousaQ && md && md.operacao === "div" && (
+            <InteracaoView
+              i={{
+                tipo: "contaPassoAPasso",
+                operacao: "div",
+                operandos: [md.a, md.b],
+                resultado: Math.floor(md.a / md.b),
+                passos: [],
+              }}
+            />
+          )}
+          {!lousaQ && conta && (
+            <ContaMontadaEstatica a={conta.a} b={conta.b} operacao={conta.operacao ?? "soma"} />
+          )}
+
+          {ehSubtracaoInterativa ? (
+            <div className="mb-3 flex flex-col items-center gap-3">
+              <div className="rounded-2xl bg-white/5 border border-white/15 p-3 w-full max-w-md">
+                {q.visualGrupos![0].rotulo && (
+                  <div className="text-[10px] font-bold uppercase tracking-wider text-amber-200 text-center mb-2">
+                    {q.visualGrupos![0].rotulo} · {q.visualGrupos![0].quantidade}
+                  </div>
+                )}
+                <div className="flex flex-wrap justify-center gap-1">
+                  {Array.from({ length: q.visualGrupos![0].quantidade }).map((_, k) => {
+                    const total = q.visualGrupos![0].quantidade;
+                    const removida = jaTirou && k >= total - (q.tirar ?? 0);
+                    return (
+                      <div key={k} className="relative">
+                        <img
+                          src={q.visualGrupos![0].imagemUrl}
+                          alt=""
+                          className={`h-11 w-11 object-contain drop-shadow transition-all duration-500 ${
+                            removida ? "opacity-15 grayscale" : "opacity-100"
+                          }`}
+                        />
+                        {removida && (
+                          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                            <div className="h-0.5 w-10 bg-red-500 rotate-45 rounded" />
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+              <button
+                onClick={() =>
+                  setTirados((t) => t.map((v, i) => (i === qi ? !v : v)))
+                }
+                className="px-4 py-2 rounded-full bg-amber-400 text-slate-900 text-sm font-bold hover:bg-amber-300"
+              >
+                {jaTirou ? "🔄 Mostrar tudo de novo" : `✂️ Tirar ${q.tirar}`}
+              </button>
+              {jaTirou && (
+                <div className="text-xs text-emerald-200">
+                  Agora conte só as que ficaram acesas!
+                </div>
+              )}
+            </div>
+          ) : q.visualGrupos && q.visualGrupos.length > 0 ? (
+            <div className="mb-3 flex flex-wrap items-center justify-center gap-3">
+              {q.visualGrupos.map((g, gi) => (
+                <div key={gi} className="flex items-center gap-2">
+                  <div className="rounded-2xl bg-white/5 border border-white/15 p-2">
+                    {g.rotulo && (
+                      <div className="text-[10px] font-bold uppercase tracking-wider text-amber-200 text-center mb-1">
+                        {g.rotulo} · {g.quantidade}
+                      </div>
+                    )}
+                    <div className="flex flex-wrap justify-center gap-1 max-w-[220px]">
+                      {Array.from({ length: g.quantidade }).map((_, k) => (
+                        <img
+                          key={k}
+                          src={g.imagemUrl}
+                          alt=""
+                          className="h-10 w-10 object-contain drop-shadow"
+                        />
+                      ))}
+                    </div>
+                  </div>
+                  {gi < q.visualGrupos!.length - 1 && (
+                    <div className="text-3xl font-black text-amber-300">+</div>
+                  )}
+                </div>
+              ))}
+            </div>
+          ) : (
+            q.visualUrl && <img src={q.visualUrl} alt="" className="w-40 mb-3" />
+          )}
+
+          <div className="grid gap-2">
+            {q.opcoes.map((op, oi) => {
+              const escolhida = respostas[qi] === oi;
+              const ehCorreta = q.correta === oi;
+              const mostrarFeedback = respostas[qi] !== null;
+              return (
+                <button
+                  key={oi}
+                  onClick={() =>
+                    setRespostas((r) => r.map((v, i) => (i === qi ? oi : v)))
+                  }
+                  disabled={mostrarFeedback}
+                  className={`text-left px-4 py-3 rounded-lg border ${
+                    !mostrarFeedback
+                      ? "bg-white/5 border-white/20 hover:bg-white/10"
+                      : ehCorreta
+                        ? "bg-emerald-500/20 border-emerald-400"
+                        : escolhida
+                          ? "bg-red-500/20 border-red-400"
+                          : "bg-white/5 border-white/10 opacity-60"
+                  }`}
+                >
+                  {op}
+                </button>
+              );
+            })}
+          </div>
+          {respostas[qi] !== null && (
+            <div
+              className={`mt-3 text-sm p-3 rounded-lg ${
+                respostas[qi] === q.correta
+                  ? "bg-emerald-500/10 text-emerald-200"
+                  : "bg-amber-500/10 text-amber-200"
+              }`}
+            >
+              {respostas[qi] === q.correta ? q.feedbackAcerto : q.feedbackErro}
+            </div>
+          )}
+          {errou && conta && (
+            <div className="mt-3">
+              <div className="text-xs text-amber-200 mb-1">Vamos resolver juntos passo a passo:</div>
+              <ContaArmada a={conta.a} b={conta.b} operacao={conta.operacao ?? "soma"} autoIniciar />
+            </div>
+          )}
+        </div>
+        );
+      })}
+
+    </Card>
+  );
+}
+
+function MissaoFamilia({
+  m,
+  cursoSlug,
+  aulaSlug,
+}: {
+  m: AulaV4["momento11_missaoFamilia"];
+  cursoSlug: string;
+  aulaSlug: string;
+}) {
+  return (
+    <Card>
+      <div className="text-sm text-amber-300">🏠 Para fazer com a família:</div>
+      <h2 className="text-xl font-bold">{m.titulo}</h2>
+      <div>
+        <div className="font-semibold mb-1">Você vai precisar de:</div>
+        <ul className="space-y-1">
+          {m.materiais.map((mat, i) => (
+            <li key={i}>• {mat}</li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <div className="font-semibold mb-1">Como fazer:</div>
+        <ol className="space-y-1 list-decimal list-inside">
+          {m.passos.map((p, i) => (
+            <li key={i}>{p}</li>
+          ))}
+        </ol>
+      </div>
+      <div className="bg-white/5 rounded-lg p-3 text-sm">📸 {m.registro}</div>
+      <MissaoFamiliaFoto cursoSlug={cursoSlug} aulaSlug={aulaSlug} />
+    </Card>
+  );
+}
+
+// ---------- Interações ------------------------------------------------
+
+function InteracaoView({ i }: { i: Interacao }) {
+  if (i.tipo === "tapContar") return <TapContar i={i} />;
+  if (i.tipo === "contarQuiz") return <ContarQuiz i={i} />;
+  if (i.tipo === "escolhaVisual") return <EscolhaVisual i={i} />;
+  if (i.tipo === "operacaoVisual") return <OperacaoVisual i={i} />;
+  if (i.tipo === "minijogoColheita") return <MinijogoColheita {...i} />;
+  if (i.tipo === "contaPassoAPasso") return <ContaPassoAPasso i={i} />;
+  return (
+    <div className="bg-white/5 rounded-xl p-4 mt-3 text-xs text-white/50">
+      Interação "{i.tipo}" ainda sem renderer.
+    </div>
+  );
+}
+
+/** Números por extenso pt-BR para o professor contar em voz alta. */
+const NUM_FALADO: Record<number, string> = {
+  1: "um", 2: "dois", 3: "três", 4: "quatro", 5: "cinco",
+  6: "seis", 7: "sete", 8: "oito", 9: "nove", 10: "dez",
+  11: "onze", 12: "doze", 13: "treze", 14: "quatorze", 15: "quinze",
+  16: "dezesseis", 17: "dezessete", 18: "dezoito", 19: "dezenove", 20: "vinte",
+  21: "vinte e um", 22: "vinte e dois", 23: "vinte e três", 24: "vinte e quatro",
+  25: "vinte e cinco", 26: "vinte e seis", 27: "vinte e sete", 28: "vinte e oito",
+  29: "vinte e nove", 30: "trinta",
+};
+function falarNumero(n: number) {
+  return NUM_FALADO[n] ?? String(n);
+}
+
+function TapContar({ i }: { i: Extract<Interacao, { tipo: "tapContar" }> }) {
+  const [tocadas, setTocadas] = useState<Set<number>>(new Set());
+  const [somAtivo, setSomAtivo] = useState(true);
+  const somRef = useRef(true);
+  useEffect(() => { somRef.current = somAtivo; }, [somAtivo]);
+  useEffect(() => () => stopSpeaking(), []);
+
+  const handleTap = (k: number) => {
+    if (tocadas.has(k)) return;
+    const novo = new Set(tocadas);
+    novo.add(k);
+    setTocadas(novo);
+    if (somRef.current) {
+      const n = novo.size;
+      const frase = n === i.quantidade
+        ? `${falarNumero(n)}! Contamos ${falarNumero(n)} ${i.itemPlural}.`
+        : falarNumero(n);
+      speakChunked(frase, { rate: 0.9, pitch: 1.1 });
+    }
+  };
+
+  const resetar = () => {
+    stopSpeaking();
+    setTocadas(new Set());
+  };
+
+  return (
+    <div className="mt-3 bg-white/5 rounded-xl p-4">
+      <div className="flex items-center justify-between gap-2 mb-3">
+        <div className="text-sm">{i.pergunta ?? `Toque em cada ${i.itemPlural}:`}</div>
+        <button
+          onClick={() => {
+            const novo = !somAtivo;
+            setSomAtivo(novo);
+            if (!novo) stopSpeaking();
+          }}
+          className="text-xs px-2 py-1 rounded-md bg-white/10 hover:bg-white/20 shrink-0"
+          title={somAtivo ? "Desligar voz do professor" : "Ligar voz do professor"}
+        >
+          {somAtivo ? "🔊 Voz ligada" : "🔇 Voz desligada"}
+        </button>
+      </div>
+      <div className="flex flex-wrap gap-2 justify-center">
+        {Array.from({ length: i.quantidade }).map((_, k) => {
+          const tocada = tocadas.has(k);
+          return (
+            <button
+              key={k}
+              onClick={() => handleTap(k)}
+              className={`transition-transform ${tocada ? "scale-110" : "opacity-60 hover:opacity-100"}`}
+            >
+              <div className="relative">
+                <img src={i.imagemUrl} alt="" className="w-14 h-14 object-contain" />
+                {tocada && (
+                  <div className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-amber-400 text-[#0d1f55] font-bold text-xs grid place-items-center">
+                    {[...tocadas].sort((a, b) => a - b).indexOf(k) + 1}
+                  </div>
+                )}
+              </div>
+            </button>
+          );
+        })}
+      </div>
+      <div className="text-center mt-4 text-lg font-bold text-amber-300">
+        Contei: {tocadas.size} {i.itemPlural}
+      </div>
+      {tocadas.size > 0 && (
+        <div className="text-center mt-2">
+          <button onClick={resetar} className="text-xs text-white/60 hover:text-white underline">
+            recomeçar contagem
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ContarQuiz({ i }: { i: Extract<Interacao, { tipo: "contarQuiz" }> }) {
+  const [escolha, setEscolha] = useState<number | null>(null);
+  // Contagem tocando junto (professor fala) — obrigatória até o 2º ano.
+  const totalItens = i.grupos.reduce((s, g) => s + g.quantidade, 0);
+  const [tocadas, setTocadas] = useState<Set<string>>(new Set());
+  const [somAtivo, setSomAtivo] = useState(true);
+  const somRef = useRef(true);
+  useEffect(() => { somRef.current = somAtivo; }, [somAtivo]);
+  useEffect(() => () => stopSpeaking(), []);
+
+  const tocar = (chave: string) => {
+    if (tocadas.has(chave) || escolha !== null) return;
+    const novo = new Set(tocadas);
+    novo.add(chave);
+    setTocadas(novo);
+    if (somRef.current) {
+      const n = novo.size;
+      const frase = n === totalItens
+        ? `${falarNumero(n)}! Contamos ${falarNumero(n)}.`
+        : falarNumero(n);
+      speakChunked(frase, { rate: 0.9, pitch: 1.1 });
+    }
+  };
+
+  const resetar = () => {
+    stopSpeaking();
+    setTocadas(new Set());
+  };
+
+  return (
+    <div className="mt-3 bg-white/5 rounded-xl p-4 space-y-4">
+      {/* Barra do professor + contador ao vivo */}
+      <div className="flex items-center gap-3">
+        <div className="flex-1 rounded-lg bg-white/10 p-2 text-center">
+          <div className="text-[10px] uppercase tracking-widest text-amber-300 font-black">
+            👆 Toque em cada figura para contar junto
+          </div>
+          <div className="text-3xl font-black tabular-nums text-amber-300">
+            {tocadas.size}
+            <span className="text-sm text-white/50"> / {totalItens}</span>
+          </div>
+        </div>
+        <button
+          onClick={() => setSomAtivo((s) => !s)}
+          className={`h-11 w-11 rounded-xl grid place-items-center ${
+            somAtivo ? "bg-amber-400 text-[#0d1f55]" : "bg-white/10 text-white/60"
+          }`}
+          aria-label={somAtivo ? "Desligar voz" : "Ligar voz"}
+          title={somAtivo ? "Voz ligada" : "Voz desligada"}
+        >
+          🔊
+        </button>
+        <button
+          onClick={resetar}
+          disabled={tocadas.size === 0}
+          className="h-11 w-11 rounded-xl bg-white/10 grid place-items-center disabled:opacity-30"
+          aria-label="Reiniciar contagem"
+          title="Reiniciar"
+        >
+          🔄
+        </button>
+      </div>
+
+      {i.grupos.map((g, gi) => (
+        <div key={gi}>
+          {g.rotulo && <div className="text-xs text-white/60 mb-1">{g.rotulo}</div>}
+          <div className="flex flex-wrap gap-1 justify-center bg-white/5 rounded-lg p-2">
+            {Array.from({ length: g.quantidade }).map((_, k) => {
+              const chave = `${gi}-${k}`;
+              const pos = Array.from(tocadas).indexOf(chave);
+              const contada = pos !== -1;
+              return (
+                <button
+                  key={k}
+                  onClick={() => tocar(chave)}
+                  disabled={escolha !== null}
+                  className="relative w-10 h-10 grid place-items-center active:scale-90 transition"
+                  aria-label={`item ${k + 1}`}
+                >
+                  <img
+                    src={g.imagemUrl}
+                    alt=""
+                    className={`w-full h-full object-contain transition ${
+                      contada ? "drop-shadow-[0_0_6px_rgba(251,191,36,0.9)]" : ""
+                    }`}
+                    draggable={false}
+                  />
+                  {contada && (
+                    <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-emerald-500 text-white text-[9px] font-black grid place-items-center border border-white">
+                      {pos + 1}
+                    </span>
+                  )}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      ))}
+
+      <div className="font-semibold text-center">{i.pergunta}</div>
+      <div className="grid grid-cols-3 gap-2">
+        {i.opcoes.map((op, oi) => {
+          const dado = escolha !== null;
+          const cert = i.correta === oi;
+          const esc = escolha === oi;
+          return (
+            <button
+              key={oi}
+              disabled={dado}
+              onClick={() => setEscolha(oi)}
+              className={`py-3 rounded-lg font-bold text-lg ${
+                !dado
+                  ? "bg-white/10 hover:bg-white/20"
+                  : cert
+                    ? "bg-emerald-500/30 border border-emerald-400"
+                    : esc
+                      ? "bg-red-500/30 border border-red-400"
+                      : "bg-white/5 opacity-50"
+              }`}
+            >
+              {op}
+            </button>
+          );
+        })}
+      </div>
+      {escolha !== null && (
+        <div
+          className={`p-3 rounded-lg text-sm ${
+            escolha === i.correta
+              ? "bg-emerald-500/10 text-emerald-200"
+              : "bg-amber-500/10 text-amber-200"
+          }`}
+        >
+          {escolha === i.correta ? i.feedbackAcerto : i.feedbackErro}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function EscolhaVisual({ i }: { i: Extract<Interacao, { tipo: "escolhaVisual" }> }) {
+  const [escolha, setEscolha] = useState<string | null>(null);
+  const temImagens = i.opcoes.some((op) => !!op.imagemUrl);
+  return (
+    <div className="mt-3 bg-white/5 rounded-xl p-4 space-y-4">
+      <div className="font-semibold text-center">{i.pergunta}</div>
+      <div
+        className={
+          temImagens
+            ? "grid grid-cols-3 gap-3"
+            : "flex flex-col gap-3 max-w-md mx-auto w-full"
+        }
+      >
+        {i.opcoes.map((op) => {
+          const dado = escolha !== null;
+          const cert = op.nome === i.respostaCerta;
+          const esc = escolha === op.nome;
+          return (
+            <button
+              key={op.nome}
+              disabled={dado}
+              onClick={() => setEscolha(op.nome)}
+              className={`rounded-xl ${
+                temImagens
+                  ? "p-3 flex flex-col items-center gap-2"
+                  : "px-4 py-4 text-left"
+              } ${
+                !dado
+                  ? "bg-white/10 hover:bg-white/20"
+                  : cert
+                    ? "bg-emerald-500/30 border border-emerald-400"
+                    : esc
+                      ? "bg-red-500/30 border border-red-400"
+                      : "bg-white/5 opacity-50"
+              }`}
+            >
+              {op.imagemUrl ? (
+                <>
+                  <img src={op.imagemUrl} alt={op.nome} className="w-16 h-16 object-contain" />
+                  <span className="text-xs font-medium text-center leading-tight">{op.nome}</span>
+                </>
+              ) : (
+                <div className="font-black text-lg md:text-xl tabular-nums leading-tight">
+                  {op.nome}
+                </div>
+              )}
+            </button>
+          );
+        })}
+      </div>
+      {escolha !== null && (
+        <div
+          className={`p-3 rounded-lg text-sm ${
+            escolha === i.respostaCerta
+              ? "bg-emerald-500/10 text-emerald-200"
+              : "bg-amber-500/10 text-amber-200"
+          }`}
+        >
+          {escolha === i.respostaCerta ? i.feedbackAcerto : i.feedbackErro}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function OperacaoVisual({ i }: { i: Extract<Interacao, { tipo: "operacaoVisual" }> }) {
+  const VELOCIDADE_VOZ = 0.78;
+  const TEMPO_POR_CARACTERE_MS = 145;
+  const PAUSA_ENTRE_PASSOS_MS = 2600;
+  const PAUSA_FINAL_MS = 900;
+  const ehSoma = i.operacao === "soma";
+  const quantidadeTirada = Math.min(i.b, i.a);
+  const total = ehSoma ? i.a + i.b : Math.max(0, i.a - i.b);
+  const sinal = ehSoma ? "+" : "−";
+  const [contando, setContando] = useState(false);
+  const [passo, setPasso] = useState(0); // soma: frutas contadas | subtração: frutas tiradas
+  const [terminou, setTerminou] = useState(false);
+
+  // Para soma: conta A e depois B. Para subtração: mostra o grupo inicial e apaga B itens dele.
+  const totalPassos = ehSoma ? i.a + i.b : quantidadeTirada;
+  const numeroAtual = ehSoma ? passo : Math.max(0, i.a - passo);
+
+  const iniciar = () => {
+    try { window.speechSynthesis.cancel(); } catch {}
+    setContando(true);
+    setTerminou(false);
+    setPasso(0);
+  };
+
+  // Auto-play na subtração: o professor fala a legenda e as maçãs somem no mesmo ritmo.
+  useEffect(() => {
+    if (ehSoma) return;
+    let cancelado = false;
+    try { window.speechSynthesis.cancel(); } catch {}
+    const falarIntro = () => {
+      try {
+        if (!i.legenda) return 0;
+        void speakChunked(i.legenda, { rate: VELOCIDADE_VOZ });
+        // Mais lento para a criança acompanhar a fala e ver cada fruta apagando.
+        return Math.min(11000, Math.max(2600, i.legenda.length * TEMPO_POR_CARACTERE_MS));
+      } catch { return 2600; }
+    };
+    const espera = falarIntro();
+    const t = setTimeout(() => {
+      if (cancelado) return;
+      setContando(true);
+      setTerminou(false);
+      setPasso(0);
+    }, espera);
+    return () => { cancelado = true; clearTimeout(t); try { window.speechSynthesis.cancel(); } catch {} };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+
+  useEffect(() => {
+    if (!contando) return;
+    if (passo >= totalPassos) {
+      const t = setTimeout(() => {
+        try {
+          void speakChunked(
+            ehSoma ? `Total: ${total} ${i.itemPlural}!` : `Ficaram ${total} ${i.itemPlural}!`,
+            { rate: VELOCIDADE_VOZ },
+          );
+        } catch {}
+        setTerminou(true);
+        setContando(false);
+      }, PAUSA_FINAL_MS);
+      return () => clearTimeout(t);
+    }
+    const t = setTimeout(() => {
+      const n = passo + 1;
+      try {
+        void speakChunked(
+          ehSoma ? String(n) : `Tirou ${n}. Ficaram ${Math.max(0, i.a - n)}.`,
+          { rate: VELOCIDADE_VOZ },
+        );
+      } catch {}
+      setPasso(n);
+    }, PAUSA_ENTRE_PASSOS_MS);
+    return () => clearTimeout(t);
+  }, [contando, passo, totalPassos, total, i.itemPlural, ehSoma, i.a]);
+
+  return (
+    <div className="mt-3 bg-white/5 rounded-xl p-4">
+      {i.legenda && <div className="text-sm text-white/70 mb-3 text-center">{i.legenda}</div>}
+      <div className="flex items-center justify-center gap-3 flex-wrap">
+        {ehSoma ? (
+          <>
+            <GrupoImgAnimado
+              url={i.imagemUrl}
+              n={i.a}
+              destacadosAte={Math.min(passo, i.a)}
+              modo="destacar"
+              sumirDepoisDe={0}
+            />
+            <div className="text-3xl font-black">{sinal}</div>
+            <GrupoImgAnimado
+              url={i.imagemUrl}
+              n={i.b}
+              destacadosAte={Math.max(0, passo - i.a)}
+              modo="destacar"
+              sumirDepoisDe={0}
+            />
+            <div className="text-3xl font-black">=</div>
+            <div className="text-4xl font-black text-amber-300 min-w-[3rem] text-center">
+              {terminou ? total : (contando ? numeroAtual : "?")}
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="flex flex-col items-center gap-1">
+              <div className="text-xs font-bold uppercase tracking-wide text-white/50">Tinha {i.a}</div>
+              <GrupoImgAnimado
+                url={i.imagemUrl}
+                n={i.a}
+                destacadosAte={0}
+                modo="sumir"
+                sumirDepoisDe={passo}
+              />
+            </div>
+            <div className="text-3xl font-black">{sinal}</div>
+            <div className="min-w-[4.5rem] text-center">
+              <div className="text-4xl font-black text-red-300">{contando || terminou ? passo : i.b}</div>
+              <div className="text-[11px] font-bold uppercase tracking-wide text-white/50">tiradas de {i.b}</div>
+            </div>
+            <div className="text-3xl font-black">=</div>
+            <div className="text-4xl font-black text-amber-300 min-w-[3rem] text-center">
+              {terminou ? total : (contando ? numeroAtual : "?")}
+            </div>
+          </>
+        )}
+      </div>
+      <div className="text-center text-sm text-white/60 mt-2">{i.itemPlural}</div>
+      <div className="flex justify-center mt-4">
+        {!contando && !terminou && (
+          <button
+            onClick={iniciar}
+            className="px-6 py-3 rounded-xl bg-amber-400 text-slate-900 font-black text-lg hover:bg-amber-300 transition-colors"
+          >
+            {ehSoma ? "▶ Contar!" : "▶ Tirar!"}
+          </button>
+        )}
+        {contando && (
+          <div className="text-amber-300 font-bold text-lg animate-pulse">
+            {ehSoma ? "Contando" : "Ficando"}: {numeroAtual}...
+          </div>
+        )}
+        {terminou && (
+          <button
+            onClick={iniciar}
+            className="px-4 py-2 rounded-lg bg-white/10 text-white/80 text-sm hover:bg-white/20"
+          >
+            {ehSoma ? "🔄 Contar de novo" : "🔄 Tirar de novo"}
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function GrupoImgAnimado({
+  url,
+  n,
+  destacadosAte,
+  modo,
+  sumirDepoisDe,
+}: {
+  url: string;
+  n: number;
+  destacadosAte: number;
+  modo: "destacar" | "sumir";
+  sumirDepoisDe: number;
+}) {
+  return (
+    <div className="flex flex-wrap gap-1 max-w-[160px] justify-center">
+      {Array.from({ length: n }).map((_, k) => {
+        const contado = k < destacadosAte;
+        const sumiu = modo === "sumir" && k < sumirDepoisDe;
+        return (
+          <span key={k} className="relative inline-flex w-9 h-9 items-center justify-center">
+            <img
+              src={url}
+              alt=""
+              className={
+                "w-9 h-9 object-contain transition-all duration-1000 " +
+                (sumiu
+                  ? "opacity-15 grayscale scale-75"
+                  : contado
+                  ? "scale-110 drop-shadow-[0_0_8px_rgba(251,191,36,0.9)]"
+                  : "opacity-60")
+              }
+            />
+            {sumiu && (
+              <span className="absolute left-1 right-1 top-1/2 h-1 -rotate-45 rounded-full bg-red-400 shadow-[0_0_8px_rgba(248,113,113,0.85)]" />
+            )}
+          </span>
+        );
+      })}
+    </div>
+  );
+}
+
+function GrupoImg({ url, n }: { url: string; n: number }) {
+  return (
+    <div className="flex flex-wrap gap-0.5 max-w-[140px] justify-center">
+      {Array.from({ length: n }).map((_, k) => (
+        <img key={k} src={url} alt="" className="w-8 h-8 object-contain" />
+      ))}
+    </div>
+  );
+}
+
+function ContaArmadaEmpilhada({
+  agrupamentos,
+}: {
+  agrupamentos: Array<{ tamanhoGrupo: number; qtdGrupos: number }>;
+}) {
+  // Expande em parcelas: [{10,x2},{3,x1}] → [10,10,3]
+  const parcelas: number[] = [];
+  agrupamentos.forEach((ag) => {
+    for (let i = 0; i < ag.qtdGrupos; i++) parcelas.push(ag.tamanhoGrupo);
+  });
+  if (parcelas.length < 2) return null;
+  const total = parcelas.reduce((a, b) => a + b, 0);
+  const largura = String(total).length;
+  const pad = (n: number) => String(n).padStart(largura, "\u00A0");
+  return (
+    <div className="rounded-2xl bg-white/95 text-[#0d1f55] p-3 border-2 border-amber-300/50 shrink-0">
+      <div className="text-[10px] font-black uppercase tracking-widest text-amber-600 mb-2 text-center">
+        Conta armada
+      </div>
+      <div className="font-mono text-2xl font-black leading-tight text-right tabular-nums px-2">
+        {parcelas.map((p, i) => (
+          <div key={i} className="flex items-center justify-end gap-2">
+            <span className="text-amber-500 w-4">{i === parcelas.length - 1 ? "+" : "\u00A0"}</span>
+            <span>
+              {pad(p)
+                .split("")
+                .map((c, j) => (
+                  <span key={j}>{c}</span>
+                ))}
+            </span>
+          </div>
+        ))}
+        <div className="border-t-2 border-[#0d1f55] my-1 ml-6" />
+        <div className="flex items-center justify-end gap-2 text-emerald-600">
+          <span className="w-4">&nbsp;</span>
+          <span>{total}</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// =====================================================================
+// Casas de valor posicional (3º ano em diante) — SEM frutas.
+// =====================================================================
+
+const NUM_EXTENSO: Record<number, string> = {
+  0: "zero", 1: "um", 2: "dois", 3: "três", 4: "quatro", 5: "cinco",
+  6: "seis", 7: "sete", 8: "oito", 9: "nove",
+};
+
+function CasasValor({
+  numero,
+  rotulos,
+  mostrarDecomposicao = true,
+  extenso,
+}: {
+  numero: number;
+  rotulos?: { um?: string; c?: string; d?: string; u?: string };
+  mostrarDecomposicao?: boolean;
+  extenso?: string;
+}) {
+  const digitos = String(Math.abs(Math.trunc(numero))).padStart(4, "0").split("").map(Number);
+  const [dUM, dC, dD, dU] = digitos;
+  const casas: Array<{ chave: "um" | "c" | "d" | "u"; rot: string; peso: number; digito: number; cor: string }> = [
+    { chave: "um", rot: rotulos?.um ?? "Milhar",  peso: 1000, digito: dUM, cor: "#f472b6" },
+    { chave: "c",  rot: rotulos?.c  ?? "Centena", peso: 100,  digito: dC,  cor: "#fb923c" },
+    { chave: "d",  rot: rotulos?.d  ?? "Dezena",  peso: 10,   digito: dD,  cor: "#22d3ee" },
+    { chave: "u",  rot: rotulos?.u  ?? "Unidade", peso: 1,    digito: dU,  cor: "#34d399" },
+  ];
+  const casasVis = numero >= 1000 ? casas : casas.slice(1);
+
+  return (
+    <div className="mt-3 rounded-xl bg-white text-[#0d1f55] p-4 border-2 border-amber-300/40">
+      <div className="text-[10px] uppercase tracking-widest font-black text-[#0d1f55]/60 mb-2">
+        Valor posicional
+      </div>
+      <div className="flex justify-center gap-2 md:gap-4">
+        {casasVis.map((c) => (
+          <div key={c.chave} className="flex flex-col items-center">
+            <div
+              className="text-[10px] font-black uppercase tracking-widest px-2 py-1 rounded-t-md text-white"
+              style={{ background: c.cor }}
+            >
+              {c.rot}
+            </div>
+            <div
+              className="w-16 h-20 md:w-20 md:h-24 grid place-items-center border-4 rounded-b-lg font-black text-4xl md:text-5xl"
+              style={{ borderColor: c.cor, color: c.cor }}
+            >
+              {c.digito}
+            </div>
+            <div className="text-[11px] font-bold mt-1 text-[#0d1f55]/70">
+              vale {c.digito * c.peso}
+            </div>
+          </div>
+        ))}
+      </div>
+      {mostrarDecomposicao && (
+        <div className="text-center mt-4 font-black text-lg md:text-xl">
+          {casasVis
+            .filter((c) => c.digito > 0)
+            .map((c) => c.digito * c.peso)
+            .join(" + ") || "0"}{" "}
+          = <span className="text-amber-600">{numero}</span>
+        </div>
+      )}
+      {extenso && (
+        <div className="text-center text-sm mt-1 text-[#0d1f55]/80 italic">
+          "{extenso}"
+        </div>
+      )}
+    </div>
+  );
+}
+
+// =====================================================================
+// Conta escrita passo a passo — ALGORITMO REAL.
+// Do 3º ano ao Ensino Médio. Substitui a contagem infantil.
+// =====================================================================
+
+// =====================================================================
+// Divisão pela CHAVE — algoritmo tradicional BR.
+// Renderiza dividendo dentro da chave, divisor fora, e desce cada passo
+// (parcial → multiplica → subtrai → desce o próximo dígito) até o resto.
+// =====================================================================
+function DivisaoChave({ i }: { i: Extract<Interacao, { tipo: "contaPassoAPasso" }> }) {
+  const N = i.operandos[0];
+  const d = i.operandos[1];
+  const Q = i.resultado;
+
+  const digs = String(N).split("");
+  const numDigits = digs.length;
+
+  type Step = { startCol: number; endCol: number; parcial: number; q: number; prod: number; rem: number };
+
+  const steps = useMemo<Step[]>(() => {
+    const arr: Step[] = [];
+    if (!Number.isFinite(N) || !Number.isFinite(d) || d <= 0) return arr;
+    let idx = 0;
+    let current = 0;
+    // consome dígitos até o primeiro parcial que "cabe" o divisor
+    while (idx < numDigits) {
+      current = current * 10 + parseInt(digs[idx], 10);
+      idx += 1;
+      if (current >= d) break;
+    }
+    if (idx === 0) idx = 1;
+    let startCol = 0;
+    let endCol = idx - 1;
+    let q = Math.floor(current / d);
+    let prod = q * d;
+    let rem = current - prod;
+    arr.push({ startCol, endCol, parcial: current, q, prod, rem });
+    while (idx < numDigits) {
+      const brought = parseInt(digs[idx], 10);
+      current = rem * 10 + brought;
+      endCol = idx;
+      startCol = Math.max(0, idx - String(current).length + 1);
+      q = Math.floor(current / d);
+      prod = q * d;
+      rem = current - prod;
+      arr.push({ startCol, endCol, parcial: current, q, prod, rem });
+      idx += 1;
+    }
+    return arr;
+  }, [N, d, numDigits]);
+
+  const [step, setStep] = useState(-1);
+  const total = steps.length;
+  const done = step >= total - 1;
+  const visible = steps.slice(0, step + 1);
+
+  useEffect(() => () => stopSpeaking(), []);
+
+  const cellCls = "text-center leading-none";
+  const gridCols = `1.2rem repeat(${numDigits}, minmax(1.4rem, 1.8rem))`;
+
+  function placeAtEnd(num: number, end: number) {
+    const s = String(num);
+    return { start: end - s.length + 1, str: s };
+  }
+
+  return (
+    <div className="mt-3 rounded-xl bg-white text-[#0d1f55] p-4 md:p-6 border-2 border-amber-300/40">
+      <div className="text-[10px] uppercase tracking-widest font-black text-[#0d1f55]/60 mb-3">
+        Divisão pela chave · passo a passo
+      </div>
+
+      <div className="flex justify-center items-start gap-4 font-mono font-black text-2xl md:text-4xl overflow-x-auto">
+        {/* ESQUERDA: dividendo + subtrações empilhadas */}
+        <div className="grid gap-y-1" style={{ gridTemplateColumns: gridCols }}>
+          {/* linha 0: dividendo */}
+          <div />
+          {digs.map((c, k) => (
+            <div key={"d-" + k} className={cellCls}>{c}</div>
+          ))}
+
+          {visible.map((s, k) => {
+            const prodP = placeAtEnd(s.prod, s.endCol);
+            const remP = placeAtEnd(s.rem, s.endCol);
+            const next = steps[k + 1];
+            return (
+              <Fragment key={"stp-" + k}>
+                {/* produto (em vermelho, precedido de "−") */}
+                <div className="text-right text-rose-600 pr-1">−</div>
+                {Array.from({ length: numDigits }).map((_, c) => {
+                  if (c >= prodP.start && c <= s.endCol) {
+                    return (
+                      <div key={"p-" + c} className={cellCls + " text-rose-600"}>
+                        {prodP.str[c - prodP.start]}
+                      </div>
+                    );
+                  }
+                  return <div key={"p-" + c} />;
+                })}
+                {/* linha horizontal cobrindo o intervalo do parcial */}
+                <div />
+                {Array.from({ length: numDigits }).map((_, c) => (
+                  <div
+                    key={"l-" + c}
+                    className={
+                      c >= s.startCol && c <= s.endCol
+                        ? "border-t-2 border-[#0d1f55] h-1 mt-1"
+                        : ""
+                    }
+                  />
+                ))}
+                {/* sobra + dígito descido pro próximo parcial (em âmbar) */}
+                <div />
+                {Array.from({ length: numDigits }).map((_, c) => {
+                  if (c >= remP.start && c <= s.endCol) {
+                    return (
+                      <div key={"r-" + c} className={cellCls}>
+                        {remP.str[c - remP.start]}
+                      </div>
+                    );
+                  }
+                  if (next && c === next.endCol) {
+                    return (
+                      <div key={"r-" + c} className={cellCls + " text-amber-600"}>
+                        {digs[c]}
+                      </div>
+                    );
+                  }
+                  return <div key={"r-" + c} />;
+                })}
+              </Fragment>
+            );
+          })}
+        </div>
+
+        {/* DIREITA: chave | divisor em cima, quociente embaixo */}
+        <div className="flex flex-col items-center border-l-4 border-[#0d1f55] pl-3">
+          <div className="flex gap-1">
+            {String(d).split("").map((c, k) => (
+              <span key={k}>{c}</span>
+            ))}
+          </div>
+          <div className="border-t-2 border-[#0d1f55] w-full my-2" />
+          <div className="flex gap-1 text-emerald-600">
+            {String(Q).split("").map((c, k) => (
+              <span key={k} className={k < visible.length ? "" : "opacity-20"}>
+                {c}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Narração */}
+      <div className="mt-5 min-h-[3.5rem] rounded-lg bg-amber-50 border-l-4 border-amber-500 p-3">
+        {step < 0 && (
+          <div className="text-sm md:text-base">
+            <span className="font-black text-amber-700">🧠 Brilha:</span>{" "}
+            Vamos montar a chave: o {N} entra dentro da chave e o {d} fica do lado de fora. Toque em "Começar".
+          </div>
+        )}
+        {step >= 0 && (() => {
+          const s = steps[step];
+          const custom = i.passos[step]?.fala;
+          const nextS = steps[step + 1];
+          const auto =
+            `Pego ${s.parcial} ÷ ${d} = ${s.q}. ` +
+            `Multiplico ${s.q} × ${d} = ${s.prod}. ` +
+            `Subtraio ${s.parcial} − ${s.prod} = ${s.rem}. ` +
+            (nextS ? `Desço o ${digs[nextS.endCol]}.` : `Resto: ${s.rem}.`);
+          return (
+            <div className="text-sm md:text-base">
+              <span className="font-black text-amber-700">Passo {step + 1}/{total}:</span>{" "}
+              {custom ?? auto}
+              {i.passos[step]?.porque && (
+                <div className="text-xs text-[#0d1f55]/70 mt-1 italic">
+                  Por quê? {i.passos[step]!.porque}
+                </div>
+              )}
+            </div>
+          );
+        })()}
+      </div>
+
+      <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
+        {!done && (
+          <button
+            onClick={() => setStep((p) => Math.min(p + 1, total - 1))}
+            className="px-5 py-3 rounded-xl bg-amber-500 text-white font-black hover:bg-amber-400"
+          >
+            {step < 0 ? "▶️ Começar" : "→ Próximo passo"}
+          </button>
+        )}
+        {done && (
+          <div className="text-lg font-black text-emerald-700">
+            ✅ Quociente: {Q}
+            {steps[total - 1]?.rem > 0 ? ` · Resto: ${steps[total - 1].rem}` : ""}
+          </div>
+        )}
+        {done && (
+          <button
+            onClick={() => setStep(-1)}
+            className="text-xs text-[#0d1f55]/50 hover:text-[#0d1f55] underline"
+          >
+            ↺ Rever passos
+          </button>
+        )}
+      </div>
+
+      {i.metodologia && metodologia(i.metodologia) && (
+        <div className="mt-4 text-[10px] uppercase tracking-widest font-bold text-[#0d1f55]/50">
+          Base: {metodologia(i.metodologia)!.nome}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ContaPassoAPasso({ i }: { i: Extract<Interacao, { tipo: "contaPassoAPasso" }> }) {
+  // Divisão pela chave tem layout próprio (algoritmo tradicional BR).
+  if (i.operacao === "div") return <DivisaoChave i={i} />;
+  // Multiplicação do 5º ano em diante: algoritmo formal, com parciais e deslocamentos.
+  if (i.operacao === "mult") return <MultiplicacaoArmada a={i.operandos[0]} b={i.operandos[1]} resultadoEsperado={i.resultado} />;
+
+  const [passoAtual, setPassoAtual] = useState(-1); // -1 = ainda não começou
+  const [resposta, setResposta] = useState<number | null>(null);
+  const [confirmado, setConfirmado] = useState(false);
+
+  const totalPassos = i.passos.length;
+  const terminou = passoAtual >= totalPassos - 1;
+  const modo = i.modo ?? "explicacao";
+
+  // Narração do professor removida a pedido: a criança lê os passos visualmente,
+  // sem TTS repetitivo tipo "Unidades: 2 + 5 = 7".
+  useEffect(() => () => stopSpeaking(), []);
+
+  // Determina colunas visíveis (U..CM conforme magnitude)
+  type Col = "CM" | "DM" | "UM" | "C" | "D" | "U";
+  const maxNum = Math.max(...i.operandos, i.resultado);
+  const numCols =
+    maxNum >= 100000 ? 6 : maxNum >= 10000 ? 5 : maxNum >= 1000 ? 4 : maxNum >= 100 ? 3 : 2;
+  const COL_ORDEM: Array<Col> = ["CM", "DM", "UM", "C", "D", "U"];
+  const colunas = COL_ORDEM.slice(6 - numCols);
+
+  const opSimbolo = i.operacao === "soma" ? "+" : i.operacao === "sub" ? "−" : "×";
+
+  function digitoDe(n: number, coluna: Col) {
+    const s = String(Math.abs(n)).padStart(6, "0");
+    return { CM: s[0], DM: s[1], UM: s[2], C: s[3], D: s[4], U: s[5] }[coluna];
+  }
+
+  // Marcações de empréstimo do professor: para subtração, deriva
+  // automaticamente qual coluna do topo foi decrementada (riscada, com o
+  // novo valor em vermelho acima) e qual recebeu +10 (prefixo "1" em
+  // vermelho na frente do dígito). É como o professor escreve no caderno.
+  const emprestimo = useMemo(() => {
+    if (i.operacao !== "sub" || i.operandos.length !== 2) return null;
+    const [A, B] = i.operandos;
+    const cols: Array<Col> = ["U", "D", "C", "UM", "DM", "CM"];
+    const idx: Record<Col, number> = { U: 0, D: 1, C: 2, UM: 3, DM: 4, CM: 5 };
+    type Marca = { recebeu: boolean; deu: boolean; topoOriginal: number; topoDepois: number };
+    const marcas: Record<Col, Marca> = {
+      U: { recebeu: false, deu: false, topoOriginal: 0, topoDepois: 0 },
+      D: { recebeu: false, deu: false, topoOriginal: 0, topoDepois: 0 },
+      C: { recebeu: false, deu: false, topoOriginal: 0, topoDepois: 0 },
+      UM: { recebeu: false, deu: false, topoOriginal: 0, topoDepois: 0 },
+      DM: { recebeu: false, deu: false, topoOriginal: 0, topoDepois: 0 },
+      CM: { recebeu: false, deu: false, topoOriginal: 0, topoDepois: 0 },
+    };
+    let borrow = 0;
+    for (const c of cols) {
+      const dA = parseInt(digitoDe(A, c) || "0", 10);
+      const dB = parseInt(digitoDe(B, c) || "0", 10);
+      marcas[c].topoOriginal = dA;
+      if (borrow > 0) marcas[c].deu = true;
+      let topo = dA - borrow;
+      if (topo < dB) {
+        topo += 10;
+        marcas[c].recebeu = true;
+        borrow = 1;
+      } else {
+        borrow = 0;
+      }
+      marcas[c].topoDepois = topo;
+    }
+    return { marcas, idx };
+  }, [i.operacao, i.operandos]);
+
+  // Um mark de empréstimo aparece assim que a criança avança pra coluna
+  // que dispara o empréstimo (a coluna filha). Ex.: empréstimo de D→U
+  // aparece quando o passo U (idx 0) já foi processado.
+  function mostrarEmprestimoDe(c: Col) {
+    if (!emprestimo) return { recebeu: false, deu: false };
+    const i2 = emprestimo.idx[c];
+    return {
+      recebeu: passoAtual >= i2 && emprestimo.marcas[c].recebeu,
+      deu: passoAtual >= Math.max(0, i2 - 1) && emprestimo.marcas[c].deu,
+    };
+  }
+
+  // Passos revelados até agora — mapa coluna → dígito do resultado
+  const digitosResultado: Record<string, { digito: number; vaiUm?: number }> = {};
+  i.passos.slice(0, passoAtual + 1).forEach((p) => {
+    if (p.coluna == null || p.digito == null) return;
+    digitosResultado[p.coluna] = { digito: p.digito, vaiUm: p.vaiUm };
+  });
+
+  // Opções para modo prática
+  const opcoes = i.opcoes ?? [
+    i.resultado,
+    i.resultado + 10,
+    i.resultado - 10,
+  ].filter((n) => n >= 0);
+
+  function reset() {
+    setPassoAtual(-1);
+    setResposta(null);
+    setConfirmado(false);
+  }
+
+  return (
+    <div className="mt-3 rounded-xl bg-white text-[#0d1f55] p-4 md:p-6 border-2 border-amber-300/40">
+      <div className="text-[10px] uppercase tracking-widest font-black text-[#0d1f55]/60 mb-3">
+        Conta escrita · passo a passo
+      </div>
+
+      {/* Grelha da conta armada */}
+      <div className="flex justify-center">
+        <div
+          className="grid gap-x-2 md:gap-x-4 gap-y-1 font-mono font-black text-3xl md:text-5xl"
+          style={{ gridTemplateColumns: `2rem repeat(${numCols}, minmax(2.5rem, 3.5rem))` }}
+        >
+          {/* Linha de "vai 1" — o vai-um da coluna à direita aparece acima da coluna vizinha da esquerda */}
+          <div />
+          {colunas.map((c, idx) => {
+            const colDireita = colunas[idx + 1];
+            const v = colDireita ? digitosResultado[colDireita]?.vaiUm : undefined;
+            return (
+              <div key={"v-" + c} className="text-center text-sm md:text-base text-rose-500">
+                {v ? v : ""}
+              </div>
+            );
+          })}
+
+          {/* Operandos */}
+          {i.operandos.map((op, opIdx) => {
+            const ehTopoSub = opIdx === 0 && i.operacao === "sub" && emprestimo != null;
+            return (
+              <Fragment key={"opRow-" + opIdx}>
+                <div className="text-right pr-1 text-[#0d1f55]/60">
+                  {opIdx === i.operandos.length - 1 ? opSimbolo : ""}
+                </div>
+                {colunas.map((c) => {
+                  const digitoStr =
+                    digitoDe(op, c) === "0" && op < Math.pow(10, colunas.length - colunas.indexOf(c) - 1)
+                      ? ""
+                      : digitoDe(op, c);
+                  if (!ehTopoSub) {
+                    return (
+                      <div key={`op-${opIdx}-${c}`} className="text-center">
+                        {digitoStr}
+                      </div>
+                    );
+                  }
+                  const marca = emprestimo!.marcas[c];
+                  const { recebeu, deu } = mostrarEmprestimoDe(c);
+                  // Valor a mostrar acima em vermelho:
+                  // - Se recebeu (com ou sem também ter emprestado): o novo topo (ex.: 13, 12, 9 na cadeia do zero).
+                  // - Se só emprestou: topoOriginal - 1.
+                  // O dígito original é riscado; NÃO prefixamos "1" na frente,
+                  // porque o valor completo já aparece acima.
+                  const acima = recebeu
+                    ? deu
+                      ? marca.topoOriginal + 10 - 1
+                      : marca.topoOriginal + 10
+                    : deu
+                      ? marca.topoOriginal - 1
+                      : null;
+                  const riscar = deu || recebeu;
+                  return (
+                    <div
+                      key={`op-${opIdx}-${c}`}
+                      className="relative text-center leading-none"
+                    >
+                      {acima !== null && (
+                        <div className="absolute -top-4 md:-top-5 left-0 right-0 text-center text-lg md:text-2xl font-black text-rose-600">
+                          {acima}
+                        </div>
+                      )}
+                      <span className="inline-flex items-baseline justify-center">
+                        <span className={riscar ? "line-through decoration-rose-600 decoration-[3px]" : ""}>
+                          {digitoStr}
+                        </span>
+                      </span>
+                    </div>
+                  );
+                })}
+              </Fragment>
+            );
+          })}
+
+          {/* Linha do resultado */}
+          <div />
+          {colunas.map((c) => (
+            <div key={"line-" + c} className="border-t-4 border-[#0d1f55] h-2" />
+          ))}
+          <div />
+          {colunas.map((c) => {
+            const d = digitosResultado[c];
+            return (
+              <div key={"r-" + c} className="text-center text-emerald-600">
+                {d != null ? d.digito : passoAtual >= 0 ? "·" : "?"}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Explicações do professor — vão se ACUMULANDO embaixo da conta */}
+      <div className="mt-5 rounded-lg bg-amber-50 border-l-4 border-amber-500 p-3 flex flex-col gap-2">
+        {passoAtual < 0 && (
+          <div className="text-sm md:text-base">
+            <span className="font-black text-amber-700">🧠 Brilha:</span>{" "}
+            Vamos armar a conta. Alinhamos unidade com unidade, dezena com dezena. Toque em "Começar" para ver a conta nascer passo a passo.
+          </div>
+        )}
+        {i.passos.slice(0, passoAtual + 1).map((p, idx) => {
+          const ultimo = idx === passoAtual;
+          return (
+            <div
+              key={idx}
+              className={`flex items-start gap-2 rounded-lg px-2 py-1.5 transition-colors ${
+                ultimo ? "bg-white/80 ring-1 ring-amber-300" : "opacity-70"
+              }`}
+            >
+              <span className="flex-shrink-0 w-6 h-6 rounded-full bg-amber-500 text-white flex items-center justify-center font-black text-[11px]">
+                {idx + 1}
+              </span>
+              <div className="min-w-0 break-words text-sm md:text-base">
+                {p.fala}
+                {p.porque && (
+                  <div className="text-xs text-[#0d1f55]/70 mt-1 italic">
+                    Por quê? {p.porque}
+                  </div>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+
+      {/* Botão avançar */}
+      <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
+        {!terminou && (
+          <button
+            onClick={() => setPassoAtual((p) => Math.min(p + 1, totalPassos - 1))}
+            className="px-5 py-3 rounded-xl bg-amber-500 text-white font-black hover:bg-amber-400"
+          >
+            {passoAtual < 0 ? "▶️ Começar" : "→ Próximo passo"}
+          </button>
+        )}
+        {terminou && modo === "explicacao" && (
+          <div className="text-lg font-black text-emerald-700 text-center w-full">
+            ✅ {i.operandos.map((n) => n.toLocaleString("pt-BR")).join(` ${opSimbolo} `)} ={" "}
+            {i.resultado.toLocaleString("pt-BR")}
+          </div>
+        )}
+
+        {terminou && !confirmado && (
+          <button
+            onClick={reset}
+            className="text-xs text-[#0d1f55]/50 hover:text-[#0d1f55] underline"
+          >
+            ↺ Rever passos
+          </button>
+        )}
+      </div>
+
+      {/* Modo prática: pergunta final */}
+      {terminou && modo === "pratica" && (
+        <div className="mt-4 border-t border-[#0d1f55]/10 pt-4">
+          <div className="text-sm font-bold mb-2">
+            {i.perguntaFinal ?? "Qual é o resultado?"}
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {opcoes.map((n) => (
+              <button
+                key={n}
+                onClick={() => {
+                  setResposta(n);
+                  setConfirmado(true);
+                }}
+                disabled={confirmado}
+                className={`px-4 py-2 rounded-lg font-black border-2 ${
+                  confirmado
+                    ? n === i.resultado
+                      ? "bg-emerald-500 text-white border-emerald-600"
+                      : n === resposta
+                      ? "bg-rose-500 text-white border-rose-600"
+                      : "bg-white/60 text-[#0d1f55]/40 border-[#0d1f55]/10"
+                    : "bg-white text-[#0d1f55] border-[#0d1f55]/20 hover:border-amber-400"
+                }`}
+              >
+                {n}
+              </button>
+            ))}
+          </div>
+          {confirmado && (
+            <div
+              className={`mt-3 p-3 rounded-lg text-sm ${
+                resposta === i.resultado ? "bg-emerald-50 text-emerald-800" : "bg-rose-50 text-rose-800"
+              }`}
+            >
+              {resposta === i.resultado
+                ? i.feedbackAcerto ?? "🎉 Perfeito! O algoritmo levou você direto ao resultado."
+                : i.feedbackErro ?? `Não foi dessa vez. O resultado é ${i.resultado}. Refaça os passos com calma.`}
+            </div>
+          )}
+        </div>
+      )}
+
+      {i.metodologia && metodologia(i.metodologia) && (
+        <div className="mt-4 text-[10px] uppercase tracking-widest font-bold text-[#0d1f55]/50">
+          Base: {metodologia(i.metodologia)!.nome}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// =====================================================================
+// Rodapé "Base científica" — metodologias declaradas pela aula.
+// =====================================================================
+
+export function RodapeMetodologias({ chaves }: { chaves?: string[] }) {
+  if (!chaves?.length) return null;
+  const items = chaves.map((k) => METODOLOGIAS_MAT[k]).filter(Boolean);
+  if (!items.length) return null;
+
+  return (
+    <section className="mt-8 rounded-2xl bg-white/5 border border-white/10 p-4 md:p-6">
+      <div className="text-[10px] uppercase tracking-widest font-black text-amber-300 mb-3">
+        📚 Base científica desta aula
+      </div>
+      <div className="grid md:grid-cols-2 gap-3">
+        {items.map((m, i) => (
+          <div
+            key={i}
+            className="rounded-xl bg-white/5 border-l-4 p-3"
+            style={{ borderColor: m.cor }}
+          >
+            <div className="font-black text-sm" style={{ color: m.cor }}>
+              {m.nome}
+            </div>
+            <div className="text-xs text-white/70 mt-1">{m.descricao}</div>
+            <div className="text-[10px] text-white/40 mt-1 italic">{m.autores}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+
+// =====================================================================
+// ExemploReal — "🔎 Na prática": aparece após cada etapa da Explicação.
+// Ancora o conceito num caso concreto (habitantes, placa, página…) e
+// renderiza o visual apropriado (casas de valor ou conta passo a passo).
+// =====================================================================
+function ExemploReal(props: NonNullable<
+  NonNullable<AulaV4["momento04_explicacao"]["etapas"][number]["exemploReal"]>
+>) {
+  const { titulo = "🔎 Na prática", contexto, casasValor, contaPassoAPasso, visualMat, destaque } = props;
+  return (
+    <div className="mt-4 rounded-2xl bg-amber-50 text-[#0d1f55] border-2 border-amber-300 p-2 sm:p-4">
+      <div className="text-[10px] uppercase tracking-widest font-black text-amber-700 mb-2">
+        {titulo}
+      </div>
+      <div className="text-sm md:text-base leading-relaxed">{contexto}</div>
+      {visualMat && <RenderVisualMat v={visualMat} />}
+      {casasValor && !visualMat && (
+        <div className="mt-3">
+          <CasasValor {...casasValor} />
+        </div>
+      )}
+      {contaPassoAPasso && (
+        <ContaPassoAPasso
+          i={{
+            tipo: "contaPassoAPasso",
+            operacao: contaPassoAPasso.operacao,
+            operandos: contaPassoAPasso.operandos,
+            resultado: contaPassoAPasso.resultado,
+            passos: contaPassoAPasso.passos,
+            modo: "explicacao",
+          }}
+        />
+      )}
+      {destaque && (
+        <div className="mt-3 text-sm md:text-base font-black text-emerald-700">
+          ✅ {destaque}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ---------- Helpers da Avaliação: conta armada -----------------------
+
+/**
+ * Detecta um padrão simples "A + B" ou "A − B" (ou "A - B") no texto de
+ * uma pergunta de avaliação de matemática. Usa apenas o PRIMEIRO padrão
+ * encontrado. Retorna undefined se não encontrar.
+ */
+function detectarContaNoTexto(
+  texto: string,
+): { a: number; b: number; operacao: "soma" | "subtracao" } | undefined {
+  // Aceita +, -, − (U+2212) entre dois números inteiros.
+  const m = texto.match(/(\d{1,4})\s*([+\-−])\s*(\d{1,4})/);
+  if (!m) return undefined;
+  const a = parseInt(m[1], 10);
+  const b = parseInt(m[3], 10);
+  if (!Number.isFinite(a) || !Number.isFinite(b)) return undefined;
+  const op: "soma" | "subtracao" = m[2] === "+" ? "soma" : "subtracao";
+  return { a, b, operacao: op };
+}
+
+/**
+ * Detecta um padrão simples "A × B" ou "A ÷ B" no texto. Aceita ×, x, *, ÷, /.
+ * Retorna undefined se não achar.
+ */
+function detectarMultDivNoTexto(
+  texto: string,
+): { a: number; b: number; operacao: "mult" | "div" } | undefined {
+  const numero = "(?:\\d{1,3}(?:\\.\\d{3})+|\\d{1,6})";
+  const m = texto.match(new RegExp(`(${numero})\\s*([×x*÷/])\\s*(${numero})`, "i"));
+  if (!m) return undefined;
+  const a = parseInt(m[1].replace(/\./g, ""), 10);
+  const b = parseInt(m[3].replace(/\./g, ""), 10);
+  if (!Number.isFinite(a) || !Number.isFinite(b) || b === 0) return undefined;
+  const op: "mult" | "div" = m[2] === "÷" || m[2] === "/" ? "div" : "mult";
+  return { a, b, operacao: op };
+}
+
+// =====================================================================
+// Multiplicação armada — algoritmo formal com parciais.
+// Usado quando o texto pede multiplicação no 5º–9º/EM: nada de tabuada
+// automática para chegar no resultado. O aluno vê a conta nascer como no
+// caderno: unidade, dezena, deslocamento, sobras e soma final.
+// =====================================================================
+function MultiplicacaoArmada({
+  a,
+  b,
+  resultadoEsperado,
+}: {
+  a: number;
+  b: number;
+  resultadoEsperado?: number;
+}) {
+  const multiplicando = Math.abs(Math.trunc(a));
+  const multiplicador = Math.abs(Math.trunc(b));
+  const resultado = resultadoEsperado ?? multiplicando * multiplicador;
+
+  type Step = {
+    tipo: "digito" | "zero" | "soma";
+    rowIndex?: number;
+    revealCols?: number[];
+    carryCol?: number;
+    carryValue?: number;
+    fala: string;
+  };
+
+  const { rows, steps, width, top, bottom } = useMemo(() => {
+    const topDigits = String(multiplicando).split("").map(Number);
+    const bottomDigits = String(multiplicador).split("").map(Number);
+    const bottomReversed = [...bottomDigits].reverse();
+    const finalResult = multiplicando * multiplicador;
+    const calcWidth = Math.max(String(finalResult).length, String(multiplicando).length, String(multiplicador).length + 1, 2);
+    const partialRows: Array<{ valor: number; texto: string; digit: number; pos: number }> = [];
+    const generatedSteps: Step[] = [];
+
+    bottomReversed.forEach((digit, pos) => {
+      const rowIndex = partialRows.length;
+      const valor = multiplicando * digit * Math.pow(10, pos);
+      const texto = String(valor).padStart(calcWidth, " ");
+      partialRows.push({ valor, texto, digit, pos });
+
+      if (digit === 0) {
+        generatedSteps.push({
+          tipo: "zero",
+          rowIndex,
+          revealCols: [calcWidth - 1],
+          fala:
+            pos === 0
+              ? `A unidade do multiplicador é 0. Então a primeira linha vale 0.`
+              : `Nesta casa apareceu 0, então esta parcial vale 0 e fica deslocada ${pos} casa${pos > 1 ? "s" : ""}.`,
+        });
+        return;
+      }
+
+      let carry = 0;
+      for (let offset = 0; offset < topDigits.length; offset += 1) {
+        const topDigit = topDigits[topDigits.length - 1 - offset];
+        const raw = digit * topDigit + carry;
+        const write = raw % 10;
+        const nextCarry = Math.floor(raw / 10);
+        const col = calcWidth - 1 - pos - offset;
+        const revealCols = [col];
+        if (offset === 0 && pos > 0) {
+          for (let z = col + 1; z < calcWidth; z += 1) {
+            revealCols.push(z);
+          }
+        }
+        const isLastTopDigit = offset === topDigits.length - 1;
+        if (isLastTopDigit && nextCarry > 0) revealCols.push(col - 1);
+        const casa = pos === 0 ? "unidade" : pos === 1 ? "dezena" : pos === 2 ? "centena" : `${pos + 1}ª casa`;
+        const deslocamento = offset === 0 && pos > 0 ? ` Como o ${digit} está na ${casa}, começo esta linha ${pos} casa${pos > 1 ? "s" : ""} à esquerda.` : "";
+        generatedSteps.push({
+          tipo: "digito",
+          rowIndex,
+          revealCols,
+          carryCol: !isLastTopDigit && nextCarry > 0 ? col - 1 : undefined,
+          carryValue: !isLastTopDigit && nextCarry > 0 ? nextCarry : undefined,
+          fala:
+            `${digit} × ${topDigit}${carry > 0 ? ` + ${carry} que subiu` : ""} = ${raw}. ` +
+            `Escrevo ${write}${nextCarry > 0 && !isLastTopDigit ? ` e sobe ${nextCarry}` : ""}.` +
+            (isLastTopDigit && nextCarry > 0 ? ` Como acabou o número de cima, escrevo o ${nextCarry} na frente.` : "") +
+            deslocamento,
+        });
+        carry = nextCarry;
+      }
+    });
+
+    if (partialRows.length > 1) {
+      generatedSteps.push({
+        tipo: "soma",
+        fala: `Agora somo as linhas parciais: ${partialRows.map((r) => r.valor.toLocaleString("pt-BR")).join(" + ")} = ${finalResult.toLocaleString("pt-BR")}.`,
+      });
+    }
+
+    return {
+      rows: partialRows,
+      steps: generatedSteps,
+      width: calcWidth,
+      top: String(multiplicando).padStart(calcWidth, " "),
+      bottom: String(multiplicador).padStart(calcWidth, " "),
+    };
+  }, [multiplicando, multiplicador]);
+
+  const [step, setStep] = useState(-1);
+  const done = step >= steps.length - 1;
+  const active = step >= 0 ? steps[step] : undefined;
+  const showResult = done && (active?.tipo === "soma" || rows.length === 1);
+
+  const visibleColsByRow = useMemo(() => {
+    const visible: Record<number, Set<number>> = {};
+    steps.slice(0, step + 1).forEach((s) => {
+      if (s.rowIndex == null || !s.revealCols) return;
+      const rowIndex = s.rowIndex;
+      if (!visible[rowIndex]) visible[rowIndex] = new Set<number>();
+      s.revealCols.forEach((c) => {
+        if (c >= 0 && c < width) visible[rowIndex].add(c);
+      });
+    });
+    return visible;
+  }, [step, steps, width]);
+
+  function renderChars(texto: string, rowIndex?: number) {
+    return texto.split("").map((char, col) => {
+      const isSpace = char === " ";
+      const visible = rowIndex == null || visibleColsByRow[rowIndex]?.has(col);
+      return (
+        <span key={col} className={isSpace ? "opacity-0" : visible ? "" : "opacity-15"}>
+          {isSpace ? "0" : visible ? char : "·"}
+        </span>
+      );
+    });
+  }
+
+  return (
+    <div data-no-tts className="mt-3 rounded-xl bg-white text-[#0d1f55] p-4 md:p-6 border-2 border-amber-300/40">
+      <div className="text-[10px] uppercase tracking-widest font-black text-[#0d1f55]/60 mb-3 text-center">
+        Multiplicação armada · parciais passo a passo
+      </div>
+      <div className="flex justify-center overflow-x-auto">
+        <div className="font-mono font-black text-3xl md:text-5xl leading-tight tabular-nums min-w-max">
+          <div className="grid gap-x-2" style={{ gridTemplateColumns: `2rem repeat(${width}, minmax(1.8rem, 2.8rem))` }}>
+            <div />
+            {Array.from({ length: width }).map((_, col) => (
+              <div key={`carry-${col}`} className="h-5 text-center text-sm md:text-base text-rose-600">
+                {active?.carryCol === col ? active.carryValue : ""}
+              </div>
+            ))}
+            <div />
+            {top.split("").map((c, idx) => (
+              <div key={`top-${idx}`} className={`text-center ${c === " " ? "opacity-0" : ""}`}>{c === " " ? "0" : c}</div>
+            ))}
+            <div className="text-right pr-1 text-amber-600">×</div>
+            {bottom.split("").map((c, idx) => (
+              <div key={`bottom-${idx}`} className={`text-center ${c === " " ? "opacity-0" : ""}`}>{c === " " ? "0" : c}</div>
+            ))}
+            <div />
+            {Array.from({ length: width }).map((_, idx) => (
+              <div key={`line1-${idx}`} className="border-t-4 border-[#0d1f55] h-2 mt-1" />
+            ))}
+            {rows.map((row, rowIndex) => (
+              <Fragment key={`row-${rowIndex}`}>
+                <div className="text-right pr-1 text-[#0d1f55]/35">{rowIndex > 0 ? "+" : ""}</div>
+                {row.texto.split("").map((_, col) => (
+                  <div key={`r-${rowIndex}-${col}`} className="text-center text-[#0d1f55]">
+                    {renderChars(row.texto, rowIndex)[col]}
+                  </div>
+                ))}
+              </Fragment>
+            ))}
+            {rows.length > 1 && (
+              <>
+                <div />
+                {Array.from({ length: width }).map((_, idx) => (
+                  <div key={`line2-${idx}`} className="border-t-4 border-[#0d1f55] h-2 mt-1" />
+                ))}
+              </>
+            )}
+            {rows.length > 1 && (
+              <>
+                <div />
+                {String(resultado).padStart(width, " ").split("").map((c, idx) => (
+                  <div key={`res-${idx}`} className={`text-center text-emerald-600 ${showResult ? "" : "opacity-20"}`}>
+                    {c === " " ? "" : showResult ? c : "?"}
+                  </div>
+                ))}
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+      <div className="mt-5 min-h-[3.5rem] rounded-lg bg-amber-50 border-l-4 border-amber-500 p-3">
+        {step < 0 ? (
+          <div className="text-sm md:text-base">
+            <span className="font-black text-amber-700">🧠 Brilha:</span> Vamos montar {multiplicando.toLocaleString("pt-BR")} × {multiplicador.toLocaleString("pt-BR")} como no caderno: primeiro a unidade, depois a dezena/centena deslocada.
+          </div>
+        ) : (
+          <div className="text-sm md:text-base">
+            <span className="font-black text-amber-700">Passo {step + 1}/{steps.length}:</span> {steps[step]?.fala ?? "Conta concluída."}
+          </div>
+        )}
+      </div>
+      <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
+        {!done ? (
+          <button
+            onClick={() => setStep((p) => Math.min(p + 1, steps.length - 1))}
+            className="px-5 py-3 rounded-xl bg-amber-500 text-white font-black hover:bg-amber-400"
+          >
+            {step < 0 ? "▶️ Começar" : "→ Próximo passo"}
+          </button>
+        ) : (
+          <div className="text-lg font-black text-emerald-700">✅ Resultado: {resultado.toLocaleString("pt-BR")}</div>
+        )}
+        {done && (
+          <button onClick={() => setStep(-1)} className="text-xs text-[#0d1f55]/50 hover:text-[#0d1f55] underline">
+            ↺ Rever passos
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Detecta situação de comparação/ordenação de números grandes (sem operador
+ * aritmético). Ex.: "Qual é maior: 4.567.890 ou 4.576.890?", "Ordene 1.020.000
+ * · 999.900 · 1.020.500". Retorna os números encontrados quando há palavra-
+ * chave de comparação e pelo menos 2 números distintos.
+ */
+function detectarComparacaoNoTexto(texto: string): number[] | undefined {
+  if (!texto) return undefined;
+  // Ignora se já é conta aritmética.
+  if (/\d\s*[+\-−×x*÷/]\s*\d/i.test(texto)) return undefined;
+  const temChave = /(maior|menor|ordena|ordene|ordem|compar|crescent|decrescent|__|[<>=])/i.test(texto);
+  if (!temChave) return undefined;
+  const matches = texto.match(/\d{1,3}(?:\.\d{3})+|\d{2,}/g);
+  if (!matches) return undefined;
+  const nums = Array.from(new Set(matches.map((s) => parseInt(s.replace(/\./g, ""), 10))))
+    .filter((n) => Number.isFinite(n) && n >= 10);
+  if (nums.length < 2) return undefined;
+  if (nums.length > 6) return nums.slice(0, 6);
+  return nums;
+}
+
+/**
+ * Mostra 2+ números empilhados com dígitos alinhados por casa de valor
+ * (U, D, C, UM, DM, CM, UMi, DMi, CMi, UB, DB, CB). Destaca o primeiro
+ * dígito onde eles diferem — que é a casa que decide a comparação.
+ */
+function ComparacaoCasas({ numeros }: { numeros: number[] }) {
+  const LABELS = ["U", "D", "C", "UM", "DM", "CM", "UMi", "DMi", "CMi", "UB", "DB", "CB"];
+  const CORES = ["#34d399", "#22d3ee", "#fb923c", "#f472b6", "#a78bfa", "#f59e0b", "#60a5fa", "#f472b6", "#a3e635", "#f87171", "#38bdf8", "#e879f9"];
+  const digs = numeros.map((n) => String(Math.abs(Math.trunc(n))));
+  const maxLen = Math.max(...digs.map((s) => s.length));
+  const rows = digs.map((s) => s.padStart(maxLen, " ").split(""));
+  // Primeiro índice (esquerda→direita) onde algum dígito difere.
+  let diffCol = -1;
+  for (let c = 0; c < maxLen; c++) {
+    const col = rows.map((r) => r[c]);
+    const first = col[0];
+    if (col.some((x) => x !== first)) { diffCol = c; break; }
+  }
+  const labels = Array.from({ length: maxLen }, (_, i) => LABELS[maxLen - 1 - i] ?? "");
+  const cores = Array.from({ length: maxLen }, (_, i) => CORES[maxLen - 1 - i] ?? "#94a3b8");
+  return (
+    <div data-no-tts className="mt-3 rounded-xl bg-white text-[#0d1f55] p-4 border-2 border-amber-300/40 overflow-x-auto">
+      <div className="text-[10px] uppercase tracking-widest font-black text-[#0d1f55]/60 mb-2 text-center">
+        Comparação por casa de valor
+      </div>
+      <div className="inline-grid gap-1 mx-auto" style={{ gridTemplateColumns: `auto repeat(${maxLen}, minmax(2.25rem, 1fr))` }}>
+        <div />
+        {labels.map((lb, i) => (
+          <div key={`h-${i}`} className="text-[10px] font-black uppercase text-center px-1 py-1 rounded text-white" style={{ background: cores[i] }}>
+            {lb}
+          </div>
+        ))}
+        {rows.map((r, ri) => (
+          <Fragment key={ri}>
+            <div className="text-xs font-bold pr-2 self-center whitespace-nowrap tabular-nums">
+              {numeros[ri].toLocaleString("pt-BR")}
+            </div>
+            {r.map((d, ci) => {
+              const isDiff = ci === diffCol && d.trim() !== "";
+              const empty = d.trim() === "";
+              return (
+                <div
+                  key={ci}
+                  className={`h-10 grid place-items-center rounded font-black tabular-nums text-xl border-2 ${empty ? "opacity-30" : ""}`}
+                  style={{
+                    borderColor: cores[ci],
+                    color: isDiff ? "#fff" : cores[ci],
+                    background: isDiff ? cores[ci] : "transparent",
+                  }}
+                >
+                  {empty ? "·" : d}
+                </div>
+              );
+            })}
+          </Fragment>
+        ))}
+      </div>
+      {diffCol >= 0 && (
+        <div className="text-center text-xs mt-3 text-[#0d1f55]/80">
+          A comparação é decidida na casa <b>{labels[diffCol]}</b> — o primeiro dígito diferente da esquerda pra direita.
+        </div>
+      )}
+    </div>
+  );
+}
+
+
+/**
+ * Tabuada interativa passo a passo. Mostra fator × 1..ate com resultados
+ * ocultos. A cada clique em "Continuar", revela o resultado da próxima
+ * linha, com destaque na linha-alvo (targetN) quando ela é revelada.
+ * Substitui CasasValor em multiplicação/divisão, seguindo o método real
+ * de ensino: a criança acompanha a tabuada até chegar no resultado.
+ */
+function TabuadaInterativa({
+  fator,
+  ate = 10,
+  targetN,
+  operacao = "mult",
+  dividendo,
+}: {
+  fator: number;
+  ate?: number;
+  targetN?: number;
+  operacao?: "mult" | "div";
+  dividendo?: number;
+}) {
+  const [revelados, setRevelados] = useState(0); // quantas linhas já tiveram resultado revelado
+  const terminou = revelados >= ate;
+  return (
+    <div data-no-tts className="mt-3 rounded-xl bg-white text-[#0d1f55] p-4 border-2 border-amber-300/40">
+      <div className="text-[10px] uppercase tracking-widest font-black text-[#0d1f55]/60 mb-2 text-center">
+        {operacao === "div"
+          ? `Tabuada do ${fator} — quantas vezes cabe em ${dividendo ?? "?"}`
+          : `Tabuada do ${fator}`}
+      </div>
+      <div className="flex flex-col gap-1 font-mono text-lg tabular-nums max-w-[22rem] mx-auto">
+        {Array.from({ length: ate }).map((_, k) => {
+          const n = k + 1;
+          const r = fator * n;
+          const revelado = k < revelados;
+          const eAlvo =
+            revelado && targetN !== undefined && n === targetN;
+          const soma =
+            operacao === "mult" && revelado
+              ? Array.from({ length: n }).fill(fator).join("+")
+              : null;
+          return (
+            <div
+              key={k}
+              className={`grid grid-cols-[2ch_1ch_2ch_1ch_3ch_auto] gap-1 justify-items-end items-center rounded px-2 py-0.5 ${
+                eAlvo ? "bg-amber-300 font-black" : ""
+              }`}
+            >
+              <span>{fator}</span>
+              <span>×</span>
+              <span>{n}</span>
+              <span>=</span>
+              <span className={revelado ? "font-bold" : "text-[#0d1f55]/25"}>
+                {revelado ? r : "?"}
+              </span>
+              <span
+                className="text-[11px] font-bold text-red-600 justify-self-start pl-2"
+                data-no-tts="true"
+              >
+                {soma ? `${soma} = ${r}` : ""}
+              </span>
+            </div>
+          );
+        })}
+      </div>
+      {!terminou ? (
+        <button
+          type="button"
+          onClick={() => setRevelados((v) => Math.min(ate, v + 1))}
+          className="mt-3 mx-auto block px-4 py-2 rounded-lg bg-amber-500 text-white font-bold hover:bg-amber-600"
+        >
+          Continuar ▶
+        </button>
+      ) : (
+        <div className="mt-3 text-center text-sm font-bold text-emerald-600">
+          Tabuada completa ✅
+        </div>
+      )}
+    </div>
+  );
+}
+
+/**
+ * Tabuada estática de consulta — aparece no topo das atividades pra
+ * criança consultar enquanto resolve.
+ */
+function TabuadaReferencia({
+  fator,
+  ate = 10,
+  targetN,
+}: {
+  fator: number;
+  ate?: number;
+  targetN?: number;
+}) {
+  return (
+    <div data-no-tts className="mb-3 rounded-xl bg-white/95 text-[#0d1f55] p-3 border-2 border-amber-300/50 max-w-[15rem] mx-auto">
+      <div className="text-[10px] font-black uppercase tracking-widest text-amber-600 text-center mb-2">
+        📖 Tabuada do {fator} — consulte
+      </div>
+      <div className="flex flex-col gap-0.5 font-mono text-sm tabular-nums">
+        {Array.from({ length: ate }).map((_, k) => {
+          const n = k + 1;
+          const eAlvo = targetN !== undefined && n === targetN;
+          return (
+            <div
+              key={k}
+              className={`grid grid-cols-[2ch_1ch_2ch_1ch_3ch] gap-1 justify-items-end rounded px-1 ${
+                eAlvo ? "bg-amber-300 font-black" : ""
+              }`}
+            >
+              <span>{fator}</span>
+              <span>×</span>
+              <span>{n}</span>
+              <span>=</span>
+              <span className="font-bold">{fator * n}</span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Escolhe qual tabuada usar a partir de uma conta detectada.
+ * Multiplicação: usa o menor fator; targetN = maior fator.
+ * Divisão A ÷ B: usa a tabuada de B; targetN = A/B (se inteiro).
+ */
+function tabuadaDeConta(c: { a: number; b: number; operacao: "mult" | "div" }) {
+  if (c.operacao === "div") {
+    const q = c.a / c.b;
+    return {
+      fator: c.b,
+      ate: Math.max(10, Math.ceil(q)),
+      targetN: Number.isInteger(q) ? q : undefined,
+      operacao: "div" as const,
+      dividendo: c.a,
+    };
+  }
+  const menor = Math.min(c.a, c.b);
+  const maior = Math.max(c.a, c.b);
+  return {
+    fator: menor,
+    ate: Math.max(10, maior),
+    targetN: maior,
+    operacao: "mult" as const,
+  };
+}
+
+/**
+ * Conta armada MONTADA, sem resultado — usada antes da criança escolher
+ * a resposta. Se ela errar, o Player renderiza <ContaArmada autoIniciar />
+ * logo abaixo do feedback pra resolver passo a passo até o resultado.
+ */
+function ContaMontadaEstatica({
+  a,
+  b,
+  operacao,
+}: {
+  a: number;
+  b: number;
+  operacao: "soma" | "subtracao";
+}) {
+  const sinal = operacao === "soma" ? "+" : "−";
+  const largura = Math.max(String(a).length, String(b).length);
+  const pad = (n: number) => String(n).padStart(largura, "\u00A0");
+  return (
+    <div className="mb-3 rounded-2xl bg-white/95 text-[#0d1f55] p-3 border-2 border-amber-300/50 max-w-xs mx-auto">
+      <div className="text-[10px] font-black uppercase tracking-widest text-amber-600 text-center mb-2">
+        Conta armada
+      </div>
+      <div className="rounded-xl bg-[#FFF7DC] py-4 px-3 flex justify-center">
+        <div className="font-mono text-4xl sm:text-5xl font-black text-[#0d1f55] leading-tight text-right tabular-nums">
+          <div className="pr-2">
+            <span className="opacity-0">+&nbsp;</span>
+            <span>{pad(a)}</span>
+          </div>
+          <div className="pr-2 flex items-center justify-end gap-3">
+            <span className="text-amber-500">{sinal}</span>
+            <span>{pad(b)}</span>
+          </div>
+          <div className="border-t-4 border-[#0d1f55] my-2" />
+          <div className="pr-2 min-h-[1em]">
+            <span className="opacity-0">+&nbsp;</span>
+            <span className="opacity-20">?</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

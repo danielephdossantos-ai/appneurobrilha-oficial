@@ -1,0 +1,440 @@
+import { useEffect, useRef, useState } from "react";
+import { speakChunked, stopSpeaking } from "@/lib/native-tts";
+import type { QuizTextoData } from "../../types";
+import { useAdaptativo } from "../adaptativo";
+import { KidsCtx } from "../PlayerPortuguesV4";
+import { useContext } from "react";
+import { TeenBlackboard } from "./TeenBlackboard";
+
+
+/**
+ * Quiz VISUAL — não é mais questionário de texto.
+ * Cada opção vira um BOTÃO REDONDO GIGANTE que a criança toca.
+ * O professor lê a pergunta em voz alta, a criança escuta a opção
+ * quando toca. Feedback visual grande, celebração no acerto.
+ *
+ * Mesma estrutura de dados de antes (pergunta / opcoes / correta),
+ * então TODOS os quizzes do curso viram jogo automaticamente.
+ */
+
+// Cores rotativas para as bolinhas — vivas mas legíveis.
+const CORES = [
+  { bg: "from-rose-400 to-pink-500", ring: "ring-rose-200" },
+  { bg: "from-sky-400 to-blue-500", ring: "ring-sky-200" },
+  { bg: "from-emerald-400 to-green-500", ring: "ring-emerald-200" },
+  { bg: "from-amber-400 to-orange-500", ring: "ring-amber-200" },
+];
+
+// Cores rotativas para as sílabas — cada palma acende de uma cor.
+const CORES_SILABA = [
+  "from-rose-400 to-pink-500",
+  "from-sky-400 to-blue-500",
+  "from-emerald-400 to-green-500",
+  "from-amber-400 to-orange-500",
+  "from-violet-400 to-purple-500",
+];
+
+function SilabasParaTocar({ silabas }: { silabas: string[] }) {
+  const [acesas, setAcesas] = useState<boolean[]>(() => silabas.map(() => false));
+
+  function tocarSilaba(i: number) {
+    setAcesas((prev) => {
+      const nova = [...prev];
+      nova[i] = !nova[i];
+      return nova;
+    });
+    if (typeof navigator !== "undefined" && "vibrate" in navigator) {
+      try { navigator.vibrate?.(30); } catch { /* ignore */ }
+    }
+  }
+
+  function resetar() {
+    setAcesas(silabas.map(() => false));
+  }
+
+  const contadas = acesas.filter(Boolean).length;
+
+  return (
+    <div className="mb-4 rounded-2xl bg-gradient-to-br from-indigo-50 to-purple-50 p-3 border-2 border-indigo-200">
+      <div className="text-xs sm:text-sm font-bold text-indigo-700 mb-2 text-center">
+        👏 Toque em cada pedaço pra acender
+      </div>
+      <div className="flex flex-wrap gap-2 justify-center items-center">
+        {silabas.map((s, i) => {
+          const cor = CORES_SILABA[i % CORES_SILABA.length];
+          const on = acesas[i];
+          return (
+            <button
+              key={i}
+              type="button"
+              onClick={() => tocarSilaba(i)}
+              className={`min-w-16 h-16 sm:min-w-20 sm:h-20 px-3 rounded-2xl font-black text-2xl sm:text-3xl shadow-md transition-all duration-200 active:scale-95 ${
+                on
+                  ? `bg-gradient-to-br ${cor} text-white scale-110 ring-4 ring-white`
+                  : "bg-white text-slate-300 border-2 border-dashed border-slate-300"
+              }`}
+              aria-pressed={on}
+            >
+              {s}
+            </button>
+          );
+        })}
+      </div>
+      <div className="flex items-center justify-center gap-3 mt-2">
+        <div className="text-lg font-black text-indigo-800">
+          👏 {contadas}
+        </div>
+        {contadas > 0 && (
+          <button
+            type="button"
+            onClick={resetar}
+            className="text-xs font-bold text-indigo-600 underline"
+          >
+            apagar
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
+
+
+export function QuizTexto({
+  quiz,
+  momento,
+  qid,
+  tituloBlackboard,
+}: {
+  quiz: QuizTextoData;
+  /** Momento da aula (m5, m8, m10...) — habilita o motor adaptativo. */
+  momento?: string;
+  /** Identificador estável da questão dentro da aula. */
+  qid?: string;
+  tituloBlackboard?: string;
+}) {
+  const adaptativo = useAdaptativo();
+  // Apoio definido pela SONDAGEM INICIAL e recalibrado pelo desempenho.
+  const apoio = adaptativo?.apoio;
+  const limiteTentativas = apoio?.tentativasAntesDeRevelar ?? 2;
+  const [escolha, setEscolha] = useState<number | null>(null);
+  const [tentativas, setTentativas] = useState(0);
+  const [fase, setFase] = useState<"responder" | "dica" | "final">("responder");
+  const inicioRef = useRef<number>(Date.now());
+  const registradoRef = useRef(false);
+
+  const acertou = escolha !== null && escolha === quiz.correta;
+  const revelou = fase === "final";
+  const dica =
+    quiz.dica ??
+    (quiz.ondeEstaNoTexto
+      ? `Volte nesta parte: "${quiz.ondeEstaNoTexto}"`
+      : "Leia a pergunta de novo devagar e elimine a opção que não combina.");
+  const reensino = quiz.reensino ?? quiz.feedbackAcerto;
+  // Apoio reforçado: a pista já aparece antes da 1ª resposta.
+  const dicaAntecipada = !!apoio?.dicaAntecipada && fase === "responder" && escolha === null;
+
+  // A pista é lida em voz alta quando o perfil pede leitura de apoio.
+  useEffect(() => {
+    if (!apoio?.lerDicaEmVozAlta) return;
+    if (fase !== "dica" && !dicaAntecipada) return;
+    stopSpeaking();
+    speakChunked(dica, { rate: apoio.velocidadeFala });
+    return () => stopSpeaking();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fase, dicaAntecipada]);
+
+  function ouvirPergunta() {
+    stopSpeaking();
+    speakChunked(quiz.pergunta);
+  }
+
+  function concluir(indice: number, correta: boolean, tent: number) {
+    setEscolha(indice);
+    setFase("final");
+    if (!registradoRef.current && momento && adaptativo) {
+      registradoRef.current = true;
+      adaptativo.registrar({
+        id: qid ?? quiz.pergunta,
+        momento,
+        correta,
+        tempoMs: Date.now() - inicioRef.current,
+        tentativas: tent,
+      });
+    }
+  }
+
+  function tocar(i: number) {
+    if (escolha !== null || revelou) return;
+    stopSpeaking();
+    const n = tentativas + 1;
+    setTentativas(n);
+
+    if (i === quiz.correta) {
+      concluir(i, true, n);
+      return;
+    }
+    if (n < limiteTentativas) {
+      // Ainda há tentativa → PISTA, sem mostrar a resposta.
+      setEscolha(i);
+      setFase("dica");
+      return;
+    }
+    // Última tentativa errada → revela + reensino automático.
+    concluir(i, false, n);
+  }
+
+  function tentarDeNovo() {
+    stopSpeaking();
+    setEscolha(null);
+    setFase("responder");
+  }
+
+  // Detecta palavra silabada tipo CA-SA, BA-NA-NA, JA-NE-LA na pergunta,
+  // pra virar um "contador de palmas" visual (acende quando toca).
+  const silabada = quiz.pergunta.match(/\b([A-ZÁÉÍÓÚÂÊÔÃÕÇ]{1,4}(?:-[A-ZÁÉÍÓÚÂÊÔÃÕÇ]{1,4})+)\b/);
+  const silabas = silabada ? silabada[1].split("-") : null;
+
+  const skin = useContext(KidsCtx);
+
+  return (
+    <TeenBlackboard titulo={tituloBlackboard}>
+      <div className={`rounded-3xl p-4 ${skin.teen ? "bg-transparent text-cyan-50" : "bg-white text-[#0d1f55] shadow-lg border-2 border-white/60"}`}>
+      {/* Pergunta com botão de ouvir */}
+      <div className="flex items-start gap-3 mb-4">
+        <button
+          onClick={ouvirPergunta}
+          aria-label="Ouvir a pergunta"
+          className="shrink-0 w-12 h-12 rounded-full bg-amber-400 text-[#0d1f55] text-2xl font-black grid place-items-center shadow-md active:scale-95"
+        >
+          🔊
+        </button>
+        <p className="text-lg sm:text-xl font-black leading-snug flex-1">
+          {quiz.pergunta}
+        </p>
+      </div>
+
+      {silabas && <SilabasParaTocar silabas={silabas} />}
+
+      {/* Sondagem → adaptação: no apoio reforçado a pista vem ANTES de responder */}
+      {dicaAntecipada && (
+        <div className="mb-4 p-3 rounded-2xl bg-sky-50 text-sky-950 border-2 border-sky-200 text-sm font-bold leading-snug">
+          <div className="text-xs uppercase tracking-wide text-sky-700">
+            🤝 Pista do professor (apoio reforçado)
+          </div>
+          <div className="mt-1">{dica}</div>
+        </div>
+      )}
+
+
+      {/* Se a pergunta tem opcoesImagens (mesmo tamanho de opcoes),
+          renderiza cards ilustrados no padrão ArquitetoLugar:
+          imagem em cima + rótulo em pill escura embaixo. */}
+      {quiz.opcoesImagens && quiz.opcoesImagens.length === quiz.opcoes.length ? (
+        <div
+          className={`grid gap-3 ${
+            quiz.opcoes.length <= 2
+              ? "grid-cols-2"
+              : quiz.opcoes.length === 3
+                ? "grid-cols-2 sm:grid-cols-3"
+                : "grid-cols-2 sm:grid-cols-4"
+          }`}
+        >
+          {quiz.opcoes.map((op, i) => {
+            const marcada = escolha === i;
+            const certa = i === quiz.correta;
+            const travado = escolha !== null;
+
+            let borda = "border-4 border-transparent bg-white hover:scale-105 active:scale-95";
+            if (revelou && marcada && certa) borda = "border-4 border-emerald-500 bg-emerald-50 ring-8 ring-emerald-200 scale-105";
+            else if (marcada && !certa) borda = "border-4 border-rose-500 bg-rose-50 ring-8 ring-rose-200 animate-pulse";
+            else if (revelou && certa) borda = "border-4 border-emerald-500 bg-emerald-50 ring-4 ring-emerald-200";
+            else if (travado) borda = "border-4 border-transparent bg-slate-100 opacity-60";
+
+            return (
+              <button
+                key={i}
+                disabled={travado}
+                onClick={() => tocar(i)}
+                className={`relative flex flex-col items-stretch rounded-3xl shadow-xl overflow-hidden transition-all duration-200 ${borda}`}
+              >
+                <div className="relative w-full h-32 sm:h-28 bg-slate-50">
+                  <img
+                    src={quiz.opcoesImagens![i]}
+                    alt={op}
+                    loading="lazy"
+                    width={1024}
+                    height={1024}
+                    className="absolute inset-0 w-full h-full object-contain p-1"
+                  />
+                </div>
+                <div className="bg-black/70 px-2 py-1.5">
+                  <span className="block text-white text-sm font-black leading-tight text-center">
+                    {op}
+                  </span>
+                </div>
+                {revelou && marcada && certa && (
+                  <span className="absolute -top-2 -right-2 text-3xl">🎉</span>
+                )}
+                {marcada && !certa && (
+                  <span className="absolute -top-2 -right-2 text-3xl">💭</span>
+                )}
+                {revelou && !marcada && certa && (
+                  <span className="absolute -top-2 -right-2 text-2xl">✅</span>
+                )}
+              </button>
+            );
+          })}
+        </div>
+      ) : (
+        <div
+          className={`grid gap-3 justify-items-stretch sm:justify-items-center ${
+            quiz.opcoes.length <= 2
+              ? "grid-cols-1 sm:grid-cols-2"
+              : quiz.opcoes.length === 3
+                ? "grid-cols-1 sm:grid-cols-3"
+                : "grid-cols-1 sm:grid-cols-2 md:grid-cols-4"
+          }`}
+        >
+          {quiz.opcoes.map((op, i) => {
+            const cor = CORES[i % CORES.length];
+            const marcada = escolha === i;
+            const certa = i === quiz.correta;
+            const travado = escolha !== null;
+
+            let estado = "";
+            if (!travado) {
+              estado = skin.teen
+                ? `bg-slate-800 border-2 border-slate-700 text-slate-300 hover:border-cyan-400 hover:shadow-[0_0_15px_rgba(6,182,212,0.3)] hover:scale-105 active:scale-95`
+                : `bg-slate-200 border-2 border-slate-300 text-slate-600 hover:scale-105 active:scale-95`;
+            } else if (marcada && certa) {
+              estado = skin.teen
+                ? "bg-cyan-950 border-2 border-cyan-400 text-cyan-400 shadow-[0_0_20px_rgba(6,182,212,0.5)] scale-105"
+                : "bg-gradient-to-br from-emerald-400 to-green-600 text-white ring-8 ring-emerald-200 scale-105";
+            } else if (marcada && !certa) {
+              estado = skin.teen
+                ? "bg-rose-950 border-2 border-rose-500 text-rose-400 shadow-[0_0_20px_rgba(244,63,94,0.4)] animate-pulse"
+                : "bg-gradient-to-br from-rose-400 to-red-600 text-white ring-8 ring-rose-200 animate-pulse";
+            } else if (revelou && certa) {
+              estado = skin.teen
+                ? "bg-cyan-950 border-2 border-cyan-400 text-cyan-400"
+                : "bg-gradient-to-br from-emerald-400 to-green-600 text-white ring-8 ring-emerald-200";
+            } else {
+              estado = skin.teen ? "bg-slate-900/50 border border-slate-800 text-slate-600 opacity-40" : "bg-slate-200 text-slate-400";
+            }
+
+            // No CELULAR: sempre pílula larga (uma resposta por linha, texto
+            // dentro do quadrado). No DESKTOP (sm+): mantém o formato antigo —
+            // bolinha se o texto for curto, pílula se for longo.
+            const curto = op.length <= 8;
+            const superCurto = op.length <= 3;
+            const forma = superCurto
+              ? "w-full min-h-20 rounded-3xl px-4 py-4 sm:w-28 sm:h-28 sm:min-h-0 sm:rounded-full"
+              : curto
+                ? "w-full min-h-20 rounded-3xl px-4 py-4 sm:w-28 sm:h-28 sm:min-h-0 sm:rounded-full"
+                : "w-full min-h-24 sm:min-h-28 rounded-3xl sm:rounded-[2rem] px-4 py-4";
+            const tamanhoTexto = superCurto
+              ? "text-3xl sm:text-5xl"
+              : curto
+                ? "text-lg sm:text-2xl"
+                : "text-base sm:text-base leading-snug";
+            return (
+              <button
+                key={i}
+                disabled={travado}
+                onClick={() => tocar(i)}
+                className={`relative ${forma} font-black shadow-xl transition-all duration-200 grid place-items-center text-center ${estado}`}
+              >
+                <span className={`${tamanhoTexto} break-words px-1`}>{op}</span>
+                {revelou && marcada && certa && (
+                  <span className="absolute -top-2 -right-2 text-3xl">🎉</span>
+                )}
+                {marcada && !certa && (
+                  <span className="absolute -top-2 -right-2 text-3xl">💭</span>
+                )}
+                {revelou && !marcada && certa && (
+                  <span className="absolute -top-2 -right-2 text-2xl">✅</span>
+                )}
+              </button>
+            );
+          })}
+        </div>
+      )}
+
+      {/* 1ª tentativa errada — PISTA, sem entregar a resposta */}
+      {fase === "dica" && (
+        <div className="mt-4 p-4 rounded-2xl bg-sky-100 text-sky-950 border-2 border-sky-300 text-base font-bold leading-snug">
+          <div className="flex items-start gap-2">
+            <span className="text-2xl">🔎</span>
+            <div className="flex-1">
+              <div className="text-sm uppercase tracking-wide text-sky-700">Dica do professor</div>
+              <div className="mt-1">{dica}</div>
+            </div>
+          </div>
+          <button
+            onClick={tentarDeNovo}
+            className="mt-3 w-full h-12 rounded-2xl bg-sky-500 text-white font-black text-lg active:scale-95 shadow"
+          >
+            🔄 Tentar com a dica
+            {limiteTentativas - tentativas > 1
+              ? ` (${limiteTentativas - tentativas} tentativas)`
+              : ""}
+          </button>
+        </div>
+      )}
+
+      {/* Resultado final */}
+      {revelou && (
+        <div
+          className={`mt-4 p-4 rounded-2xl text-base font-bold leading-snug ${
+            acertou
+              ? skin.teen ? "bg-cyan-900/30 text-cyan-200 border-2 border-cyan-500/50" : "bg-emerald-100 text-emerald-900 border-2 border-emerald-300"
+              : skin.teen ? "bg-rose-900/30 text-rose-200 border-2 border-rose-500/50" : "bg-amber-100 text-amber-900 border-2 border-amber-300"
+          }`}
+        >
+          <div className="flex items-start gap-2">
+            <span className="text-2xl">{acertou ? "🌟" : "🤔"}</span>
+            <div className="flex-1">
+              <div>
+                {acertou
+                  ? quiz.feedbackAcerto
+                  : (escolha !== null && quiz.feedbackOpcoes?.[escolha]) || quiz.feedbackErro}
+              </div>
+              {quiz.ondeEstaNoTexto && (
+                <div className={`mt-2 text-xs italic ${skin.teen ? "text-cyan-400/70" : "text-[#0d1f55]/70"}`}>
+                  📖 No texto: "{quiz.ondeEstaNoTexto}"
+                </div>
+              )}
+            </div>
+          </div>
+
+          {acertou && apoio?.reensinoSempre && (
+            <div className={`mt-3 rounded-2xl border-2 p-3 ${skin.teen ? "bg-slate-900/50 border-cyan-500/30 text-cyan-100" : "bg-white/70 border-emerald-300 text-[#0d1f55]"}`}>
+              <div className={`text-sm uppercase tracking-wide ${skin.teen ? "text-cyan-400" : "text-emerald-700"}`}>
+                👩‍🏫 Por que essa é a certa
+              </div>
+              <div className="mt-1">{reensino}</div>
+            </div>
+          )}
+
+          {!acertou && (
+            <div className={`mt-3 rounded-2xl border-2 p-3 ${skin.teen ? "bg-slate-900/50 border-rose-500/30 text-cyan-100" : "bg-white/70 border-amber-300"}`}>
+              <div className={`text-sm uppercase tracking-wide ${skin.teen ? "text-rose-400" : "text-amber-700"}`}>
+                👩‍🏫 Vamos aprender junto
+              </div>
+              <div className={`mt-1 ${skin.teen ? "text-cyan-100" : "text-[#0d1f55]"}`}>
+                A resposta certa é <strong>{quiz.opcoes[quiz.correta]}</strong>. {reensino}
+              </div>
+              <a
+                href="#m4"
+                className={`mt-3 inline-flex items-center justify-center w-full h-11 rounded-2xl font-black text-sm active:scale-95 ${skin.teen ? "bg-cyan-600 text-white" : "bg-[#0d1f55] text-white"}`}
+              >
+                📖 Reler a explicação
+              </a>
+            </div>
+          )}
+        </div>
+      )}
+      </div>
+    </TeenBlackboard>
+  );
+}

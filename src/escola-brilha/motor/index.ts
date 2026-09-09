@@ -1,0 +1,606 @@
+/**
+ * Motor Pedagógico do Escola Brilha
+ * ---------------------------------
+ * Núcleo ÚNICO de aprendizagem do aplicativo.
+ *
+ * Toda lógica pedagógica DEVE passar por este módulo:
+ *   - sequência das habilidades BNCC
+ *   - carregamento das missões
+ *   - adaptação por idade
+ *   - adaptação por desempenho
+ *   - revisão inteligente (espaçada)
+ *   - progresso
+ *   - recomendações
+ *   - conquistas
+ *
+ * Nenhum componente / rota / player pode implementar regra pedagógica
+ * própria. Sempre importar `MotorPedagogico` daqui.
+ *
+ * Este arquivo é uma FACHADA (facade) que compõe os módulos existentes.
+ * Não duplica regras — centraliza o ponto de acesso.
+ */
+
+import type { Aula } from "../types";
+import type { MissaoOficial } from "../biblioteca-oficial/types";
+
+import { getAula, listAulas, hasAula } from "../registry";
+import {
+  getMissaoOficial,
+  hasMissaoOficial,
+  listMissoesOficiais,
+  listMissoesPorAno,
+  listMissoesPorDisciplina,
+  totalMissoesOficiais,
+} from "../biblioteca-oficial";
+import { proximaHabilidade, invalidarCacheSequencia, type HabSeq } from "../bncc-sequencia";
+import {
+  proximaMissao,
+  metaDaAula,
+  metaDoCodigo,
+  estimarTempo,
+  dificuldadeDe,
+  type Dificuldade,
+  type MissaoMeta,
+} from "../proxima-missao";
+import { supabase } from "@/integrations/supabase/client";
+import { resolverMissao, parseBNCC, MENSAGEM_MISSAO_EM_CONSTRUCAO } from "./resolver";
+import {
+  selecionarAtividades,
+  selecionarAtividadesDetalhado,
+  CATALOGO_ATIVIDADES,
+  TODOS_TIPOS,
+  type TipoAtividade,
+  type AtividadeMeta,
+  type SelecaoAtividades,
+} from "../atividades";
+import {
+  AdaptacaoMissao,
+  planejarAdaptacao,
+  type PlanoAdaptacao,
+  type SinaisAluno,
+} from "./adaptacao-missao";
+import {
+  ExemplosContexto,
+  exemplosParaHabilidade,
+  CONTEXTOS,
+  type ContextoExemplo,
+  type Exemplo,
+  type OpcoesExemplos,
+} from "./exemplos-contexto";
+import {
+  RevisaoInteligente,
+  gerarPacoteRevisao,
+  reiniciarHistoricoRevisao,
+  type PacoteRevisao,
+  type OpcoesRevisao,
+} from "./revisao-inteligente";
+import {
+  SistemaMotivacao,
+  proximaMensagem,
+  reiniciarMotivacao,
+  type MensagemMotivacional,
+  type GatilhoMotivacional,
+} from "./motivacao";
+import {
+  AvaliacaoContinua,
+  type EventoAvaliacao,
+  type TipoEventoAvaliacao,
+  type IndicadoresContinuos,
+  type EstadoAvaliacao,
+} from "./avaliacao-continua";
+import {
+  BancoErrosFrequentes,
+  catalogoDaHabilidade,
+  detectarErro,
+  type EntradaErro,
+  type CausaErro,
+  type CatalogoErrosHabilidade,
+  type SinalErroObservado,
+  type DeteccaoErro,
+} from "./erros-frequentes";
+import {
+  TrilhasAprendizagem,
+  type NoTrilha,
+  type StatusMissao,
+  type TrilhaDisciplina,
+} from "./trilhas";
+import {
+  ConquistasEducacionais,
+  CATALOGO_CONQUISTAS,
+  type Conquista,
+  type CategoriaConquista,
+  type CatalogoConquista,
+  type EventoConquista,
+} from "./conquistas-educacionais";
+import {
+  BibliotecaNacional,
+  type CategoriaValidacao,
+  type ProblemaValidacao,
+  type ResultadoValidacao,
+  type ResultadoRegistro,
+} from "./biblioteca-nacional";
+import {
+  DominioAprendizagem,
+  calcularDominio,
+  type NivelDominioAprendizagem,
+  type RotuloNivel,
+  type SinaisDominio,
+  type DetalheDominio,
+  type OrigemInteracao,
+  type RegistroInteracao,
+} from "./dominio-aprendizagem";
+
+
+
+// =====================================================================
+// Tipos públicos do Motor
+// =====================================================================
+
+export type NivelDominio =
+  | "nao_iniciada"
+  | "em_aprendizagem"
+  | "parcialmente_dominada"
+  | "dominada";
+
+export type PerfilCrianca = {
+  childId: string;
+  idade?: number;
+  serie?: string;
+  perfilNeuro?: string; // "TEA" | "TDAH" | "Tipico" | ...
+};
+
+export type Desempenho = {
+  desempenho: number; // 0-100
+  tempoSegundos?: number;
+  erros?: number;
+  acertos?: number;
+};
+
+export type AdaptacaoIdade = {
+  usarImagens: boolean;
+  leituraEmVozAlta: boolean;
+  fonteMaior: boolean;
+  quantidadeMaxItens: number;
+};
+
+export type AdaptacaoDesempenho = {
+  nivelSugerido: "facil" | "medio" | "dificil";
+  precisaReforco: boolean;
+  precisaRevisao: boolean;
+  aumentarDificuldade: boolean;
+};
+
+export type Recomendacao = {
+  tipo: "proxima_missao" | "revisao" | "reforco";
+  codigoBncc: string;
+  motivo: string;
+};
+
+// =====================================================================
+// 1. Sequência BNCC & Carregamento de Missões
+// =====================================================================
+
+const Missoes = {
+  /** Carrega a MissaoOficial completa (biblioteca oficial). */
+  carregar(codigo: string): MissaoOficial | undefined {
+    return getMissaoOficial(codigo);
+  },
+  /** Aula base (registry data/). Fallback quando não existe missão oficial. */
+  carregarAulaBase(codigo: string): Aula | undefined {
+    return getAula(codigo);
+  },
+  existe(codigo: string): boolean {
+    return hasMissaoOficial(codigo) || hasAula(codigo);
+  },
+  listar(): MissaoOficial[] {
+    return listMissoesOficiais();
+  },
+  listarPorAno(ano: string): MissaoOficial[] {
+    return listMissoesPorAno(ano);
+  },
+  listarPorDisciplina(disciplina: string): MissaoOficial[] {
+    return listMissoesPorDisciplina(disciplina);
+  },
+  total(): number {
+    return totalMissoesOficiais();
+  },
+  aulasBase(): Aula[] {
+    return listAulas();
+  },
+};
+
+const Sequencia = {
+  /** Próxima habilidade BNCC oficial após `codigo`. */
+  proxima(codigo: string): Promise<HabSeq | null> {
+    return proximaHabilidade(codigo);
+  },
+  invalidarCache(): void {
+    invalidarCacheSequencia();
+  },
+};
+
+// =====================================================================
+// 2. Adaptação por Idade
+// =====================================================================
+
+function normalizarSerie(s: string | undefined): string {
+  return (s ?? "").toLowerCase().replace(/\s+/g, " ").trim();
+}
+
+const AdaptacaoPorIdade = {
+  calcular(perfil: PerfilCrianca): AdaptacaoIdade {
+    const idade = perfil.idade ?? 0;
+    const serie = normalizarSerie(perfil.serie);
+    const infantil =
+      idade > 0 && idade <= 6 ||
+      serie.includes("infantil") ||
+      serie.startsWith("1º");
+
+    if (infantil) {
+      return {
+        usarImagens: true,
+        leituraEmVozAlta: true,
+        fonteMaior: true,
+        quantidadeMaxItens: 4,
+      };
+    }
+    if (idade <= 9 || serie.startsWith("2º") || serie.startsWith("3º")) {
+      return {
+        usarImagens: true,
+        leituraEmVozAlta: true,
+        fonteMaior: false,
+        quantidadeMaxItens: 6,
+      };
+    }
+    return {
+      usarImagens: false,
+      leituraEmVozAlta: false,
+      fonteMaior: false,
+      quantidadeMaxItens: 10,
+    };
+  },
+};
+
+// =====================================================================
+// 3. Adaptação por Desempenho
+// =====================================================================
+
+const AdaptacaoPorDesempenho = {
+  calcular(d: Desempenho): AdaptacaoDesempenho {
+    const p = Math.max(0, Math.min(100, d.desempenho ?? 0));
+    if (p < 50) {
+      return {
+        nivelSugerido: "facil",
+        precisaReforco: true,
+        precisaRevisao: true,
+        aumentarDificuldade: false,
+      };
+    }
+    if (p < 85) {
+      return {
+        nivelSugerido: "medio",
+        precisaReforco: false,
+        precisaRevisao: false,
+        aumentarDificuldade: false,
+      };
+    }
+    return {
+      nivelSugerido: "dificil",
+      precisaReforco: false,
+      precisaRevisao: false,
+      aumentarDificuldade: true,
+    };
+  },
+};
+
+// =====================================================================
+// 4. Revisão Inteligente (SM-2 via RPC do banco)
+// =====================================================================
+
+const Revisao = {
+  /**
+   * Registra conclusão + agenda próxima revisão (repetição espaçada).
+   * Além do desempenho, aceita métricas de domínio:
+   *  - tempoSegundos, acertos, erros, dificuldades[]
+   */
+  async registrarConclusao(
+    childId: string,
+    codigoBncc: string,
+    desempenho: number,
+    opts: {
+      tipo?: "aula" | "revisao" | "reforco";
+      tempoSegundos?: number;
+      acertos?: number;
+      erros?: number;
+      dificuldades?: string[];
+    } = {},
+  ): Promise<string | null> {
+    const { data, error } = await supabase.rpc("registrar_conclusao_aula", {
+      _child_id: childId,
+      _codigo_bncc: codigoBncc,
+      _desempenho: Math.max(0, Math.min(100, Math.round(desempenho))),
+      _tipo: opts.tipo ?? "aula",
+      _tempo_segundos: Math.max(0, Math.round(opts.tempoSegundos ?? 0)),
+      _acertos: Math.max(0, Math.round(opts.acertos ?? 0)),
+      _erros: Math.max(0, Math.round(opts.erros ?? 0)),
+      _dificuldades: (opts.dificuldades ?? []) as unknown as never,
+    } as never);
+    if (error) {
+      console.error("[MotorPedagogico] registrarConclusao:", error);
+      return null;
+    }
+    return (data as string | null) ?? null;
+  },
+
+  async recomendar(childId: string): Promise<Recomendacao[]> {
+    const { data, error } = await supabase.rpc("recomendar_revisoes_auto", {
+      _child_id: childId,
+    } as never);
+    if (error) {
+      console.error("[MotorPedagogico] recomendar_revisoes_auto:", error);
+      return [];
+    }
+    return (data ?? []).map((r: { codigo_bncc: string; motivo: string }) => ({
+      tipo: "revisao" as const,
+      codigoBncc: r.codigo_bncc,
+      motivo: r.motivo ?? "revisao_programada",
+    }));
+  },
+
+  /**
+   * Gera o PACOTE de uma revisão inteligente — questões diferentes,
+   * novos exemplos e novos desafios. Nunca repete exatamente a mesma
+   * atividade da rodada anterior. Chame depois que o SM-2 disparar a
+   * revisão (via `recomendar`) para construir a próxima sessão.
+   */
+  gerarPacote(childId: string, codigoBncc: string, opts?: OpcoesRevisao): PacoteRevisao {
+    return gerarPacoteRevisao(childId, codigoBncc, opts);
+  },
+
+  /** Reinicia o histórico de variantes (novo ciclo pedagógico). */
+  reiniciarHistorico(childId: string, codigoBncc?: string): void {
+    return reiniciarHistoricoRevisao(childId, codigoBncc);
+  },
+};
+
+// =====================================================================
+// 5. Progresso
+// =====================================================================
+
+const Progresso = {
+  async carregar(childId: string, codigoBncc: string) {
+    const { data } = await supabase
+      .from("escola_progresso")
+      .select(
+        "bloco_atual, concluida, percentual, nivel_dominio, tentativas, acertos, erros, sessoes_dominadas_consecutivas, facilidade, dificuldades, revisoes_realizadas, evolucao_delta, historico_evolucao, tempo_medio_segundos, tempo_estudado_segundos",
+      )
+      .eq("child_id", childId)
+      .eq("codigo_bncc", codigoBncc)
+      .maybeSingle();
+    return data ?? null;
+  },
+
+  async podeAvancar(childId: string, codigoBncc: string): Promise<boolean> {
+    const { data, error } = await supabase.rpc("pode_avancar_habilidade", {
+      _child_id: childId,
+      _codigo_bncc: codigoBncc,
+    });
+    if (error) return false;
+    return !!data;
+  },
+
+  async nivelDominio(childId: string, codigoBncc: string): Promise<NivelDominio> {
+    const p = await Progresso.carregar(childId, codigoBncc);
+    const n = (p?.nivel_dominio as NivelDominio | undefined) ?? "nao_iniciada";
+    return n;
+  },
+
+  /** Retrato completo do domínio: nível, facilidade, dificuldades, tentativas, tempo, revisões, evolução. */
+  async dominio(childId: string, codigoBncc: string) {
+    const { data, error } = await supabase.rpc("dominio_habilidade", {
+      _child_id: childId,
+      _codigo_bncc: codigoBncc,
+    } as never);
+    if (error) {
+      console.error("[MotorPedagogico] dominio_habilidade:", error);
+      return null;
+    }
+    return data as {
+      codigo_bncc: string;
+      nivel_dominio: NivelDominio;
+      percentual: number;
+      facilidade: number;
+      dificuldades: string[];
+      tentativas: number;
+      acertos: number;
+      erros: number;
+      tempo_total_segundos: number;
+      tempo_medio_segundos: number;
+      revisoes_realizadas: number;
+      sessoes_dominadas_consecutivas: number;
+      evolucao_delta: number;
+      historico_evolucao: Array<{ em: string; desempenho: number; tempo_segundos: number; acertos: number; erros: number; nivel: string; tipo: string }>;
+      proxima_revisao: string | null;
+      pode_avancar: boolean;
+    } | null;
+  },
+};
+
+// =====================================================================
+// 6. Recomendações (próxima missão, revisões, reforço)
+// =====================================================================
+
+const Recomendacoes = {
+  async proximaMissao(childId: string | undefined, serie?: string): Promise<MissaoMeta | null> {
+    return proximaMissao(childId, serie);
+  },
+
+  /**
+   * Roteiro completo: revisões pendentes primeiro, depois próxima missão.
+   */
+  async roteiro(perfil: PerfilCrianca): Promise<Recomendacao[]> {
+    const out: Recomendacao[] = [];
+    if (perfil.childId) {
+      const revs = await Revisao.recomendar(perfil.childId);
+      out.push(...revs);
+    }
+    const prox = await Recomendacoes.proximaMissao(perfil.childId, perfil.serie);
+    if (prox) {
+      out.push({
+        tipo: "proxima_missao",
+        codigoBncc: prox.aula.codigo,
+        motivo: "sequencia_bncc",
+      });
+    }
+    return out;
+  },
+
+  meta(codigo: string): MissaoMeta | null {
+    return metaDoCodigo(codigo);
+  },
+};
+
+// =====================================================================
+// 7. Conquistas
+// =====================================================================
+
+const Conquistas = {
+  async registrar(childId: string, codigo: string, tipo: string) {
+    try {
+      await supabase.from("child_achievements").insert({
+        child_id: childId,
+        achievement_id: `${tipo}:${codigo}`,
+      });
+    } catch (e) {
+      console.warn("[MotorPedagogico] conquista não registrada:", e);
+    }
+  },
+};
+
+// =====================================================================
+// FACHADA — ponto único de acesso pedagógico
+// =====================================================================
+
+export const MotorPedagogico = {
+  missoes: Missoes,
+  sequencia: Sequencia,
+  adaptacaoIdade: AdaptacaoPorIdade,
+  adaptacaoDesempenho: AdaptacaoPorDesempenho,
+  /** Adaptação unificada da missão (idade + desempenho + tempo + erros + histórico). Nunca altera objetivo BNCC. */
+  adaptacaoMissao: AdaptacaoMissao,
+  revisao: Revisao,
+  progresso: Progresso,
+  recomendacoes: Recomendacoes,
+  conquistas: Conquistas,
+
+  /** Banco Nacional de Atividades — seleção automática por habilidade BNCC. */
+  atividades: {
+    catalogo: CATALOGO_ATIVIDADES,
+    tipos: TODOS_TIPOS,
+    selecionar: selecionarAtividades,
+    selecionarDetalhado: selecionarAtividadesDetalhado,
+  },
+
+  /** Exemplos pedagógicos por contexto (família, escola, animais, natureza, esportes, alimentação, brincadeiras, tecnologia, cultura brasileira, cotidiano). */
+  exemplos: {
+    contextos: CONTEXTOS,
+    para: exemplosParaHabilidade,
+    catalogo: ExemplosContexto,
+  },
+
+  /** Sistema Permanente de Motivação — mensagens rotativas de incentivo. */
+  motivacao: SistemaMotivacao,
+
+  /** Avaliação Contínua — coleta compreensão, erros, evolução, tempo, autonomia e persistência DURANTE toda a missão. */
+  avaliacao: AvaliacaoContinua,
+
+  /** Banco Nacional de Erros Frequentes — erros comuns por habilidade BNCC + estratégias automáticas de correção. */
+  erros: {
+    catalogo: catalogoDaHabilidade,
+    detectar: detectarErro,
+    banco: BancoErrosFrequentes,
+  },
+
+  /** Trilhas de Aprendizagem — sequência BNCC por disciplina, com evolução, concluídas, pendentes e próxima sugerida. */
+  trilhas: TrilhasAprendizagem,
+
+
+
+
+
+  /** Sistema de Conquistas Educacionais — reconhece progresso PESSOAL, sem gerar competição entre crianças. */
+  conquistasEducacionais: ConquistasEducacionais,
+
+  /** Biblioteca Nacional de Missões — portão oficial de validação/cadastro (estrutura, vínculo BNCC, ordem pedagógica, consistência, integridade). */
+  bibliotecaNacional: BibliotecaNacional,
+
+  /** Motor de Domínio da Aprendizagem — 4 níveis (não iniciada, em desenvolvimento, quase dominada, dominada) recalculados continuamente a partir de acertos, erros, revisões, tempo, desafios e avaliações posteriores. Concluir a missão NÃO implica dominar. */
+  dominio: DominioAprendizagem,
+
+  /** Resolve tudo que uma missão precisa a partir do código BNCC. */
+  resolver: resolverMissao,
+  parseBNCC,
+
+  MENSAGEM_MISSAO_EM_CONSTRUCAO,
+
+  util: {
+    metaDaAula,
+    estimarTempo,
+    dificuldadeDe,
+  },
+} as const;
+
+
+export type MotorPedagogicoType = typeof MotorPedagogico;
+
+export type {
+  Aula,
+  MissaoOficial,
+  HabSeq,
+  MissaoMeta,
+  Dificuldade,
+  TipoAtividade,
+  AtividadeMeta,
+  SelecaoAtividades,
+  PlanoAdaptacao,
+  SinaisAluno,
+  ContextoExemplo,
+  Exemplo,
+  OpcoesExemplos,
+  PacoteRevisao,
+  OpcoesRevisao,
+  MensagemMotivacional,
+  GatilhoMotivacional,
+  EventoAvaliacao,
+  TipoEventoAvaliacao,
+  IndicadoresContinuos,
+  EstadoAvaliacao,
+  EntradaErro,
+  CausaErro,
+  CatalogoErrosHabilidade,
+  SinalErroObservado,
+  DeteccaoErro,
+  NoTrilha,
+  StatusMissao,
+  TrilhaDisciplina,
+  Conquista,
+  CategoriaConquista,
+  CatalogoConquista,
+  EventoConquista,
+  CategoriaValidacao,
+  ProblemaValidacao,
+  ResultadoValidacao,
+  ResultadoRegistro,
+  NivelDominioAprendizagem,
+  RotuloNivel,
+  SinaisDominio,
+  DetalheDominio,
+  OrigemInteracao,
+  RegistroInteracao,
+};
+
+export { RevisaoInteligente, SistemaMotivacao, AvaliacaoContinua, BancoErrosFrequentes, TrilhasAprendizagem, ConquistasEducacionais, CATALOGO_CONQUISTAS, BibliotecaNacional, DominioAprendizagem, calcularDominio };
+
+
+export { planejarAdaptacao, exemplosParaHabilidade, proximaMensagem, reiniciarMotivacao };
+

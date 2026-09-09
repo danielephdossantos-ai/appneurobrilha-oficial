@@ -1,0 +1,1167 @@
+import { createContext, useContext, useEffect, useState } from "react";
+
+/**
+ * Skin dos blocos internos:
+ *  - kids  → 1º/2º ano (roxo/doce, mascote, estrelinhas)
+ *  - tween → 3º ano em diante (visual "entre kids e teen": grafite + neon,
+ *            cartões mais retos, tipografia mais firme, menos fofura)
+ */
+export type SkinPT = {
+  kids: boolean;
+  tween: boolean;
+  /** Skin "teen" (visual do 6º ano em diante) — visual dark/sci-fi. */
+  teen?: boolean;
+  /** Skin "expedição" (visual da Geografia) — só muda a moldura da aula. */
+  geo?: boolean;
+  /** Numeração das cenas, usada pelo cabeçalho de seção do skin geo. */
+  ordem?: Record<string, number>;
+};
+export const KidsCtx = createContext<SkinPT>({ kids: false, tween: false, teen: false });
+import { Link } from "@tanstack/react-router";
+import type { AulaPortuguesV4 } from "../types";
+import { stopSpeaking } from "@/lib/native-tts";
+import { PrevisaoTitulo } from "./blocos/PrevisaoTitulo";
+import { CardVocabulario } from "./blocos/CardVocabulario";
+import { LeituraIlustrada } from "./blocos/LeituraIlustrada";
+import { QuizTexto } from "./blocos/QuizTexto";
+import { OrdenarSequencia } from "./blocos/OrdenarSequencia";
+import { ArrastarParaAlvo } from "./blocos/ArrastarParaAlvo";
+import { SelecionarItens } from "./blocos/SelecionarItens";
+import { MontarPalavra } from "./blocos/MontarPalavra";
+import { EnsinoVisual } from "./blocos/EnsinoVisual";
+import { Escrita } from "./blocos/Escrita";
+import { LaboratorioClima } from "./blocos/LaboratorioClima";
+import { ArquitetoLugar } from "./blocos/ArquitetoLugar";
+import { MissaoFamiliaFoto } from "./blocos/MissaoFamiliaFoto";
+import { AquecimentoRevisao } from "@/escola-brilha/curso-v4/AquecimentoRevisao";
+import { AdaptativoProvider, useAdaptativo, NOTA_MINIMA } from "./adaptativo";
+import { ROTULO_APOIO } from "./perfil-apoio";
+import { LeituraFluente } from "./blocos/LeituraFluente";
+import { LenteLeitura } from "./blocos/LenteLeitura";
+import { BotaoOuvirEnunciado } from "./blocos/BotaoOuvirEnunciado";
+import { useFalaAutomatica } from "./audio-prefs";
+
+
+
+/**
+ * Player Português v4 — tela única com scroll, 11 momentos.
+ * Mesma estrutura do PlayerV4 de Matemática, mas com blocos próprios
+ * pra leitura, previsão, vocabulário, sequência e quiz textual.
+ */
+
+type Props = {
+  aula: AulaPortuguesV4;
+  cursoSlug: string;
+  voltarPara: string;
+  onConcluir?: () => void;
+};
+
+const MOMENTOS_BASE = [
+  { id: "m1", label: "🎬 Motivação" },
+  { id: "m2", label: "🔮 Previsão" },
+  { id: "m3", label: "📚 Vocabulário" },
+  { id: "mev", label: "🧠 Ensino visual", opcional: true },
+  { id: "m4", label: "📖 Leitura guiada" },
+  { id: "m5", label: "🧠 Compreensão" },
+  { id: "m6", label: "🎭 Personagens & lugar" },
+  { id: "m7", label: "🧩 Sequência" },
+  { id: "m8", label: "💪 Você lê" },
+  { id: "mesc", label: "✍️ Você escreve", opcional: true },
+  { id: "mflu", label: "🏃 Ler de novo", opcional: true },
+  { id: "mmini", label: "🎮 Minijogo", opcional: true },
+  { id: "mlab", label: "🔬 Laboratório", opcional: true },
+  { id: "m9", label: "🔁 Revisão" },
+  { id: "m10", label: "✅ Avaliação" },
+  { id: "m11", label: "🏠 Missão em Família" },
+] as const;
+
+/**
+ * Fase 9 — sessão A ("aprender") vs sessão B ("praticar").
+ * Sessão A tem ~10 min: aquecimento, história, previsão, palavras novas,
+ * ensino visual e leitura guiada. Tudo o que sobra fica na sessão B.
+ */
+const MOMENTOS_SESSAO_A: readonly string[] = ["m1", "m2", "m3", "mev", "m4"];
+
+
+/** Cores por momento — usadas só no skin infantil (1º ano). */
+const CORES_KIDS: Record<string, string> = {
+  m1: "#f472b6",
+  m2: "#38bdf8",
+  m3: "#fbbf24",
+  mev: "#a78bfa",
+  m4: "#34d399",
+  m5: "#f97316",
+  m6: "#e879f9",
+  m7: "#60a5fa",
+  m8: "#facc15",
+  mesc: "#fb923c",
+  mflu: "#4ade80",
+  mmini: "#fb7185",
+  mlab: "#2dd4bf",
+  m9: "#c084fc",
+  m10: "#4ade80",
+  m11: "#fca5a5",
+};
+
+/** Paleta "tween" (3º ano+): neon sobre grafite, mais sóbria que a infantil. */
+const CORES_TWEEN: Record<string, string> = {
+  m1: "#22d3ee",
+  m2: "#818cf8",
+  m3: "#f59e0b",
+  mev: "#a78bfa",
+  m4: "#10b981",
+  m5: "#f43f5e",
+  m6: "#e879f9",
+  m7: "#38bdf8",
+  m8: "#eab308",
+  mesc: "#f472b6",
+  mflu: "#34d399",
+  mmini: "#fb7185",
+  mlab: "#2dd4bf",
+  m9: "#8b5cf6",
+  m10: "#22c55e",
+  m11: "#fb923c",
+};
+
+/** Paleta "teen" (6º ano+): Neon Colorido sobre Slate escuro. */
+const CORES_TEEN: Record<string, string> = {
+  m1: "#f43f5e", // Rose neon (8º ano)
+  m2: "#fbbf24", // Amber (8º ano)
+  m3: "#10b981", // Emerald (8º ano)
+  mev: "#a78bfa",
+  m4: "#06b6d4", // Ciano (6º/7º ano)
+  m5: "#ef4444",
+  m6: "#8b5cf6",
+  m7: "#f97316",
+  m8: "#06b6d4",
+  mesc: "#f472b6",
+  mflu: "#34d399",
+  mmini: "#fb7185",
+  mlab: "#2dd4bf",
+  m9: "#8b5cf6",
+  m10: "#22c55e",
+  m11: "#fb923c",
+};
+
+export function PlayerPortuguesV4(props: Props) {
+  return (
+    <AdaptativoProvider
+      aulaSlug={`${props.cursoSlug}:${props.aula.slug}`}
+      cursoSlug={props.cursoSlug}
+    >
+      <PlayerPortuguesV4Inner {...props} />
+    </AdaptativoProvider>
+  );
+}
+
+function PlayerPortuguesV4Inner({ aula, cursoSlug, voltarPara, onConcluir }: Props) {
+  const [ativo, setAtivo] = useState<string>("m1");
+
+  const teen = cursoSlug === "portugues-6ano" || cursoSlug === "portugues-7ano" || cursoSlug === "portugues-8ano" || cursoSlug === "portugues-9ano";
+  const tween =
+    cursoSlug === "portugues-3ano" ||
+    cursoSlug === "portugues-4ano" ||
+    cursoSlug === "portugues-5ano";
+  const kids = cursoSlug === "portugues-1ano" || cursoSlug === "portugues-2ano";
+
+  const CORES = teen ? CORES_TEEN : tween ? CORES_TWEEN : CORES_KIDS;
+
+  // Skin "expedição" (mesma moldura visual da Geografia) — 3º ano.
+  const geo = cursoSlug === "portugues-3ano";
+
+
+  const MOMENTOS_ATIVOS = MOMENTOS_BASE.filter(
+    (m) =>
+      !("opcional" in m && m.opcional) ||
+      (m.id === "mmini" && !!aula.momento_minijogo) ||
+      (m.id === "mlab" && !!aula.momento_laboratorio) ||
+      (m.id === "mev" && !!aula.momento_ensinoVisual) ||
+      (m.id === "mesc" && !!aula.momento_escrita) ||
+      (m.id === "mflu" && !!aula.momento_fluencia),
+  );
+
+  // ---- Fase 9 · sessões curtas (A e B) --------------------------------
+  // Aos 6 anos a atenção sustentada é de ~10-15 min. A aula é quebrada
+  // em duas sessões com um descanso no meio; o ponto fica salvo.
+  const sessoes = cursoSlug === "portugues-1ano";
+  const chaveSessao = `brilha:sessao:${cursoSlug}:${aula.slug}`;
+  const [sessao, setSessao] = useState<"A" | "B">("A");
+
+  useEffect(() => {
+    if (!sessoes) return;
+    try {
+      const salvo = window.localStorage.getItem(chaveSessao);
+      setSessao(salvo === "B" ? "B" : "A");
+    } catch {
+      setSessao("A");
+    }
+  }, [chaveSessao, sessoes]);
+
+  const irParaSessao = (s: "A" | "B") => {
+    stopSpeaking();
+    setSessao(s);
+    try {
+      window.localStorage.setItem(chaveSessao, s);
+    } catch {
+      /* modo privado */
+    }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const MOMENTOS = sessoes
+    ? MOMENTOS_ATIVOS.filter((m) =>
+        sessao === "A" ? MOMENTOS_SESSAO_A.includes(m.id) : !MOMENTOS_SESSAO_A.includes(m.id),
+      )
+    : MOMENTOS_ATIVOS;
+
+  const [falaAuto, setFalaAuto] = useFalaAutomatica();
+
+  useEffect(() => {
+    const els = MOMENTOS.map((m) => document.getElementById(m.id)).filter(Boolean) as HTMLElement[];
+    if (!els.length) return;
+    const obs = new IntersectionObserver(
+      (entries) => {
+        const vis = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        if (vis[0]) setAtivo(vis[0].target.id);
+      },
+      { rootMargin: "-30% 0px -50% 0px", threshold: [0, 0.25, 0.5, 0.75] },
+    );
+    els.forEach((el) => obs.observe(el));
+    return () => obs.disconnect();
+  }, [aula.slug, sessao]);
+
+
+  useEffect(() => () => stopSpeaking(), []);
+
+  // ---- Motor adaptativo (Fase 1 do contrato do 1º ano) ----------------
+  const adaptativo = useAdaptativo();
+  const gateAtivo =
+    cursoSlug === "portugues-1ano" ||
+    cursoSlug === "portugues-2ano" ||
+    cursoSlug === "portugues-3ano";
+  const totalAvaliacao = aula.momento10_avaliacao.perguntas.length;
+  useEffect(() => {
+    adaptativo?.declararAvaliacao(totalAvaliacao);
+  }, [adaptativo, totalAvaliacao]);
+
+  const idxAtivo = Math.max(0, MOMENTOS.findIndex((m) => m.id === ativo));
+  const progresso = ((idxAtivo + 1) / MOMENTOS.length) * 100;
+
+
+  const ordemMomentos = Object.fromEntries(MOMENTOS.map((m, i) => [m.id, i + 1]));
+
+  return (
+    <KidsCtx.Provider value={{ kids, tween, teen, geo, ordem: ordemMomentos }}>
+    <div
+      data-skin={teen ? "pt-teen" : geo ? "pt-expedicao" : undefined}
+      className={
+        teen
+          ? "min-h-screen relative overflow-x-hidden bg-slate-950 text-cyan-50"
+          : geo
+          ? "min-h-screen relative overflow-x-hidden bg-gradient-to-b from-[#0f172a] via-[#0a2540] to-[#0d1f55] text-white"
+          : tween
+          ? "min-h-screen relative overflow-x-hidden bg-[linear-gradient(180deg,#0b1020_0%,#111a33_45%,#0f172a_100%)] text-white"
+          : kids
+          ? "min-h-screen relative overflow-x-hidden bg-[linear-gradient(180deg,#2b1258_0%,#4c1d95_35%,#6d28d9_70%,#3b0764_100%)] text-white"
+          : "min-h-screen bg-gradient-to-b from-[#3b1e6b] to-[#1a0d3d] text-white"
+      }
+    >
+      {(tween || teen) && !geo && (
+        <div
+          className="pointer-events-none fixed inset-0 z-0 opacity-[0.18]"
+          aria-hidden
+          style={{
+            backgroundImage: teen
+              ? `linear-gradient(${aula.recompensa.moedas > 50 ? 'rgba(244,63,94,.25)' : 'rgba(6,182,212,.25)'} 1px, transparent 1px), linear-gradient(90deg, ${aula.recompensa.moedas > 50 ? 'rgba(244,63,94,.25)' : 'rgba(6,182,212,.25)'} 1px, transparent 1px)`
+              : "linear-gradient(rgba(34,211,238,.25) 1px, transparent 1px), linear-gradient(90deg, rgba(34,211,238,.25) 1px, transparent 1px)",
+            backgroundSize: teen ? "24px 24px" : "42px 42px",
+          }}
+        />
+      )}
+      {kids && !tween && (
+        <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden" aria-hidden>
+          {[
+            { t: "6%", l: "8%", s: 26, d: "0s" },
+            { t: "18%", l: "82%", s: 18, d: ".6s" },
+            { t: "38%", l: "12%", s: 16, d: "1.2s" },
+            { t: "58%", l: "88%", s: 22, d: ".3s" },
+            { t: "74%", l: "6%", s: 20, d: "1.6s" },
+            { t: "88%", l: "76%", s: 16, d: ".9s" },
+          ].map((e, i) => (
+            <span
+              key={i}
+              className="absolute animate-pulse"
+              style={{ top: e.t, left: e.l, fontSize: e.s, animationDelay: e.d }}
+            >
+              {i % 2 ? "⭐" : "✨"}
+            </span>
+          ))}
+        </div>
+      )}
+
+      {geo && (
+        <header className="sticky top-0 z-20 backdrop-blur bg-black/40 border-b border-white/10">
+          <div className="max-w-3xl mx-auto px-4 py-3 flex items-center gap-3">
+            <Link
+              to="/escola-brilha/curso/$slug"
+              params={{ slug: cursoSlug }}
+              className="text-xs text-white/70 hover:text-white shrink-0"
+            >
+              ← Sair
+            </Link>
+            <div className="flex-1 h-2 bg-white/10 rounded-full overflow-hidden">
+              <div
+                role="progressbar"
+                aria-label="Progresso da aula"
+                aria-valuemin={0}
+                aria-valuemax={100}
+                aria-valuenow={Math.round(progresso)}
+                className="h-full bg-gradient-to-r from-emerald-400 to-amber-300 transition-all"
+                style={{ width: `${progresso}%` }}
+              />
+            </div>
+            <div className="text-xs text-white/60 shrink-0">
+              {idxAtivo + 1} / {MOMENTOS.length}
+            </div>
+            <button
+              type="button"
+              onClick={() => setFalaAuto(!falaAuto)}
+              aria-label={falaAuto ? "Desligar a fala automática" : "Ligar a fala automática"}
+              className={`shrink-0 h-8 w-8 grid place-items-center rounded-full border text-sm transition active:scale-95 ${
+                falaAuto
+                  ? "bg-emerald-400/90 border-emerald-200 text-[#0d1f55]"
+                  : "bg-white/10 border-white/25 text-white/60"
+              }`}
+            >
+              {falaAuto ? "🔊" : "🔇"}
+            </button>
+          </div>
+          <div className="max-w-3xl mx-auto px-4 pb-2 flex items-center justify-between text-[11px] uppercase tracking-widest text-emerald-300/80">
+            <span className="truncate">{MOMENTOS[idxAtivo]?.label}</span>
+            <span className="text-white/40 truncate ml-3">{aula.titulo}</span>
+          </div>
+        </header>
+      )}
+
+      {!geo && (
+      <header
+        className={
+          tween
+            ? "sticky top-0 z-20 bg-[#0b1020]/95 backdrop-blur border-b-2 border-cyan-400/50"
+            : kids
+            ? "sticky top-0 z-20 bg-[#2b1258]/95 backdrop-blur border-b-4 border-amber-300/70"
+            : "sticky top-0 z-20 bg-[#1a0d3d]/95 backdrop-blur border-b border-white/10"
+        }
+      >
+        <div className="max-w-5xl mx-auto px-4 py-3 flex items-center gap-3">
+          <Link
+            to="/escola-brilha/curso/$slug"
+            params={{ slug: cursoSlug }}
+            className={
+              tween
+                ? "shrink-0 h-9 px-3 grid place-items-center rounded-lg border border-cyan-400/60 text-cyan-200 text-xs font-bold uppercase tracking-wider hover:bg-cyan-400/10 active:scale-95 transition"
+                : kids
+                ? "shrink-0 h-10 px-4 grid place-items-center rounded-full bg-amber-400 text-[#2b1258] text-sm font-black active:scale-95 transition"
+                : "text-sm text-white/70 hover:text-white"
+            }
+          >
+            ← Trilha
+          </Link>
+          <div className="flex-1 min-w-0">
+            <div
+              className={
+                tween
+                  ? "text-sm md:text-base font-extrabold uppercase tracking-wide truncate"
+                  : kids
+                  ? "text-base font-black truncate"
+                  : "text-sm font-bold truncate"
+              }
+            >
+              {kids && !tween ? "📖 " : ""}
+              {aula.titulo}
+            </div>
+            {kids ? (
+              <div className="mt-1 flex items-center gap-2">
+                <div
+                  className={
+                    tween
+                      ? "h-1.5 flex-1 rounded-sm bg-white/10 overflow-hidden"
+                      : "h-2.5 flex-1 rounded-full bg-white/15 overflow-hidden"
+                  }
+                >
+                  <div
+                    role="progressbar"
+                    aria-label="Progresso da aula"
+                    aria-valuemin={0}
+                    aria-valuemax={100}
+                    aria-valuenow={Math.round(progresso)}
+                    className={
+                      tween
+                        ? "h-full rounded-sm bg-[linear-gradient(90deg,#22d3ee,#818cf8)] transition-all duration-500"
+                        : "h-full rounded-full bg-[linear-gradient(90deg,#fbbf24,#f472b6,#38bdf8)] transition-all duration-500"
+                    }
+                    style={{ width: `${progresso}%` }}
+                  />
+                </div>
+                <span
+                  className={
+                    tween
+                      ? "shrink-0 text-[10px] font-mono font-bold text-cyan-300"
+                      : "shrink-0 text-[10px] font-black text-amber-200"
+                  }
+                >
+                  {idxAtivo + 1}/{MOMENTOS.length}
+                </span>
+              </div>
+            ) : (
+              <div className="text-[10px] text-white/60">Role para descer a aula ↓</div>
+            )}
+          </div>
+          {/* Fase 9 — liga/desliga a fala automática dos enunciados. */}
+          <button
+            type="button"
+            onClick={() => setFalaAuto(!falaAuto)}
+            aria-label={
+              falaAuto ? "Desligar a fala automática" : "Ligar a fala automática"
+            }
+            title={
+              falaAuto
+                ? "Fala automática ligada — os enunciados são lidos sozinhos"
+                : "Fala automática desligada"
+            }
+            className={`shrink-0 h-9 w-9 grid place-items-center rounded-full border-2 text-base transition active:scale-95 ${
+              falaAuto
+                ? "bg-emerald-400/90 border-emerald-200 text-[#0b1020]"
+                : "bg-white/10 border-white/25 text-white/60"
+            }`}
+          >
+            {falaAuto ? "🔊" : "🔇"}
+          </button>
+        </div>
+
+      </header>
+      )}
+
+
+      <div
+        className={
+          geo
+            ? "relative z-10 max-w-3xl mx-auto px-4 py-6"
+            : "relative z-10 max-w-5xl mx-auto px-4 py-6 lg:flex lg:gap-6"
+        }
+      >
+        <aside className={geo ? "hidden" : "hidden lg:block w-56 shrink-0"}>
+          <div className="sticky top-24 space-y-1">
+            {MOMENTOS.map((m) => (
+              <a
+                key={m.id}
+                href={`#${m.id}`}
+                className={
+                  tween
+                    ? `block text-[11px] px-3 py-2 rounded-lg font-bold uppercase tracking-wide border transition ${
+                        ativo === m.id
+                          ? "text-[#0b1020] border-transparent"
+                          : "text-white/70 border-white/10 bg-white/[.04] hover:bg-white/10"
+                      }`
+                    : kids
+                    ? `block text-xs px-3 py-2.5 rounded-2xl font-bold transition ${
+                        ativo === m.id
+                          ? "text-[#2b1258] scale-[1.03] shadow-lg"
+                          : "text-white/75 bg-white/5 hover:bg-white/15"
+                      }`
+                    : `block text-xs px-3 py-2 rounded-lg transition ${
+                        ativo === m.id
+                          ? "bg-amber-400 text-[#1a0d3d] font-bold"
+                          : "text-white/70 hover:bg-white/10"
+                      }`
+                }
+                style={
+                  kids && ativo === m.id
+                    ? { background: CORES[m.id] ?? (tween ? "#22d3ee" : "#fbbf24") }
+                    : undefined
+                }
+              >
+                {m.label}
+              </a>
+            ))}
+          </div>
+        </aside>
+
+        <main className={kids ? "flex-1 space-y-6 min-w-0" : "flex-1 space-y-8 min-w-0"}>
+
+          {sessoes && (
+            <TrilhoSessao
+              sessao={sessao}
+              onIr={irParaSessao}
+            />
+          )}
+
+          {(!sessoes || sessao === "A") && (
+          <>
+
+          {/* Sondagem → adaptação: o nível de apoio desta aula */}
+          {adaptativo && adaptativo.apoio.origem !== "padrao" && (
+            <div className="rounded-2xl border border-white/15 bg-white/5 p-4">
+              <div className="text-xs uppercase tracking-wider text-white/60">
+                {adaptativo.apoio.origem === "sondagem"
+                  ? "Sondagem inicial · seu modo de estudo"
+                  : "Seu modo de estudo · ajustado pelo seu desempenho"}
+              </div>
+              <div className="mt-1 text-lg font-black text-amber-200">
+                {ROTULO_APOIO[adaptativo.apoio.nivel].emoji}{" "}
+                {ROTULO_APOIO[adaptativo.apoio.nivel].titulo}
+              </div>
+              <p className="text-sm text-white/80 mt-1">
+                {ROTULO_APOIO[adaptativo.apoio.nivel].texto}
+              </p>
+              {adaptativo.apoio.habilidadesFracas.length > 0 && (
+                <p className="text-xs text-white/60 mt-2">
+                  Reforçando: {adaptativo.apoio.habilidadesFracas.slice(0, 3).join(" · ")}
+                </p>
+              )}
+            </div>
+          )}
+
+          {/* M0 · Aquecimento — revisão espaçada (3 itens de aulas anteriores) */}
+
+          <AquecimentoRevisao
+            cursoSlug={cursoSlug}
+            aulaSlug={aula.slug}
+            kids={kids}
+            tween={tween}
+          />
+
+          {/* M1 · Motivação */}
+          <Secao id="m1" label="🎬 Motivação">
+            {geo ? (
+              <LenteLeitura
+                titulo={aula.momento01_motivacao.titulo}
+                historia={aula.momento01_motivacao.historia}
+              />
+
+            ) : (
+            <div className={kids ? "flex flex-col items-center gap-3" : undefined}>
+              {aula.momento01_motivacao.imagemUrl && (
+                <img
+                  src={aula.momento01_motivacao.imagemUrl}
+                  alt=""
+                  className={
+                    kids
+                      ? "w-32 h-32 md:w-40 md:h-40 object-contain drop-shadow-[0_8px_16px_rgba(0,0,0,.35)] animate-[bounce_3s_ease-in-out_infinite]"
+                      : "w-24 h-24 object-contain mx-auto mb-3 drop-shadow"
+                  }
+                />
+              )}
+              <h3
+                className={
+                  kids
+                    ? "text-2xl md:text-3xl font-black text-amber-200 text-center"
+                    : "text-xl font-black text-amber-200 text-center"
+                }
+              >
+                {aula.momento01_motivacao.titulo}
+              </h3>
+              <p
+                className={
+                  kids
+                    ? "relative rounded-3xl bg-white/95 text-[#2b1258] font-semibold text-center max-w-2xl px-5 py-4 text-lg leading-relaxed shadow-lg"
+                    : "text-white/90 leading-relaxed text-center max-w-2xl mx-auto mt-2"
+                }
+              >
+                {aula.momento01_motivacao.historia}
+              </p>
+            </div>
+            )}
+          </Secao>
+
+
+
+          {/* M2 · Previsão */}
+          <Secao id="m2" label="🔮 Previsão">
+            <Instrucao>{aula.momento02_previsao.instrucao}</Instrucao>
+            <PrevisaoTitulo data={aula.momento02_previsao.bloco} />
+          </Secao>
+
+          {/* M3 · Vocabulário */}
+          <Secao id="m3" label="📚 Palavras novas">
+            <Instrucao>{aula.momento03_vocabulario.instrucao}</Instrucao>
+            <div className="grid md:grid-cols-2 gap-3">
+              {aula.momento03_vocabulario.cards.map((c) => (
+                <CardVocabulario key={c.palavra} card={c} />
+              ))}
+            </div>
+          </Secao>
+
+          {/* ENSINO VISUAL (opcional) — ensina o pré-requisito ANTES de cobrar. */}
+          {aula.momento_ensinoVisual && (
+            <Secao id="mev" label={`🧠 ${aula.momento_ensinoVisual.titulo}`}>
+              <Instrucao>{aula.momento_ensinoVisual.instrucao}</Instrucao>
+              <div className="space-y-5">
+                {aula.momento_ensinoVisual.blocos.map((b, i) => (
+                  <EnsinoVisual key={i} bloco={b} />
+                ))}
+              </div>
+            </Secao>
+          )}
+
+          {/* M4 · Leitura guiada */}
+          <Secao id="m4" label="📖 Leitura guiada">
+            <Instrucao>{aula.momento04_leituraGuiada.instrucao}</Instrucao>
+            <LeituraIlustrada data={aula.momento04_leituraGuiada.leitura} />
+          </Secao>
+
+          {sessoes && sessao === "A" && (
+            <IntervaloSessao
+              onContinuar={() => irParaSessao("B")}
+              voltarPara={voltarPara}
+            />
+          )}
+          </>
+          )}
+
+          {(!sessoes || sessao === "B") && (
+          <>
+
+          {/* M5 · Compreensão */}
+
+          <Secao id="m5" label="🧠 Entendi?">
+            <Instrucao>{aula.momento05_compreensao.instrucao}</Instrucao>
+            <div className="space-y-3">
+              {aula.momento05_compreensao.perguntas.map((q, i) => (
+                <QuizTexto key={i} quiz={q} momento="m5" qid={`m5-${i}`} />
+              ))}
+            </div>
+          </Secao>
+
+          {/* M6 · Personagens & cenário */}
+          <Secao id="m6" label="🎭 Personagens e lugar">
+            <Instrucao>{aula.momento06_personagensCenario.instrucao}</Instrucao>
+            <div className="space-y-3">
+              {aula.momento06_personagensCenario.perguntas.map((q, i) => (
+                <QuizTexto key={i} quiz={q} momento="m6" qid={`m6-${i}`} />
+              ))}
+            </div>
+          </Secao>
+
+          {/* M7 · Sequência */}
+          <Secao id="m7" label="🧩 Ordem da história">
+            <Instrucao>{aula.momento07_sequencia.instrucao}</Instrucao>
+            <OrdenarSequencia data={aula.momento07_sequencia.bloco} />
+          </Secao>
+
+          {/* M8 · Leitura independente */}
+          <Secao id="m8" label="💪 Você lê sozinho">
+            <Instrucao>{aula.momento08_leituraIndependente.instrucao}</Instrucao>
+            <div className="space-y-4">
+              <LeituraIlustrada data={aula.momento08_leituraIndependente.leitura} />
+              <div className="space-y-3">
+                {aula.momento08_leituraIndependente.perguntas.map((q, i) => (
+                  <QuizTexto key={i} quiz={q} momento="m8" qid={`m8-${i}`} />
+                ))}
+              </div>
+            </div>
+          </Secao>
+
+          {/* BLOCO DE ESCRITA (opcional) — traçado, ditado com sílabas móveis
+              e produção de texto real (lista/bilhete). */}
+          {aula.momento_escrita && (
+            <Secao id="mesc" label={`✍️ ${aula.momento_escrita.titulo}`}>
+              <Instrucao>{aula.momento_escrita.instrucao}</Instrucao>
+              <div className="space-y-5">
+                {aula.momento_escrita.blocos.map((b, i) => (
+                  <Escrita key={i} bloco={b} aulaSlug={`${cursoSlug}:${aula.slug}`} />
+                ))}
+              </div>
+            </Secao>
+          )}
+
+          {/* FLUÊNCIA (opcional) — releitura do mesmo texto 3 vezes (Fase 9). */}
+          {aula.momento_fluencia && (
+            <Secao id="mflu" label={`🏃 ${aula.momento_fluencia.titulo}`}>
+              <div className="flex items-start gap-2">
+                <div className="flex-1 min-w-0">
+                  <Instrucao>{aula.momento_fluencia.instrucao}</Instrucao>
+                </div>
+                <BotaoOuvirEnunciado texto={aula.momento_fluencia.instrucao} auto />
+              </div>
+              <LeituraFluente
+                data={aula.momento_fluencia}
+                aulaSlug={`${cursoSlug}:${aula.slug}`}
+              />
+            </Secao>
+          )}
+
+
+
+          {/* Minijogo (opcional) */}
+          {aula.momento_minijogo &&
+            (() => {
+              const jogo = aula.momento_minijogo.jogo;
+              return (
+                <Secao id="mmini" label={`🎮 ${aula.momento_minijogo.titulo}`}>
+                  <Instrucao>{aula.momento_minijogo.instrucao}</Instrucao>
+                  {jogo.tipo === "arrastarParaAlvo" && (
+                    <ArrastarParaAlvo data={jogo.bloco} />
+                  )}
+                  {jogo.tipo === "selecionarItens" && (
+                    <SelecionarItens data={jogo.bloco} />
+                  )}
+                  {jogo.tipo === "montarPalavra" && (
+                    <MontarPalavra data={jogo.bloco} />
+                  )}
+                  {jogo.tipo === "ordenarSequencia" && (
+                    <OrdenarSequencia data={jogo.bloco} />
+                  )}
+                  {jogo.tipo === "laboratorioClima" && (
+                    <LaboratorioClima data={jogo.bloco} />
+                  )}
+                  {jogo.tipo === "arquitetoLugar" && (
+                    <ArquitetoLugar data={jogo.bloco} />
+                  )}
+                </Secao>
+              );
+            })()}
+
+          {/* Laboratório do Explorador (opcional) */}
+          {aula.momento_laboratorio && (
+            <Secao
+              id="mlab"
+              label={`🔬 ${aula.momento_laboratorio.titulo}`}
+            >
+              <Instrucao>{aula.momento_laboratorio.instrucao}</Instrucao>
+              <LaboratorioClima data={aula.momento_laboratorio.bloco} />
+            </Secao>
+          )}
+
+          {/* M9 · Revisão */}
+          <Secao id="m9" label="🔁 Revisão">
+            <ul className="space-y-2">
+              {aula.momento09_revisao.pontos.map((p, i) => (
+                <li key={i} className="flex items-start gap-2 text-white/90">
+                  <span className="text-amber-300">✔</span>
+                  <span>{p}</span>
+                </li>
+              ))}
+            </ul>
+            {aula.momento09_revisao.miniDesafio && (
+              <div className="mt-4">
+                <QuizTexto quiz={aula.momento09_revisao.miniDesafio} momento="m9" qid="m9-desafio" />
+              </div>
+            )}
+          </Secao>
+
+          {/* M10 · Avaliação */}
+          <Secao id="m10" label="✅ Avaliação">
+            <div className="space-y-3">
+              {aula.momento10_avaliacao.perguntas.map((q, i) => (
+                <QuizTexto key={`m10-${i}-${adaptativo?.tentativaAvaliacao ?? 0}`} quiz={q} momento="m10" qid={`m10-${i}`} />
+              ))}
+            </div>
+            {adaptativo && gateAtivo && (
+              <PainelNota
+                respondidas={adaptativo.respondidasAvaliacao}
+                total={totalAvaliacao}
+                acertos={adaptativo.acertosAvaliacao}
+                nota={adaptativo.notaAvaliacao}
+                aprovado={adaptativo.aprovado}
+                onRefazer={adaptativo.reiniciarAvaliacao}
+              />
+            )}
+          </Secao>
+
+
+          {/* M11 · Missão em família */}
+          <Secao id="m11" label="🏠 Missão em Família">
+            <div className="rounded-2xl bg-white/5 border border-white/10 p-4 space-y-3">
+              <h4 className="text-lg font-bold text-amber-200">
+                {aula.momento11_missaoFamilia.titulo}
+              </h4>
+              <div>
+                <div className="text-xs uppercase tracking-widest text-white/60 mb-1">
+                  Materiais
+                </div>
+                <ul className="list-disc list-inside text-sm text-white/85">
+                  {aula.momento11_missaoFamilia.materiais.map((m, i) => (
+                    <li key={i}>{m}</li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <div className="text-xs uppercase tracking-widest text-white/60 mb-1">
+                  Passo a passo
+                </div>
+                <ol className="list-decimal list-inside text-sm text-white/85 space-y-1">
+                  {aula.momento11_missaoFamilia.passos.map((p, i) => (
+                    <li key={i}>{p}</li>
+                  ))}
+                </ol>
+              </div>
+              <div className="text-sm text-white/85 pt-1">
+                <span className="text-amber-200 font-bold">📸 Registro:</span>{" "}
+                {aula.momento11_missaoFamilia.registro}
+              </div>
+              <MissaoFamiliaFoto cursoSlug={cursoSlug} aulaSlug={aula.slug} />
+            </div>
+          </Secao>
+
+          <div className="pt-6 flex flex-col items-center gap-3">
+            {gateAtivo && adaptativo && !adaptativo.aprovado && (
+              <p className="text-center text-sm font-bold text-amber-200 max-w-md">
+                🔒 Responda a avaliação e acerte pelo menos{" "}
+                {Math.round(NOTA_MINIMA * 100)}% para concluir a aula.
+              </p>
+            )}
+            <button
+              onClick={() => onConcluir?.()}
+              disabled={gateAtivo && !!adaptativo && !adaptativo.aprovado}
+              className={
+                gateAtivo && !!adaptativo && !adaptativo.aprovado
+                  ? "px-10 py-5 rounded-full bg-white/15 text-white/50 font-black text-xl cursor-not-allowed"
+                  : tween
+                  ? "px-9 py-4 rounded-xl bg-[linear-gradient(90deg,#22d3ee,#818cf8)] text-[#0b1020] font-extrabold uppercase tracking-wider text-base shadow-[0_0_28px_rgba(34,211,238,.35)] hover:brightness-110 active:scale-95 transition"
+                  : kids
+                  ? "px-10 py-5 rounded-full bg-[linear-gradient(90deg,#fbbf24,#f472b6)] text-[#2b1258] font-black text-xl shadow-[0_8px_0_rgba(0,0,0,.25)] active:translate-y-1 active:shadow-[0_3px_0_rgba(0,0,0,.25)] transition"
+                  : "px-8 py-4 rounded-xl bg-amber-400 text-[#1a0d3d] font-black text-lg hover:bg-amber-300"
+              }
+            >
+              {tween ? "✅ Concluir missão" : "🎉 Concluir aula"}
+            </button>
+            <Link to={voltarPara} className="text-xs text-white/50 hover:text-white/80">
+              Sair para a trilha
+            </Link>
+          </div>
+
+          </>
+          )}
+
+        </main>
+
+      </div>
+    </div>
+    </KidsCtx.Provider>
+  );
+}
+
+function Secao({
+  id,
+  label,
+  children,
+}: {
+  id: string;
+  label: string;
+  children: React.ReactNode;
+}) {
+  const { kids, tween, geo, ordem, teen } = useContext(KidsCtx);
+  const isTeen = teen;
+  const cor = (isTeen ? CORES_TEEN[id] : tween ? CORES_TWEEN[id] : CORES_KIDS[id]) ?? (isTeen ? "#06b6d4" : tween ? "#22d3ee" : "#fbbf24");
+  const emoji = label.trim().split(" ")[0];
+  const texto = label.trim().split(" ").slice(1).join(" ");
+
+  // Skin "expedição" (mesma moldura da Geografia): cena numerada, coluna
+  // única, sem cartão colorido — o conteúdo da aula continua o mesmo.
+  if (geo) {
+    return (
+      <section id={id} className="scroll-mt-28">
+        <div className="text-[11px] uppercase tracking-[0.2em] mb-3 flex items-center gap-2 text-amber-300/80">
+          <span className="w-6 h-6 rounded-full grid place-items-center text-[10px] font-black bg-amber-300/20 border border-amber-300/40 text-amber-200">
+            {ordem?.[id] ?? "•"}
+          </span>
+          <span className="min-w-0 truncate">
+            {emoji} {texto}
+          </span>
+        </div>
+        <div className="space-y-4 rounded-2xl border border-white/10 bg-white/[.06] p-4 md:p-5 text-[1rem] leading-relaxed">
+          {children}
+        </div>
+      </section>
+    );
+  }
+
+
+  if (isTeen) {
+    return (
+      <section
+        id={id}
+        className="scroll-mt-28 rounded-2xl overflow-hidden border border-cyan-900/40 bg-slate-900/40 backdrop-blur-md relative"
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-cyan-500/5 to-transparent pointer-events-none" />
+        <div className="flex items-center gap-3 px-4 py-3 border-b border-cyan-900/40 bg-slate-900/60">
+          <span
+            className="grid h-8 w-8 shrink-0 place-items-center rounded-md text-base shadow-[0_0_10px_rgba(6,182,212,0.2)]"
+            style={{ background: `${cor}22`, border: `1px solid ${cor}44` }}
+          >
+            {emoji}
+          </span>
+          <span
+            className="min-w-0 truncate text-xs font-black uppercase tracking-[0.2em]"
+            style={{ color: cor }}
+          >
+            {texto}
+          </span>
+          <div className="ml-auto flex items-center gap-1">
+            <div className="h-1 w-1 rounded-full bg-cyan-500 shadow-[0_0_5px_#06b6d4]" />
+            <div className="h-4 w-[1px] bg-cyan-900/40 mx-1" />
+            <span className="text-[9px] font-mono text-cyan-700">LVL.{ordem?.[id] ?? "0"}</span>
+          </div>
+        </div>
+        <div className="space-y-4 p-4 md:p-6 text-[0.95rem] leading-relaxed relative z-10">
+          {children}
+        </div>
+      </section>
+    );
+  }
+
+  if (!kids) {
+    return (
+      <section
+        id={id}
+        className="scroll-mt-24 rounded-3xl bg-white/5 border border-white/10 p-5 md:p-6"
+      >
+        <div className="text-[11px] uppercase tracking-widest text-amber-300 mb-3">
+          {label}
+        </div>
+        <div className="space-y-3">{children}</div>
+      </section>
+    );
+  }
+
+  if (tween) {
+    return (
+      <section
+        id={id}
+        className="scroll-mt-28 rounded-2xl overflow-hidden border border-white/10 bg-white/[.05] backdrop-blur-sm"
+        style={{ boxShadow: `0 0 0 1px ${cor}33, 0 14px 34px -20px ${cor}` }}
+      >
+        <div className="flex items-center gap-3 px-4 py-3 border-b border-white/10">
+          <span
+            className="grid h-9 w-9 shrink-0 place-items-center rounded-lg text-lg"
+            style={{ background: `${cor}22`, border: `1px solid ${cor}66` }}
+          >
+            {emoji}
+          </span>
+          <span
+            className="min-w-0 truncate text-sm md:text-base font-extrabold uppercase tracking-wider"
+            style={{ color: cor }}
+          >
+            {texto}
+          </span>
+          <span className="ml-auto shrink-0 h-1.5 w-10 rounded-full" style={{ background: cor }} />
+        </div>
+        <div className="space-y-4 p-4 md:p-6 text-[1rem] leading-relaxed">{children}</div>
+      </section>
+    );
+  }
+
+  return (
+    <section
+      id={id}
+      className="scroll-mt-28 rounded-[2rem] overflow-hidden border-4 shadow-[0_10px_0_rgba(0,0,0,.22)]"
+      style={{ borderColor: cor, background: "rgba(255,255,255,0.07)" }}
+    >
+      <div
+        className="flex items-center gap-3 px-4 py-3"
+        style={{ background: cor }}
+      >
+        <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-white/90 text-2xl shadow-inner">
+          {emoji}
+        </span>
+        <span className="min-w-0 truncate text-lg font-black text-[#2b1258] drop-shadow-sm">
+          {texto}
+        </span>
+      </div>
+      <div className="space-y-4 p-4 md:p-6 text-[1.05rem] leading-relaxed">
+        {children}
+      </div>
+    </section>
+  );
+}
+
+function Instrucao({ children }: { children: React.ReactNode }) {
+  const { kids, tween, teen } = useContext(KidsCtx);
+  if (teen) {
+    return (
+      <div className="flex items-start gap-3 rounded-lg border-l-2 border-cyan-500 bg-cyan-950/20 px-4 py-3 group">
+        <span className="text-cyan-500 font-mono text-[10px] leading-6 animate-pulse">_</span>
+        <p className="min-w-0 text-sm font-medium text-cyan-100/90 tracking-wide uppercase">
+          {children}
+        </p>
+      </div>
+    );
+  }
+  if (!kids) return <p className="text-sm text-white/80 italic">{children}</p>;
+  if (tween) {
+    return (
+      <div className="flex items-start gap-2 rounded-lg border-l-4 border-cyan-400 bg-white/[.06] px-4 py-3">
+        <span className="text-cyan-300 font-mono text-sm leading-6">▶</span>
+        <p className="min-w-0 text-[0.95rem] font-semibold text-white/95">{children}</p>
+      </div>
+    );
+  }
+  return (
+    <div className="flex items-start gap-2 rounded-2xl bg-white/12 border-2 border-white/20 px-4 py-3">
+      <span className="text-xl leading-none">🗣️</span>
+      <p className="min-w-0 text-base font-bold text-white">{children}</p>
+    </div>
+  );
+}
+
+
+
+/**
+ * Painel de desempenho da avaliação (Fase 1 — 1º ano).
+ * Mostra acertos, nota e libera/bloqueia a conclusão da aula.
+ */
+function PainelNota({
+  respondidas,
+  total,
+  acertos,
+  nota,
+  aprovado,
+  onRefazer,
+}: {
+  respondidas: number;
+  total: number;
+  acertos: number;
+  nota: number;
+  aprovado: boolean;
+  onRefazer: () => void;
+}) {
+  const completou = respondidas >= total && total > 0;
+  const pct = Math.round(nota * 100);
+
+  return (
+    <div
+      className={`mt-4 rounded-2xl border-2 p-4 ${
+        aprovado
+          ? "bg-emerald-500/15 border-emerald-400/60"
+          : completou
+            ? "bg-rose-500/15 border-rose-400/60"
+            : "bg-white/10 border-white/20"
+      }`}
+    >
+      <div className="flex items-center justify-between gap-3 text-sm font-black">
+        <span>📊 Respondidas: {respondidas}/{total}</span>
+        <span>
+          ✅ Acertos: {acertos} ({pct}%)
+        </span>
+      </div>
+      <div className="mt-2 h-3 rounded-full bg-black/30 overflow-hidden">
+        <div
+          className={`h-full rounded-full transition-all duration-500 ${
+            aprovado ? "bg-emerald-400" : "bg-amber-400"
+          }`}
+          style={{ width: `${Math.min(100, pct)}%` }}
+        />
+      </div>
+      {!completou && (
+        <p className="mt-2 text-xs text-white/80">
+          Meta: acertar pelo menos {Math.round(NOTA_MINIMA * 100)}% para concluir a aula.
+        </p>
+      )}
+      {completou && aprovado && (
+        <p className="mt-2 text-sm font-bold text-emerald-200">
+          🌟 Muito bem! Você alcançou a meta e pode concluir a aula.
+        </p>
+      )}
+      {completou && !aprovado && (
+        <div className="mt-3">
+          <p className="text-sm font-bold text-rose-100">
+            Ainda não chegou em {Math.round(NOTA_MINIMA * 100)}%. Volte na leitura guiada
+            e na revisão, depois refaça a avaliação — você consegue!
+          </p>
+          <button
+            onClick={onRefazer}
+            className="mt-3 w-full h-12 rounded-2xl bg-amber-400 text-[#2b1258] font-black text-base active:scale-95 shadow"
+          >
+            🔄 Refazer a avaliação
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+/**
+ * Fase 9 — trilho das duas sessões curtas da aula.
+ * Deixa visível pra criança (e pro adulto) que a aula tem duas partes
+ * curtas, e permite voltar pra parte 1 quando quiser.
+ */
+function TrilhoSessao({
+  sessao,
+  onIr,
+}: {
+  sessao: "A" | "B";
+  onIr: (s: "A" | "B") => void;
+}) {
+  const itens: Array<{ id: "A" | "B"; titulo: string; sub: string }> = [
+    { id: "A", titulo: "Parte 1", sub: "Aprender" },
+    { id: "B", titulo: "Parte 2", sub: "Praticar" },
+  ];
+  return (
+    <div className="flex gap-2">
+      {itens.map((it) => {
+        const ativa = sessao === it.id;
+        return (
+          <button
+            key={it.id}
+            type="button"
+            onClick={() => onIr(it.id)}
+            className={`flex-1 rounded-2xl border-2 px-3 py-2 text-left transition active:scale-95 ${
+              ativa
+                ? "bg-amber-400 border-amber-200 text-[#2b1258]"
+                : "bg-white/10 border-white/20 text-white/70"
+            }`}
+          >
+            <div className="text-sm font-black">{it.titulo}</div>
+            <div className="text-[10px] font-bold uppercase tracking-widest opacity-80">
+              {it.sub}
+            </div>
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+/**
+ * Fase 9 — Descanso do Brilha.
+ * Fecha a sessão A. A criança escolhe continuar agora ou parar por hoje;
+ * ao voltar, o app retoma direto na parte 2.
+ */
+function IntervaloSessao({
+  onContinuar,
+  voltarPara,
+}: {
+  onContinuar: () => void;
+  voltarPara: string;
+}) {
+  return (
+    <div className="rounded-[2rem] border-4 border-emerald-300/70 bg-emerald-400/15 p-6 text-center space-y-3">
+      <div className="text-5xl">😌</div>
+      <h3 className="text-2xl font-black text-emerald-100">
+        Descanso do Brilha
+      </h3>
+      <p className="mx-auto max-w-md text-base font-semibold text-white/90">
+        Você já fez <b>metade da aula</b>! Respire fundo, beba água e estique o
+        corpo. Quer continuar agora ou parar por hoje? O app guarda o seu lugar.
+      </p>
+      <div className="flex flex-col items-center gap-2 pt-1">
+        <button
+          type="button"
+          onClick={onContinuar}
+          className="h-14 px-8 rounded-full bg-[linear-gradient(90deg,#fbbf24,#f472b6)] text-[#2b1258] font-black text-lg shadow-[0_6px_0_rgba(0,0,0,.25)] active:translate-y-1 transition"
+        >
+          ▶ Continuar a parte 2
+        </button>
+        <Link
+          to={voltarPara}
+          className="text-xs font-bold text-white/70 hover:text-white"
+        >
+          Parar por hoje — eu volto depois
+        </Link>
+      </div>
+    </div>
+  );
+}

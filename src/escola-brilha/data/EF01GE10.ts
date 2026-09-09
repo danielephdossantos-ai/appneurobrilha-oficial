@@ -1,0 +1,6 @@
+import { criarAulaGeo1 } from "./criarAulaGeo1";
+export default criarAulaGeo1({ codigo: "EF01GE10", titulo: "O Lugar Muda Com as Épocas", tema: "características naturais e ritmos sazonais", explicacao: "Luz, temperatura, chuva, vento, plantas e animais podem mudar ao longo das épocas do ano. Essas mudanças não acontecem do mesmo jeito em todos os lugares; devemos observar a realidade local.", exemplo: "Em uma época pode chover mais e a vegetação ficar verde; em outra, o lugar pode ficar mais seco.", missao: "Compare duas épocas do ano no seu lugar usando chuva, temperatura e vegetação.", proxima: "EF01GE11", questoes: [
+  { pergunta: "As épocas do ano são iguais em todo lugar?", opcoes: ["Não, variam conforme o lugar", "Sim, sempre", "Só existe verão", "Não afetam a natureza"], correta: 0, explicacao: "Climas e ritmos locais são diferentes." },
+  { pergunta: "O que podemos observar entre épocas?", opcoes: ["Chuva, temperatura e vegetação", "Somente placas", "Apenas prédios", "Só horários de aula"], correta: 0, explicacao: "Elementos naturais revelam mudanças sazonais." },
+  { pergunta: "Como descrever o próprio lugar?", opcoes: ["Usando observações locais", "Repetindo qualquer região", "Ignorando o clima", "Sem comparar épocas"], correta: 0, explicacao: "A habilidade pede relação com o lugar vivido." },
+] });

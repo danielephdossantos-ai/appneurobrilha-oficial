@@ -1,0 +1,62 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "23-3xNa3_9lpx5NFAJaOb"
+uri = "file://src/assets/illustrations/apple.png"
+type = "image"
+title = "red apple illustration"
+
+[[generated]]
+id = "0fOgI2Kl1MTQiEPeOWlrX"
+uri = "file://src/assets/illustrations/dog.png"
+type = "image"
+title = "cute dog illustration"
+
+[[generated]]
+id = "zvhBppkEdQrbCjBQFvur_"
+uri = "file://src/assets/illustrations/star.png"
+type = "image"
+title = "happy star illustration"
+
+[[generated]]
+id = "x43falIJe6wXiICxH595l"
+uri = "file://src/assets/illustrations/fish.png"
+type = "image"
+title = "cute fish illustration"
+
+[[generated]]
+id = "yrQ8Rr-Ck-sRQzkwbj1uU"
+uri = "file://src/assets/illustrations/lollipop.png"
+type = "image"
+title = "lollipop candy illustration"
+
+[[generated]]
+id = "dGk4fDnpQo7C1QqmHGWKN"
+uri = "file://src/assets/illustrations/banana.png"
+type = "image"
+title = "banana illustration"
+
+[[generated]]
+id = "4KLg0-hYyE8LrnRTYkEfB"
+uri = "file://src/assets/illustrations/tropical-fish.png"
+type = "image"
+title = "tropical fish illustration"
+
+[[generated]]
+id = "P3Hv2NPt0OkNuV25DozzA"
+uri = "file://src/assets/illustrations/balloon.png"
+type = "image"
+title = "red balloon illustration"
+
+[[generated]]
+id = "osAKCtgr1k1HCmUQIi3BS"
+uri = "file://src/assets/illustrations/pineapple.png"
+type = "image"
+title = "pineapple illustration"
+
+[[generated]]
+id = "AqbqxKGVKhys3o4ab84rZ"
+uri = "file://src/assets/illustrations/elephant.png"
+type = "image"
+title = "cute elephant illustration"

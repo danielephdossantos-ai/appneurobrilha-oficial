@@ -1,0 +1,1 @@
+UPDATE public.bncc_habilidades SET disciplina='Português' WHERE codigo_bncc LIKE 'EI03EF%';

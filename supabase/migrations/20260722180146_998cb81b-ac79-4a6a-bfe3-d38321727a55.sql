@@ -1,0 +1,1 @@
+ALTER TABLE public.study_agenda ADD COLUMN IF NOT EXISTS weekdays jsonb;

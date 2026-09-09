@@ -1,0 +1,39 @@
+import type { CursoIng, AulaIng, UnidadeIng } from "./types";
+import { cursoInglesMaternal } from "./ingles-maternal";
+import { cursoInglesPre1 } from "./ingles-pre1";
+import { cursoInglesPre2 } from "./ingles-pre2";
+import { cursoInglesKids } from "./ingles-kids";
+
+export const cursosInglesEI: CursoIng[] = [
+  cursoInglesKids,
+  cursoInglesMaternal,
+  cursoInglesPre1,
+  cursoInglesPre2,
+];
+
+export function getCursoInglesEI(slug: string): CursoIng | undefined {
+  return cursosInglesEI.find((c) => c.slug === slug);
+}
+
+export function getCursoInglesEIBySerie(serie: string): CursoIng | undefined {
+  return cursosInglesEI.find((c) => c.serie === serie);
+}
+
+/** Junta todas as unidades do curso (níveis + legado) para busca. */
+function todasUnidades(curso: CursoIng): UnidadeIng[] {
+  const de_niveis = (curso.niveis ?? []).flatMap((n) => n.unidades);
+  return [...de_niveis, ...(curso.unidades ?? [])];
+}
+
+export function getAulaInglesEI(
+  serie: string,
+  aulaSlug: string,
+): { curso: CursoIng; aula: AulaIng } | undefined {
+  const curso = getCursoInglesEIBySerie(serie);
+  if (!curso) return undefined;
+  for (const u of todasUnidades(curso)) {
+    const aula = u.aulas.find((a) => a.slug === aulaSlug);
+    if (aula) return { curso, aula };
+  }
+  return undefined;
+}

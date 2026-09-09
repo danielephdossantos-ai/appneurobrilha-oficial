@@ -1,0 +1,137 @@
+import type { AulaV4 } from "../../types";
+
+export const aula05_area: AulaV4 = {
+  slug: "u6-05-area",
+  titulo: "Área: m² e cm²",
+  iconeTrilha: "🟦",
+  bncc: ["EF05MA20"],
+  duracaoMin: 22,
+  metodologias: ["cpa"],
+
+  momento01_motivacao: {
+    titulo: "Quanto cobre?",
+    historia: "{NOME}, área mede a superfície que uma figura cobre; perímetro mede o contorno. Figuras podem ter o mesmo perímetro e áreas diferentes — ou a mesma área e perímetros diferentes.",
+  },
+  momento02_exploracao: {
+    instrucao: "Unidades e figuras.",
+    cenas: [
+      { tipo: "texto", texto: "1 m² = 10.000 cm². Chão é m². Papel é cm².", destaque: true },
+      { tipo: "texto", texto: "Área usa unidades quadradas; perímetro usa unidades de comprimento. São grandezas diferentes." },
+      {
+        tipo: "figuraPlana",
+        forma: "retangulo",
+        medidasLados: ["base", "altura", "base", "altura"],
+        legenda: "Retângulo: A = base × altura",
+      },
+      {
+        tipo: "figuraPlana",
+        forma: "quadrado",
+        medidasLados: ["lado", "lado", "lado", "lado"],
+        legenda: "Quadrado: A = lado × lado",
+      },
+    ],
+  },
+  momento03_descoberta: {
+    perguntaGuia: "Retângulos 6 × 2 e 4 × 3 têm a mesma área? E o mesmo perímetro?",
+    pista: "Calcule a área e some os quatro lados de cada figura.",
+    revelacao: "As duas áreas valem 12 unidades quadradas. Os perímetros são diferentes: 16 e 14 unidades.",
+  },
+  momento04_explicacao: {
+    titulo: "Exemplos",
+    etapas: [
+      {
+        texto: "Sala 4 m × 3 m — arme a multiplicação.",
+        exemploReal: {
+          contexto: "A = 4 × 3",
+          visualMat: {
+            tipo: "figuraPlana",
+            forma: "retangulo",
+            medidasLados: ["4 m", "3 m", "4 m", "3 m"],
+            legenda: "Retângulo 4 m × 3 m",
+          },
+          destaque: "A = 4 × 3 = 12 m².",
+        },
+      },
+      {
+        texto: "Quadrado 6 cm de lado.",
+        exemploReal: {
+          contexto: "A = 6 × 6",
+          visualMat: {
+            tipo: "figuraPlana",
+            forma: "quadrado",
+            medidasLados: ["6 cm", "6 cm", "6 cm", "6 cm"],
+          },
+          destaque: "A = 36 cm².",
+        },
+      },
+      { texto: "Área composta: some as partes." },
+      { texto: "Para comparar área e perímetro, calcule cada grandeza separadamente. Mesma área não garante mesmo perímetro, e mesmo perímetro não garante mesma área." },
+    ],
+  },
+  momento05_modelagem: {
+    enunciado: "Retângulo 8 m × 5 m.",
+    resposta: "40 m²",
+    contaPassoAPasso: {
+      operacao: "mult",
+      operandos: [8, 5],
+      resultado: 40,
+      passos: [
+        { fala: "A = base × altura." },
+        { fala: "8 × 5 = 40. Resposta: 40 m²." },
+      ],
+    },
+    passos: ["A = b × h.", "8 × 5 = 40."],
+  },
+  momento06_praticaGuiada: {
+    enunciado: "Quadrado de 9 cm de lado.",
+    dica: "l × l.",
+    interacao: {
+      tipo: "escolhaVisual",
+      pergunta: "Área:",
+      opcoes: [{ nome: "81 cm²" }, { nome: "36 cm²" }, { nome: "18 cm²" }],
+      respostaCerta: "81 cm²",
+      feedbackAcerto: "🎯 9 × 9.",
+      feedbackErro: "81 cm².",
+    },
+  },
+  momento07_praticaIndependente: {
+    enunciado: "Retângulo 12 m × 7 m.",
+    interacao: {
+      tipo: "escolhaVisual",
+      pergunta: "Área:",
+      opcoes: [{ nome: "84 m²" }, { nome: "38 m²" }, { nome: "74 m²" }],
+      respostaCerta: "84 m²",
+      feedbackAcerto: "🎯",
+      feedbackErro: "84 m².",
+    },
+  },
+  momento08_aplicacao: {
+    contexto: "Cozinha em L: retângulo 3×2 m + 2×1 m.",
+    problema: "Área total?",
+    interacao: {
+      tipo: "escolhaVisual",
+      pergunta: "Escolha:",
+      opcoes: [{ nome: "8 m²" }, { nome: "6 m²" }, { nome: "10 m²" }],
+      respostaCerta: "8 m²",
+      feedbackAcerto: "🎯 6 + 2 = 8.",
+      feedbackErro: "8 m².",
+    },
+  },
+  momento09_revisao: {
+    pontos: ["Retângulo: b × h.", "Quadrado: l × l.", "Área composta: some as partes."],
+  },
+  momento10_avaliacao: {
+    perguntas: [
+      { pergunta: "Retângulo 6×4:", opcoes: ["24", "20", "28"], correta: 0, feedbackAcerto: "🎉", feedbackErro: "24." },
+      { pergunta: "Quadrado 7:", opcoes: ["49", "28", "14"], correta: 0, feedbackAcerto: "🎉", feedbackErro: "49." },
+      { pergunta: "Retângulos 6×2 e 4×3 têm:", opcoes: ["mesma área e perímetros diferentes", "mesmo perímetro e áreas diferentes", "áreas e perímetros iguais"], correta: 0, feedbackAcerto: "🎉 Ambas as áreas são 12; os perímetros são 16 e 14.", feedbackErro: "Calcule separadamente: área e perímetro não são a mesma grandeza." },
+    ],
+  },
+  momento11_missaoFamilia: {
+    titulo: "Área do quarto",
+    materiais: ["Trena"],
+    passos: ["Com ajuda de um adulto, meça largura e comprimento de um cômodo.", "Calcule a área em m² e o perímetro em metros.", "Compare as duas grandezas e suas unidades."],
+    registro: "📸 Foto.",
+  },
+  recompensa: { xp: 150, moedas: 80 },
+};

@@ -1,0 +1,101 @@
+---
+name: Contrato Português 2º ano — Nivelamento pós-auditoria
+description: Contrato de 7 fases para nivelar "A Biblioteca Encantada" (portugues-2ano) ao padrão do 1º ano. Nenhuma outra série de Português avança antes da Fase 7.
+type: feature
+---
+
+# Contrato — Português 2º ano: Nivelamento ao padrão do 1º ano
+
+Curso slug: `portugues-2ano` · "A Biblioteca Encantada" · 30 aulas · 6 unidades ·
+skin **kids/tween**. Esqueleto fixo de 11 momentos já existe e é preservado.
+
+**Regra de ouro:** as fases abaixo são executadas em ordem, uma por turno, com
+typecheck limpo e validação da usuária antes de avançar. Nenhuma outra série de
+Língua Portuguesa é iniciada antes da Fase 7.
+
+## Diagnóstico que originou o contrato
+| Recurso | 1º ano | 2º ano hoje |
+|---|---|---|
+| Dica / reensino | 97 / 32 | 0 / 0 |
+| Momento de fluência | 40 aulas | 0 |
+| Momento de escrita | 29 aulas | 0 |
+| Avaliações com 4 alternativas | 200/200 | 0/150 |
+| Consciência fonêmica | sim | não |
+| Sondagem inicial | sim | não |
+| Práticas curriculares | sim | não |
+| Ensino visual | 29/40 aulas | 2/30 |
+
+## Fase 1 — Motor adaptativo nas 30 aulas ✅ CONCLUÍDA
+- `dica` em todo item de quiz/minijogo (pista, nunca a resposta) — 440 itens.
+- `reensino` nos blocos-chave (compreensão, leitura independente, revisão e
+  avaliação) — 335 itens.
+- Gate de **≥70%** na avaliação já ativo pelo player compartilhado.
+- Blocos de minijogo (previsão, ordenar, arrastar, selecionar, montar palavra,
+  arquiteto) agora aceitam e exibem `dica` no feedback de erro.
+
+
+## Fase 2 — Avaliações com 4 alternativas
+- Reescrever os 150 itens de `momento10_avaliacao` para **4 opções** com
+  distratores plausíveis (erro ortográfico comum, sentido próximo, pegadinha de
+  inferência).
+- Feedback explicativo em cada alternativa errada.
+- Eliminar todos os itens de 2 e 3 opções.
+
+## Fase 3 — Bloco de escrita real (`momento_escrita`) ✅ CONCLUÍDA
+Em todas as 30 aulas, calibrado para 7 anos (codificação, não traçado inicial):
+- **Ditado de palavra e frase** com sílabas móveis (foco ortográfico da aula).
+- **Escrita funcional**: bilhete, convite, lista, legenda, cartaz — rascunho →
+  revisão → versão final salva.
+- U5 recebe a produção mais longa (livro próprio) com checklist de revisão.
+- Entregue: 30/30 aulas com `momento_escrita` (ditado de sílabas + ditado de
+  frase com palavras móveis + produção real). Novos formatos: convite, legenda,
+  cartaz e texto. Ciclo rascunho → revisão (checklist marcável) → versão final
+  salva no aparelho, via `cicloRevisao`.
+
+## Fase 4 — Fluência por releitura (`momento_fluencia`) ✅ CONCLUÍDA
+
+- Entregue: `momento_fluencia` nas 30 aulas — releitura do mesmo trecho 3x
+  (eco → cronômetro → repetição), texto tirado da leitura independente da
+  própria aula e meta de tempo calibrada em ~60 palavras/minuto.
+- Bloco de 3 etapas em todas as 30 aulas: **eco → cronometrada 1 → cronometrada
+  2 com comparação**.
+- Textos decodáveis próprios do 2º ano (frases e parágrafos curtos, não palavras
+  isoladas).
+- Registrar palavras/minuto para o relatório.
+
+## Fase 5 — Consciência fonológica avançada e palavras teimosas ✅ CONCLUÍDA
+- Entregue: **Unidade 7 — A Oficina dos Sons** com 4 aulas (batida forte/sílaba
+  tônica + M antes de P/B; rimas + R/RR; troca e segmentação de fonemas + S/SS/Ç;
+  palavras teimosas + LH/NH/CH e AM/ÃO).
+- Novos blocos em `types.ts`: `silabaTonica`, `rimas`, `regraOrtografica`,
+  renderizados por `FonologiaAvancada.tsx`; `palavraRelampago` reaproveitado com
+  o corpus de alta frequência do 2º ano.
+- Todas as 4 aulas seguem o esqueleto de 11 momentos + escrita + fluência,
+  com dica/reensino e avaliação de 4 alternativas.
+
+
+## Fase 6 — Variedade de interação e ensino visual ✅ CONCLUÍDA
+- Entregue: `momento_ensinoVisual` em **34/34 aulas** (28 injetadas nas U1–U6),
+  cada uma calibrada ao foco da aula — pontuação, maiúsculas, sílaba tônica,
+  rimas, segmentar/sintetizar/trocar fonemas, palavras teimosas e as regras
+  ortográficas do ano (M antes de P/B, R/RR, S/SS/Ç, LH/NH/CH, AM/ÃO).
+- Monotonia dos "arrastarParaAlvo" quebrada: U3A03 virou `montarPalavra`,
+  U5A02 virou `ordenarSequencia` e U6A04 virou `selecionarItens`. Os
+  arrastar restantes ficaram só onde a tarefa é mesmo de emparelhar.
+- `BotaoOuvirEnunciado` já está nos blocos compartilhados (ArrastarParaAlvo,
+  SelecionarItens, MontarPalavra, OrdenarSequencia, CardVocabulario).
+
+
+## Fase 7 — Sondagem inicial, práticas curriculares e BNCC ✅ CONCLUÍDA
+- Entregue: sondagem própria do 2º ano (`player-portugues/sondagem-2ano.ts`) com
+  8 itens falados — leitura de palavra, sílaba tônica, rimas, M antes de P/B,
+  R/RR, palavra teimosa, pontuação e causa/efeito — sugerindo unidade de entrada
+  (U7 → U3 → U4 → U6). Registro de sondagens por curso em `sondagens.ts`;
+  `CartaoSondagem` agora é genérico e aparece no 1º e no 2º ano.
+- `praticasCurriculares` do 2º ano: escrita diária, oralidade e leitura em voz
+  alta diária (fluência por releitura).
+- Cobertura BNCC fechada: EF02LP01–EF02LP28, incluindo EF02LP02 e EF02LP05
+  (atendidos pela Unidade 7 — A Oficina dos Sons).
+
+**Contrato concluído — o 2º ano está nivelado ao padrão do 1º ano.**
+

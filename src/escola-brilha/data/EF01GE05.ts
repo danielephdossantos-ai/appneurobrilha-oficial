@@ -1,0 +1,6 @@
+import { criarAulaGeo1 } from "./criarAulaGeo1";
+export default criarAulaGeo1({ codigo: "EF01GE05", titulo: "Ritmos da Natureza", tema: "ritmos naturais", explicacao: "Dia e noite, calor, frio, chuva e umidade mudam ao longo do tempo. Observar em horários, dias e épocas diferentes permite comparar ritmos da natureza no lugar onde vivemos.", exemplo: "O pátio pode estar fresco pela manhã e quente à tarde; uma semana pode ter dias secos e chuvosos.", missao: "Faça um diário de três dias com céu, temperatura percebida e umidade ou chuva.", proxima: "EF01GE06", questoes: [
+  { pergunta: "O que é um ritmo natural?", opcoes: ["Uma mudança que pode se repetir no tempo", "Uma construção", "Uma regra escolar", "Um brinquedo"], correta: 0, explicacao: "Dia e noite são um exemplo de ritmo natural." },
+  { pergunta: "Como comparar manhã e tarde?", opcoes: ["Observando luz e temperatura", "Olhando apenas o relógio", "Sem sair do lugar", "Escolhendo uma resposta antes"], correta: 0, explicacao: "Registrar observações mostra mudanças." },
+  { pergunta: "Qual registro ajuda a estudar o tempo?", opcoes: ["Diário com data e observação", "Lista sem datas", "Desenho sem relação", "Uma adivinhação"], correta: 0, explicacao: "Datas permitem comparar escalas temporais." },
+] });

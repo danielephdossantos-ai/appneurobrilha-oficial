@@ -1,0 +1,144 @@
+import React from "react";
+
+import { cn } from "@/utils/utils";
+import { useMascot } from "@/contexts/MascotContext";
+import { url as pipaMascot } from "@/assets/pip-girl-mascot.png.asset.json";
+import { url as pipaDoutora } from "@/assets/pip-girl-doutora.png.asset.json";
+import { url as pipaAstronauta } from "@/assets/pip-girl-astronauta.png.asset.json";
+import { url as pipaProfessora } from "@/assets/pip-girl-professora.png.asset.json";
+import { url as pipaArte } from "@/assets/pip-girl-arte.png.asset.json";
+import { url as pipaBailarina } from "@/assets/pip-girl-bailarina.png.asset.json";
+import { url as pipaFada } from "@/assets/pip-girl-fada.png.asset.json";
+import { url as pipaSereia } from "@/assets/pip-girl-sereia.png.asset.json";
+import { url as pipaConfeiteira } from "@/assets/pip-girl-confeiteira.png.asset.json";
+import { url as pipaVeterinaria } from "@/assets/pip-girl-veterinaria.png.asset.json";
+import { url as pipaMusica } from "@/assets/pip-girl-musica.png.asset.json";
+import { url as pipaPrincesa } from "@/assets/pip-girl-princesas.png.asset.json";
+import { url as pipaUnicornio } from "@/assets/pip-girl-unicornio.png.asset.json";
+import { url as pipaSuperHeroina } from "@/assets/pip-girl-super-heroina.png.asset.json";
+import { useAppState } from "@/core/store";
+
+import { url as pipMascot } from "@/assets/pip-mascot.png.asset.json";
+import { url as pipEgg } from "@/assets/pip-egg.png.asset.json";
+import { url as pipHatching } from "@/assets/pip-hatching.png.asset.json";
+import { url as pipBaby } from "@/assets/pip-baby.png.asset.json";
+import { url as pipaEgg } from "@/assets/pipa-egg.png.asset.json";
+import { url as pipaHatching } from "@/assets/pipa-hatching.png.asset.json";
+import { url as pipaBaby } from "@/assets/pipa-baby.png.asset.json";
+import { url as pipDinossauros } from "@/assets/pip-dinossauros.png.asset.json";
+import { url as pipEspaco } from "@/assets/pip-espaco.png.asset.json";
+import { url as pipArte } from "@/assets/pip-arte.png.asset.json";
+import { url as pipAnimais } from "@/assets/pip-animais.png.asset.json";
+import { url as pipMusica } from "@/assets/pip-musica.png.asset.json";
+import { url as pipFazendinha } from "@/assets/pip-fazendinha.png.asset.json";
+import { url as pipSuperHerois } from "@/assets/pip-super-herois.png.asset.json";
+import { url as pipPrincesas } from "@/assets/pip-princesas.png.asset.json";
+import { url as pipMinecraft } from "@/assets/pip-minecraft.png.asset.json";
+import { url as pipCarros } from "@/assets/pip-carros.png.asset.json";
+import { url as pipTrens } from "@/assets/pip-trens.png.asset.json";
+import { url as pipRobos } from "@/assets/pip-robos.png.asset.json";
+import { url as pipVeiculos } from "@/assets/pip-veiculos.png.asset.json";
+
+
+export const PIP_SKINS: Record<string, string> = {
+  dinossauros: pipDinossauros,
+  espaco: pipEspaco,
+  arte: pipArte,
+  animais: pipAnimais,
+  musica: pipMusica,
+  fazendinha: pipFazendinha,
+  "super-herois": pipSuperHerois,
+  princesas: pipPrincesas,
+  minecraft: pipMinecraft,
+  carros: pipCarros,
+  trens: pipTrens,
+  robos: pipRobos,
+  veiculos: pipVeiculos,
+};
+
+type Emotion = "happy" | "thinking" | "excited" | "sleeping" | "proud" | "waving" | "blinking";
+
+interface LiveMascotProps {
+  emotion?: Emotion;
+  size?: "sm" | "md" | "lg" | "xl" | "2xl";
+  className?: string;
+  message?: string;
+  showBadge?: boolean;
+}
+
+const LiveMascot = ({
+  emotion = "happy",
+  size = "md",
+  className,
+  message,
+  showBadge = true,
+}: LiveMascotProps) => {
+  const { activeChild } = useAppState();
+  const mascotCtx = useMascot();
+  const profile = mascotCtx.childMascotProfile;
+  const stage = profile?.stage ?? "ovo";
+  const activeMascotName = mascotCtx.activeMascot?.mascot?.name;
+  const isPipa = (profile?.active_mascot ?? activeMascotName?.toLowerCase()) === "pipa";
+
+  const stageImages: Record<string, string> = isPipa
+    ? { ovo: pipaEgg, nascendo: pipaHatching, bebe: pipaBaby, crianca: pipaMascot }
+    : { ovo: pipEgg, nascendo: pipHatching, bebe: pipBaby, crianca: pipMascot };
+  const equipped = profile?.equipped_skin ?? (isPipa ? "pipa-original" : "original");
+  const equippedImages: Record<string,string> = {
+    ...PIP_SKINS,
+    original: pipMascot,
+    "pipa-original": pipaMascot,
+    "pipa-doutora": pipaDoutora,
+    "pipa-astronauta": pipaAstronauta,
+    "pipa-professora": pipaProfessora,
+    "pipa-arte": pipaArte,
+    "pipa-bailarina": pipaBailarina,
+    "pipa-fada": pipaFada,
+    "pipa-sereia": pipaSereia,
+    "pipa-confeiteira": pipaConfeiteira,
+    "pipa-veterinaria": pipaVeterinaria,
+    "pipa-musica": pipaMusica,
+    "pipa-princesa": pipaPrincesa,
+    "pipa-unicornio": pipaUnicornio,
+    "pipa-super-heroina": pipaSuperHeroina,
+  };
+  const mascotImage = stage === "crianca" ? (equippedImages[equipped] ?? stageImages.crianca) : (stageImages[stage] ?? stageImages.bebe);
+
+
+  const sizes = {
+    sm: "w-12 h-12 md:w-16 md:h-16",
+    md: "w-20 h-20 md:w-24 md:h-24",
+    lg: "w-28 h-28 md:w-32 md:h-32",
+    xl: "w-36 h-36 md:w-48 md:h-48",
+    "2xl": "w-52 h-52 md:w-64 md:h-64",
+  };
+
+  return (
+    <div className={cn("flex flex-col items-center gap-6", className)}>
+      <div
+        className={cn("relative flex items-center justify-center overflow-visible", sizes[size])}
+      >
+        {/* Expressões faciais via filtros ou sobreposições se necessário */}
+        {/* Para um visual Disney/Pixar premium, focamos no drop-shadow e no glow do puzzle */}
+
+        <img
+          src={mascotImage}
+          alt={isPipa ? "Pipa, companheira da jornada" : "Pip, companheiro da jornada"}
+          className="max-w-full h-auto object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.3)] select-none pointer-events-none"
+          draggable={false}
+        />
+      </div>
+
+      {message && (
+        <div className="bg-white px-8 py-5 rounded-[2rem] border-4 border-primary/30 shadow-kid relative max-w-sm">
+          <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-6 h-6 bg-white border-t-4 border-l-4 border-primary/30 rotate-45" />
+          <p className="text-primary font-black text-center text-lg md:text-xl leading-snug">
+            {message}
+          </p>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default LiveMascot;

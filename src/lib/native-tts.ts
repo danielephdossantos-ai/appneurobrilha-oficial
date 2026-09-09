@@ -1,0 +1,313 @@
+import { normalizarFala } from "@/lib/normalizador-fala";
+import { sanitizarFalaMascote } from "@/lib/sanitizar-fala-mascote";
+// Helpers para TTS nativo (Web Speech API) com chunking.
+// O Chrome desktop trunca utterances longas (~200 chars / 15s).
+// Quebrar em frases curtas e enfileirar resolve.
+
+/**
+ * Remove emojis, pictogramas e símbolos decorativos antes de falar.
+ * O TTS lê emoji ("🏫" vira "escola") o que polui a narração e às vezes
+ * duplica palavras (título "🏫 — ESCOLA" ficava "escola escola").
+ * Também converte separadores visuais (— · • | →) em pausa curta.
+ */
+export function normalizeLiteracyTextForSpeech(text: string): string {
+  if (!text) return "";
+  let out = text;
+
+  // Em telas de alfabetização, "R." deve soar como resposta, não como a letra erre.
+  out = out.replace(/\bR\s*[:.]\s*/gi, "Resposta: ");
+
+  // ─────────────────────────────────────────────────────────────
+  // (Precisa vir ANTES dos dicionários de sílabas — se um pedaço da
+  // palavra hifenada for uma sílaba CV conhecida, a regra CV vai comer
+  // primeiro e sobra "PA lhaço" em vez de "palhaço".)
+  // Hifenação silábica em MAIÚSCULO: "BRA-ÇO", "PA-LHA-ÇO", "GRAN-DE",
+  // "P-A-TO", "S-O-L". Vozes nativas tratam o hífen como pausa e leem cada
+  // pedaço como letra ("BRA cê-cedilha ó"). Para a fala do professor,
+  // colapsamos a palavra hifenada num token único em minúsculo — o visual
+  // (silabas: […]) mantém a segmentação sem depender disso.
+  out = out.replace(
+    /\b([A-ZÁÉÍÓÚÂÊÎÔÛÃÕÇ]{1,6}(?:[-·][A-ZÁÉÍÓÚÂÊÎÔÛÃÕÇ]{1,6}){1,6})\b/g,
+    (token) => token.replace(/[-·]/g, "").toLowerCase(),
+  );
+
+
+  // Evita leituras artificiais com letras repetidas na alfabetização.
+  // O visual pode destacar o som repetido, mas a voz do professor precisa soar natural.
+  out = out.replace(/\bSO\s*[-·]?\s*L+\b/gi, "sol");
+  out = out.replace(/\b([BCDFGHJKLMNPQRSTVWXYZ])\1{1,}\s*[-·]?\s*([A-ZÁÉÍÓÚÂÊÎÔÛÃÕÇa-záéíóúâêîôûãõç][A-ZÁÉÍÓÚÂÊÎÔÛÃÕÇa-záéíóúâêîôûãõç]+)\b/g, (_, ch, rest) => {
+    return `${String(ch).toLowerCase()}${String(rest).toLowerCase()}`;
+  });
+
+  // Sílabas CV em MAIÚSCULO dentro de instruções ("Junta MA com PA")
+  // fazem algumas vozes lerem "eme á". Para a fala do professor, convertemos
+  // apenas tokens isolados de sílabas para uma forma fonética curta.
+  const silabasSeguras: Record<string, string> = {
+    BA: "bá", BE: "bé", BI: "bí", BO: "bó", BU: "bú",
+    CA: "cá", CO: "có", CU: "cú",
+    DA: "dá", DE: "dé", DI: "dí", DO: "dó", DU: "dú",
+    FA: "fá", FE: "fé", FI: "fí", FO: "fó", FU: "fú",
+    GA: "gá", GO: "gó", GU: "gú",
+    JA: "já", JE: "jé", JI: "jí", JO: "jó", JU: "jú",
+    LA: "lá", LE: "lé", LI: "lí", LO: "ló", LU: "lú",
+    MA: "má", ME: "mé", MI: "mí", MO: "mó", MU: "mú",
+    NA: "ná", NE: "né", NI: "ní", NO: "nó", NU: "nú",
+    PA: "pá", PE: "pé", PI: "pí", PO: "pó", PU: "pú",
+    RA: "rá", RE: "ré", RI: "rí", RO: "ró", RU: "rú",
+    SA: "sá", SE: "sé", SI: "sí", SO: "só", SU: "sú",
+    TA: "tá", TE: "té", TI: "tí", TO: "tó", TU: "tú",
+    VA: "vá", VE: "vé", VI: "ví", VO: "vó", VU: "vú",
+  };
+  out = out.replace(
+    /\b(BA|BE|BI|BO|BU|CA|CO|CU|DA|DE|DI|DO|DU|FA|FE|FI|FO|FU|GA|GO|GU|JA|JE|JI|JO|JU|LA|LE|LI|LO|LU|MA|ME|MI|MO|MU|NA|NE|NI|NO|NU|PA|PE|PI|PO|PU|RA|RE|RI|RO|RU|SA|SE|SI|SO|SU|TA|TE|TI|TO|TU|VA|VE|VI|VO|VU)\b/g,
+    (s) => silabasSeguras[s] ?? s.toLowerCase(),
+  );
+
+  // Runs de letras romanas maiúsculas são lidas como
+  // números pelo TTS. Em contexto de alfabetização isso vira "três", "seis"…
+  // Convertemos vogais em som curto e consoantes em "som de X" para não virar
+  // ruído repetitivo de letra isolada.
+  const somVogalElongada: Record<string, string> = {
+    A: "á", E: "é", I: "i", O: "ó", U: "u",
+    Á: "á", É: "é", Í: "i", Ó: "ó", Ú: "u",
+    Ã: "ã", Õ: "õ", Ê: "é", Ô: "ó", Î: "i", Û: "u",
+  };
+  const consoanteSegura: Record<string, string> = {
+    B: "som de B", C: "som de C", D: "som de D", F: "som de F", G: "som de G",
+    H: "som de H", J: "som de J", K: "som de C", L: "som de L", M: "som de M",
+    N: "som de N", P: "som de P", Q: "som de Q", R: "som de R", S: "som de S",
+    T: "som de T", V: "som de V", W: "som de W", X: "som de X", Y: "som de Y", Z: "som de Z",
+  };
+  out = out.replace(/\b([A-ZÁÉÍÓÚÂÊÎÔÛÃÕÇ])\1{1,}\b/g, (_, ch) => {
+    const upper = ch.toUpperCase();
+    return somVogalElongada[upper] ?? consoanteSegura[upper] ?? ch.toLowerCase();
+  });
+
+  // (A regra de hifenação em maiúsculo roda lá em cima, ANTES do dicionário
+  //  de sílabas CV, para não deixar pedaços da palavra escaparem.)
+
+
+
+  // Dígrafos e encontros consonantais aparecem soltos na fala explicativa
+  // ("BR forte", "CH = SHHH"). Sem tradução, o TTS soletra "bê-erre".
+  // Mapeamos para uma leitura curta e natural — o VISUAL na tela continua
+  // mostrando as letras em maiúsculo (essa transformação só afeta a voz).
+  const digrafosEncontros: Record<string, string> = {
+    // dígrafos (um som)
+    CH: "che", LH: "lhe", NH: "nhe", RR: "erre forte", SS: "esse",
+    QU: "que", GU: "gue",
+    // encontros com R
+    BR: "bê com erre", PR: "pê com erre", TR: "tê com erre",
+    CR: "cê com erre", DR: "dê com erre", FR: "efe com erre",
+    GR: "gê com erre", VR: "vê com erre",
+    // encontros com L
+    BL: "bê com ele", CL: "cê com ele", FL: "efe com ele",
+    GL: "gê com ele", PL: "pê com ele",
+    // ditongo nasal
+    "ÃO": "ão",
+    // outros pares clínicos
+    "Ç": "cê-cedilha", // som SSS mas quando lida como letra na explicação
+  };
+  // Nota: NÃO incluir "Ç" aqui — em JS, \b considera Ç como não-word, então
+  // dispara dentro de palavras ("BRAÇO" viraria "BRA cê-cedilha O"). Ç isolado
+  // em explicações é raríssimo e cai no fallback abaixo.
+  out = out.replace(
+    /\b(CH|LH|NH|RR|SS|QU|GU|BR|PR|TR|CR|DR|FR|GR|VR|BL|CL|FL|GL|PL|ÃO)\b/g,
+    (s) => digrafosEncontros[s] ?? s.toLowerCase(),
+  );
+
+  // Fallback: qualquer sequência de 2+ maiúsculas isolada (não capturada
+  // pelas regras acima nem pelo run-de-letras-repetidas) vira minúscula
+  // pra não ser soletrada letra-por-letra.
+  out = out.replace(/\b[A-ZÁÉÍÓÚÂÊÎÔÛÃÕÇ]{2,}\b/g, (s) => s.toLowerCase());
+
+  // Palavras de treino conhecidas hifenadas em minúsculo (BOR-BO-LE-TA
+  // depois de já estar em lowercase por outra origem, ou aparecer em texto
+  // fixo). Mantém o dicionário original.
+  const replacements: Array<[RegExp, string]> = [
+    [/\b(?:bor|bo)\s*[-·]?\s*bo\s*[-·]?\s*le\s*[-·]?\s*ta\b/gi, "borboleta"],
+    [/\bdi\s*[-·]?\s*nos\s*[-·]?\s*sau\s*[-·]?\s*ro\b/gi, "dinossauro"],
+    [/\bca\s*[-·]?\s*chor\s*[-·]?\s*ro\b/gi, "cachorro"],
+    [/\bpas\s*[-·]?\s*sa\s*[-·]?\s*ri\s*[-·]?\s*nho\b/gi, "passarinho"],
+    [/\ba\s*[-·]?\s*be\s*[-·]?\s*lha\b/gi, "abelha"],
+    [/\bbo\s*[-·]?\s*la\b/gi, "bola"],
+    [/\bca\s*[-·]?\s*sa\b/gi, "casa"],
+    [/\bga\s*[-·]?\s*to\b/gi, "gato"],
+    [/\bpa\s*[-·]?\s*to\b/gi, "pato"],
+    [/\bsa\s*[-·]?\s*po\b/gi, "sapo"],
+    [/\blu\s*[-·]?\s*a\b/gi, "lua"],
+    [/\bso\s*[-·]?\s*l+\b/gi, "sol"],
+  ];
+
+  replacements.forEach(([pattern, replacement]) => {
+    out = out.replace(pattern, replacement);
+  });
+
+  // Palavras 100% MAIÚSCULAS que sobraram (ex.: "PALHAÇO", "COELHO", "ESCOLA")
+  // fazem algumas vozes soletrarem letra a letra ("pê á ele há á cê-cedilha ó").
+  // Para a fala do professor, jogamos para minúsculo — o visual continua em caixa
+  // alta na tela porque essa transformação só afeta o texto enviado ao TTS.
+  // Preserva siglas curtas de 1 letra (A, E, O usados em explicação fonética).
+  out = out.replace(/\b[A-ZÁÉÍÓÚÂÊÎÔÛÃÕÇ]{2,}\b/g, (w) => w.toLowerCase());
+
+  return out;
+}
+
+export function sanitizeForSpeech(text: string): string {
+  if (!text) return "";
+  // Camada Única de Normalização PT-BR
+  return normalizarFala(text);
+}
+
+
+
+export function pickPtBrVoice(): SpeechSynthesisVoice | null {
+  if (typeof window === "undefined" || !("speechSynthesis" in window)) return null;
+  const voices = window.speechSynthesis.getVoices();
+  return (
+    voices.find((v) => v.lang?.toLowerCase() === "pt-br") ||
+    voices.find((v) => v.lang?.toLowerCase().startsWith("pt")) ||
+    null
+  );
+}
+
+/** Divide texto longo em pedaços de no máximo ~160 chars cortando em
+ *  pontuação ou espaço para não travar a leitura no meio de uma palavra. */
+export function chunkText(text: string, max = 160): string[] {
+  const clean = text.replace(/\s+/g, " ").trim();
+  if (clean.length <= max) return [clean];
+  // Primeiro corta em frases (. ! ? ; \n)
+  const sentences = clean
+    .split(/(?<=[.!?;])\s+|\n+/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+  const chunks: string[] = [];
+  for (const s of sentences) {
+    if (s.length <= max) {
+      chunks.push(s);
+      continue;
+    }
+    // Frase ainda grande: corta por vírgula
+    let rest = s;
+    while (rest.length > max) {
+      let cut = rest.lastIndexOf(",", max);
+      if (cut < max / 2) cut = rest.lastIndexOf(" ", max);
+      if (cut < max / 2) cut = max;
+      chunks.push(rest.slice(0, cut).trim());
+      rest = rest.slice(cut).trim();
+    }
+    if (rest) chunks.push(rest);
+  }
+  return chunks;
+}
+
+export interface SpeakOpts {
+  rate?: number;
+  pitch?: number;
+  volume?: number;
+  onEnd?: () => void;
+  /** Se true, enfileira sem cancelar o que já está falando. */
+  queue?: boolean;
+}
+
+const activeSpeechResolvers = new Set<() => void>();
+let speechRunId = 0;
+let lastPtText = "";
+let lastPtAt = 0;
+
+function resolveActiveSpeech() {
+  activeSpeechResolvers.forEach((resolve) => resolve());
+  activeSpeechResolvers.clear();
+}
+
+/** Fala texto longo enfileirando utterances curtos.
+ *  Por padrão cancela fala anterior; passe { queue: true } para enfileirar. */
+export function speakChunked(text: string, opts: SpeakOpts = {}): Promise<void> {
+  return new Promise((resolve) => {
+    if (typeof window === "undefined" || !("speechSynthesis" in window) || !text?.trim()) {
+      opts.onEnd?.();
+      resolve();
+      return;
+    }
+    const synth = window.speechSynthesis;
+    const normalized = text.trim();
+    const now = Date.now();
+    if (!opts.queue && normalized === lastPtText && now - lastPtAt < 1200) {
+      opts.onEnd?.();
+      resolve();
+      return;
+    }
+    lastPtText = normalized;
+    lastPtAt = now;
+    if (!opts.queue) {
+      speechRunId += 1;
+      synth.cancel();
+      resolveActiveSpeech();
+    }
+    const currentRunId = speechRunId;
+    const chunks = chunkText(sanitizeForSpeech(text));
+    const voice = pickPtBrVoice();
+    let i = 0;
+    let finished = false;
+    const finish = () => {
+      if (finished) return;
+      finished = true;
+      activeSpeechResolvers.delete(finish);
+      opts.onEnd?.();
+      resolve();
+    };
+    activeSpeechResolvers.add(finish);
+    if (chunks.length === 0) {
+      finish();
+      return;
+    }
+    const speakNext = () => {
+      if (currentRunId !== speechRunId || finished) return;
+      if (i >= chunks.length) {
+        finish();
+        return;
+      }
+      const chunk = chunks[i++];
+      const u = new SpeechSynthesisUtterance(chunk);
+      u.lang = "pt-BR";
+      // Motor de Leitura Brilha: 0.72 para alfabetização, 0.88 para fluência natural
+      u.rate = opts.rate ?? 0.88;
+      u.pitch = opts.pitch ?? 1;
+      u.volume = opts.volume ?? 1;
+      if (voice) u.voice = voice;
+      // Pausa natural entre frases: mais tempo se terminou em ponto/interrogação/exclamação,
+      // menos se terminou em vírgula/ponto-e-vírgula. Assim o TTS "respeita" a pontuação.
+      const last = chunk.slice(-1);
+      const pausaMs = /[.!?]/.test(last) ? 650 : /[,;:]/.test(last) ? 380 : 220;
+      let advanced = false;
+      const timeout = window.setTimeout(
+        () => {
+          if (advanced) return;
+          advanced = true;
+          window.setTimeout(speakNext, pausaMs);
+        },
+        Math.max(3000, Math.ceil(chunk.length * 150)),
+      );
+      const advance = () => {
+        if (advanced) return;
+        advanced = true;
+        window.clearTimeout(timeout);
+        window.setTimeout(speakNext, pausaMs);
+      };
+      u.onend = advance;
+      u.onerror = advance;
+      synth.resume();
+      synth.speak(u);
+      synth.resume();
+    };
+    speakNext();
+  });
+}
+
+export function stopSpeaking() {
+  if (typeof window !== "undefined" && "speechSynthesis" in window) {
+    speechRunId += 1;
+    window.speechSynthesis.cancel();
+    resolveActiveSpeech();
+  }
+}

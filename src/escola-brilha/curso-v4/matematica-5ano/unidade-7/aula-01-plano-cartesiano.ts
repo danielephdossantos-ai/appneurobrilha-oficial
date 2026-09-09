@@ -1,0 +1,136 @@
+import type { AulaV4 } from "../../types";
+
+export const aula01_planoCartesiano: AulaV4 = {
+  slug: "u7-01-plano-cartesiano",
+  titulo: "Plano cartesiano: coordenadas",
+  iconeTrilha: "🗺️",
+  bncc: ["EF05MA14", "EF05MA15"],
+  duracaoMin: 22,
+  metodologias: ["cpa"],
+
+  momento01_motivacao: {
+    titulo: "O mapa do Império",
+    historia: "{NOME}, cada ponto no plano tem 2 endereços: X (para a direita) e Y (para cima). Assim ninguém se perde.",
+  },
+  momento02_exploracao: {
+    instrucao: "Eixos.",
+    cenas: [
+      { tipo: "texto", texto: "Eixo X: horizontal. Eixo Y: vertical.", destaque: true },
+      { tipo: "texto", texto: "Um ponto é escrito (x, y). Sempre X primeiro, Y depois." },
+    ],
+  },
+  momento03_descoberta: {
+    perguntaGuia: "Onde está o ponto (3, 2)?",
+    pista: "3 pra direita, 2 pra cima.",
+    revelacao: "Anda 3 no X, depois sobe 2 no Y.",
+  },
+  momento04_explicacao: {
+    titulo: "Localizar",
+    etapas: [
+      {
+        texto: "(0,0) = origem. (5,0) = 5 no eixo X. (0,4) = 4 no eixo Y.",
+        exemploReal: {
+          contexto: "Marcando pontos no plano:",
+          visualMat: {
+            tipo: "mapaGrade",
+            linhas: 6,
+            colunas: 7,
+            pinos: [
+              { linha: 6, coluna: 1, rotulo: "(0,0)", cor: "#64748b" },
+              { linha: 6, coluna: 6, rotulo: "(5,0)", cor: "#0ea5e9" },
+              { linha: 2, coluna: 1, rotulo: "(0,4)", cor: "#10b981" },
+            ],
+            legenda: "X: pra direita. Y: pra cima.",
+          },
+          destaque: "Sempre X primeiro, Y depois.",
+        },
+      },
+      {
+        texto: "Para desenhar uma figura, marque cada vértice pelo par (x,y).",
+        exemploReal: {
+          contexto: "Quadrado com vértices (0,0), (3,0), (3,3), (0,3):",
+          visualMat: {
+            tipo: "mapaGrade",
+            linhas: 5,
+            colunas: 5,
+            pinos: [
+              { linha: 5, coluna: 1, rotulo: "A(0,0)", cor: "#ef4444" },
+              { linha: 5, coluna: 4, rotulo: "B(3,0)", cor: "#f59e0b" },
+              { linha: 2, coluna: 4, rotulo: "C(3,3)", cor: "#10b981" },
+              { linha: 2, coluna: 1, rotulo: "D(0,3)", cor: "#0ea5e9" },
+            ],
+          },
+          destaque: "Ligando A→B→C→D→A forma o quadrado.",
+        },
+      },
+    ],
+  },
+  momento05_modelagem: {
+    enunciado: "Vértices do quadrado: (0,0), (3,0), (3,3), (0,3).",
+    resposta: "Quadrado de lado 3",
+    visualMat: {
+      tipo: "mapaGrade",
+      linhas: 5,
+      colunas: 5,
+      pinos: [
+        { linha: 5, coluna: 1, rotulo: "(0,0)", cor: "#ef4444" },
+        { linha: 5, coluna: 4, rotulo: "(3,0)", cor: "#f59e0b" },
+        { linha: 2, coluna: 4, rotulo: "(3,3)", cor: "#10b981" },
+        { linha: 2, coluna: 1, rotulo: "(0,3)", cor: "#0ea5e9" },
+      ],
+    },
+    passos: ["Marca 4 pontos.", "Liga em ordem.", "É um quadrado."],
+  },
+  momento06_praticaGuiada: {
+    enunciado: "Qual ponto está mais alto: A(2,5) ou B(4,3)?",
+    dica: "O Y decide.",
+    interacao: {
+      tipo: "escolhaVisual",
+      pergunta: "Escolha:",
+      opcoes: [{ nome: "A" }, { nome: "B" }, { nome: "iguais" }],
+      respostaCerta: "A",
+      feedbackAcerto: "🎯 5 > 3.",
+      feedbackErro: "Y de A = 5, maior.",
+    },
+  },
+  momento07_praticaIndependente: {
+    enunciado: "Parta de (2,4), avance 3 unidades para a direita e mantenha a mesma altura.",
+    interacao: {
+      tipo: "escolhaVisual",
+      pergunta: "Ponto de chegada:",
+      opcoes: [{ nome: "(5, 4)" }, { nome: "(2, 7)" }, { nome: "(3, 4)" }, { nome: "(5, 7)" }],
+      respostaCerta: "(5, 4)",
+      feedbackAcerto: "🎯 O x aumenta de 2 para 5 e o y permanece 4.",
+      feedbackErro: "Mover para a direita altera x: 2 + 3 = 5. A altura y continua 4.",
+    },
+  },
+  momento08_aplicacao: {
+    contexto: "Mapa do tesouro: uma pista está em (3,4) e outra em (3,2).",
+    problema: "Distância vertical?",
+    interacao: {
+      tipo: "escolhaVisual",
+      pergunta: "Escolha:",
+      opcoes: [{ nome: "2" }, { nome: "3" }, { nome: "4" }],
+      respostaCerta: "2",
+      feedbackAcerto: "🎯 |4−2|=2.",
+      feedbackErro: "|4−2|=2.",
+    },
+  },
+  momento09_revisao: {
+    pontos: ["(x, y): x primeiro, y depois.", "Direita e cima = positivo."],
+  },
+  momento10_avaliacao: {
+    perguntas: [
+      { pergunta: "Origem é:", opcoes: ["(0,0)", "(1,1)", "(0,1)"], correta: 0, feedbackAcerto: "🎉", feedbackErro: "(0,0)." },
+      { pergunta: "(5,0) fica sobre:", opcoes: ["eixo X", "eixo Y", "origem"], correta: 0, feedbackAcerto: "🎉", feedbackErro: "Eixo X." },
+      { pergunta: "Ponto mais à direita: (2,3) ou (5,1)?", opcoes: ["(5,1)", "(2,3)", "iguais"], correta: 0, feedbackAcerto: "🎉 x=5.", feedbackErro: "(5,1)." },
+    ],
+  },
+  momento11_missaoFamilia: {
+    titulo: "Mapa de casa",
+    materiais: ["Papel quadriculado"],
+    passos: ["Desenhe eixos.", "Marque 5 pontos com coordenadas.", "Ligue formando uma figura."],
+    registro: "📸 Foto.",
+  },
+  recompensa: { xp: 150, moedas: 80 },
+};

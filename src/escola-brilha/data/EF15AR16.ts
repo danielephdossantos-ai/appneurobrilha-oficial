@@ -1,0 +1,2 @@
+import { criarAulaArte1 } from "./criarAulaArte1";
+export default criarAulaArte1({ codigo: "EF15AR16", titulo: "Desenhando os Sons", foco: "Explorar registros musicais convencionais e não convencionais", objeto: "notação e registro musical", exemplos: ["Criar símbolos para sons", "Desenhar sem relação com o som", "Copiar um texto", "Medir temperatura"], resposta: "Combinar símbolos, registrar uma sequência sonora e executá-la novamente.", proxima: "EF15AR17" });

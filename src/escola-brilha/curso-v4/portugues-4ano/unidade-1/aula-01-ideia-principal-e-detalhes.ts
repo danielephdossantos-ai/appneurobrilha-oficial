@@ -1,0 +1,629 @@
+import type { AulaPortuguesV4 } from "../../types";
+import { url as brilha } from "@/assets/neuro-treino/objetos/esquilo-brilha.png.asset.json";
+import { url as bussola } from "@/assets/neuro-treino/objetos/bussola.png.asset.json";
+import { url as mapa } from "@/assets/neuro-treino/objetos/mapa.png.asset.json";
+import { url as mochila } from "@/assets/neuro-treino/objetos/mochila.png.asset.json";
+import { url as navio } from "@/assets/neuro-treino/objetos/navio.png.asset.json";
+import { url as ilha } from "@/assets/neuro-treino/objetos/praia.png.asset.json";
+import { url as lupa } from "@/assets/neuro-treino/objetos/binoculo.png.asset.json";
+import { url as menina } from "@/assets/neuro-treino/objetos/menina.png.asset.json";
+
+/**
+ * Aula 1 — Ideia Principal e Detalhes
+ * -------------------------------------------------------------
+ * Abertura da Unidade 1 (Mapa da Leitura) do curso "A Redação dos
+ * Exploradores". A missão: aprender a separar o que é ESSENCIAL de
+ * um texto (a ideia principal) do que é apenas complemento (detalhe).
+ *
+ * Foco pedagógico: reconhecer a ideia central de um parágrafo/texto
+ * curto e distingui-la dos detalhes que a sustentam.
+ *
+ * BNCC: EF35LP03, EF35LP04, EF35LP05, EF35LP06, EF04LP11
+ */
+export const aula1: AulaPortuguesV4 = {
+  slug: "aula-01-ideia-principal-e-detalhes",
+  titulo: "Ideia Principal e Detalhes",
+  iconeTrilha: "🧭",
+  bncc: ["EF35LP03", "EF35LP05", "EF15LP02", "EF15LP03"],
+  duracaoMin: 20,
+
+  momento01_motivacao: {
+    titulo: "Bem-vindo à Expedição dos Exploradores",
+    historia:
+      "Brilha ajustou a bússola no punho e olhou para o mapa amarelado espalhado na mesa. — Hoje começamos uma expedição diferente: vamos explorar TEXTOS. Todo texto tem um caminho principal, como uma trilha central numa floresta, e vários desvios menores, que são os detalhes. Um bom explorador sabe reconhecer qual é o caminho principal para não se perder. Vamos treinar esse olhar?",
+    imagemUrl: brilha,
+  },
+
+  momento02_previsao: {
+    instrucao:
+      "Antes de ler o relato de expedição de hoje, observe os itens que a exploradora carregava. O que eles sugerem sobre o assunto principal do texto?",
+    bloco: {
+      titulo: "O Diário da Exploradora Helena",
+      capaImagemUrl: mapa,
+      pistas: [
+        { imagemUrl: bussola, nome: "Uma bússola antiga" },
+        { imagemUrl: navio, nome: "Um pequeno barco de expedição" },
+      ],
+      recado: {
+        rotulo: "Página do diário",
+        icone: "🗺️",
+        linhas: [
+          "Dia 12: chegamos à ilha desconhecida.",
+          "O calor era forte, mas encontramos água doce.",
+          "Decidimos explorar a floresta ao amanhecer.",
+        ],
+        estilo: "papel",
+      },
+      pergunta: "Qual você acha que é o assunto principal dessa página do diário?",
+      hipoteses: [
+        { texto: "A chegada da exploradora a uma ilha desconhecida" },
+        { texto: "A receita de um prato típico da ilha" },
+        { texto: "Uma lista de compras para a viagem" },
+      ],
+      respostaCerta: 0,
+      feedbackAcerto:
+        "🧭 Isso mesmo! 'Chegamos à ilha', 'encontramos água' e 'vamos explorar' giram todos em torno de UM assunto central: a chegada à ilha desconhecida. Os outros detalhes (calor, água, floresta) só completam essa ideia.",
+      feedbackErro:
+        "Repare que todas as frases falam sobre o mesmo lugar e o mesmo momento: a chegada a uma ilha. Isso é a ideia principal — o resto (calor, água doce) são detalhes que a completam.",
+      dica: "🧭 Pista de explorador: lembre o que significa “ideia principal” — é o assunto mais importante de um texto ou parágrafo — a informação que, se você tirasse, o texto perderia o sentido. Use essa ideia para eliminar as alternativas que não combinam.",
+    },
+  },
+
+  momento03_vocabulario: {
+    instrucao: "Duas palavras vão te ajudar a montar o mapa de qualquer texto.",
+    cards: [
+      {
+        palavra: "ideia principal",
+        explicacao:
+          "É o assunto mais importante de um texto ou parágrafo — a informação que, se você tirasse, o texto perderia o sentido.",
+        exemplo:
+          "Num texto sobre a floresta amazônica, a ideia principal pode ser 'a floresta abriga milhares de espécies'.",
+        imagemUrl: bussola,
+      },
+      {
+        palavra: "detalhe",
+        explicacao:
+          "É uma informação que completa, explica ou enriquece a ideia principal, mas não é o centro do texto — se tirada, o texto continua fazendo sentido, só fica menos rico.",
+        exemplo:
+          "Dizer que a floresta 'tem árvores de até 40 metros' é um detalhe que enriquece a ideia principal sobre a floresta.",
+        imagemUrl: lupa,
+      },
+    ],
+  },
+
+  momento_ensinoVisual: {
+    titulo: "Achando a trilha principal do texto",
+    instrucao:
+      "Observe cada mini-texto, veja qual frase carrega a IDEIA PRINCIPAL e qual só é um DETALHE que a enriquece.",
+    blocos: [
+      {
+        tipo: "regraOrtografica",
+        regra: "Como achar a ideia principal",
+        explicacao:
+          "Todo parágrafo tem um assunto central — a ideia principal — e frases que só completam essa ideia, os detalhes. Para achar a ideia principal, pergunte: 'Se eu tirasse essa frase, o texto perderia o sentido?'. Se a resposta for SIM, é a ideia principal. Se for NÃO (o texto continua fazendo sentido, só fica menos rico), é detalhe.",
+        exemplos: [
+          {
+            palavra: "A floresta amazônica abriga milhares de espécies de animais.",
+            destaque: "abriga milhares de espécies",
+            motivo: "Sem essa frase, o parágrafo perde o assunto: é a ideia principal.",
+          },
+          {
+            palavra: "Algumas árvores da floresta chegam a 40 metros de altura.",
+            destaque: "40 metros de altura",
+            motivo: "É um detalhe: enriquece o texto, mas o assunto continua sendo a floresta.",
+          },
+          {
+            palavra: "O Rio Sombrio foi atravessado pela equipe em três dias.",
+            destaque: "atravessado... em três dias",
+            motivo: "A travessia é o assunto central; 'três dias' é um detalhe de tempo.",
+          },
+        ],
+        desafios: [
+          {
+            molde:
+              "Time: 'O cachorro de Marcos, um vira-lata de pelo preto, adora correr no parque aos domingos.' _",
+            opcoes: [
+              "Ideia principal: o cachorro adora correr no parque",
+              "Ideia principal: o pelo é preto",
+              "Ideia principal: o dono se chama Marcos",
+            ],
+            correta: 0,
+            frase:
+              "O cachorro de Marcos, um vira-lata de pelo preto, adora correr no parque aos domingos.",
+            feedbackErro:
+              "Pergunte: sem 'adora correr no parque', o texto perde o sentido? Sim! Cor do pelo e nome do dono são detalhes.",
+          },
+          {
+            molde:
+              "Time: 'A escola organizou uma feira de ciências. Muitos alunos trouxeram experimentos coloridos.' _",
+            opcoes: [
+              "Ideia principal: a escola organizou uma feira de ciências",
+              "Ideia principal: os experimentos eram coloridos",
+              "Ideia principal: muitos alunos participaram",
+            ],
+            correta: 0,
+            frase:
+              "A escola organizou uma feira de ciências. Muitos alunos trouxeram experimentos coloridos.",
+            feedbackErro:
+              "A cor dos experimentos é detalhe. O assunto central das duas frases é a feira de ciências.",
+          },
+          {
+            molde:
+              "Time: 'Chovia muito naquela tarde. A rua ficou alagada e os carros andavam devagar.' _",
+            opcoes: [
+              "Ideia principal: choveu muito e a rua alagou",
+              "Ideia principal: os carros eram lentos",
+              "Ideia principal: era tarde",
+            ],
+            correta: 0,
+            frase: "Chovia muito naquela tarde. A rua ficou alagada e os carros andavam devagar.",
+            feedbackErro:
+              "'Andavam devagar' é consequência/detalhe. O centro do texto é a chuva forte que alagou a rua.",
+          },
+        ],
+      },
+      {
+        tipo: "regraOrtografica",
+        regra: "Detalhe: o que completa sem ser o centro",
+        explicacao:
+          "O detalhe é uma informação real do texto, mas não é o motivo dele existir. Detalhes respondem perguntas como 'quando?', 'como era?', 'de que cor?' — eles decoram e explicam a ideia principal, mas se forem removidos, a história continua de pé.",
+        exemplos: [
+          {
+            palavra: "A viagem durou três dias.",
+            destaque: "três dias",
+            motivo: "Detalhe de tempo: enriquece, mas a viagem continua sendo o assunto principal.",
+          },
+          {
+            palavra: "A caverna tinha morcegos dormindo no teto.",
+            destaque: "morcegos dormindo",
+            motivo: "Detalhe do ambiente, não o motivo central do relato (as pinturas antigas).",
+          },
+          {
+            palavra: "O barco balançava a cada remada.",
+            destaque: "a cada remada",
+            motivo: "Detalhe que mostra o desafio, mas não substitui a ideia central da travessia.",
+          },
+        ],
+        desafios: [
+          {
+            molde:
+              "'Helena encontrou pinturas antigas na caverna. O ar era úmido e havia morcegos no teto.' Qual frase é DETALHE? _",
+            opcoes: [
+              "O ar era úmido e havia morcegos no teto",
+              "Helena encontrou pinturas antigas na caverna",
+              "As duas são ideia principal",
+            ],
+            correta: 0,
+            frase:
+              "Helena encontrou pinturas antigas na caverna. O ar era úmido e havia morcegos no teto.",
+            feedbackErro:
+              "O achado das pinturas é o centro do relato; o ar úmido é só detalhe do ambiente.",
+          },
+          {
+            molde:
+              "'A equipe atravessou o rio perigoso. A correnteza era forte e o barco balançava.' Qual é DETALHE? _",
+            opcoes: [
+              "A correnteza era forte e o barco balançava",
+              "A equipe atravessou o rio perigoso",
+              "Nenhuma delas",
+            ],
+            correta: 0,
+            frase:
+              "A equipe atravessou o rio perigoso. A correnteza era forte e o barco balançava.",
+            feedbackErro:
+              "A travessia é a ideia principal; a força da correnteza é um detalhe que mostra o desafio.",
+          },
+          {
+            molde:
+              "'Ana adora ler. Seu livro favorito tem capa azul e 200 páginas.' Qual é DETALHE? _",
+            opcoes: [
+              "O livro tem capa azul e 200 páginas",
+              "Ana adora ler",
+              "Ambas são ideia principal",
+            ],
+            correta: 0,
+            frase: "Ana adora ler. Seu livro favorito tem capa azul e 200 páginas.",
+            feedbackErro:
+              "Cor da capa e número de páginas são detalhes; o gosto de Ana pela leitura é a ideia central.",
+          },
+        ],
+      },
+    ],
+  },
+  momento04_leituraGuiada: {
+    instrucao:
+      "Leia como um explorador atento ao mapa: procure a trilha principal do texto e observe os desvios (detalhes) que a acompanham.",
+    leitura: {
+      titulo: "A Travessia do Rio Sombrio",
+      imagemUrl: navio,
+      legendaImagem: "O pequeno barco de expedição na travessia",
+      destacar: ["rio mais perigoso da região", "correnteza forte", "três dias de viagem"],
+      paragrafos: [
+        "A equipe de exploradores enfrentou o rio mais perigoso da região para alcançar as ruínas escondidas na margem oposta. A correnteza era tão forte que o barco balançava a cada remada, e o guia precisava gritar instruções o tempo todo.",
+        "Durante a travessia, que durou três dias, a expedição também avistou aves raras e árvores centenárias nas margens — detalhes que renderam boas anotações no diário, mas que não eram o motivo da viagem.",
+        "No fim, o objetivo foi alcançado: a equipe atravessou o rio e chegou às ruínas, provando que planejamento e coragem venciam o maior obstáculo do percurso.",
+      ],
+    },
+  },
+
+  momento05_compreensao: {
+    instrucao: "Volte ao texto sempre que precisar confirmar sua resposta.",
+    perguntas: [
+      {
+        pergunta: "Qual era o objetivo principal da expedição descrita no texto?",
+        opcoes: [
+          "Atravessar o rio para chegar às ruínas na margem oposta",
+          "Observar aves raras nas margens do rio",
+          "Testar a resistência do barco na correnteza",
+        ],
+        correta: 0,
+        feedbackAcerto:
+          "🧭 Isso! O primeiro parágrafo já revela: 'enfrentou o rio... para alcançar as ruínas escondidas'.",
+        feedbackErro:
+          "Releia a primeira frase: o motivo da travessia aparece logo depois de 'para'.",
+        ondeEstaNoTexto:
+          "A equipe de exploradores enfrentou o rio mais perigoso da região para alcançar as ruínas escondidas na margem oposta.",
+        dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “A equipe de exploradores enfrentou o rio mais perigoso da região para alcançar as ruínas escondidas na margem oposta”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Atravessar o rio para chegar às ruínas na margem oposta”. O primeiro parágrafo já revela: 'enfrentou o rio... para alcançar as ruínas escondidas'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+      },
+      {
+        pergunta: "Quanto tempo durou a travessia?",
+        opcoes: ["Um dia", "Três dias", "Uma semana"],
+        correta: 1,
+        feedbackAcerto: "🧭 Exato! O segundo parágrafo diz 'que durou três dias'.",
+        feedbackErro:
+          "A duração aparece no começo do segundo parágrafo, logo depois de 'travessia'.",
+        ondeEstaNoTexto: "Durante a travessia, que durou três dias...",
+        dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “Durante a travessia, que durou três dias”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Três dias”. O segundo parágrafo diz 'que durou três dias'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+      },
+      {
+        pergunta: "As aves raras e as árvores centenárias são...",
+        opcoes: [
+          "A ideia principal do texto",
+          "Detalhes que enriquecem o relato, mas não são o motivo da viagem",
+          "Informações que não aparecem no texto",
+        ],
+        correta: 1,
+        feedbackAcerto:
+          "🧭 Perfeito! O próprio texto diz: eram 'detalhes' que 'não eram o motivo da viagem'.",
+        feedbackErro:
+          "O texto usa exatamente a palavra 'detalhes' para essas observações — releia o fim do segundo parágrafo.",
+        ondeEstaNoTexto:
+          "…detalhes que renderam boas anotações no diário, mas que não eram o motivo da viagem.",
+        dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “detalhes que renderam boas anotações no diário, mas que não eram o motivo da viagem”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Detalhes que enriquecem o relato, mas não são o motivo da viagem”. O próprio texto diz: eram 'detalhes' que 'não eram o motivo da viagem'. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+      },
+    ],
+  },
+
+  momento06_personagensCenario: {
+    instrucao:
+      "Agora vamos treinar o olhar de explorador: separar o caminho principal dos desvios do texto.",
+    perguntas: [
+      {
+        pergunta:
+          "Se você tivesse que contar essa história para alguém em UMA frase, qual seria a melhor escolha?",
+        opcoes: [
+          "A expedição avistou aves raras durante três dias de viagem",
+          "A expedição atravessou um rio perigoso e chegou às ruínas na margem oposta",
+          "O barco balançava muito por causa da correnteza forte",
+        ],
+        correta: 1,
+        feedbackAcerto:
+          "🧭 Isso mesmo! Essa frase resume a IDEIA PRINCIPAL — o desafio (rio perigoso) e o resultado (chegar às ruínas). As outras opções são detalhes do caminho.",
+        feedbackErro:
+          "Pense: qual frase, sozinha, já conta o essencial da história, do começo ao fim? As aves e o balanço do barco são só detalhes do percurso.",
+        dica: "🧭 Pista de explorador: lembre o que significa “ideia principal” — é o assunto mais importante de um texto ou parágrafo — a informação que, se você tirasse, o texto perderia o sentido. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “A expedição atravessou um rio perigoso e chegou às ruínas na margem oposta”. Essa frase resume a IDEIA PRINCIPAL — o desafio (rio perigoso) e o resultado (chegar às ruínas). As outras opções são detalhes do caminho. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+      },
+      {
+        pergunta: "Por que o texto menciona a correnteza forte e o guia gritando instruções?",
+        opcoes: [
+          "Porque é a ideia principal do texto",
+          "Para dar detalhes que mostram o tamanho do desafio enfrentado",
+          "Porque não tem relação nenhuma com a história",
+        ],
+        correta: 1,
+        feedbackAcerto:
+          "🧭 Exatamente! São detalhes que reforçam e dão cor à ideia principal — mostram o quão difícil foi a travessia, mas não substituem a ideia central.",
+        feedbackErro:
+          "Esses elementos não mudam o assunto do texto; eles só ajudam a entender melhor o desafio da travessia, que é a ideia principal.",
+        dica: "🧭 Pista de explorador: lembre o que significa “ideia principal” — é o assunto mais importante de um texto ou parágrafo — a informação que, se você tirasse, o texto perderia o sentido. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Para dar detalhes que mostram o tamanho do desafio enfrentado”. São detalhes que reforçam e dão cor à ideia principal — mostram o quão difícil foi a travessia, mas não substituem a ideia central. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+      },
+    ],
+  },
+
+  momento07_sequencia: {
+    instrucao:
+      "Um explorador organiza o relato na ordem em que os fatos aconteceram. Coloque as cenas em sequência.",
+    bloco: {
+      instrucao: "Do começo ao fim da travessia.",
+      itens: [
+        {
+          id: "p1",
+          texto: "A equipe enfrenta o rio perigoso para chegar às ruínas.",
+          imagemUrl: navio,
+        },
+        {
+          id: "p2",
+          texto: "Durante três dias, avistam aves raras e árvores centenárias.",
+          imagemUrl: mapa,
+        },
+        {
+          id: "p3",
+          texto: "A equipe atravessa o rio e alcança as ruínas na margem oposta.",
+          imagemUrl: ilha,
+        },
+      ],
+      ordemCerta: ["p1", "p2", "p3"],
+      feedbackAcerto: "🧭 Perfeito! Você seguiu a trilha certa: desafio, percurso, chegada.",
+      feedbackErro:
+        "Pense na ordem natural de uma viagem: primeiro enfrentam o desafio, depois vivem o percurso, só então chegam ao destino.",
+      dica: "🧭 Pista de explorador: lembre o que significa “ideia principal” — é o assunto mais importante de um texto ou parágrafo — a informação que, se você tirasse, o texto perderia o sentido. Use essa ideia para eliminar as alternativas que não combinam.",
+    },
+  },
+
+  momento08_leituraIndependente: {
+    instrucao:
+      "Nova página do diário! Leia sozinho e identifique a ideia principal escondida entre os detalhes.",
+    leitura: {
+      titulo: "O Achado na Caverna de Pedra",
+      imagemUrl: ilha,
+      destacar: ["pinturas antigas", "milhares de anos", "história perdida"],
+      paragrafos: [
+        "No sexto dia de expedição, Helena encontrou uma caverna escondida atrás de uma cachoeira. Dentro dela, as paredes estavam cobertas de pinturas antigas, feitas há milhares de anos por povos que já não existem mais.",
+        "O ar da caverna era úmido e havia morcegos dormindo no teto, o que assustou um pouco a equipe no começo. Mesmo assim, todos ficaram fascinados com as pinturas, que contavam, em símbolos, a história perdida daquele povo.",
+        "Helena fotografou cada pintura com cuidado, sabendo que aquele achado mudaria tudo o que se sabia sobre os primeiros habitantes da região.",
+      ],
+    },
+    perguntas: [
+      {
+        pergunta: "Qual é a ideia principal desse relato?",
+        opcoes: [
+          "Os morcegos que dormiam no teto da caverna",
+          "A descoberta de pinturas antigas que contam a história de um povo perdido",
+          "O ar úmido dentro da caverna",
+        ],
+        correta: 1,
+        feedbackAcerto:
+          "🧭 Isso! Toda a página do diário gira em torno da descoberta das pinturas e do que elas revelam.",
+        feedbackErro:
+          "Os morcegos e o ar úmido são detalhes do ambiente. O achado central, repetido nos três parágrafos, são as pinturas antigas.",
+        ondeEstaNoTexto:
+          "…as paredes estavam cobertas de pinturas antigas, feitas há milhares de anos…",
+        dica: "🧭 Pista de explorador: volte ao texto e releia este trecho — “as paredes estavam cobertas de pinturas antigas, feitas há milhares de anos”.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “A descoberta de pinturas antigas que contam a história de um povo perdido”. Toda a página do diário gira em torno da descoberta das pinturas e do que elas revelam. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+      },
+      {
+        pergunta: "O fato de os morcegos assustarem a equipe é um exemplo de:",
+        opcoes: ["Ideia principal", "Detalhe", "Título do texto"],
+        correta: 1,
+        feedbackAcerto:
+          "🧭 Correto! É apenas um detalhe do ambiente da caverna, não o foco central do relato.",
+        feedbackErro:
+          "Pense: se tirássemos essa informação, o relato ainda faria sentido? Sim — por isso é um detalhe, não a ideia principal.",
+        dica: "🧭 Pista de explorador: lembre o que significa “ideia principal” — é o assunto mais importante de um texto ou parágrafo — a informação que, se você tirasse, o texto perderia o sentido. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Detalhe”. É apenas um detalhe do ambiente da caverna, não o foco central do relato. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // ESCRITA · ciclo Rascunho → Revisão → Versão final (Fase 3 · 4º ano)
+  // ------------------------------------------------------------
+  momento_escrita: {
+    titulo: "Diário de Bordo do Explorador",
+    instrucao:
+      "Escritor de verdade escreve três vezes: primeiro o RASCUNHO (solte as ideias), depois a REVISÃO (confira item por item) e só então a VERSÃO FINAL.",
+    blocos: [
+      {
+        tipo: "escritaReal",
+        formato: "texto",
+        titulo: "Escreva um parágrafo com ideia principal",
+        comando:
+          "Escolha um lugar que você conhece bem (sua rua, sua escola, um parque). Escreva UM parágrafo em que a primeira frase diga a ideia principal e as outras três tragam detalhes que provam essa ideia.",
+        linhas: 5,
+        modelo: [
+          "A praça do meu bairro é o melhor lugar para brincar de tarde.",
+          "Ela tem uma quadra grande, com cesta e traves.",
+          "Debaixo das árvores fica sempre fresco, mesmo no sol forte.",
+          "Por isso, quase toda criança da rua aparece por lá depois da aula.",
+        ],
+        checklist: [
+          "Meu texto tem começo, meio e fim — não termina no meio da ideia.",
+          "Comecei cada frase com letra maiúscula e fechei com ponto.",
+          "Não repeti a mesma palavra várias vezes: troquei por pronome ou sinônimo.",
+          "Usei pelo menos um conectivo (porque, então, mas, além disso) ligando as ideias.",
+          "Li em voz alta e consertei o que ficou estranho.",
+          "A primeira frase do meu parágrafo diz a IDEIA PRINCIPAL.",
+          "Cada detalhe que escrevi comprova essa ideia.",
+        ],
+        cicloRevisao: true,
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // FLUÊNCIA · releitura expressiva (Fase 4 · 4º ano · ~110 ppm)
+  // ------------------------------------------------------------
+  momento_fluencia: {
+    titulo: "Leitura expressiva: A Trilha das Pistas",
+    instrucao:
+      "Leia o mesmo trecho três vezes: a 1ª devagar, entendendo tudo; a 2ª no cronômetro; a 3ª em voz alta com ENTONAÇÃO — respeitando vírgula, ponto e travessão. A meta não é correr: é ler como quem conta.",
+    texto: [
+      "A trilha começava atrás da escola e subia devagar até o alto do morro, onde o vento não parava nunca.",
+      "Ao longo do caminho, placas de madeira contavam a história do lugar: aqui existiu um engenho, ali passava um riacho que hoje corre por baixo da rua.",
+      "Quem lê as placas com atenção descobre que a cidade inteira já foi um grande campo — e que cada nome de rua guarda um pedaço dessa memória.",
+    ],
+    metaSegundos: 41,
+  },
+
+  momento09_revisao: {
+    pontos: [
+      "A IDEIA PRINCIPAL é o assunto mais importante de um texto — sem ela, o texto perde o sentido.",
+      "Os DETALHES completam, explicam ou enriquecem a ideia principal, mas podem ser retirados sem que o texto deixe de fazer sentido.",
+      "Um bom truque: tente resumir o texto em uma única frase — o que você mantém nessa frase costuma ser a ideia principal.",
+      "Sempre volte ao texto para confirmar se a ideia principal escolhida realmente aparece nele.",
+    ],
+    miniDesafio: {
+      pergunta:
+        "Um texto diz: 'Os golfinhos são mamíferos inteligentes. Eles vivem em grupos e se comunicam por sons.' Qual é a ideia principal?",
+      opcoes: [
+        "Os golfinhos são mamíferos inteligentes",
+        "Eles vivem em grupos",
+        "Eles se comunicam por sons",
+      ],
+      correta: 0,
+      feedbackAcerto:
+        "🧭 Isso! As outras frases são detalhes que explicam por que os golfinhos são considerados inteligentes.",
+      feedbackErro:
+        "Pense: qual frase resume todo o parágrafo? As outras duas são exemplos que comprovam essa ideia central.",
+      dica: "🧭 Pista de explorador: lembre o que significa “ideia principal” — é o assunto mais importante de um texto ou parágrafo — a informação que, se você tirasse, o texto perderia o sentido. Use essa ideia para eliminar as alternativas que não combinam.",
+      reensino:
+        "📚 Vamos rever juntos: a resposta certa é “Os golfinhos são mamíferos inteligentes”. As outras frases são detalhes que explicam por que os golfinhos são considerados inteligentes. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+    },
+  },
+
+  momento10_avaliacao: {
+    perguntas: [
+      {
+        pergunta: "1/5 — O que é a 'ideia principal' de um texto?",
+        opcoes: [
+          "Qualquer frase escolhida ao acaso",
+          "O assunto mais importante, sem o qual o texto perde o sentido",
+          "Sempre a última frase do texto",
+          "Observar aves raras nas margens do rio",
+        ],
+        correta: 1,
+        feedbackAcerto: "🧭 Isso! A ideia principal é o centro do texto.",
+        feedbackErro:
+          "A ideia principal é a informação mais importante — o texto gira em torno dela.",
+        feedbackOpcoes: [
+          "❌ “Qualquer frase escolhida ao acaso” não é a resposta. A ideia principal é a informação mais importante — o texto gira em torno dela.",
+          null,
+          "❌ “Sempre a última frase do texto” não é a resposta. A ideia principal é a informação mais importante — o texto gira em torno dela.",
+          "❌ “Observar aves raras nas margens do rio” não é a resposta. A ideia principal é a informação mais importante — o texto gira em torno dela.",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “ideia principal” — é o assunto mais importante de um texto ou parágrafo — a informação que, se você tirasse, o texto perderia o sentido. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “O assunto mais importante, sem o qual o texto perde o sentido”. A ideia principal é o centro do texto. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+      },
+      {
+        pergunta: "2/5 — O que caracteriza um 'detalhe'?",
+        opcoes: [
+          "É a informação central do texto",
+          "É uma informação que complementa a ideia principal, mas pode ser retirada",
+          "É sempre o título do texto",
+          "Testar a resistência do barco na correnteza",
+        ],
+        correta: 1,
+        feedbackAcerto: "🧭 Correto! Detalhes enriquecem, mas não são o centro do texto.",
+        feedbackErro:
+          "Um detalhe completa a ideia principal, mas o texto continua fazendo sentido sem ele.",
+        feedbackOpcoes: [
+          "❌ “É a informação central do texto” não é a resposta. Um detalhe completa a ideia principal, mas o texto continua fazendo sentido sem ele.",
+          null,
+          "❌ “É sempre o título do texto” não é a resposta. Um detalhe completa a ideia principal, mas o texto continua fazendo sentido sem ele.",
+          "❌ “Testar a resistência do barco na correnteza” não é a resposta. Um detalhe completa a ideia principal, mas o texto continua fazendo sentido sem ele.",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “detalhe” — é uma informação que completa, explica ou enriquece a ideia principal, mas não é o centro do texto — se tirada, o texto continua fazendo sentido, só fica menos rico. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “É uma informação que complementa a ideia principal, mas pode ser retirada”. Detalhes enriquecem, mas não são o centro do texto. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+      },
+      {
+        pergunta: "3/5 — No relato da travessia do rio, qual era a ideia principal?",
+        opcoes: [
+          "A equipe atravessou um rio perigoso para chegar às ruínas",
+          "As aves raras avistadas nas margens",
+          "O barco que balançava",
+          "A ideia principal do texto",
+        ],
+        correta: 0,
+        feedbackAcerto: "🧭 Isso! Esse é o fio condutor de todo o texto.",
+        feedbackErro:
+          "As aves e o balanço do barco são detalhes; o objetivo e o resultado da travessia é a ideia principal.",
+        feedbackOpcoes: [
+          null,
+          "❌ “As aves raras avistadas nas margens” não é a resposta. As aves e o balanço do barco são detalhes; o objetivo e o resultado da travessia é a ideia principal.",
+          "❌ “O barco que balançava” não é a resposta. As aves e o balanço do barco são detalhes; o objetivo e o resultado da travessia é a ideia principal.",
+          "❌ “A ideia principal do texto” não é a resposta. As aves e o balanço do barco são detalhes; o objetivo e o resultado da travessia é a ideia principal.",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “ideia principal” — é o assunto mais importante de um texto ou parágrafo — a informação que, se você tirasse, o texto perderia o sentido. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “A equipe atravessou um rio perigoso para chegar às ruínas”. Esse é o fio condutor de todo o texto. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+      },
+      {
+        pergunta: "4/5 — Um bom truque para achar a ideia principal é:",
+        opcoes: [
+          "Contar quantas palavras o texto tem",
+          "Tentar resumir o texto em uma única frase",
+          "Procurar a palavra mais difícil do texto",
+          "Informações que não aparecem no texto",
+        ],
+        correta: 1,
+        feedbackAcerto: "🧭 Exatamente! O que sobra nesse resumo costuma ser a ideia principal.",
+        feedbackErro:
+          "Resumir o texto numa frase ajuda a filtrar o que é essencial do que é apenas detalhe.",
+        feedbackOpcoes: [
+          "❌ “Contar quantas palavras o texto tem” não é a resposta. Resumir o texto numa frase ajuda a filtrar o que é essencial do que é apenas detalhe.",
+          null,
+          "❌ “Procurar a palavra mais difícil do texto” não é a resposta. Resumir o texto numa frase ajuda a filtrar o que é essencial do que é apenas detalhe.",
+          "❌ “Informações que não aparecem no texto” não é a resposta. Resumir o texto numa frase ajuda a filtrar o que é essencial do que é apenas detalhe.",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “ideia principal” — é o assunto mais importante de um texto ou parágrafo — a informação que, se você tirasse, o texto perderia o sentido. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Tentar resumir o texto em uma única frase”. O que sobra nesse resumo costuma ser a ideia principal. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+      },
+      {
+        pergunta: "5/5 — No relato da caverna, os morcegos e o ar úmido eram:",
+        opcoes: [
+          "A ideia principal do relato",
+          "Detalhes do ambiente, e não o foco central",
+          "Informações que não existiam no texto",
+          "A expedição avistou aves raras durante três dias de viagem",
+        ],
+        correta: 1,
+        feedbackAcerto:
+          "🧭 Isso! Você já está lendo como um verdadeiro explorador de textos. Primeira etapa do mapa concluída! 🌟",
+        feedbackErro:
+          "O foco central era a descoberta das pinturas; morcegos e ar úmido eram apenas detalhes do cenário.",
+        feedbackOpcoes: [
+          "❌ “A ideia principal do relato” não é a resposta. O foco central era a descoberta das pinturas; morcegos e ar úmido eram apenas detalhes do cenário.",
+          null,
+          "❌ “Informações que não existiam no texto” não é a resposta. O foco central era a descoberta das pinturas; morcegos e ar úmido eram apenas detalhes do cenário.",
+          "❌ “A expedição avistou aves raras durante três dias de viagem” não é a resposta. O foco central era a descoberta das pinturas; morcegos e ar úmido eram apenas detalhes do cenário.",
+        ],
+        dica: "🧭 Pista de explorador: lembre o que significa “ideia principal” — é o assunto mais importante de um texto ou parágrafo — a informação que, se você tirasse, o texto perderia o sentido. Use essa ideia para eliminar as alternativas que não combinam.",
+        reensino:
+          "📚 Vamos rever juntos: a resposta certa é “Detalhes do ambiente, e não o foco central”. Você já está lendo como um verdadeiro explorador de textos. Primeira etapa do mapa concluída! 🌟. Agora releia a pergunta com essa ideia na cabeça — pense antes de responder.",
+      },
+    ],
+  },
+
+  momento11_missaoFamilia: {
+    titulo: "🏠 Missão: caçando a ideia principal em casa",
+    materiais: ["Um jornal, revista ou notícia impressa/no celular", "Papel e lápis"],
+    passos: [
+      "1) Escolham juntos uma notícia curta ou um parágrafo de um livro em casa.",
+      "2) A criança lê em voz alta e tenta resumir o texto em UMA frase — essa é a busca pela ideia principal.",
+      "3) Depois, peça para ela apontar 2 ou 3 detalhes que apareceram no texto, mas que não entraram no resumo.",
+      "4) Conversem: por que esses detalhes não eram essenciais para entender o assunto?",
+    ],
+    registro:
+      "🗣️ Registre por escrito ou em áudio: 'A ideia principal do texto era ___ e os detalhes eram ___.'",
+  },
+
+  recompensa: {
+    xp: 130,
+    moedas: 75,
+  },
+};

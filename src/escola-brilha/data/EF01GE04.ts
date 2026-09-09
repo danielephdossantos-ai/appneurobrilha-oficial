@@ -1,0 +1,6 @@
+import { criarAulaGeo1 } from "./criarAulaGeo1";
+export default criarAulaGeo1({ codigo: "EF01GE04", titulo: "Regras Para Conviver Bem", tema: "regras de convivência", explicacao: "Casa, escola e espaços públicos têm regras para proteger pessoas, organizar o uso e garantir respeito. As regras podem ser construídas coletivamente ao ouvir necessidades diferentes.", exemplo: "Esperar a vez no brinquedo permite que todas as crianças participem.", missao: "Crie com a turma uma regra, explique por que ela é necessária e quem ela protege.", proxima: "EF01GE05", questoes: [
+  { pergunta: "Para que servem regras de convivência?", opcoes: ["Organizar e proteger a convivência", "Impedir toda brincadeira", "Dar vantagem a uma pessoa", "Criar confusão"], correta: 0, explicacao: "Boas regras ajudam todos a participar com segurança." },
+  { pergunta: "Como construir uma regra justa?", opcoes: ["Ouvindo o grupo e explicando sua finalidade", "Sem ouvir ninguém", "Copiando qualquer frase", "Escolhendo quem será excluído"], correta: 0, explicacao: "Participação melhora os acordos." },
+  { pergunta: "Qual é uma regra adequada ao pátio?", opcoes: ["Respeitar a vez dos colegas", "Empurrar para passar", "Esconder materiais", "Impedir novos participantes"], correta: 0, explicacao: "Respeitar turnos favorece a convivência." },
+] });

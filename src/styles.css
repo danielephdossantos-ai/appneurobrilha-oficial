@@ -1,0 +1,596 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* NeuroBrilha Kids — paleta Menta Brilha
+ * Cores suaves, baixa estimulação sensorial, tipografia Nunito,
+ * alvos de toque grandes (≥48px), sem cronômetros.
+ */
+
+@theme inline {
+  --font-sans: "Nunito", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Nunito", ui-sans-serif, system-ui, sans-serif;
+
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1.25rem;
+  --radius-xl: 1.75rem;
+  --radius-2xl: 2.25rem;
+  --radius-3xl: 3rem;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-sun: var(--sun);
+  --color-sky: var(--sky);
+  --color-petal: var(--petal);
+  --color-coral: var(--coral);
+  --color-lilac: var(--lilac);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --shadow-soft: 0 4px 0px 0px oklch(var(--primary-dark) / 0.2);
+  --shadow-glow: 0 8px 40px -12px oklch(0.7 0.16 155 / 0.35);
+  --shadow-kid: 0 4px 0px 0px var(--shadow-color);
+  --shadow-kid-hover: 0 2px 0px 0px var(--shadow-color);
+  --shadow-kid-active: 0 0px 0px 0px var(--shadow-color);
+}
+
+:root {
+  /* Menta Brilha — base */
+  --background: oklch(0.985 0.012 155);
+  --foreground: oklch(0.22 0.04 165);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.22 0.04 165);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.22 0.04 165);
+
+  /* Verde menta principal */
+  --primary: oklch(0.62 0.13 158);
+  --primary-foreground: oklch(0.99 0.01 155);
+
+  --secondary: oklch(0.93 0.05 155);
+  --secondary-foreground: oklch(0.3 0.08 165);
+
+  --muted: oklch(0.96 0.02 155);
+  --muted-foreground: oklch(0.5 0.04 165);
+
+  --accent: oklch(0.88 0.08 155);
+  --accent-foreground: oklch(0.25 0.08 165);
+
+  --destructive: oklch(0.6 0.18 25);
+  --destructive-foreground: oklch(0.99 0.01 25);
+
+  --success: oklch(0.65 0.15 150);
+  --success-foreground: oklch(0.99 0.01 150);
+
+  --warning: oklch(0.78 0.14 75);
+  --warning-foreground: oklch(0.25 0.06 75);
+
+  --border: oklch(0.9 0.03 155);
+  --input: oklch(0.92 0.03 155);
+  --ring: oklch(0.62 0.13 158);
+
+  /* Acentos lúdicos suaves */
+  --sun: oklch(0.85 0.13 85);
+  --sky: oklch(0.82 0.08 230);
+  --petal: oklch(0.86 0.08 350);
+  --coral: oklch(0.78 0.12 35);
+  --lilac: oklch(0.82 0.07 305);
+
+  --sidebar: oklch(0.97 0.02 155);
+  --sidebar-foreground: oklch(0.25 0.05 165);
+  --sidebar-primary: oklch(0.62 0.13 158);
+  --sidebar-primary-foreground: oklch(0.99 0.01 155);
+  --sidebar-accent: oklch(0.92 0.05 155);
+  --sidebar-accent-foreground: oklch(0.3 0.08 165);
+  --sidebar-border: oklch(0.88 0.04 155);
+  --sidebar-ring: oklch(0.62 0.13 158);
+
+  --primary-dark: 0.52 0.13 158;
+  --secondary-dark: 0.83 0.05 155;
+  --sun-dark: 0.75 0.13 85;
+  --sky-dark: 0.72 0.08 230;
+  --petal-dark: 0.76 0.08 350;
+}
+
+.dark {
+  --background: oklch(0.2 0.03 165);
+  --foreground: oklch(0.95 0.02 155);
+  --card: oklch(0.25 0.04 165);
+  --card-foreground: oklch(0.95 0.02 155);
+  --popover: oklch(0.25 0.04 165);
+  --popover-foreground: oklch(0.95 0.02 155);
+  --primary: oklch(0.72 0.14 158);
+  --primary-foreground: oklch(0.18 0.04 165);
+  --secondary: oklch(0.3 0.05 165);
+  --secondary-foreground: oklch(0.95 0.02 155);
+  --muted: oklch(0.28 0.04 165);
+  --muted-foreground: oklch(0.7 0.04 155);
+  --accent: oklch(0.35 0.07 158);
+  --accent-foreground: oklch(0.95 0.02 155);
+  --border: oklch(0.35 0.04 165);
+  --input: oklch(0.32 0.04 165);
+  --ring: oklch(0.72 0.14 158);
+  --sidebar: oklch(0.22 0.04 165);
+  --sidebar-foreground: oklch(0.95 0.02 155);
+  --sidebar-primary: oklch(0.72 0.14 158);
+  --sidebar-primary-foreground: oklch(0.18 0.04 165);
+  --sidebar-accent: oklch(0.3 0.05 165);
+  --sidebar-accent-foreground: oklch(0.95 0.02 155);
+  --sidebar-border: oklch(0.32 0.04 165);
+  --sidebar-ring: oklch(0.72 0.14 158);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    font-family: var(--font-sans);
+  }
+  body {
+    background:
+      radial-gradient(1200px 600px at 100% -10%, oklch(0.93 0.06 155 / 0.6), transparent 60%),
+      radial-gradient(900px 500px at -10% 100%, oklch(0.9 0.07 205 / 0.4), transparent 60%),
+      var(--color-background);
+    color: var(--color-foreground);
+    font-weight: 500;
+    min-height: 100vh;
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
+  }
+  html {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
+  }
+  /* Nenhuma mídia pode ser mais larga que a tela (padroniza aulas no celular) */
+  img,
+  svg,
+  video,
+  canvas {
+    max-width: 100%;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-weight: 800;
+    letter-spacing: -0.01em;
+  }
+  button {
+    font-weight: 700;
+  }
+
+  .font-dyslexic {
+    font-family: "OpenDyslexic", "Comic Sans MS", cursive, sans-serif !important;
+    letter-spacing: 0.1em;
+    word-spacing: 0.3em;
+    line-height: 1.8;
+  }
+}
+
+/* Geografia 1º ano — skin visual do Cartógrafo (piloto EF01GE01).
+   Mantém as mecânicas antigas, mas remove a aparência branca/colorida do player base. */
+[data-skin="geo-cartografo"] .geo-cartografo-bloco,
+[data-skin="geo-cartografo"] .geo-cartografo-bloco * {
+  color: rgba(255, 255, 255, 0.94);
+}
+
+[data-skin="geo-cartografo"] .geo-cartografo-bloco > div,
+[data-skin="geo-cartografo"] .geo-cartografo-bloco [class*="bg-white"],
+[data-skin="geo-cartografo"] .geo-cartografo-bloco [class*="bg-amber"],
+[data-skin="geo-cartografo"] .geo-cartografo-bloco [class*="bg-yellow"],
+[data-skin="geo-cartografo"] .geo-cartografo-bloco [class*="bg-sky"],
+[data-skin="geo-cartografo"] .geo-cartografo-bloco [class*="bg-blue"],
+[data-skin="geo-cartografo"] .geo-cartografo-bloco [class*="bg-purple"],
+[data-skin="geo-cartografo"] .geo-cartografo-bloco [class*="bg-pink"],
+[data-skin="geo-cartografo"] .geo-cartografo-bloco [class*="bg-orange"] {
+  background: rgba(15, 23, 42, 0.58) !important;
+}
+
+[data-skin="geo-cartografo"] .geo-cartografo-bloco [class*="border-white"],
+[data-skin="geo-cartografo"] .geo-cartografo-bloco [class*="border-amber"],
+[data-skin="geo-cartografo"] .geo-cartografo-bloco [class*="border-yellow"],
+[data-skin="geo-cartografo"] .geo-cartografo-bloco [class*="border-sky"],
+[data-skin="geo-cartografo"] .geo-cartografo-bloco [class*="border-blue"],
+[data-skin="geo-cartografo"] .geo-cartografo-bloco [class*="border-purple"],
+[data-skin="geo-cartografo"] .geo-cartografo-bloco [class*="border-pink"],
+[data-skin="geo-cartografo"] .geo-cartografo-bloco [class*="border-orange"] {
+  border-color: rgba(52, 211, 153, 0.22) !important;
+}
+
+[data-skin="geo-cartografo"] .geo-cartografo-bloco [class*="text-[#0d1f55]"],
+[data-skin="geo-cartografo"] .geo-cartografo-bloco [class*="text-slate"],
+[data-skin="geo-cartografo"] .geo-cartografo-bloco [class*="text-gray"],
+[data-skin="geo-cartografo"] .geo-cartografo-bloco [class*="text-black"] {
+  color: rgba(255, 255, 255, 0.92) !important;
+}
+
+[data-skin="geo-cartografo"] .geo-cartografo-bloco [class*="text-[#FFC93C]"],
+[data-skin="geo-cartografo"] .geo-cartografo-bloco [class*="text-yellow"],
+[data-skin="geo-cartografo"] .geo-cartografo-bloco [class*="text-amber"] {
+  color: rgb(252, 211, 77) !important;
+}
+
+[data-skin="geo-cartografo"] .geo-cartografo-bloco button {
+  border-color: rgba(52, 211, 153, 0.25) !important;
+  box-shadow: none !important;
+}
+
+/* Botões grandes e acessíveis */
+.btn-tap {
+  min-height: 48px;
+  min-width: 48px;
+}
+
+/* Camada de Adaptação Neuro-Sistêmica */
+.neuro-adaptive-container {
+  /* Escala visual padrão */
+  --visual-scale: 1;
+  /* Multiplicador de velocidade (1 = normal, 0.5 = 2x mais lento, 2 = 2x mais rápido) */
+  --animation-speed-multiplier: 1;
+  /* Opacidade dos estímulos secundários */
+  --stimuli-opacity: 0.7;
+}
+
+/* Aplicação da velocidade em transições e animações */
+.neuro-adaptive-container * {
+  transition-duration: calc(300ms * var(--animation-speed-multiplier)) !important;
+  animation-duration: calc(500ms * var(--animation-speed-multiplier)) !important;
+}
+
+/* Controle de estímulos (ex: bordas muito fortes, sombras excessivas) */
+.neuro-adaptive-container .stimuli-sensitive {
+  opacity: var(--stimuli-opacity);
+}
+
+/* Tamanho de fontes e ícones baseado na escala */
+.neuro-adaptive-container .scalable-text {
+  font-size: calc(1em * var(--visual-scale));
+}
+
+.neuro-adaptive-container .scalable-icon {
+  width: calc(1.25rem * var(--visual-scale));
+  height: calc(1.25rem * var(--visual-scale));
+}
+
+@keyframes bounce-gentle {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes celebrate {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  25% {
+    transform: scale(1.2) rotate(-5deg);
+  }
+  50% {
+    transform: scale(1.2) rotate(5deg);
+  }
+  75% {
+    transform: scale(1.2) rotate(-5deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes yawn {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05) translateY(-2px);
+    opacity: 0.8;
+  }
+}
+
+@keyframes progress {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.animate-bounce-gentle {
+  animation: bounce-gentle 2s ease-in-out infinite;
+}
+
+.animate-celebrate {
+  animation: celebrate 0.5s ease-in-out infinite;
+}
+
+.animate-yawn {
+  animation: yawn 3s ease-in-out infinite;
+}
+
+.animate-progress {
+  animation: progress 1.5s ease-out forwards;
+}
+
+@keyframes blink {
+  0%,
+  90%,
+  100% {
+    transform: scaleY(1);
+  }
+  95% {
+    transform: scaleY(0.1);
+  }
+}
+
+@keyframes wave {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-10deg);
+  }
+  75% {
+    transform: rotate(10deg);
+  }
+}
+
+@keyframes float-thinking {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-5px) scale(1.05);
+  }
+}
+
+@keyframes glow-puzzle {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 10px oklch(0.85 0.13 85)) brightness(1);
+    transform: scale(1);
+  }
+  50% {
+    filter: drop-shadow(0 0 25px oklch(0.85 0.13 85)) brightness(1.3);
+    transform: scale(1.1);
+  }
+}
+
+.animate-blink {
+  animation: blink 4s infinite;
+}
+
+.animate-wave {
+  animation: wave 1s ease-in-out infinite;
+}
+
+.animate-float-thinking {
+  animation: float-thinking 2s ease-in-out infinite;
+}
+
+.animate-glow-puzzle {
+  animation: glow-puzzle 2s ease-in-out infinite;
+}
+
+@media print {
+  aside,
+  header,
+  nav,
+  button,
+  .no-print {
+    display: none !important;
+  }
+
+  main {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .bg-slate-50\/50 {
+    background-color: white !important;
+  }
+
+  .shadow-sm,
+  .shadow-lg,
+  .shadow-soft,
+  .shadow-glow {
+    box-shadow: none !important;
+    border: 1px solid #e2e8f0 !important;
+  }
+
+  .recharts-responsive-container {
+    width: 100% !important;
+    height: 300px !important;
+  }
+}
+
+/* ============================================================
+ * Skin "pip-ei" — Aventura de Aprender com Pip (Educação Infantil)
+ * Fundo claro (roxo/rosa/creme) — precisa inverter textos brancos
+ * hardcoded nos blocos compartilhados do player.
+ * ============================================================ */
+[data-skin="pip-ei"] .text-white { color: #4a1d6b !important; }
+[data-skin="pip-ei"] .text-white\/90 { color: rgba(74, 29, 107, 0.9) !important; }
+[data-skin="pip-ei"] .text-white\/80 { color: rgba(74, 29, 107, 0.85) !important; }
+[data-skin="pip-ei"] .text-white\/70 { color: rgba(74, 29, 107, 0.75) !important; }
+[data-skin="pip-ei"] .text-white\/60 { color: rgba(74, 29, 107, 0.65) !important; }
+[data-skin="pip-ei"] .text-white\/50 { color: rgba(74, 29, 107, 0.55) !important; }
+[data-skin="pip-ei"] .text-white\/40 { color: rgba(74, 29, 107, 0.45) !important; }
+
+/* Cartões brancos translúcidos ficariam invisíveis sobre fundo claro:
+ * troca por lavanda suave com borda roxa. */
+[data-skin="pip-ei"] .bg-white\/5,
+[data-skin="pip-ei"] .bg-white\/10,
+[data-skin="pip-ei"] .bg-white\/15,
+[data-skin="pip-ei"] .bg-white\/20 {
+  background-color: rgba(255, 255, 255, 0.85) !important;
+}
+[data-skin="pip-ei"] .border-white\/10,
+[data-skin="pip-ei"] .border-white\/15,
+[data-skin="pip-ei"] .border-white\/20,
+[data-skin="pip-ei"] .border-white\/25,
+[data-skin="pip-ei"] .border-white\/30 {
+  border-color: rgba(168, 85, 247, 0.25) !important;
+}
+
+/* Chips escuros (bg-[#0d1f55]) usados como pílulas de status →
+ * viram roxo escuro coerente com a paleta. */
+[data-skin="pip-ei"] .bg-\[\#0d1f55\] {
+  background-color: #6d28d9 !important;
+  color: #fff !important;
+}
+[data-skin="pip-ei"] .bg-\[\#0d1f55\] .text-white,
+[data-skin="pip-ei"] .bg-\[\#0d1f55\] .text-white\/60,
+[data-skin="pip-ei"] .bg-\[\#0d1f55\] .text-white\/70 {
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+
+
+
+/* Botão "Entendi · Próximo bloco" (emerald translúcido) →
+ * ganha fundo sólido e texto branco no skin claro. */
+[data-skin="pip-ei"] .bg-emerald-500\/25 {
+  background-color: #10b981 !important;
+  border-color: #059669 !important;
+  color: #fff !important;
+}
+[data-skin="pip-ei"] .bg-emerald-500\/25.text-emerald-100,
+[data-skin="pip-ei"] .text-emerald-100 {
+  color: #fff !important;
+}
+
+
+
+/* ============================================================
+ * Skin "pt-expedicao" — Língua Portuguesa 3º ano
+ * Usa a mesma linguagem visual das expedições (Geografia/História/
+ * Ciências): painéis de vidro escuro, borda ciano, tipografia mono nos
+ * rótulos. Aqui só a APARÊNCIA dos blocos compartilhados muda —
+ * conteúdo, dicas, escrita e avaliações continuam iguais.
+ * ============================================================ */
+[data-skin="pt-expedicao"] .bg-white,
+[data-skin="pt-expedicao"] .bg-white\/95,
+[data-skin="pt-expedicao"] .bg-white\/90 {
+  background-color: rgba(15, 23, 42, 0.72) !important;
+  border-color: rgba(34, 211, 238, 0.22) !important;
+  color: #e2e8f0 !important;
+  box-shadow: 0 0 40px -24px rgba(34, 211, 238, 0.6) !important;
+}
+
+[data-skin="pt-expedicao"] .text-\[\#0d1f55\],
+[data-skin="pt-expedicao"] .text-\[\#2b1258\],
+[data-skin="pt-expedicao"] .text-\[\#1a0d3d\],
+[data-skin="pt-expedicao"] .text-slate-400,
+[data-skin="pt-expedicao"] .text-slate-950 {
+  color: #e2e8f0 !important;
+}
+
+/* Cartões de opção com gradiente colorido → vidro escuro com borda ciano */
+[data-skin="pt-expedicao"] [class*="bg-gradient-to-br"] {
+  background-image: none !important;
+  background-color: rgba(15, 23, 42, 0.85) !important;
+  box-shadow: inset 0 0 0 1px rgba(34, 211, 238, 0.3) !important;
+  color: #e2e8f0 !important;
+}
+
+/* Estados de acerto/erro continuam legíveis, mas em tom de expedição */
+[data-skin="pt-expedicao"] [class*="from-emerald"] {
+  background-color: rgba(5, 150, 105, 0.32) !important;
+  box-shadow: inset 0 0 0 2px rgba(52, 211, 153, 0.7) !important;
+}
+[data-skin="pt-expedicao"] [class*="from-rose-400"][class*="to-red-600"] {
+  background-color: rgba(190, 18, 60, 0.32) !important;
+  box-shadow: inset 0 0 0 2px rgba(251, 113, 133, 0.7) !important;
+}
+[data-skin="pt-expedicao"] .bg-slate-200,
+[data-skin="pt-expedicao"] .bg-slate-100,
+[data-skin="pt-expedicao"] .bg-slate-50 {
+  background-color: rgba(15, 23, 42, 0.55) !important;
+  color: rgba(226, 232, 240, 0.55) !important;
+}
+
+/* Caixas de feedback / dica / reensino */
+[data-skin="pt-expedicao"] .bg-emerald-100 {
+  background-color: rgba(5, 150, 105, 0.22) !important;
+  border-color: rgba(52, 211, 153, 0.45) !important;
+}
+[data-skin="pt-expedicao"] .bg-amber-100,
+[data-skin="pt-expedicao"] .bg-amber-100\/95,
+[data-skin="pt-expedicao"] .bg-amber-50 {
+  background-color: rgba(180, 83, 9, 0.22) !important;
+  border-color: rgba(251, 191, 36, 0.45) !important;
+}
+[data-skin="pt-expedicao"] .bg-sky-100 {
+  background-color: rgba(3, 105, 161, 0.22) !important;
+  border-color: rgba(56, 189, 248, 0.45) !important;
+}
+[data-skin="pt-expedicao"] .text-emerald-900,
+[data-skin="pt-expedicao"] .text-amber-900,
+[data-skin="pt-expedicao"] .text-sky-950,
+[data-skin="pt-expedicao"] .text-\[\#3a2410\] {
+  color: #e2e8f0 !important;
+}
+
+/* Anéis grossos e pulsos infantis → contorno fino de instrumento */
+[data-skin="pt-expedicao"] [class*="ring-8"] {
+  --tw-ring-offset-width: 0px;
+  box-shadow: inset 0 0 0 2px rgba(34, 211, 238, 0.55) !important;
+}
+[data-skin="pt-expedicao"] .animate-pulse {
+  animation: none !important;
+}
+
+/* Rótulos em mono maiúsculo, como nas expedições */
+[data-skin="pt-expedicao"] .uppercase.tracking-widest,
+[data-skin="pt-expedicao"] [class*="tracking-\[0\.2em\]"] {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* Botões âmbar mantêm texto escuro para contraste */
+[data-skin="pt-expedicao"] .bg-amber-400,
+[data-skin="pt-expedicao"] .bg-amber-300 {
+  color: #0f172a !important;
+}

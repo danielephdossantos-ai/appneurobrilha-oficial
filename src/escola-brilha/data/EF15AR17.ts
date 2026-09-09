@@ -1,0 +1,2 @@
+import { criarAulaArte1 } from "./criarAulaArte1";
+export default criarAulaArte1({ codigo: "EF15AR17", titulo: "História que Vira Som", foco: "Improvisar, compor e sonorizar histórias com voz, corpo, objetos e instrumentos", objeto: "criação musical", exemplos: ["Criar sons para uma história", "Ler sem escutar", "Apagar a história", "Contar quadrados"], resposta: "Escolher sons coerentes com cenas e organizar uma sonorização coletiva.", proxima: "EF15AR18" });

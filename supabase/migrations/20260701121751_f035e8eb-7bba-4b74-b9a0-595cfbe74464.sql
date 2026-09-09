@@ -1,0 +1,1 @@
+ALTER VIEW public.vw_biblioteca_nacional SET (security_invoker = on);

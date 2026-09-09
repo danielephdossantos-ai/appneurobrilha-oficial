@@ -1,0 +1,777 @@
+/**
+ * Escola Brilha — modelo único de aula.
+ * Toda habilidade BNCC segue exatamente esta estrutura (12 blocos).
+ * Uma aula = um arquivo em src/escola-brilha/data/<CODIGO>.ts.
+ */
+
+export type QuizItem = {
+  pergunta: string;
+  opcoes: string[];
+  correta: number; // índice em opcoes
+  explicacao: string;
+  /**
+   * Visual OBRIGATÓRIO para crianças não-alfabetizadas (Ed. Infantil / 1º Ano):
+   * mostra a cena da pergunta com imagens de contagem. Uma imagem repetida N vezes
+   * (ex.: 5 cenouras) ou vários grupos coloridos (ex.: 3 grupos de 3 maçãs).
+   */
+  visual?:
+    | {
+        tipo: "itens";
+        imagemUrl: string;
+        quantidade: number;
+        rotulo?: string;
+      }
+    | {
+        tipo: "grupos";
+        grupos: Array<{ imagemUrl: string; quantidade: number; rotulo?: string; cor?: string }>;
+      }
+    | {
+        tipo: "comparar";
+        lados: Array<{ imagemUrl: string; quantidade: number; rotulo: string; cor?: string }>;
+      }
+    | {
+        /**
+         * Cena de POSIÇÃO ESPACIAL — mostra o sujeito na posição real
+         * (em cima, embaixo, dentro, fora, direita, esquerda, atrás,
+         * frente, ao lado) em relação à referência. Sem contagem.
+         */
+        tipo: "cena";
+        posicao:
+          | "cima"
+          | "baixo"
+          | "dentro"
+          | "fora"
+          | "direita"
+          | "esquerda"
+          | "atras"
+          | "frente"
+          | "aoLado";
+        referenciaImg: string;
+        referenciaLabel?: string;
+        sujeitoImg: string;
+        sujeitoLabel?: string;
+      }
+    | {
+        /** Fila de 3 itens para ilustrar "entre" (o do meio é destacado). */
+        tipo: "cenaEntre";
+        fila: Array<{ img: string; label: string }>;
+      };
+};
+
+
+export type Exercicio = {
+  enunciado: string;
+  resposta: string;
+  dica?: string;
+};
+
+/** Modelo único — 12 blocos fixos. Nenhuma aula pode fugir desse padrão. */
+export type Aula = {
+  codigo: string;              // ex: "EF01MA01"
+  ano: string;                 // ex: "1º Ano"
+  disciplina: string;          // ex: "Matemática"
+  titulo: string;              // título curto, amigável à criança
+
+  /**
+   * Narrativa de abertura (OBRIGATÓRIA em toda missão nova).
+   * História curta que prepara a explicação pedagógica.
+   *
+   * Regras:
+   *  - Duração alvo: ATÉ 2 MINUTOS de leitura (~1500 caracteres somando os três campos).
+   *  - Deve despertar CURIOSIDADE, criar CONTEXTO, apresentar um PROBLEMA
+   *    e CONVIDAR a criança a participar.
+   *  - Deve estar diretamente relacionada ao conteúdo BNCC da missão.
+   *  - Evitar histórias longas — priorizar frases curtas e concretas.
+   *
+   * Estrutura:
+   *  contexto → onde/quando a história acontece (cenário e personagens).
+   *  problema → o desafio que surge e precisa ser resolvido.
+   *  convite  → chamada direta à criança ("Vamos ajudar?", "Bora descobrir?").
+   *
+   * Se ausente, o player usa `missao` como abertura simples (compatibilidade).
+   */
+  narrativa?: {
+    titulo: string;
+    contexto: string;
+    problema: string;
+    convite: string;
+  };
+
+  // 1. Missão
+  missao: string;
+
+  // 2. Objetivos
+  objetivos: string[];
+  // 3. Explicação
+  explicacao: string;
+  /**
+   * Aprendizagem Ativa (opcional): fatia a explicação em pequenos pedaços,
+   * cada um seguido de uma micro-interação (toque, checagem rápida ou
+   * observação). Se ausente, o bloco Explicação fatia automaticamente o
+   * texto de `explicacao` em parágrafos e insere um "toque para continuar"
+   * entre eles — nunca mais um paredão de texto.
+   */
+  explicacaoAtiva?: Array<{
+    texto: string;
+    /** Exemplo curtíssimo do cotidiano ligado ao bloco. */
+    exemplo?: string;
+    /** URL de ilustração OU um emoji/símbolo grande. */
+    imagem?: string;
+    /** Legenda opcional da imagem. */
+    imagemAlt?: string;
+    /** Micro-interação (quiz de 1 pergunta). Se ausente, o bloco exige o botão "Entendi ✓". */
+    checagem?: {
+      pergunta: string;
+      opcoes: string[];
+      correta: number;
+      explicacao?: string;
+    };
+  }>;
+  /**
+   * Níveis de aprofundamento da explicação (opcional).
+   * Todo nível deve ter um texto DIFERENTE — o player nunca repete a mesma
+   * frase quando a criança pede "explicar de outro jeito".
+   *
+   *   nivel1 → explicação extremamente simples (frase-mãe, curtíssima)
+   *   nivel2 → novo exemplo concreto do cotidiano
+   *   nivel3 → outra forma de explicar (analogia, desenho falado, história)
+   *   nivel4 → aplicação prática (onde isso aparece na vida real)
+   *
+   * Se ausente, o player usa o próprio `explicacao` como nível 1 e libera
+   * apenas os níveis que tiverem texto distinto.
+   */
+  explicacoesNiveis?: {
+    nivel1?: string;
+    nivel2?: string;
+    nivel3?: string;
+    nivel4?: string;
+  };
+  // 4. Exemplo
+  exemploResolvido: {
+    enunciado: string;
+    passos: string[];
+    resposta: string;
+    /**
+     * Exemplo INTERATIVO (opcional). Quando presente, o bloco renderiza
+     * a atividade real — a criança toca em cada item, o professor conta
+     * em voz alta e mostra a resposta. Ideal para Ed. Infantil e 1º Ano.
+     */
+    interativo?: {
+      tipo: "contagem";
+      /** URL da imagem do item a contar (ex.: maçã). Vem do Banco de Mídias. */
+      imagemUrl: string;
+      /** Quantidade de itens exibidos. */
+      quantidade: number;
+      /** Nome singular do item (ex.: "maçã"). */
+      nomeItem: string;
+      /** Plural do item (ex.: "maçãs"). Se ausente, adiciona "s". */
+      nomeItemPlural?: string;
+      /** Pergunta lida em voz alta. Padrão: "Quantas <plural> existem?". */
+      pergunta?: string;
+    };
+  };
+  // 5. Prática Guiada
+  atividadeGuiada: {
+    enunciado: string;
+    resposta: string;
+    explicacao: string;
+    /**
+     * Prática VISUAL (opcional). Renderiza a cena real com imagens grandes
+     * do Banco de Mídias — não emojis. Ex.: pódio 1º/2º/3º com fotos das
+     * crianças. A criança toca no participante para responder.
+     */
+    visual?:
+      | {
+          tipo: "podio";
+          pergunta: string;
+          participantes: Array<{
+            nome: string;
+            imagemUrl: string;
+            posicao: 1 | 2 | 3;
+          }>;
+          /** Nome correto — o toque nesse participante confirma acerto. */
+          respostaCerta: string;
+        }
+      | {
+          /** Renderiza N grupos iguais de imagens para ensinar contagem em grupos. */
+          tipo: "grupos";
+          pergunta: string;
+          imagemUrl: string;
+          itemSingular: string;
+          itemPlural: string;
+          /** Quantidade de grupos. */
+          quantidadeGrupos: number;
+          /** Itens em cada grupo (todos iguais). */
+          itensPorGrupo: number;
+          /** Alternativas para a criança tocar. */
+          opcoes: number[];
+          /** Índice da alternativa correta (deve bater com grupos × itens). */
+          correta: number;
+        }
+      | {
+          /** Compara coleções diferentes por contagem ou correspondência um a um. */
+          tipo: "comparar";
+          pergunta: string;
+          lados: Array<{
+            imagemUrl: string;
+            quantidade: number;
+            rotulo: string;
+            cor?: string;
+          }>;
+          opcoes: string[];
+          correta: number;
+        }
+      | {
+          /**
+           * Cena de POSIÇÃO ESPACIAL — sujeito posicionado de verdade
+           * (em cima, embaixo, dentro, fora, direita, esquerda, atrás,
+           * frente, ao lado) sobre a referência. A criança escolhe entre
+           * alternativas descritivas.
+           */
+          tipo: "cena";
+          pergunta: string;
+          posicao:
+            | "cima"
+            | "baixo"
+            | "dentro"
+            | "fora"
+            | "direita"
+            | "esquerda"
+            | "atras"
+            | "frente"
+            | "aoLado";
+          referenciaImg: string;
+          referenciaLabel?: string;
+          sujeitoImg: string;
+          sujeitoLabel?: string;
+          opcoes: string[];
+          correta: number;
+        }
+      | {
+          /**
+           * Escolha visual simples — mostra N imagens lado a lado (sem pódio,
+           * sem posição). A criança toca na imagem correta. Ideal para
+           * "qual parte do corpo faz X?", "qual objeto é Y?", etc.
+           */
+          tipo: "escolherImagem";
+          pergunta: string;
+          opcoes: Array<{ nome: string; imagemUrl: string }>;
+          respostaCerta: string;
+        };
+  };
+
+  // 6. Exercícios
+  exercicios: Exercicio[];
+  // 7. Desafio
+  desafio: {
+    enunciado: string;
+    resposta: string;
+    /**
+     * Desafio VISUAL interativo (opcional). Renderiza a cena com imagens
+     * (ex.: Papagaio com 8 sementes, Esquilo com 5 castanhas, Coelho com 10 cenouras)
+     * e várias perguntas de múltipla escolha em sequência. A criança clica
+     * na resposta certa em cada pergunta.
+     */
+    visual?: {
+      cena?: Array<{
+        personagem: string;
+        personagemImagemUrl?: string;
+        itemImagemUrl: string;
+        quantidade: number;
+        cor?: string;
+      }>;
+      perguntas: QuizItem[];
+    };
+
+  };
+
+  // 8. Quiz
+  quiz: QuizItem[];
+  // 9. Resumo (pontos-chave + dica)
+  revisao: { pontos: string[]; dica: string };
+  // 10. Conclusão
+  conclusao: string;
+  /**
+   * Curiosidade (opcional mas RECOMENDADA em toda aula). Um "você sabia?"
+   * curto ligado ao tema, para despertar interesse antes da conclusão.
+   */
+  curiosidade?: {
+    titulo?: string;
+    texto: string;
+    imagemUrl?: string;
+  };
+
+
+  // Opcional — diagnóstico rápido dos conhecimentos prévios (antes da aula).
+  // Se ausente, o player pula direto pra Missão.
+  conhecimentosPrevios?: string[];
+  diagnostico?: QuizItem[];
+
+  /**
+   * Multi-modalidade (opcional). Atende diferentes estilos de aprendizagem
+   * combinando texto, imagem, áudio, animação, objetos manipuláveis e jogos
+   * educativos (arrastar, ordenar, ligar, colorir, montar).
+   *
+   *   midias         → imagens ilustrativas / áudios (URL) exibidos junto
+   *                    da explicação ou dos exemplos.
+   *   interativas    → mini-jogos manipuláveis intercalados na aula.
+   *
+   * O player renderiza esses recursos após o bloco Explicação. Se ausente,
+   * a aula continua funcionando só com texto/voz (não há regressão).
+   */
+  midias?: Array<
+    | { tipo: "imagem"; url: string; alt: string; legenda?: string }
+    | { tipo: "audio"; url: string; titulo: string }
+    | { tipo: "animacao"; emojis: string[]; legenda?: string } // animação simples inline
+  >;
+  interativas?: Array<
+    | {
+        tipo: "arrastar";
+        titulo: string;
+        instrucao: string;
+        // pares (item → alvo). O jogador arrasta o item pro alvo certo.
+        pares: Array<{ item: string; alvo: string; itemImagem?: string }>;
+        /**
+         * Suporte visual (opcional). Fallback usado quando o par não
+         * define seu próprio `itemImagem`. Se cada item tem uma imagem
+         * diferente, defina em cada `pares[i].itemImagem`.
+         */
+        itemImagem?: string;
+        /**
+         * Alvos visuais (opcional). Renderiza cada alvo com uma cor de
+         * fundo, número de capacidade e (opcional) imagem central. O
+         * `nome` deve casar com `alvo` dos pares.
+         */
+        alvosVisuais?: Array<{
+          nome: string;
+          cor: string;
+          capacidade?: number;
+          imagemUrl?: string;
+        }>;
+        /**
+         * Fundo de MAPA (opcional). Quando presente, o tabuleiro de alvos é
+         * renderizado sobre uma ilustração de mapa — ideal para percursos
+         * (ex.: casa → praça). Os alvos viram "paradas" ao longo do trajeto.
+         */
+        mapaFundo?: string;
+      }
+    | {
+        tipo: "ordenar";
+        titulo: string;
+        instrucao: string;
+        // sequência correta; embaralhada na tela.
+        itens: string[];
+        /**
+         * Suporte visual (opcional). Cada entrada é um grupo de imagens.
+         * A ordem correta é a ordem do array. Usado para Ed. Infantil e
+         * 1º Ano, onde a criança ordena por quantidade visual.
+         */
+        imagens?: Array<{
+          imagemUrl: string;
+          quantidade: number;
+          rotulo?: string;
+          // Segundo grupo opcional (para ordenar somas/pares, ex.: 1+7).
+          imagemUrl2?: string;
+          quantidade2?: number;
+          cor?: string;
+          cor2?: string;
+        }>;
+      }
+    | {
+        tipo: "ligar";
+        titulo: string;
+        instrucao: string;
+        /**
+         * colunas A ↔ B; a criança liga cada A ao B correspondente.
+         *
+         * Suporte visual (opcional, ideal Ed. Infantil / 1º ano):
+         *  - `aImagem` + `aQuantidade` renderizam N cópias da imagem na
+         *    coluna A (ex.: 8 cenouras). O rótulo de texto vira legenda.
+         *  - `bImagem` + `bQuantidade` fazem o mesmo na coluna B (raro).
+         */
+        pares: Array<{
+          a: string;
+          b: string;
+          aImagem?: string;
+          aQuantidade?: number;
+          bImagem?: string;
+          bQuantidade?: number;
+        }>;
+      }
+    | {
+        tipo: "colorir";
+        titulo: string;
+        instrucao: string;
+        // regiões nomeadas + cor esperada (feedback quando acerta).
+        regioes: Array<{ nome: string; corCorreta: string }>;
+        paleta: string[]; // cores disponíveis
+      }
+    | {
+        tipo: "montar";
+        titulo: string;
+        instrucao: string;
+        // peças que devem ser selecionadas na ordem certa pra montar algo.
+        pecas: string[]; // ordem correta
+      }
+    | {
+        /**
+         * Mini-jogo de contagem visual com alternativas.
+         * Ideal para Ed. Infantil / 1º Ano: mostra 1+ grupos de itens
+         * (imagens do banco de mídias) e uma pergunta de múltipla escolha.
+         *
+         * Casos de uso:
+         *  - Contar um a um (1 grupo).
+         *  - Contar em grupos (N grupos iguais).
+         *  - Comparar coleções (2 grupos rotulados, ex.: "Esquerda" x "Direita").
+         *  - Completar coleção (2 grupos rotulados "Antes" x "Depois").
+         */
+        tipo: "contarQuiz";
+        titulo: string;
+        instrucao?: string;
+        grupos: Array<{
+          imagemUrl: string;
+          quantidade: number;
+          rotulo?: string;
+        }>;
+        pergunta: string;
+        opcoes: string[];
+        correta: number;
+        acerto?: string;
+        erro?: string;
+      }
+    | {
+        /**
+         * Gráfico de colunas simples (barra vertical proporcional ao valor)
+         * com pergunta de múltipla escolha. Ideal para EF01MA21 — leitura
+         * de gráficos: cada coluna mostra ícone + valor numérico + barra
+         * cuja ALTURA representa a quantidade.
+         */
+        tipo: "graficoQuiz";
+        titulo: string;
+        instrucao?: string;
+        colunas: Array<{
+          imagemUrl: string;
+          rotulo: string;
+          valor: number;
+          cor?: string;
+        }>;
+        pergunta: string;
+        opcoes: string[];
+        correta: number;
+        acerto?: string;
+        erro?: string;
+      }
+    | {
+        /**
+         * Conta visual de + ou − com imagens aparecendo (soma) ou
+         * sumindo (subtração). OBRIGATÓRIO para Ed. Infantil, 1º e 2º Ano
+         * — nunca mostrar contas só em texto.
+         */
+        tipo: "operacao";
+        titulo: string;
+        instrucao?: string;
+        operacao: "soma" | "subtracao";
+        imagemUrl: string;
+        itemPlural: string;
+        a: number;
+        b: number;
+        cor?: string;
+        legenda?: string;
+      }
+    | {
+        /**
+         * Cena visual de POSIÇÃO ESPACIAL — mostra de verdade em cima,
+         * embaixo, dentro, fora, direita, esquerda, atrás, frente, ao lado
+         * ou "entre" (fila de 3). Ideal para EF01MA11.
+         */
+        tipo: "posicaoEspacial";
+        titulo: string;
+        instrucao?: string;
+        cenas: Array<
+          | {
+              modo: "dupla";
+              referenciaImg: string;
+              referenciaLabel?: string;
+              sujeitoImg: string;
+              sujeitoLabel?: string;
+              posicao:
+                | "cima"
+                | "baixo"
+                | "dentro"
+                | "fora"
+                | "direita"
+                | "esquerda"
+                | "atras"
+                | "frente"
+                | "aoLado";
+              pergunta: string;
+              opcoes: string[];
+              correta: number;
+              acerto?: string;
+              erro?: string;
+            }
+          | {
+              modo: "entre";
+              fila: Array<{ img: string; label: string }>;
+              pergunta: string;
+              opcoes: string[];
+              correta: number;
+              acerto?: string;
+              erro?: string;
+            }
+        >;
+      }
+    | {
+        /**
+         * Escolher a figura certa TOCANDO na imagem (sem ler texto).
+         * Ideal para Ed. Infantil / 1º Ano em Português: a professora
+         * fala a palavra, a criança toca na figura. Ao tocar, o TTS diz
+         * o nome da figura e valida a resposta.
+         */
+        tipo: "escolherFigura";
+        titulo: string;
+        instrucao?: string;
+        pergunta?: string;
+        opcoes: Array<{
+          nome: string;
+          imagemUrl: string;
+          /** Texto opcional exibido abaixo da imagem (associação visual↔texto). */
+          rotulo?: string;
+        }>;
+        /** Índice da opção correta em `opcoes`. */
+        correta: number;
+        acerto?: string;
+        erro?: string;
+      }
+    | {
+        /**
+         * Comparar escritas convencionais/não convencionais (EF01LP03+).
+         * Mostra UMA figura de referência no topo + várias grafias (texto)
+         * como botões grandes. Ao tocar, o TTS lê a grafia exatamente como
+         * está escrita (mesmo se estiver errada) pra criança ouvir a
+         * diferença sonora. Valida a escrita correta.
+         */
+        tipo: "escolherEscrita";
+        titulo: string;
+        instrucao?: string;
+        pergunta?: string;
+        /** Figura de referência mostrada no topo. */
+        figura: { imagemUrl: string; rotulo?: string };
+        /** Grafias candidatas. */
+        opcoes: string[];
+        /** Índice da grafia correta em `opcoes`. */
+        correta: number;
+        acerto?: string;
+        erro?: string;
+      }
+    | {
+        /**
+         * Selecionar cartões que pertencem a UMA categoria (ex.: só as
+         * letras entre letras/números/símbolos). Ideal para EF01LP04.
+         * Ao tocar em um cartão, o TTS fala o símbolo. Cartões corretos
+         * ficam verdes, incorretos ficam vermelhos. A fase é concluída
+         * quando todos os cartões corretos foram encontrados.
+         */
+        tipo: "selecionarLetras";
+        titulo: string;
+        instrucao?: string;
+        cartoes: Array<{
+          /** Símbolo mostrado (ex.: "A", "7", "%"). */
+          simbolo: string;
+          /** Categoria do cartão. */
+          tipo: "letra" | "numero" | "simbolo";
+          /** Nome falado pelo TTS (padrão: o próprio símbolo). */
+          fala?: string;
+        }>;
+        /** Categoria que a criança deve selecionar. Padrão: "letra". */
+        alvo?: "letra" | "numero" | "simbolo";
+        acerto?: string;
+        erro?: string;
+      }
+    | {
+        /**
+         * Laboratório da Lupa — a criança toca em cada objeto e uma
+         * lupa animada percorre a imagem revelando um detalhe (voz + texto).
+         * Ideal para Ciências: explorar folhas, cascas, pedras, flores.
+         * A fase é concluída quando TODOS os objetos foram explorados.
+         */
+        tipo: "lupa";
+        titulo: string;
+        instrucao?: string;
+        itens: Array<{
+          nome: string;
+          imagemUrl: string;
+          /** Frase revelada (falada em voz alta) ao passar a lupa. */
+          descoberta: string;
+          /** Emoji/legenda curta exibida abaixo da imagem. */
+          rotulo?: string;
+        }>;
+        acerto?: string;
+      }
+    | {
+        /**
+         * Selecionar vários itens que atendem a UM critério (ex.: "encontre
+         * apenas objetos de madeira"). A criança toca em cada item; verde
+         * quando bate no critério, vermelho quando não. A fase é concluída
+         * quando todos os corretos foram escolhidos.
+         */
+        tipo: "selecionarMultiplos";
+        titulo: string;
+        instrucao?: string;
+        /** Critério mostrado em destaque (ex.: "Objetos de madeira"). */
+        criterio: string;
+        opcoes: Array<{
+          nome: string;
+          imagemUrl: string;
+          rotulo?: string;
+          correto: boolean;
+        }>;
+        acerto?: string;
+        erro?: string;
+      }
+    | {
+        /**
+         * Álbum personalizado — a criança faz escolhas pessoais (cor
+         * favorita, brincadeira preferida, momento feliz) e o sistema
+         * monta uma PÁGINA DO ÁLBUM com o que ela escolheu. Ideal para
+         * História / Identidade (EF01HI01+). Não há resposta certa —
+         * a fase conclui quando todas as escolhas foram feitas.
+         */
+        tipo: "album";
+        titulo: string;
+        instrucao: string;
+        escolhas: Array<{
+          /** Pergunta lida em voz alta (ex.: "Sua cor favorita"). */
+          label: string;
+          /** "cor" mostra swatches; "imagem" mostra cartões com imagem. */
+          modo: "cor" | "imagem";
+          opcoes: Array<{
+            nome: string;
+            /** Hex para modo "cor". */
+            cor?: string;
+            /** URL para modo "imagem". */
+            imagemUrl?: string;
+            rotulo?: string;
+          }>;
+        }>;
+        acerto?: string;
+      }
+  >;
+
+
+
+
+
+
+  /**
+   * Progressão automática por níveis (opcional).
+   *
+   *   fácil  → aprendizagem inicial (reconhecer / identificar).
+   *   médio  → aplicação do conceito (usar em situação nova).
+   *   difícil → problemas mais elaborados (analisar / combinar).
+   *
+   * A criança só avança pro próximo nível após demonstrar DOMÍNIO
+   * (padrão ≥70% de acertos) do nível anterior. O desempenho de cada
+   * etapa fica registrado (localStorage por criança+aula) e é agregado
+   * ao contador global de acertos/erros da aula em `escola_progresso`.
+   *
+   * Se ausente, o bloco Exercícios cai no fallback simples de `exercicios[]`.
+   */
+  niveis?: {
+    facil?: QuizItem[];
+    medio?: QuizItem[];
+    dificil?: QuizItem[];
+    /** Percentual mínimo pra desbloquear o próximo nível. Padrão: 70. */
+    dominioMinimo?: number;
+  };
+
+
+  /**
+   * Minijogo Brilha (opcional) — mini-experiência lúdica temática da aula.
+   * Renderizado como bloco próprio antes do Quiz.
+   *
+   * Tipo "cacaElementos": a criança encontra N elementos escondidos no
+   * cenário dentro de um tempo limite. Cada acerto "ilumina" o mapa.
+   */
+  minijogo?:
+    | {
+        tipo: "cacaElementos";
+        titulo: string;
+        objetivo: string;
+        /** Tempo em segundos. Padrão: 90. */
+        tempoSegundos?: number;
+        /** Elementos a encontrar (imagem + rótulo curto). */
+        elementos: Array<{ nome: string; imagemUrl: string; rotulo?: string }>;
+        /** Distratores — objetos que aparecem no cenário só pra confundir. */
+        distratores?: Array<{ nome: string; imagemUrl: string; rotulo?: string }>;
+        /** Frase falada quando o minijogo é concluído. */
+        acerto?: string;
+      }
+    | {
+        /**
+         * Fábrica dos Materiais — objetos deslizam por uma esteira e a criança
+         * arrasta cada um pro recipiente da categoria correta antes do tempo
+         * acabar. Cada acerto faz a fábrica "produzir" uma peça.
+         */
+        tipo: "esteira";
+        titulo: string;
+        objetivo: string;
+        /** Tempo em segundos. Padrão: 90. */
+        tempoSegundos?: number;
+        /** Categorias (recipientes) na parte de baixo da tela. */
+        categorias: Array<{ nome: string; cor: string; emoji?: string }>;
+        /** Objetos que passam na esteira, cada um pertence a uma categoria. */
+        objetos: Array<{
+          nome: string;
+          imagemUrl: string;
+          categoria: string;
+          rotulo?: string;
+        }>;
+        /** Meta mínima de acertos pra concluir. Padrão: 10. */
+        minAcertos?: number;
+        acerto?: string;
+      }
+    | {
+        /**
+         * Sequência — cartas aparecem embaralhadas e a criança toca em cada
+         * uma na ORDEM correta (ex.: linha do tempo). Cada sequência
+         * completa "ilumina uma página". Encerra por tempo ou por meta.
+         */
+        tipo: "sequencia";
+        titulo: string;
+        objetivo: string;
+        /** Tempo em segundos. Padrão: 90. */
+        tempoSegundos?: number;
+        /** Cada sequência é uma lista de cartas na ORDEM correta. */
+        sequencias: Array<{
+          titulo?: string;
+          cards: Array<{ nome: string; imagemUrl: string; rotulo?: string }>;
+        }>;
+        /** Meta mínima de sequências pra concluir. Padrão: todas. */
+        minSequencias?: number;
+        acerto?: string;
+      };
+
+  /**
+   * Missão em Família (opcional) — atividade offline para fazer com um
+   * responsável. Renderizada como bloco próprio antes da Conclusão.
+   * A criança/família marcam "Feito!" e podem registrar cada item.
+   */
+  missaoFamilia?: {
+    titulo: string;
+    instrucao: string;
+    /** Campos que a família preenche depois da atividade. */
+    registros?: Array<{
+      label: string;
+      /** "texto" (livre) | "sim_nao" (radio) | "cor" (paleta rápida). */
+      tipo?: "texto" | "sim_nao" | "cor";
+    }>;
+    /** Habilita botão de anexar foto no Diário. Padrão: false. */
+    permitirFoto?: boolean;
+  };
+
+  // Opcional — mantido pra compatibilidade, não é mais renderizado como bloco
+  motivacao?: string;
+  proximaHabilidade?: { codigo: string; titulo?: string };
+
+};

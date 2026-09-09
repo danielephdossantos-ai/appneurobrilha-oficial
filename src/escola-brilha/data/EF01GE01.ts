@@ -1,0 +1,6 @@
+import { criarAulaGeo1 } from "./criarAulaGeo1";
+export default criarAulaGeo1({ codigo: "EF01GE01", titulo: "Comparando os Lugares Onde Vivemos", tema: "lugares de vivência", explicacao: "Casa, escola, rua e comunidade são lugares de vivência. Eles podem ter elementos parecidos e diferentes. Comparar é observar o que existe, como é usado e quem participa.", exemplo: "Duas escolas podem ter salas e pátio, mas uma pode ter horta e a outra, quadra.", missao: "Desenhe dois lugares conhecidos e marque uma semelhança e uma diferença.", proxima: "EF01GE02", questoes: [
+  { pergunta: "O que fazemos ao comparar dois lugares?", opcoes: ["Observamos semelhanças e diferenças", "Escolhemos o mais bonito", "Apagamos as diferenças", "Contamos apenas pessoas"], correta: 0, explicacao: "Comparar exige observar o que é parecido e diferente." },
+  { pergunta: "Casa e escola podem ter em comum o quê?", opcoes: ["Pessoas e espaços de convivência", "A mesma função", "A mesma família", "Nenhuma regra"], correta: 0, explicacao: "Os usos mudam, mas ambos reúnem pessoas." },
+  { pergunta: "Qual frase mostra uma diferença?", opcoes: ["A escola tem salas; a praça tem brinquedos", "Os dois são lugares", "Pessoas usam ambos", "Ambos ficam na comunidade"], correta: 0, explicacao: "A frase distingue elementos de cada lugar." },
+] });
