@@ -195,13 +195,13 @@ function Index() {
     }
   }, [roleChecked, isLoading, session, allChildren.length, navigate]);
 
-  if (!roleChecked) return <div className="min-h-screen grid place-items-center"><div className="h-9 w-9 animate-spin rounded-full border-4 border-indigo-200 border-t-indigo-600" /></div>;
-
   useEffect(() => {
     if (activeChild?.id && activeChild.anamnese_completa && shouldShowEggHatch(activeChild.id)) {
       setShowEggHatch(true);
     }
   }, [activeChild?.id, activeChild?.anamnese_completa]);
+
+  if (!roleChecked) return <div className="min-h-screen grid place-items-center"><div className="h-9 w-9 animate-spin rounded-full border-4 border-indigo-200 border-t-indigo-600" /></div>;
 
   return (
     <TermoCienciaGate childId={activeChild?.id}>
