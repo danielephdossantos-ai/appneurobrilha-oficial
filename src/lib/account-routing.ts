@@ -2,6 +2,7 @@ import type { User } from "@supabase/supabase-js";
 import { supabase } from "@/database/supabase/client";
 
 export type AccountType = "family" | "teacher";
+export const VERIFIED_ADMIN_SESSION_KEY = "neurobrilha:verified-admin-user";
 
 export async function saveAccountType(accountType: AccountType) {
   const { error } = await supabase.auth.updateUser({ data: { account_type: accountType } });
@@ -24,11 +25,18 @@ export async function resolveAccountDestination(
   // A conta proprietária/admin pode escolher qual experiência abrir no login.
   // Sem uma escolha explícita, continua entrando no painel administrativo.
   if (adminRole) {
+    if (typeof window !== "undefined") {
+      window.sessionStorage.setItem(VERIFIED_ADMIN_SESSION_KEY, user.id);
+    }
     if (accountType === "teacher") return "/area-professor";
     if (accountType === "family") return requestedNext && !requestedNext.startsWith("/area-professor")
       ? requestedNext
       : "/";
     return "/admin";
+  }
+
+  if (typeof window !== "undefined") {
+    window.sessionStorage.removeItem(VERIFIED_ADMIN_SESSION_KEY);
   }
 
   if (teacherProfile || accountType === "teacher") return "/area-professor";
