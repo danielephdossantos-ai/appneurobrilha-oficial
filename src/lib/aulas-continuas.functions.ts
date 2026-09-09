@@ -4,6 +4,7 @@ import { parseBNCC } from "@/escola-brilha/motor/resolver";
 import { validarAulaIA } from "./validador-aulas.server";
 import { chamarProfessorMentorIA } from "./ai-orchestrator.server";
 import { extrairJSON } from "./ai-json.server";
+import { PROFESSOR_MENTOR_PEDAGOGIA } from "./professor-mentor-pedagogia";
 
 /**
  * Módulo de Motor de Decisão de Conteúdo
@@ -227,6 +228,8 @@ export const gerarAulaGemini = createServerFn({ method: "POST" })
     // 2. Preparar Prompt Estruturado (Instrução 5/8)
     const systemPrompt = `Você é um Especialista em Neuroeducação e Design Pedagógico.
 Gere uma AULA COMPLETA em JSON estruturado para uma criança.
+
+${PROFESSOR_MENTOR_PEDAGOGIA}
 
 DADOS DO ALUNO:
 - Idade: ${data.idade} anos

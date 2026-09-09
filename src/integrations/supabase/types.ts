@@ -1445,132 +1445,6 @@ export type Database = {
           },
         ]
       }
-      brilha_vida_abc_entries: {
-        Row: {
-          antecedent: string
-          child_id: string
-          consequence: string
-          created_at: string
-          family_hypothesis: string
-          id: string
-          observed_behavior: string
-        }
-        Insert: {
-          antecedent: string
-          child_id: string
-          consequence?: string
-          created_at?: string
-          family_hypothesis?: string
-          id: string
-          observed_behavior: string
-        }
-        Update: {
-          antecedent?: string
-          child_id?: string
-          consequence?: string
-          created_at?: string
-          family_hypothesis?: string
-          id?: string
-          observed_behavior?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "brilha_vida_abc_entries_child_id_fkey"
-            columns: ["child_id"]
-            isOneToOne: false
-            referencedRelation: "children"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      brilha_vida_mood_entries: {
-        Row: {
-          child_id: string
-          created_at: string
-          emotion: string
-          energy: number
-          id: string
-          moment_text: string | null
-          note: string | null
-          quadrant: string | null
-          source: string
-          trigger_text: string | null
-          valence: number
-        }
-        Insert: {
-          child_id: string
-          created_at?: string
-          emotion: string
-          energy: number
-          id: string
-          moment_text?: string | null
-          note?: string | null
-          quadrant?: string | null
-          source: string
-          trigger_text?: string | null
-          valence: number
-        }
-        Update: {
-          child_id?: string
-          created_at?: string
-          emotion?: string
-          energy?: number
-          id?: string
-          moment_text?: string | null
-          note?: string | null
-          quadrant?: string | null
-          source?: string
-          trigger_text?: string | null
-          valence?: number
-        }
-        Relationships: [
-          {
-            foreignKeyName: "brilha_vida_mood_entries_child_id_fkey"
-            columns: ["child_id"]
-            isOneToOne: false
-            referencedRelation: "children"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      child_access_entitlements: {
-        Row: {
-          active_until: string
-          child_id: string
-          created_at: string
-          provider_reference: string | null
-          source: string
-          status: string
-          updated_at: string
-        }
-        Insert: {
-          active_until: string
-          child_id: string
-          created_at?: string
-          provider_reference?: string | null
-          source: string
-          status: string
-          updated_at?: string
-        }
-        Update: {
-          active_until?: string
-          child_id?: string
-          created_at?: string
-          provider_reference?: string | null
-          source?: string
-          status?: string
-          updated_at?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "child_access_entitlements_child_id_fkey"
-            columns: ["child_id"]
-            isOneToOne: true
-            referencedRelation: "children"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       child_achievements: {
         Row: {
           achievement_id: string
@@ -1687,56 +1561,6 @@ export type Database = {
             foreignKeyName: "child_escrita_status_child_id_fkey"
             columns: ["child_id"]
             isOneToOne: true
-            referencedRelation: "children"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      child_free_access_codes: {
-        Row: {
-          batch_id: string
-          code_hash: string
-          created_at: string
-          created_by: string
-          duration_days: number
-          expires_at: string
-          id: string
-          redeemed_at: string | null
-          redeemed_by: string | null
-          redeemed_child_id: string | null
-          revoked_at: string | null
-        }
-        Insert: {
-          batch_id: string
-          code_hash: string
-          created_at?: string
-          created_by: string
-          duration_days: number
-          expires_at: string
-          id?: string
-          redeemed_at?: string | null
-          redeemed_by?: string | null
-          redeemed_child_id?: string | null
-          revoked_at?: string | null
-        }
-        Update: {
-          batch_id?: string
-          code_hash?: string
-          created_at?: string
-          created_by?: string
-          duration_days?: number
-          expires_at?: string
-          id?: string
-          redeemed_at?: string | null
-          redeemed_by?: string | null
-          redeemed_child_id?: string | null
-          revoked_at?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "child_free_access_codes_redeemed_child_id_fkey"
-            columns: ["redeemed_child_id"]
-            isOneToOne: false
             referencedRelation: "children"
             referencedColumns: ["id"]
           },
@@ -5626,51 +5450,6 @@ export type Database = {
         }
         Relationships: []
       }
-      neuro_atividades: {
-        Row: {
-          categoria_nome: string
-          categoria_slug: string
-          criado_em: string | null
-          grupo: string
-          habilidade_clinica: string | null
-          id: string
-          instrucao: string | null
-          nivel_dificuldade: number | null
-          objetivo: string | null
-          payload: Json
-          variacao_id: string
-          variacao_index: number
-        }
-        Insert: {
-          categoria_nome: string
-          categoria_slug: string
-          criado_em?: string | null
-          grupo: string
-          habilidade_clinica?: string | null
-          id?: string
-          instrucao?: string | null
-          nivel_dificuldade?: number | null
-          objetivo?: string | null
-          payload: Json
-          variacao_id: string
-          variacao_index: number
-        }
-        Update: {
-          categoria_nome?: string
-          categoria_slug?: string
-          criado_em?: string | null
-          grupo?: string
-          habilidade_clinica?: string | null
-          id?: string
-          instrucao?: string | null
-          nivel_dificuldade?: number | null
-          objetivo?: string | null
-          payload?: Json
-          variacao_id?: string
-          variacao_index?: number
-        }
-        Relationships: []
-      }
       neuro_horarios: {
         Row: {
           child_id: string
@@ -9017,212 +8796,6 @@ export type Database = {
           },
         ]
       }
-      teacher_access_codes: {
-        Row: {
-          batch_id: string
-          code_hash: string
-          created_at: string
-          created_by: string
-          duration_days: number
-          expires_at: string
-          id: string
-          redeemed_at: string | null
-          redeemed_by: string | null
-          revoked_at: string | null
-        }
-        Insert: {
-          batch_id: string
-          code_hash: string
-          created_at?: string
-          created_by: string
-          duration_days?: number
-          expires_at: string
-          id?: string
-          redeemed_at?: string | null
-          redeemed_by?: string | null
-          revoked_at?: string | null
-        }
-        Update: {
-          batch_id?: string
-          code_hash?: string
-          created_at?: string
-          created_by?: string
-          duration_days?: number
-          expires_at?: string
-          id?: string
-          redeemed_at?: string | null
-          redeemed_by?: string | null
-          revoked_at?: string | null
-        }
-        Relationships: []
-      }
-      teacher_homework_assignments: {
-        Row: {
-          child_id: string
-          completed_at: string | null
-          created_at: string
-          due_date: string
-          guardian_user_id: string
-          id: string
-          inclusive_lesson_id: string | null
-          instructions: string
-          source_route: string | null
-          source_type: string
-          status: string
-          subject: string
-          teacher_student_link_id: string
-          teacher_user_id: string
-          title: string
-          updated_at: string
-        }
-        Insert: {
-          child_id: string
-          completed_at?: string | null
-          created_at?: string
-          due_date: string
-          guardian_user_id: string
-          id?: string
-          inclusive_lesson_id?: string | null
-          instructions: string
-          source_route?: string | null
-          source_type?: string
-          status?: string
-          subject: string
-          teacher_student_link_id: string
-          teacher_user_id: string
-          title: string
-          updated_at?: string
-        }
-        Update: {
-          child_id?: string
-          completed_at?: string | null
-          created_at?: string
-          due_date?: string
-          guardian_user_id?: string
-          id?: string
-          inclusive_lesson_id?: string | null
-          instructions?: string
-          source_route?: string | null
-          source_type?: string
-          status?: string
-          subject?: string
-          teacher_student_link_id?: string
-          teacher_user_id?: string
-          title?: string
-          updated_at?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "teacher_homework_assignments_child_id_fkey"
-            columns: ["child_id"]
-            isOneToOne: false
-            referencedRelation: "children"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "teacher_homework_assignments_inclusive_lesson_id_fkey"
-            columns: ["inclusive_lesson_id"]
-            isOneToOne: false
-            referencedRelation: "teacher_inclusive_lessons"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "teacher_homework_assignments_teacher_student_link_id_fkey"
-            columns: ["teacher_student_link_id"]
-            isOneToOne: false
-            referencedRelation: "teacher_student_links"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "teacher_homework_assignments_teacher_user_id_fkey"
-            columns: ["teacher_user_id"]
-            isOneToOne: false
-            referencedRelation: "teacher_profiles"
-            referencedColumns: ["user_id"]
-          },
-        ]
-      }
-      teacher_inclusive_lessons: {
-        Row: {
-          accessibility: Json
-          answer_key: Json
-          codigo_bncc: string
-          created_at: string
-          id: string
-          knowledge_object: string | null
-          learning_goal: string
-          pedagogical_reviewed: boolean
-          reviewed_at: string | null
-          reviewed_by: string | null
-          school_stage: string
-          school_year: string
-          source_fidelity_checked: boolean
-          source_lesson_key: string
-          source_route: string | null
-          source_version: string | null
-          status: string
-          student_pages: Json
-          subject: string
-          supported_profiles: string[]
-          teacher_pages: Json
-          technical_reviewed: boolean
-          title: string
-          updated_at: string
-        }
-        Insert: {
-          accessibility?: Json
-          answer_key?: Json
-          codigo_bncc: string
-          created_at?: string
-          id?: string
-          knowledge_object?: string | null
-          learning_goal: string
-          pedagogical_reviewed?: boolean
-          reviewed_at?: string | null
-          reviewed_by?: string | null
-          school_stage: string
-          school_year: string
-          source_fidelity_checked?: boolean
-          source_lesson_key: string
-          source_route?: string | null
-          source_version?: string | null
-          status?: string
-          student_pages?: Json
-          subject: string
-          supported_profiles?: string[]
-          teacher_pages?: Json
-          technical_reviewed?: boolean
-          title: string
-          updated_at?: string
-        }
-        Update: {
-          accessibility?: Json
-          answer_key?: Json
-          codigo_bncc?: string
-          created_at?: string
-          id?: string
-          knowledge_object?: string | null
-          learning_goal?: string
-          pedagogical_reviewed?: boolean
-          reviewed_at?: string | null
-          reviewed_by?: string | null
-          school_stage?: string
-          school_year?: string
-          source_fidelity_checked?: boolean
-          source_lesson_key?: string
-          source_route?: string | null
-          source_version?: string | null
-          status?: string
-          student_pages?: Json
-          subject?: string
-          supported_profiles?: string[]
-          teacher_pages?: Json
-          technical_reviewed?: boolean
-          title?: string
-          updated_at?: string
-        }
-        Relationships: []
-      }
       teacher_lesson_plans: {
         Row: {
           adaptacoes: Json | null
@@ -9270,335 +8843,6 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
-      }
-      teacher_pedagogical_assistant_usage: {
-        Row: {
-          request_count: number
-          teacher_user_id: string
-          updated_at: string
-          usage_date: string
-        }
-        Insert: {
-          request_count?: number
-          teacher_user_id: string
-          updated_at?: string
-          usage_date?: string
-        }
-        Update: {
-          request_count?: number
-          teacher_user_id?: string
-          updated_at?: string
-          usage_date?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "teacher_pedagogical_assistant_usage_teacher_user_id_fkey"
-            columns: ["teacher_user_id"]
-            isOneToOne: false
-            referencedRelation: "teacher_profiles"
-            referencedColumns: ["user_id"]
-          },
-        ]
-      }
-      teacher_profiles: {
-        Row: {
-          access_expires_at: string
-          access_source: string
-          created_at: string
-          display_name: string | null
-          professional_id: string | null
-          school_name: string | null
-          status: string
-          subjects: string[]
-          updated_at: string
-          user_id: string
-        }
-        Insert: {
-          access_expires_at?: string
-          access_source?: string
-          created_at?: string
-          display_name?: string | null
-          professional_id?: string | null
-          school_name?: string | null
-          status?: string
-          subjects?: string[]
-          updated_at?: string
-          user_id: string
-        }
-        Update: {
-          access_expires_at?: string
-          access_source?: string
-          created_at?: string
-          display_name?: string | null
-          professional_id?: string | null
-          school_name?: string | null
-          status?: string
-          subjects?: string[]
-          updated_at?: string
-          user_id?: string
-        }
-        Relationships: []
-      }
-      teacher_referral_benefits: {
-        Row: {
-          active_paid_students: number
-          last_nonzero_at: string | null
-          notified_at: string | null
-          reached_four_at: string | null
-          school_year: number
-          status: string
-          teacher_user_id: string
-          updated_at: string
-        }
-        Insert: {
-          active_paid_students?: number
-          last_nonzero_at?: string | null
-          notified_at?: string | null
-          reached_four_at?: string | null
-          school_year: number
-          status?: string
-          teacher_user_id: string
-          updated_at?: string
-        }
-        Update: {
-          active_paid_students?: number
-          last_nonzero_at?: string | null
-          notified_at?: string | null
-          reached_four_at?: string | null
-          school_year?: number
-          status?: string
-          teacher_user_id?: string
-          updated_at?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "teacher_referral_benefits_teacher_user_id_fkey"
-            columns: ["teacher_user_id"]
-            isOneToOne: false
-            referencedRelation: "teacher_profiles"
-            referencedColumns: ["user_id"]
-          },
-        ]
-      }
-      teacher_student_invite_codes: {
-        Row: {
-          batch_id: string
-          code_hash: string
-          created_at: string
-          expires_at: string
-          id: string
-          redeemed_at: string | null
-          redeemed_child_id: string | null
-          redeemed_guardian_id: string | null
-          revoked_at: string | null
-          teacher_user_id: string
-        }
-        Insert: {
-          batch_id: string
-          code_hash: string
-          created_at?: string
-          expires_at: string
-          id?: string
-          redeemed_at?: string | null
-          redeemed_child_id?: string | null
-          redeemed_guardian_id?: string | null
-          revoked_at?: string | null
-          teacher_user_id: string
-        }
-        Update: {
-          batch_id?: string
-          code_hash?: string
-          created_at?: string
-          expires_at?: string
-          id?: string
-          redeemed_at?: string | null
-          redeemed_child_id?: string | null
-          redeemed_guardian_id?: string | null
-          revoked_at?: string | null
-          teacher_user_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "teacher_student_invite_codes_redeemed_child_id_fkey"
-            columns: ["redeemed_child_id"]
-            isOneToOne: false
-            referencedRelation: "children"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "teacher_student_invite_codes_teacher_user_id_fkey"
-            columns: ["teacher_user_id"]
-            isOneToOne: false
-            referencedRelation: "teacher_profiles"
-            referencedColumns: ["user_id"]
-          },
-        ]
-      }
-      teacher_student_links: {
-        Row: {
-          child_id: string
-          consented_at: string
-          created_at: string
-          guardian_user_id: string
-          id: string
-          pedagogical_profile_consented_at: string | null
-          pedagogical_profile_revoked_at: string | null
-          revoked_at: string | null
-          status: string
-          teacher_user_id: string
-          updated_at: string
-          valid_until: string
-        }
-        Insert: {
-          child_id: string
-          consented_at?: string
-          created_at?: string
-          guardian_user_id: string
-          id?: string
-          pedagogical_profile_consented_at?: string | null
-          pedagogical_profile_revoked_at?: string | null
-          revoked_at?: string | null
-          status?: string
-          teacher_user_id: string
-          updated_at?: string
-          valid_until?: string
-        }
-        Update: {
-          child_id?: string
-          consented_at?: string
-          created_at?: string
-          guardian_user_id?: string
-          id?: string
-          pedagogical_profile_consented_at?: string | null
-          pedagogical_profile_revoked_at?: string | null
-          revoked_at?: string | null
-          status?: string
-          teacher_user_id?: string
-          updated_at?: string
-          valid_until?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "teacher_student_links_child_id_fkey"
-            columns: ["child_id"]
-            isOneToOne: false
-            referencedRelation: "children"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "teacher_student_links_teacher_user_id_fkey"
-            columns: ["teacher_user_id"]
-            isOneToOne: false
-            referencedRelation: "teacher_profiles"
-            referencedColumns: ["user_id"]
-          },
-        ]
-      }
-      teacher_student_support_profile_revisions: {
-        Row: {
-          action: string
-          actor_user_id: string
-          changed_fields: string[]
-          created_at: string
-          id: string
-          profile_id: string
-        }
-        Insert: {
-          action: string
-          actor_user_id: string
-          changed_fields?: string[]
-          created_at?: string
-          id?: string
-          profile_id: string
-        }
-        Update: {
-          action?: string
-          actor_user_id?: string
-          changed_fields?: string[]
-          created_at?: string
-          id?: string
-          profile_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "teacher_student_support_profile_revisions_profile_id_fkey"
-            columns: ["profile_id"]
-            isOneToOne: false
-            referencedRelation: "teacher_student_support_profiles"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      teacher_student_support_profiles: {
-        Row: {
-          avoided_strategies: string[]
-          communication_supports: string[]
-          created_at: string
-          effective_strategies: string[]
-          id: string
-          learning_strengths: string[]
-          link_id: string
-          literacy_supports: string[]
-          mathematics_supports: string[]
-          observation_context: string | null
-          preferred_response_modes: string[]
-          reviewed_at: string
-          reviewed_by: string
-          routine_and_attention_supports: string[]
-          sensory_environment_supports: string[]
-          status: string
-          support_needs: string[]
-          updated_at: string
-        }
-        Insert: {
-          avoided_strategies?: string[]
-          communication_supports?: string[]
-          created_at?: string
-          effective_strategies?: string[]
-          id?: string
-          learning_strengths?: string[]
-          link_id: string
-          literacy_supports?: string[]
-          mathematics_supports?: string[]
-          observation_context?: string | null
-          preferred_response_modes?: string[]
-          reviewed_at?: string
-          reviewed_by: string
-          routine_and_attention_supports?: string[]
-          sensory_environment_supports?: string[]
-          status?: string
-          support_needs?: string[]
-          updated_at?: string
-        }
-        Update: {
-          avoided_strategies?: string[]
-          communication_supports?: string[]
-          created_at?: string
-          effective_strategies?: string[]
-          id?: string
-          learning_strengths?: string[]
-          link_id?: string
-          literacy_supports?: string[]
-          mathematics_supports?: string[]
-          observation_context?: string | null
-          preferred_response_modes?: string[]
-          reviewed_at?: string
-          reviewed_by?: string
-          routine_and_attention_supports?: string[]
-          sensory_environment_supports?: string[]
-          status?: string
-          support_needs?: string[]
-          updated_at?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "teacher_student_support_profiles_link_id_fkey"
-            columns: ["link_id"]
-            isOneToOne: true
-            referencedRelation: "teacher_student_links"
-            referencedColumns: ["id"]
-          },
-        ]
       }
       teaching_strategies: {
         Row: {
@@ -10057,54 +9301,6 @@ export type Database = {
         Args: { amount: number; child_id: string }
         Returns: undefined
       }
-      admin_generate_child_free_codes: {
-        Args: { code_count?: number; duration_days?: number }
-        Returns: {
-          batch_id: string
-          code: string
-          expires_at: string
-        }[]
-      }
-      admin_generate_teacher_codes: {
-        Args: { code_count?: number }
-        Returns: {
-          batch_id: string
-          code: string
-          expires_at: string
-        }[]
-      }
-      admin_generate_teacher_free_codes: {
-        Args: { code_count: number; duration_days: number }
-        Returns: {
-          batch_id: string
-          code: string
-          expires_at: string
-        }[]
-      }
-      admin_list_teacher_accounts: {
-        Args: never
-        Returns: {
-          access_expires_at: string
-          access_source: string
-          active_paid_students: number
-          benefit_status: string
-          display_name: string
-          email: string
-          professional_id: string
-          reached_four: boolean
-          school_name: string
-          status: string
-          user_id: string
-        }[]
-      }
-      admin_set_teacher_access: {
-        Args: {
-          duration_days?: number
-          requested_action: string
-          target_user_id: string
-        }
-        Returns: string
-      }
       approve_lesson_draft: { Args: { _draft_id: string }; Returns: string }
       calcular_nivel_dominio: {
         Args: { _desempenho: number; _sessoes_consec: number }
@@ -10124,69 +9320,6 @@ export type Database = {
       }
       get_auth_user_id: { Args: never; Returns: string }
       grant_first_admin: { Args: never; Returns: string }
-      guardian_list_teacher_homework: {
-        Args: { selected_child_id: string }
-        Returns: {
-          child_id: string
-          completed_at: string | null
-          created_at: string
-          due_date: string
-          guardian_user_id: string
-          id: string
-          inclusive_lesson_id: string | null
-          instructions: string
-          source_route: string | null
-          source_type: string
-          status: string
-          subject: string
-          teacher_student_link_id: string
-          teacher_user_id: string
-          title: string
-          updated_at: string
-        }[]
-        SetofOptions: {
-          from: "*"
-          to: "teacher_homework_assignments"
-          isOneToOne: false
-          isSetofReturn: true
-        }
-      }
-      guardian_list_teacher_links: {
-        Args: { selected_child_id: string }
-        Returns: {
-          link_id: string
-          status: string
-          teacher_name: string
-          valid_until: string
-        }[]
-      }
-      guardian_list_teacher_profile_consents: {
-        Args: { selected_child_id: string }
-        Returns: {
-          link_id: string
-          profile_consented: boolean
-          profile_consented_at: string
-        }[]
-      }
-      guardian_redeem_child_free_code: {
-        Args: { raw_code: string; selected_child_id: string }
-        Returns: string
-      }
-      guardian_redeem_student_invite: {
-        Args: { raw_code: string; selected_child_id: string }
-        Returns: {
-          link_valid_until: string
-          teacher_name: string
-        }[]
-      }
-      guardian_set_teacher_profile_consent: {
-        Args: { allow_profile: boolean; selected_link_id: string }
-        Returns: boolean
-      }
-      guardian_update_teacher_homework_status: {
-        Args: { new_status: string; selected_assignment_id: string }
-        Returns: undefined
-      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -10238,10 +9371,6 @@ export type Database = {
         Returns: Json
       }
       rb_etapas_faltantes: { Args: { _aula_id: string }; Returns: string[] }
-      recalculate_teacher_referral_benefit: {
-        Args: { target_teacher: string }
-        Returns: undefined
-      }
       recomendar_revisoes: {
         Args: { _child_id: string }
         Returns: {
@@ -10262,10 +9391,6 @@ export type Database = {
           proxima_revisao: string
           ultimo_desempenho: number
         }[]
-      }
-      redeem_teacher_access_code: {
-        Args: { raw_code: string }
-        Returns: string
       }
       registrar_conclusao_aula:
         | {
@@ -10310,211 +9435,6 @@ export type Database = {
       }
       show_limit: { Args: never; Returns: number }
       show_trgm: { Args: { "": string }; Returns: string[] }
-      teacher_access_summary: {
-        Args: never
-        Returns: {
-          active_paid_students: number
-          benefit_status: string
-          reached_four: boolean
-          school_year: number
-        }[]
-      }
-      teacher_cancel_homework_assignment: {
-        Args: { selected_assignment_id: string }
-        Returns: undefined
-      }
-      teacher_consume_pedagogical_assistant_quota: {
-        Args: never
-        Returns: {
-          allowed: boolean
-          remaining: number
-        }[]
-      }
-      teacher_create_homework_assignment: {
-        Args: {
-          assignment_due_date: string
-          assignment_instructions: string
-          assignment_source_route?: string
-          assignment_source_type?: string
-          assignment_subject: string
-          assignment_title: string
-          selected_inclusive_lesson_id?: string
-          selected_link_id: string
-        }
-        Returns: string
-      }
-      teacher_generate_student_invites: {
-        Args: { code_count?: number }
-        Returns: {
-          batch_id: string
-          code: string
-          expires_at: string
-        }[]
-      }
-      teacher_get_inclusive_lesson: {
-        Args: { selected_id: string }
-        Returns: {
-          accessibility: Json
-          answer_key: Json
-          codigo_bncc: string
-          created_at: string
-          id: string
-          knowledge_object: string | null
-          learning_goal: string
-          pedagogical_reviewed: boolean
-          reviewed_at: string | null
-          reviewed_by: string | null
-          school_stage: string
-          school_year: string
-          source_fidelity_checked: boolean
-          source_lesson_key: string
-          source_route: string | null
-          source_version: string | null
-          status: string
-          student_pages: Json
-          subject: string
-          supported_profiles: string[]
-          teacher_pages: Json
-          technical_reviewed: boolean
-          title: string
-          updated_at: string
-        }[]
-        SetofOptions: {
-          from: "*"
-          to: "teacher_inclusive_lessons"
-          isOneToOne: false
-          isSetofReturn: true
-        }
-      }
-      teacher_get_student_homework_summary: {
-        Args: { selected_link_id: string }
-        Returns: {
-          assigned_count: number
-          completed_count: number
-          overdue_count: number
-          started_count: number
-        }[]
-      }
-      teacher_get_student_learning_summary: {
-        Args: { selected_link_id: string }
-        Returns: {
-          completed_skills: number
-          in_progress_skills: number
-          last_activity_at: string
-          observed_skills: number
-          subject: string
-        }[]
-      }
-      teacher_get_student_support_profile: {
-        Args: { selected_link_id: string }
-        Returns: {
-          avoided_strategies: string[]
-          communication_supports: string[]
-          created_at: string
-          effective_strategies: string[]
-          id: string
-          learning_strengths: string[]
-          link_id: string
-          literacy_supports: string[]
-          mathematics_supports: string[]
-          observation_context: string | null
-          preferred_response_modes: string[]
-          reviewed_at: string
-          reviewed_by: string
-          routine_and_attention_supports: string[]
-          sensory_environment_supports: string[]
-          status: string
-          support_needs: string[]
-          updated_at: string
-        }[]
-        SetofOptions: {
-          from: "*"
-          to: "teacher_student_support_profiles"
-          isOneToOne: false
-          isSetofReturn: true
-        }
-      }
-      teacher_list_homework_assignments: {
-        Args: never
-        Returns: {
-          child_id: string
-          completed_at: string | null
-          created_at: string
-          due_date: string
-          guardian_user_id: string
-          id: string
-          inclusive_lesson_id: string | null
-          instructions: string
-          source_route: string | null
-          source_type: string
-          status: string
-          subject: string
-          teacher_student_link_id: string
-          teacher_user_id: string
-          title: string
-          updated_at: string
-        }[]
-        SetofOptions: {
-          from: "*"
-          to: "teacher_homework_assignments"
-          isOneToOne: false
-          isSetofReturn: true
-        }
-      }
-      teacher_list_students: {
-        Args: never
-        Returns: {
-          child_id: string
-          child_name: string
-          link_id: string
-          school_year: string
-          valid_until: string
-        }[]
-      }
-      teacher_save_student_support_profile: {
-        Args: {
-          new_avoided_strategies?: string[]
-          new_communication_supports?: string[]
-          new_effective_strategies?: string[]
-          new_learning_strengths?: string[]
-          new_literacy_supports?: string[]
-          new_mathematics_supports?: string[]
-          new_observation_context?: string
-          new_preferred_response_modes?: string[]
-          new_routine_and_attention_supports?: string[]
-          new_sensory_environment_supports?: string[]
-          new_support_needs?: string[]
-          selected_link_id: string
-        }
-        Returns: string
-      }
-      teacher_search_inclusive_lessons: {
-        Args: {
-          filter_profile?: string
-          filter_subject?: string
-          filter_year?: string
-          result_limit?: number
-          search_text?: string
-        }
-        Returns: {
-          codigo_bncc: string
-          id: string
-          knowledge_object: string
-          learning_goal: string
-          school_stage: string
-          school_year: string
-          subject: string
-          supported_profiles: string[]
-          title: string
-        }[]
-      }
-      teacher_student_profile_access_status: {
-        Args: { selected_link_id: string }
-        Returns: {
-          allowed: boolean
-          reason: string
-        }[]
-      }
     }
     Enums: {
       app_role: "admin" | "moderator" | "user"
@@ -10634,12 +9554,12 @@ export type Tables<
   DefaultSchemaTableNameOrOptions extends
     | keyof (DefaultSchema["Tables"] & DefaultSchema["Views"])
     | { schema: keyof DatabaseWithoutInternals },
-  TableName extends (DefaultSchemaTableNameOrOptions extends {
+  TableName extends DefaultSchemaTableNameOrOptions extends {
     schema: keyof DatabaseWithoutInternals
   }
     ? keyof (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
         DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])
-    : never) = never,
+    : never = never,
 > = DefaultSchemaTableNameOrOptions extends {
   schema: keyof DatabaseWithoutInternals
 }
@@ -10663,11 +9583,11 @@ export type TablesInsert<
   DefaultSchemaTableNameOrOptions extends
     | keyof DefaultSchema["Tables"]
     | { schema: keyof DatabaseWithoutInternals },
-  TableName extends (DefaultSchemaTableNameOrOptions extends {
+  TableName extends DefaultSchemaTableNameOrOptions extends {
     schema: keyof DatabaseWithoutInternals
   }
     ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
-    : never) = never,
+    : never = never,
 > = DefaultSchemaTableNameOrOptions extends {
   schema: keyof DatabaseWithoutInternals
 }
@@ -10688,11 +9608,11 @@ export type TablesUpdate<
   DefaultSchemaTableNameOrOptions extends
     | keyof DefaultSchema["Tables"]
     | { schema: keyof DatabaseWithoutInternals },
-  TableName extends (DefaultSchemaTableNameOrOptions extends {
+  TableName extends DefaultSchemaTableNameOrOptions extends {
     schema: keyof DatabaseWithoutInternals
   }
     ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
-    : never) = never,
+    : never = never,
 > = DefaultSchemaTableNameOrOptions extends {
   schema: keyof DatabaseWithoutInternals
 }
@@ -10713,11 +9633,11 @@ export type Enums<
   DefaultSchemaEnumNameOrOptions extends
     | keyof DefaultSchema["Enums"]
     | { schema: keyof DatabaseWithoutInternals },
-  EnumName extends (DefaultSchemaEnumNameOrOptions extends {
+  EnumName extends DefaultSchemaEnumNameOrOptions extends {
     schema: keyof DatabaseWithoutInternals
   }
     ? keyof DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"]
-    : never) = never,
+    : never = never,
 > = DefaultSchemaEnumNameOrOptions extends {
   schema: keyof DatabaseWithoutInternals
 }
@@ -10730,11 +9650,11 @@ export type CompositeTypes<
   PublicCompositeTypeNameOrOptions extends
     | keyof DefaultSchema["CompositeTypes"]
     | { schema: keyof DatabaseWithoutInternals },
-  CompositeTypeName extends (PublicCompositeTypeNameOrOptions extends {
+  CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
     schema: keyof DatabaseWithoutInternals
   }
     ? keyof DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
-    : never) = never,
+    : never = never,
 > = PublicCompositeTypeNameOrOptions extends {
   schema: keyof DatabaseWithoutInternals
 }

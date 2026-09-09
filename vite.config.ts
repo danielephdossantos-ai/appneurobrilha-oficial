@@ -8,7 +8,10 @@ export default defineConfig({
   },
   vite: {
     plugins: [
-      mcpPlugin(),
+      // O plugin MCP do Lovable usa caminhos no formato Unix e falha ao abrir
+      // o projeto localmente no Windows. Ele não é necessário para visualizar
+      // ou testar o app no VS Code, então fica ativo apenas nos demais ambientes.
+      ...(process.platform === "win32" ? [] : [mcpPlugin()]),
       VitePWA({
       registerType: "prompt",
       includeAssets: ["favicon.ico", "apple-touch-icon.png", "pwa-192x192.png", "pwa-512x512.png", "pwa-maskable-512x512.png"],

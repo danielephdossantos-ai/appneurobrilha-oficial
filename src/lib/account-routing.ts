@@ -18,10 +18,19 @@ export async function resolveAccountDestination(
     (supabase as any).from("teacher_profiles").select("user_id").eq("user_id", user.id).maybeSingle(),
   ]);
 
-  if (adminRole) return "/admin";
-
   const storedType = user.user_metadata?.account_type;
   const accountType = preferred ?? (storedType === "teacher" || storedType === "family" ? storedType : null);
+
+  // A conta proprietária/admin pode escolher qual experiência abrir no login.
+  // Sem uma escolha explícita, continua entrando no painel administrativo.
+  if (adminRole) {
+    if (accountType === "teacher") return "/area-professor";
+    if (accountType === "family") return requestedNext && !requestedNext.startsWith("/area-professor")
+      ? requestedNext
+      : "/";
+    return "/admin";
+  }
+
   if (teacherProfile || accountType === "teacher") return "/area-professor";
 
   if (requestedNext && !requestedNext.startsWith("/area-professor") && !requestedNext.startsWith("/admin")) {

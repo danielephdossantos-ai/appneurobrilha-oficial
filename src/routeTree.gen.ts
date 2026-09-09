@@ -28,6 +28,7 @@ import { Route as ConectarRouteImport } from './routes/conectar'
 import { Route as CuradoriaAulasRouteImport } from './routes/curadoria-aulas'
 import { Route as CurriculoAnualRouteImport } from './routes/curriculo-anual'
 import { Route as GeradorProceduralRouteImport } from './routes/gerador-procedural'
+import { Route as HistoriasBrilhaRouteImport } from './routes/historias-brilha'
 import { Route as LojaMascotesRouteImport } from './routes/loja-mascotes'
 import { Route as MascotesRouteImport } from './routes/mascotes'
 import { Route as MatrizPedagogicaRouteImport } from './routes/matriz-pedagogica'
@@ -46,8 +47,11 @@ import { Route as ProfessorMatematicaRouteImport } from './routes/professor-mate
 import { Route as ProgressaoRouteImport } from './routes/progressao'
 import { Route as ReforcoBrilhaRouteImport } from './routes/reforco-brilha'
 import { Route as RelatorioRouteImport } from './routes/relatorio'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as RotinaRouteImport } from './routes/rotina'
 import { Route as RotinaEscritaRouteImport } from './routes/rotina-escrita'
+import { Route as SoletracaoBrilhaRouteImport } from './routes/soletracao-brilha'
+import { Route as TabuadaBrilhaRouteImport } from './routes/tabuada-brilha'
 import { Route as TerapeutaBrilhaRouteImport } from './routes/terapeuta-brilha'
 import { Route as TermosRouteImport } from './routes/termos'
 import { Route as TrilhasRouteImport } from './routes/trilhas'
@@ -57,6 +61,7 @@ import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as AdminProfessoresRouteImport } from './routes/admin.professores'
 import { Route as AjusteDificuldadesChildIdRouteImport } from './routes/ajuste-dificuldades.$childId'
 import { Route as AnamneseChildIdRouteImport } from './routes/anamnese.$childId'
+import { Route as AreaProfessorAlfabetizacaoRouteImport } from './routes/area-professor.alfabetizacao'
 import { Route as AreaProfessorAssistentePedagogicoRouteImport } from './routes/area-professor.assistente-pedagogico'
 import { Route as AreaProfessorBibliotecaInclusivaRouteImport } from './routes/area-professor.biblioteca-inclusiva'
 import { Route as AreaProfessorPraticaRouteImport } from './routes/area-professor.pratica'
@@ -203,6 +208,11 @@ const GeradorProceduralRoute = GeradorProceduralRouteImport.update({
   path: '/gerador-procedural',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HistoriasBrilhaRoute = HistoriasBrilhaRouteImport.update({
+  id: '/historias-brilha',
+  path: '/historias-brilha',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LojaMascotesRoute = LojaMascotesRouteImport.update({
   id: '/loja-mascotes',
   path: '/loja-mascotes',
@@ -293,6 +303,11 @@ const RelatorioRoute = RelatorioRouteImport.update({
   path: '/relatorio',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RotinaRoute = RotinaRouteImport.update({
   id: '/rotina',
   path: '/rotina',
@@ -301,6 +316,16 @@ const RotinaRoute = RotinaRouteImport.update({
 const RotinaEscritaRoute = RotinaEscritaRouteImport.update({
   id: '/rotina-escrita',
   path: '/rotina-escrita',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SoletracaoBrilhaRoute = SoletracaoBrilhaRouteImport.update({
+  id: '/soletracao-brilha',
+  path: '/soletracao-brilha',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TabuadaBrilhaRoute = TabuadaBrilhaRouteImport.update({
+  id: '/tabuada-brilha',
+  path: '/tabuada-brilha',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TerapeutaBrilhaRoute = TerapeutaBrilhaRouteImport.update({
@@ -351,6 +376,12 @@ const AnamneseChildIdRoute = AnamneseChildIdRouteImport.update({
   path: '/anamnese/$childId',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AreaProfessorAlfabetizacaoRoute =
+  AreaProfessorAlfabetizacaoRouteImport.update({
+    id: '/alfabetizacao',
+    path: '/alfabetizacao',
+    getParentRoute: () => AreaProfessorRoute,
+  } as any)
 const AreaProfessorAssistentePedagogicoRoute =
   AreaProfessorAssistentePedagogicoRouteImport.update({
     id: '/assistente-pedagogico',
@@ -659,6 +690,7 @@ export interface FileRoutesByFullPath {
   '/curadoria-aulas': typeof CuradoriaAulasRoute
   '/curriculo-anual': typeof CurriculoAnualRoute
   '/gerador-procedural': typeof GeradorProceduralRoute
+  '/historias-brilha': typeof HistoriasBrilhaRoute
   '/loja-mascotes': typeof LojaMascotesRoute
   '/mascotes': typeof MascotesRoute
   '/matriz-pedagogica': typeof MatrizPedagogicaRoute
@@ -677,8 +709,11 @@ export interface FileRoutesByFullPath {
   '/progressao': typeof ProgressaoRoute
   '/reforco-brilha': typeof ReforcoBrilhaRoute
   '/relatorio': typeof RelatorioRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/rotina': typeof RotinaRoute
   '/rotina-escrita': typeof RotinaEscritaRoute
+  '/soletracao-brilha': typeof SoletracaoBrilhaRoute
+  '/tabuada-brilha': typeof TabuadaBrilhaRoute
   '/terapeuta-brilha': typeof TerapeutaBrilhaRoute
   '/termos': typeof TermosRoute
   '/trilhas': typeof TrilhasRoute
@@ -687,6 +722,7 @@ export interface FileRoutesByFullPath {
   '/admin/professores': typeof AdminProfessoresRoute
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
+  '/area-professor/alfabetizacao': typeof AreaProfessorAlfabetizacaoRoute
   '/area-professor/assistente-pedagogico': typeof AreaProfessorAssistentePedagogicoRoute
   '/area-professor/biblioteca-inclusiva': typeof AreaProfessorBibliotecaInclusivaRoute
   '/area-professor/pratica': typeof AreaProfessorPraticaRoute
@@ -758,6 +794,7 @@ export interface FileRoutesByTo {
   '/curadoria-aulas': typeof CuradoriaAulasRoute
   '/curriculo-anual': typeof CurriculoAnualRoute
   '/gerador-procedural': typeof GeradorProceduralRoute
+  '/historias-brilha': typeof HistoriasBrilhaRoute
   '/loja-mascotes': typeof LojaMascotesRoute
   '/mascotes': typeof MascotesRoute
   '/matriz-pedagogica': typeof MatrizPedagogicaRoute
@@ -776,8 +813,11 @@ export interface FileRoutesByTo {
   '/progressao': typeof ProgressaoRoute
   '/reforco-brilha': typeof ReforcoBrilhaRoute
   '/relatorio': typeof RelatorioRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/rotina': typeof RotinaRoute
   '/rotina-escrita': typeof RotinaEscritaRoute
+  '/soletracao-brilha': typeof SoletracaoBrilhaRoute
+  '/tabuada-brilha': typeof TabuadaBrilhaRoute
   '/terapeuta-brilha': typeof TerapeutaBrilhaRoute
   '/termos': typeof TermosRoute
   '/trilhas': typeof TrilhasRoute
@@ -786,6 +826,7 @@ export interface FileRoutesByTo {
   '/admin/professores': typeof AdminProfessoresRoute
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
+  '/area-professor/alfabetizacao': typeof AreaProfessorAlfabetizacaoRoute
   '/area-professor/assistente-pedagogico': typeof AreaProfessorAssistentePedagogicoRoute
   '/area-professor/biblioteca-inclusiva': typeof AreaProfessorBibliotecaInclusivaRoute
   '/area-professor/pratica': typeof AreaProfessorPraticaRoute
@@ -859,6 +900,7 @@ export interface FileRoutesById {
   '/curadoria-aulas': typeof CuradoriaAulasRoute
   '/curriculo-anual': typeof CurriculoAnualRoute
   '/gerador-procedural': typeof GeradorProceduralRoute
+  '/historias-brilha': typeof HistoriasBrilhaRoute
   '/loja-mascotes': typeof LojaMascotesRoute
   '/mascotes': typeof MascotesRoute
   '/matriz-pedagogica': typeof MatrizPedagogicaRoute
@@ -877,8 +919,11 @@ export interface FileRoutesById {
   '/progressao': typeof ProgressaoRoute
   '/reforco-brilha': typeof ReforcoBrilhaRoute
   '/relatorio': typeof RelatorioRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/rotina': typeof RotinaRoute
   '/rotina-escrita': typeof RotinaEscritaRoute
+  '/soletracao-brilha': typeof SoletracaoBrilhaRoute
+  '/tabuada-brilha': typeof TabuadaBrilhaRoute
   '/terapeuta-brilha': typeof TerapeutaBrilhaRoute
   '/termos': typeof TermosRoute
   '/trilhas': typeof TrilhasRoute
@@ -887,6 +932,7 @@ export interface FileRoutesById {
   '/admin/professores': typeof AdminProfessoresRoute
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
+  '/area-professor/alfabetizacao': typeof AreaProfessorAlfabetizacaoRoute
   '/area-professor/assistente-pedagogico': typeof AreaProfessorAssistentePedagogicoRoute
   '/area-professor/biblioteca-inclusiva': typeof AreaProfessorBibliotecaInclusivaRoute
   '/area-professor/pratica': typeof AreaProfessorPraticaRoute
@@ -961,6 +1007,7 @@ export interface FileRouteTypes {
     | '/curadoria-aulas'
     | '/curriculo-anual'
     | '/gerador-procedural'
+    | '/historias-brilha'
     | '/loja-mascotes'
     | '/mascotes'
     | '/matriz-pedagogica'
@@ -979,8 +1026,11 @@ export interface FileRouteTypes {
     | '/progressao'
     | '/reforco-brilha'
     | '/relatorio'
+    | '/reset-password'
     | '/rotina'
     | '/rotina-escrita'
+    | '/soletracao-brilha'
+    | '/tabuada-brilha'
     | '/terapeuta-brilha'
     | '/termos'
     | '/trilhas'
@@ -989,6 +1039,7 @@ export interface FileRouteTypes {
     | '/admin/professores'
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
+    | '/area-professor/alfabetizacao'
     | '/area-professor/assistente-pedagogico'
     | '/area-professor/biblioteca-inclusiva'
     | '/area-professor/pratica'
@@ -1060,6 +1111,7 @@ export interface FileRouteTypes {
     | '/curadoria-aulas'
     | '/curriculo-anual'
     | '/gerador-procedural'
+    | '/historias-brilha'
     | '/loja-mascotes'
     | '/mascotes'
     | '/matriz-pedagogica'
@@ -1078,8 +1130,11 @@ export interface FileRouteTypes {
     | '/progressao'
     | '/reforco-brilha'
     | '/relatorio'
+    | '/reset-password'
     | '/rotina'
     | '/rotina-escrita'
+    | '/soletracao-brilha'
+    | '/tabuada-brilha'
     | '/terapeuta-brilha'
     | '/termos'
     | '/trilhas'
@@ -1088,6 +1143,7 @@ export interface FileRouteTypes {
     | '/admin/professores'
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
+    | '/area-professor/alfabetizacao'
     | '/area-professor/assistente-pedagogico'
     | '/area-professor/biblioteca-inclusiva'
     | '/area-professor/pratica'
@@ -1160,6 +1216,7 @@ export interface FileRouteTypes {
     | '/curadoria-aulas'
     | '/curriculo-anual'
     | '/gerador-procedural'
+    | '/historias-brilha'
     | '/loja-mascotes'
     | '/mascotes'
     | '/matriz-pedagogica'
@@ -1178,8 +1235,11 @@ export interface FileRouteTypes {
     | '/progressao'
     | '/reforco-brilha'
     | '/relatorio'
+    | '/reset-password'
     | '/rotina'
     | '/rotina-escrita'
+    | '/soletracao-brilha'
+    | '/tabuada-brilha'
     | '/terapeuta-brilha'
     | '/termos'
     | '/trilhas'
@@ -1188,6 +1248,7 @@ export interface FileRouteTypes {
     | '/admin/professores'
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
+    | '/area-professor/alfabetizacao'
     | '/area-professor/assistente-pedagogico'
     | '/area-professor/biblioteca-inclusiva'
     | '/area-professor/pratica'
@@ -1261,6 +1322,7 @@ export interface RootRouteChildren {
   CuradoriaAulasRoute: typeof CuradoriaAulasRoute
   CurriculoAnualRoute: typeof CurriculoAnualRoute
   GeradorProceduralRoute: typeof GeradorProceduralRoute
+  HistoriasBrilhaRoute: typeof HistoriasBrilhaRoute
   LojaMascotesRoute: typeof LojaMascotesRoute
   MascotesRoute: typeof MascotesRoute
   MatrizPedagogicaRoute: typeof MatrizPedagogicaRoute
@@ -1279,8 +1341,11 @@ export interface RootRouteChildren {
   ProgressaoRoute: typeof ProgressaoRoute
   ReforcoBrilhaRoute: typeof ReforcoBrilhaRoute
   RelatorioRoute: typeof RelatorioRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
   RotinaRoute: typeof RotinaRoute
   RotinaEscritaRoute: typeof RotinaEscritaRoute
+  SoletracaoBrilhaRoute: typeof SoletracaoBrilhaRoute
+  TabuadaBrilhaRoute: typeof TabuadaBrilhaRoute
   TerapeutaBrilhaRoute: typeof TerapeutaBrilhaRoute
   TermosRoute: typeof TermosRoute
   TrilhasRoute: typeof TrilhasRoute
@@ -1459,6 +1524,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GeradorProceduralRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/historias-brilha': {
+      id: '/historias-brilha'
+      path: '/historias-brilha'
+      fullPath: '/historias-brilha'
+      preLoaderRoute: typeof HistoriasBrilhaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/loja-mascotes': {
       id: '/loja-mascotes'
       path: '/loja-mascotes'
@@ -1585,6 +1657,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RelatorioRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/rotina': {
       id: '/rotina'
       path: '/rotina'
@@ -1597,6 +1676,20 @@ declare module '@tanstack/react-router' {
       path: '/rotina-escrita'
       fullPath: '/rotina-escrita'
       preLoaderRoute: typeof RotinaEscritaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/soletracao-brilha': {
+      id: '/soletracao-brilha'
+      path: '/soletracao-brilha'
+      fullPath: '/soletracao-brilha'
+      preLoaderRoute: typeof SoletracaoBrilhaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tabuada-brilha': {
+      id: '/tabuada-brilha'
+      path: '/tabuada-brilha'
+      fullPath: '/tabuada-brilha'
+      preLoaderRoute: typeof TabuadaBrilhaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/terapeuta-brilha': {
@@ -1661,6 +1754,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/anamnese/$childId'
       preLoaderRoute: typeof AnamneseChildIdRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/area-professor/alfabetizacao': {
+      id: '/area-professor/alfabetizacao'
+      path: '/alfabetizacao'
+      fullPath: '/area-professor/alfabetizacao'
+      preLoaderRoute: typeof AreaProfessorAlfabetizacaoRouteImport
+      parentRoute: typeof AreaProfessorRoute
     }
     '/area-professor/assistente-pedagogico': {
       id: '/area-professor/assistente-pedagogico'
@@ -2028,6 +2128,7 @@ const AdminRouteChildren: AdminRouteChildren = {
 const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
 interface AreaProfessorRouteChildren {
+  AreaProfessorAlfabetizacaoRoute: typeof AreaProfessorAlfabetizacaoRoute
   AreaProfessorAssistentePedagogicoRoute: typeof AreaProfessorAssistentePedagogicoRoute
   AreaProfessorBibliotecaInclusivaRoute: typeof AreaProfessorBibliotecaInclusivaRoute
   AreaProfessorPraticaRoute: typeof AreaProfessorPraticaRoute
@@ -2038,6 +2139,7 @@ interface AreaProfessorRouteChildren {
 }
 
 const AreaProfessorRouteChildren: AreaProfessorRouteChildren = {
+  AreaProfessorAlfabetizacaoRoute: AreaProfessorAlfabetizacaoRoute,
   AreaProfessorAssistentePedagogicoRoute:
     AreaProfessorAssistentePedagogicoRoute,
   AreaProfessorBibliotecaInclusivaRoute: AreaProfessorBibliotecaInclusivaRoute,
@@ -2124,6 +2226,7 @@ const rootRouteChildren: RootRouteChildren = {
   CuradoriaAulasRoute: CuradoriaAulasRoute,
   CurriculoAnualRoute: CurriculoAnualRoute,
   GeradorProceduralRoute: GeradorProceduralRoute,
+  HistoriasBrilhaRoute: HistoriasBrilhaRoute,
   LojaMascotesRoute: LojaMascotesRoute,
   MascotesRoute: MascotesRoute,
   MatrizPedagogicaRoute: MatrizPedagogicaRoute,
@@ -2142,8 +2245,11 @@ const rootRouteChildren: RootRouteChildren = {
   ProgressaoRoute: ProgressaoRoute,
   ReforcoBrilhaRoute: ReforcoBrilhaRoute,
   RelatorioRoute: RelatorioRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
   RotinaRoute: RotinaRoute,
   RotinaEscritaRoute: RotinaEscritaRoute,
+  SoletracaoBrilhaRoute: SoletracaoBrilhaRoute,
+  TabuadaBrilhaRoute: TabuadaBrilhaRoute,
   TerapeutaBrilhaRoute: TerapeutaBrilhaRoute,
   TermosRoute: TermosRoute,
   TrilhasRoute: TrilhasRoute,

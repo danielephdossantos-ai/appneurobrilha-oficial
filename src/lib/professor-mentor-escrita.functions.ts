@@ -5,6 +5,7 @@ import { getEscritaStatus, EscritaStatus } from "./motor-escrita.functions";
 import { MOTOR_PEDAGOGICO } from "./motor-pedagogico-data";
 import { extrairHiperfoco } from "./hiperfoco-utils";
 import { supabase } from "@/integrations/supabase/client";
+import { PROFESSOR_MENTOR_PEDAGOGIA } from "./professor-mentor-pedagogia";
 
 // Tipagem da atividade na biblioteca
 export interface AtividadeEscritaBiblioteca {
@@ -109,6 +110,8 @@ export const gerarAtividadeEscritaIA = createServerFn({ method: "POST" })
 
     const systemPrompt = `Você é o PROFESSOR MENTOR DE ESCRITA do NeuroBrilha Kids.
 Sua missão é gerar a PRÓXIMA atividade de escrita perfeitamente adequada ao nível da criança.
+
+${PROFESSOR_MENTOR_PEDAGOGIA}
 
 REGRAS DE OURO:
 1. IA NÃO cria atividades livremente. Você segue o motor pedagógico.

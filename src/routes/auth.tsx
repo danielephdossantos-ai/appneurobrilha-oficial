@@ -1,9 +1,9 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Loader2 } from "lucide-react";
+import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { supabase } from "@/database/supabase/client";
-import { toast } from "sonner";
 import { lovable } from "@/integrations/lovable";
+import { toast } from "sonner";
 import { resolveAccountDestination, saveAccountType, type AccountType } from "@/lib/account-routing";
 
 function safeNext(value: unknown): string {
@@ -28,9 +28,10 @@ function Auth() {
   const { next } = Route.useSearch();
   const [accountType, setAccountType] = useState<AccountType | null>(null);
   const dest = next || (accountType === "teacher" ? "/area-professor" : "/");
-  const [mode, setMode] = useState<"login" | "signup">("login");
+  const [mode, setMode] = useState<"login" | "signup" | "forgot">("login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [checking, setChecking] = useState(true);
 
@@ -68,9 +69,18 @@ function Auth() {
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email || !password) return;
+    if (!email || (mode !== "forgot" && !password)) return;
     setLoading(true);
     try {
+      if (mode === "forgot") {
+        const { error } = await supabase.auth.resetPasswordForEmail(email, {
+          redirectTo: `${window.location.origin}/reset-password`,
+        });
+        if (error) throw error;
+        toast.success("Enviamos o link para criar uma nova senha. Confira também o spam.");
+        setMode("login");
+        return;
+      }
       if (mode === "signup") {
         const { error } = await supabase.auth.signUp({
           email,
@@ -174,7 +184,7 @@ function Auth() {
           className="w-full bg-background/90 backdrop-blur rounded-3xl border-2 border-white/30 p-5 flex flex-col gap-3 shadow-xl"
         >
           <h2 className="text-lg font-black text-foreground text-center">
-            {mode === "login" ? "Entrar" : "Criar conta"} · {accountType === "teacher" ? "Professor" : "Família"}
+            {mode === "login" ? "Entrar" : mode === "signup" ? "Criar conta" : "Redefinir senha"} · {accountType === "teacher" ? "Professor" : "Família"}
           </h2>
           <p className="text-xs text-muted-foreground text-center -mt-2">
             Login uma única vez — o app lembra de você neste aparelho.
@@ -191,17 +201,26 @@ function Auth() {
             placeholder="seu@email.com"
           />
 
-          <label className="text-xs font-bold text-foreground">Senha</label>
-          <input
-            type="password"
-            required
-            minLength={6}
-            autoComplete={mode === "login" ? "current-password" : "new-password"}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="rounded-xl border-2 border-input bg-background px-3 py-2.5 text-sm font-medium focus:outline-none focus:border-primary"
-            placeholder="Mínimo 6 caracteres"
-          />
+          {mode !== "forgot" && (
+            <>
+              <label className="text-xs font-bold text-foreground">Senha</label>
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  required
+                  minLength={6}
+                  autoComplete={mode === "login" ? "current-password" : "new-password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full rounded-xl border-2 border-input bg-background px-3 py-2.5 pr-11 text-sm font-medium focus:outline-none focus:border-primary"
+                  placeholder="Mínimo 6 caracteres"
+                />
+                <button type="button" onClick={() => setShowPassword((value) => !value)} aria-label={showPassword ? "Ocultar senha" : "Mostrar senha"} className="absolute inset-y-0 right-0 grid w-11 place-items-center text-muted-foreground">
+                  {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                </button>
+              </div>
+            </>
+          )}
 
           <button
             type="submit"
@@ -209,20 +228,31 @@ function Auth() {
             className="mt-2 rounded-xl bg-primary text-primary-foreground font-black py-3 text-sm uppercase tracking-wider hover:bg-primary/90 transition disabled:opacity-60 flex items-center justify-center gap-2"
           >
             {loading && <Loader2 className="h-4 w-4 animate-spin" />}
-            {mode === "login" ? "Entrar" : "Criar conta"}
+            {mode === "login" ? "Entrar" : mode === "signup" ? "Criar conta" : "Enviar link de redefinição"}
           </button>
+
+          {mode === "login" && (
+            <button type="button" onClick={() => setMode("forgot")} className="text-xs font-bold text-primary hover:underline">
+              Esqueci minha senha
+            </button>
+          )}
+          {mode === "forgot" && (
+            <button type="button" onClick={() => setMode("login")} className="text-xs font-bold text-muted-foreground hover:underline">
+              Voltar para entrar
+            </button>
+          )}
 
           <button type="button" onClick={() => setAccountType(null)} className="text-xs font-bold text-muted-foreground hover:underline">
             Trocar tipo de acesso
           </button>
 
-          <div className="flex items-center gap-2 my-1">
+          {mode !== "forgot" && <div className="flex items-center gap-2 my-1">
             <div className="h-px flex-1 bg-border" />
             <span className="text-[10px] font-bold text-muted-foreground uppercase">ou</span>
             <div className="h-px flex-1 bg-border" />
-          </div>
+          </div>}
 
-          <button
+          {mode !== "forgot" && <button
             type="button"
             disabled={loading}
             onClick={async () => {
@@ -231,29 +261,40 @@ function Auth() {
                 sessionStorage.setItem("nb:auth-next", dest);
                 sessionStorage.setItem("nb:account-type", accountType);
               } catch {}
-              const res = await lovable.auth.signInWithOAuth("google", {
+              const result = await lovable.auth.signInWithOAuth("google", {
                 redirect_uri: `${window.location.origin}/auth`,
               });
-              if (res.error) {
-                toast.error(res.error.message ?? "Erro no login Google");
+              if (result.error) {
+                toast.error(result.error.message ?? "Erro no login Google");
                 setLoading(false);
                 return;
               }
-              if (!res.redirected) {
-                try {
-                  sessionStorage.removeItem("nb:auth-next");
-                } catch {}
-                navigate({ href: dest, replace: true });
+              // Quando o Lovable Cloud conclui sem redirecionar, a integração já
+              // gravou os tokens no cliente Supabase. Resolve o destino agora.
+              if (!result.redirected) {
+                const { data: sessionData } = await supabase.auth.getSession();
+                if (sessionData.session) {
+                  await saveAccountType(accountType);
+                  const target = await resolveAccountDestination(
+                    sessionData.session.user,
+                    accountType,
+                    readStoredNext() || next,
+                  );
+                  navigate({ href: target, replace: true });
+                } else {
+                  toast.error("O Google não concluiu a entrada. Tente novamente.");
+                  setLoading(false);
+                }
               }
             }}
             className="rounded-xl border-2 border-input bg-background text-foreground font-bold py-3 text-sm hover:bg-accent transition disabled:opacity-60 flex items-center justify-center gap-2"
           >
             <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3c-1.6 4.7-6.1 8-11.3 8-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.1 7.9 3l5.7-5.7C34.6 6.1 29.6 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.3-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.6 16 19 13 24 13c3.1 0 5.8 1.1 7.9 3l5.7-5.7C34.6 6.1 29.6 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.5 0 10.5-2.1 14.3-5.5l-6.6-5.6C29.6 34.6 26.9 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.2 5.8l6.6 5.6C41.5 36.4 44 30.7 44 24c0-1.3-.1-2.3-.4-3.5z"/></svg>
             Continuar com Google
-          </button>
+          </button>}
 
 
-          <button
+          {mode !== "forgot" && <button
             type="button"
             onClick={() => setMode(mode === "login" ? "signup" : "login")}
             className="text-xs font-bold text-primary hover:underline"
@@ -261,7 +302,7 @@ function Auth() {
             {mode === "login"
               ? "Não tem conta? Criar agora"
               : "Já tem conta? Entrar"}
-          </button>
+          </button>}
         </form>
       </div>
     </div>

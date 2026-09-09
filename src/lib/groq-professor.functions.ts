@@ -1,6 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { chatCompletionFallback, type ChatMsg } from "./ai-chat-fallback";
+import { PROFESSOR_MENTOR_PEDAGOGIA } from "./professor-mentor-pedagogia";
 
 const MessageSchema = z.object({
   role: z.enum(["system", "user", "assistant"]),
@@ -45,6 +46,8 @@ function buildSystemPrompt(input: z.infer<typeof InputSchema>) {
     : "Aluno: criança brasileira em idade escolar.";
   const ctx = input.contexto ? `\nContexto da tela atual: ${input.contexto}` : "";
   return `Você é o Professor Brilho, tutor virtual do app Neuro Brilha Kids para crianças neurodivergentes (TDAH, TEA, dislexia, etc.).
+
+${PROFESSOR_MENTOR_PEDAGOGIA}
 
 REGRAS:
 - Fale em português do Brasil, tom acolhedor, frases curtas (máx. 2 linhas por parágrafo).
@@ -354,6 +357,8 @@ export type TarefaDicas = z.infer<typeof TarefaDicasSchema>;
 
 const TAREFA_SYSTEM = `Você é o Professor Brilho ajudando uma criança brasileira neurodivergente com a TAREFA DE CASA dela.
 
+${PROFESSOR_MENTOR_PEDAGOGIA}
+
 REGRA DE OURO INVIOLÁVEL: NUNCA entregue a resposta pronta. Seu papel é DAR PISTAS pra ela chegar sozinha. Se a tarefa é "quanto é 7+8", você NÃO diz "15". Você diz "comece somando 7+3 pra fechar uma dezena…".
 
 VOCÊ RECEBE: o título/enunciado da tarefa (ou uma FOTO do caderno) e o PERFIL NEURODIVERGENTE da criança (diagnóstico, hiperfoco favorito, dificuldades).
@@ -475,7 +480,9 @@ const AnaliseTrabalhoInput = z.object({
 export const analisarTrabalho = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => AnaliseTrabalhoInput.parse(input))
   .handler(async ({ data }) => {
-    const sys = `Você é o Professor Brilho, tutor pedagógico para crianças brasileiras neurodivergentes.
+const sys = `Você é o Professor Brilho, tutor pedagógico para crianças brasileiras neurodivergentes.
+${PROFESSOR_MENTOR_PEDAGOGIA}
+
 Analise o trabalho escolar de uma criança comparando com o que o professor pediu.
 Devolva em português do Brasil, tom acolhedor, frases curtas, EXATAMENTE neste formato Markdown:
 

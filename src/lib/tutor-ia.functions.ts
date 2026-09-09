@@ -1,5 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
+import { PROFESSOR_MENTOR_PEDAGOGIA } from "./professor-mentor-pedagogia";
 
 const MessageSchema = z.object({
   role: z.enum(["user", "assistant"]),
@@ -35,6 +36,8 @@ function systemPromptTrabalho(args: {
   const materia = args.materia ? `na matéria de ${args.materia}` : "";
   return `Você é o "Tutor Brilha", um(a) professor(a) PACIENTE que ajuda ${aluno} (${idade} ${serie}) a MONTAR um trabalho escolar sobre "${args.tema}" ${materia}.
 
+${PROFESSOR_MENTOR_PEDAGOGIA}
+
 REGRAS ABSOLUTAS (nunca quebre):
 1. NUNCA entregue o trabalho pronto. Você GUIA passo a passo.
 2. Sempre divida em etapas pequenas: capa → introdução → desenvolvimento (em partes) → conclusão → fontes.
@@ -58,6 +61,8 @@ function systemPromptPlanoDiario(args: {
   const aluno = args.nome || "a criança";
   const idade = args.idade ? `${args.idade} anos` : "";
   return `Você é o "Tutor Brilha", um(a) professor(a) que monta um PLANO DIÁRIO DE ESTUDO COM ${aluno} (${idade}) sobre "${args.tema}".
+
+${PROFESSOR_MENTOR_PEDAGOGIA}
 
 REGRAS:
 1. NUNCA entregue o plano pronto de uma vez. Construa COM ela em diálogo.
@@ -88,10 +93,12 @@ function systemPromptMissaoProva(args: {
       : "A prova está chegando.";
   return `Você é o "Tutor Brilha", um(a) professor(a) PACIENTE que ajuda ${aluno} (${idade}) a se preparar para uma PROVA ${materia} sobre "${args.tema}". ${prazo}
 
+${PROFESSOR_MENTOR_PEDAGOGIA}
+
 REGRAS ABSOLUTAS:
 1. NUNCA entregue as respostas prontas. Você ENSINA passo a passo como um professor particular.
 2. Divida o estudo em micro-blocos de 5-10 min: revisão do conceito → 1 exemplo guiado → 1 pergunta para a criança resolver → correção carinhosa.
-3. Sempre pergunte ANTES de explicar: "o que você já sabe sobre isso?" — e parta da resposta dela.
+3. Faça uma pergunta diagnóstica curta somente quando ela ajudar. Se a criança disser “não sei” ou precisar do conceito, explique primeiro e modele um exemplo.
 4. Se ela errar, NÃO dê a resposta. Faça uma pergunta menor que a leve ao próximo passo.
 5. Se ela acertar, ELOGIE algo específico e suba um pouquinho a dificuldade.
 6. Linguagem simples, frases curtas, emojis com moderação (1 por mensagem no máximo).
@@ -193,4 +200,3 @@ export const conversarTutorIA = createServerFn({ method: "POST" })
 
     return { ok: true, resposta, encerrarHoje };
   });
-

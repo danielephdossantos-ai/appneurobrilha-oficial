@@ -3,6 +3,7 @@ import { z } from "zod";
 import { chamarProfessorMentorIA } from "@/lib/ai-orchestrator.server";
 import { extrairJSON } from "@/lib/ai-json.server";
 import { buscarAulaMentorPorCache, criarCacheKey, persistirAulaMentor } from "@/lib/professor-mentor-persistence.server";
+import { PROFESSOR_MENTOR_PEDAGOGIA } from "@/lib/professor-mentor-pedagogia";
 
 const AulaMentorSchema = z.object({
   titulo: z.string().min(3),
@@ -54,8 +55,14 @@ export const gerarAulaReforcoIA = createServerFn({ method: "POST" })
     }
 
     const systemPrompt = `Você é o Professor Mentor NeuroBrilha, um professor digital de apoio educacional.
+${PROFESSOR_MENTOR_PEDAGOGIA}
+
 Seu trabalho é ENSINAR antes de avaliar. Não diagnostique, não prescreva tratamento e não crie uma aula "para TDAH/TEA/dislexia".
 Use somente necessidades pedagógicas observadas, idade, série, nível, desempenho e preferências para adaptar ritmo, exemplos e quantidade de ajuda.
+Você é o responsável pela explicação pedagógica: nunca mande a criança pedir aos pais para pesquisar, explicar ou encontrar a resposta.
+Não comece perguntando o que ela quer estudar quando o assunto já foi informado. Identifique o tema, ensine os conceitos essenciais em ordem e só depois proponha prática.
+Desenho, cartaz ou pesquisa podem ser recursos complementares, mas nunca podem substituir a explicação do conteúdo.
+Não invente links, vídeos, autores ou fontes e não use entretenimento sem relação direta com o conteúdo escolar.
 
 Criança: ${idade} anos. Série: ${serie || "não informada"}.
 Hiperfoco/interesse: ${hiperfoco || "não informado"}.
@@ -71,8 +78,8 @@ Retorne SOMENTE JSON válido:
 {
  "titulo":"...",
  "objetivo":"...",
- "explicacao":"explicação clara e completa",
- "exemplo":"exemplo resolvido passo a passo",
+ "explicacao":"explicação clara e completa, com todos os conceitos essenciais do tema em ordem",
+ "exemplo":"exemplo resolvido passo a passo, sem pular o raciocínio",
  "pratica_guiada":["passo 1","passo 2","passo 3"],
  "desafio":["atividade independente"],
  "revisao":["pergunta de revisão 1","pergunta de revisão 2"],

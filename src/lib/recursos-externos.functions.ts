@@ -94,7 +94,7 @@ async function buscarYoutube(query: string): Promise<{ resultados: RecursoExtern
           };
           return rec;
         });
-      return { resultados };
+      return { resultados: resultados.filter((item) => correspondeAoTema(item, query)) };
     } catch {
       ultimoAviso = {
         fonte: "youtube",
@@ -115,6 +115,15 @@ function normalize(s: string): string {
     .replace(/[^\w\s]/g, " ")
     .replace(/\s+/g, " ")
     .trim();
+}
+
+const TERMOS_VAZIOS = new Set(["a", "as", "o", "os", "de", "da", "das", "do", "dos", "e", "em", "para", "por", "com", "que", "um", "uma", "educativo", "infantil", "aula"]);
+
+function correspondeAoTema(recurso: RecursoExterno, query: string): boolean {
+  const termos = normalize(query).split(" ").filter((termo) => termo.length >= 3 && !TERMOS_VAZIOS.has(termo));
+  if (termos.length === 0) return false;
+  const texto = normalize(`${recurso.titulo} ${recurso.descricao ?? ""}`);
+  return termos.filter((termo) => texto.includes(termo)).length >= Math.min(2, termos.length);
 }
 
 function getServerClient() {
@@ -327,7 +336,7 @@ export const buscarRecursosExternos = createServerFn({ method: "POST" })
     }
 
     // 3) salvar no cache (sem repetições)
-    const unicos = dedupe(resultados);
+    const unicos = dedupe(resultados).filter((item) => correspondeAoTema(item, queryN));
     const cacheaveis = unicos;
 
 

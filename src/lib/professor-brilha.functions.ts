@@ -2,6 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { createClient } from "@supabase/supabase-js";
 import { z } from "zod";
+import { PROFESSOR_MENTOR_PEDAGOGIA } from "./professor-mentor-pedagogia";
 
 function getServerClient() {
   return createClient(
@@ -51,6 +52,8 @@ function systemPrompt(ctx: z.infer<typeof ContextoSchema>, bnccInfo: string): st
   const idade = inferIdade(ctx.serie);
   const bncc = ctx.bncc?.length ? ctx.bncc.join(", ") : "";
   return `Você é o "Professor Brilha", um(a) professor(a) muito paciente e carinhoso(a) que ajuda uma criança com dúvidas EM CIMA da aula que ela está fazendo agora, dentro do app Escola Brilha.
+
+${PROFESSOR_MENTOR_PEDAGOGIA}
 
 CONTEXTO DA AULA ATUAL:
 - Disciplina: ${ctx.disciplina ?? "Geografia"}

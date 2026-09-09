@@ -114,18 +114,12 @@ export function IAProfessorMentor({ onAbrirAula }: Props) {
               {resultado.aula.objetivo}
             </p>
 
-            <div className="space-y-3">
-              {resultado.aula.passos.map((passo: any, idx: number) => (
-                <div key={idx} className="flex items-start gap-3 p-3 rounded-xl bg-secondary/30 border border-border/50">
-                  <div className="h-6 w-6 rounded-full bg-primary text-white text-[10px] font-bold grid place-items-center shrink-0 mt-0.5">
-                    {idx + 1}
-                  </div>
-                  <div>
-                    <div className="text-[9px] font-black uppercase text-primary tracking-tighter">{passo.tipo}</div>
-                    <div className="text-sm font-medium">{passo.texto}</div>
-                  </div>
-                </div>
-              ))}
+            <div className="space-y-4">
+              <section className="rounded-xl bg-blue-50 border border-blue-200 p-4"><h5 className="font-black text-blue-900">1. Entenda o conteúdo</h5><p className="mt-2 whitespace-pre-line text-sm leading-relaxed">{resultado.aula.explicacao}</p></section>
+              <section className="rounded-xl bg-violet-50 border border-violet-200 p-4"><h5 className="font-black text-violet-900">2. Veja o exemplo passo a passo</h5><p className="mt-2 whitespace-pre-line text-sm leading-relaxed">{resultado.aula.exemplo}</p></section>
+              <section className="rounded-xl bg-amber-50 border border-amber-200 p-4"><h5 className="font-black text-amber-900">3. Vamos fazer juntos</h5><ol className="mt-2 list-decimal pl-5 space-y-2 text-sm">{resultado.aula.pratica_guiada?.map((passo: string, idx: number) => <li key={idx}>{passo}</li>)}</ol></section>
+              <section className="rounded-xl bg-emerald-50 border border-emerald-200 p-4"><h5 className="font-black text-emerald-900">4. Agora é sua vez</h5><ul className="mt-2 list-disc pl-5 space-y-2 text-sm">{resultado.aula.desafio?.map((item: string, idx: number) => <li key={idx}>{item}</li>)}</ul></section>
+              <section className="rounded-xl bg-slate-50 border border-slate-200 p-4"><h5 className="font-black text-slate-900">5. Confira o que aprendeu</h5><ul className="mt-2 list-disc pl-5 space-y-2 text-sm">{resultado.aula.revisao?.map((item: string, idx: number) => <li key={idx}>{item}</li>)}</ul></section>
             </div>
 
             <button
