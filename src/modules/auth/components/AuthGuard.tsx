@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "@tanstack/react-router";
 import { Loader2 } from "lucide-react";
 import { supabase } from "@/database/supabase/client";
@@ -10,56 +10,51 @@ interface AuthGuardProps {
 export const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
   const [ready, setReady] = useState(false);
   const [authed, setAuthed] = useState(false);
+  const settledRef = useRef(false);
   const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
     let mounted = true;
     let fallbackTimer: ReturnType<typeof setTimeout>;
+
+    const finish = (hasSession: boolean) => {
+      if (!mounted) return;
+      settledRef.current = true;
+      setAuthed(hasSession);
+      setReady(true);
+    };
     
     const checkSession = async () => {
       try {
         console.log("AuthGuard: Initial session check starting...");
         
-        // Timeout the session check if it hangs - reduced to 2 seconds for faster recovery
-        const sessionPromise = supabase.auth.getSession();
-        const timeoutPromise = new Promise((_, reject) => 
-          setTimeout(() => reject(new Error("Supabase hang")), 2000)
-        );
-        
-        const res = await Promise.race([sessionPromise, timeoutPromise]);
-        const { data, error } = res as any;
+        const { data, error } = await supabase.auth.getSession();
         
         if (error) throw error;
         
         console.log("AuthGuard: Session check finished. Session exists:", !!data?.session);
-        if (mounted) {
-          setAuthed(!!data?.session);
-          setReady(true);
-        }
+        finish(!!data?.session);
       } catch (err) {
         console.error("AuthGuard: Session check failed or timed out:", err);
-        if (mounted) {
-          setAuthed(false);
-          setReady(true);
-        }
+        finish(false);
       }
     };
 
     checkSession();
     
-    // Safety fallback: if nothing happened in 3 seconds, just show the app (likely unauthenticated)
+    // Em redes móveis lentas, não presumir que a pessoa saiu antes da sessão terminar.
     fallbackTimer = setTimeout(() => {
-      if (mounted && !ready) {
-        console.warn("AuthGuard: Safety fallback triggered (3s)");
-        setReady(true);
+      if (mounted && !settledRef.current) {
+        console.warn("AuthGuard: Session check timed out (15s)");
+        finish(false);
       }
-    }, 3000);
+    }, 15000);
 
     const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => {
       console.log("AuthGuard: Auth state change:", _e, !!session);
       if (mounted) {
-        setAuthed(!!session);
+        finish(!!session);
       }
     });
 
