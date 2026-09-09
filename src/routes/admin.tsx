@@ -2,20 +2,29 @@ import { createFileRoute, Outlet, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useAppState } from "@/core/store";
 import { supabase } from "@/database/supabase/client";
+import { VERIFIED_ADMIN_SESSION_KEY } from "@/lib/account-routing";
 
 export const Route = createFileRoute("/admin")({
   component: AdminLayout,
 });
 
 function AdminLayout() {
-  const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
   const { session } = useAppState();
+  const [isAdmin, setIsAdmin] = useState<boolean | null>(() => {
+    if (typeof window === "undefined") return null;
+    const verifiedUserId = window.sessionStorage.getItem(VERIFIED_ADMIN_SESSION_KEY);
+    return verifiedUserId && verifiedUserId === session?.user?.id ? true : null;
+  });
 
   useEffect(() => {
     let active = true;
     (async () => {
       const uid = session?.user?.id;
       if (!uid) { if (active) setIsAdmin(false); return; }
+      if (window.sessionStorage.getItem(VERIFIED_ADMIN_SESSION_KEY) === uid) {
+        if (active) setIsAdmin(true);
+        return;
+      }
       try {
         const roleRequest = supabase
           .from("user_roles")
@@ -28,6 +37,7 @@ function AdminLayout() {
         });
         const { data, error } = await Promise.race([roleRequest, timeout]);
         if (error) throw error;
+        if (data) window.sessionStorage.setItem(VERIFIED_ADMIN_SESSION_KEY, uid);
         if (active) setIsAdmin(!!data);
       } catch (error) {
         console.error("Falha ao verificar acesso administrativo", error);
