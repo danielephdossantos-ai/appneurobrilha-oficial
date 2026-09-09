@@ -20,7 +20,7 @@ function AdminLayout() {
     let active = true;
     (async () => {
       const uid = session?.user?.id;
-      if (!uid) { if (active) setIsAdmin(false); return; }
+      if (!uid) { if (active) setIsAdmin(null); return; }
       if (window.sessionStorage.getItem(VERIFIED_ADMIN_SESSION_KEY) === uid) {
         if (active) setIsAdmin(true);
         return;
