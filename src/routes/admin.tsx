@@ -1,5 +1,6 @@
 import { createFileRoute, Outlet, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { useAppState } from "@/core/store";
 import { supabase } from "@/database/supabase/client";
 
 export const Route = createFileRoute("/admin")({
@@ -8,23 +9,33 @@ export const Route = createFileRoute("/admin")({
 
 function AdminLayout() {
   const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
+  const { session } = useAppState();
 
   useEffect(() => {
     let active = true;
     (async () => {
-      const { data: auth } = await supabase.auth.getUser();
-      const uid = auth?.user?.id;
+      const uid = session?.user?.id;
       if (!uid) { if (active) setIsAdmin(false); return; }
-      const { data } = await supabase
-        .from("user_roles")
-        .select("role")
-        .eq("user_id", uid)
-        .eq("role", "admin")
-        .maybeSingle();
-      if (active) setIsAdmin(!!data);
+      try {
+        const roleRequest = supabase
+          .from("user_roles")
+          .select("role")
+          .eq("user_id", uid)
+          .eq("role", "admin")
+          .maybeSingle();
+        const timeout = new Promise<never>((_, reject) => {
+          window.setTimeout(() => reject(new Error("Tempo de verificação excedido")), 8_000);
+        });
+        const { data, error } = await Promise.race([roleRequest, timeout]);
+        if (error) throw error;
+        if (active) setIsAdmin(!!data);
+      } catch (error) {
+        console.error("Falha ao verificar acesso administrativo", error);
+        if (active) setIsAdmin(false);
+      }
     })();
     return () => { active = false; };
-  }, []);
+  }, [session?.user?.id]);
 
   if (isAdmin === null) {
     return <div className="min-h-screen flex items-center justify-center text-muted-foreground">Carregando...</div>;
