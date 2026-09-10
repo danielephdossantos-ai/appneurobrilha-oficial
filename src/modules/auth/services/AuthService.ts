@@ -2,19 +2,19 @@ import { supabase } from "@/database/supabase/client";
 
 export class AuthService {
   static async signOut() {
-    window.location.href = "/api/logout";
+    return supabase.auth.signOut();
   }
 
   static async getSession() {
-    return { data: { session: null }, error: null };
+    return supabase.auth.getSession();
   }
 
   static async getUser() {
-    return { data: { user: null }, error: null };
+    return supabase.auth.getUser();
   }
 
-  static onAuthStateChange(_callback: (event: string, session: any) => void) {
-    return { data: { subscription: { unsubscribe: () => {} } } };
+  static onAuthStateChange(callback: (event: string, session: any) => void) {
+    return supabase.auth.onAuthStateChange(callback);
   }
 
   static async updatePrivacySettings(settings: {
@@ -23,10 +23,12 @@ export class AuthService {
     analytics_consent?: boolean;
     data_usage_consent?: boolean;
   }) {
-    return { error: null };
+    return supabase.auth.updateUser({ data: { privacy_settings: settings } });
   }
 
   static async getPrivacySettings() {
-    return null;
+    const { data, error } = await supabase.auth.getUser();
+    if (error) throw error;
+    return data.user?.user_metadata?.privacy_settings ?? null;
   }
 }

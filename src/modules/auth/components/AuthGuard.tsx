@@ -67,12 +67,14 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
 
   useEffect(() => {
     if (!ready) return;
-    const isAuthRoute = location.pathname.startsWith("/auth");
-    const isCallbackRoute = location.pathname.startsWith("/auth/callback");
+    const publicRoutes = ["/auth", "/reset-password", "/.lovable/oauth/consent"];
+    const isPublicRoute = publicRoutes.some(
+      (route) => location.pathname === route || location.pathname.startsWith(`${route}/`),
+    );
     
-    if (!authed && !isAuthRoute && !isCallbackRoute) {
+    if (!authed && !isPublicRoute) {
       console.log("AuthGuard: Redirecting to /auth");
-      navigate({ to: "/auth", replace: true });
+      navigate({ to: "/auth", search: { next: location.pathname }, replace: true });
     }
   }, [ready, authed, location.pathname, navigate]);
 
@@ -91,6 +93,12 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
       </div>
     );
   }
+
+  const publicRoutes = ["/auth", "/reset-password", "/.lovable/oauth/consent"];
+  const isPublicRoute = publicRoutes.some(
+    (route) => location.pathname === route || location.pathname.startsWith(`${route}/`),
+  );
+  if (!authed && !isPublicRoute) return null;
 
   return <>{children}</>;
 };
