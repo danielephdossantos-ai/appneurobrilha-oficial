@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Eye, EyeOff, Loader2 } from "lucide-react";
+import { Eye, EyeOff, Loader2, ShieldCheck } from "lucide-react";
 import { supabase } from "@/database/supabase/client";
 import { lovable } from "@/integrations/lovable";
 import { toast } from "sonner";
@@ -27,6 +27,8 @@ function Auth() {
   const navigate = useNavigate();
   const { next } = Route.useSearch();
   const [accountType, setAccountType] = useState<AccountType | null>(null);
+  const [adminAccess, setAdminAccess] = useState(false);
+  const [adminCode, setAdminCode] = useState("");
   const dest = next || (accountType === "teacher" ? "/area-professor" : "/");
   const [mode, setMode] = useState<"login" | "signup" | "forgot">("login");
   const [email, setEmail] = useState("");
@@ -38,6 +40,17 @@ function Auth() {
   const isAlreadyRegisteredError = (message?: string) => {
     const normalized = message?.toLowerCase() ?? "";
     return normalized.includes("already registered") || normalized.includes("already exists");
+  };
+
+  const redeemAdminCode = async () => {
+    const normalized = adminCode.trim().toUpperCase();
+    if (!normalized) throw new Error("Digite o código administrativo.");
+    const { data, error } = await (supabase as any).rpc("redeem_admin_access_code", {
+      p_code: normalized,
+    });
+    if (error || data !== true) throw new Error("Código administrativo inválido, vencido ou já utilizado.");
+    const { data: current } = await supabase.auth.getUser();
+    if (current.user) sessionStorage.setItem("neurobrilha:verified-admin-user", current.user.id);
   };
 
   // Destino guardado antes de sair para o Google (o provedor devolve só a origem).
@@ -120,6 +133,12 @@ function Auth() {
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
+        if (adminAccess) {
+          await redeemAdminCode();
+          toast.success("Acesso administrativo confirmado!");
+          navigate({ to: "/admin", replace: true });
+          return;
+        }
         toast.success("Bem-vindo!");
         await saveAccountType(accountType!);
         const { data: current } = await supabase.auth.getUser();
@@ -163,6 +182,13 @@ function Auth() {
               <img src="/pwa-192x192.png" alt="Mascote do professor" className="h-14 w-14 rounded-2xl object-cover" /><h2 className="mt-4 text-xl font-black">Professor</h2><p className="mt-2 text-sm text-muted-foreground">Materiais para ensinar e imprimir. Conectar aluno assinante é opcional.</p>
             </button>
           </div>
+          <button
+            type="button"
+            onClick={() => { setAdminAccess(true); setAccountType("family"); }}
+            className="mx-auto inline-flex min-h-12 items-center gap-2 rounded-2xl border-2 border-slate-300 bg-white px-5 font-black text-slate-800 hover:border-indigo-500"
+          >
+            <ShieldCheck className="h-5 w-5" /> Sou administradora
+          </button>
         </div>
       </div>
     );
@@ -184,7 +210,7 @@ function Auth() {
           className="w-full bg-background/90 backdrop-blur rounded-3xl border-2 border-white/30 p-5 flex flex-col gap-3 shadow-xl"
         >
           <h2 className="text-lg font-black text-foreground text-center">
-            {mode === "login" ? "Entrar" : mode === "signup" ? "Criar conta" : "Redefinir senha"} · {accountType === "teacher" ? "Professor" : "Família"}
+            {mode === "login" ? "Entrar" : mode === "signup" ? "Criar conta" : "Redefinir senha"} · {adminAccess ? "Administradora" : accountType === "teacher" ? "Professor" : "Família"}
           </h2>
           <p className="text-xs text-muted-foreground text-center -mt-2">
             Login uma única vez — o app lembra de você neste aparelho.
@@ -222,6 +248,21 @@ function Auth() {
             </>
           )}
 
+          {adminAccess && mode === "login" && (
+            <>
+              <label className="text-xs font-bold text-foreground">Código administrativo</label>
+              <input
+                type="password"
+                required
+                autoComplete="off"
+                value={adminCode}
+                onChange={(e) => setAdminCode(e.target.value.toUpperCase())}
+                className="rounded-xl border-2 border-input bg-background px-3 py-2.5 text-sm font-black tracking-wider focus:outline-none focus:border-primary"
+                placeholder="NB-ADM-..."
+              />
+            </>
+          )}
+
           <button
             type="submit"
             disabled={loading}
@@ -242,7 +283,7 @@ function Auth() {
             </button>
           )}
 
-          <button type="button" onClick={() => setAccountType(null)} className="text-xs font-bold text-muted-foreground hover:underline">
+          <button type="button" onClick={() => { setAdminAccess(false); setAdminCode(""); setAccountType(null); }} className="text-xs font-bold text-muted-foreground hover:underline">
             Trocar tipo de acesso
           </button>
 
@@ -252,7 +293,7 @@ function Auth() {
             <div className="h-px flex-1 bg-border" />
           </div>}
 
-          {mode !== "forgot" && <button
+          {mode !== "forgot" && !adminAccess && <button
             type="button"
             disabled={loading}
             onClick={async () => {
@@ -294,7 +335,7 @@ function Auth() {
           </button>}
 
 
-          {mode !== "forgot" && <button
+          {mode !== "forgot" && !adminAccess && <button
             type="button"
             onClick={() => setMode(mode === "login" ? "signup" : "login")}
             className="text-xs font-bold text-primary hover:underline"

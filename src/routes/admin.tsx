@@ -1,6 +1,5 @@
 import { createFileRoute, Outlet, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { useAppState } from "@/core/store";
 import { supabase } from "@/database/supabase/client";
 import { VERIFIED_ADMIN_SESSION_KEY } from "@/lib/account-routing";
 
@@ -9,18 +8,14 @@ export const Route = createFileRoute("/admin")({
 });
 
 function AdminLayout() {
-  const { session } = useAppState();
-  const [isAdmin, setIsAdmin] = useState<boolean | null>(() => {
-    if (typeof window === "undefined") return null;
-    const verifiedUserId = window.sessionStorage.getItem(VERIFIED_ADMIN_SESSION_KEY);
-    return verifiedUserId && verifiedUserId === session?.user?.id ? true : null;
-  });
+  const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
 
   useEffect(() => {
     let active = true;
     (async () => {
-      const uid = session?.user?.id;
-      if (!uid) { if (active) setIsAdmin(null); return; }
+      const { data: authData, error: authError } = await supabase.auth.getUser();
+      if (authError || !authData.user) { if (active) setIsAdmin(false); return; }
+      const uid = authData.user.id;
       if (window.sessionStorage.getItem(VERIFIED_ADMIN_SESSION_KEY) === uid) {
         if (active) setIsAdmin(true);
         return;
@@ -45,7 +40,7 @@ function AdminLayout() {
       }
     })();
     return () => { active = false; };
-  }, [session?.user?.id]);
+  }, []);
 
   if (isAdmin === null) {
     return <div className="min-h-screen flex items-center justify-center text-muted-foreground">Carregando...</div>;
