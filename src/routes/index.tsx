@@ -13,6 +13,7 @@ import { useMascot } from "@/contexts/MascotContext";
 import { url as pipaDoutora } from "@/assets/pip-girl-doutora.png.asset.json";
 import { url as pipaProfessora } from "@/assets/pip-girl-professora.png.asset.json";
 import { url as pipaAstronauta } from "@/assets/pip-girl-astronauta.png.asset.json";
+import { AdminCentralHomeLink } from "@/modules/admin/components/AdminCentralHomeLink";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -196,6 +197,10 @@ function Index() {
           />
         )}
       </AnimatePresence>
+
+      <div className="mb-4 flex justify-end">
+        <AdminCentralHomeLink />
+      </div>
 
       {/* ═══════════════ MOBILE ═══════════════ */}
       <div className="md:hidden flex flex-col gap-3 -mt-2">

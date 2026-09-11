@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { ArrowLeft, Check, ClipboardCopy, Download, GraduationCap, KeyRound, RefreshCw, UserRoundX } from "lucide-react";
 import { toast } from "sonner";
+import { AdminCentralNavigation } from "@/modules/admin/components/AdminCentralNavigation";
 
 export const Route = createFileRoute("/admin/professores")({ component: AdminProfessoresPage });
 
@@ -104,6 +105,7 @@ function AdminProfessoresPage() {
           <h1 className="flex items-center gap-3 text-2xl font-black md:text-3xl"><GraduationCap className="h-8 w-8 text-indigo-600" /> Professores e acessos gratuitos</h1>
           <p className="text-sm text-muted-foreground">Gere cortesias e controle acessos. Códigos gratuitos de aluno não contam para a meta de 4 pagantes.</p>
         </header>
+        <AdminCentralNavigation />
 
         <Card>
           <CardHeader><CardTitle className="flex items-center gap-2"><KeyRound className="h-5 w-5" /> Gerar novo lote</CardTitle></CardHeader>

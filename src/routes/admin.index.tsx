@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
 import { GraduationCap, Shield, Sparkles, Users } from "lucide-react";
 import { diagnosticoToNeuroProfile, NEURO_PROFILE_LABEL } from "@/lib/neuro-profile";
+import { AdminCentralNavigation } from "@/modules/admin/components/AdminCentralNavigation";
 
 export const Route = createFileRoute("/admin/")({
   component: AdminPage,
@@ -88,6 +89,7 @@ function AdminPage() {
             <p className="text-sm text-muted-foreground">Perfis fictícios prontos — sem anamnese.</p>
           </div>
         </header>
+        <AdminCentralNavigation />
 
         <Card className="border-indigo-200 bg-indigo-50/70">
           <CardHeader>
