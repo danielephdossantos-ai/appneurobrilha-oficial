@@ -258,6 +258,45 @@ export type Database = {
           },
         ]
       }
+      admin_access_codes: {
+        Row: {
+          active: boolean
+          code_hash: string
+          created_at: string
+          expires_at: string | null
+          id: string
+          label: string
+          max_uses: number
+          redeemed_at: string | null
+          redeemed_by: string | null
+          use_count: number
+        }
+        Insert: {
+          active?: boolean
+          code_hash: string
+          created_at?: string
+          expires_at?: string | null
+          id?: string
+          label: string
+          max_uses?: number
+          redeemed_at?: string | null
+          redeemed_by?: string | null
+          use_count?: number
+        }
+        Update: {
+          active?: boolean
+          code_hash?: string
+          created_at?: string
+          expires_at?: string | null
+          id?: string
+          label?: string
+          max_uses?: number
+          redeemed_at?: string | null
+          redeemed_by?: string | null
+          use_count?: number
+        }
+        Relationships: []
+      }
       anamnese_v2: {
         Row: {
           child_id: string
@@ -10263,6 +10302,7 @@ export type Database = {
           ultimo_desempenho: number
         }[]
       }
+      redeem_admin_access_code: { Args: { p_code: string }; Returns: boolean }
       redeem_teacher_access_code: {
         Args: { raw_code: string }
         Returns: string
