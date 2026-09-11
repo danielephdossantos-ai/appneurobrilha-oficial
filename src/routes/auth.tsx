@@ -28,7 +28,6 @@ function Auth() {
   const { next } = Route.useSearch();
   const [accountType, setAccountType] = useState<AccountType | null>(null);
   const [adminAccess, setAdminAccess] = useState(false);
-  const [adminCode, setAdminCode] = useState("");
   const dest = next || (accountType === "teacher" ? "/area-professor" : "/");
   const [mode, setMode] = useState<"login" | "signup" | "forgot">("login");
   const [email, setEmail] = useState("");
@@ -40,17 +39,6 @@ function Auth() {
   const isAlreadyRegisteredError = (message?: string) => {
     const normalized = message?.toLowerCase() ?? "";
     return normalized.includes("already registered") || normalized.includes("already exists");
-  };
-
-  const redeemAdminCode = async () => {
-    const normalized = adminCode.trim().toUpperCase();
-    if (!normalized) throw new Error("Digite o código administrativo.");
-    const { data, error } = await (supabase as any).rpc("redeem_admin_access_code", {
-      p_code: normalized,
-    });
-    if (error || data !== true) throw new Error("Código administrativo inválido, vencido ou já utilizado.");
-    const { data: current } = await supabase.auth.getUser();
-    if (current.user) sessionStorage.setItem("neurobrilha:verified-admin-user", current.user.id);
   };
 
   // Destino guardado antes de sair para o Google (o provedor devolve só a origem).
@@ -134,7 +122,15 @@ function Auth() {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
         if (adminAccess) {
-          await redeemAdminCode();
+          const { data: signedIn } = await supabase.auth.getUser();
+          const { data: adminRole, error: roleError } = await supabase
+            .from("user_roles")
+            .select("role")
+            .eq("user_id", signedIn.user?.id ?? "")
+            .eq("role", "admin")
+            .maybeSingle();
+          if (roleError) throw roleError;
+          if (!adminRole) throw new Error("Esta conta não possui autorização de administradora.");
           toast.success("Acesso administrativo confirmado!");
           navigate({ to: "/admin", replace: true });
           return;
@@ -248,21 +244,6 @@ function Auth() {
             </>
           )}
 
-          {adminAccess && mode === "login" && (
-            <>
-              <label className="text-xs font-bold text-foreground">Código administrativo</label>
-              <input
-                type="password"
-                required
-                autoComplete="off"
-                value={adminCode}
-                onChange={(e) => setAdminCode(e.target.value.toUpperCase())}
-                className="rounded-xl border-2 border-input bg-background px-3 py-2.5 text-sm font-black tracking-wider focus:outline-none focus:border-primary"
-                placeholder="NB-ADM-..."
-              />
-            </>
-          )}
-
           <button
             type="submit"
             disabled={loading}
@@ -283,7 +264,7 @@ function Auth() {
             </button>
           )}
 
-          <button type="button" onClick={() => { setAdminAccess(false); setAdminCode(""); setAccountType(null); }} className="text-xs font-bold text-muted-foreground hover:underline">
+          <button type="button" onClick={() => { setAdminAccess(false); setAccountType(null); }} className="text-xs font-bold text-muted-foreground hover:underline">
             Trocar tipo de acesso
           </button>
 

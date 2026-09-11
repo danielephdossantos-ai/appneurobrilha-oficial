@@ -158,6 +158,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthGuard>
+        <ProfileAccessGuard>
         <MascotProvider>
           <ParentModeProvider>
             <HiperfocoProvider>
@@ -174,6 +175,7 @@ function RootComponent() {
           </HiperfocoProvider>
           </ParentModeProvider>
         </MascotProvider>
+        </ProfileAccessGuard>
       </AuthGuard>
       <Toaster position="top-center" richColors />
     </QueryClientProvider>
@@ -232,4 +234,5 @@ import { ParentPinGate } from "@/components/auth/ParentPinGate";
 import { HiperfocoProvider } from "@/context/HiperfocoContext";
 import { AuthGuard } from "@/modules/auth/components/AuthGuard";
 import { GradeGuard } from "@/modules/auth/components/GradeGuard";
+import { ProfileAccessGuard } from "@/modules/auth/components/ProfileAccessGuard";
 import { ProfessorBrilhoMount } from "@/components/professor/ProfessorBrilhoMount";

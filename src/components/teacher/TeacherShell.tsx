@@ -23,6 +23,7 @@ export function TeacherShell({ children }: { children: ReactNode }) {
             <Link to="/area-professor/assistente-pedagogico" className="rounded-xl px-3 py-2 text-sm font-bold text-slate-700 hover:bg-indigo-50"><Sparkles className="mr-1 inline h-4 w-4" />Assistente</Link>
             <Link to="/area-professor/tarefas" className="rounded-xl px-3 py-2 text-sm font-bold text-slate-700 hover:bg-indigo-50"><ClipboardList className="mr-1 inline h-4 w-4" />Tarefas</Link>
           </nav>
+          <Link to="/" className="inline-flex min-h-11 items-center rounded-xl border border-indigo-200 px-3 text-sm font-bold text-indigo-700 hover:bg-indigo-50">Ir para o aplicativo e aulas</Link>
           <button onClick={logout} className="inline-flex min-h-11 items-center gap-2 rounded-xl border px-3 text-sm font-bold text-slate-700 hover:bg-slate-50"><LogOut className="h-4 w-4" />Sair</button>
         </div>
       </header>
