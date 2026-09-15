@@ -332,7 +332,7 @@ export function Shell({ children }: { children?: ReactNode }) {
           <div className="w-full mx-auto">{children ?? <Outlet />}</div>
           <MobileNav path={path} />
 
-          <div className="fixed bottom-24 left-0 right-0 px-6 flex justify-between pointer-events-none z-50 lg:hidden">
+          <div className={`${path === "/rotina" ? "hidden" : "fixed"} bottom-24 left-0 right-0 px-6 flex justify-between pointer-events-none z-50 lg:hidden`}>
             <div className="pointer-events-auto">
               {prevPath && (
                 <button
@@ -357,7 +357,7 @@ export function Shell({ children }: { children?: ReactNode }) {
             </div>
           </div>
 
-          <div className="hidden lg:flex fixed bottom-8 left-1/2 -translate-x-1/2 gap-4 pointer-events-none z-50">
+          <div className={`${path === "/rotina" ? "hidden" : "hidden lg:flex"} fixed bottom-8 left-1/2 -translate-x-1/2 gap-4 pointer-events-none z-50`}>
             <div className="pointer-events-auto">
               {prevPath && (
                 <button
