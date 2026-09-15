@@ -9,6 +9,7 @@ import type { PrintablePage } from "@/components/teacher/printable/activity-type
 import { TEACHER_LITERACY_WORKBOOK } from "@/data/teacher-literacy-workbook";
 import { REAL_TEACHER_LITERACY_WORKBOOK } from "@/data/teacher-literacy-real-workbook";
 import { TEACHER_LITERACY_EI_WORKBOOK } from "@/data/teacher-literacy-ei-workbook";
+import { TEACHER_BIBLIOTECA_ENCANTADA_WORKBOOK } from "@/data/teacher-literacy-biblioteca-encantada-workbook";
 import "@/components/teacher/printable/printable-teacher.css";
 
 export const Route = createFileRoute("/area-professor/alfabetizacao")({ component: CursoAlfabetizacao });
@@ -19,7 +20,7 @@ function CursoAlfabetizacao() {
   const [moduleIndex, setModuleIndex] = useState(0);
   const [pageIndex, setPageIndex] = useState(0);
   const [filter, setFilter] = useState<"all" | "teacher" | "student">("all");
-  const appWorkbook = [...TEACHER_LITERACY_EI_WORKBOOK, ...REAL_TEACHER_LITERACY_WORKBOOK];
+  const appWorkbook = [...TEACHER_LITERACY_EI_WORKBOOK, ...TEACHER_BIBLIOTECA_ENCANTADA_WORKBOOK, ...REAL_TEACHER_LITERACY_WORKBOOK];
   const workbook = tab === "formacao" ? TEACHER_LITERACY_WORKBOOK : appWorkbook;
   const safeModuleIndex = Math.min(moduleIndex, workbook.length - 1);
   const module = workbook[safeModuleIndex];
