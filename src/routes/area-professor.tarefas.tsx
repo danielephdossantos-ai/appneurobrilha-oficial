@@ -43,6 +43,18 @@ function TeacherHomework() {
     setTasks(t ?? []);
   }
   useEffect(() => {
+    const saved = sessionStorage.getItem("teacher-homework-draft");
+    if (saved) {
+      try {
+        const draft = JSON.parse(saved) as Partial<Pick<Task, "title" | "subject" | "instructions" | "source_route">>;
+        setTitle(draft.title ?? "");
+        setSubject(draft.subject ?? "");
+        setInstructions(draft.instructions ?? "");
+        setRoute(draft.source_route ?? (draft as { route?: string }).route ?? "");
+      } finally {
+        sessionStorage.removeItem("teacher-homework-draft");
+      }
+    }
     void load();
   }, []);
   async function send() {

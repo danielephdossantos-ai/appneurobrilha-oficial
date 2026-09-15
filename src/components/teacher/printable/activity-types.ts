@@ -31,6 +31,13 @@ export type LiteracyModule = {
   summary: string;
   relatedResources: RelatedResource[];
   pages: PrintablePage[];
+  source?: {
+    app: "Neuro-Treino" | "Escola Brilha" | "Biblioteca Encantada";
+    location: string;
+    route: string;
+    bncc?: string;
+    activityType?: string;
+  };
 };
 
 export type RelatedResource = { source: "Escola Brilha" | "Neuro-Treino" | "Brilha Vida"; title: string; reason: string; route?: string };

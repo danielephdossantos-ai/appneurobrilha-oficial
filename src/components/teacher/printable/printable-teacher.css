@@ -12,6 +12,14 @@
 .resource-grid h3 { font-size: 17px; font-weight: 900; margin: 5px 0 0; }
 .resource-link { align-items: center; color: #075e55; display: inline-flex; font-size: 13px; font-weight: 900; gap: 5px; margin-top: 12px; }
 .resource-link svg { height: 15px; width: 15px; }
+.source-panel { align-items: center; background: #fff; border: 2px solid #087f73; border-radius: 16px; display: flex; gap: 14px; justify-content: space-between; margin-top: 12px; padding: 14px; }
+.source-panel > div:first-child { display: flex; flex-direction: column; gap: 3px; }
+.source-panel span { color: #087f73; font-size: 10px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+.source-panel b { font-size: 15px; }
+.source-panel small { color: #526578; }
+.source-panel > div:last-child { display: flex; flex-wrap: wrap; gap: 8px; }
+.source-action { align-items: center; background: #087f73; border-radius: 10px; color: #fff; display: inline-flex; font-size: 12px; font-weight: 900; gap: 6px; min-height: 40px; padding: 8px 11px; }
+.source-action svg { height: 16px; width: 16px; }
 .printable-toolbar { align-items: center; background: white; border: 1px solid #cbd5e1; border-radius: 18px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; padding: 12px; }
 .toolbar-page, .toolbar-actions, .toolbar-filters, .toolbar-navigation { align-items: center; display: flex; gap: 6px; }
 .printable-toolbar button { align-items: center; background: white; border: 1px solid #cbd5e1; border-radius: 10px; display: inline-flex; gap: 5px; min-height: 38px; padding: 7px 10px; }
