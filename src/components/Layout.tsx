@@ -44,7 +44,7 @@ import {
   PenTool,
   Bot,
 } from "lucide-react";
-import { ReactNode, ComponentType, useEffect } from "react";
+import { ReactNode, ComponentType, useEffect, useState } from "react";
 import { definirNomeCriancaFala } from "@/lib/sanitizar-fala-mascote";
 import { supabase } from "@/database/supabase/client";
 import { NotificationBell } from "./NotificationBell";
@@ -137,10 +137,36 @@ export function Shell({ children }: { children?: ReactNode }) {
   const path = useRouterState({ select: (s) => s.location.pathname });
   const navigate = useNavigate();
   const { unlocked: parentUnlocked, requestUnlock, lock: lockParent } = useParentMode();
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     definirNomeCriancaFala(activeChild?.nome);
   }, [activeChild?.nome]);
+
+  useEffect(() => {
+    let active = true;
+
+    void (async () => {
+      const { data: authData } = await supabase.auth.getUser();
+      if (!authData.user) {
+        if (active) setIsAdmin(false);
+        return;
+      }
+
+      const { data, error } = await supabase
+        .from("user_roles")
+        .select("role")
+        .eq("user_id", authData.user.id)
+        .eq("role", "admin")
+        .maybeSingle();
+
+      if (active) setIsAdmin(!error && Boolean(data));
+    })();
+
+    return () => {
+      active = false;
+    };
+  }, []);
 
   const currentIndex = navigationSequence.indexOf(path);
   const prevPath = currentIndex > 0 ? navigationSequence[currentIndex - 1] : null;
@@ -240,6 +266,17 @@ export function Shell({ children }: { children?: ReactNode }) {
           ))}
         </nav>
 
+        {isAdmin && (
+          <>
+            <div className="text-xs uppercase tracking-[0.2em] font-black text-sidebar-foreground/40 px-3 mt-6 mb-2">
+              Administração
+            </div>
+            <nav className="flex flex-col gap-1">
+              <NavItem to="/admin" label="Administrador" icon={ShieldCheck} />
+            </nav>
+          </>
+        )}
+
         <div className="text-xs uppercase tracking-[0.2em] font-black text-sidebar-foreground/40 px-3 mt-6 mb-2 flex items-center justify-between">
           <span>Responsáveis</span>
           {parentUnlocked && (
@@ -330,7 +367,7 @@ export function Shell({ children }: { children?: ReactNode }) {
 
         <main className="flex-1 min-w-0 overflow-x-hidden px-3 sm:px-4 md:px-8 py-6 md:py-10 pb-32 md:pb-32 w-full mx-auto relative">
           <div className="w-full mx-auto">{children ?? <Outlet />}</div>
-          <MobileNav path={path} />
+          <MobileNav path={path} isAdmin={isAdmin} />
 
           <div className={`${path === "/rotina" ? "hidden" : "fixed"} bottom-24 left-0 right-0 px-6 flex justify-between pointer-events-none z-50 lg:hidden`}>
             <div className="pointer-events-auto">
@@ -388,7 +425,7 @@ export function Shell({ children }: { children?: ReactNode }) {
   );
 }
 
-function MobileNav({ path }: { path: string }) {
+function MobileNav({ path, isAdmin }: { path: string; isAdmin: boolean }) {
   const { unlocked: parentUnlocked, requestUnlock } = useParentMode();
   const navigate = useNavigate();
   const items = [
@@ -396,6 +433,7 @@ function MobileNav({ path }: { path: string }) {
     { to: "/escola-brilha", icon: GraduationCap, label: "Escola" },
     { to: "/neuro-treino", icon: Brain, label: "Neuro" },
     { to: "/brilha-vida", icon: Heart, label: "Vida" },
+    ...(isAdmin ? [{ to: "/admin", icon: ShieldCheck, label: "Admin" }] : []),
   ];
   return (
     <nav className="lg:hidden fixed bottom-0 inset-x-0 z-10 bg-card border-t border-border px-2 py-2 flex justify-around">
