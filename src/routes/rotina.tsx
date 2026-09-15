@@ -281,10 +281,10 @@ function Rotina() {
         </Card>
       ) : (
         <div className="space-y-7">
-          <RoutineSection title="☀️ Manhã" items={groups.manha} visualMode={visualMode} currentId={currentItem?.id} onStart={startItem} onComplete={complete} onEdit={setEditing} onDelete={setDeleteTarget}/>
-          <RoutineSection title="🌤️ Tarde" items={groups.tarde} visualMode={visualMode} currentId={currentItem?.id} onStart={startItem} onComplete={complete} onEdit={setEditing} onDelete={setDeleteTarget}/>
-          <RoutineSection title="📚 Estudos de hoje" items={groups.estudos} visualMode={visualMode} currentId={currentItem?.id} onStart={startItem} onComplete={complete} onEdit={setEditing} onDelete={setDeleteTarget}/>
-          <RoutineSection title="🌙 Noite" items={groups.noite} visualMode={visualMode} currentId={currentItem?.id} onStart={startItem} onComplete={complete} onEdit={setEditing} onDelete={setDeleteTarget}/>
+          <RoutineSection title="☀️ Manhã" items={groups.manha} visualMode={visualMode} currentId={currentItem?.id} onStart={startItem} onComplete={complete} onEdit={setEditing} onDelete={setDeleteTarget} onAdd={() => setEditing("new")}/>
+          <RoutineSection title="🌤️ Tarde" items={groups.tarde} visualMode={visualMode} currentId={currentItem?.id} onStart={startItem} onComplete={complete} onEdit={setEditing} onDelete={setDeleteTarget} onAdd={() => setEditing("new")}/>
+          <RoutineSection title="📚 Estudos de hoje" items={groups.estudos} visualMode={visualMode} currentId={currentItem?.id} onStart={startItem} onComplete={complete} onEdit={setEditing} onDelete={setDeleteTarget} onAdd={() => setEditing("new")}/>
+          <RoutineSection title="🌙 Noite" items={groups.noite} visualMode={visualMode} currentId={currentItem?.id} onStart={startItem} onComplete={complete} onEdit={setEditing} onDelete={setDeleteTarget} onAdd={() => setEditing("new")}/>
         </div>
       )}
 
@@ -293,15 +293,69 @@ function Rotina() {
       </Card>
 
       {editing && <RoutineEditor childId={activeChild.id} date={dateStr} initial={editing === "new" ? null : editing} onClose={() => setEditing(null)} onSaved={() => { setEditing(null); queryClient.invalidateQueries({ queryKey: ["routine", activeChild.id, dateStr] }); }} />}
-      {showTemplates && <TemplatePicker onClose={() => setShowTemplates(false)} onUse={(t) => useTemplate.mutate(t)} loading={useTemplate.isPending}/>} 
-      {deleteTarget && <DeleteChoice item={deleteTarget} date={dateStr} onClose={() => setDeleteTarget(null)} onOnlyToday={() => removeToday.mutate(deleteTarget)} onAll={() => removeSeries.mutate(deleteTarget)} loading={removeToday.isPending || removeSeries.isPending}/>} 
+      {showTemplates && <TemplatePicker onClose={() => setShowTemplates(false)} onUse={(t) => useTemplate.mutate(t)} loading={useTemplate.isPending}/>}
+      {deleteTarget && <DeleteChoice item={deleteTarget} date={dateStr} onClose={() => setDeleteTarget(null)} onOnlyToday={() => removeToday.mutate(deleteTarget)} onAll={() => removeSeries.mutate(deleteTarget)} loading={removeToday.isPending || removeSeries.isPending}/>}
     </Shell>
   );
 }
 
-function RoutineSection({ title, items, visualMode, currentId, onStart, onComplete, onEdit, onDelete }: { title: string; items: RoutineItem[]; visualMode: boolean; currentId?: string; onStart: (i: RoutineItem) => void; onComplete: (i: RoutineItem) => void; onEdit: (i: RoutineItem) => void; onDelete: (i: RoutineItem) => void }) {
-  if (!items.length) return null;
-  return <section><h3 className="font-bold text-lg mb-3">{title}</h3><div className="space-y-2">{items.map((item) => <RoutineRow key={item.id} item={item} visualMode={visualMode} isCurrent={item.id === currentId} onStart={onStart} onComplete={onComplete} onEdit={onEdit} onDelete={onDelete}/>)}</div></section>;
+function RoutineSection({
+  title,
+  items,
+  visualMode,
+  currentId,
+  onStart,
+  onComplete,
+  onEdit,
+  onDelete,
+  onAdd,
+}: {
+  title: string;
+  items: RoutineItem[];
+  visualMode: boolean;
+  currentId?: string;
+  onStart: (i: RoutineItem) => void;
+  onComplete: (i: RoutineItem) => void;
+  onEdit: (i: RoutineItem) => void;
+  onDelete: (i: RoutineItem) => void;
+  onAdd: () => void;
+}) {
+  return (
+    <section className="rounded-3xl border bg-background p-4 sm:p-5">
+      <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
+        <h3 className="text-lg font-bold">{title}</h3>
+        <button
+          type="button"
+          onClick={onAdd}
+          className="inline-flex items-center gap-2 rounded-xl border border-primary/30 px-4 py-2 text-sm font-bold text-primary hover:bg-primary/5"
+        >
+          <Plus className="h-4 w-4" />
+          Agendar atividade
+        </button>
+      </div>
+
+      {items.length ? (
+        <div className="space-y-2">
+          {items.map((item) => (
+            <RoutineRow
+              key={item.id}
+              item={item}
+              visualMode={visualMode}
+              isCurrent={item.id === currentId}
+              onStart={onStart}
+              onComplete={onComplete}
+              onEdit={onEdit}
+              onDelete={onDelete}
+            />
+          ))}
+        </div>
+      ) : (
+        <p className="rounded-2xl bg-muted/40 px-4 py-5 text-center text-sm text-muted-foreground">
+          Nenhuma atividade agendada neste per?odo.
+        </p>
+      )}
+    </section>
+  );
 }
 
 function RoutineRow({ item, visualMode, isCurrent, onStart, onComplete, onEdit, onDelete }: { item: RoutineItem; visualMode: boolean; isCurrent: boolean; onStart: (i: RoutineItem) => void; onComplete: (i: RoutineItem) => void; onEdit: (i: RoutineItem) => void; onDelete: (i: RoutineItem) => void }) {

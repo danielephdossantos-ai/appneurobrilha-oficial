@@ -26,17 +26,42 @@ const ROLE_LABEL: Record<string, string> = {
  * Preferência: learning_plans Premium. Fallback: planos legados para crianças
  * que ainda não foram regeneradas após a migração.
  */
-export const syncPlansToRoutine = createServerFn({ method: "POST" })
-  .validator((d: unknown) => z.object({ childId: z.string().uuid(), date: z.string() }).parse(d))
+const syncPlansToRoutineServer = createServerFn({ method: "POST" })
+  .validator((d: unknown) => z.object({ childId: z.string().uuid(), date: z.string(), accessToken: z.string().min(1) }).parse(d))
   .handler(async ({ data }) => {
-    // Valida ownership com a sessão do responsável ANTES de usar Service Role.
-    const { supabase: userSupabase } = await import("@/integrations/supabase/client");
-    const { data: { user } } = await userSupabase.auth.getUser();
-    if (!user) throw new Error("Unauthorized");
-    const { data: ownedChild } = await userSupabase.from("children").select("id").eq("id", data.childId).eq("user_id", user.id).maybeSingle();
-    if (!ownedChild?.id) throw new Error("Acesso não autorizado ao perfil da criança.");
-
+    // Valida a sess?o recebida do navegador antes de usar Service Role.
     const { createClient } = await import("@supabase/supabase-js");
+    const userUrl = process.env.SUPABASE_URL ?? process.env.VITE_SUPABASE_URL;
+    const userKey =
+      process.env.SUPABASE_ANON_KEY ??
+      process.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+
+    if (!userUrl || !userKey) {
+      throw new Error("Configura??o do backend ausente.");
+    }
+
+    const userSupabase = createClient(userUrl, userKey, {
+      global: { headers: { Authorization: `Bearer ${data.accessToken}` } },
+      auth: { persistSession: false, autoRefreshToken: false },
+    });
+
+    const { data: { user }, error: authError } =
+      await userSupabase.auth.getUser(data.accessToken);
+
+    if (authError || !user) {
+      throw new Error("Sess?o expirada. Entre novamente.");
+    }
+
+    const { data: ownedChild } = await userSupabase
+      .from("children")
+      .select("id")
+      .eq("id", data.childId)
+      .eq("user_id", user.id)
+      .maybeSingle();
+
+    if (!ownedChild?.id) {
+      throw new Error("Acesso n?o autorizado ao perfil da crian?a.");
+    }
     const supabase = createClient(
       process.env.SUPABASE_URL!,
       process.env.SUPABASE_SERVICE_ROLE_KEY!,
@@ -155,3 +180,21 @@ export const syncPlansToRoutine = createServerFn({ method: "POST" })
 
     return { success: true, count: keepIds.length };
   });
+
+
+async function authenticatedSyncData(data: Record<string, unknown>) {
+  const { supabase } = await import("@/integrations/supabase/client");
+  const { data: { session }, error } = await supabase.auth.getSession();
+
+  if (error || !session?.access_token) {
+    throw new Error("Sess?o expirada. Entre novamente.");
+  }
+
+  return { ...data, accessToken: session.access_token };
+}
+
+export async function syncPlansToRoutine({ data }: { data: any }) {
+  return syncPlansToRoutineServer({
+    data: await authenticatedSyncData(data),
+  } as any);
+}

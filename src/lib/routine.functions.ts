@@ -38,10 +38,28 @@ type TemplateItem = Pick<RoutineItem, "title" | "type" | "startTime" | "duration
   reminderMinutesBefore?: number;
 };
 
-async function authOwnedChild(childId: string) {
-  const { supabase } = await import("@/integrations/supabase/client");
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) throw new Error("Unauthorized");
+async function authOwnedChild(childId: string, accessToken: string) {
+  const { createClient } = await import("@supabase/supabase-js");
+  const supabaseUrl = process.env.SUPABASE_URL ?? process.env.VITE_SUPABASE_URL;
+  const supabaseKey =
+    process.env.SUPABASE_ANON_KEY ??
+    process.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+
+  if (!supabaseUrl || !supabaseKey) {
+    throw new Error("Configura??o do backend ausente.");
+  }
+
+  const supabase = createClient(supabaseUrl, supabaseKey, {
+    global: { headers: { Authorization: `Bearer ${accessToken}` } },
+    auth: { persistSession: false, autoRefreshToken: false },
+  });
+
+  const { data: { user }, error: authError } =
+    await supabase.auth.getUser(accessToken);
+
+  if (authError || !user) {
+    throw new Error("Sess?o expirada. Entre novamente.");
+  }
 
   const { data: child, error } = await supabase
     .from("children")
@@ -49,15 +67,17 @@ async function authOwnedChild(childId: string) {
     .eq("id", childId)
     .eq("user_id", user.id)
     .maybeSingle();
+
   if (error) throw error;
-  if (!child) throw new Error("Criança não encontrada para este responsável.");
+  if (!child) throw new Error("Crian?a n?o encontrada para este respons?vel.");
+
   return { supabase, user, child };
 }
 
-export const getRoutineItems = createServerFn({ method: "GET" })
-  .validator((d: unknown) => z.object({ childId: z.string().uuid(), date: z.string() }).parse(d))
+const getRoutineItemsServer = createServerFn({ method: "GET" })
+  .validator((d: unknown) => z.object({ childId: z.string().uuid(), date: z.string(), accessToken: z.string().min(1) }).parse(d))
   .handler(async ({ data }) => {
-    const { supabase } = await authOwnedChild(data.childId);
+    const { supabase } = await authOwnedChild(data.childId, data.accessToken);
     const dayOfWeek = new Date(`${data.date}T12:00:00`).getDay();
 
     const { data: rows, error } = await supabase
@@ -103,10 +123,10 @@ export const getRoutineItems = createServerFn({ method: "GET" })
       .filter((item: RoutineItem) => item.status !== "cancelado");
   });
 
-export const saveRoutineItem = createServerFn({ method: "POST" })
-  .validator((d: unknown) => routineItemSchema.parse(d))
+const saveRoutineItemServer = createServerFn({ method: "POST" })
+  .validator((d: unknown) => routineItemSchema.extend({ accessToken: z.string().min(1) }).parse(d))
   .handler(async ({ data }) => {
-    const { supabase, user } = await authOwnedChild(data.childId);
+    const { supabase, user } = await authOwnedChild(data.childId, data.accessToken);
     const payload = {
       child_id: data.childId,
       parent_id: user.id,
@@ -144,9 +164,10 @@ export const saveRoutineItem = createServerFn({ method: "POST" })
     return inserted;
   });
 
-export const applyRoutineTemplate = createServerFn({ method: "POST" })
+const applyRoutineTemplateServer = createServerFn({ method: "POST" })
   .validator((d: unknown) => z.object({
     childId: z.string().uuid(),
+    accessToken: z.string().min(1),
     items: z.array(z.object({
       title: z.string().min(1),
       description: z.string().optional().nullable(),
@@ -157,7 +178,7 @@ export const applyRoutineTemplate = createServerFn({ method: "POST" })
     })).min(1).max(20),
   }).parse(d))
   .handler(async ({ data }) => {
-    const { supabase, user } = await authOwnedChild(data.childId);
+    const { supabase, user } = await authOwnedChild(data.childId, data.accessToken);
     const weekdays = [1, 2, 3, 4, 5];
     const payload = (data.items as TemplateItem[]).map((item) => ({
       child_id: data.childId,
@@ -180,19 +201,19 @@ export const applyRoutineTemplate = createServerFn({ method: "POST" })
     return { success: true, count: payload.length };
   });
 
-export const deleteRoutineItem = createServerFn({ method: "POST" })
-  .validator((d: unknown) => z.object({ id: z.string().uuid(), childId: z.string().uuid() }).parse(d))
+const deleteRoutineItemServer = createServerFn({ method: "POST" })
+  .validator((d: unknown) => z.object({ id: z.string().uuid(), childId: z.string().uuid(), accessToken: z.string().min(1) }).parse(d))
   .handler(async ({ data }) => {
-    const { supabase } = await authOwnedChild(data.childId);
+    const { supabase } = await authOwnedChild(data.childId, data.accessToken);
     const { error } = await supabase.from("routine_items").delete().eq("id", data.id).eq("child_id", data.childId);
     if (error) throw error;
     return { success: true };
   });
 
-export const cancelRoutineOccurrence = createServerFn({ method: "POST" })
-  .validator((d: unknown) => z.object({ id: z.string().uuid(), childId: z.string().uuid(), date: z.string() }).parse(d))
+const cancelRoutineOccurrenceServer = createServerFn({ method: "POST" })
+  .validator((d: unknown) => z.object({ id: z.string().uuid(), childId: z.string().uuid(), date: z.string(), accessToken: z.string().min(1) }).parse(d))
   .handler(async ({ data }) => {
-    const { supabase } = await authOwnedChild(data.childId);
+    const { supabase } = await authOwnedChild(data.childId, data.accessToken);
     const { error } = await supabase.from("routine_item_occurrences" as any).upsert({
       routine_item_id: data.id,
       child_id: data.childId,
@@ -205,15 +226,16 @@ export const cancelRoutineOccurrence = createServerFn({ method: "POST" })
     return { success: true };
   });
 
-export const toggleRoutineItemStatus = createServerFn({ method: "POST" })
+const toggleRoutineItemStatusServer = createServerFn({ method: "POST" })
   .validator((d: unknown) => z.object({
     id: z.string().uuid(),
     childId: z.string().uuid(),
     date: z.string(),
+    accessToken: z.string().min(1),
     status: z.enum(["pendente", "concluido", "atrasado", "cancelado"]),
   }).parse(d))
   .handler(async ({ data }) => {
-    const { supabase, user, child } = await authOwnedChild(data.childId);
+    const { supabase, user, child } = await authOwnedChild(data.childId, data.accessToken);
     const { data: item, error: itemError } = await supabase
       .from("routine_items")
       .select("id,title,date,recurrence_days,child_id,notify_parent_on_complete")
@@ -276,3 +298,39 @@ export const toggleRoutineItemStatus = createServerFn({ method: "POST" })
     }
     return { success: true };
   });
+
+
+async function authenticatedRoutineData(data: Record<string, unknown>) {
+  const { supabase } = await import("@/integrations/supabase/client");
+  const { data: { session }, error } = await supabase.auth.getSession();
+
+  if (error || !session?.access_token) {
+    throw new Error("Sess?o expirada. Entre novamente.");
+  }
+
+  return { ...data, accessToken: session.access_token };
+}
+
+export async function getRoutineItems({ data }: { data: any }) {
+  return getRoutineItemsServer({ data: await authenticatedRoutineData(data) } as any);
+}
+
+export async function saveRoutineItem({ data }: { data: any }) {
+  return saveRoutineItemServer({ data: await authenticatedRoutineData(data) } as any);
+}
+
+export async function applyRoutineTemplate({ data }: { data: any }) {
+  return applyRoutineTemplateServer({ data: await authenticatedRoutineData(data) } as any);
+}
+
+export async function deleteRoutineItem({ data }: { data: any }) {
+  return deleteRoutineItemServer({ data: await authenticatedRoutineData(data) } as any);
+}
+
+export async function cancelRoutineOccurrence({ data }: { data: any }) {
+  return cancelRoutineOccurrenceServer({ data: await authenticatedRoutineData(data) } as any);
+}
+
+export async function toggleRoutineItemStatus({ data }: { data: any }) {
+  return toggleRoutineItemStatusServer({ data: await authenticatedRoutineData(data) } as any);
+}
