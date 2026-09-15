@@ -351,7 +351,7 @@ function RoutineSection({
         </div>
       ) : (
         <p className="rounded-2xl bg-muted/40 px-4 py-5 text-center text-sm text-muted-foreground">
-          Nenhuma atividade agendada neste per?odo.
+          Nenhuma atividade agendada neste período.
         </p>
       )}
     </section>

@@ -46,7 +46,7 @@ async function authOwnedChild(childId: string, accessToken: string) {
     process.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 
   if (!supabaseUrl || !supabaseKey) {
-    throw new Error("Configura??o do backend ausente.");
+    throw new Error("Configuração do backend ausente.");
   }
 
   const supabase = createClient(supabaseUrl, supabaseKey, {
@@ -58,7 +58,7 @@ async function authOwnedChild(childId: string, accessToken: string) {
     await supabase.auth.getUser(accessToken);
 
   if (authError || !user) {
-    throw new Error("Sess?o expirada. Entre novamente.");
+    throw new Error("Sessão expirada. Entre novamente.");
   }
 
   const { data: child, error } = await supabase
@@ -69,7 +69,7 @@ async function authOwnedChild(childId: string, accessToken: string) {
     .maybeSingle();
 
   if (error) throw error;
-  if (!child) throw new Error("Crian?a n?o encontrada para este respons?vel.");
+  if (!child) throw new Error("Criança não encontrada para este responsável.");
 
   return { supabase, user, child };
 }
@@ -305,7 +305,7 @@ async function authenticatedRoutineData(data: Record<string, unknown>) {
   const { data: { session }, error } = await supabase.auth.getSession();
 
   if (error || !session?.access_token) {
-    throw new Error("Sess?o expirada. Entre novamente.");
+    throw new Error("Sessão expirada. Entre novamente.");
   }
 
   return { ...data, accessToken: session.access_token };
