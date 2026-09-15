@@ -3,7 +3,7 @@ export type IllustrationName =
   | "banana" | "maca" | "uva" | "livro" | "lapis" | "tesoura" | "escola" | "crianca" | "mao" | "estrela" | "coracao"
   | "circulo" | "quadrado" | "triangulo" | "numero" | "letra" | "silaba";
 
-export type MediaItem = { illustration: IllustrationName; label: string };
+export type MediaItem = { illustration?: IllustrationName; srcUrl?: string; label: string };
 
 export type PrintableActivity =
   | { kind: "guide"; objective: string; materials: string[]; preparation: string[]; steps: string[]; observe: string[] }
@@ -14,6 +14,7 @@ export type PrintableActivity =
   | { kind: "levels"; instruction: string; levels: { name: string; task: string; support: string; media?: MediaItem }[] }
   | { kind: "record"; rows: string[] }
   | { kind: "answer"; answerKey: string[]; likelyError: string; intervention: string; decision: string; relatedActivity?: string };
+  | { kind: "source-sheet"; instruction: string; items: { label: string; media?: MediaItem; options?: string[]; responseLines?: number }[]; note?: string };
 
 export type PrintablePage = {
   id: string;

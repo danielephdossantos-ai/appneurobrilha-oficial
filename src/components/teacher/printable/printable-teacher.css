@@ -54,6 +54,16 @@
 .model-step span { font-size: 12px; }
 .model-arrow { color: var(--teal); font-size: 24px !important; font-weight: 900; position: absolute; right: -17px; }
 .printable-image { height: 96px; object-fit: contain; width: 96px; }
+.printable-source-image { filter: grayscale(1) contrast(1.28); mix-blend-mode: multiply; }
+.printable-image-placeholder { align-items: center; border: 2px dashed #94a3b8; display: flex; font-size: 12px; justify-content: center; text-align: center; }
+.source-sheet-grid { display: grid; gap: 12px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.source-sheet-item { align-items: center; border: 2px solid #cbd5e1; border-radius: 14px; display: flex; flex-direction: column; gap: 8px; min-height: 205px; padding: 12px; text-align: center; }
+.source-sheet-item .printable-image { height: 112px; width: 150px; }
+.source-sheet-options { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+.source-sheet-options span { align-items: center; display: inline-flex; font-size: 12px; gap: 4px; }
+.source-sheet-options svg { height: 19px; width: 19px; }
+.source-response-line { border-bottom: 2px solid #17324d; display: block; height: 22px; width: 90%; }
+.source-sheet-note { border-left: 4px solid #f4b942; font-size: 12px; margin-top: 15px; padding: 8px 12px; }
 .printable-line-art { display: block; height: 96px; width: 96px; }
 .printable-image--coloring { filter: grayscale(1) contrast(1.5); }
 .association-grid { display: grid; gap: 14px; grid-template-columns: repeat(2, 1fr); }
