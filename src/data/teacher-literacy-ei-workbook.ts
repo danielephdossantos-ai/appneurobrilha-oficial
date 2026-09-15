@@ -1,5 +1,6 @@
 import type { LiteracyModule, MediaItem, PrintableActivity, PrintablePage } from "@/components/teacher/printable/activity-types";
 import { cursosEI } from "@/escola-brilha/curso-portugues-ei/registry";
+import { teacherPrintableMedia } from "@/data/teacher-printable-illustrations";
 
 type AnyRecord = Record<string, unknown>;
 type SheetItem = { label: string; media?: MediaItem; options?: string[]; responseLines?: number };
@@ -9,8 +10,9 @@ const asRecord = (value: unknown): AnyRecord => value && typeof value === "objec
 const text = (value: unknown) => typeof value === "string" ? value : "";
 const list = (value: unknown) => Array.isArray(value) ? value.map(asRecord) : [];
 const media = (item: AnyRecord, fallback: string): MediaItem | undefined => {
-  const srcUrl = text(item.imagemUrl) || text(item.mascoteUrl);
-  return srcUrl ? { srcUrl, label: text(item.nome) || fallback } : undefined;
+  const hasVisual = text(item.imagemUrl) || text(item.mascoteUrl);
+  const label = text(item.nome) || fallback;
+  return hasVisual ? teacherPrintableMedia(label) : undefined;
 };
 
 function extractMoment(moment: unknown): Extracted | null {

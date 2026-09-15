@@ -1,6 +1,7 @@
 export type IllustrationName =
   | "casa" | "bola" | "cachorro" | "gato" | "sapo" | "abelha" | "borboleta" | "peixe" | "arvore" | "flor"
   | "banana" | "maca" | "uva" | "livro" | "lapis" | "tesoura" | "escola" | "crianca" | "mao" | "estrela" | "coracao"
+  | "bebe" | "mae" | "pai" | "sol" | "pato" | "rato"
   | "circulo" | "quadrado" | "triangulo" | "numero" | "letra" | "silaba";
 
 export type MediaItem = { illustration?: IllustrationName; srcUrl?: string; label: string };

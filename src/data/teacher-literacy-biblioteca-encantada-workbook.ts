@@ -1,5 +1,6 @@
 import type { LiteracyModule, PrintableActivity, PrintablePage } from "@/components/teacher/printable/activity-types";
 import { trilhaBibliotecaEncantada } from "@/escola-brilha/biblioteca-encantada/registry";
+import { teacherPrintableMedia } from "@/data/teacher-printable-illustrations";
 
 export const TEACHER_BIBLIOTECA_ENCANTADA_WORKBOOK: LiteracyModule[] = trilhaBibliotecaEncantada.aulas.map((lesson) => {
   const presentation = lesson.cenas.filter(scene => scene.tipo === "olha");
@@ -20,7 +21,7 @@ export const TEACHER_BIBLIOTECA_ENCANTADA_WORKBOOK: LiteracyModule[] = trilhaBib
   const vocabulary: PrintableActivity = {
     kind: "source-sheet",
     instruction: `Observe, aponte e nomeie. Depois contorne as palavras-alvo: ${lesson.palavrasAlvo.join(" e ")}.`,
-    items: presentation.map(scene => ({ label: scene.palavra, media: { srcUrl: scene.imagem, label: scene.palavra }, responseLines: 1 })),
+    items: presentation.map(scene => ({ label: scene.palavra, media: teacherPrintableMedia(scene.palavra), responseLines: 1 })),
     note: "As imagens e palavras são as mesmas apresentadas na aula digital original.",
   };
 
@@ -28,8 +29,8 @@ export const TEACHER_BIBLIOTECA_ENCANTADA_WORKBOOK: LiteracyModule[] = trilhaBib
     kind: "source-sheet",
     instruction: "Recorte os cartões. Leia ou escute o comando do professor e cole a imagem correta no quadro.",
     items: pecs.flatMap(scene => [
-      { label: scene.palavra, media: { srcUrl: scene.imagem, label: scene.palavra }, options: ["ALVO"] },
-      ...scene.distratores.map(item => ({ label: item.palavra, media: { srcUrl: item.imagem, label: item.palavra }, options: ["DISTRAÇÃO"] })),
+      { label: scene.palavra, media: teacherPrintableMedia(scene.palavra), options: ["ALVO"] },
+      ...scene.distratores.map(item => ({ label: item.palavra, media: teacherPrintableMedia(item.palavra), options: ["DISTRAÇÃO"] })),
     ]).slice(0, 6),
     note: "Na aplicação com a criança, cubra as palavras ALVO/DISTRAÇÃO antes de entregar a folha.",
   };
