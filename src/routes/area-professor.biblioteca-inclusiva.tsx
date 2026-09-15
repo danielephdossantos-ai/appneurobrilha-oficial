@@ -10,6 +10,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/area-professor/biblioteca-inclusiva")({
+  validateSearch: (search: Record<string, unknown>) => ({
+    q: typeof search.q === "string" ? search.q : "",
+  }),
   component: InclusiveLibrary,
 });
 type Result = {
@@ -37,7 +40,8 @@ const profileLabel: Record<string, string> = {
 };
 
 function InclusiveLibrary() {
-  const [query, setQuery] = useState("");
+  const { q } = Route.useSearch();
+  const [query, setQuery] = useState(q);
   const [year, setYear] = useState("");
   const [subject, setSubject] = useState("");
   const [profile, setProfile] = useState("");
@@ -146,7 +150,7 @@ function InclusiveLibrary() {
                   <p className="text-sm text-muted-foreground">{row.learning_goal}</p>
                   <div className="flex flex-wrap gap-1">
                     {row.supported_profiles.map((p) => (
-                      <Badge key={p} variant="secondary">
+                      <Badge key={p} variant="secondary" translate="no" className="notranslate">
                         {profileLabel[p] ?? p}
                       </Badge>
                     ))}

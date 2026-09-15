@@ -343,8 +343,8 @@ function BibliotecaPedagogica() {
                                                 {obj.habilidades.map((h) => (
                                                   <li key={h.codigo}>
                                                     <Link
-                                                      to="/escola-brilha/$codigo"
-                                                      params={{ codigo: h.codigo }}
+                                                      to="/area-professor/biblioteca-inclusiva"
+                                                      search={{ q: h.codigo }}
                                                       className="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-primary/5 border border-transparent hover:border-primary/20 transition-colors"
                                                     >
                                                       <span className="text-xs font-mono bg-primary/10 text-primary px-2 py-0.5 rounded">

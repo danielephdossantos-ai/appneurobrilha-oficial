@@ -36,17 +36,79 @@ type Lesson = {
 };
 type PrintMode = "all" | "teacher" | "student";
 
+function renderStructuredContent(value: unknown): React.ReactNode {
+  if (value === null || value === undefined || value === "") return null;
+
+  if (typeof value === "string" || typeof value === "number") {
+    return String(value);
+  }
+
+  if (Array.isArray(value)) {
+    return (
+      <ul className="list-disc space-y-2 pl-6">
+        {value.map((item, index) => (
+          <li key={index}>{renderStructuredContent(item)}</li>
+        ))}
+      </ul>
+    );
+  }
+
+  if (typeof value === "object") {
+    const item = value as Record<string, unknown>;
+
+    if ("step" in item || "detail" in item) {
+      return (
+        <span>
+          {item.step !== undefined && item.step !== null ? (
+            <strong>{String(item.step)}. </strong>
+          ) : null}
+          {renderStructuredContent(item.detail)}
+        </span>
+      );
+    }
+
+    return (
+      <div className="space-y-2">
+        {Object.entries(item).map(([key, content]) => (
+          <div key={key}>
+            <strong>{key.replace(/_/g, " ")}:</strong>{" "}
+            {renderStructuredContent(content)}
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  return String(value);
+}
+
 function InclusiveLesson() {
   const { lessonId } = Route.useParams();
   const [lesson, setLesson] = useState<Lesson | null>(null);
   const [loading, setLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
   const [printMode, setPrintMode] = useState<PrintMode>("all");
   useEffect(() => {
     void (async () => {
-      const { data } = await (supabase as any).rpc("teacher_get_inclusive_lesson", {
+      const { data, error } = await (supabase as any).rpc("teacher_get_inclusive_lesson", {
         selected_id: lessonId,
       });
-      setLesson(data?.[0] ?? null);
+
+      if (error) {
+        setErrorMessage("Não foi possível carregar todas as páginas desta aula.");
+        setLesson(null);
+        setLoading(false);
+        return;
+      }
+
+      const result = data?.[0] ?? null;
+      if (result) {
+        result.teacher_pages = Array.isArray(result.teacher_pages) ? result.teacher_pages : [];
+        result.student_pages = Array.isArray(result.student_pages) ? result.student_pages : [];
+        result.answer_key = Array.isArray(result.answer_key) ? result.answer_key : [];
+      }
+
+      setLesson(result);
       setLoading(false);
     })();
   }, [lessonId]);
@@ -65,6 +127,18 @@ function InclusiveLesson() {
         <p className="p-8 text-center">Carregando material…</p>
       </Shell>
     );
+  if (errorMessage)
+    return (
+      <Shell>
+        <div className="mx-auto max-w-xl rounded-2xl border border-red-200 bg-red-50 p-6 text-center">
+          <p className="font-bold text-red-800">{errorMessage}</p>
+          <Link to="/area-professor/biblioteca-inclusiva" className="mt-4 inline-flex min-h-11 items-center rounded-xl border bg-white px-4 font-bold">
+            Voltar para a biblioteca
+          </Link>
+        </div>
+      </Shell>
+    );
+
   if (!lesson)
     return (
       <Shell>
@@ -90,33 +164,30 @@ function InclusiveLesson() {
       <h2 className="mt-3 text-2xl font-black">{page.title || lesson.title}</h2>
       {page.purpose && (
         <p className="mt-3 rounded-xl bg-indigo-50 p-4 font-semibold print:border print:bg-white">
-          {page.purpose}
+          {renderStructuredContent(page.purpose)}
         </p>
       )}
-      {page.instruction && <p className="mt-5 text-lg font-bold">{page.instruction}</p>}
+      {page.instruction && <p className="mt-5 text-lg font-bold">{renderStructuredContent(page.instruction)}</p>}
       {page.content && (
-        <p className="mt-4 whitespace-pre-wrap text-lg leading-relaxed">{page.content}</p>
+        <p className="mt-4 whitespace-pre-wrap text-lg leading-relaxed">{renderStructuredContent(page.content)}</p>
       )}
-      {page.activity && <div className="mt-6 rounded-xl border-2 p-5 text-lg">{page.activity}</div>}
+      {page.activity && <div className="mt-6 rounded-xl border-2 p-5 text-lg">{renderStructuredContent(page.activity)}</div>}
       {page.support && (
         <p className="mt-4 rounded-xl bg-amber-50 p-4 text-sm print:border print:bg-white">
-          <b>Apoio:</b> {page.support}
+          <b>Apoio:</b> {renderStructuredContent(page.support)}
         </p>
       )}
-      {page.sections?.map((s, i) => (
-        <section key={i} className="mt-6">
-          <h3 className="text-lg font-black">{s.heading}</h3>
-          {Array.isArray(s.content) ? (
-            <ul className="mt-2 list-disc space-y-2 pl-6">
-              {s.content.map((x, j) => (
-                <li key={j}>{x}</li>
-              ))}
-            </ul>
-          ) : (
-            <p className="mt-2 whitespace-pre-wrap leading-relaxed">{s.content}</p>
-          )}
-        </section>
-      ))}
+      {Array.isArray(page.sections) &&
+        page.sections.map((s, i) => (
+          <section key={i} className="mt-6">
+            <h3 className="text-lg font-black">
+              {renderStructuredContent(s.heading)}
+            </h3>
+            <div className="mt-2 whitespace-pre-wrap leading-relaxed">
+              {renderStructuredContent(s.content)}
+            </div>
+          </section>
+        ))}
       {brand}
     </article>
   );
@@ -155,12 +226,24 @@ function InclusiveLesson() {
           <h1 className="mt-2 text-3xl font-black">{lesson.title}</h1>
           <p className="mt-2">{lesson.learning_goal}</p>
         </header>
+        <nav className="print:hidden grid gap-3 rounded-2xl border bg-white p-4 sm:grid-cols-3">
+          <a href="#guia-professor" className="rounded-xl bg-indigo-50 px-4 py-3 text-center font-black text-indigo-800">
+            Guia do professor ({lesson.teacher_pages.length})
+          </a>
+          <a href="#atividades-aluno" className="rounded-xl bg-emerald-50 px-4 py-3 text-center font-black text-emerald-800">
+            Atividades do aluno ({lesson.student_pages.length})
+          </a>
+          <a href="#gabarito" className="rounded-xl bg-amber-50 px-4 py-3 text-center font-black text-amber-900">
+            Gabarito ({lesson.answer_key.length})
+          </a>
+        </nav>
+
         {showTeacher && (
-          <section data-print-bundle="teacher" className="space-y-5">
+          <section id="guia-professor" data-print-bundle="teacher" className="scroll-mt-24 space-y-5">
             {lesson.teacher_pages.map((p, i) => renderPage(p, i, "teacher"))}
             {lesson.answer_key.length > 0 && (
               <article
-                data-print-section="answer-key"
+                id="gabarito" data-print-section="answer-key"
                 className="print:break-before-page rounded-2xl border-2 border-emerald-200 bg-emerald-50 p-6 print:border-slate-700 print:bg-white"
               >
                 <p className="text-xs font-black uppercase tracking-wider text-emerald-800">
@@ -211,7 +294,7 @@ function InclusiveLesson() {
           </section>
         )}
         {showStudent && (
-          <section data-print-bundle="student" className="space-y-5">
+          <section id="atividades-aluno" data-print-bundle="student" className="scroll-mt-24 space-y-5">
             {lesson.student_pages.map((p, i) => renderPage(p, i, "student"))}
           </section>
         )}
