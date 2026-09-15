@@ -1,7 +1,7 @@
 export type IllustrationName =
   | "casa" | "bola" | "cachorro" | "gato" | "sapo" | "abelha" | "borboleta" | "peixe" | "arvore" | "flor"
   | "banana" | "maca" | "uva" | "livro" | "lapis" | "tesoura" | "escola" | "crianca" | "mao" | "estrela" | "coracao"
-  | "bebe" | "mae" | "pai" | "sol" | "pato" | "rato"
+  | "bebe" | "mae" | "pai" | "sol" | "pato" | "rato" | "robo" | "drone"
   | "circulo" | "quadrado" | "triangulo" | "numero" | "letra" | "silaba";
 
 export type MediaItem = { illustration?: IllustrationName; srcUrl?: string; label: string };
@@ -14,6 +14,7 @@ export type PrintableActivity =
   | { kind: "complete"; instruction: string; items: { label: string; media?: MediaItem; answerWidth: "short" | "long"; mode: "write" | "circle" | "order" }[]; response: string }
   | { kind: "levels"; instruction: string; levels: { name: string; task: string; support: string; media?: MediaItem }[] }
   | { kind: "record"; rows: string[] }
+  | { kind: "visual-grid"; instruction: string; target: string; items: { media: MediaItem; label?: string }[] }
   | { kind: "answer"; answerKey: string[]; likelyError: string; intervention: string; decision: string; relatedActivity?: string };
   | { kind: "source-sheet"; instruction: string; items: { label: string; media?: MediaItem; options?: string[]; responseLines?: number }[]; note?: string };
 

@@ -40,6 +40,8 @@
 .printable-kicker { color: var(--teal); font-size: 10px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
 .printable-page-header h2 { font-size: 25px; line-height: 1.1; margin: 7px 0 5px; }
 .printable-page-header p { color: #526578; font-size: 12px; margin: 0; }
+.student-page-header { padding-bottom: 5mm; }
+.student-page-header h2 { font-size: 21px; margin-bottom: 0; }
 .printable-audience { border: 1px solid #f4b942; border-radius: 999px; color: #805b00; font-size: 11px; font-weight: 900; padding: 6px 9px; text-align: center; }
 .printable-purpose { background: #f0faf7; border-left: 5px solid var(--sun); font-size: 14px; margin: 7mm 0; padding: 10px 12px; }
 .student-identification { border: 1.5px solid #17324d; display: grid; font-size: 11px; gap: 6px 14px; grid-template-columns: 1.5fr 1fr; margin-top: 5mm; padding: 8px; }
@@ -68,6 +70,13 @@
 .source-sheet-options svg { height: 19px; width: 19px; }
 .source-response-line { border-bottom: 2px solid #17324d; display: block; height: 22px; width: 90%; }
 .source-sheet-note { border-left: 4px solid #f4b942; font-size: 12px; margin-top: 15px; padding: 8px 12px; }
+.visual-worksheet-instruction { font-size: 20px; font-weight: 900; line-height: 1.35; margin: 9mm 0 8mm; text-transform: uppercase; }
+.visual-worksheet-grid { border: 2px solid #17324d; display: grid; grid-template-columns: repeat(2, 1fr); }
+.visual-worksheet-card { align-items: center; border: 1px solid #17324d; display: flex; justify-content: center; min-height: 61mm; padding: 8mm; position: relative; }
+.visual-worksheet-card .printable-image, .visual-worksheet-card .printable-line-art { height: 41mm; width: 52mm; }
+.visual-answer-circle { border: 2px solid #17324d; border-radius: 50%; bottom: 7mm; height: 10mm; position: absolute; right: 7mm; width: 10mm; }
+.visual-worksheet-footer { align-items: center; display: flex; font-size: 16px; gap: 10px; margin-top: 8mm; }
+.visual-count-box { border: 2px solid #17324d; display: inline-block; height: 14mm; width: 18mm; }
 .printable-line-art { display: block; height: 96px; width: 96px; }
 .printable-image--coloring { filter: grayscale(1) contrast(1.5); }
 .association-grid { display: grid; gap: 14px; grid-template-columns: repeat(2, 1fr); }

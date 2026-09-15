@@ -19,10 +19,10 @@ export const TEACHER_BIBLIOTECA_ENCANTADA_WORKBOOK: LiteracyModule[] = trilhaBib
   };
 
   const vocabulary: PrintableActivity = {
-    kind: "source-sheet",
-    instruction: `Observe, aponte e nomeie. Depois contorne as palavras-alvo: ${lesson.palavrasAlvo.join(" e ")}.`,
-    items: presentation.map(scene => ({ label: scene.palavra, media: teacherPrintableMedia(scene.palavra), responseLines: 1 })),
-    note: "As imagens e palavras são as mesmas apresentadas na aula digital original.",
+    kind: "visual-grid",
+    instruction: `CIRCULE TODAS AS FIGURAS DE ${lesson.palavrasAlvo[0]}. DEPOIS, CONTE QUANTAS VOCÊ ENCONTROU.`,
+    target: lesson.palavrasAlvo[0],
+    items: [0, 1, 1, 0, 1, 0].map(position => ({ media: teacherPrintableMedia(lesson.palavrasAlvo[position] ?? lesson.palavrasAlvo[0]) })),
   };
 
   const choice: PrintableActivity = {
