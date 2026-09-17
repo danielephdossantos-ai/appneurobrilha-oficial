@@ -16,11 +16,18 @@ const AulaMentorSchema = z.object({
   dicas_familia: z.array(z.string().min(3)).optional().default([]),
 });
 
+const ContextoAulaSchema = z.object({
+  modo: z.enum(["reforco", "prova", "trabalho", "tarefa"]).optional().default("reforco"),
+  materia: z.string().optional(),
+  contexto: z.string().optional(),
+});
+
 export const gerarAulaReforcoIA = createServerFn({ method: "POST" })
   .inputValidator((data) => z.object({
     dificuldade: z.string().min(2),
     criancaId: z.string().uuid(),
-    perfilNeuro: z.string().optional()
+    perfilNeuro: z.string().optional(),
+    ...ContextoAulaSchema.shape,
   }).parse(data))
   .handler(async ({ data }) => {
     const { createClient } = await import("@supabase/supabase-js");
@@ -47,7 +54,10 @@ export const gerarAulaReforcoIA = createServerFn({ method: "POST" })
     const serie = String(crianca?.serie ?? "");
     const hiperfoco = String(crianca?.hiperfoco ?? "").trim();
     const dificuldade = data.dificuldade.trim();
-    const cacheKey = criarCacheKey(["reforco", dificuldade, serie, Math.max(1, Math.min(4, Number((crianca?.niveis as any)?.geral ?? 1))), hiperfoco]);
+    const modo = data.modo ?? "reforco";
+    const materia = data.materia?.trim() || "não informada";
+    const contexto = data.contexto?.trim() || "";
+    const cacheKey = criarCacheKey([modo, materia, dificuldade, contexto, serie, Math.max(1, Math.min(4, Number((crianca?.niveis as any)?.geral ?? 1))), hiperfoco]);
 
     const reutilizada = await buscarAulaMentorPorCache(cacheKey);
     if (reutilizada) {
@@ -65,6 +75,8 @@ Desenho, cartaz ou pesquisa podem ser recursos complementares, mas nunca podem s
 Não invente links, vídeos, autores ou fontes e não use entretenimento sem relação direta com o conteúdo escolar.
 
 Criança: ${idade} anos. Série: ${serie || "não informada"}.
+Fluxo: ${modo}. Matéria: ${materia}.
+Contexto escolar: ${contexto || "não informado"}.
 Hiperfoco/interesse: ${hiperfoco || "não informado"}.
 Tempo de atenção informado: ${crianca?.tempo_atencao_min ?? "não informado"} min.
 Sinais pedagógicos agregados da anamnese: ${JSON.stringify({ scores: anamnese?.scores ?? null, risk: anamnese?.risk_levels ?? null })}.
@@ -92,7 +104,7 @@ Retorne SOMENTE JSON válido:
       max_tokens: 4096,
       messages: [
         { role: "system", content: systemPrompt },
-        { role: "user", content: `Ensine a dificuldade: ${dificuldade}` },
+        { role: "user", content: `Prepare uma aula completa para ${modo}. Ensine o conteúdo: ${dificuldade}. Matéria: ${materia}. ${contexto ? `Contexto: ${contexto}.` : ""}` },
       ],
     });
 
@@ -109,7 +121,7 @@ Retorne SOMENTE JSON válido:
 
     const persisted = await persistirAulaMentor({
       cacheKey,
-      modulo: "reforco_brilha",
+      modulo: `${modo}_brilha`,
       dificuldadeOriginal: dificuldade.toLowerCase(),
       titulo: aula.titulo,
       objetivo: aula.objetivo,

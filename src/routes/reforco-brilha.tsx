@@ -1101,6 +1101,11 @@ function ReforcoBrilha() {
             <AulaViewer
               aulaId={aulaAberta.id}
               titulo={aulaAberta.titulo}
+              generationContext={{
+                modo: "reforco",
+                contexto: `Dificuldade informada: ${aulaAberta.dificuldade || topic || aulaAberta.titulo}. Ensine antes de avaliar e retome pré-requisitos quando necessário.`,
+              }}
+              onReady={(aulaId) => setAulaAberta((atual) => atual ? { ...atual, id: aulaId } : atual)}
               onClose={() => {
                 if (!handleBack(navigate)) {
                   setAulaAberta(null);

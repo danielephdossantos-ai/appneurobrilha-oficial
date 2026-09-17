@@ -43,6 +43,7 @@ import { SpeakButton } from "@/components/ui/SpeakButton";
 import { MissaoProvaQuiz } from "@/components/professor/MissaoProvaQuiz";
 import { GraduationCap, BookOpen } from "lucide-react";
 import { buildAdaptiveUIState } from "@/engines/neuro-engine/adaptation-utils";
+import { AulaViewer } from "@/components/reforco-brilha/AulaViewer";
 
 export const Route = createFileRoute("/missao-prova")({
   component: MissaoProva,
@@ -59,6 +60,7 @@ function MissaoProva() {
   const [tutorAberto, setTutorAberto] = useState(false);
   const [autoGenerating, setAutoGenerating] = useState(false);
   const [recursosVistos, setRecursosVistos] = useState(0);
+  const [aulaMentorAberta, setAulaMentorAberta] = useState<{ id: string; titulo: string; materia: string; contexto: string } | null>(null);
 
   const adaptiveUI = useMemo(
     () =>
@@ -152,23 +154,24 @@ function MissaoProva() {
   }, [missions, autoGenerating, queryClient, activeChild?.id]);
 
   const startSession = async (session: any, mission: any) => {
-    setIsStudying(true);
     setCurrentSession(session);
     setCurrentMission(mission);
-    setLessonContent(null);
-    setRecursosVistos(0);
-
     try {
-      // Usar o ReforcoEngine para gerar uma aula baseada no tópico da sessão
-      const lesson = await ReforcoEngine.getLesson(
-        session.title + ": " + mission.subject,
-        engine?.adaptive as any,
-      );
-      setLessonContent(lesson);
+      if (!session.started_at) {
+        const { error } = await (supabase as any).from("exam_study_plans")
+          .update({ started_at: new Date().toISOString() }).eq("id", session.id);
+        if (error) throw error;
+      }
+      const conteudos = (mission.contents || []).map((item: any) => item.content_title).filter(Boolean).join(", ");
+      setAulaMentorAberta({
+        id: session.mentor_aula_id || "ia-new",
+        titulo: `${session.title}: ${mission.subject}`,
+        materia: mission.subject,
+        contexto: `Prova em ${mission.exam_date}. Conteúdos cadastrados: ${conteudos || session.description || session.title}.`,
+      });
     } catch (error) {
-      console.error("Erro ao gerar aula:", error);
-      toast.error("Erro ao preparar sua missão de estudo.");
-      setIsStudying(false);
+      console.error("Erro ao abrir aula persistida da Missão Prova:", error);
+      toast.error("Não foi possível abrir esta aula agora.");
     }
   };
 
@@ -699,6 +702,29 @@ function MissaoProva() {
             ),
           )}
           onFechar={() => setTutorAberto(false)}
+        />
+      )}
+      {aulaMentorAberta && currentSession && currentMission && (
+        <AulaViewer
+          aulaId={aulaMentorAberta.id}
+          titulo={aulaMentorAberta.titulo}
+          generationContext={{ modo: "prova", materia: aulaMentorAberta.materia, contexto: aulaMentorAberta.contexto }}
+          onReady={async (aulaId) => {
+            const { error } = await (supabase as any).from("exam_study_plans")
+              .update({ mentor_aula_id: aulaId }).eq("id", currentSession.id);
+            if (error) { console.error(error); toast.error("A aula foi criada, mas não pôde ser vinculada ao plano."); return; }
+            setCurrentSession((atual: any) => ({ ...atual, mentor_aula_id: aulaId }));
+            setAulaMentorAberta((atual) => atual ? { ...atual, id: aulaId } : atual);
+          }}
+          onComplete={async ({ tempoSegundos }) => {
+            const { error } = await (supabase as any).from("exam_study_plans").update({
+              completed: true, completed_at: new Date().toISOString(), duration_seconds: tempoSegundos,
+            }).eq("id", currentSession.id);
+            if (error) { console.error(error); toast.error("A aula terminou, mas o progresso não foi salvo."); return; }
+            await queryClient.invalidateQueries({ queryKey: ["exam_missions_child", activeChild?.id] });
+            toast.success("Aula concluída e progresso salvo!");
+          }}
+          onClose={() => setAulaMentorAberta(null)}
         />
       )}
     </Shell>

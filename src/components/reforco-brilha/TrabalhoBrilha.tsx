@@ -34,6 +34,7 @@ import { analisarTrabalho } from "@/lib/groq-professor.functions";
 import { TutorTrabalho } from "./TutorTrabalho";
 import { SpeakButton } from "@/components/ui/SpeakButton";
 import { RichEditor, insertIntoActiveEditor } from "./RichEditor";
+import { AulaViewer } from "./AulaViewer";
 
 
 type BlocoTipo = "titulo" | "paragrafo" | "imagem" | "capa" | "quebra" | "rico";
@@ -68,6 +69,9 @@ interface Trabalho {
   blocos: Bloco[];
   fontes: Fonte[];
   updated_at: string;
+  mentor_aula_id?: string | null;
+  mentor_completed_at?: string | null;
+  mentor_duration_seconds?: number | null;
 }
 
 interface Props {
@@ -90,6 +94,7 @@ export function TrabalhoBrilha({ childId }: Props) {
   const qc = useQueryClient();
   const [editandoId, setEditandoId] = useState<string | null>(null);
   const [criando, setCriando] = useState(false);
+  const [aulaMentor, setAulaMentor] = useState<Trabalho | null>(null);
 
   const { data: trabalhos = [] } = useQuery({
     queryKey: ["rb_trabalhos", childId],
@@ -137,6 +142,7 @@ export function TrabalhoBrilha({ childId }: Props) {
   }
 
   return (
+    <>
     <Card className="border-2 border-amber-200 bg-gradient-to-br from-amber-50/60 to-white">
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-sm font-black uppercase tracking-widest text-amber-700 flex items-center gap-2">
@@ -183,14 +189,14 @@ export function TrabalhoBrilha({ childId }: Props) {
                   <Trash2 className="h-4 w-4" />
                 </button>
               </div>
-              <div className="flex items-center justify-between text-[10px] text-muted-foreground">
+              <div className="flex items-center justify-between gap-2 text-[10px] text-muted-foreground">
                 <span>{t.blocos?.length || 0} blocos · {t.fontes?.length || 0} fontes</span>
-                <button
-                  onClick={() => setEditandoId(t.id)}
-                  className="font-bold text-amber-700 hover:text-amber-900"
-                >
-                  Abrir →
-                </button>
+                <div className="flex items-center gap-2">
+                  <button onClick={() => setAulaMentor(t)} className="font-black text-indigo-700 hover:text-indigo-900 flex items-center gap-1">
+                    <BookOpen className="h-3 w-3" /> Aprender
+                  </button>
+                  <button onClick={() => setEditandoId(t.id)} className="font-bold text-amber-700 hover:text-amber-900">Montar →</button>
+                </div>
               </div>
             </div>
           ))}
@@ -203,6 +209,28 @@ export function TrabalhoBrilha({ childId }: Props) {
         </p>
       )}
     </Card>
+    {aulaMentor && childId && (
+      <AulaViewer
+        aulaId={aulaMentor.mentor_aula_id || "ia-new"}
+        titulo={`${aulaMentor.tema}: ${aulaMentor.materia || "Trabalho escolar"}`}
+        generationContext={{ modo: "trabalho", materia: aulaMentor.materia || undefined,
+          contexto: `Trabalho "${aulaMentor.titulo}". Tema solicitado: ${aulaMentor.tema}. Data de entrega: ${aulaMentor.data_entrega || "não informada"}. Ensine o conteúdo antes de orientar a produção do trabalho.` }}
+        onReady={async (aulaId) => {
+          const { error } = await supabase.from("rb_trabalhos" as any).update({ mentor_aula_id: aulaId }).eq("id", aulaMentor.id);
+          if (error) { console.error(error); toast.error("A aula foi criada, mas não foi vinculada ao trabalho."); return; }
+          setAulaMentor((atual) => atual ? { ...atual, mentor_aula_id: aulaId } : atual);
+          await qc.invalidateQueries({ queryKey: ["rb_trabalhos", childId] });
+        }}
+        onComplete={async ({ tempoSegundos }) => {
+          const { error } = await supabase.from("rb_trabalhos" as any).update({ mentor_completed_at: new Date().toISOString(), mentor_duration_seconds: tempoSegundos }).eq("id", aulaMentor.id);
+          if (error) { console.error(error); toast.error("A aula terminou, mas o progresso não foi salvo."); return; }
+          toast.success("Tema estudado! Agora você pode montar o trabalho.");
+          await qc.invalidateQueries({ queryKey: ["rb_trabalhos", childId] });
+        }}
+        onClose={() => setAulaMentor(null)}
+      />
+    )}
+    </>
   );
 }
 
@@ -1541,4 +1569,3 @@ function RecursoPreviewModal({
     </div>
   );
 }
-

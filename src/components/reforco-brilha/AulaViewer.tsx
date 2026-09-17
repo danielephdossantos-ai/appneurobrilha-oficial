@@ -25,6 +25,12 @@ export interface AulaViewerProps {
   titulo: string;
   onClose: () => void;
   onComplete?: (dados: { tempoSegundos: number }) => void;
+  generationContext?: {
+    modo: "reforco" | "prova" | "trabalho" | "tarefa";
+    materia?: string;
+    contexto?: string;
+  };
+  onReady?: (aulaId: string) => void;
 }
 
 interface Pagina {
@@ -203,7 +209,7 @@ function PaginaConteudo({ pagina }: { pagina: Pagina }) {
   );
 }
 
-export function AulaViewer({ aulaId, titulo, onClose, onComplete }: AulaViewerProps) {
+export function AulaViewer({ aulaId, titulo, onClose, onComplete, generationContext, onReady }: AulaViewerProps) {
   const [paginas, setPaginas] = useState<Pagina[]>([]);
   const [idx, setIdx] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -223,7 +229,10 @@ export function AulaViewer({ aulaId, titulo, onClose, onComplete }: AulaViewerPr
           const res = await gerar({
             data: {
               dificuldade: titulo,
-              criancaId: activeChild.id
+              criancaId: activeChild.id,
+              modo: generationContext?.modo ?? "reforco",
+              materia: generationContext?.materia,
+              contexto: generationContext?.contexto,
             }
           });
           
@@ -236,6 +245,8 @@ export function AulaViewer({ aulaId, titulo, onClose, onComplete }: AulaViewerPr
             .order("ordem", { ascending: true });
             
           setPaginas((pags || []) as Pagina[]);
+          setIdx(0);
+          onReady?.(res.id);
         } catch (e) {
           console.error("Erro ao gerar aula sob demanda:", e);
           toast.error("Falha ao gerar aula com IA");
@@ -258,7 +269,7 @@ export function AulaViewer({ aulaId, titulo, onClose, onComplete }: AulaViewerPr
     return () => {
       alive = false;
     };
-  }, [aulaId, activeChild, titulo, gerar]);
+  }, [aulaId, activeChild, titulo, gerar, generationContext?.modo, generationContext?.materia, generationContext?.contexto]);
 
   const total = paginas.length;
   const atual = paginas[idx];

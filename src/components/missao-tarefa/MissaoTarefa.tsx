@@ -21,6 +21,7 @@ import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { analisarTarefaCasa } from "@/lib/groq-professor.functions";
 import { useAppState } from "@/core/store";
+import { AulaViewer } from "@/components/reforco-brilha/AulaViewer";
 
 interface Props {
   childId: string;
@@ -46,6 +47,9 @@ type Tarefa = {
   dica_revelada: number;
   status: "pendente" | "em_andamento" | "concluida";
   created_at: string;
+  mentor_aula_id?: string | null;
+  mentor_completed_at?: string | null;
+  mentor_duration_seconds?: number | null;
 };
 
 const STATUS_COLORS: Record<Tarefa["status"], string> = {
@@ -78,6 +82,7 @@ export function MissaoTarefa({ childId }: Props) {
   const [dueDate, setDueDate] = useState(format(new Date(), "yyyy-MM-dd"));
   const [enunciado, setEnunciado] = useState("");
   const [fotoBase64, setFotoBase64] = useState<string | null>(null);
+  const [tarefaMentor, setTarefaMentor] = useState<Tarefa | null>(null);
   const fotoRef = useRef<HTMLInputElement | null>(null);
 
   const analisarFn = useServerFn(analisarTarefaCasa);
@@ -382,10 +387,32 @@ export function MissaoTarefa({ childId }: Props) {
             onRevelarDica={() => revelarDicaMutation.mutate({ tarefa: t })}
             onConcluir={() => concluirMutation.mutate(t)}
             onExcluir={() => excluirMutation.mutate(t)}
+            onAprender={() => setTarefaMentor(t)}
             revealingDica={revelarDicaMutation.isPending}
           />
         ))}
       </div>
+      {tarefaMentor && (
+        <AulaViewer
+          aulaId={tarefaMentor.mentor_aula_id || "ia-new"}
+          titulo={`${tarefaMentor.titulo}: ${tarefaMentor.materia || "Tarefa escolar"}`}
+          generationContext={{ modo: "tarefa", materia: tarefaMentor.materia || undefined,
+            contexto: `Tarefa com prazo ${tarefaMentor.due_date}. Enunciado: ${tarefaMentor.enunciado || tarefaMentor.ia_resumo?.o_que_a_tarefa_pede || tarefaMentor.titulo}. Ensine o conceito e modele um exemplo diferente. Não revele a resposta da tarefa.` }}
+          onReady={async (aulaId) => {
+            const { error } = await (supabase as any).from("homework_tasks").update({ mentor_aula_id: aulaId, status: "em_andamento" }).eq("id", tarefaMentor.id);
+            if (error) { console.error(error); toast.error("A aula foi criada, mas não foi vinculada à tarefa."); return; }
+            setTarefaMentor((atual) => atual ? { ...atual, mentor_aula_id: aulaId, status: "em_andamento" } : atual);
+            await queryClient.invalidateQueries({ queryKey });
+          }}
+          onComplete={async ({ tempoSegundos }) => {
+            const { error } = await (supabase as any).from("homework_tasks").update({ mentor_completed_at: new Date().toISOString(), mentor_duration_seconds: tempoSegundos, status: "em_andamento" }).eq("id", tarefaMentor.id);
+            if (error) { console.error(error); toast.error("A aula terminou, mas o progresso não foi salvo."); return; }
+            toast.success("Explicação concluída. Agora resolva a tarefa usando as pistas.");
+            await queryClient.invalidateQueries({ queryKey });
+          }}
+          onClose={() => setTarefaMentor(null)}
+        />
+      )}
     </div>
   );
 }
@@ -395,12 +422,14 @@ function TarefaCard({
   onRevelarDica,
   onConcluir,
   onExcluir,
+  onAprender,
   revealingDica,
 }: {
   tarefa: Tarefa;
   onRevelarDica: () => void;
   onConcluir: () => void;
   onExcluir: () => void;
+  onAprender: () => void;
   revealingDica: boolean;
 }) {
   const dicas = tarefa.dicas_ia ?? [];
@@ -441,13 +470,14 @@ function TarefaCard({
             </p>
           )}
         </div>
-        <button
-          onClick={onExcluir}
-          title="Excluir"
-          className="text-rose-500 hover:text-rose-700 p-1"
-        >
-          <Trash2 className="h-4 w-4" />
-        </button>
+        <div className="flex items-center gap-2">
+          {tarefa.status !== "concluida" && (
+            <button onClick={onAprender} className="text-xs font-black text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-lg px-3 py-2 flex items-center gap-1 hover:bg-indigo-100">
+              <BookOpen className="h-4 w-4" /> Aprender o conteúdo
+            </button>
+          )}
+          <button onClick={onExcluir} title="Excluir" className="text-rose-500 hover:text-rose-700 p-1"><Trash2 className="h-4 w-4" /></button>
+        </div>
       </div>
 
       {/* Dicas progressivas */}
