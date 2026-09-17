@@ -15,6 +15,7 @@ import {
 import { toast } from "sonner";
 import { PlanoEstudoProva } from "./PlanoEstudoProva";
 import { EstudosRecomendados } from "./EstudosRecomendados";
+import { dataLocalHoje, validarDataFutura } from "@/lib/missao-prova";
 
 interface Prova {
   id: string;
@@ -53,6 +54,7 @@ export function CalendarioProvas({ childId, filtroTipo = "todos", titulo }: Prop
   const [showForm, setShowForm] = useState(false);
   const [subject, setSubject] = useState("");
   const [notes, setNotes] = useState("");
+  const [contents, setContents] = useState("");
   const [tipo, setTipo] = useState<"prova" | "trabalho">(
     filtroTipo === "trabalho" ? "trabalho" : "prova"
   );
@@ -114,23 +116,46 @@ export function CalendarioProvas({ childId, filtroTipo = "todos", titulo }: Prop
       toast.error("Selecione uma criança antes");
       return;
     }
-    if (!subject.trim()) return;
-    const { error } = await supabase.from("exam_missions").insert({
+    if (!subject.trim() || (tipo === "prova" && !contents.trim())) {
+      toast.error(tipo === "prova" ? "Informe a matéria e os conteúdos da prova." : "Informe o tema do trabalho.");
+      return;
+    }
+    if (!validarDataFutura(selectedDate)) {
+      toast.error("Informe uma data válida e futura, com o ano completo.");
+      return;
+    }
+    const { data: mission, error } = await supabase.from("exam_missions").insert({
       child_id: childId,
       subject: subject.trim(),
       exam_date: selectedDate,
       notes: notes.trim() || null,
       tipo,
-    } as any);
+    } as any).select("id").single();
     if (error) {
       toast.error("Erro ao salvar: " + error.message);
       return;
     }
+    const contentRows = contents.split(/[,;\n]/).map((item) => item.trim()).filter(Boolean).map((content_title) => ({
+      mission_id: mission.id,
+      content_title,
+    }));
+    const { error: contentError } = contentRows.length
+      ? await supabase.from("exam_mission_contents").insert(contentRows)
+      : { error: null };
+    if (contentError) {
+      await supabase.from("exam_missions").delete().eq("id", mission.id);
+      toast.error("Não foi possível salvar os conteúdos da prova.");
+      return;
+    }
     toast.success(tipo === "prova" ? "Prova agendada!" : "Trabalho agendado!");
     setSubject("");
+    setContents("");
     setNotes("");
     setShowForm(false);
     qc.invalidateQueries({ queryKey: ["exam_missions", childId] });
+    qc.invalidateQueries({ queryKey: ["exam_missions_child", childId] });
+    qc.invalidateQueries({ queryKey: ["exam_study_plans"] });
+    qc.invalidateQueries({ queryKey: ["lembretes_hoje", childId] });
   }
 
   async function removerProva(id: string) {
@@ -140,6 +165,9 @@ export function CalendarioProvas({ childId, filtroTipo = "todos", titulo }: Prop
       return;
     }
     qc.invalidateQueries({ queryKey: ["exam_missions", childId] });
+    qc.invalidateQueries({ queryKey: ["exam_missions_child", childId] });
+    qc.invalidateQueries({ queryKey: ["exam_study_plans"] });
+    qc.invalidateQueries({ queryKey: ["lembretes_hoje", childId] });
   }
 
   const hojeStr = ymd(today);
@@ -191,7 +219,9 @@ export function CalendarioProvas({ childId, filtroTipo = "todos", titulo }: Prop
               return (
                 <button
                   key={i}
-                  onClick={() => setSelectedDate(s)}
+                  onClick={() => {
+                    if (s >= dataLocalHoje()) setSelectedDate(s);
+                  }}
                   className={[
                     "aspect-square rounded-lg text-xs font-bold relative transition-all",
                     inMonth ? "text-foreground" : "text-muted-foreground/40",
@@ -247,6 +277,14 @@ export function CalendarioProvas({ childId, filtroTipo = "todos", titulo }: Prop
 
           {showForm && (
             <form onSubmit={salvarProva} className="space-y-2 bg-white border-2 border-indigo-200 rounded-xl p-3">
+              <input
+                type="date"
+                min={dataLocalHoje()}
+                value={selectedDate}
+                onChange={(e) => setSelectedDate(e.target.value)}
+                className="w-full text-sm border border-indigo-200 rounded-lg px-3 py-2 focus:outline-none focus:border-indigo-500"
+                required
+              />
               {filtroTipo === "todos" && (
                 <div className="flex gap-2">
                   <button
@@ -283,10 +321,20 @@ export function CalendarioProvas({ childId, filtroTipo = "todos", titulo }: Prop
                 className="w-full text-sm border border-indigo-200 rounded-lg px-3 py-2 focus:outline-none focus:border-indigo-500"
                 required
               />
+              {tipo === "prova" && (
+                <textarea
+                  value={contents}
+                  onChange={(e) => setContents(e.target.value)}
+                  placeholder="Conteúdos da prova (ex: verbos, tempos verbais e conjugação)"
+                  rows={2}
+                  required
+                  className="w-full text-sm border border-indigo-200 rounded-lg px-3 py-2 focus:outline-none focus:border-indigo-500"
+                />
+              )}
               <textarea
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
-                placeholder="Conteúdo / observações (opcional)"
+                placeholder="Observações (opcional)"
                 rows={2}
                 className="w-full text-sm border border-indigo-200 rounded-lg px-3 py-2 focus:outline-none focus:border-indigo-500"
               />

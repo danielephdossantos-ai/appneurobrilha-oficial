@@ -1,21 +1,15 @@
-import { createClient } from "@supabase/supabase-js";
 import { createHash } from "node:crypto";
 
-function db() {
-  return createClient(
-    process.env.SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!,
-    { auth: { persistSession: false, autoRefreshToken: false } },
-  );
-}
+type DatabaseClient = {
+  from: (table: string) => any;
+};
 
 export function criarCacheKey(parts: Array<string | number | null | undefined>): string {
   const normalized = parts.map((p) => String(p ?? "").trim().toLowerCase().replace(/\s+/g, " ")).join("|");
   return createHash("sha256").update(normalized).digest("hex");
 }
 
-export async function buscarAulaMentorPorCache(cacheKey: string) {
-  const supabase = db();
+export async function buscarAulaMentorPorCache(supabase: DatabaseClient, cacheKey: string) {
   const { data: cache, error } = await supabase
     .from("rb_aulas_geradas_ia")
     .select("id,aula_id,conteudo,cache_key")
@@ -36,7 +30,7 @@ export async function buscarAulaMentorPorCache(cacheKey: string) {
   return { cacheId: cache.id, aulaId: cache.aula_id, conteudo: cache.conteudo, paginas };
 }
 
-export async function persistirAulaMentor(input: {
+export async function persistirAulaMentor(supabase: DatabaseClient, input: {
   cacheKey: string;
   modulo: string;
   dificuldadeOriginal: string;
@@ -48,9 +42,9 @@ export async function persistirAulaMentor(input: {
   conteudo: any;
   paginas: Array<{ ordem: number; tipo: string; titulo?: string; conteudo: any }>;
   tags?: string[];
+  studyPlanId?: string;
+  minPaginas?: number;
 }) {
-  const supabase = db();
-
   const { data: aula, error: aulaError } = await supabase
     .from("rb_aulas")
     .insert({
@@ -74,6 +68,16 @@ export async function persistirAulaMentor(input: {
     const { error: pagesError } = await supabase.from("rb_paginas_aula").insert(rows);
     if (pagesError) throw pagesError;
 
+    const { count: pageCount, error: countError } = await supabase
+      .from("rb_paginas_aula")
+      .select("id", { count: "exact", head: true })
+      .eq("aula_id", aula.id);
+    if (countError) throw countError;
+    const minimum = input.minPaginas ?? 1;
+    if ((pageCount ?? 0) < minimum) {
+      throw new Error(`A aula não foi salva por completo: eram esperadas pelo menos ${minimum} páginas.`);
+    }
+
     const { data: cache, error: cacheError } = await supabase
       .from("rb_aulas_geradas_ia")
       .upsert({
@@ -89,7 +93,19 @@ export async function persistirAulaMentor(input: {
       .single();
     if (cacheError) throw cacheError;
 
-    return { aulaId: aula.id, cacheId: cache?.id ?? null };
+    if (input.studyPlanId) {
+      const { data: linked, error: linkError } = await supabase
+        .from("exam_study_plans")
+        .update({ mentor_aula_id: aula.id })
+        .eq("id", input.studyPlanId)
+        .select("id,mentor_aula_id")
+        .single();
+      if (linkError || linked?.mentor_aula_id !== aula.id) {
+        throw linkError ?? new Error("A aula foi criada, mas não foi vinculada à sessão de estudo.");
+      }
+    }
+
+    return { aulaId: aula.id, cacheId: cache?.id ?? null, pageCount: pageCount ?? 0 };
   } catch (error) {
     await supabase.from("rb_aulas").delete().eq("id", aula.id);
     throw error;

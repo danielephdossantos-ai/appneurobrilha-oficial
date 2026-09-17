@@ -20,6 +20,7 @@ import { toast } from "sonner";
 import { format, differenceInDays, startOfDay } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { gerarPlanoEstudosMissaoProva } from "@/lib/groq-professor.functions";
+import { dataLocalHoje, validarDataFutura } from "@/lib/missao-prova";
 
 interface MissaoProvaManagerProps {
   childId: string;
@@ -30,11 +31,18 @@ const missionQueryKeys = (childId: string) => [
   ["exam_missions_child", childId] as const,
 ];
 
+function invalidateMissionQueries(queryClient: ReturnType<typeof useQueryClient>, childId: string) {
+  missionQueryKeys(childId).forEach((queryKey) => queryClient.invalidateQueries({ queryKey }));
+  queryClient.invalidateQueries({ queryKey: ["exam_study_plans"] });
+  queryClient.invalidateQueries({ queryKey: ["lembretes_hoje", childId] });
+}
+
 export function MissaoProvaManager({ childId }: MissaoProvaManagerProps) {
   const queryClient = useQueryClient();
   const [isAdding, setIsAdding] = useState(false);
   const [newSubject, setNewSubject] = useState("");
   const [newDate, setNewDate] = useState("");
+  const [newContents, setNewContents] = useState("");
   const [newNotes, setNewNotes] = useState("");
 
   const { data: missions = [], isLoading } = useQuery({
@@ -59,14 +67,21 @@ export function MissaoProvaManager({ childId }: MissaoProvaManagerProps) {
 
   const createMissionMutation = useMutation({
     mutationFn: async () => {
+      if (!newSubject.trim() || !newContents.trim()) {
+        throw new Error("Informe a matéria e os conteúdos da prova.");
+      }
+      if (!validarDataFutura(newDate)) {
+        throw new Error("Informe uma data válida e futura, com o ano completo.");
+      }
       const { data, error } = await (supabase as any)
         .from("exam_missions")
         .insert([
           {
             child_id: childId,
-            subject: newSubject,
+            subject: newSubject.trim(),
             exam_date: newDate,
-            notes: newNotes,
+            notes: newNotes.trim() || null,
+            tipo: "prova",
           },
         ])
         .select()
@@ -74,23 +89,27 @@ export function MissaoProvaManager({ childId }: MissaoProvaManagerProps) {
 
       if (error) throw error;
 
-      const { error: contentError } = await (supabase as any).from("exam_mission_contents").insert([
-        {
-          mission_id: data.id,
-          content_title: newSubject,
-        },
-      ]);
+      const contentRows = newContents
+        .split(/[,;\n]/)
+        .map((item) => item.trim())
+        .filter(Boolean)
+        .map((content_title) => ({ mission_id: data.id, content_title }));
+      const { error: contentError } = await (supabase as any)
+        .from("exam_mission_contents")
+        .insert(contentRows);
 
-      if (contentError) throw contentError;
+      if (contentError) {
+        await (supabase as any).from("exam_missions").delete().eq("id", data.id);
+        throw contentError;
+      }
       return data;
     },
     onSuccess: () => {
-      missionQueryKeys(childId).forEach((queryKey) => {
-        queryClient.invalidateQueries({ queryKey });
-      });
+      invalidateMissionQueries(queryClient, childId);
       setIsAdding(false);
       setNewSubject("");
       setNewDate("");
+      setNewContents("");
       setNewNotes("");
       toast.success("Missão Prova criada e conectada ao plano de estudos.");
     },
@@ -105,9 +124,7 @@ export function MissaoProvaManager({ childId }: MissaoProvaManagerProps) {
       if (error) throw error;
     },
     onSuccess: () => {
-      missionQueryKeys(childId).forEach((queryKey) => {
-        queryClient.invalidateQueries({ queryKey });
-      });
+      invalidateMissionQueries(queryClient, childId);
       toast.info("Missão removida.");
     },
     onError: (error: any) => {
@@ -126,9 +143,7 @@ export function MissaoProvaManager({ childId }: MissaoProvaManagerProps) {
       if (error) throw error;
     },
     onSuccess: () => {
-      missionQueryKeys(childId).forEach((queryKey) => {
-        queryClient.invalidateQueries({ queryKey });
-      });
+      invalidateMissionQueries(queryClient, childId);
       toast.success("Conteúdo adicionado à Missão Prova.");
     },
     onError: (error: any) => {
@@ -180,9 +195,7 @@ export function MissaoProvaManager({ childId }: MissaoProvaManagerProps) {
       return res.plano;
     },
     onSuccess: (plano) => {
-      missionQueryKeys(childId).forEach((queryKey) => {
-        queryClient.invalidateQueries({ queryKey });
-      });
+      invalidateMissionQueries(queryClient, childId);
       toast.success(
         plano?.resumoMaterial
           ? `Plano gerado! IA leu: ${plano.resumoMaterial.slice(0, 90)}`
@@ -255,11 +268,24 @@ export function MissaoProvaManager({ childId }: MissaoProvaManagerProps) {
                 </label>
                 <input
                   type="date"
+                  min={dataLocalHoje()}
                   className="w-full px-4 py-2.5 rounded-xl border border-indigo-100 focus:ring-2 focus:ring-indigo-500 outline-none text-sm bg-white"
                   value={newDate}
                   onChange={(e) => setNewDate(e.target.value)}
                 />
               </div>
+            </div>
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold text-indigo-700 uppercase ml-1">
+                Conteúdos da Prova
+              </label>
+              <textarea
+                placeholder="Ex: verbos, tempos verbais e conjugação"
+                className="w-full px-4 py-2.5 rounded-xl border border-indigo-100 focus:ring-2 focus:ring-indigo-500 outline-none text-sm bg-white min-h-[80px]"
+                value={newContents}
+                onChange={(e) => setNewContents(e.target.value)}
+                required
+              />
             </div>
             <div className="space-y-1.5">
               <label className="text-xs font-bold text-indigo-700 uppercase ml-1">
@@ -274,7 +300,7 @@ export function MissaoProvaManager({ childId }: MissaoProvaManagerProps) {
             </div>
             <div className="flex justify-end">
               <button
-                disabled={!newSubject || !newDate || createMissionMutation.isPending}
+                disabled={!newSubject.trim() || !newContents.trim() || !validarDataFutura(newDate) || createMissionMutation.isPending}
                 onClick={() => createMissionMutation.mutate()}
                 className="bg-indigo-600 text-white px-8 py-2.5 rounded-xl font-bold text-sm hover:bg-indigo-700 disabled:opacity-50 shadow-lg shadow-indigo-100"
               >

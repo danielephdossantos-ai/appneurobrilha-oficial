@@ -207,6 +207,8 @@ export function AulaViewer({ aulaId, titulo, onClose, onComplete }: AulaViewerPr
   const [paginas, setPaginas] = useState<Pagina[]>([]);
   const [idx, setIdx] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [erro, setErro] = useState<string | null>(null);
+  const [tentativa, setTentativa] = useState(0);
   const [startTime] = useState(() => Date.now());
 
   const gerar = useServerFn(gerarAulaReforcoIA);
@@ -216,6 +218,7 @@ export function AulaViewer({ aulaId, titulo, onClose, onComplete }: AulaViewerPr
     let alive = true;
     (async () => {
       setLoading(true);
+      setErro(null);
       
       // Se for uma aula nova via IA
       if (aulaId === "ia-new" && activeChild) {
@@ -229,36 +232,45 @@ export function AulaViewer({ aulaId, titulo, onClose, onComplete }: AulaViewerPr
           
           if (!alive) return;
           
-          const { data: pags } = await supabase
+          const { data: pags, error: pagesError } = await supabase
             .from("rb_paginas_aula")
             .select("id,ordem,tipo,titulo,conteudo")
             .eq("aula_id", res.id)
             .order("ordem", { ascending: true });
             
-          setPaginas((pags || []) as Pagina[]);
+          if (pagesError) throw pagesError;
+          if (!pags?.length) throw new Error("A aula foi gerada, mas nenhuma página foi salva.");
+          setPaginas(pags as Pagina[]);
         } catch (e) {
           console.error("Erro ao gerar aula sob demanda:", e);
-          toast.error("Falha ao gerar aula com IA");
+          const mensagem = e instanceof Error ? e.message : "Falha ao gerar aula com IA";
+          setErro(mensagem);
+          toast.error(mensagem);
         } finally {
           if (alive) setLoading(false);
         }
         return;
       }
 
-      const { data } = await supabase
+      const { data, error } = await supabase
         .from("rb_paginas_aula")
         .select("id,ordem,tipo,titulo,conteudo")
         .eq("aula_id", aulaId)
         .order("ordem", { ascending: true });
       if (!alive) return;
-      setPaginas((data || []) as Pagina[]);
+      if (error || !data?.length) {
+        setPaginas([]);
+        setErro(error?.message || "Esta aula não foi salva por completo. Tente novamente.");
+      } else {
+        setPaginas(data as Pagina[]);
+      }
       setIdx(0);
       setLoading(false);
     })();
     return () => {
       alive = false;
     };
-  }, [aulaId, activeChild, titulo, gerar]);
+  }, [aulaId, activeChild, titulo, gerar, tentativa]);
 
   const total = paginas.length;
   const atual = paginas[idx];
@@ -377,8 +389,15 @@ export function AulaViewer({ aulaId, titulo, onClose, onComplete }: AulaViewerPr
               Carregando aula…
             </div>
           ) : !atual ? (
-            <div className="h-64 grid place-items-center text-muted-foreground text-center">
-              Esta aula ainda não tem páginas cadastradas.
+            <div className="h-64 flex flex-col items-center justify-center gap-4 text-muted-foreground text-center">
+              <p>{erro || "Esta aula não foi salva por completo."}</p>
+              <button
+                type="button"
+                onClick={() => setTentativa((value) => value + 1)}
+                className="rounded-xl bg-primary px-4 py-2 text-sm font-bold text-primary-foreground"
+              >
+                Tentar novamente
+              </button>
             </div>
           ) : (
             <div key={atual.id} className="animate-in fade-in slide-in-from-right-4 duration-300">

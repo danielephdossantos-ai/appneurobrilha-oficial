@@ -1,5 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
-import { createClient } from "@supabase/supabase-js";
+import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 
 export interface RecursoExterno {
   id?: string;
@@ -124,14 +124,6 @@ function correspondeAoTema(recurso: RecursoExterno, query: string): boolean {
   if (termos.length === 0) return false;
   const texto = normalize(`${recurso.titulo} ${recurso.descricao ?? ""}`);
   return termos.filter((termo) => texto.includes(termo)).length >= Math.min(2, termos.length);
-}
-
-function getServerClient() {
-  return createClient(
-    process.env.SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!,
-    { auth: { persistSession: false, autoRefreshToken: false } },
-  );
 }
 
 // ---------- Wikipédia (PT) ----------
@@ -279,12 +271,13 @@ function dedupe(lista: RecursoExterno[]): RecursoExterno[] {
 
 
 export const buscarRecursosExternos = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
   .inputValidator((d: { query: string; force?: boolean }) => d)
-  .handler(async ({ data }) => {
+  .handler(async ({ data, context }) => {
     const queryN = normalize(data.query);
     if (queryN.length < 3) return { resultados: [], fonte: "vazio" as const, avisos: [] as AvisoFonteExterna[] };
 
-    const supabase = getServerClient();
+    const supabase = context.supabase;
 
     // 1) cache
     if (!data.force) {
@@ -352,7 +345,8 @@ export const buscarRecursosExternos = createServerFn({ method: "POST" })
         conteudo: r.conteudo ?? null,
         ordem: i,
       }));
-      await supabase.from("rb_recursos_externos").insert(rows);
+      const { error: cacheError } = await supabase.from("rb_recursos_externos").insert(rows);
+      if (cacheError) console.warn("external_resources_cache_write_failed", cacheError.message);
     }
 
     return { resultados: unicos, fonte: "api" as const, avisos };

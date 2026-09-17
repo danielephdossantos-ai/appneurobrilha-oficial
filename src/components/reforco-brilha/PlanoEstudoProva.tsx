@@ -20,6 +20,14 @@ interface PlanoDia {
   completed: boolean;
 }
 
+function atualizarPlano(qc: ReturnType<typeof useQueryClient>, missionId: string) {
+  qc.invalidateQueries({ queryKey: ["exam_study_plans", missionId] });
+  qc.invalidateQueries({ queryKey: ["exam_study_plans"] });
+  qc.invalidateQueries({ queryKey: ["exam_missions"] });
+  qc.invalidateQueries({ queryKey: ["exam_missions_child"] });
+  qc.invalidateQueries({ queryKey: ["lembretes_hoje"] });
+}
+
 function ymd(d: Date): string {
   const y = d.getFullYear();
   const m = String(d.getMonth() + 1).padStart(2, "0");
@@ -111,8 +119,7 @@ export function PlanoEstudoProva({ missionId, subject, examDate, notes }: Props)
       return;
     }
     toast.success(`Plano de ${dias.length} dia(s) gerado!`);
-    qc.invalidateQueries({ queryKey: ["exam_study_plans", missionId] });
-    qc.invalidateQueries({ queryKey: ["lembretes_hoje"] });
+    atualizarPlano(qc, missionId);
   }
 
   async function toggleCompleto(p: PlanoDia) {
@@ -124,14 +131,12 @@ export function PlanoEstudoProva({ missionId, subject, examDate, notes }: Props)
       toast.error("Erro");
       return;
     }
-    qc.invalidateQueries({ queryKey: ["exam_study_plans", missionId] });
-    qc.invalidateQueries({ queryKey: ["lembretes_hoje"] });
+    atualizarPlano(qc, missionId);
   }
 
   async function remover(id: string) {
     await supabase.from("exam_study_plans").delete().eq("id", id);
-    qc.invalidateQueries({ queryKey: ["exam_study_plans", missionId] });
-    qc.invalidateQueries({ queryKey: ["lembretes_hoje"] });
+    atualizarPlano(qc, missionId);
   }
 
   async function salvarEdicao(id: string) {
@@ -144,7 +149,7 @@ export function PlanoEstudoProva({ missionId, subject, examDate, notes }: Props)
       return;
     }
     setEditingId(null);
-    qc.invalidateQueries({ queryKey: ["exam_study_plans", missionId] });
+    atualizarPlano(qc, missionId);
   }
 
   async function adicionarDia() {
@@ -163,7 +168,7 @@ export function PlanoEstudoProva({ missionId, subject, examDate, notes }: Props)
       toast.error("Erro");
       return;
     }
-    qc.invalidateQueries({ queryKey: ["exam_study_plans", missionId] });
+    atualizarPlano(qc, missionId);
   }
 
   if (isLoading) {
