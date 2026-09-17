@@ -33,7 +33,6 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { format, differenceInDays, addDays, startOfDay, isBefore } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { toast } from "sonner";
-import { ReforcoEngine } from "@/engines/pedagogical-engine/reforco-engine";
 import { FloatingActivityControls } from "@/components/activities/FloatingActivityControls";
 import { TutorTrabalho } from "@/components/reforco-brilha/TutorTrabalho";
 import { BibliotecaInternet } from "@/components/reforco-brilha/BibliotecaInternet";

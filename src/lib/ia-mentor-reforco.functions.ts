@@ -5,7 +5,7 @@ import { extrairJSON } from "@/lib/ai-json.server";
 import { buscarAulaMentorPorCache, criarCacheKey, persistirAulaMentor } from "@/lib/professor-mentor-persistence.server";
 import { PROFESSOR_MENTOR_PEDAGOGIA } from "@/lib/professor-mentor-pedagogia";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
-import { criarPaginasMissaoProva, MIN_MENTOR_PAGES } from "@/lib/missao-prova";
+import { criarContextoPedagogicoMissaoProva, criarPaginasMissaoProva, MIN_MENTOR_PAGES } from "@/lib/missao-prova";
 
 const AulaMentorSchema = z.object({
   titulo: z.string().min(3),
@@ -182,12 +182,11 @@ export const gerarAulaSessaoMissaoProva = createServerFn({ method: "POST" })
     const systemPrompt = `Você é o Professor Mentor NeuroBrilha e criará uma aula para uma prova escolar.
 ${PROFESSOR_MENTOR_PEDAGOGIA}
 
-MATÉRIA OBRIGATÓRIA: ${materia}
-CONTEÚDOS OBRIGATÓRIOS: ${topicos}
+${criarContextoPedagogicoMissaoProva(materia, conteudos)}
 SÉRIE: ${crianca.serie || "não informada"}. IDADE: ${crianca.idade || "não informada"}.
 INTERESSE PARA CONTEXTUALIZAÇÃO: ${crianca.hiperfoco || "não informado"}.
 
-Não troque a matéria e não misture conteúdos de outra disciplina. Ensine os conceitos antes de avaliar.
+Ensine os conceitos antes de avaliar.
 Em Língua Portuguesa, inclua análise linguística e conjugação quando o conteúdo pedir verbos.
 Em Matemática, apresente cálculos e raciocínio matemático, sem exercícios de gramática.
 Cada correção deve explicar o raciocínio, não apenas informar a resposta.

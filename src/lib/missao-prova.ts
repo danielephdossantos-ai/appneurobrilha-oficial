@@ -42,6 +42,12 @@ export function montarTemaMissaoProva(materia: string, conteudos: string[], titu
   return [materia.trim(), topicos, tituloSessao?.trim()].filter(Boolean).join(" — ");
 }
 
+export function criarContextoPedagogicoMissaoProva(materia: string, conteudos: string[]): string {
+  const materiaLimpa = materia.trim();
+  const topicos = conteudos.map((item) => item.trim()).filter(Boolean).join(", ");
+  return `MATÉRIA OBRIGATÓRIA: ${materiaLimpa}\nCONTEÚDOS OBRIGATÓRIOS: ${topicos}\nNão troque a matéria e não misture conteúdos de outra disciplina.`;
+}
+
 export function criarPaginasMissaoProva(aula: MissaoProvaAula): MentorPage[] {
   return [
     { ordem: 1, tipo: "objetivo", titulo: "Objetivo", conteudo: { texto: aula.objetivo } },

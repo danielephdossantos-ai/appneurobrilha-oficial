@@ -116,8 +116,8 @@ export function CalendarioProvas({ childId, filtroTipo = "todos", titulo }: Prop
       toast.error("Selecione uma criança antes");
       return;
     }
-    if (!subject.trim() || !contents.trim()) {
-      toast.error("Informe a matéria e os conteúdos da prova.");
+    if (!subject.trim() || (tipo === "prova" && !contents.trim())) {
+      toast.error(tipo === "prova" ? "Informe a matéria e os conteúdos da prova." : "Informe o tema do trabalho.");
       return;
     }
     if (!validarDataFutura(selectedDate)) {
@@ -139,7 +139,9 @@ export function CalendarioProvas({ childId, filtroTipo = "todos", titulo }: Prop
       mission_id: mission.id,
       content_title,
     }));
-    const { error: contentError } = await supabase.from("exam_mission_contents").insert(contentRows);
+    const { error: contentError } = contentRows.length
+      ? await supabase.from("exam_mission_contents").insert(contentRows)
+      : { error: null };
     if (contentError) {
       await supabase.from("exam_missions").delete().eq("id", mission.id);
       toast.error("Não foi possível salvar os conteúdos da prova.");
@@ -275,6 +277,14 @@ export function CalendarioProvas({ childId, filtroTipo = "todos", titulo }: Prop
 
           {showForm && (
             <form onSubmit={salvarProva} className="space-y-2 bg-white border-2 border-indigo-200 rounded-xl p-3">
+              <input
+                type="date"
+                min={dataLocalHoje()}
+                value={selectedDate}
+                onChange={(e) => setSelectedDate(e.target.value)}
+                className="w-full text-sm border border-indigo-200 rounded-lg px-3 py-2 focus:outline-none focus:border-indigo-500"
+                required
+              />
               {filtroTipo === "todos" && (
                 <div className="flex gap-2">
                   <button
@@ -311,14 +321,16 @@ export function CalendarioProvas({ childId, filtroTipo = "todos", titulo }: Prop
                 className="w-full text-sm border border-indigo-200 rounded-lg px-3 py-2 focus:outline-none focus:border-indigo-500"
                 required
               />
-              <textarea
-                value={contents}
-                onChange={(e) => setContents(e.target.value)}
-                placeholder="Conteúdos da prova (ex: verbos, tempos verbais e conjugação)"
-                rows={2}
-                required
-                className="w-full text-sm border border-indigo-200 rounded-lg px-3 py-2 focus:outline-none focus:border-indigo-500"
-              />
+              {tipo === "prova" && (
+                <textarea
+                  value={contents}
+                  onChange={(e) => setContents(e.target.value)}
+                  placeholder="Conteúdos da prova (ex: verbos, tempos verbais e conjugação)"
+                  rows={2}
+                  required
+                  className="w-full text-sm border border-indigo-200 rounded-lg px-3 py-2 focus:outline-none focus:border-indigo-500"
+                />
+              )}
               <textarea
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
