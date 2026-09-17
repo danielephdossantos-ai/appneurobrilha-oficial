@@ -4,6 +4,8 @@ import { chamarProfessorMentorIA } from "@/lib/ai-orchestrator.server";
 import { extrairJSON } from "@/lib/ai-json.server";
 import { buscarAulaMentorPorCache, criarCacheKey, persistirAulaMentor } from "@/lib/professor-mentor-persistence.server";
 import { PROFESSOR_MENTOR_PEDAGOGIA } from "@/lib/professor-mentor-pedagogia";
+import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
+import { criarPaginasMissaoProva, MIN_MENTOR_PAGES } from "@/lib/missao-prova";
 
 const AulaMentorSchema = z.object({
   titulo: z.string().min(3),
@@ -16,19 +18,27 @@ const AulaMentorSchema = z.object({
   dicas_familia: z.array(z.string().min(3)).optional().default([]),
 });
 
+export const AulaMissaoProvaSchema = z.object({
+  titulo: z.string().min(3),
+  objetivo: z.string().min(10),
+  conceitos_essenciais: z.array(z.string().min(3)).min(2),
+  explicacao: z.string().min(30),
+  exemplos_resolvidos: z.array(z.string().min(5)).min(2),
+  pratica_guiada: z.array(z.string().min(3)).min(2),
+  exercicios_independentes: z.array(z.string().min(3)).min(2),
+  revisao: z.array(z.string().min(3)).min(2),
+  correcao_explicada: z.array(z.string().min(5)).min(2),
+});
+
 export const gerarAulaReforcoIA = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
   .inputValidator((data) => z.object({
     dificuldade: z.string().min(2),
     criancaId: z.string().uuid(),
     perfilNeuro: z.string().optional()
   }).parse(data))
-  .handler(async ({ data }) => {
-    const { createClient } = await import("@supabase/supabase-js");
-    const supabase = createClient(
-      process.env.SUPABASE_URL!,
-      process.env.SUPABASE_SERVICE_ROLE_KEY!,
-      { auth: { persistSession: false, autoRefreshToken: false } },
-    );
+  .handler(async ({ data, context }) => {
+    const supabase = context.supabase as any;
 
     const { data: crianca, error: childError } = await supabase
       .from("children")
@@ -49,7 +59,7 @@ export const gerarAulaReforcoIA = createServerFn({ method: "POST" })
     const dificuldade = data.dificuldade.trim();
     const cacheKey = criarCacheKey(["reforco", dificuldade, serie, Math.max(1, Math.min(4, Number((crianca?.niveis as any)?.geral ?? 1))), hiperfoco]);
 
-    const reutilizada = await buscarAulaMentorPorCache(cacheKey);
+    const reutilizada = await buscarAulaMentorPorCache(supabase, cacheKey);
     if (reutilizada) {
       return { aula: reutilizada.conteudo, origem: "reutilizada", id: reutilizada.aulaId };
     }
@@ -107,7 +117,7 @@ Retorne SOMENTE JSON válido:
       ...(aula.dicas_familia.length ? [{ ordem: 7, tipo: "dicas_familia", titulo: "Para a família", conteudo: { bullets: aula.dicas_familia } }] : []),
     ];
 
-    const persisted = await persistirAulaMentor({
+    const persisted = await persistirAulaMentor(supabase, {
       cacheKey,
       modulo: "reforco_brilha",
       dificuldadeOriginal: dificuldade.toLowerCase(),
@@ -123,4 +133,104 @@ Retorne SOMENTE JSON válido:
 
     // Só retorna sucesso depois que aula + páginas + cache foram persistidos.
     return { aula, origem: `gerada_${ai.provider}`, id: persisted.aulaId };
+  });
+
+export const gerarAulaSessaoMissaoProva = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((input: unknown) => z.object({
+    sessionId: z.string().uuid(),
+    criancaId: z.string().uuid(),
+  }).parse(input))
+  .handler(async ({ data, context }) => {
+    const supabase = context.supabase as any;
+    const { data: session, error: sessionError } = await supabase
+      .from("exam_study_plans")
+      .select("id,title,description,mentor_aula_id,mission:exam_missions!inner(id,child_id,subject,exam_date,notes,contents:exam_mission_contents(content_title))")
+      .eq("id", data.sessionId)
+      .single();
+    if (sessionError || !session) throw new Error("Sessão de estudo não encontrada.");
+
+    const mission = Array.isArray(session.mission) ? session.mission[0] : session.mission;
+    if (!mission || mission.child_id !== data.criancaId) throw new Error("Esta sessão não pertence à criança selecionada.");
+
+    if (session.mentor_aula_id) {
+      const { data: existingPages, error: existingError } = await supabase
+        .from("rb_paginas_aula")
+        .select("id,ordem,tipo,titulo,conteudo")
+        .eq("aula_id", session.mentor_aula_id)
+        .order("ordem", { ascending: true });
+      if (!existingError && (existingPages?.length ?? 0) >= MIN_MENTOR_PAGES) {
+        return { id: session.mentor_aula_id, paginas: existingPages, origem: "persistida" as const };
+      }
+    }
+
+    const conteudos = (mission.contents ?? [])
+      .map((item: { content_title?: string }) => item.content_title?.trim())
+      .filter((item: string | undefined): item is string => Boolean(item));
+    if (conteudos.length === 0) throw new Error("Informe os conteúdos da prova antes de gerar a aula.");
+
+    const { data: crianca, error: childError } = await supabase
+      .from("children")
+      .select("idade,serie,hiperfoco,niveis,tempo_atencao_min")
+      .eq("id", data.criancaId)
+      .single();
+    if (childError || !crianca) throw new Error("Não foi possível carregar o perfil da criança.");
+
+    const materia = String(mission.subject).trim();
+    const topicos = conteudos.join(", ");
+    const cacheKey = criarCacheKey(["missao-prova", session.id, materia, topicos]);
+    const systemPrompt = `Você é o Professor Mentor NeuroBrilha e criará uma aula para uma prova escolar.
+${PROFESSOR_MENTOR_PEDAGOGIA}
+
+MATÉRIA OBRIGATÓRIA: ${materia}
+CONTEÚDOS OBRIGATÓRIOS: ${topicos}
+SÉRIE: ${crianca.serie || "não informada"}. IDADE: ${crianca.idade || "não informada"}.
+INTERESSE PARA CONTEXTUALIZAÇÃO: ${crianca.hiperfoco || "não informado"}.
+
+Não troque a matéria e não misture conteúdos de outra disciplina. Ensine os conceitos antes de avaliar.
+Em Língua Portuguesa, inclua análise linguística e conjugação quando o conteúdo pedir verbos.
+Em Matemática, apresente cálculos e raciocínio matemático, sem exercícios de gramática.
+Cada correção deve explicar o raciocínio, não apenas informar a resposta.
+
+Retorne SOMENTE JSON válido com este formato exato:
+{
+  "titulo":"...",
+  "objetivo":"...",
+  "conceitos_essenciais":["...","..."],
+  "explicacao":"...",
+  "exemplos_resolvidos":["...","..."],
+  "pratica_guiada":["...","..."],
+  "exercicios_independentes":["...","..."],
+  "revisao":["...","..."],
+  "correcao_explicada":["...","..."]
+}`;
+
+    const ai = await chamarProfessorMentorIA({
+      label: "missao-prova-aula",
+      json: true,
+      max_tokens: 4096,
+      messages: [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: `Prepare a aula de ${materia} sobre ${topicos}. Sessão: ${session.title}.` },
+      ],
+    });
+    const aula = AulaMissaoProvaSchema.parse(extrairJSON(ai.text));
+    const paginas = criarPaginasMissaoProva(aula);
+    const persisted = await persistirAulaMentor(supabase, {
+      cacheKey,
+      modulo: "missao_prova",
+      dificuldadeOriginal: `${materia}: ${topicos}`.toLowerCase(),
+      titulo: aula.titulo,
+      objetivo: aula.objetivo,
+      faixaEtaria: crianca.idade ? `${crianca.idade} anos` : undefined,
+      nivel: "basico",
+      provider: ai.provider,
+      conteudo: { ...aula, materia, conteudos },
+      paginas,
+      tags: [materia, ...conteudos].map((tag) => tag.toLowerCase()),
+      studyPlanId: session.id,
+      minPaginas: MIN_MENTOR_PAGES,
+    });
+    if (persisted.pageCount < MIN_MENTOR_PAGES) throw new Error("A aula não foi salva por completo. Tente novamente.");
+    return { id: persisted.aulaId, paginas, origem: `gerada_${ai.provider}` as const };
   });
