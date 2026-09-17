@@ -43,6 +43,9 @@ import { SpeakButton } from "@/components/ui/SpeakButton";
 import { MissaoProvaQuiz } from "@/components/professor/MissaoProvaQuiz";
 import { GraduationCap, BookOpen } from "lucide-react";
 import { buildAdaptiveUIState } from "@/engines/neuro-engine/adaptation-utils";
+import { AulaViewer } from "@/components/reforco-brilha/AulaViewer";
+import { gerarAulaSessaoMissaoProva } from "@/lib/ia-mentor-reforco.functions";
+import { useServerFn } from "@tanstack/react-start";
 
 export const Route = createFileRoute("/missao-prova")({
   component: MissaoProva,
@@ -59,6 +62,7 @@ function MissaoProva() {
   const [tutorAberto, setTutorAberto] = useState(false);
   const [autoGenerating, setAutoGenerating] = useState(false);
   const [recursosVistos, setRecursosVistos] = useState(0);
+  const gerarAulaSessao = useServerFn(gerarAulaSessaoMissaoProva);
 
   const adaptiveUI = useMemo(
     () =>
@@ -159,16 +163,19 @@ function MissaoProva() {
     setRecursosVistos(0);
 
     try {
-      // Usar o ReforcoEngine para gerar uma aula baseada no tópico da sessão
-      const lesson = await ReforcoEngine.getLesson(
-        session.title + ": " + mission.subject,
-        engine?.adaptive as any,
-      );
-      setLessonContent(lesson);
+      if (!activeChild) throw new Error("Selecione uma criança antes de abrir a aula.");
+      const lesson = await gerarAulaSessao({
+        data: { sessionId: session.id, criancaId: activeChild.id },
+      });
+      setLessonContent({ mentorAulaId: lesson.id, title: session.title });
+      await queryClient.invalidateQueries({ queryKey: ["exam_missions_child", activeChild.id] });
+      await queryClient.invalidateQueries({ queryKey: ["exam_missions", activeChild.id] });
     } catch (error) {
       console.error("Erro ao gerar aula:", error);
-      toast.error("Erro ao preparar sua missão de estudo.");
+      toast.error(error instanceof Error ? error.message : "Não foi possível salvar a aula. Tente novamente.");
       setIsStudying(false);
+      setCurrentSession(null);
+      setCurrentMission(null);
     }
   };
 
@@ -190,6 +197,46 @@ function MissaoProva() {
       console.error("Erro ao completar sessão:", error);
     }
   };
+
+  if (isStudying && lessonContent?.mentorAulaId) {
+    return (
+      <Shell>
+        <AulaViewer
+          aulaId={lessonContent.mentorAulaId}
+          titulo={lessonContent.title || currentSession?.title || "Missão Prova"}
+          onClose={() => {
+            setIsStudying(false);
+            setLessonContent(null);
+            setCurrentSession(null);
+            setCurrentMission(null);
+          }}
+          onComplete={({ tempoSegundos }) => {
+            if (!currentSession) return;
+            void (async () => {
+              const { error } = await (supabase as any)
+                .from("exam_study_plans")
+                .update({
+                  completed: true,
+                  completed_at: new Date().toISOString(),
+                  duration_seconds: tempoSegundos,
+                })
+                .eq("id", currentSession.id);
+              if (error) {
+                toast.error("A aula terminou, mas não foi possível registrar a conclusão.");
+                return;
+              }
+              if (activeChild) {
+                await queryClient.invalidateQueries({ queryKey: ["exam_missions_child", activeChild.id] });
+                await queryClient.invalidateQueries({ queryKey: ["exam_missions", activeChild.id] });
+                await queryClient.invalidateQueries({ queryKey: ["lembretes_hoje", activeChild.id] });
+              }
+              toast.success("Missão cumprida! Você está mais perto de brilhar na prova!");
+            })();
+          }}
+        />
+      </Shell>
+    );
+  }
 
   if (isStudying) {
     return (

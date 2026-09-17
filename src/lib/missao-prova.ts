@@ -16,7 +16,7 @@ export interface MentorPage {
   ordem: number;
   tipo: string;
   titulo: string;
-  conteudo: Record<string, unknown>;
+  conteudo: Record<string, string | string[]>;
 }
 
 export function dataLocalHoje(): string {
