@@ -2915,31 +2915,43 @@ export type Database = {
         Row: {
           aula_id: string | null
           completed: boolean
+          completed_at: string | null
           created_at: string
           description: string | null
+          duration_seconds: number | null
           id: string
+          mentor_aula_id: string | null
           mission_id: string
           scheduled_date: string
+          started_at: string | null
           title: string
         }
         Insert: {
           aula_id?: string | null
           completed?: boolean
+          completed_at?: string | null
           created_at?: string
           description?: string | null
+          duration_seconds?: number | null
           id?: string
+          mentor_aula_id?: string | null
           mission_id: string
           scheduled_date: string
+          started_at?: string | null
           title: string
         }
         Update: {
           aula_id?: string | null
           completed?: boolean
+          completed_at?: string | null
           created_at?: string
           description?: string | null
+          duration_seconds?: number | null
           id?: string
+          mentor_aula_id?: string | null
           mission_id?: string
           scheduled_date?: string
+          started_at?: string | null
           title?: string
         }
         Relationships: [
@@ -2953,6 +2965,20 @@ export type Database = {
           {
             foreignKeyName: "exam_study_plans_aula_id_fkey"
             columns: ["aula_id"]
+            isOneToOne: false
+            referencedRelation: "rb_aulas_premium_status"
+            referencedColumns: ["aula_id"]
+          },
+          {
+            foreignKeyName: "exam_study_plans_mentor_aula_id_fkey"
+            columns: ["mentor_aula_id"]
+            isOneToOne: false
+            referencedRelation: "rb_aulas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "exam_study_plans_mentor_aula_id_fkey"
+            columns: ["mentor_aula_id"]
             isOneToOne: false
             referencedRelation: "rb_aulas_premium_status"
             referencedColumns: ["aula_id"]
@@ -3406,6 +3432,9 @@ export type Database = {
           ia_resumo: Json | null
           id: string
           materia: string | null
+          mentor_aula_id: string | null
+          mentor_completed_at: string | null
+          mentor_duration_seconds: number | null
           status: string
           titulo: string
           updated_at: string
@@ -3423,6 +3452,9 @@ export type Database = {
           ia_resumo?: Json | null
           id?: string
           materia?: string | null
+          mentor_aula_id?: string | null
+          mentor_completed_at?: string | null
+          mentor_duration_seconds?: number | null
           status?: string
           titulo: string
           updated_at?: string
@@ -3440,6 +3472,9 @@ export type Database = {
           ia_resumo?: Json | null
           id?: string
           materia?: string | null
+          mentor_aula_id?: string | null
+          mentor_completed_at?: string | null
+          mentor_duration_seconds?: number | null
           status?: string
           titulo?: string
           updated_at?: string
@@ -3452,6 +3487,20 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "children"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "homework_tasks_mentor_aula_id_fkey"
+            columns: ["mentor_aula_id"]
+            isOneToOne: false
+            referencedRelation: "rb_aulas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "homework_tasks_mentor_aula_id_fkey"
+            columns: ["mentor_aula_id"]
+            isOneToOne: false
+            referencedRelation: "rb_aulas_premium_status"
+            referencedColumns: ["aula_id"]
           },
         ]
       }
@@ -8145,6 +8194,9 @@ export type Database = {
           id: string
           instrucoes_professor: string | null
           materia: string | null
+          mentor_aula_id: string | null
+          mentor_completed_at: string | null
+          mentor_duration_seconds: number | null
           tema: string
           titulo: string
           updated_at: string
@@ -8159,6 +8211,9 @@ export type Database = {
           id?: string
           instrucoes_professor?: string | null
           materia?: string | null
+          mentor_aula_id?: string | null
+          mentor_completed_at?: string | null
+          mentor_duration_seconds?: number | null
           tema: string
           titulo: string
           updated_at?: string
@@ -8173,6 +8228,9 @@ export type Database = {
           id?: string
           instrucoes_professor?: string | null
           materia?: string | null
+          mentor_aula_id?: string | null
+          mentor_completed_at?: string | null
+          mentor_duration_seconds?: number | null
           tema?: string
           titulo?: string
           updated_at?: string
@@ -8184,6 +8242,20 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "children"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "rb_trabalhos_mentor_aula_id_fkey"
+            columns: ["mentor_aula_id"]
+            isOneToOne: false
+            referencedRelation: "rb_aulas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "rb_trabalhos_mentor_aula_id_fkey"
+            columns: ["mentor_aula_id"]
+            isOneToOne: false
+            referencedRelation: "rb_aulas_premium_status"
+            referencedColumns: ["aula_id"]
           },
         ]
       }
