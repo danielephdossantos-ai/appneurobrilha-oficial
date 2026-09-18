@@ -23,7 +23,12 @@ export interface PaginaAulaEscolar {
     | "pratica_guiada"
     | "exercicio"
     | "revisao"
-    | "correcao";
+    | "correcao"
+    | "modelo_visual"
+    | "modelo_simbolico"
+    | "erros_comuns"
+    | "video"
+    | "desafio";
   titulo: string;
   conteudo: string;
   itens?: string[];
@@ -198,33 +203,76 @@ export function criarAulaSegura(materia: string, topico: string): PaginaAulaEsco
       titulo: "Objetivo da missão",
       conteudo: `Compreender ${topico}, reconhecer suas ideias principais e usar o conhecimento em atividades.`,
     },
-    { ordem: 3, tipo: "explicacao", titulo: "Explicação passo a passo", conteudo: base.conceito },
-    { ordem: 4, tipo: "exemplo", titulo: "Exemplo resolvido", conteudo: base.exemplo },
+    { ordem: 3, tipo: "explicacao", titulo: "Aulão: conceito principal", conteudo: base.conceito },
+    {
+      ordem: 4,
+      tipo: "modelo_visual",
+      titulo: "Modelo visual e concreto",
+      conteudo: `Imagine ${topico} representado com objetos, desenhos, cores ou partes. Faça um desenho simples e identifique nele cada informação importante antes de usar símbolos.`,
+    },
     {
       ordem: 5,
-      tipo: "pratica_guiada",
-      titulo: "Vamos fazer juntos",
-      conteudo: "Siga uma etapa de cada vez.",
-      itens: base.pratica,
+      tipo: "modelo_simbolico",
+      titulo: "Do desenho para os símbolos",
+      conteudo: `Transforme o modelo visual de ${topico} em palavras, números, sinais ou esquema. Compare cada parte do desenho com sua representação escolar.`,
     },
     {
       ordem: 6,
-      tipo: "exercicio",
-      titulo: "Agora é sua vez",
-      conteudo: "Resolva sem olhar o gabarito.",
-      itens: base.exercicios,
+      tipo: "exemplo",
+      titulo: "Exemplo resolvido passo a passo",
+      conteudo: base.exemplo,
     },
     {
       ordem: 7,
-      tipo: "revisao",
-      titulo: "Revisão da missão",
-      conteudo: `Explique com suas palavras o que aprendeu sobre ${topico} e anote o ponto que precisa rever.`,
+      tipo: "exemplo",
+      titulo: "Segundo exemplo comentado",
+      conteudo: `Resolva outro exemplo de ${topico}: leia o pedido, destaque os dados, escolha uma estratégia, execute uma etapa por vez e confira se a resposta faz sentido.`,
     },
     {
       ordem: 8,
+      tipo: "erros_comuns",
+      titulo: "Erros comuns e como evitar",
+      conteudo:
+        "Não pule a leitura, não misture regras de conteúdos diferentes e não aceite uma resposta sem conferir. Volte ao modelo visual quando surgir dúvida.",
+    },
+    {
+      ordem: 9,
+      tipo: "pratica_guiada",
+      titulo: "Prática guiada: fazemos juntos",
+      conteudo: "Siga uma etapa de cada vez e explique por que escolheu cada passo.",
+      itens: base.pratica,
+    },
+    {
+      ordem: 10,
+      tipo: "exercicio",
+      titulo: "Nível fácil e médio",
+      conteudo: "Resolva sem olhar o gabarito. Use desenho ou esquema se precisar.",
+      itens: base.exercicios,
+    },
+    {
+      ordem: 11,
+      tipo: "desafio",
+      titulo: "Desafio de aplicação",
+      conteudo: `Crie uma situação do cotidiano que use ${topico}, resolva e explique como chegou à resposta.`,
+    },
+    {
+      ordem: 12,
+      tipo: "video",
+      titulo: "Videoaula na lousa",
+      conteudo: `Assista a uma aula sobre ${topico}. Pause nos exemplos e tente resolver antes do professor mostrar a resposta.`,
+    },
+    {
+      ordem: 13,
+      tipo: "revisao",
+      titulo: "Resumo e mapa mental",
+      conteudo: `Escreva três ideias essenciais sobre ${topico}, um exemplo e uma dúvida que ainda precisa revisar.`,
+    },
+    {
+      ordem: 14,
       tipo: "correcao",
-      titulo: "Correção explicada",
-      conteudo: "Confira somente depois de tentar.",
+      titulo: "Gabarito totalmente explicado",
+      conteudo:
+        "Confira somente depois de tentar. Em cada erro, identifique exatamente qual etapa precisa ser refeita.",
       itens: base.respostas,
     },
   ];

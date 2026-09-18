@@ -3,17 +3,13 @@ import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 
 export interface RecursoExterno {
   id?: string;
-  fonte:
-    | "wikipedia"
-    | "youtube"
-    | "openlibrary"
-    | "wikiversity"
-    | "archive";
+  fonte: "wikipedia" | "youtube" | "openlibrary" | "wikiversity" | "archive";
   titulo: string;
   descricao: string | null;
   url: string;
   thumbnail: string | null;
   conteudo?: string | null;
+  visualizacoes?: number | null;
 }
 
 export interface AvisoFonteExterna {
@@ -22,10 +18,10 @@ export interface AvisoFonteExterna {
   mensagem: string;
 }
 
-
-
 // ---------- YouTube (Data API v3) ----------
-async function buscarYoutube(query: string): Promise<{ resultados: RecursoExterno[]; aviso?: AvisoFonteExterna }> {
+async function buscarYoutube(
+  query: string,
+): Promise<{ resultados: RecursoExterno[]; aviso?: AvisoFonteExterna }> {
   const keys = [process.env.YOUTUBE_API_KEY, process.env.YOUTUBE_API_KEY_NOVA]
     .map((key) => (key || "").trim())
     .filter((key, index, all) => key && all.indexOf(key) === index);
@@ -42,64 +38,130 @@ async function buscarYoutube(query: string): Promise<{ resultados: RecursoExtern
   }
 
   let ultimoAviso: AvisoFonteExterna | undefined;
-  // foco educativo infantil em PT-BR; embeddable + safeSearch strict
-  const q = `${query} educativo infantil`;
+  // Aula explicada em português, com exemplos na lousa/quadro.
+  const q = `${query} aula completa professor lousa quadro exemplos exercícios`;
 
   for (const [keyIndex, key] of keys.entries()) {
     const url =
-      `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=6` +
+      `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=15` +
       `&safeSearch=strict&videoEmbeddable=true&relevanceLanguage=pt&regionCode=BR` +
       `&q=${encodeURIComponent(q)}&key=${key}`;
     try {
       const r = await fetch(url);
       const data: any = await r.json();
       if (!r.ok) {
-        const reason = String(data?.error?.errors?.[0]?.reason || data?.error?.status || "").toLowerCase();
+        const reason = String(
+          data?.error?.errors?.[0]?.reason || data?.error?.status || "",
+        ).toLowerCase();
         const rawMessage = String(data?.error?.message || "Erro ao consultar o YouTube.");
         let tipo: AvisoFonteExterna["tipo"] = "erro";
-        let mensagem = "O YouTube recusou a busca. Verifique se a chave está correta e se a API do YouTube Data v3 está ativa.";
+        let mensagem =
+          "O YouTube recusou a busca. Verifique se a chave está correta e se a API do YouTube Data v3 está ativa.";
 
-        if (reason.includes("keyinvalid") || rawMessage.toLowerCase().includes("api key not valid")) {
+        if (
+          reason.includes("keyinvalid") ||
+          rawMessage.toLowerCase().includes("api key not valid")
+        ) {
           tipo = "chave_invalida";
-          mensagem = "A chave do YouTube foi rejeitada como inválida. Atualize a YOUTUBE_API_KEY pelo formulário seguro.";
-        } else if (reason.includes("accessnotconfigured") || reason.includes("apihasnotbeenused") || reason.includes("disabled")) {
+          mensagem =
+            "A chave do YouTube foi rejeitada como inválida. Atualize a YOUTUBE_API_KEY pelo formulário seguro.";
+        } else if (
+          reason.includes("accessnotconfigured") ||
+          reason.includes("apihasnotbeenused") ||
+          reason.includes("disabled")
+        ) {
           tipo = "api_desativada";
-          mensagem = "A chave existe, mas a YouTube Data API v3 não está ativada no projeto do Google Cloud dessa chave.";
-        } else if (reason.includes("iprefererblocked") || reason.includes("referer") || reason.includes("restriction")) {
+          mensagem =
+            "A chave existe, mas a YouTube Data API v3 não está ativada no projeto do Google Cloud dessa chave.";
+        } else if (
+          reason.includes("iprefererblocked") ||
+          reason.includes("referer") ||
+          reason.includes("restriction")
+        ) {
           tipo = "restricao";
-          mensagem = "A chave do YouTube tem restrição incompatível. Para chamada pelo servidor, use restrição por API e permita YouTube Data API v3.";
+          mensagem =
+            "A chave do YouTube tem restrição incompatível. Para chamada pelo servidor, use restrição por API e permita YouTube Data API v3.";
         } else if (reason.includes("quota") || reason.includes("dailylimit") || r.status === 403) {
           tipo = "quota";
-          mensagem = "A cota do YouTube pode ter acabado ou a chave não tem permissão para usar essa API.";
+          mensagem =
+            "A cota do YouTube pode ter acabado ou a chave não tem permissão para usar essa API.";
         }
 
-        console.warn("youtube_search_failed", { status: r.status, reason, message: rawMessage, keyIndex });
+        console.warn("youtube_search_failed", {
+          status: r.status,
+          reason,
+          message: rawMessage,
+          keyIndex,
+        });
         ultimoAviso = { fonte: "youtube", tipo, mensagem };
         continue;
       }
       const items: any[] = data.items || [];
+      const ids = items
+        .map((item) => item.id?.videoId)
+        .filter(Boolean)
+        .join(",");
+      let estatisticas = new Map<string, number>();
+      if (ids) {
+        const statsResponse = await fetch(
+          `https://www.googleapis.com/youtube/v3/videos?part=statistics&id=${ids}&key=${key}`,
+        );
+        if (statsResponse.ok) {
+          const statsData: any = await statsResponse.json();
+          estatisticas = new Map(
+            (statsData.items || []).map((item: any) => [
+              item.id,
+              Number(item.statistics?.viewCount || 0),
+            ]),
+          );
+        }
+      }
       const resultados = items
         .filter((it) => it.id?.videoId)
         .map((it) => {
           const sn = it.snippet || {};
           const thumb =
-            sn.thumbnails?.high?.url || sn.thumbnails?.medium?.url || sn.thumbnails?.default?.url || null;
+            sn.thumbnails?.high?.url ||
+            sn.thumbnails?.medium?.url ||
+            sn.thumbnails?.default?.url ||
+            null;
           const rec: RecursoExterno = {
             fonte: "youtube",
             titulo: sn.title || "Vídeo",
-            descricao: sn.channelTitle ? `${sn.channelTitle} — ${sn.description || ""}`.trim() : sn.description || null,
+            descricao: sn.channelTitle
+              ? `${sn.channelTitle} — ${sn.description || ""}`.trim()
+              : sn.description || null,
             url: `https://www.youtube.com/embed/${it.id.videoId}`,
             thumbnail: thumb,
             conteudo: null,
+            visualizacoes: estatisticas.get(it.id.videoId) || 0,
           };
           return rec;
-        });
-      return { resultados: resultados.filter((item) => correspondeAoTema(item, query)) };
+        })
+        .filter((item) => correspondeAoTema(item, query))
+        .sort((a, b) => {
+          const canalA = normalize(a.descricao || "");
+          const canalB = normalize(b.descricao || "");
+          const confiaveis = [
+            "gis com giz",
+            "professor ferretto",
+            "portugues com leticia",
+            "nerckie",
+            "manual do mundo",
+          ];
+          const prioridadeA = confiaveis.some((canal) => canalA.includes(canal)) ? 1 : 0;
+          const prioridadeB = confiaveis.some((canal) => canalB.includes(canal)) ? 1 : 0;
+          if (prioridadeA !== prioridadeB) return prioridadeB - prioridadeA;
+          return (b.visualizacoes || 0) - (a.visualizacoes || 0);
+        })
+        .slice(0, 6);
+      return { resultados };
     } catch {
       ultimoAviso = {
         fonte: "youtube",
         tipo: "erro",
-        mensagem: "Não consegui conectar ao YouTube agora. Tente atualizar a busca em alguns instantes.",
+        mensagem:
+          "Não consegui conectar ao YouTube agora. Tente atualizar a busca em alguns instantes.",
       };
     }
   }
@@ -117,10 +179,33 @@ function normalize(s: string): string {
     .trim();
 }
 
-const TERMOS_VAZIOS = new Set(["a", "as", "o", "os", "de", "da", "das", "do", "dos", "e", "em", "para", "por", "com", "que", "um", "uma", "educativo", "infantil", "aula"]);
+const TERMOS_VAZIOS = new Set([
+  "a",
+  "as",
+  "o",
+  "os",
+  "de",
+  "da",
+  "das",
+  "do",
+  "dos",
+  "e",
+  "em",
+  "para",
+  "por",
+  "com",
+  "que",
+  "um",
+  "uma",
+  "educativo",
+  "infantil",
+  "aula",
+]);
 
 function correspondeAoTema(recurso: RecursoExterno, query: string): boolean {
-  const termos = normalize(query).split(" ").filter((termo) => termo.length >= 3 && !TERMOS_VAZIOS.has(termo));
+  const termos = normalize(query)
+    .split(" ")
+    .filter((termo) => termo.length >= 3 && !TERMOS_VAZIOS.has(termo));
   if (termos.length === 0) return false;
   const texto = normalize(`${recurso.titulo} ${recurso.descricao ?? ""}`);
   return termos.filter((termo) => texto.includes(termo)).length >= Math.min(2, termos.length);
@@ -155,7 +240,9 @@ async function buscarWikipedia(query: string): Promise<RecursoExterno[]> {
           fonte: "wikipedia",
           titulo: s.title,
           descricao: s.extract || s.description || null,
-          url: s.content_urls?.desktop?.page || `https://pt.wikipedia.org/wiki/${encodeURIComponent(titulo)}`,
+          url:
+            s.content_urls?.desktop?.page ||
+            `https://pt.wikipedia.org/wiki/${encodeURIComponent(titulo)}`,
           thumbnail: s.thumbnail?.source || null,
           conteudo: s.extract || null,
         };
@@ -259,7 +346,11 @@ function dedupe(lista: RecursoExterno[]): RecursoExterno[] {
   const out: RecursoExterno[] = [];
   for (const r of lista) {
     if (!r?.url) continue;
-    const urlKey = (r.url || "").trim().toLowerCase().replace(/[?#].*$/, "").replace(/\/$/, "");
+    const urlKey = (r.url || "")
+      .trim()
+      .toLowerCase()
+      .replace(/[?#].*$/, "")
+      .replace(/\/$/, "");
     const tituloKey = `${r.fonte}::${normalize(r.titulo || "")}`;
     if (vistos.has(urlKey) || vistos.has(tituloKey)) continue;
     vistos.add(urlKey);
@@ -269,13 +360,13 @@ function dedupe(lista: RecursoExterno[]): RecursoExterno[] {
   return out;
 }
 
-
 export const buscarRecursosExternos = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d: { query: string; force?: boolean }) => d)
   .handler(async ({ data, context }) => {
     const queryN = normalize(data.query);
-    if (queryN.length < 3) return { resultados: [], fonte: "vazio" as const, avisos: [] as AvisoFonteExterna[] };
+    if (queryN.length < 3)
+      return { resultados: [], fonte: "vazio" as const, avisos: [] as AvisoFonteExterna[] };
 
     const supabase = context.supabase;
 
@@ -295,7 +386,11 @@ export const buscarRecursosExternos = createServerFn({ method: "POST" })
             (r) => (r.fonte as string) !== "khan" && (r.fonte as string) !== "youtube-edu",
           ),
         );
-        return { resultados: cachedClean, fonte: "cache" as const, avisos: [] as AvisoFonteExterna[] };
+        return {
+          resultados: cachedClean,
+          fonte: "cache" as const,
+          avisos: [] as AvisoFonteExterna[],
+        };
       }
     }
 
@@ -331,8 +426,6 @@ export const buscarRecursosExternos = createServerFn({ method: "POST" })
     // 3) salvar no cache (sem repetições)
     const unicos = dedupe(resultados).filter((item) => correspondeAoTema(item, queryN));
     const cacheaveis = unicos;
-
-
 
     if (cacheaveis.length > 0) {
       const rows = cacheaveis.map((r, i) => ({

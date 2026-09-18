@@ -59,31 +59,35 @@ describe("Apoio Escolar V2", () => {
     expect(contexto).toContain("SÉRIE: 7º ano");
   });
 
-  it("define oito páginas pedagógicas obrigatórias", () => {
+  it("define quatorze páginas para o aulão premium", () => {
     const paginas = paginasObrigatoriasDaAula();
-    expect(paginas).toHaveLength(8);
-    expect(paginas.map((pagina) => pagina.ordem)).toEqual([1, 2, 3, 4, 5, 6, 7, 8]);
+    expect(paginas).toHaveLength(14);
+    expect(paginas.map((pagina) => pagina.ordem)).toEqual([
+      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
+    ]);
     expect(paginas.at(-1)?.tipo).toBe("correcao");
+    expect(paginas.some((pagina) => pagina.tipo === "modelo_visual")).toBe(true);
+    expect(paginas.some((pagina) => pagina.tipo === "video")).toBe(true);
   });
 
   it("gera aula real de frações com exemplo e respostas", () => {
     const paginas = criarAulaSegura("Matemática", "frações equivalentes");
     expect(paginas[2].conteudo).toContain("numerador");
-    expect(paginas[3].conteudo).toContain("1/2 = 2/4");
-    expect(paginas[7].itens).toContain("4/8 = 1/2.");
+    expect(paginas[5].conteudo).toContain("1/2 = 2/4");
+    expect(paginas[13].itens).toContain("4/8 = 1/2.");
   });
 
   it("gera aula real de verbos sem misturar Matemática", () => {
     const paginas = criarAulaSegura("Português", "verbos");
     expect(paginas[2].conteudo).toContain("ação");
-    expect(paginas[3].conteudo).toContain("passado");
+    expect(paginas[5].conteudo).toContain("passado");
     expect(JSON.stringify(paginas)).not.toContain("numerador");
   });
 
   it("gera aula real de sistema solar com os oito planetas", () => {
     const paginas = criarAulaSegura("Ciências", "sistema solar");
     expect(paginas[2].conteudo).toContain("oito planetas");
-    expect(paginas[3].conteudo).toContain("Mercúrio");
-    expect(paginas[7].itens).toContain("Júpiter.");
+    expect(paginas[5].conteudo).toContain("Mercúrio");
+    expect(paginas[13].itens).toContain("Júpiter.");
   });
 });

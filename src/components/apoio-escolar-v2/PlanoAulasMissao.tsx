@@ -4,6 +4,7 @@ import { ArrowLeft, ArrowRight, BookOpen, CheckCircle2, Sparkles } from "lucide-
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/database/supabase/client";
+import { BibliotecaInternet } from "@/components/reforco-brilha/BibliotecaInternet";
 import {
   criarAulaSegura,
   criarConsultaExataRecursos,
@@ -24,6 +25,7 @@ interface SessaoSalva {
   topic: string;
   status: "planejada" | "em_andamento" | "concluida";
   lesson_pages: PaginaAulaEscolar[];
+  resource_query: string | null;
 }
 
 interface Props {
@@ -49,7 +51,7 @@ export function PlanoAulasMissao({ missao, tipo }: Props) {
     queryFn: async () => {
       const resposta = await (supabase as any)
         .from("school_support_sessions")
-        .select("id,title,topic,status,lesson_pages")
+        .select("id,title,topic,status,lesson_pages,resource_query")
         .eq("mission_id", missao.id)
         .order("scheduled_date", { ascending: true });
       if (resposta.error) throw resposta.error;
@@ -81,6 +83,31 @@ export function PlanoAulasMissao({ missao, tipo }: Props) {
     },
     onError: (erro) =>
       toast.error(erro instanceof Error ? erro.message : "Não foi possível criar o plano."),
+  });
+
+  const refazerAulao = useMutation({
+    mutationFn: async () => {
+      for (const sessao of sessoes) {
+        const resposta = await (supabase as any)
+          .from("school_support_sessions")
+          .update({
+            lesson_pages: criarAulaSegura(missao.subject, sessao.topic),
+            resource_query: criarConsultaExataRecursos({
+              tipo,
+              materia: missao.subject,
+              conteudos: [sessao.topic],
+              dataEntrega: missao.due_date,
+            }),
+          })
+          .eq("id", sessao.id);
+        if (resposta.error) throw resposta.error;
+      }
+    },
+    onSuccess: async () => {
+      await qc.invalidateQueries({ queryKey: chave });
+      toast.success("Aulas atualizadas para o formato aulão.");
+    },
+    onError: () => toast.error("Não foi possível atualizar as aulas."),
   });
 
   const concluir = async (sessao: SessaoSalva) => {
@@ -138,6 +165,11 @@ export function PlanoAulasMissao({ missao, tipo }: Props) {
             ))}
           </ol>
         ) : null}
+        {atual.tipo === "video" && sessaoAtiva.resource_query ? (
+          <div className="mt-6 rounded-2xl border-2 border-red-100 bg-red-50/30 p-3">
+            <BibliotecaInternet query={sessaoAtiva.resource_query} />
+          </div>
+        ) : null}
         <div className="mt-6 flex justify-between gap-3 border-t pt-4">
           <Button
             variant="outline"
@@ -179,7 +211,18 @@ export function PlanoAulasMissao({ missao, tipo }: Props) {
   }
   return (
     <div className="mt-4 space-y-2 border-t pt-4">
-      <p className="text-sm font-black uppercase tracking-wide text-primary">Aulas da missão</p>
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <p className="text-sm font-black uppercase tracking-wide text-primary">Aulas da missão</p>
+        <Button
+          size="sm"
+          variant="outline"
+          disabled={refazerAulao.isPending}
+          onClick={() => refazerAulao.mutate()}
+        >
+          <Sparkles className="mr-2 h-4 w-4" />
+          {refazerAulao.isPending ? "Atualizando..." : "Refazer como aulão"}
+        </Button>
+      </div>
       {sessoes.map((sessao) => (
         <button
           key={sessao.id}
