@@ -8,6 +8,7 @@ import { BibliotecaInternet } from "@/components/reforco-brilha/BibliotecaIntern
 import {
   criarAulaSegura,
   criarConsultaExataRecursos,
+  filtrarTopicosDaMateria,
   type PaginaAulaEscolar,
   type TipoMissaoEscolar,
 } from "@/lib/apoio-escolar-v2";
@@ -45,6 +46,7 @@ export function PlanoAulasMissao({ missao, tipo }: Props) {
   const chave = ["school-support-sessions", missao.id] as const;
   const [sessaoAtiva, setSessaoAtiva] = useState<SessaoSalva | null>(null);
   const [pagina, setPagina] = useState(0);
+  const topicosValidos = filtrarTopicosDaMateria(missao.subject, missao.topics);
 
   const { data: sessoes = [], isLoading } = useQuery({
     queryKey: chave,
@@ -55,13 +57,17 @@ export function PlanoAulasMissao({ missao, tipo }: Props) {
         .eq("mission_id", missao.id)
         .order("scheduled_date", { ascending: true });
       if (resposta.error) throw resposta.error;
-      return (resposta.data ?? []) as SessaoSalva[];
+      const permitidos = new Set(topicosValidos.map((topico) => topico.toLocaleLowerCase("pt-BR")));
+      return ((resposta.data ?? []) as SessaoSalva[]).filter((sessao) =>
+        permitidos.has(sessao.topic.trim().toLocaleLowerCase("pt-BR")),
+      );
     },
   });
 
   const criarPlano = useMutation({
     mutationFn: async () => {
-      const registros = missao.topics.map((topico, indice) => ({
+      if (!topicosValidos.length) throw new Error("Informe o conteúdo exato da prova.");
+      const registros = topicosValidos.map((topico, indice) => ({
         mission_id: missao.id,
         scheduled_date: dataParaSessao(indice, missao.due_date),
         title: `Aula: ${topico}`,
@@ -152,7 +158,7 @@ export function PlanoAulasMissao({ missao, tipo }: Props) {
           </span>
         </div>
         <p className="text-sm font-bold uppercase tracking-wide text-primary">
-          {sessaoAtiva.title}
+          Conteúdo obrigatório: {sessaoAtiva.topic}
         </p>
         <h4 className="mt-2 text-2xl font-black">{atual.titulo}</h4>
         <p className="mt-4 text-base leading-7 sm:text-lg">{atual.conteudo}</p>

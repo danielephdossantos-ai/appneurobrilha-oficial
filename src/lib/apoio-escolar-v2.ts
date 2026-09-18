@@ -104,6 +104,26 @@ export function criarContextoTutor(rascunho: RascunhoMissaoEscolar): string {
     .join("\n");
 }
 
+function normalizarComparacao(valor: string): string {
+  return valor
+    .toLocaleLowerCase("pt-BR")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]/g, "")
+    .trim();
+}
+
+export function filtrarTopicosDaMateria(materia: string, topicos: string[]): string[] {
+  const materiaNormalizada = normalizarComparacao(materia);
+  const vistos = new Set<string>();
+  return topicos.filter((topico) => {
+    const normalizado = normalizarComparacao(topico);
+    if (!normalizado || normalizado === materiaNormalizada || vistos.has(normalizado)) return false;
+    vistos.add(normalizado);
+    return true;
+  });
+}
+
 function conteudoConhecido(materia: string, topico: string) {
   const chave = `${materia} ${topico}`.toLocaleLowerCase("pt-BR");
   if (chave.includes("fraç")) {
@@ -190,6 +210,25 @@ function conteudoConhecido(materia: string, topico: string) {
 
 export function criarAulaSegura(materia: string, topico: string): PaginaAulaEscolar[] {
   const base = conteudoConhecido(materia.trim(), topico.trim());
+  const chave = `${materia} ${topico}`.toLocaleLowerCase("pt-BR");
+  if (chave.includes("verbo")) {
+    return [
+      { ordem: 1, tipo: "acolhimento", titulo: "A missão dos verbos", conteudo: "Nesta aula vamos reconhecer verbos, entender o que eles indicam e aprender a usá-los no presente, passado e futuro." },
+      { ordem: 2, tipo: "objetivo", titulo: "O que você precisa saber para a prova", conteudo: "Identificar o verbo na frase, descobrir a pessoa e o tempo verbal e conjugar verbos regulares em situações simples." },
+      { ordem: 3, tipo: "explicacao", titulo: "O que é verbo?", conteudo: base.conceito },
+      { ordem: 4, tipo: "modelo_visual", titulo: "Ação, estado e fenômeno da natureza", conteudo: "AÇÃO: correr, estudar e brincar. ESTADO: ser, estar e permanecer. FENÔMENO DA NATUREZA: chover, nevar e anoitecer. Observe o sentido do verbo dentro da frase." },
+      { ordem: 5, tipo: "modelo_simbolico", titulo: "Como encontrar o verbo na frase", conteudo: "Pergunte: o que acontece? Em “Lucas escreveu a resposta”, acontece escreveu. Depois observe quem pratica ou vive aquilo: Lucas. Assim encontramos o verbo e sua relação com o sujeito." },
+      { ordem: 6, tipo: "exemplo", titulo: "Presente, passado e futuro", conteudo: base.exemplo },
+      { ordem: 7, tipo: "exemplo", titulo: "Conjugação passo a passo", conteudo: "Use o verbo ESTUDAR: eu estudo, tu estudas, ele estuda, nós estudamos, vós estudais, eles estudam. A parte ESTUD- é o radical; as terminações mudam para indicar pessoa e número." },
+      { ordem: 8, tipo: "erros_comuns", titulo: "Cuidado com estes erros", conteudo: "Não confunda verbo com substantivo: em “a corrida começou”, corrida é nome; começou é verbo. Não escolha uma palavra apenas porque lembra ação: confira sempre sua função na frase." },
+      { ordem: 9, tipo: "pratica_guiada", titulo: "Vamos fazer juntos", conteudo: "Leia cada frase, localize o que acontece e depois identifique o tempo verbal.", itens: base.pratica },
+      { ordem: 10, tipo: "exercicio", titulo: "Treino para a prova", conteudo: "Resolva primeiro sozinho. Depois confira cada resposta explicada.", itens: base.exercicios },
+      { ordem: 11, tipo: "desafio", titulo: "Transforme a frase", conteudo: "Escreva a frase “Nós estudamos verbos” no passado e no futuro. Depois destaque somente o verbo em cada frase." },
+      { ordem: 12, tipo: "video", titulo: "Videoaulas somente sobre verbos", conteudo: "Escolha uma videoaula abaixo. Pause nos exemplos e tente identificar o verbo antes da explicação do professor." },
+      { ordem: 13, tipo: "revisao", titulo: "Resumo da prova de verbos", conteudo: "Verbo pode indicar ação, estado ou fenômeno. Ele varia em pessoa, número e tempo. Para encontrá-lo, observe o que acontece na frase e quando acontece." },
+      { ordem: 14, tipo: "correcao", titulo: "Gabarito explicado", conteudo: "Confira apenas depois de tentar. Leia novamente a frase e justifique por que a palavra escolhida é verbo.", itens: base.respostas },
+    ];
+  }
   return [
     {
       ordem: 1,

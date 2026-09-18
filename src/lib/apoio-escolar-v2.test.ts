@@ -3,6 +3,7 @@ import {
   criarConsultaExataRecursos,
   criarContextoTutor,
   criarAulaSegura,
+  filtrarTopicosDaMateria,
   paginasObrigatoriasDaAula,
   tituloPadraoMissao,
   validarMissaoEscolar,
@@ -82,6 +83,12 @@ describe("Apoio Escolar V2", () => {
     expect(paginas[2].conteudo).toContain("ação");
     expect(paginas[5].conteudo).toContain("passado");
     expect(JSON.stringify(paginas)).not.toContain("numerador");
+  });
+
+  it("não transforma o nome da matéria em outra aula", () => {
+    expect(filtrarTopicosDaMateria("Português", ["Portugues", "verbos", "Verbos"])).toEqual([
+      "verbos",
+    ]);
   });
 
   it("gera aula real de sistema solar com os oito planetas", () => {
