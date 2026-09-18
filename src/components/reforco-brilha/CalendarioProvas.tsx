@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { Link } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/database/supabase/client";
 import { Card } from "@/components/Layout";
@@ -451,18 +452,34 @@ export function CalendarioProvas({ childId, filtroTipo = "todos", titulo }: Prop
               </section>
             )}
 
-            {childId && (
+            {childId && !isTrab && (
               <section className="bg-emerald-50/40 border-2 border-emerald-100 rounded-xl p-3">
                 <p className="text-[10px] font-black uppercase tracking-widest text-emerald-700 mb-2">
-                  {isTrab
-                    ? "Sugestões grátis da internet pra montar o trabalho"
-                    : "Materiais recomendados"}
+                  Materiais recomendados
                 </p>
                 <EstudosRecomendados
                   childId={childId}
                   subject={sel.subject}
                   notes={sel.notes}
                 />
+              </section>
+            )}
+
+            {isTrab && (
+              <section className="rounded-2xl border-2 border-amber-200 bg-amber-50 p-4">
+                <p className="text-xs font-black uppercase tracking-widest text-amber-800">
+                  Oficina de Trabalho Escolar
+                </p>
+                <p className="mt-2 text-sm text-foreground">
+                  Registre o pedido do professor, pesquise fontes públicas, organize as ideias e confira o trabalho com o Mentor.
+                </p>
+                <Link
+                  to="/missao-trabalho"
+                  className="mt-3 inline-flex items-center gap-2 rounded-xl bg-amber-600 px-4 py-2 text-sm font-black text-white hover:bg-amber-700"
+                >
+                  Montar este trabalho
+                  <ChevronRight className="h-4 w-4" />
+                </Link>
               </section>
             )}
           </div>
@@ -477,4 +494,3 @@ export function CalendarioProvas({ childId, filtroTipo = "todos", titulo }: Prop
     </Card>
   );
 }
-

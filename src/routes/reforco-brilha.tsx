@@ -696,7 +696,13 @@ function ReforcoBrilha() {
                 {agenda.map((item) => (
                   <button
                     key={item.id}
-                    onClick={() => startLesson(item.topic)}
+                    onClick={() => {
+                      if (item.type === "trabalho") {
+                        navigate({ to: "/missao-trabalho" });
+                        return;
+                      }
+                      startLesson(item.topic);
+                    }}
                     className="p-5 rounded-[2rem] bg-indigo-50 border-2 border-indigo-100 hover:border-indigo-300 hover:bg-indigo-100/50 transition-all text-left flex items-start gap-4 group"
                   >
                     <div className="h-12 w-12 rounded-2xl bg-white shadow-sm flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
@@ -723,7 +729,7 @@ function ReforcoBrilha() {
                       </div>
                       <div className="font-extrabold text-slate-800 text-lg">{item.topic}</div>
                       <div className="mt-2 flex items-center gap-1.5 text-indigo-600 font-bold text-xs">
-                        ESTUDAR AGORA <ArrowRight className="h-3 w-3" />
+                        {item.type === "trabalho" ? "MONTAR TRABALHO" : "ESTUDAR AGORA"} <ArrowRight className="h-3 w-3" />
                       </div>
                     </div>
                   </button>

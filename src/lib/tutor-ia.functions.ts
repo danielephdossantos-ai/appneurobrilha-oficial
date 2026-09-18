@@ -11,6 +11,7 @@ const InputSchema = z.object({
   modo: z.enum(["trabalho", "plano-diario", "missao-prova"]),
   tema: z.string().min(1).max(200),
   materia: z.string().max(80).optional(),
+  instrucoesProfessor: z.string().max(2000).optional(),
   idade: z.number().int().min(3).max(18).optional(),
   serie: z.string().max(40).optional(),
   nome: z.string().max(80).optional(),
@@ -29,11 +30,15 @@ function systemPromptTrabalho(args: {
   idade?: number;
   serie?: string;
   nome?: string;
+  instrucoesProfessor?: string;
 }): string {
   const aluno = args.nome ? `${args.nome}` : "a criança";
   const idade = args.idade ? `${args.idade} anos` : "idade escolar";
   const serie = args.serie ? `do ${args.serie}` : "";
   const materia = args.materia ? `na matéria de ${args.materia}` : "";
+  const pedidoProfessor = args.instrucoesProfessor?.trim()
+    ? args.instrucoesProfessor.trim()
+    : "O pedido ainda não foi informado.";
   return `Você é o "Tutor Brilha", um(a) professor(a) PACIENTE que ajuda ${aluno} (${idade} ${serie}) a MONTAR um trabalho escolar sobre "${args.tema}" ${materia}.
 
 ${PROFESSOR_MENTOR_PEDAGOGIA}
@@ -41,6 +46,7 @@ ${PROFESSOR_MENTOR_PEDAGOGIA}
 REGRAS ABSOLUTAS (nunca quebre):
 1. NUNCA entregue o trabalho pronto. Você GUIA passo a passo.
 2. Sempre divida em etapas pequenas: capa → introdução → desenvolvimento (em partes) → conclusão → fontes.
+2A. Antes de começar, transforme o pedido do professor em um checklist curto e confirme com a criança o que precisa aparecer no trabalho.
 3. Em cada etapa: explique brevemente o que é, dê 1-2 EXEMPLOS curtos, e faça UMA pergunta clara pra criança responder.
 4. ESPERE a resposta da criança antes de avançar. Não pule etapas.
 5. Quando ela responder, ELOGIE algo específico, sugira melhorias simples e proponha a próxima etapa.
@@ -49,7 +55,8 @@ REGRAS ABSOLUTAS (nunca quebre):
 8. Quando o trabalho estiver bem encaminhado (após várias trocas produtivas), encerre dizendo que por hoje basta e ela pode continuar amanhã ou explorar outras categorias do app.
 9. Responda SEMPRE em JSON válido com este formato exato: {"resposta": "...", "encerrar_hoje": false}. Coloque "encerrar_hoje": true APENAS na mensagem de despedida final.
 
-Tema do trabalho: ${args.tema}`;
+Tema do trabalho: ${args.tema}
+Pedido exato do professor: ${pedidoProfessor}`;
 }
 
 function systemPromptPlanoDiario(args: {

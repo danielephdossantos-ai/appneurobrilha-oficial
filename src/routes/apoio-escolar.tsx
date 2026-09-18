@@ -1,13 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Shell } from "@/components/Layout";
-import { GraduationCap, Camera, FileText, ArrowRight } from "lucide-react";
+import { GraduationCap, Camera, Brain, FileText, ArrowRight } from "lucide-react";
 
 export const Route = createFileRoute("/apoio-escolar")({ component: ApoioEscolar });
 
 const opcoes = [
   { to: "/missao-prova", icon: GraduationCap, title: "Preparar para Prova", text: "Organize os dias, aprenda o conteúdo, pratique e revise até a avaliação." },
   { to: "/missao-tarefa", icon: Camera, title: "Ajuda para Tarefa", text: "Envie uma foto ou digite a tarefa. O Mentor orienta o raciocínio sem simplesmente entregar a resposta." },
-  { to: "/missao-trabalho", icon: FileText, title: "Orientar Trabalho Escolar", text: "Entenda as orientações, pesquise, organize as ideias, escreva e revise passo a passo." },
+  { to: "/reforco-brilha", icon: Brain, title: "Reforço Brilha", text: "Escolha uma dificuldade e receba explicação, exemplos resolvidos, treino e revisão no ritmo da criança." },
+  { to: "/missao-trabalho", icon: FileText, title: "Montar Trabalho Escolar", text: "Entenda o pedido, pesquise em fontes públicas, escreva com suas palavras e confira tudo com o Professor Mentor." },
 ] as const;
 
 function ApoioEscolar() {
@@ -17,7 +18,7 @@ function ApoioEscolar() {
       <h1 className="text-3xl md:text-4xl font-black tracking-tight mt-1">Como podemos ajudar hoje?</h1>
       <p className="text-muted-foreground mt-2 max-w-2xl">Escolha o objetivo. O Reforço e o Professor Mentor trabalham nos bastidores usando primeiro as aulas que o NeuroBrilha já possui.</p>
     </header>
-    <div className="grid md:grid-cols-3 gap-4 md:gap-6">
+    <div className="grid md:grid-cols-2 gap-4 md:gap-6">
       {opcoes.map(({to, icon: Icon, title, text}) => <Link key={to} to={to} className="group rounded-3xl border bg-card p-6 shadow-sm hover:shadow-md hover:border-primary/40 transition-all flex flex-col min-h-[250px]">
         <div className="h-12 w-12 rounded-2xl bg-primary/10 text-primary grid place-items-center"><Icon className="h-6 w-6"/></div>
         <h2 className="text-xl font-black mt-5">{title}</h2>

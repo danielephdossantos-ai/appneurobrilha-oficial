@@ -160,7 +160,7 @@ export function TrabalhoBrilha({ childId }: Props) {
 
       {trabalhos.length === 0 ? (
         <p className="text-xs text-muted-foreground italic">
-          Nenhum trabalho ainda. Clique em "Novo trabalho" para montar um com Wikipédia, YouTube, livros e mais.
+          Nenhum trabalho ainda. Clique em "Novo trabalho" para pesquisar fontes públicas, organizar as ideias e escrever com orientação.
         </p>
       ) : (
         <div className="grid sm:grid-cols-2 gap-3">
@@ -254,6 +254,11 @@ function EditorTrabalho({
 
   // Preview inline
   const [preview, setPreview] = useState<RecursoExterno | null>(null);
+  const cadastroPronto =
+    titulo.trim().length >= 3 &&
+    materia.trim().length >= 2 &&
+    tema.trim().length >= 3 &&
+    instrucoesProf.trim().length >= 5;
 
 
   // Debounced auto-save
@@ -301,6 +306,10 @@ function EditorTrabalho({
 
   async function rodarAnalise() {
     if (analisando) return;
+    if (!cadastroPronto) {
+      toast.error("Preencha título, matéria, tema e o que o professor pediu antes da análise.");
+      return;
+    }
     const texto = [
       titulo,
       ...blocos.map((b) =>
@@ -393,6 +402,10 @@ function EditorTrabalho({
 
 
   async function pesquisar() {
+    if (!cadastroPronto) {
+      toast.error("Primeiro informe tudo o que o professor pediu no trabalho.");
+      return;
+    }
     const q = buscaQuery.trim();
     if (q.length < 3) {
       toast.error("Digite ao menos 3 letras");
@@ -400,7 +413,7 @@ function EditorTrabalho({
     }
     setBuscando(true);
     try {
-      const res = await buscar({ data: { query: q } });
+      const res = await buscar({ data: { query: q, textOnly: true } });
       // Missão Trabalho: somente texto e imagem (sem vídeos / sem links de busca externos)
       const filtrados = (res.resultados || []).filter((r) => {
         if (r.fonte === "youtube") return false;
@@ -456,6 +469,23 @@ function EditorTrabalho({
   function addQuebra() {
     setBlocos((b) => [...b, { id: uid(), tipo: "quebra" }]);
   }
+  function criarEstruturaOrientada() {
+    if (!cadastroPronto) {
+      toast.error("Preencha as informações obrigatórias antes de montar a estrutura.");
+      return;
+    }
+    if (blocos.length > 0 && !confirm("Adicionar a estrutura guiada ao conteúdo que já existe?")) return;
+    setBlocos((atuais) => [
+      ...atuais,
+      { id: uid(), tipo: "titulo", texto: "Introdução" },
+      { id: uid(), tipo: "paragrafo", texto: `Apresente o tema “${tema}”, explique por que ele é importante e diga o que o trabalho vai mostrar. Escreva com suas palavras.` },
+      { id: uid(), tipo: "titulo", texto: "Desenvolvimento" },
+      { id: uid(), tipo: "paragrafo", texto: "Organize aqui as informações pesquisadas em partes. Compare as fontes e explique cada ideia com suas palavras." },
+      { id: uid(), tipo: "titulo", texto: "Conclusão" },
+      { id: uid(), tipo: "paragrafo", texto: "Retome a ideia principal, diga o que foi aprendido e conclua sem apenas repetir a introdução." },
+    ]);
+    toast.success("Estrutura criada. Agora substitua as orientações pelo texto do aluno.");
+  }
   function removerBloco(id: string) {
     setBlocos((b) => b.filter((x) => x.id !== id));
   }
@@ -475,20 +505,22 @@ function EditorTrabalho({
   }
 
   function addRecursoComoTexto(r: RecursoExterno) {
-    const texto = r.conteudo || r.descricao || "";
-    const html = `<h3>${r.titulo}</h3><p>${texto.replace(/\n+/g, "</p><p>")}</p>`;
+    const textoOriginal = (r.conteudo || r.descricao || "").trim();
+    const texto = textoOriginal.length > 900 ? `${textoOriginal.slice(0, 900)}…` : textoOriginal;
+    const html = `<h3>Anotação de pesquisa: ${r.titulo}</h3><blockquote>${texto.replace(/\n+/g, "</blockquote><blockquote>")}</blockquote><p><strong>Agora escreva com suas palavras:</strong> explique abaixo o que você entendeu e como esta informação ajuda no trabalho.</p>`;
     if (insertIntoActiveEditor({ html })) {
       addFonte(r);
-      toast.success("Inserido no editor");
+      toast.success("Trecho e fonte guardados. Agora reescreva com suas palavras.");
       return;
     }
     setBlocos((b) => [
       ...b,
-      { id: uid(), tipo: "titulo", texto: r.titulo },
-      { id: uid(), tipo: "paragrafo", texto },
+      { id: uid(), tipo: "titulo", texto: `Anotação de pesquisa: ${r.titulo}` },
+      { id: uid(), tipo: "paragrafo", texto: `TRECHO PARA ESTUDO — não entregue assim: ${texto}` },
+      { id: uid(), tipo: "paragrafo", texto: "Escreva aqui, com suas palavras, o que você entendeu e como esta informação ajuda no trabalho." },
     ]);
     addFonte(r);
-    toast.success("Adicionado ao trabalho");
+    toast.success("Trecho e fonte guardados. Agora reescreva com suas palavras.");
   }
   function addRecursoImagem(r: RecursoExterno) {
     if (!r.thumbnail) {
@@ -728,8 +760,8 @@ function EditorTrabalho({
           </button>
           <button
             onClick={() => {
-              if (!tema.trim()) {
-                toast.error("Defina o tema do trabalho primeiro");
+              if (!cadastroPronto) {
+                toast.error("Preencha título, matéria, tema e as instruções do professor primeiro.");
                 return;
               }
               setTutorAberto(true);
@@ -787,6 +819,25 @@ function EditorTrabalho({
           </div>
         </div>
       )}
+
+      <section className={`mb-4 rounded-2xl border-2 p-4 ${cadastroPronto ? "border-emerald-300 bg-emerald-50" : "border-violet-300 bg-violet-50"}`}>
+        <p className="text-xs font-black uppercase tracking-widest text-violet-800">Antes de começar o trabalho</p>
+        <h4 className="mt-1 text-lg font-black text-foreground">Registre exatamente o que o professor pediu</h4>
+        <div className="mt-3 grid gap-2 text-sm sm:grid-cols-2">
+          {[
+            [titulo.trim().length >= 3, "Título do trabalho"],
+            [materia.trim().length >= 2, "Matéria"],
+            [tema.trim().length >= 3, "Tema específico"],
+            [instrucoesProf.trim().length >= 5, "Instruções e exigências do professor"],
+          ].map(([ok, rotulo]) => (
+            <div key={String(rotulo)} className="flex items-center gap-2 font-bold">
+              <span className={`grid h-6 w-6 place-items-center rounded-full ${ok ? "bg-emerald-600 text-white" : "bg-white text-violet-700"}`}>{ok ? "✓" : "!"}</span>
+              {rotulo}
+            </div>
+          ))}
+        </div>
+        <p className="mt-3 text-xs text-muted-foreground">A pesquisa, o Tutor e a análise final só são liberados quando os quatro itens estiverem preenchidos.</p>
+      </section>
 
 
 
@@ -849,6 +900,14 @@ function EditorTrabalho({
               title="Adiciona uma capa na primeira página (nome, tema, aluno, série, professor)"
             >
               <BookOpen className="h-3 w-3" /> Capa
+            </button>
+            <button
+              onClick={criarEstruturaOrientada}
+              disabled={!cadastroPronto}
+              className="bg-gradient-to-r from-emerald-600 to-teal-600 disabled:opacity-40 text-white font-black px-3 py-1.5 rounded-lg flex items-center gap-1 shadow"
+              title="Cria introdução, desenvolvimento e conclusão para o aluno preencher"
+            >
+              <GraduationCap className="h-3 w-3" /> Estrutura guiada
             </button>
             <button
               onClick={addBlocoTitulo}
@@ -956,14 +1015,14 @@ function EditorTrabalho({
               />
               <button
                 onClick={pesquisar}
-                disabled={buscando}
+                disabled={buscando || !cadastroPronto}
                 className="bg-amber-600 hover:bg-amber-700 text-white px-2 rounded-lg disabled:opacity-50"
               >
                 {buscando ? <Loader2 className="h-4 w-4 animate-spin" /> : <Search className="h-4 w-4" />}
               </button>
             </div>
             <p className="text-[10px] text-amber-700">
-              Wikipédia · Livros (OpenLibrary) · Wikiversidade · Textos do Archive
+              Wikipédia · Livros (OpenLibrary) · Wikiversidade · Textos e acervos públicos
             </p>
             <p className="text-[10px] text-amber-600 italic">
               Apenas textos e imagens — sem vídeos.
@@ -999,7 +1058,7 @@ function EditorTrabalho({
                     onClick={() => addRecursoComoTexto(r)}
                     className="text-[10px] font-bold bg-amber-100 hover:bg-amber-200 text-amber-900 px-2 py-1 rounded flex items-center gap-1"
                   >
-                    <Wand2 className="h-3 w-3" /> Texto
+                    <Wand2 className="h-3 w-3" /> Guardar trecho + fonte
                   </button>
                   {r.thumbnail && (
                     <button
@@ -1054,6 +1113,7 @@ function EditorTrabalho({
       <TutorTrabalho
         tema={tema}
         materia={materia}
+        instrucoesProfessor={instrucoesProf}
         modo="trabalho"
         onFechar={() => setTutorAberto(false)}
       />
@@ -1541,4 +1601,3 @@ function RecursoPreviewModal({
     </div>
   );
 }
-

@@ -10,6 +10,7 @@ type Msg = { role: "user" | "assistant"; content: string };
 interface Props {
   tema: string;
   materia?: string;
+  instrucoesProfessor?: string;
   modo?: "trabalho" | "plano-diario" | "missao-prova";
   diasAteProva?: number;
   onFechar: () => void;
@@ -39,7 +40,7 @@ function incrementarUso(childId: string | undefined): number {
   return novo;
 }
 
-export function TutorTrabalho({ tema, materia, modo = "trabalho", diasAteProva, onFechar }: Props) {
+export function TutorTrabalho({ tema, materia, instrucoesProfessor, modo = "trabalho", diasAteProva, onFechar }: Props) {
   const { activeChild } = useAppState();
   const conversar = useServerFn(conversarTutorIA);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -109,6 +110,7 @@ export function TutorTrabalho({ tema, materia, modo = "trabalho", diasAteProva, 
           modo,
           tema,
           materia: materia || undefined,
+          instrucoesProfessor: instrucoesProfessor || undefined,
           idade: activeChild?.idade,
           serie: (activeChild as any)?.serie,
           nome: activeChild?.nome,
