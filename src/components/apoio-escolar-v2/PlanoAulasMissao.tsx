@@ -134,7 +134,8 @@ export function PlanoAulasMissao({ missao, tipo }: Props) {
     if (!atual)
       return <p className="mt-4 text-sm text-destructive">Esta aula não possui páginas válidas.</p>;
     return (
-      <div className="mt-4 rounded-3xl border-2 border-primary/20 bg-background p-4 sm:p-6">
+      <div className="mt-4 space-y-6">
+      <div className="rounded-3xl border-2 border-primary/20 bg-background p-4 sm:p-6">
         <div className="mb-5 flex items-center justify-between gap-3">
           <Button
             variant="ghost"
@@ -165,11 +166,6 @@ export function PlanoAulasMissao({ missao, tipo }: Props) {
             ))}
           </ol>
         ) : null}
-        {atual.tipo === "video" && sessaoAtiva.resource_query ? (
-          <div className="mt-6 rounded-2xl border-2 border-red-100 bg-red-50/30 p-3">
-            <BibliotecaInternet query={sessaoAtiva.resource_query} />
-          </div>
-        ) : null}
         <div className="mt-6 flex justify-between gap-3 border-t pt-4">
           <Button
             variant="outline"
@@ -191,6 +187,16 @@ export function PlanoAulasMissao({ missao, tipo }: Props) {
             </Button>
           )}
         </div>
+      </div>
+      {sessaoAtiva.resource_query ? (
+        <section className="rounded-3xl border-2 border-red-100 bg-background p-4 sm:p-6">
+          <h4 className="text-xl font-black">Vídeos para reforçar esta aula</h4>
+          <p className="mb-4 mt-1 text-sm text-muted-foreground">
+            Até 6 opções em linguagem simples, escolhidas somente quando correspondem ao conteúdo da prova.
+          </p>
+          <BibliotecaInternet query={sessaoAtiva.resource_query} somenteYoutube />
+        </section>
+      ) : null}
       </div>
     );
   }

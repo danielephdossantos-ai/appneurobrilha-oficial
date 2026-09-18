@@ -7,6 +7,7 @@ import { Globe, ExternalLink, Loader2, RefreshCw, X, Play } from "lucide-react";
 interface Props {
   query: string;
   onAbrirRecurso?: (recurso: RecursoExterno) => void;
+  somenteYoutube?: boolean;
 }
 
 function extractYoutubeId(url: string): string | null {
@@ -34,7 +35,7 @@ function toEmbedUrl(url: string, fonte: string): string {
   }
 }
 
-export function BibliotecaInternet({ query, onAbrirRecurso }: Props) {
+export function BibliotecaInternet({ query, onAbrirRecurso, somenteYoutube = false }: Props) {
   const buscar = useServerFn(buscarRecursosExternos);
   const [loading, setLoading] = useState(false);
   const [erro, setErro] = useState<string | null>(null);
@@ -50,7 +51,7 @@ export function BibliotecaInternet({ query, onAbrirRecurso }: Props) {
     setLoading(true);
     setErro(null);
     try {
-      const res = await buscar({ data: { query, force } });
+      const res = await buscar({ data: { query, force, youtubeOnly: somenteYoutube } });
       setResultados(res.resultados);
       setAvisos((res.avisos || []).map((aviso: { mensagem: string }) => aviso.mensagem));
       setFonte(res.fonte);
@@ -73,7 +74,7 @@ export function BibliotecaInternet({ query, onAbrirRecurso }: Props) {
       <div className="flex items-center justify-between px-1">
         <h3 className="text-sm font-black uppercase tracking-widest text-emerald-700 flex items-center gap-2">
           <Globe className="h-4 w-4" />
-          Biblioteca da Internet
+          {somenteYoutube ? "Videoaulas recomendadas" : "Biblioteca da Internet"}
           {fonte === "cache" && (
             <span className="text-[10px] font-bold normal-case tracking-normal bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">
               do cache
@@ -94,7 +95,9 @@ export function BibliotecaInternet({ query, onAbrirRecurso }: Props) {
         <Card className="border-2 border-emerald-200 bg-emerald-50/50">
           <div className="flex items-center gap-3 text-emerald-700">
             <Loader2 className="h-5 w-5 animate-spin" />
-            <span className="text-sm font-medium">Buscando em fontes públicas (Wikipédia)...</span>
+            <span className="text-sm font-medium">
+              {somenteYoutube ? "Buscando videoaulas exatamente sobre o conteúdo..." : "Buscando em fontes públicas..."}
+            </span>
           </div>
         </Card>
       )}
@@ -118,7 +121,9 @@ export function BibliotecaInternet({ query, onAbrirRecurso }: Props) {
 
       {!loading && !erro && resultados.length === 0 && (
         <Card className="border-2 border-dashed border-emerald-200 bg-emerald-50/30 text-sm text-emerald-800">
-          Nenhum resultado encontrado nas bibliotecas públicas para <b>{query}</b>.
+          {somenteYoutube
+            ? <>Nenhuma videoaula aprovada para <b>{query}</b>. Não exibimos vídeos de outro assunto.</>
+            : <>Nenhum resultado encontrado nas bibliotecas públicas para <b>{query}</b>.</>}
         </Card>
       )}
 

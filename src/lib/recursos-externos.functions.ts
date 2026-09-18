@@ -40,15 +40,22 @@ async function buscarYoutube(
   let ultimoAviso: AvisoFonteExterna | undefined;
   // Aula explicada em português, com exemplos na lousa/quadro.
   const q = `${query} aula completa professor lousa quadro exemplos exercícios`;
+  const buscaGis = ehConsultaDeMatematica(query)
+    ? `${topicosObrigatorios(query).join(" ")} Professora Gis Gis com Giz aula`
+    : null;
 
   for (const [keyIndex, key] of keys.entries()) {
-    const url =
-      `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=15` +
-      `&safeSearch=strict&videoEmbeddable=true&relevanceLanguage=pt&regionCode=BR` +
-      `&q=${encodeURIComponent(q)}&key=${key}`;
     try {
-      const r = await fetch(url);
-      const data: any = await r.json();
+      const criarUrl = (termo: string, maxResults: number) =>
+        `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=${maxResults}` +
+        `&safeSearch=strict&videoEmbeddable=true&relevanceLanguage=pt&regionCode=BR` +
+        `&q=${encodeURIComponent(termo)}&key=${key}`;
+      const buscas = [fetch(criarUrl(q, 25))];
+      if (buscaGis) buscas.push(fetch(criarUrl(buscaGis, 10)));
+      const respostas = await Promise.all(buscas);
+      const r = respostas[0];
+      const dados = await Promise.all(respostas.map((resposta) => resposta.json()));
+      const data: any = dados[0];
       if (!r.ok) {
         const reason = String(
           data?.error?.errors?.[0]?.reason || data?.error?.status || "",
@@ -96,7 +103,14 @@ async function buscarYoutube(
         ultimoAviso = { fonte: "youtube", tipo, mensagem };
         continue;
       }
-      const items: any[] = data.items || [];
+      const items: any[] = Array.from(
+        new Map(
+          dados
+            .flatMap((resultado: any) => resultado.items || [])
+            .filter((item: any) => item.id?.videoId)
+            .map((item: any) => [item.id.videoId, item]),
+        ).values(),
+      );
       const ids = items
         .map((item) => item.id?.videoId)
         .filter(Boolean)
@@ -200,15 +214,46 @@ const TERMOS_VAZIOS = new Set([
   "educativo",
   "infantil",
   "aula",
+  "aulas",
+  "explicada",
+  "explicado",
+  "explicacao",
+  "exercicio",
+  "exercicios",
+  "professor",
+  "professora",
+  "prova",
+  "trabalho",
+  "tarefa",
+  "matematica",
+  "portugues",
+  "ciencias",
+  "historia",
+  "geografia",
 ]);
 
-function correspondeAoTema(recurso: RecursoExterno, query: string): boolean {
-  const termos = normalize(query)
+function raizDoTermo(termo: string): string {
+  return termo.length > 6 ? termo.slice(0, 5) : termo;
+}
+
+function topicosObrigatorios(query: string): string[] {
+  return normalize(query)
     .split(" ")
-    .filter((termo) => termo.length >= 3 && !TERMOS_VAZIOS.has(termo));
+    .filter((termo) => termo.length >= 3 && !TERMOS_VAZIOS.has(termo))
+    .map(raizDoTermo);
+}
+
+function ehConsultaDeMatematica(query: string): boolean {
+  return normalize(query).includes("matematica");
+}
+
+function correspondeAoTema(recurso: RecursoExterno, query: string): boolean {
+  const termos = topicosObrigatorios(query);
   if (termos.length === 0) return false;
   const texto = normalize(`${recurso.titulo} ${recurso.descricao ?? ""}`);
-  return termos.filter((termo) => texto.includes(termo)).length >= Math.min(2, termos.length);
+  // Pelo menos um tópico real da prova precisa aparecer. Termos genéricos
+  // como "matemática", "aula" e "exercícios" nunca aprovam um vídeo.
+  return termos.some((termo) => texto.includes(termo));
 }
 
 // ---------- Wikipédia (PT) ----------
@@ -362,7 +407,7 @@ function dedupe(lista: RecursoExterno[]): RecursoExterno[] {
 
 export const buscarRecursosExternos = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((d: { query: string; force?: boolean }) => d)
+  .inputValidator((d: { query: string; force?: boolean; youtubeOnly?: boolean }) => d)
   .handler(async ({ data, context }) => {
     const queryN = normalize(data.query);
     if (queryN.length < 3)
@@ -371,7 +416,7 @@ export const buscarRecursosExternos = createServerFn({ method: "POST" })
     const supabase = context.supabase;
 
     // 1) cache
-    if (!data.force) {
+    if (!data.force && !data.youtubeOnly) {
       const { data: cached } = await supabase
         .from("rb_recursos_externos")
         .select("id,fonte,titulo,descricao,url,thumbnail,conteudo")
@@ -411,6 +456,14 @@ export const buscarRecursosExternos = createServerFn({ method: "POST" })
     ]);
     const yt = ytResult.resultados;
     const avisos = ytResult.aviso ? [ytResult.aviso] : [];
+
+    if (data.youtubeOnly) {
+      return {
+        resultados: dedupe(yt).filter((item) => correspondeAoTema(item, queryN)).slice(0, 6),
+        fonte: "api" as const,
+        avisos,
+      };
+    }
 
     // intercalar pra diversificar fontes
     const resultados: RecursoExterno[] = [];
