@@ -1,31 +1,25 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Shell, PageHeader } from "@/components/Layout";
 import { FileText } from "lucide-react";
+import { Shell, PageHeader } from "@/components/Layout";
+import { MissaoEscolarV2 } from "@/components/apoio-escolar-v2/MissaoEscolarV2";
 import { useAppState } from "@/core/store";
-import { TrabalhoBrilha } from "@/components/reforco-brilha/TrabalhoBrilha";
-import { CalendarioProvas } from "@/components/reforco-brilha/CalendarioProvas";
 
-export const Route = createFileRoute("/missao-trabalho")({
-  component: MissaoTrabalho,
-});
+export const Route = createFileRoute("/missao-trabalho")({ component: MissaoTrabalhoPage });
 
-function MissaoTrabalho() {
+function MissaoTrabalhoPage() {
   const { activeChild } = useAppState();
   return (
     <Shell>
       <PageHeader
         icon={FileText}
         title="MISSÃO TRABALHO BRILHA"
-        subtitle="Monte seu trabalho escolar com Wikipédia, YouTube, livros e o Tutor Brilha guiando passo a passo."
+        subtitle="Organize tema, conteúdo, prazo e as etapas do trabalho escolar."
       />
-      <div className="mt-4 space-y-4">
-        <CalendarioProvas
-          childId={activeChild?.id ?? null}
-          filtroTipo="trabalho"
-          titulo="Calendário de Trabalhos"
-        />
-        <TrabalhoBrilha childId={activeChild?.id ?? null} />
-      </div>
+      {activeChild ? (
+        <MissaoEscolarV2 childId={activeChild.id} serie={activeChild.serie} tipo="trabalho" />
+      ) : (
+        <p className="py-10 text-center">Cadastre uma criança para começar.</p>
+      )}
     </Shell>
   );
 }

@@ -1,36 +1,25 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Shell, PageHeader } from "@/components/Layout";
-import { useAppState } from "@/core/store";
 import { ClipboardList } from "lucide-react";
-import { MissaoTarefa } from "@/components/missao-tarefa/MissaoTarefa";
-import { TarefasEnviadasProfessor } from "@/components/missao-tarefa/TarefasEnviadasProfessor";
+import { Shell, PageHeader } from "@/components/Layout";
+import { MissaoEscolarV2 } from "@/components/apoio-escolar-v2/MissaoEscolarV2";
+import { useAppState } from "@/core/store";
 
-export const Route = createFileRoute("/missao-tarefa")({
-  component: MissaoTarefaPage,
-});
+export const Route = createFileRoute("/missao-tarefa")({ component: MissaoTarefaPage });
 
 function MissaoTarefaPage() {
   const { activeChild } = useAppState();
-
   return (
     <Shell>
-      <div className="space-y-4 px-3 sm:px-4 max-w-3xl mx-auto pb-24">
-        <PageHeader
-          icon={ClipboardList}
-          title="MISSÃO TAREFA BRILHA"
-          subtitle="A tarefa de casa do dia a dia, com dicas da IA — sem entregar a resposta."
-        />
-        {!activeChild ? (
-          <div className="text-center text-sm text-muted-foreground py-10">
-            Cadastre uma criança no perfil pra começar.
-          </div>
-        ) : (
-          <>
-            <TarefasEnviadasProfessor childId={activeChild.id} />
-            <MissaoTarefa childId={activeChild.id} />
-          </>
-        )}
-      </div>
+      <PageHeader
+        icon={ClipboardList}
+        title="MISSÃO TAREFA BRILHA"
+        subtitle="Organize a tarefa e aprenda a resolver sem receber somente a resposta."
+      />
+      {activeChild ? (
+        <MissaoEscolarV2 childId={activeChild.id} serie={activeChild.serie} tipo="tarefa" />
+      ) : (
+        <p className="py-10 text-center">Cadastre uma criança para começar.</p>
+      )}
     </Shell>
   );
 }
