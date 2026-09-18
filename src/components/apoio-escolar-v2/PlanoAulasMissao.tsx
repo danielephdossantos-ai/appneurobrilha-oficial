@@ -5,6 +5,8 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/database/supabase/client";
 import { BibliotecaInternet } from "@/components/reforco-brilha/BibliotecaInternet";
+import { useServerFn } from "@tanstack/react-start";
+import { gerarAulaCompletaMissaoV2 } from "@/lib/apoio-escolar-mentor.functions";
 import {
   criarAulaSegura,
   criarConsultaExataRecursos,
@@ -32,6 +34,7 @@ interface SessaoSalva {
 interface Props {
   missao: MissaoParaPlano;
   tipo: TipoMissaoEscolar;
+  childId: string;
 }
 
 function dataParaSessao(indice: number, limite: string) {
@@ -41,8 +44,9 @@ function dataParaSessao(indice: number, limite: string) {
   return sugerida > limite ? limite : sugerida;
 }
 
-export function PlanoAulasMissao({ missao, tipo }: Props) {
+export function PlanoAulasMissao({ missao, tipo, childId }: Props) {
   const qc = useQueryClient();
+  const gerarAulaCompleta = useServerFn(gerarAulaCompletaMissaoV2);
   const chave = ["school-support-sessions", missao.id] as const;
   const [sessaoAtiva, setSessaoAtiva] = useState<SessaoSalva | null>(null);
   const [pagina, setPagina] = useState(0);
@@ -116,6 +120,17 @@ export function PlanoAulasMissao({ missao, tipo }: Props) {
     onError: () => toast.error("Não foi possível atualizar as aulas."),
   });
 
+  const gerarComMentor = useMutation({
+    mutationFn: async (sessao: SessaoSalva) => gerarAulaCompleta({ data: { sessionId: sessao.id, childId } }),
+    onSuccess: async (resultado, sessao) => {
+      await qc.invalidateQueries({ queryKey: chave });
+      setSessaoAtiva({ ...sessao, lesson_pages: resultado.paginas, resource_query: resultado.resourceQuery });
+      setPagina(0);
+      toast.success(`Aulão completo criado com ${resultado.provider}.`);
+    },
+    onError: (erro) => toast.error(erro instanceof Error ? erro.message : "O Professor Mentor não conseguiu gerar esta aula."),
+  });
+
   const concluir = async (sessao: SessaoSalva) => {
     const resposta = await (supabase as any)
       .from("school_support_sessions")
@@ -160,6 +175,10 @@ export function PlanoAulasMissao({ missao, tipo }: Props) {
         <p className="text-sm font-bold uppercase tracking-wide text-primary">
           Conteúdo obrigatório: {sessaoAtiva.topic}
         </p>
+        <Button className="mt-3" variant="secondary" disabled={gerarComMentor.isPending} onClick={() => gerarComMentor.mutate(sessaoAtiva)}>
+          <Sparkles className="mr-2 h-4 w-4" />
+          {gerarComMentor.isPending ? "Professor preparando o aulão..." : "Gerar aulão completo com Professor Mentor"}
+        </Button>
         <h4 className="mt-2 text-2xl font-black">{atual.titulo}</h4>
         <p className="mt-4 text-base leading-7 sm:text-lg">{atual.conteudo}</p>
         {atual.itens?.length ? (

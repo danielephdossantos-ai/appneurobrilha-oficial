@@ -252,7 +252,7 @@ export function MissaoEscolarV2({ childId, serie, tipo }: Props) {
                 <CheckCircle2 className="h-4 w-4" />
                 Salva na agenda
               </div>
-              <PlanoAulasMissao missao={missao} tipo={tipo} />
+              <PlanoAulasMissao missao={missao} tipo={tipo} childId={childId} />
             </article>
           ))}
         </div>
