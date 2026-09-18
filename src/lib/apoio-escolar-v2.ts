@@ -25,6 +25,8 @@ export interface PaginaAulaEscolar {
     | "revisao"
     | "correcao";
   titulo: string;
+  conteudo: string;
+  itens?: string[];
 }
 
 export interface ErroValidacaoMissao {
@@ -72,13 +74,19 @@ export function tituloPadraoMissao(rascunho: RascunhoMissaoEscolar): string {
 }
 
 export function criarConsultaExataRecursos(rascunho: RascunhoMissaoEscolar): string {
-  const conteudos = rascunho.conteudos.map((item) => item.trim()).filter(Boolean).join(" ");
+  const conteudos = rascunho.conteudos
+    .map((item) => item.trim())
+    .filter(Boolean)
+    .join(" ");
   const serie = rascunho.serie?.trim() ? ` ${rascunho.serie.trim()}` : "";
   return `${conteudos} ${rascunho.materia.trim()}${serie} aula explicada exercícios`.trim();
 }
 
 export function criarContextoTutor(rascunho: RascunhoMissaoEscolar): string {
-  const conteudos = rascunho.conteudos.map((item) => item.trim()).filter(Boolean).join(", ");
+  const conteudos = rascunho.conteudos
+    .map((item) => item.trim())
+    .filter(Boolean)
+    .join(", ");
   return [
     `TIPO DE MISSÃO: ${rascunho.tipo}`,
     `MATÉRIA OBRIGATÓRIA: ${rascunho.materia.trim()}`,
@@ -91,15 +99,137 @@ export function criarContextoTutor(rascunho: RascunhoMissaoEscolar): string {
     .join("\n");
 }
 
-export function paginasObrigatoriasDaAula(): PaginaAulaEscolar[] {
+function conteudoConhecido(materia: string, topico: string) {
+  const chave = `${materia} ${topico}`.toLocaleLowerCase("pt-BR");
+  if (chave.includes("fraç")) {
+    return {
+      conceito:
+        "Fração representa uma ou mais partes iguais de um todo. O número de cima é o numerador e mostra quantas partes foram consideradas. O número de baixo é o denominador e mostra em quantas partes iguais o todo foi dividido.",
+      exemplo:
+        "Em 3/4, o todo foi dividido em 4 partes iguais e estamos considerando 3. Para criar uma fração equivalente, multiplicamos ou dividimos numerador e denominador pelo mesmo número: 1/2 = 2/4.",
+      pratica: [
+        "Desenhe um círculo e divida em 4 partes iguais.",
+        "Pinte 2 partes e escreva a fração 2/4.",
+        "Simplifique 2/4 dividindo os dois números por 2.",
+      ],
+      exercicios: [
+        "Represente 3/5 com um desenho.",
+        "Complete: 1/2 = __/6.",
+        "Simplifique a fração 4/8.",
+      ],
+      respostas: ["Três das cinco partes iguais devem estar pintadas.", "1/2 = 3/6.", "4/8 = 1/2."],
+    };
+  }
+  if (chave.includes("verbo")) {
+    return {
+      conceito:
+        "Verbo é a palavra que indica ação, estado, mudança de estado ou fenômeno da natureza. Ele varia conforme a pessoa, o número e o tempo da ação.",
+      exemplo:
+        "Na frase 'Ana estudou ontem', estudou é o verbo e está no passado. Em 'Ana estuda hoje', estuda está no presente. Em 'Ana estudará amanhã', estudará está no futuro.",
+      pratica: [
+        "Localize o verbo em: O menino corre no parque.",
+        "Troque corre pelo passado.",
+        "Agora escreva a mesma ação no futuro.",
+      ],
+      exercicios: [
+        "Circule o verbo: A chuva caiu cedo.",
+        "Passe 'Eu estudo' para o passado.",
+        "Complete com um verbo: Os pássaros ___ no céu.",
+      ],
+      respostas: [
+        "O verbo é caiu.",
+        "Eu estudei.",
+        "Uma resposta possível é: Os pássaros voam no céu.",
+      ],
+    };
+  }
+  if (chave.includes("sistema solar")) {
+    return {
+      conceito:
+        "O Sistema Solar é formado pelo Sol e pelos corpos celestes que giram ao seu redor. Há oito planetas; a Terra é o terceiro a partir do Sol.",
+      exemplo:
+        "A ordem dos planetas é: Mercúrio, Vênus, Terra, Marte, Júpiter, Saturno, Urano e Netuno. Os planetas realizam translação ao redor do Sol e rotação em torno do próprio eixo.",
+      pratica: [
+        "Escreva os quatro planetas mais próximos do Sol.",
+        "Compare rotação e translação.",
+        "Explique por que o Sol é importante para a Terra.",
+      ],
+      exercicios: [
+        "Qual é o maior planeta?",
+        "Qual planeta possui anéis muito visíveis?",
+        "A Terra ocupa qual posição a partir do Sol?",
+      ],
+      respostas: ["Júpiter.", "Saturno.", "A terceira posição."],
+    };
+  }
+  return {
+    conceito: `${topico} será estudado dentro de ${materia}. Primeiro identifique a definição principal, depois observe como o conceito aparece em exemplos e só então resolva a atividade.`,
+    exemplo: `Procure no material escolar um exemplo de ${topico}. Leia o enunciado, destaque as informações importantes e explique com suas palavras o que foi entendido.`,
+    pratica: [
+      "Leia o conteúdo uma vez por inteiro.",
+      "Marque as palavras mais importantes.",
+      "Explique o assunto com suas palavras e confira no material.",
+    ],
+    exercicios: [
+      `Escreva o que significa ${topico}.`,
+      `Dê um exemplo de ${topico}.`,
+      "Crie uma pergunta sobre o assunto e responda.",
+    ],
+    respostas: [
+      "Compare a definição com o livro ou caderno.",
+      "O exemplo deve pertencer ao conteúdo estudado.",
+      "A resposta deve usar as ideias principais da explicação.",
+    ],
+  };
+}
+
+export function criarAulaSegura(materia: string, topico: string): PaginaAulaEscolar[] {
+  const base = conteudoConhecido(materia.trim(), topico.trim());
   return [
-    { ordem: 1, tipo: "acolhimento", titulo: "O que vamos aprender" },
-    { ordem: 2, tipo: "objetivo", titulo: "Objetivo da missão" },
-    { ordem: 3, tipo: "explicacao", titulo: "Explicação passo a passo" },
-    { ordem: 4, tipo: "exemplo", titulo: "Exemplo resolvido" },
-    { ordem: 5, tipo: "pratica_guiada", titulo: "Vamos fazer juntos" },
-    { ordem: 6, tipo: "exercicio", titulo: "Agora é sua vez" },
-    { ordem: 7, tipo: "revisao", titulo: "Revisão da missão" },
-    { ordem: 8, tipo: "correcao", titulo: "Correção explicada" },
+    {
+      ordem: 1,
+      tipo: "acolhimento",
+      titulo: "O que vamos aprender",
+      conteudo: `Hoje vamos aprender ${topico} em ${materia}, com explicação, exemplo e prática.`,
+    },
+    {
+      ordem: 2,
+      tipo: "objetivo",
+      titulo: "Objetivo da missão",
+      conteudo: `Compreender ${topico}, reconhecer suas ideias principais e usar o conhecimento em atividades.`,
+    },
+    { ordem: 3, tipo: "explicacao", titulo: "Explicação passo a passo", conteudo: base.conceito },
+    { ordem: 4, tipo: "exemplo", titulo: "Exemplo resolvido", conteudo: base.exemplo },
+    {
+      ordem: 5,
+      tipo: "pratica_guiada",
+      titulo: "Vamos fazer juntos",
+      conteudo: "Siga uma etapa de cada vez.",
+      itens: base.pratica,
+    },
+    {
+      ordem: 6,
+      tipo: "exercicio",
+      titulo: "Agora é sua vez",
+      conteudo: "Resolva sem olhar o gabarito.",
+      itens: base.exercicios,
+    },
+    {
+      ordem: 7,
+      tipo: "revisao",
+      titulo: "Revisão da missão",
+      conteudo: `Explique com suas palavras o que aprendeu sobre ${topico} e anote o ponto que precisa rever.`,
+    },
+    {
+      ordem: 8,
+      tipo: "correcao",
+      titulo: "Correção explicada",
+      conteudo: "Confira somente depois de tentar.",
+      itens: base.respostas,
+    },
   ];
+}
+
+export function paginasObrigatoriasDaAula(): PaginaAulaEscolar[] {
+  return criarAulaSegura("Matemática", "frações");
 }

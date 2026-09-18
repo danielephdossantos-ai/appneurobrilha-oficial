@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   criarConsultaExataRecursos,
   criarContextoTutor,
+  criarAulaSegura,
   paginasObrigatoriasDaAula,
   tituloPadraoMissao,
   validarMissaoEscolar,
@@ -22,9 +23,15 @@ describe("Apoio Escolar V2", () => {
   });
 
   it("rejeita data impossível, ano incompleto e data passada", () => {
-    expect(validarMissaoEscolar({ ...base, dataEntrega: "2026-02-30" }, "2026-01-01")).toHaveLength(1);
-    expect(validarMissaoEscolar({ ...base, dataEntrega: "0026-09-29" }, "2026-09-17")).toHaveLength(1);
-    expect(validarMissaoEscolar({ ...base, dataEntrega: "2026-09-16" }, "2026-09-17")).toHaveLength(1);
+    expect(validarMissaoEscolar({ ...base, dataEntrega: "2026-02-30" }, "2026-01-01")).toHaveLength(
+      1,
+    );
+    expect(validarMissaoEscolar({ ...base, dataEntrega: "0026-09-29" }, "2026-09-17")).toHaveLength(
+      1,
+    );
+    expect(validarMissaoEscolar({ ...base, dataEntrega: "2026-09-16" }, "2026-09-17")).toHaveLength(
+      1,
+    );
   });
 
   it("exige matéria e conteúdo específico", () => {
@@ -34,7 +41,9 @@ describe("Apoio Escolar V2", () => {
 
   it("cria título coerente para cada missão", () => {
     expect(tituloPadraoMissao(base)).toBe("Prova de Matemática");
-    expect(tituloPadraoMissao({ ...base, tipo: "tarefa", titulo: "Lista de verbos" })).toBe("Lista de verbos");
+    expect(tituloPadraoMissao({ ...base, tipo: "tarefa", titulo: "Lista de verbos" })).toBe(
+      "Lista de verbos",
+    );
   });
 
   it("pesquisa pelo conteúdo exato em vez de usar somente a matéria", () => {
@@ -55,5 +64,26 @@ describe("Apoio Escolar V2", () => {
     expect(paginas).toHaveLength(8);
     expect(paginas.map((pagina) => pagina.ordem)).toEqual([1, 2, 3, 4, 5, 6, 7, 8]);
     expect(paginas.at(-1)?.tipo).toBe("correcao");
+  });
+
+  it("gera aula real de frações com exemplo e respostas", () => {
+    const paginas = criarAulaSegura("Matemática", "frações equivalentes");
+    expect(paginas[2].conteudo).toContain("numerador");
+    expect(paginas[3].conteudo).toContain("1/2 = 2/4");
+    expect(paginas[7].itens).toContain("4/8 = 1/2.");
+  });
+
+  it("gera aula real de verbos sem misturar Matemática", () => {
+    const paginas = criarAulaSegura("Português", "verbos");
+    expect(paginas[2].conteudo).toContain("ação");
+    expect(paginas[3].conteudo).toContain("passado");
+    expect(JSON.stringify(paginas)).not.toContain("numerador");
+  });
+
+  it("gera aula real de sistema solar com os oito planetas", () => {
+    const paginas = criarAulaSegura("Ciências", "sistema solar");
+    expect(paginas[2].conteudo).toContain("oito planetas");
+    expect(paginas[3].conteudo).toContain("Mercúrio");
+    expect(paginas[7].itens).toContain("Júpiter.");
   });
 });

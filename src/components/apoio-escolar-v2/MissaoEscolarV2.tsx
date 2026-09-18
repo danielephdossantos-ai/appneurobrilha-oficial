@@ -12,6 +12,7 @@ import {
   type RascunhoMissaoEscolar,
   type TipoMissaoEscolar,
 } from "@/lib/apoio-escolar-v2";
+import { PlanoAulasMissao } from "./PlanoAulasMissao";
 
 interface Props {
   childId: string;
@@ -251,6 +252,7 @@ export function MissaoEscolarV2({ childId, serie, tipo }: Props) {
                 <CheckCircle2 className="h-4 w-4" />
                 Salva na agenda
               </div>
+              <PlanoAulasMissao missao={missao} tipo={tipo} />
             </article>
           ))}
         </div>
