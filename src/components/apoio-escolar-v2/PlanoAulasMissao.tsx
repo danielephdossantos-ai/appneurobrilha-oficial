@@ -7,6 +7,7 @@ import { supabase } from "@/database/supabase/client";
 import { BibliotecaInternet } from "@/components/reforco-brilha/BibliotecaInternet";
 import { useServerFn } from "@tanstack/react-start";
 import { gerarAulaCompletaMissaoV2 } from "@/lib/apoio-escolar-mentor.functions";
+import { AulaLousaPlayer } from "./AulaLousaPlayer";
 import {
   criarAulaSegura,
   criarConsultaExataRecursos,
@@ -179,18 +180,7 @@ export function PlanoAulasMissao({ missao, tipo, childId }: Props) {
           <Sparkles className="mr-2 h-4 w-4" />
           {gerarComMentor.isPending ? "Professor preparando o aulão..." : "Gerar aulão completo com Professor Mentor"}
         </Button>
-        <h4 className="mt-2 text-2xl font-black">{atual.titulo}</h4>
-        <p className="mt-4 text-base leading-7 sm:text-lg">{atual.conteudo}</p>
-        {atual.itens?.length ? (
-          <ol className="mt-5 space-y-3">
-            {atual.itens.map((item, indice) => (
-              <li key={`${atual.ordem}-${indice}`} className="rounded-2xl border bg-muted/30 p-3">
-                <strong className="mr-2">{indice + 1}.</strong>
-                {item}
-              </li>
-            ))}
-          </ol>
-        ) : null}
+        <AulaLousaPlayer pagina={atual} topico={sessaoAtiva.topic} />
         <div className="mt-6 flex justify-between gap-3 border-t pt-4">
           <Button
             variant="outline"
@@ -217,7 +207,7 @@ export function PlanoAulasMissao({ missao, tipo, childId }: Props) {
         <section className="rounded-3xl border-2 border-red-100 bg-background p-4 sm:p-6">
           <h4 className="text-xl font-black">Vídeos para reforçar esta aula</h4>
           <p className="mb-4 mt-1 text-sm text-muted-foreground">
-            Até 6 opções em linguagem simples, escolhidas somente quando correspondem ao conteúdo da prova.
+            Até 10 opções em português, escolhidas somente quando correspondem ao conteúdo exato.
           </p>
           <BibliotecaInternet query={sessaoAtiva.resource_query} somenteYoutube />
         </section>

@@ -35,9 +35,19 @@ export const gerarAulaCompletaMissaoV2 = createServerFn({ method: "POST" })
     const materia = String(missao.subject).trim();
     const topico = String(sessao.topic).trim();
     const serie = String(missao.school_year || crianca?.serie || "não informada");
-    const instrucao = `Você é o Professor Mentor NeuroBrilha, especializado no Ensino Fundamental brasileiro. Crie um AULÃO que uma família sem formação docente consiga acompanhar.
+    const metodologia = missao.kind === "prova"
+      ? "Prepare revisão completa, técnica de memorização, questões parecidas com prova, mini simulado e correção comentada."
+      : missao.kind === "tarefa"
+        ? "Ensine o conhecimento necessário, resolva um exemplo diferente e conduza a tarefa com pistas sem entregar a resposta final."
+        : "Conduza uma oficina: explique como pesquisar, selecionar fontes, planejar introdução-desenvolvimento-conclusão, revisar e apresentar o trabalho.";
+    const instrucao = `Você é o Professor Mentor NeuroBrilha, professor experiente da escola brasileira. Crie um AULÃO que uma família sem formação docente consiga acompanhar.
 MATÉRIA OBRIGATÓRIA: ${materia}. CONTEÚDO OBRIGATÓRIO: ${topico}. SÉRIE: ${serie}. IDADE: ${crianca?.idade ?? "não informada"}.
-Não misture matérias, não use texto genérico e ensine antes de perguntar. Explique termos novos. Use concreto, visual e simbólico quando fizer sentido. Inclua dois exemplos resolvidos sem pular etapas, prática guiada, quatro exercícios e gabarito explicado. Em Matemática mostre contas e raciocínio; em Português faça análise linguística real. Considere a BNCC sem inventar códigos. Não invente links.
+${metodologia}
+Fale diretamente com o aluno, em português brasileiro, como numa explicação de lousa. Não use frases vazias como "imagine no caderno" ou "desenhe no caderno" sem ensinar o conteúdo.
+Cada página precisa acrescentar conhecimento novo. Ensine antes de perguntar e explique cada termo novo com definição, exemplo e contraexemplo.
+Inclua pelo menos dois exemplos totalmente resolvidos, sem pular etapas, prática guiada, quatro exercícios progressivos, técnica de memorização e gabarito explicado.
+Em Matemática mostre contas, modelos visuais e raciocínio. Em Português use textos curtos autorais e análise linguística real. Em Ciências, História e Geografia explique relações de causa e efeito, vocabulário e aplicações.
+Adapte a linguagem à série, mas mantenha conteúdo escolar correto e substancioso. Considere a BNCC sem inventar códigos. Não invente links nem indique vídeos dentro das páginas.
 As 14 páginas devem seguir: 1 acolhimento; 2 objetivo; 3 explicacao; 4 modelo_visual; 5 modelo_simbolico; 6 exemplo; 7 exemplo; 8 erros_comuns; 9 pratica_guiada; 10 exercicio; 11 desafio; 12 video; 13 revisao; 14 correcao.
 Retorne somente JSON: {"materia":"${materia}","topico":"${topico}","paginas":[{"ordem":1,"tipo":"acolhimento","titulo":"...","conteudo":"...","itens":["..."]}]}`;
     const ai = await chamarProfessorMentorIA({ label: "apoio-escolar-v2", json: true, temperature: 0.25, max_tokens: 8192, messages: [{ role: "system", content: instrucao }, { role: "user", content: `Prepare a aula completa de ${materia} sobre ${topico} para ${serie}.` }] });

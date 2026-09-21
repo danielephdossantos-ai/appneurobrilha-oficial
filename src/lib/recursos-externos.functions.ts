@@ -168,7 +168,7 @@ async function buscarYoutube(
           if (prioridadeA !== prioridadeB) return prioridadeB - prioridadeA;
           return (b.visualizacoes || 0) - (a.visualizacoes || 0);
         })
-        .slice(0, 6);
+        .slice(0, 10);
       return { resultados };
     } catch {
       ultimoAviso = {
@@ -479,7 +479,7 @@ export const buscarRecursosExternos = createServerFn({ method: "POST" })
 
     if (data.youtubeOnly) {
       return {
-        resultados: dedupe(yt).filter((item) => correspondeAoTema(item, queryN)).slice(0, 6),
+        resultados: dedupe(yt).filter((item) => correspondeAoTema(item, queryN)).slice(0, 10),
         fonte: "api" as const,
         avisos,
       };
