@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { ArrowLeft, BookOpenCheck, GraduationCap, Printer } from "lucide-react";
 import { supabase } from "@/database/supabase/client";
 import { TeacherShell as Shell } from "@/components/teacher/TeacherShell";
+import { InclusiveLessonEF01CI01 } from "@/components/teacher/InclusiveLessonEF01CI01";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/area-professor/aula-inclusiva/$lessonId")({
@@ -71,6 +72,8 @@ function InclusiveLesson() {
         <p className="p-8 text-center">Material não encontrado ou ainda não aprovado.</p>
       </Shell>
     );
+  if (lesson.codigo_bncc === "EF01CI01")
+    return <InclusiveLessonEF01CI01 />;
   const brand = (
     <footer className="mt-8 flex items-center justify-between border-t pt-3 text-[10px] font-bold uppercase tracking-wider text-slate-500">
       <span>NeuroBrilha Kids · uso pedagógico</span>

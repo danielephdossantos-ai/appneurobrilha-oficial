@@ -54,10 +54,20 @@ function InclusiveLibrary() {
     });
     setLoading(false);
     if (error) {
+      console.error("[Biblioteca Inclusiva] Falha na RPC teacher_search_inclusive_lessons", {
+        code: error.code,
+        message: error.message,
+        details: error.details,
+        hint: error.hint,
+      });
       toast.error("Não foi possível pesquisar a biblioteca inclusiva.");
       return;
     }
-    setRows(data ?? []);
+    const resultRows = data ?? [];
+    console.info("[Biblioteca Inclusiva] RPC teacher_search_inclusive_lessons concluída", {
+      count: resultRows.length,
+    });
+    setRows(resultRows);
   }
   useEffect(() => {
     void search();
