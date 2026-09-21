@@ -40,6 +40,15 @@ describe("Apoio Escolar V2", () => {
     expect(erros.map((erro) => erro.campo)).toEqual(["materia", "conteudos"]);
   });
 
+  it("não aceita conteúdo ambíguo no lugar da matéria", () => {
+    const erros = validarMissaoEscolar(
+      { ...base, materia: "verbos", conteudos: ["conjugação"] },
+      "2026-09-17",
+    );
+    expect(erros[0]?.campo).toBe("materia");
+    expect(erros[0]?.mensagem).toContain("Português");
+  });
+
   it("cria título coerente para cada missão", () => {
     expect(tituloPadraoMissao(base)).toBe("Prova de Matemática");
     expect(tituloPadraoMissao({ ...base, tipo: "tarefa", titulo: "Lista de verbos" })).toBe(
@@ -51,6 +60,15 @@ describe("Apoio Escolar V2", () => {
     expect(criarConsultaExataRecursos(base)).toBe(
       "frações Matemática 7º ano aula explicada exercícios",
     );
+  });
+
+  it("marca explicitamente língua portuguesa na busca de verbos", () => {
+    const consulta = criarConsultaExataRecursos({
+      ...base,
+      materia: "Português",
+      conteudos: ["verbos"],
+    });
+    expect(consulta).toContain("verbos Português gramática língua portuguesa Brasil");
   });
 
   it("prende o Tutor à matéria e ao conteúdo cadastrados", () => {

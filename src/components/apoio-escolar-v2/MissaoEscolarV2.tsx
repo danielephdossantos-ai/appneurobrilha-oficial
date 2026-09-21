@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label";
 import {
   tituloPadraoMissao,
   validarMissaoEscolar,
+  MATERIAS_ESCOLARES,
   type RascunhoMissaoEscolar,
   type TipoMissaoEscolar,
 } from "@/lib/apoio-escolar-v2";
@@ -150,10 +151,14 @@ export function MissaoEscolarV2({ childId, serie, tipo }: Props) {
                 <Label htmlFor={`${tipo}-materia`}>Matéria</Label>
                 <Input
                   id={`${tipo}-materia`}
+                  list={`${tipo}-materias-escolares`}
                   value={materia}
                   onChange={(e) => setMateria(e.target.value)}
                   placeholder="Ex.: Matemática"
                 />
+                <datalist id={`${tipo}-materias-escolares`}>
+                  {MATERIAS_ESCOLARES.map((item) => <option key={item} value={item} />)}
+                </datalist>
               </div>
               <div className="space-y-2">
                 <Label htmlFor={`${tipo}-data`}>Data</Label>
@@ -175,7 +180,7 @@ export function MissaoEscolarV2({ childId, serie, tipo }: Props) {
                 placeholder="Ex.: frações equivalentes, soma de frações"
               />
               <p className="text-xs text-muted-foreground">
-                Separe mais de um conteúdo com vírgula.
+                Separe mais de um conteúdo com vírgula. Exemplo: verbos, tempos verbais, conjugação.
               </p>
             </div>
             <div className="space-y-2">

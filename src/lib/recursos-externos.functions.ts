@@ -50,7 +50,7 @@ async function buscarYoutube(
         `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=${maxResults}` +
         `&safeSearch=strict&videoEmbeddable=true&relevanceLanguage=pt&regionCode=BR` +
         `&q=${encodeURIComponent(termo)}&key=${key}`;
-      const buscas = [fetch(criarUrl(q, 25))];
+      const buscas = [fetch(criarUrl(q, 50))];
       if (buscaGis) buscas.push(fetch(criarUrl(buscaGis, 10)));
       const respostas = await Promise.all(buscas);
       const r = respostas[0];
@@ -230,6 +230,16 @@ const TERMOS_VAZIOS = new Set([
   "ciencias",
   "historia",
   "geografia",
+  "gramatica",
+  "lingua",
+  "brasil",
+  "crianca",
+  "criancas",
+  "ensino",
+  "fundamental",
+  "medio",
+  "ano",
+  "anos",
 ]);
 
 function raizDoTermo(termo: string): string {
@@ -253,7 +263,17 @@ function correspondeAoTema(recurso: RecursoExterno, query: string): boolean {
   const texto = normalize(`${recurso.titulo} ${recurso.descricao ?? ""}`);
   // Pelo menos um tópico real da prova precisa aparecer. Termos genéricos
   // como "matemática", "aula" e "exercícios" nunca aprovam um vídeo.
-  return termos.some((termo) => texto.includes(termo));
+  if (!termos.some((termo) => texto.includes(termo))) return false;
+
+  const consulta = normalize(query);
+  if (recurso.fonte === "youtube" && consulta.includes("portugues")) {
+    const sinaisIngles = [
+      "english grammar", "learn english", "verbs in english", "english verbs",
+      "verb to be", "simple present", "simple past", "ingles basico", "em ingles",
+    ];
+    if (sinaisIngles.some((sinal) => texto.includes(sinal))) return false;
+  }
+  return true;
 }
 
 // ---------- Wikipédia (PT) ----------

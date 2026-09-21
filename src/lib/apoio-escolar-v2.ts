@@ -39,6 +39,21 @@ export interface ErroValidacaoMissao {
   mensagem: string;
 }
 
+export const MATERIAS_ESCOLARES = [
+  "Português", "Matemática", "Ciências", "História", "Geografia", "Inglês",
+  "Arte", "Ensino Religioso", "Filosofia",
+] as const;
+
+function normalizarMateria(valor: string): string {
+  return valor.toLocaleLowerCase("pt-BR").normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "").trim();
+}
+
+const CONTEUDOS_QUE_NAO_SAO_MATERIA = new Set([
+  "verbo", "verbos", "fracao", "fracoes", "tabuada", "equacao", "equacoes",
+  "sistema solar", "mata atlantica", "interpretacao de texto", "conjugacao",
+]);
+
 function dataValida(data: string): boolean {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(data)) return false;
   const [ano, mes, dia] = data.split("-").map(Number);
@@ -62,6 +77,11 @@ export function validarMissaoEscolar(
   }
   if (rascunho.materia.trim().length < 2) {
     erros.push({ campo: "materia", mensagem: "Informe a matéria." });
+  } else if (CONTEUDOS_QUE_NAO_SAO_MATERIA.has(normalizarMateria(rascunho.materia))) {
+    erros.push({
+      campo: "materia",
+      mensagem: `“${rascunho.materia.trim()}” é o conteúdo. No campo Matéria, informe por exemplo Português, Inglês ou Matemática.`,
+    });
   }
   if (!rascunho.conteudos.some((conteudo) => conteudo.trim().length >= 2)) {
     erros.push({ campo: "conteudos", mensagem: "Informe o conteúdo que precisa ser estudado." });
@@ -84,7 +104,16 @@ export function criarConsultaExataRecursos(rascunho: RascunhoMissaoEscolar): str
     .filter(Boolean)
     .join(" ");
   const serie = rascunho.serie?.trim() ? ` ${rascunho.serie.trim()}` : "";
-  return `${conteudos} ${rascunho.materia.trim()}${serie} aula explicada exercícios`.trim();
+  const materia = rascunho.materia.trim();
+  const materiaNormalizada = normalizarMateria(materia);
+  const contextoIdioma = materiaNormalizada === "portugues"
+    ? "gramática língua portuguesa Brasil"
+    : materiaNormalizada === "ingles"
+      ? "English inglês"
+      : "";
+  return [conteudos, materia, contextoIdioma, serie.trim(), "aula explicada exercícios"]
+    .filter(Boolean)
+    .join(" ");
 }
 
 export function criarContextoTutor(rascunho: RascunhoMissaoEscolar): string {
