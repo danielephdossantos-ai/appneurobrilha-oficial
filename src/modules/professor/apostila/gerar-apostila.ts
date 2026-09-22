@@ -9,6 +9,7 @@
  */
 
 import type { Aula } from "@/escola-brilha/types";
+import { paginasMatematica } from "./gerar-apostila-matematica";
 
 export type ApostilaImagem = { url: string; legenda?: string };
 export type ApostilaItemVisual = ApostilaImagem | { texto: string };
