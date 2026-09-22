@@ -357,6 +357,85 @@ function Bloco({ bloco }: { bloco: ApostilaBloco }) {
           </div>
         </div>
       )}
+      {bloco.tipo === "contar-marcar" && (
+        <div className="mt-6">
+          <p className="max-w-[150mm] text-left text-[16pt] font-semibold leading-relaxed">{bloco.comando}</p>
+          <div className="mt-7 space-y-6">
+            {bloco.itens.map((item, index) => (
+              <div key={`${item.imagem.url}-${index}`} className="break-inside-avoid rounded-md border-2 border-foreground/70 p-3">
+                <div className="flex flex-wrap items-center gap-2">
+                  {Array.from({ length: item.quantidade }).map((_, i) => (
+                    <img key={i} src={item.imagem.url} alt="" className="h-14 w-14 object-contain" />
+                  ))}
+                </div>
+                <div className="mt-3 grid grid-cols-3 gap-4">
+                  {item.opcoes.map((opcao) => (
+                    <div key={opcao} className="flex min-h-14 items-center justify-center gap-3 rounded-md border-2 border-foreground/60 text-[24pt] font-bold">
+                      <span className="h-6 w-6 border-2 border-foreground" />
+                      {opcao}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      {bloco.tipo === "sequencia-numerica" && (
+        <div className="mt-6">
+          <p className="max-w-[150mm] text-left text-[16pt] font-semibold leading-relaxed">{bloco.comando}</p>
+          <div className="mt-8 space-y-8">
+            {bloco.linhas.map((linha, index) => (
+              <div key={index} className="flex items-center gap-4">
+                {linha.map((celula, i) =>
+                  celula === "_" ? (
+                    <span key={i} className="h-20 w-20 rounded-md border-2 border-dashed border-foreground" />
+                  ) : (
+                    <span key={i} className="flex h-20 w-20 items-center justify-center rounded-md border-2 border-foreground text-[28pt] font-bold">
+                      {celula}
+                    </span>
+                  ),
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      {bloco.tipo === "conta-visual" && (
+        <div className="mt-6">
+          <p className="max-w-[150mm] text-left text-[16pt] font-semibold leading-relaxed">{bloco.comando}</p>
+          <div className="mt-7 space-y-7">
+            {bloco.itens.map((item, index) => (
+              <div key={`${item.imagem.url}-${index}`} className="break-inside-avoid rounded-md border-2 border-foreground/70 p-3">
+                <div className="flex flex-wrap items-center gap-2 text-[26pt] font-bold">
+                  {Array.from({ length: item.a }).map((_, i) => (
+                    <img key={`a-${i}`} src={item.imagem.url} alt="" className="h-14 w-14 object-contain" />
+                  ))}
+                  <span className="px-2">{item.sinal}</span>
+                  {Array.from({ length: item.b }).map((_, i) => (
+                    <img key={`b-${i}`} src={item.imagem.url} alt="" className="h-14 w-14 object-contain" />
+                  ))}
+                  <span className="px-2">=</span>
+                  <span className="inline-block h-16 w-24 border-2 border-foreground" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      {bloco.tipo === "desenhar-quantidade" && (
+        <div className="mt-6">
+          <p className="max-w-[150mm] text-left text-[16pt] font-semibold leading-relaxed">{bloco.comando}</p>
+          <div className="mt-8 grid grid-cols-2 gap-6">
+            {bloco.itens.map((item, index) => (
+              <div key={index} className="break-inside-avoid">
+                <p className="text-[18pt] font-bold">{item.rotulo ?? `Desenhe ${item.quantidade}`}</p>
+                <div className="mt-2 h-40 rounded-md border-2 border-foreground" />
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
       {bloco.tipo === "alternativas" && (
         <ol className="mt-2 space-y-4">
           {bloco.questoes.map((q, i) => (
