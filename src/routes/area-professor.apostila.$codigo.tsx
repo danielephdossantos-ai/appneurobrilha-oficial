@@ -82,7 +82,7 @@ function ApostilaImprimir() {
     requestAnimationFrame(() => requestAnimationFrame(() => window.print()));
   }
 
-  if (!aula || !apostila)
+  if (!apostila)
     return (
       <Shell>
         <main className="p-8 text-center">
