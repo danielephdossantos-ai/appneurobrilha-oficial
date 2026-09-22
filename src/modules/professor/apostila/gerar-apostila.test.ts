@@ -46,7 +46,7 @@ describe("apostila A4 da área do professor", () => {
       "tracado",
       "marcar-figura",
       "procurar-letras",
-      "colorir-inicial",
+      "completar-unidade",
     ]);
   });
 
@@ -111,5 +111,29 @@ describe("apostila A4 da área do professor", () => {
       expect(folhas, codigo).not.toContain(codigo);
       expect(folhas, codigo).not.toMatch(/BNCC|NeuroBrilha|escute|ouça|toque na|aplicativo|gabarito/i);
     }
+  });
+
+  it("não usa atividade de pintar nas 26 apostilas", () => {
+    for (const codigo of codigosPrimeiroAno) {
+      const aulaAtual = getAula(codigo);
+      if (!aulaAtual) continue;
+      const folhas = JSON.stringify(gerarApostila(aulaAtual).paginas.filter((pagina) => pagina.etiqueta === "Folha do estudante"));
+      expect(folhas, codigo).not.toMatch(/pinte|pintar|colorir|colorir-inicial/i);
+    }
+  });
+
+  it("varia os formatos conforme o conteúdo da aula", () => {
+    const tiposPorAula = new Set<string>();
+    for (const codigo of ["EF01LP02", "EF01LP11", "EF01LP14", "EF01LP18"]) {
+      const aulaAtual = getAula(codigo);
+      if (!aulaAtual) continue;
+      const tipos = gerarApostila(aulaAtual)
+        .paginas
+        .filter((pagina) => pagina.etiqueta === "Folha do estudante")
+        .flatMap((pagina) => pagina.blocos.map((bloco) => bloco.tipo))
+        .join(",");
+      tiposPorAula.add(tipos);
+    }
+    expect(tiposPorAula.size).toBeGreaterThan(1);
   });
 });

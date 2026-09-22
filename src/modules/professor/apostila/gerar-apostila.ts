@@ -9,15 +9,6 @@
  */
 
 import type { Aula } from "@/escola-brilha/types";
-import bolaColorir from "@/assets/apostila/ef01lp01/bola-colorir.png";
-import casaColorir from "@/assets/apostila/ef01lp01/casa-colorir.png";
-import dadoColorir from "@/assets/apostila/ef01lp01/dado-colorir.png";
-import gatoColorir from "@/assets/apostila/ef01lp01/gato-colorir.png";
-import patoColorir from "@/assets/apostila/ef01lp01/pato-colorir.png";
-import ratoColorir from "@/assets/apostila/ef01lp01/rato-colorir.png";
-import sapoColorir from "@/assets/apostila/ef01lp01/sapo-colorir.png";
-import solColorir from "@/assets/apostila/ef01lp01/sol-colorir.png";
-import vacaColorir from "@/assets/apostila/ef01lp01/vaca-colorir.png";
 
 export type ApostilaImagem = { url: string; legenda?: string };
 export type ApostilaItemVisual = ApostilaImagem | { texto: string };
@@ -72,10 +63,28 @@ export type ApostilaBloco =
       alvos: string[];
     }
   | {
-      tipo: "colorir-inicial";
+      tipo: "completar-unidade";
       titulo?: string;
       comando: string;
-      itens: Array<{ imagem: ApostilaImagem; inicial: string; rotulo?: string }>;
+      itens: Array<{ imagem: ApostilaImagem; antes?: string; depois?: string; dica?: string }>;
+    }
+  | {
+      tipo: "montar-palavra";
+      titulo?: string;
+      comando: string;
+      itens: Array<{ imagem: ApostilaImagem; partes: string[]; espacos: number }>;
+    }
+  | {
+      tipo: "separar-partes";
+      titulo?: string;
+      comando: string;
+      itens: Array<{ imagem: ApostilaImagem; palavra: string; opcoes: string[] }>;
+    }
+  | {
+      tipo: "ordenar-frase";
+      titulo?: string;
+      comando: string;
+      itens: Array<{ imagem: ApostilaImagem; palavras: string[] }>;
     }
   | {
       tipo: "alternativas";
@@ -190,19 +199,9 @@ function imagemComLegenda(imagens: ApostilaImagem[], legenda: string): ApostilaI
 }
 
 function paginasInfantisEF01LP01(imagens: ApostilaImagem[]): ApostilaPagina[] | null {
-  const imagensOriginais = ["gato", "sol", "bola", "pato", "sapo", "casa", "rato", "vaca", "dado"]
+  const [gato, sol, bola, pato, sapo, casa, rato, vaca, dado] = ["gato", "sol", "bola", "pato", "sapo", "casa", "rato", "vaca", "dado"]
     .map((legenda) => imagemComLegenda(imagens, legenda));
-  if (imagensOriginais.some((imagem) => !imagem)) return null;
-
-  const gato = { url: gatoColorir, legenda: "gato" };
-  const sol = { url: solColorir, legenda: "sol" };
-  const bola = { url: bolaColorir, legenda: "bola" };
-  const pato = { url: patoColorir, legenda: "pato" };
-  const sapo = { url: sapoColorir, legenda: "sapo" };
-  const casa = { url: casaColorir, legenda: "casa" };
-  const rato = { url: ratoColorir, legenda: "rato" };
-  const vaca = { url: vacaColorir, legenda: "vaca" };
-  const dado = { url: dadoColorir, legenda: "dado" };
+  if (!gato || !sol || !bola || !pato || !sapo || !casa || !rato || !vaca || !dado) return null;
 
   return [
     {
@@ -250,7 +249,7 @@ function paginasInfantisEF01LP01(imagens: ApostilaImagem[]): ApostilaPagina[] | 
       blocos: [
         {
           tipo: "tracado",
-          comando: "Cubra os pontilhados e pinte o desenho.",
+          comando: "Cubra os pontilhados com capricho.",
           itens: ["G", "B", "P", "S"],
           repeticoes: 5,
           imagens: { G: gato, B: bola, P: pato, S: sol },
@@ -286,16 +285,16 @@ function paginasInfantisEF01LP01(imagens: ApostilaImagem[]): ApostilaPagina[] | 
     },
     {
       etiqueta: "Folha do estudante",
-      titulo: "Atividade 7 — Pinte e complete",
+      titulo: "Atividade 7 — Complete as palavras",
       blocos: [
         {
-          tipo: "colorir-inicial",
-          comando: "Pinte as figuras e escreva a primeira letra.",
+          tipo: "completar-unidade",
+          comando: "Complete com a primeira letra.",
           itens: [
-            { imagem: gato, inicial: "G" },
-            { imagem: sol, inicial: "S" },
-            { imagem: bola, inicial: "B" },
-            { imagem: pato, inicial: "P" },
+            { imagem: gato, depois: "ATO" },
+            { imagem: sol, depois: "OL" },
+            { imagem: bola, depois: "OLA" },
+            { imagem: pato, depois: "ATO" },
           ],
         },
       ],
@@ -351,6 +350,75 @@ function misturarGrade(alvos: string[], distratores: string[]): string[] {
   return grade;
 }
 
+function partesDaUnidade(unidade: string, foco: ConfigApostila["foco"]): string[] {
+  if (foco === "frase") return unidade.replace(/[.?!]/g, "").split(/\s+/).filter(Boolean);
+  if (foco === "palavra") return unidade.split("");
+  if (foco === "silaba") return unidade.split("");
+  return [unidade];
+}
+
+function lacunaDaUnidade(unidade: string, foco: ConfigApostila["foco"]): { antes?: string; depois?: string; dica?: string } {
+  if (foco === "frase") {
+    const palavras = unidade.replace(/[.?!]/g, "").split(/\s+/).filter(Boolean);
+    return { antes: `${palavras.slice(0, -1).join(" ")} `, depois: unidade.endsWith(".") ? "." : "", dica: "palavra" };
+  }
+  if (foco === "palavra") return { antes: unidade.slice(0, 1), depois: unidade.slice(2), dica: unidade.slice(1, 2) || "" };
+  if (foco === "silaba") return { depois: unidade.slice(1), dica: unidade.slice(0, 1) };
+  return { depois: unidade.slice(1), dica: unidade.slice(0, 1) };
+}
+
+function paginasSom(config: ConfigApostila, escolhas: Array<ItemConteudo & { imagem: ApostilaImagem }>, alvosUnicos: string[], imagensTracado: Record<string, ApostilaImagem>): ApostilaPagina[] {
+  const opcoes = (certa: string, indice: number) => [certa, config.distratores[indice % config.distratores.length] ?? "A", config.distratores[(indice + 1) % config.distratores.length] ?? "O"];
+  return [
+    { etiqueta: "Folha do estudante", titulo: "Atividade 1 — Descubra o começo", blocos: [{ tipo: "escolha-visual", comando: "Circule as figuras que começam como o modelo.", modelo: escolhas[0].imagem, imagens: escolhas.slice(1).map((item) => item.imagem) }] },
+    { etiqueta: "Folha do estudante", titulo: "Atividade 2 — Marque a letra", blocos: [{ tipo: "marcar-som", comando: "Marque a letra que combina com o começo de cada figura.", itens: escolhas.slice(0, 3).map((item, index) => ({ imagem: item.imagem, opcoes: opcoes(item.unidade, index) })) }] },
+    { etiqueta: "Folha do estudante", titulo: "Atividade 3 — Ligue cada figura", blocos: [{ tipo: "ligar-imagens", comando: "Ligue cada letra à figura que começa com ela.", esquerda: escolhas.map((item) => ({ texto: item.unidade })), direita: [...escolhas].reverse().map((item) => item.imagem) }] },
+    { etiqueta: "Folha do estudante", titulo: "Atividade 4 — Cubra o pontilhado", blocos: [{ tipo: "tracado", comando: "Cubra os pontilhados com capricho.", itens: alvosUnicos.slice(0, 4), repeticoes: 5, imagens: imagensTracado }] },
+    { etiqueta: "Folha do estudante", titulo: "Atividade 5 — Complete a palavra", blocos: [{ tipo: "completar-unidade", comando: "Escreva a letra que falta no começo.", itens: escolhas.map((item) => ({ imagem: item.imagem, depois: item.figura.toUpperCase().slice(1), dica: item.unidade })) }] },
+    { etiqueta: "Folha do estudante", titulo: "Atividade 6 — Procure as letras", blocos: [{ tipo: "procurar-letras", comando: `Procure e circule: ${alvosUnicos.join(", ")}.`, alvos: alvosUnicos, letras: misturarGrade(alvosUnicos, config.distratores) }] },
+    { etiqueta: "Folha do estudante", titulo: "Atividade 7 — Monte com letras", blocos: [{ tipo: "montar-palavra", comando: "Organize as letras para formar o nome da figura.", itens: escolhas.slice(0, 4).map((item) => ({ imagem: item.imagem, partes: item.figura.toUpperCase().split("").reverse(), espacos: item.figura.length })) }] },
+  ];
+}
+
+function paginasSilaba(config: ConfigApostila, escolhas: Array<ItemConteudo & { imagem: ApostilaImagem }>, alvosUnicos: string[], imagensTracado: Record<string, ApostilaImagem>): ApostilaPagina[] {
+  const opcoes = (certa: string, indice: number) => [certa, config.distratores[indice % config.distratores.length] ?? "LA", config.distratores[(indice + 1) % config.distratores.length] ?? "BA"];
+  return [
+    { etiqueta: "Folha do estudante", titulo: "Atividade 1 — Bata palmas", blocos: [{ tipo: "separar-partes", comando: "Fale o nome da figura, bata palmas e marque quantas partes você ouviu.", itens: escolhas.slice(0, 4).map((item) => ({ imagem: item.imagem, palavra: item.figura.toUpperCase(), opcoes: ["1", "2", "3"] })) }] },
+    { etiqueta: "Folha do estudante", titulo: "Atividade 2 — Marque a sílaba", blocos: [{ tipo: "marcar-som", comando: "Marque a sílaba que aparece na palavra.", itens: escolhas.slice(0, 3).map((item, index) => ({ imagem: item.imagem, opcoes: opcoes(item.unidade, index) })) }] },
+    { etiqueta: "Folha do estudante", titulo: "Atividade 3 — Ligue palavra e figura", blocos: [{ tipo: "ligar-imagens", comando: "Ligue a palavra à figura correspondente.", esquerda: escolhas.map((item) => ({ texto: item.figura.toUpperCase() })), direita: [...escolhas].reverse().map((item) => item.imagem) }] },
+    { etiqueta: "Folha do estudante", titulo: "Atividade 4 — Cubra as sílabas", blocos: [{ tipo: "tracado", comando: "Cubra os pontilhados com capricho.", itens: alvosUnicos.slice(0, 4), repeticoes: 4, imagens: imagensTracado }] },
+    { etiqueta: "Folha do estudante", titulo: "Atividade 5 — Complete a sílaba", blocos: [{ tipo: "completar-unidade", comando: "Escreva a parte que falta.", itens: escolhas.map((item) => ({ imagem: item.imagem, ...lacunaDaUnidade(item.unidade, "silaba") })) }] },
+    { etiqueta: "Folha do estudante", titulo: "Atividade 6 — Caça-sílabas", blocos: [{ tipo: "procurar-letras", comando: `Procure e circule: ${alvosUnicos.join(", ")}.`, alvos: alvosUnicos, letras: misturarGrade(alvosUnicos, config.distratores) }] },
+    { etiqueta: "Folha do estudante", titulo: "Atividade 7 — Monte a palavra", blocos: [{ tipo: "montar-palavra", comando: "Use as letras para montar o nome da figura.", itens: escolhas.slice(0, 4).map((item) => ({ imagem: item.imagem, partes: partesDaUnidade(item.figura.toUpperCase(), "palavra"), espacos: item.figura.length })) }] },
+  ];
+}
+
+function paginasPalavra(config: ConfigApostila, escolhas: Array<ItemConteudo & { imagem: ApostilaImagem }>, alvosUnicos: string[], imagensTracado: Record<string, ApostilaImagem>): ApostilaPagina[] {
+  const questoes = escolhas.slice(0, 3).map((item, index) => ({ pergunta: `${index + 1}. Marque a figura de ${item.unidade}.`, imagens: [item.imagem, ...escolhas.filter((outro) => outro.figura !== item.figura).slice(0, 2).map((outro) => outro.imagem)] }));
+  return [
+    { etiqueta: "Folha do estudante", titulo: "Atividade 1 — Palavra e figura", blocos: [{ tipo: "ligar-imagens", comando: "Ligue cada palavra à sua figura.", esquerda: escolhas.map((item) => ({ texto: item.unidade })), direita: [...escolhas].reverse().map((item) => item.imagem) }] },
+    { etiqueta: "Folha do estudante", titulo: "Atividade 2 — Marque a figura", blocos: [{ tipo: "marcar-figura", comando: "Marque uma resposta em cada atividade.", questoes }] },
+    { etiqueta: "Folha do estudante", titulo: "Atividade 3 — Complete a palavra", blocos: [{ tipo: "completar-unidade", comando: "Complete a parte que falta.", itens: escolhas.map((item) => ({ imagem: item.imagem, ...lacunaDaUnidade(item.unidade, "palavra") })) }] },
+    { etiqueta: "Folha do estudante", titulo: "Atividade 4 — Cubra a palavra", blocos: [{ tipo: "tracado", comando: "Cubra os pontilhados e depois copie no espaço.", itens: alvosUnicos.slice(0, 4), repeticoes: 2, imagens: imagensTracado }] },
+    { etiqueta: "Folha do estudante", titulo: "Atividade 5 — Caça-palavras", blocos: [{ tipo: "procurar-letras", comando: `Procure e circule: ${alvosUnicos.join(", ")}.`, alvos: alvosUnicos, letras: misturarGrade(alvosUnicos, config.distratores) }] },
+    { etiqueta: "Folha do estudante", titulo: "Atividade 6 — Monte a palavra", blocos: [{ tipo: "montar-palavra", comando: "Organize as letras para formar o nome da figura.", itens: escolhas.slice(0, 4).map((item) => ({ imagem: item.imagem, partes: partesDaUnidade(item.unidade, "palavra").reverse(), espacos: item.unidade.length })) }] },
+    { etiqueta: "Folha do estudante", titulo: "Atividade 7 — Escreva do seu jeito", blocos: [{ tipo: "linhas", enunciado: "Escolha duas figuras da folha e escreva as palavras.", linhas: 5 }] },
+  ];
+}
+
+function paginasFrase(config: ConfigApostila, escolhas: Array<ItemConteudo & { imagem: ApostilaImagem }>, alvosUnicos: string[], imagensTracado: Record<string, ApostilaImagem>): ApostilaPagina[] {
+  const questoes = escolhas.slice(0, 3).map((item, index) => ({ pergunta: `${index + 1}. Marque a figura da frase: ${item.unidade}`, imagens: [item.imagem, ...escolhas.filter((outro) => outro.figura !== item.figura).slice(0, 2).map((outro) => outro.imagem)] }));
+  return [
+    { etiqueta: "Folha do estudante", titulo: "Atividade 1 — Ordene a frase", blocos: [{ tipo: "ordenar-frase", comando: "Organize as palavras e copie a frase na linha.", itens: escolhas.slice(0, 3).map((item) => ({ imagem: item.imagem, palavras: partesDaUnidade(item.unidade, "frase").reverse() })) }] },
+    { etiqueta: "Folha do estudante", titulo: "Atividade 2 — Frase e figura", blocos: [{ tipo: "marcar-figura", comando: "Marque a figura que combina com cada frase.", questoes }] },
+    { etiqueta: "Folha do estudante", titulo: "Atividade 3 — Complete a frase", blocos: [{ tipo: "completar-unidade", comando: "Escreva a palavra que falta.", itens: escolhas.slice(0, 3).map((item) => ({ imagem: item.imagem, ...lacunaDaUnidade(item.unidade, "frase") })) }] },
+    { etiqueta: "Folha do estudante", titulo: "Atividade 4 — Copie com atenção", blocos: [{ tipo: "tracado", comando: "Cubra os pontilhados e copie a frase no espaço.", itens: escolhas.slice(0, 3).map((item) => item.unidade), repeticoes: 1, imagens: imagensTracado }] },
+    { etiqueta: "Folha do estudante", titulo: "Atividade 5 — Procure palavras", blocos: [{ tipo: "procurar-letras", comando: `Procure e circule: ${alvosUnicos.join(", ")}.`, alvos: alvosUnicos, letras: misturarGrade(alvosUnicos, config.distratores) }] },
+    { etiqueta: "Folha do estudante", titulo: "Atividade 6 — Ligue a frase", blocos: [{ tipo: "ligar-imagens", comando: "Ligue cada frase à figura correspondente.", esquerda: escolhas.map((item) => ({ texto: item.unidade })), direita: [...escolhas].reverse().map((item) => item.imagem) }] },
+    { etiqueta: "Folha do estudante", titulo: "Atividade 7 — Escreva uma frase", blocos: [{ tipo: "linhas", enunciado: "Escolha uma figura e escreva uma frase curta.", linhas: 5 }] },
+  ];
+}
+
 function paginasInfantisPadrao(aula: Aula, imagens: ApostilaImagem[]): ApostilaPagina[] | null {
   const config = CONFIGS_APOSTILA[aula.codigo];
   if (!config) return null;
@@ -359,15 +427,8 @@ function paginasInfantisPadrao(aula: Aula, imagens: ApostilaImagem[]): ApostilaP
     .filter((item): item is ItemConteudo & { imagem: ApostilaImagem } => Boolean(item.imagem));
   if (itens.length < 3) return null;
 
-  const rotuloUnidade = config.foco === "som" ? "letra" : config.foco === "silaba" ? "sílaba" : config.foco === "palavra" ? "palavra" : "frase";
   const alvosUnicos = [...new Set(config.grade)];
   const escolhas = itens.slice(0, 4);
-  const perguntasFigura = escolhas.slice(0, 3).map((item, index) => ({
-    pergunta: `${index + 1}. Marque a figura de ${item.unidade}.`,
-    imagens: [item.imagem, ...escolhas.filter((outro) => outro.figura !== item.figura).slice(0, 2).map((outro) => outro.imagem)],
-  }));
-  const opcoes = (certa: string, indice: number) => [certa, config.distratores[indice % config.distratores.length] ?? "A", config.distratores[(indice + 1) % config.distratores.length] ?? "O"];
-
   const imagensTracado = Object.fromEntries(
     alvosUnicos.slice(0, 4).flatMap((alvo) => {
       const imagem = itens.find((item) => item.unidade === alvo)?.imagem;
@@ -375,43 +436,10 @@ function paginasInfantisPadrao(aula: Aula, imagens: ApostilaImagem[]): ApostilaP
     }),
   );
 
-  return [
-    {
-      etiqueta: "Folha do estudante",
-      titulo: "Atividade 1 — Observe e marque",
-      blocos: [{ tipo: "escolha-visual", comando: config.foco === "som" ? "Circule todas as figuras que começam como o modelo." : `Circule a figura de ${escolhas[1]?.unidade ?? escolhas[0].unidade}.`, modelo: escolhas[0].imagem, imagens: escolhas.slice(1).map((item) => item.imagem) }],
-    },
-    {
-      etiqueta: "Folha do estudante",
-      titulo: `Atividade 2 — Marque a ${rotuloUnidade}`,
-      blocos: [{ tipo: "marcar-som", comando: `Marque a ${rotuloUnidade} que combina com cada figura.`, itens: escolhas.slice(0, 3).map((item, index) => ({ imagem: item.imagem, opcoes: opcoes(item.unidade, index) })) }],
-    },
-    {
-      etiqueta: "Folha do estudante",
-      titulo: "Atividade 3 — Ligue cada figura",
-      blocos: [{ tipo: "ligar-imagens", comando: `Ligue cada ${rotuloUnidade} à figura correspondente.`, esquerda: escolhas.map((item) => ({ texto: item.unidade })), direita: [...escolhas].reverse().map((item) => item.imagem) }],
-    },
-    {
-      etiqueta: "Folha do estudante",
-      titulo: "Atividade 4 — Cubra o pontilhado",
-      blocos: [{ tipo: "tracado", comando: "Cubra os pontilhados e pinte os desenhos.", itens: alvosUnicos.slice(0, 4), repeticoes: config.foco === "frase" ? 2 : 5, imagens: imagensTracado }],
-    },
-    {
-      etiqueta: "Folha do estudante",
-      titulo: "Atividade 5 — Marque a resposta correta",
-      blocos: [{ tipo: "marcar-figura", comando: "Marque uma resposta em cada atividade.", questoes: perguntasFigura }],
-    },
-    {
-      etiqueta: "Folha do estudante",
-      titulo: `Atividade 6 — Procure ${config.foco === "som" ? "as letras" : "as partes estudadas"}`,
-      blocos: [{ tipo: "procurar-letras", comando: `Procure e circule: ${alvosUnicos.join(", ")}.`, alvos: alvosUnicos, letras: misturarGrade(alvosUnicos, config.distratores) }],
-    },
-    {
-      etiqueta: "Folha do estudante",
-      titulo: "Atividade 7 — Pinte e escreva",
-      blocos: [{ tipo: "colorir-inicial", comando: `Pinte as figuras e escreva a ${rotuloUnidade}.`, itens: escolhas.map((item) => ({ imagem: item.imagem, inicial: item.unidade, rotulo: rotuloUnidade })) }],
-    },
-  ];
+  if (config.foco === "som") return paginasSom(config, escolhas, alvosUnicos, imagensTracado);
+  if (config.foco === "silaba") return paginasSilaba(config, escolhas, alvosUnicos, imagensTracado);
+  if (config.foco === "palavra") return paginasPalavra(config, escolhas, alvosUnicos, imagensTracado);
+  return paginasFrase(config, escolhas, alvosUnicos, imagensTracado);
 }
 
 /** Adaptações impressas — orientação docente fixa, não gerada por IA. */
