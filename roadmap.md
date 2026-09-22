@@ -8,5 +8,5 @@
 - [x] Separar níveis de apoio e formas alternativas de resposta
 - [x] Atualizar impressão, gabarito e testes
 - [x] Validar no desktop e impressão A4; atividade mantém estrutura fluida no celular
-- [ ] Replicar o padrão premium aprovado em EF01LP02–EF01LP26
-- [ ] Validar as 26 apostilas e revisar amostras em impressão A4
+- [x] Replicar o padrão premium aprovado em EF01LP02–EF01LP26
+- [x] Validar as 26 apostilas e revisar amostras em impressão A4

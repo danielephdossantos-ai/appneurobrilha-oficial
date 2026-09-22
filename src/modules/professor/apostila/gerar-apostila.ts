@@ -312,7 +312,7 @@ type ConfigApostila = {
 };
 
 const CONFIGS_APOSTILA: Record<string, ConfigApostila> = {
-  EF01LP02: { foco: "som", itens: [{ unidade: "S", figura: "sapo" }, { unidade: "P", figura: "pato" }, { unidade: "B", figura: "bola" }, { unidade: "G", figura: "gato" }], distratores: ["M", "L", "R"], grade: ["S", "P", "B", "G"] },
+  EF01LP02: { foco: "som", itens: [{ unidade: "S", figura: "sapo" }, { unidade: "S", figura: "sopa" }, { unidade: "P", figura: "pato" }, { unidade: "G", figura: "gato" }], distratores: ["M", "L", "B"], grade: ["S", "P", "G"] },
   EF01LP03: { foco: "som", itens: [{ unidade: "A", figura: "abelha" }, { unidade: "E", figura: "escola" }, { unidade: "I", figura: "ioio" }, { unidade: "O", figura: "ovelha" }, { unidade: "U", figura: "ursinho" }], distratores: ["M", "S", "P"], grade: ["A", "E", "I", "O", "U"] },
   EF01LP04: { foco: "som", itens: [{ unidade: "M", figura: "mae" }, { unidade: "M", figura: "maca" }, { unidade: "M", figura: "mapa" }, { unidade: "M", figura: "mochila" }], distratores: ["S", "B", "G"], grade: ["M"] },
   EF01LP05: { foco: "som", itens: [{ unidade: "S", figura: "sol" }, { unidade: "S", figura: "sapo" }, { unidade: "S", figura: "sopa" }, { unidade: "S", figura: "suco" }], distratores: ["M", "B", "P"], grade: ["S"] },
@@ -368,11 +368,18 @@ function paginasInfantisPadrao(aula: Aula, imagens: ApostilaImagem[]): ApostilaP
   }));
   const opcoes = (certa: string, indice: number) => [certa, config.distratores[indice % config.distratores.length] ?? "A", config.distratores[(indice + 1) % config.distratores.length] ?? "O"];
 
+  const imagensTracado = Object.fromEntries(
+    alvosUnicos.slice(0, 4).flatMap((alvo) => {
+      const imagem = itens.find((item) => item.unidade === alvo)?.imagem;
+      return imagem ? [[alvo, imagem] as const] : [];
+    }),
+  );
+
   return [
     {
       etiqueta: "Folha do estudante",
       titulo: "Atividade 1 — Observe e marque",
-      blocos: [{ tipo: "escolha-visual", comando: `Circule a figura que combina com o modelo.`, modelo: escolhas[0].imagem, imagens: escolhas.slice(1).map((item) => item.imagem) }],
+      blocos: [{ tipo: "escolha-visual", comando: config.foco === "som" ? "Circule todas as figuras que começam como o modelo." : `Circule a figura de ${escolhas[1]?.unidade ?? escolhas[0].unidade}.`, modelo: escolhas[0].imagem, imagens: escolhas.slice(1).map((item) => item.imagem) }],
     },
     {
       etiqueta: "Folha do estudante",
@@ -387,7 +394,7 @@ function paginasInfantisPadrao(aula: Aula, imagens: ApostilaImagem[]): ApostilaP
     {
       etiqueta: "Folha do estudante",
       titulo: "Atividade 4 — Cubra o pontilhado",
-      blocos: [{ tipo: "tracado", comando: "Cubra os pontilhados e pinte os desenhos.", itens: alvosUnicos.slice(0, 4), repeticoes: config.foco === "frase" ? 2 : 5, imagens: Object.fromEntries(alvosUnicos.slice(0, 4).map((alvo) => [alvo, itens.find((item) => item.unidade === alvo)?.imagem ?? escolhas[0].imagem])) }],
+      blocos: [{ tipo: "tracado", comando: "Cubra os pontilhados e pinte os desenhos.", itens: alvosUnicos.slice(0, 4), repeticoes: config.foco === "frase" ? 2 : 5, imagens: imagensTracado }],
     },
     {
       etiqueta: "Folha do estudante",
