@@ -163,4 +163,17 @@ describe("Matemática do 1º ano", () => {
       }
     }
   });
+
+  it("informa o número e o que desenhar nas atividades de quantidade", () => {
+    for (const aula of aulasMat) {
+      const blocos = gerarApostila(aula).paginas.flatMap((pagina) => pagina.blocos);
+      for (const bloco of blocos) {
+        if (bloco.tipo !== "desenhar-quantidade") continue;
+        for (const item of bloco.itens) {
+          expect(item.rotulo, aula.codigo).toMatch(new RegExp(`^Desenhe ${item.quantidade} \\S+`, "i"));
+          expect(item.objeto, aula.codigo).toBeTruthy();
+        }
+      }
+    }
+  });
 });

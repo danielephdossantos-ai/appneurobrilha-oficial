@@ -125,7 +125,7 @@ export type ApostilaBloco =
       tipo: "desenhar-quantidade";
       titulo?: string;
       comando: string;
-      itens: Array<{ quantidade: number; rotulo?: string }>;
+      itens: Array<{ quantidade: number; rotulo?: string; objeto?: string }>;
     }
   | {
       tipo: "alternativas";

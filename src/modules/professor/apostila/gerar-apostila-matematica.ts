@@ -76,6 +76,20 @@ function grupo(imagem: ApostilaImagem, quantidade: number) {
   return { ...imagem, quantidade };
 }
 
+function nomeNoPlural(imagem: ApostilaImagem | undefined): string {
+  const nome = (imagem?.legenda ?? "bolinha")
+    .replace(/\.(png|jpe?g|webp|svg)$/i, "")
+    .trim()
+    .toLowerCase();
+  if (!nome) return "bolinhas";
+  if (/ões$|ães$|ãos$|ais$|eis$|ois$|uis$|is$|ns$|res$|zes$|s$/i.test(nome)) return nome;
+  if (nome.endsWith("ão")) return `${nome.slice(0, -2)}ões`;
+  if (nome.endsWith("ã")) return `${nome}s`;
+  if (nome.endsWith("m")) return `${nome.slice(0, -1)}ns`;
+  if (/[rz]$/.test(nome)) return `${nome}es`;
+  return `${nome}s`;
+}
+
 /** Acha a figura cujo nome/arquivo corresponde à palavra (sem inventar pares). */
 function figuraDaPalavra(imagens: ApostilaImagem[], palavra: string): ApostilaImagem | undefined {
   const chave = palavra
@@ -156,8 +170,11 @@ function paginasContagem(config: ConfigMat, imgs: ApostilaImagem[]): ApostilaPag
     folha("Atividade 5 — Desenhe a quantidade", [
       {
         tipo: "desenhar-quantidade",
-        comando: "Desenhe no quadro a quantidade pedida.",
-        itens: config.numeros.slice(0, 4).map((quantidade) => ({ quantidade })),
+        comando: "Leia o número e desenhe exatamente a quantidade pedida em cada quadro.",
+        itens: config.numeros.slice(0, 4).map((quantidade, index) => {
+          const objeto = nomeNoPlural(imgs[index % imgs.length]);
+          return { quantidade, objeto, rotulo: `Desenhe ${quantidade} ${objeto}` };
+        }),
       },
     ]),
     folha("Atividade 6 — Procure os números", [

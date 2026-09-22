@@ -494,8 +494,12 @@ function Bloco({ bloco }: { bloco: ApostilaBloco }) {
           <p className="max-w-[150mm] text-left text-[16pt] font-semibold leading-relaxed">{bloco.comando}</p>
           <div className="mt-8 grid grid-cols-2 gap-6">
             {bloco.itens.map((item, index) => (
-              <div key={index} className="break-inside-avoid">
-                <p className="text-[18pt] font-bold">{item.rotulo ?? `Desenhe ${item.quantidade}`}</p>
+              <div key={index} className="break-inside-avoid rounded-md border-2 border-foreground p-4">
+                <p className="flex items-baseline gap-3 text-[18pt] font-bold">
+                  <span>Desenhe</span>
+                  <strong className="text-[30pt] leading-none">{item.quantidade}</strong>
+                  <span>{item.objeto ?? item.rotulo?.replace(new RegExp(`^Desenhe\\s+${item.quantidade}\\s*`, "i"), "")}</span>
+                </p>
                 <div className="mt-2 h-40 rounded-md border-2 border-foreground" />
               </div>
             ))}
