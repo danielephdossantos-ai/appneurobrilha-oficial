@@ -29,6 +29,7 @@ export type ApostilaBloco =
       atividade: string;
       imagens: ApostilaImagem[];
       quantidade?: number;
+      grupos?: Array<{ imagem: ApostilaImagem; quantidade: number; rotulo?: string }>;
     }
   | { tipo: "contagem"; titulo?: string; imagem: string; quantidade: number; rotulo?: string }
   | { tipo: "linhas"; titulo?: string; enunciado: string; linhas: number }
@@ -262,8 +263,46 @@ export function adaptarTextoParaPapel(texto: string): string {
     .replace(/arraste/gi, "ligue")
     .replace(/(?:escute|ouça)(?: o áudio)?/gi, "acompanhe a leitura do professor")
     .replace(/aperte o botão[^.\n]*/gi, "acompanhe a leitura do professor")
+    .replace(/[\p{Extended_Pictographic}\uFE0F]/gu, "")
     .replace(/\s{2,}/g, " ")
     .trim();
+}
+
+function modeloDaAtividadeGuiada(aula: Aula): Pick<Extract<ApostilaBloco, { tipo: "explicacao-atividade" }>, "imagens" | "quantidade" | "grupos"> {
+  const visual = aula.atividadeGuiada.visual;
+  if (!visual) return { imagens: [] };
+  if (visual.tipo === "grupos") {
+    return {
+      imagens: [],
+      grupos: Array.from({ length: visual.quantidadeGrupos }, (_, indice) => ({
+        imagem: { url: visual.imagemUrl, legenda: visual.itemPlural },
+        quantidade: visual.itensPorGrupo,
+        rotulo: `Grupo ${indice + 1}`,
+      })),
+    };
+  }
+  if (visual.tipo === "comparar") {
+    return {
+      imagens: [],
+      grupos: visual.lados.map((lado) => ({
+        imagem: { url: lado.imagemUrl, legenda: lado.rotulo },
+        quantidade: lado.quantidade,
+        rotulo: lado.rotulo,
+      })),
+    };
+  }
+  if (visual.tipo === "podio") {
+    return { imagens: visual.participantes.map((item) => ({ url: item.imagemUrl, legenda: item.nome })) };
+  }
+  if (visual.tipo === "escolherImagem") {
+    return { imagens: visual.opcoes.map((item) => ({ url: item.imagemUrl, legenda: item.nome })) };
+  }
+  return {
+    imagens: [
+      { url: visual.referenciaImg, legenda: visual.referenciaLabel },
+      { url: visual.sujeitoImg, legenda: visual.sujeitoLabel },
+    ],
+  };
 }
 
 function textoNarrativa(aula: Aula): string {
@@ -557,6 +596,7 @@ export function gerarApostila(aula: Aula, extras: ApostilaImagem[] = []): Aposti
     : imagens[0];
   const quantidadeExemplo = aula.exemploResolvido.interativo?.quantidade;
   const atividadeIndependente = aula.exercicios?.[0]?.enunciado ?? aula.desafio.enunciado;
+  const modeloGuiado = modeloDaAtividadeGuiada(aula);
   const guia2: ApostilaBloco[] = [
     { tipo: "texto", titulo: "Objetivo da aula adaptada", texto: adaptarTextoParaPapel(aula.missao) },
     {
@@ -564,7 +604,7 @@ export function gerarApostila(aula: Aula, extras: ApostilaImagem[] = []): Aposti
       titulo: "1. Explique, mostre e faça junto",
       explicacao: adaptarTextoParaPapel(aula.explicacao),
       atividade: adaptarTextoParaPapel(aula.atividadeGuiada.enunciado),
-      imagens: imagens.slice(0, 4),
+      ...modeloGuiado,
     },
     {
       tipo: "explicacao-atividade",

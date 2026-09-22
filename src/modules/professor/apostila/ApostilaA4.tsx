@@ -168,7 +168,21 @@ function Bloco({ bloco }: { bloco: ApostilaBloco }) {
             <div className="rounded-md border border-foreground/30 p-2">
               <p className="text-center text-[9pt] font-black uppercase">Modelo visual</p>
               <div className="mt-2 flex min-h-20 flex-wrap items-center justify-center gap-2">
-                {bloco.imagens.length ? bloco.imagens.flatMap((imagem, imagemIndex) =>
+                {bloco.grupos?.length ? bloco.grupos.map((grupo, grupoIndex) => (
+                  <div key={`${grupo.imagem.url}-${grupoIndex}`} className="rounded border border-foreground/30 p-1 text-center">
+                    {grupo.rotulo && <p className="text-[8pt] font-bold">{grupo.rotulo}</p>}
+                    <div className="mt-1 flex max-w-[48mm] flex-wrap justify-center gap-1">
+                      {Array.from({ length: grupo.quantidade }, (_, repeticao) => (
+                        <img
+                          key={repeticao}
+                          src={grupo.imagem.url}
+                          alt={grupo.imagem.legenda ?? ""}
+                          className="h-9 w-9 object-contain"
+                        />
+                      ))}
+                    </div>
+                  </div>
+                )) : bloco.imagens.length ? bloco.imagens.flatMap((imagem, imagemIndex) =>
                   Array.from({ length: Math.max(1, bloco.quantidade ?? 1) }, (_, repeticao) => (
                     <img
                       key={`${imagem.url}-${imagemIndex}-${repeticao}`}

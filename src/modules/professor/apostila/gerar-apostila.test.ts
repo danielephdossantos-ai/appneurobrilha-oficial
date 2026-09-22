@@ -86,6 +86,25 @@ describe("apostila A4 da área do professor", () => {
     }
   });
 
+  it("usa na explicação visual a mesma figura e quantidade da atividade guiada", () => {
+    const aulaContagem = getAula("EF01MA02")!;
+    const visual = aulaContagem.atividadeGuiada.visual;
+    const guia = gerarApostila(aulaContagem).paginas.filter((pagina) => pagina.etiqueta === "Guia do professor")[1];
+    const primeiro = guia?.blocos.find((bloco) => bloco.tipo === "explicacao-atividade");
+    expect(visual?.tipo).toBe("grupos");
+    expect(primeiro).toMatchObject({
+      tipo: "explicacao-atividade",
+      grupos: [
+        { quantidade: 3 },
+        { quantidade: 3 },
+        { quantidade: 3 },
+      ],
+    });
+    if (visual?.tipo === "grupos" && primeiro?.tipo === "explicacao-atividade") {
+      expect(primeiro.grupos?.every((grupo) => grupo.imagem.url === visual.imagemUrl)).toBe(true);
+    }
+  });
+
   it("gera treino pontilhado para G, B, P e S com cinco repetições", () => {
     const a = gerarApostila(aula);
     const tracado = a.paginas
