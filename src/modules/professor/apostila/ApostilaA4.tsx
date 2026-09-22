@@ -585,26 +585,31 @@ export function ApostilaA4({
           .apostila-folha { break-after: page; min-height: 297mm; }
           .apostila-folha:last-child { break-after: auto; }
         }
-        /* Folha da criança: as atividades ocupam a folha toda, sem sobra de branco. */
-        .apostila-preencher { display: flex; flex-direction: column; gap: 4mm; }
-        .apostila-preencher > section { flex: 1 1 0%; display: flex; flex-direction: column; min-height: 0; margin-top: 0; }
-        .apostila-preencher > section > div { flex: 1 1 0%; display: flex; flex-direction: column; min-height: 0; }
-        .apostila-preencher > section > div > .grid { flex: 1 1 0%; grid-auto-rows: 1fr; align-content: stretch; }
-        .apostila-preencher > section > div > div[class*="space-y"] { flex: 1 1 0%; display: flex; flex-direction: column; justify-content: space-between; }
-        .apostila-preencher > section > div > div[class*="space-y"] > * { flex: 1 1 0%; }
-        .apostila-folha-crianca { height: 297mm; overflow: hidden; }
-        /* nada de altura mínima travada: as atividades encolhem para caber na folha */
+        /* Folha da criança: distribuição equilibrada, sem ampliar nem cortar figuras. */
+        .apostila-folha-crianca { box-sizing: border-box; height: 297mm; overflow: hidden; }
+        .apostila-preencher { display: flex; min-height: 0; flex-direction: column; }
+        .apostila-preencher > section {
+          display: flex;
+          min-height: 0;
+          flex: 1 1 auto;
+          flex-direction: column;
+          justify-content: center;
+          margin-top: 0;
+        }
+        .apostila-preencher > section > div { margin-top: 5mm; }
         .apostila-preencher figure,
         .apostila-preencher [class*="min-h-"] { min-height: 0; }
-        .apostila-preencher figure { height: 100%; }
-        /* célula com figura + resposta: a figura cresce, a linha de resposta continua visível */
-        .apostila-preencher .grid > div:not(.contents) { display: flex; flex-direction: column; min-height: 0; }
-        .apostila-preencher .grid > div:not(.contents) > figure { flex: 1 1 0%; min-height: 0; }
-        .apostila-preencher .apostila-centrar { justify-content: center; }
+        .apostila-preencher figure img {
+          width: auto;
+          height: auto;
+          max-width: 100%;
+          max-height: 30mm;
+          object-fit: contain;
+        }
         .apostila-preencher .apostila-grupo { align-content: center; }
-        .apostila-preencher figure img { height: auto; width: auto; min-height: 12mm; max-height: 100%; max-width: 100%; }
-        .apostila-preencher img { max-height: 100%; }
-        .apostila-preencher svg { max-height: 100%; }
+        .apostila-preencher .apostila-grupo img,
+        .apostila-preencher div.flex.flex-wrap > img { max-width: 14mm; max-height: 14mm; }
+        .apostila-preencher svg { max-width: 30mm; max-height: 30mm; }
       `}</style>
       {paginas.map((p, i) => (
         <Folha key={i} pagina={p} apostila={apostila} />
