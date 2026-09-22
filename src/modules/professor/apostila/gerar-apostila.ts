@@ -556,7 +556,7 @@ export function gerarApostila(aula: Aula, extras: ApostilaImagem[] = []): Aposti
   // Todas as aulas de Português do 1º ano usam tarefas concretas, exclusivamente no papel.
   const folhasPiloto = aula.codigo === "EF01LP01"
     ? paginasInfantisEF01LP01(imagens)
-    : paginasInfantisPadrao(aula, imagens);
+    : (paginasInfantisPadrao(aula, imagens) ?? paginasMatematica(aula, imagens));
   if (folhasPiloto) paginas.push(...folhasPiloto);
 
   // Compatibilidade para outras disciplinas e anos ainda não convertidos.
