@@ -20,6 +20,23 @@ export type ApostilaBloco =
   | { tipo: "contagem"; titulo?: string; imagem: string; quantidade: number; rotulo?: string }
   | { tipo: "linhas"; titulo?: string; enunciado: string; linhas: number }
   | {
+      tipo: "escolha-visual";
+      comando: string;
+      modelo?: ApostilaImagem;
+      imagens: ApostilaImagem[];
+    }
+  | {
+      tipo: "ligar-imagens";
+      comando: string;
+      esquerda: ApostilaImagem[];
+      direita: ApostilaImagem[];
+    }
+  | {
+      tipo: "tracado";
+      comando: string;
+      itens: string[];
+    }
+  | {
       tipo: "alternativas";
       titulo?: string;
       questoes: Array<{ enunciado: string; opcoes: string[] }>;
@@ -121,6 +138,60 @@ function paragrafos(texto: string): string[] {
     .filter(Boolean);
 }
 
+function imagemComLegenda(imagens: ApostilaImagem[], legenda: string): ApostilaImagem | undefined {
+  const alvo = normalizar(legenda);
+  return imagens.find((imagem) => normalizar(imagem.legenda ?? "").includes(alvo));
+}
+
+function paginasInfantisEF01LP01(imagens: ApostilaImagem[]): ApostilaPagina[] | null {
+  const gato = imagemComLegenda(imagens, "gato");
+  const sol = imagemComLegenda(imagens, "sol");
+  const bola = imagemComLegenda(imagens, "bola");
+  const pato = imagemComLegenda(imagens, "pato");
+  const sapo = imagemComLegenda(imagens, "sapo");
+  const casa = imagemComLegenda(imagens, "casa");
+  const cachorro = imagemComLegenda(imagens, "cachorro");
+  if (!gato || !sol || !bola || !pato || !sapo || !casa || !cachorro) return null;
+
+  return [
+    {
+      etiqueta: "Folha do estudante",
+      titulo: "Descubra o começo",
+      blocos: [
+        {
+          tipo: "escolha-visual",
+          comando: "Circule as figuras que começam igual a GATO.",
+          modelo: gato,
+          imagens: [gato, sol, bola, pato],
+        },
+      ],
+    },
+    {
+      etiqueta: "Folha do estudante",
+      titulo: "Amigos de som",
+      blocos: [
+        {
+          tipo: "ligar-imagens",
+          comando: "Ligue cada figura à que começa do mesmo jeito.",
+          esquerda: [sol, casa],
+          direita: [cachorro, sapo],
+        },
+      ],
+    },
+    {
+      etiqueta: "Folha do estudante",
+      titulo: "Registre no papel",
+      blocos: [
+        {
+          tipo: "tracado",
+          comando: "Cubra o pontilhado e escreva mais uma vez.",
+          itens: ["G", "S", "P"],
+        },
+      ],
+    },
+  ];
+}
+
 /** Adaptações impressas — orientação docente fixa, não gerada por IA. */
 const ADAPTACOES: string[] = [
   "TEA: antecipe a sequência da folha (mostre as etapas antes de começar), aceite resposta apontando e mantenha o mesmo comando em todas as questões.",
@@ -206,7 +277,13 @@ export function gerarApostila(aula: Aula, extras: ApostilaImagem[] = []): Aposti
     blocos: guia2,
   });
 
-  // ---------------- Folha do estudante · 1 (com imagens) ----------------
+  // ---------------- Folhas do estudante ----------------
+  // O piloto EF01LP01 usa tarefas concretas, exclusivamente no papel.
+  const folhasPiloto = aula.codigo === "EF01LP01" ? paginasInfantisEF01LP01(imagens) : null;
+  if (folhasPiloto) paginas.push(...folhasPiloto);
+
+  // Compatibilidade para as demais aulas, ainda no modelo anterior.
+  if (!folhasPiloto) {
   const folha1: ApostilaBloco[] = [
     { tipo: "linhas", titulo: "Nome", enunciado: "Escreva seu nome:", linhas: 1 },
   ];
@@ -258,6 +335,7 @@ export function gerarApostila(aula: Aula, extras: ApostilaImagem[] = []): Aposti
     subtitulo: "Agora é você — responda do seu jeito",
     blocos: folha2,
   });
+  }
 
   // ---------------- Gabarito ----------------
   const gabarito: ApostilaBloco[] = [
