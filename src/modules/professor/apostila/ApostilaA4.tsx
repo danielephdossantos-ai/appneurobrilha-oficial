@@ -3,7 +3,7 @@
  * Tudo em preto no branco, sem dependência de cor, pronto para fotocópia.
  */
 
-import type { Apostila, ApostilaBloco, ApostilaPagina } from "./gerar-apostila";
+import type { Apostila, ApostilaBloco, ApostilaItemVisual, ApostilaPagina } from "./gerar-apostila";
 
 function Linhas({ quantidade }: { quantidade: number }) {
   return (
@@ -21,11 +21,45 @@ function ImagemAtividade({ imagem }: { imagem: { url: string; legenda?: string }
       <img
         src={imagem.url}
         alt={imagem.legenda ?? ""}
-        className="h-28 w-28 object-contain grayscale contrast-125 print:grayscale print:contrast-150"
+        className="apostila-outline-img h-28 w-28 object-contain"
       />
       {imagem.legenda && <figcaption className="text-[14pt] font-semibold">{imagem.legenda}</figcaption>}
     </figure>
   );
+}
+
+function LetraPontilhada({ letra }: { letra: string }) {
+  return (
+    <svg aria-label={letra} viewBox="0 0 120 120" className="h-28 w-28 text-foreground/75">
+      <text
+        x="60"
+        y="88"
+        textAnchor="middle"
+        fontFamily="Arial Rounded MT Bold, Arial, sans-serif"
+        fontSize="88"
+        fontWeight="800"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="3"
+        strokeDasharray="2 8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        {letra}
+      </text>
+    </svg>
+  );
+}
+
+function ItemVisual({ item }: { item: ApostilaItemVisual }) {
+  if ("texto" in item) {
+    return (
+      <div className="flex min-h-36 items-center justify-center rounded-md border border-foreground/20 p-4 text-center">
+        <span className="text-[54pt] font-bold leading-none">{item.texto}</span>
+      </div>
+    );
+  }
+  return <ImagemAtividade imagem={item} />;
 }
 
 function Bloco({ bloco }: { bloco: ApostilaBloco }) {
@@ -93,9 +127,9 @@ function Bloco({ bloco }: { bloco: ApostilaBloco }) {
         <div className="mt-6">
           <p className="max-w-[150mm] text-left text-[16pt] font-semibold leading-relaxed">{bloco.comando}</p>
           {bloco.modelo && (
-            <div className="mt-8 flex items-center gap-5 border-b border-foreground/20 pb-7">
+            <div className="mt-8 flex flex-col items-center gap-3 border-b border-foreground/20 pb-7">
               <span className="text-[11pt] font-semibold uppercase">Modelo</span>
-              <div className="w-40"><ImagemAtividade imagem={bloco.modelo} /></div>
+              <div className="w-48"><ImagemAtividade imagem={bloco.modelo} /></div>
             </div>
           )}
           <div className="mt-8 grid grid-cols-2 gap-8">
@@ -107,11 +141,11 @@ function Bloco({ bloco }: { bloco: ApostilaBloco }) {
         <div className="mt-6">
           <p className="max-w-[150mm] text-left text-[16pt] font-semibold leading-relaxed">{bloco.comando}</p>
           <div className="mt-10 grid grid-cols-[1fr_70mm_1fr] items-center gap-y-14">
-            {bloco.esquerda.map((imagem, index) => (
-              <div className="contents" key={`${imagem.url}-${index}`}>
-                <ImagemAtividade imagem={imagem} />
+            {bloco.esquerda.map((item, index) => (
+              <div className="contents" key={`${"texto" in item ? item.texto : item.url}-${index}`}>
+                <ItemVisual item={item} />
                 <div className="border-b-2 border-dashed border-foreground/40" />
-                {bloco.direita[index] ? <ImagemAtividade imagem={bloco.direita[index]} /> : <div />}
+                {bloco.direita[index] ? <ItemVisual item={bloco.direita[index]} /> : <div />}
               </div>
             ))}
           </div>
@@ -123,10 +157,82 @@ function Bloco({ bloco }: { bloco: ApostilaBloco }) {
           <div className="mt-10 space-y-12">
             {bloco.itens.map((item) => (
               <div key={item} className="grid grid-cols-[40mm_1fr] items-end gap-8">
-                <span className="select-none border-b-2 border-dashed border-foreground/40 pb-2 text-center text-[54pt] font-bold text-foreground/30">
-                  {item} {item} {item}
-                </span>
+                <div className="flex justify-center border-b-2 border-dashed border-foreground/40 pb-2">
+                  <LetraPontilhada letra={item} />
+                </div>
                 <div className="h-20 border-b-2 border-foreground/60" />
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      {bloco.tipo === "marcar-som" && (
+        <div className="mt-6">
+          <p className="max-w-[150mm] text-left text-[16pt] font-semibold leading-relaxed">{bloco.comando}</p>
+          <div className="mt-8 space-y-7">
+            {bloco.itens.map((item, index) => (
+              <div key={`${item.imagem.url}-${index}`} className="grid grid-cols-[38mm_1fr] items-center gap-6 border-b border-foreground/20 pb-6">
+                <ImagemAtividade imagem={item.imagem} />
+                <div className="grid grid-cols-3 gap-4">
+                  {item.opcoes.map((opcao) => (
+                    <div key={opcao} className="flex min-h-16 items-center justify-center gap-3 rounded-md border-2 border-foreground/60 text-[26pt] font-bold">
+                      <span className="h-6 w-6 border-2 border-foreground" />
+                      {opcao}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      {bloco.tipo === "marcar-figura" && (
+        <div className="mt-6">
+          <p className="max-w-[150mm] text-left text-[16pt] font-semibold leading-relaxed">{bloco.comando}</p>
+          <div className="mt-8 space-y-8">
+            {bloco.questoes.map((questao, index) => (
+              <div key={`${questao.pergunta}-${index}`} className="break-inside-avoid">
+                <p className="text-[15pt] font-semibold">{questao.pergunta}</p>
+                <div className="mt-4 grid grid-cols-3 gap-5">
+                  {questao.imagens.map((imagem, i) => (
+                    <div key={`${imagem.url}-${i}`} className="relative">
+                      <span className="absolute left-3 top-3 z-10 h-6 w-6 border-2 border-foreground bg-background" />
+                      <ImagemAtividade imagem={imagem} />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      {bloco.tipo === "procurar-letras" && (
+        <div className="mt-6">
+          <p className="max-w-[150mm] text-left text-[16pt] font-semibold leading-relaxed">{bloco.comando}</p>
+          <div className="mt-6 flex flex-wrap gap-3 text-[15pt] font-bold">
+            {bloco.alvos.map((alvo) => <span key={alvo} className="rounded-md border-2 border-foreground px-4 py-2">{alvo}</span>)}
+          </div>
+          <div className="mt-8 grid grid-cols-4 gap-5">
+            {bloco.letras.map((letra, index) => (
+              <div key={`${letra}-${index}`} className="flex aspect-square items-center justify-center rounded-full border-2 border-foreground/70 text-[30pt] font-bold">
+                {letra}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      {bloco.tipo === "colorir-inicial" && (
+        <div className="mt-6">
+          <p className="max-w-[150mm] text-left text-[16pt] font-semibold leading-relaxed">{bloco.comando}</p>
+          <div className="mt-8 grid grid-cols-2 gap-7">
+            {bloco.itens.map((item, index) => (
+              <div key={`${item.imagem.url}-${index}`} className="break-inside-avoid rounded-md border border-foreground/30 p-4">
+                <ImagemAtividade imagem={item.imagem} />
+                <div className="mt-4 flex items-center gap-3 text-[15pt] font-semibold">
+                  Primeira letra:
+                  <span className="inline-flex h-14 w-14 items-center justify-center border-2 border-foreground text-[28pt] font-bold">{item.inicial}</span>
+                  <span className="h-14 flex-1 border-b-2 border-foreground/60" />
+                </div>
               </div>
             ))}
           </div>
@@ -207,11 +313,21 @@ export function ApostilaA4({
   });
   return (
     <div className="apostila space-y-6 print:space-y-0">
+      <svg aria-hidden="true" className="absolute h-0 w-0 overflow-hidden">
+      </svg>
       <style>{`
         @page { size: A4; margin: 0; }
+        .apostila-outline-img {
+          filter: grayscale(1) contrast(1.85) brightness(1.9);
+          opacity: 0.72;
+        }
         @media print {
           .apostila-folha { break-after: page; min-height: 297mm; }
           .apostila-folha:last-child { break-after: auto; }
+          .apostila-outline-img {
+            filter: grayscale(1) contrast(2.15) brightness(2.05);
+            opacity: 0.68;
+          }
         }
       `}</style>
       {paginas.map((p, i) => (

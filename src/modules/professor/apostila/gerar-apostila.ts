@@ -11,6 +11,7 @@
 import type { Aula } from "@/escola-brilha/types";
 
 export type ApostilaImagem = { url: string; legenda?: string };
+export type ApostilaItemVisual = ApostilaImagem | { texto: string };
 
 export type ApostilaBloco =
   | { tipo: "texto"; titulo?: string; texto: string }
@@ -21,20 +22,48 @@ export type ApostilaBloco =
   | { tipo: "linhas"; titulo?: string; enunciado: string; linhas: number }
   | {
       tipo: "escolha-visual";
+      titulo?: string;
       comando: string;
       modelo?: ApostilaImagem;
       imagens: ApostilaImagem[];
     }
   | {
       tipo: "ligar-imagens";
+      titulo?: string;
       comando: string;
-      esquerda: ApostilaImagem[];
-      direita: ApostilaImagem[];
+      esquerda: ApostilaItemVisual[];
+      direita: ApostilaItemVisual[];
     }
   | {
       tipo: "tracado";
+      titulo?: string;
       comando: string;
       itens: string[];
+    }
+  | {
+      tipo: "marcar-som";
+      titulo?: string;
+      comando: string;
+      itens: Array<{ imagem: ApostilaImagem; opcoes: string[] }>;
+    }
+  | {
+      tipo: "marcar-figura";
+      titulo?: string;
+      comando: string;
+      questoes: Array<{ pergunta: string; imagens: ApostilaImagem[] }>;
+    }
+  | {
+      tipo: "procurar-letras";
+      titulo?: string;
+      comando: string;
+      letras: string[];
+      alvos: string[];
+    }
+  | {
+      tipo: "colorir-inicial";
+      titulo?: string;
+      comando: string;
+      itens: Array<{ imagem: ApostilaImagem; inicial: string }>;
     }
   | {
       tipo: "alternativas";
@@ -154,16 +183,20 @@ function paginasInfantisEF01LP01(imagens: ApostilaImagem[]): ApostilaPagina[] | 
   const bola = imagemComLegenda(imagens, "bola");
   const pato = imagemComLegenda(imagens, "pato");
   const sapo = imagemComLegenda(imagens, "sapo");
-  if (!gato || !sol || !bola || !pato || !sapo) return null;
+  const casa = imagemComLegenda(imagens, "casa");
+  const rato = imagemComLegenda(imagens, "rato");
+  const vaca = imagemComLegenda(imagens, "vaca");
+  const dado = imagemComLegenda(imagens, "dado");
+  if (!gato || !sol || !bola || !pato || !sapo || !casa || !rato || !vaca || !dado) return null;
 
   return [
     {
       etiqueta: "Folha do estudante",
-      titulo: "Descubra o começo",
+      titulo: "Atividade 1 — Descubra o começo",
       blocos: [
         {
           tipo: "escolha-visual",
-          comando: "Circule a figura que começa igual a SOL.",
+          comando: "Circule a figura que começa igual ao modelo.",
           modelo: sol,
           imagens: [sapo, gato, bola, pato],
         },
@@ -171,24 +204,82 @@ function paginasInfantisEF01LP01(imagens: ApostilaImagem[]): ApostilaPagina[] | 
     },
     {
       etiqueta: "Folha do estudante",
-      titulo: "Amigos de som",
+      titulo: "Atividade 2 — Primeiro som da palavra",
       blocos: [
         {
-          tipo: "ligar-imagens",
-          comando: "Ligue cada figura à que começa do mesmo jeito.",
-          esquerda: [sol],
-          direita: [sapo],
+          tipo: "marcar-som",
+          comando: "Marque a letra que combina com o começo de cada figura.",
+          itens: [
+            { imagem: gato, opcoes: ["G", "S", "B"] },
+            { imagem: bola, opcoes: ["P", "B", "R"] },
+            { imagem: pato, opcoes: ["D", "P", "V"] },
+          ],
         },
       ],
     },
     {
       etiqueta: "Folha do estudante",
-      titulo: "Registre no papel",
+      titulo: "Atividade 3 — Ligue cada figura",
+      blocos: [
+        {
+          tipo: "ligar-imagens",
+          comando: "Ligue cada letra à figura que começa com ela.",
+          esquerda: [{ texto: "G" }, { texto: "S" }, { texto: "B" }, { texto: "P" }],
+          direita: [pato, gato, sapo, bola],
+        },
+      ],
+    },
+    {
+      etiqueta: "Folha do estudante",
+      titulo: "Atividade 4 — Cubra o pontilhado",
       blocos: [
         {
           tipo: "tracado",
-          comando: "Cubra o pontilhado e escreva mais uma vez.",
-          itens: ["G", "S", "P"],
+          comando: "Cubra a letra pontilhada e escreva no espaço.",
+          itens: ["G"],
+        },
+      ],
+    },
+    {
+      etiqueta: "Folha do estudante",
+      titulo: "Atividade 5 — Marque a resposta correta",
+      blocos: [
+        {
+          tipo: "marcar-figura",
+          comando: "Marque uma resposta em cada atividade.",
+          questoes: [
+            { pergunta: "1. Qual figura começa com G?", imagens: [gato, sol, bola] },
+            { pergunta: "2. Qual figura começa com P?", imagens: [casa, pato, rato] },
+            { pergunta: "3. Qual figura começa como SAPO?", imagens: [sol, rato, dado] },
+          ],
+        },
+      ],
+    },
+    {
+      etiqueta: "Folha do estudante",
+      titulo: "Atividade 6 — Procure as letras",
+      blocos: [
+        {
+          tipo: "procurar-letras",
+          comando: "Procure e circule as letras G, S, B e P.",
+          alvos: ["G", "S", "B", "P"],
+          letras: ["M", "G", "A", "S", "B", "O", "P", "L", "S", "T", "G", "B", "D", "P", "C", "A"],
+        },
+      ],
+    },
+    {
+      etiqueta: "Folha do estudante",
+      titulo: "Atividade 7 — Pinte e complete",
+      blocos: [
+        {
+          tipo: "colorir-inicial",
+          comando: "Pinte as figuras e escreva a primeira letra.",
+          itens: [
+            { imagem: gato, inicial: "G" },
+            { imagem: sol, inicial: "S" },
+            { imagem: bola, inicial: "B" },
+            { imagem: pato, inicial: "P" },
+          ],
         },
       ],
     },
@@ -340,65 +431,67 @@ export function gerarApostila(aula: Aula, extras: ApostilaImagem[] = []): Aposti
   });
   }
 
-  // ---------------- Gabarito ----------------
-  const gabarito: ApostilaBloco[] = [
-    {
-      tipo: "lista",
-      titulo: "Respostas das questões",
-      itens: (aula.exercicios ?? [])
-        .slice(0, 6)
-        .map((ex, i) => `Questão ${i + 1}: ${ex.resposta}${ex.dica ? ` · Dica se travar: ${ex.dica}` : ""}`),
-    },
-  ];
-  if (aula.quiz?.length)
+  if (!folhasPiloto) {
+    // ---------------- Gabarito ----------------
+    const gabarito: ApostilaBloco[] = [
+      {
+        tipo: "lista",
+        titulo: "Respostas das questões",
+        itens: (aula.exercicios ?? [])
+          .slice(0, 6)
+          .map((ex, i) => `Questão ${i + 1}: ${ex.resposta}${ex.dica ? ` · Dica se travar: ${ex.dica}` : ""}`),
+      },
+    ];
+    if (aula.quiz?.length)
+      gabarito.push({
+        tipo: "lista",
+        titulo: "Marque a resposta correta",
+        itens: aula.quiz
+          .slice(0, 4)
+          .map(
+            (q, i) =>
+              `${i + 1}. ${q.pergunta} → ${q.opcoes[q.correta] ?? "-"}. Por quê: ${q.explicacao}`,
+          ),
+      });
+    gabarito.push({ tipo: "texto", titulo: "Desafio", texto: aula.desafio.resposta });
     gabarito.push({
       tipo: "lista",
-      titulo: "Marque a resposta correta",
-      itens: aula.quiz
-        .slice(0, 4)
-        .map(
-          (q, i) =>
-            `${i + 1}. ${q.pergunta} → ${q.opcoes[q.correta] ?? "-"}. Por quê: ${q.explicacao}`,
-        ),
+      titulo: "O que observar na criança",
+      itens: [
+        "Consegue fazer sozinha, com apoio ou ainda não consegue?",
+        "Precisou de quantas repetições do comando?",
+        "Manteve atenção até o fim da folha?",
+        ...(aula.revisao?.pontos ?? []).map((p) => `Domina: ${p}`),
+      ],
     });
-  gabarito.push({ tipo: "texto", titulo: "Desafio", texto: aula.desafio.resposta });
-  gabarito.push({
-    tipo: "lista",
-    titulo: "O que observar na criança",
-    itens: [
-      "Consegue fazer sozinha, com apoio ou ainda não consegue?",
-      "Precisou de quantas repetições do comando?",
-      "Manteve atenção até o fim da folha?",
-      ...(aula.revisao?.pontos ?? []).map((p) => `Domina: ${p}`),
-    ],
-  });
-  paginas.push({
-    etiqueta: "Gabarito",
-    titulo: aula.titulo,
-    subtitulo: "Uso exclusivo do professor — não entregue à criança",
-    blocos: gabarito,
-  });
+    paginas.push({
+      etiqueta: "Gabarito",
+      titulo: aula.titulo,
+      subtitulo: "Uso exclusivo do professor — não entregue à criança",
+      blocos: gabarito,
+    });
 
-  // ---------------- Carta para a família ----------------
-  paginas.push({
-    etiqueta: "Carta para a família",
-    titulo: "O que fizemos hoje na escola",
-    subtitulo: aula.titulo,
-    blocos: [
-      { tipo: "texto", titulo: "Hoje a turma aprendeu", texto: aula.missao },
-      { tipo: "lista", titulo: "Para lembrar em casa", itens: aula.revisao?.pontos ?? [] },
-      ...(aula.revisao?.dica
-        ? [{ tipo: "aviso" as const, titulo: "Dica de ouro", texto: aula.revisao.dica }]
-        : []),
-      { tipo: "texto", titulo: "Missão em família (10 minutos)", texto: aula.conclusao },
-      {
-        tipo: "linhas",
-        titulo: "Recado do responsável",
-        enunciado: "Como foi a missão em casa?",
-        linhas: 3,
-      },
-    ],
-  });
+    // ---------------- Carta para a família ----------------
+    paginas.push({
+      etiqueta: "Carta para a família",
+      titulo: "O que fizemos hoje na escola",
+      subtitulo: aula.titulo,
+      blocos: [
+        { tipo: "texto", titulo: "Hoje a turma aprendeu", texto: aula.missao },
+        { tipo: "lista", titulo: "Para lembrar em casa", itens: aula.revisao?.pontos ?? [] },
+        ...(aula.revisao?.dica
+          ? [{ tipo: "aviso" as const, titulo: "Dica de ouro", texto: aula.revisao.dica }]
+          : []),
+        { tipo: "texto", titulo: "Missão em família (10 minutos)", texto: aula.conclusao },
+        {
+          tipo: "linhas",
+          titulo: "Recado do responsável",
+          enunciado: "Como foi a missão em casa?",
+          linhas: 3,
+        },
+      ],
+    });
+  }
 
   return {
     codigo: aula.codigo,
