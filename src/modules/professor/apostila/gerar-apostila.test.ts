@@ -60,7 +60,11 @@ describe("apostila A4 da área do professor", () => {
     const tracado = a.paginas
       .flatMap((p) => p.blocos)
       .find((b) => b.tipo === "tracado");
-    expect(tracado).toMatchObject({ itens: ["G"], repeticoes: 10 });
+    expect(tracado).toMatchObject({
+      itens: ["G"],
+      repeticoes: 5,
+      imagem: expect.objectContaining({ legenda: expect.stringMatching(/gato/i) }),
+    });
   });
 
   it("reaproveita apenas imagens que a aula já tem", () => {
