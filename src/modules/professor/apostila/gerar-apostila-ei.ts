@@ -276,6 +276,43 @@ function paginasCriancaMatematica(aula: AulaEI, imagens: ApostilaImagem[]): Apos
       }),
     );
 
+  // Aulas de comparação, formas e classificação não têm contagem: usam as
+  // próprias perguntas e figuras da aula como atividade no papel.
+  const escolhas = compreensoes
+    .slice(0, 3)
+    .map((m) => ({
+      pergunta: m.perguntaAudio,
+      imagens: unicas(m.opcoes.map((o) => img(o.imagemUrl, o.nome)), 4),
+    }))
+    .filter((q) => q.imagens.length >= 2);
+  if (paginas.length < 3 && escolhas.length)
+    paginas.push(
+      folha(`Atividade ${paginas.length + 1} — Marque a figura certa`, {
+        tipo: "marcar-figura",
+        comando: "O professor lê. Marque com X a figura certa.",
+        questoes: escolhas,
+      }),
+    );
+
+  if (paginas.length < 3 && imagens.length >= 3)
+    paginas.push(
+      folha(`Atividade ${paginas.length + 1} — Circule as figuras`, {
+        tipo: "escolha-visual",
+        comando: "Fale o nome de cada figura e circule as que o professor pedir.",
+        imagens: imagens.slice(0, 6),
+      }),
+    );
+
+  const convite = momentos(aula, "fazDeConta")[0]?.convite;
+  if (paginas.length < 3)
+    paginas.push(
+      folha(`Atividade ${paginas.length + 1} — Desenhe sua resposta`, {
+        tipo: "desenhar-quantidade",
+        comando: "Desenhe no quadro a sua resposta.",
+        itens: [{ quantidade: 1, rotulo: convite ?? "Meu desenho" }],
+      }),
+    );
+
   return paginas;
 }
 
