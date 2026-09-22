@@ -21,10 +21,33 @@ function ImagemAtividade({ imagem }: { imagem: { url: string; legenda?: string }
       <img
         src={imagem.url}
         alt={imagem.legenda ?? ""}
-        className="h-28 w-28 object-contain grayscale contrast-125 print:grayscale print:contrast-150"
+        className="apostila-outline-img h-28 w-28 object-contain"
       />
       {imagem.legenda && <figcaption className="text-[14pt] font-semibold">{imagem.legenda}</figcaption>}
     </figure>
+  );
+}
+
+function LetraPontilhada({ letra }: { letra: string }) {
+  return (
+    <svg aria-label={letra} viewBox="0 0 120 120" className="h-28 w-28 text-foreground/75">
+      <text
+        x="60"
+        y="88"
+        textAnchor="middle"
+        fontFamily="Arial Rounded MT Bold, Arial, sans-serif"
+        fontSize="88"
+        fontWeight="800"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="3"
+        strokeDasharray="2 8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        {letra}
+      </text>
+    </svg>
   );
 }
 
@@ -134,9 +157,9 @@ function Bloco({ bloco }: { bloco: ApostilaBloco }) {
           <div className="mt-10 space-y-12">
             {bloco.itens.map((item) => (
               <div key={item} className="grid grid-cols-[40mm_1fr] items-end gap-8">
-                <span className="select-none border-b-2 border-dashed border-foreground/40 pb-2 text-center text-[64pt] font-bold text-foreground/70 [-webkit-text-fill-color:transparent] [-webkit-text-stroke:1.5px_currentColor]">
-                  {item}
-                </span>
+                <div className="flex justify-center border-b-2 border-dashed border-foreground/40 pb-2">
+                  <LetraPontilhada letra={item} />
+                </div>
                 <div className="h-20 border-b-2 border-foreground/60" />
               </div>
             ))}
@@ -290,8 +313,22 @@ export function ApostilaA4({
   });
   return (
     <div className="apostila space-y-6 print:space-y-0">
+      <svg aria-hidden="true" className="absolute h-0 w-0 overflow-hidden">
+        <filter id="apostila-contorno-img" colorInterpolationFilters="sRGB">
+          <feColorMatrix type="saturate" values="0" />
+          <feConvolveMatrix order="3" kernelMatrix="-1 -1 -1 -1 8 -1 -1 -1 -1" preserveAlpha="true" />
+          <feComponentTransfer>
+            <feFuncR type="linear" slope="2.2" intercept="0" />
+            <feFuncG type="linear" slope="2.2" intercept="0" />
+            <feFuncB type="linear" slope="2.2" intercept="0" />
+          </feComponentTransfer>
+        </filter>
+      </svg>
       <style>{`
         @page { size: A4; margin: 0; }
+        .apostila-outline-img {
+          filter: url(#apostila-contorno-img) grayscale(1) contrast(2.4) brightness(1.35);
+        }
         @media print {
           .apostila-folha { break-after: page; min-height: 297mm; }
           .apostila-folha:last-child { break-after: auto; }
