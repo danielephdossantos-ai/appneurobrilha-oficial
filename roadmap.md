@@ -12,3 +12,6 @@
 - [x] Validar as 26 apostilas e revisar amostras em impressão A4
 - [x] Diferenciar os formatos das 26 apostilas por som, sílaba, palavra e frase
 - [x] Remover atividades de pintar das folhas da criança
+- [x] Converter Matemática do 1º ano (EF01MA01–EF01MA22) com atividades numéricas próprias
+- [x] Abrir a lista de apostilas para Português e Matemática do 1º ao 5º ano
+- [ ] Curso de alfabetização e anos iniciais (3 a 6 anos) em apostila
