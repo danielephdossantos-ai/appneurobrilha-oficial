@@ -251,9 +251,9 @@ function paginasInfantisEF01LP01(imagens: ApostilaImagem[]): ApostilaPagina[] | 
         {
           tipo: "tracado",
           comando: "Cubra os pontilhados e pinte o desenho.",
-          itens: ["G", "B", "P"],
+          itens: ["G", "B", "P", "S"],
           repeticoes: 5,
-          imagens: { G: gato, B: bola, P: pato },
+          imagens: { G: gato, B: bola, P: pato, S: sol },
         },
       ],
     },
