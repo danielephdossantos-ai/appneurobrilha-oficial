@@ -163,9 +163,9 @@ function paginasInfantisEF01LP01(imagens: ApostilaImagem[]): ApostilaPagina[] | 
       blocos: [
         {
           tipo: "escolha-visual",
-          comando: "Circule as figuras que começam igual a GATO.",
-          modelo: gato,
-          imagens: [gato, sol, bola, pato],
+          comando: "Circule a figura que começa igual a SOL.",
+          modelo: sol,
+          imagens: [sapo, gato, bola, pato],
         },
       ],
     },
