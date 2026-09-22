@@ -468,7 +468,7 @@ function paginasInfantisPadrao(aula: Aula, imagens: ApostilaImagem[]): ApostilaP
 }
 
 /** Adaptações impressas — orientação docente fixa, não gerada por IA. */
-const ADAPTACOES: string[] = [
+export const ADAPTACOES: string[] = [
   "TEA: antecipe a sequência da folha (mostre as etapas antes de começar), aceite resposta apontando e mantenha o mesmo comando em todas as questões.",
   "TDAH: divida a folha em duas partes, marque uma pausa de movimento no meio e destaque com lápis de cor a questão atual.",
   "Dislexia: leia o enunciado em voz alta, aceite resposta oral, e não conte erro de ortografia como erro de conteúdo.",

@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { getAula } from "@/escola-brilha/registry";
 import { ApostilaA4 } from "@/modules/professor/apostila/ApostilaA4";
 import { gerarApostila, termosDaAula, type ApostilaImagem } from "@/modules/professor/apostila/gerar-apostila";
+import { gerarApostilaEI } from "@/modules/professor/apostila/gerar-apostila-ei";
 
 export const Route = createFileRoute("/area-professor/apostila/$codigo")({
   component: ApostilaImprimir,
@@ -33,7 +34,11 @@ type Filtro = "tudo" | "professor" | "estudante" | "familia";
 
 function ApostilaImprimir() {
   const { codigo } = Route.useParams();
-  const aula = useMemo(() => getAula(codigo), [codigo]);
+  const apostilaEI = useMemo(
+    () => (codigo.includes("__") ? gerarApostilaEI(codigo) : null),
+    [codigo],
+  );
+  const aula = useMemo(() => (apostilaEI ? undefined : getAula(codigo)), [codigo, apostilaEI]);
   const [extras, setExtras] = useState<ApostilaImagem[]>([]);
   const [filtro, setFiltro] = useState<Filtro>("tudo");
 
@@ -67,14 +72,17 @@ function ApostilaImprimir() {
     return () => window.removeEventListener("afterprint", reset);
   }, []);
 
-  const apostila = useMemo(() => (aula ? gerarApostila(aula, extras) : null), [aula, extras]);
+  const apostila = useMemo(
+    () => apostilaEI ?? (aula ? gerarApostila(aula, extras) : null),
+    [apostilaEI, aula, extras],
+  );
 
   function imprimir(modo: Filtro) {
     setFiltro(modo);
     requestAnimationFrame(() => requestAnimationFrame(() => window.print()));
   }
 
-  if (!aula || !apostila)
+  if (!apostila)
     return (
       <Shell>
         <main className="p-8 text-center">

@@ -14,4 +14,4 @@
 - [x] Remover atividades de pintar das folhas da criança
 - [x] Converter Matemática do 1º ano (EF01MA01–EF01MA22) com atividades numéricas próprias
 - [x] Abrir a lista de apostilas para Português e Matemática do 1º ao 5º ano
-- [ ] Curso de alfabetização e anos iniciais (3 a 6 anos) em apostila
+- [x] Curso de alfabetização e anos iniciais (3 a 6 anos) em apostila (42 aulas)
