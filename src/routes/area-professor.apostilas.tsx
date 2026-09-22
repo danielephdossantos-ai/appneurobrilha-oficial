@@ -70,6 +70,30 @@ function Apostilas() {
             className="min-h-12 w-full bg-transparent font-semibold outline-none"
           />
         </label>
+        <section className="space-y-3">
+          <h2 className="text-xl font-black">Alfabetização e anos iniciais (3 a 6 anos)</h2>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {infantis.map((a) => (
+              <Link
+                key={a.chave}
+                to="/area-professor/apostila/$codigo"
+                params={{ codigo: a.chave }}
+                className="rounded-2xl border-2 border-emerald-100 bg-white p-5 hover:border-emerald-300"
+              >
+                <p className="text-xs font-black uppercase text-emerald-700">
+                  {a.serieLabel} · {a.disciplina}
+                </p>
+                <h3 className="mt-1 text-lg font-black">{a.titulo}</h3>
+                <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">{a.resumo}</p>
+                <span className="mt-3 inline-flex items-center gap-2 text-sm font-black text-emerald-700">
+                  <Printer className="h-4 w-4" />
+                  Abrir apostila
+                </span>
+              </Link>
+            ))}
+          </div>
+        </section>
+        <h2 className="text-xl font-black">Ensino Fundamental</h2>
         <div className="grid gap-3 sm:grid-cols-2">
           {filtradas.map((a) => (
             <Link
