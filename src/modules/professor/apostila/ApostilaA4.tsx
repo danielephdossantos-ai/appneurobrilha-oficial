@@ -530,7 +530,7 @@ function Folha({ pagina, apostila }: { pagina: ApostilaPagina; apostila: Apostil
   return (
     <article
       data-etiqueta={pagina.etiqueta}
-      className="apostila-folha mx-auto flex min-h-[297mm] w-full max-w-[210mm] flex-col bg-background p-[18mm] text-foreground shadow-sm ring-1 ring-border print:bg-background print:shadow-none print:ring-0"
+      className={`apostila-folha mx-auto flex min-h-[297mm] w-full max-w-[210mm] flex-col bg-background p-[18mm] text-foreground shadow-sm ring-1 ring-border print:bg-background print:shadow-none print:ring-0 ${infantil ? "apostila-folha-crianca h-[297mm]" : ""}`}
     >
       {infantil ? (
         <header className="grid grid-cols-[1fr_42mm] gap-8 border-b border-foreground/25 pb-3 text-[11pt]">
