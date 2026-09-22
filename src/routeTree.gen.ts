@@ -66,7 +66,6 @@ import { Route as AreaProfessorAlfabetizacaoRouteImport } from './routes/area-pr
 import { Route as AreaProfessorApostilasRouteImport } from './routes/area-professor.apostilas'
 import { Route as AreaProfessorAssistentePedagogicoRouteImport } from './routes/area-professor.assistente-pedagogico'
 import { Route as AreaProfessorBibliotecaInclusivaRouteImport } from './routes/area-professor.biblioteca-inclusiva'
-import { Route as AreaProfessorPraticaRouteImport } from './routes/area-professor.pratica'
 import { Route as AreaProfessorTarefasRouteImport } from './routes/area-professor.tarefas'
 import { Route as BnccCodigoRouteImport } from './routes/bncc.$codigo'
 import { Route as EscolaBrilhaIndexRouteImport } from './routes/escola-brilha.index'
@@ -407,11 +406,6 @@ const AreaProfessorBibliotecaInclusivaRoute =
     path: '/biblioteca-inclusiva',
     getParentRoute: () => AreaProfessorRoute,
   } as any)
-const AreaProfessorPraticaRoute = AreaProfessorPraticaRouteImport.update({
-  id: '/pratica',
-  path: '/pratica',
-  getParentRoute: () => AreaProfessorRoute,
-} as any)
 const AreaProfessorTarefasRoute = AreaProfessorTarefasRouteImport.update({
   id: '/tarefas',
   path: '/tarefas',
@@ -745,7 +739,6 @@ export interface FileRoutesByFullPath {
   '/area-professor/apostilas': typeof AreaProfessorApostilasRoute
   '/area-professor/assistente-pedagogico': typeof AreaProfessorAssistentePedagogicoRoute
   '/area-professor/biblioteca-inclusiva': typeof AreaProfessorBibliotecaInclusivaRoute
-  '/area-professor/pratica': typeof AreaProfessorPraticaRoute
   '/area-professor/tarefas': typeof AreaProfessorTarefasRoute
   '/bncc/$codigo': typeof BnccCodigoRoute
   '/escola-brilha/$codigo': typeof EscolaBrilhaCodigoRoute
@@ -851,7 +844,6 @@ export interface FileRoutesByTo {
   '/area-professor/apostilas': typeof AreaProfessorApostilasRoute
   '/area-professor/assistente-pedagogico': typeof AreaProfessorAssistentePedagogicoRoute
   '/area-professor/biblioteca-inclusiva': typeof AreaProfessorBibliotecaInclusivaRoute
-  '/area-professor/pratica': typeof AreaProfessorPraticaRoute
   '/area-professor/tarefas': typeof AreaProfessorTarefasRoute
   '/bncc/$codigo': typeof BnccCodigoRoute
   '/escola-brilha/$codigo': typeof EscolaBrilhaCodigoRoute
@@ -960,7 +952,6 @@ export interface FileRoutesById {
   '/area-professor/apostilas': typeof AreaProfessorApostilasRoute
   '/area-professor/assistente-pedagogico': typeof AreaProfessorAssistentePedagogicoRoute
   '/area-professor/biblioteca-inclusiva': typeof AreaProfessorBibliotecaInclusivaRoute
-  '/area-professor/pratica': typeof AreaProfessorPraticaRoute
   '/area-professor/tarefas': typeof AreaProfessorTarefasRoute
   '/bncc/$codigo': typeof BnccCodigoRoute
   '/escola-brilha/$codigo': typeof EscolaBrilhaCodigoRoute
@@ -1070,7 +1061,6 @@ export interface FileRouteTypes {
     | '/area-professor/apostilas'
     | '/area-professor/assistente-pedagogico'
     | '/area-professor/biblioteca-inclusiva'
-    | '/area-professor/pratica'
     | '/area-professor/tarefas'
     | '/bncc/$codigo'
     | '/escola-brilha/$codigo'
@@ -1176,7 +1166,6 @@ export interface FileRouteTypes {
     | '/area-professor/apostilas'
     | '/area-professor/assistente-pedagogico'
     | '/area-professor/biblioteca-inclusiva'
-    | '/area-professor/pratica'
     | '/area-professor/tarefas'
     | '/bncc/$codigo'
     | '/escola-brilha/$codigo'
@@ -1284,7 +1273,6 @@ export interface FileRouteTypes {
     | '/area-professor/apostilas'
     | '/area-professor/assistente-pedagogico'
     | '/area-professor/biblioteca-inclusiva'
-    | '/area-professor/pratica'
     | '/area-professor/tarefas'
     | '/bncc/$codigo'
     | '/escola-brilha/$codigo'
@@ -1825,13 +1813,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AreaProfessorBibliotecaInclusivaRouteImport
       parentRoute: typeof AreaProfessorRoute
     }
-    '/area-professor/pratica': {
-      id: '/area-professor/pratica'
-      path: '/pratica'
-      fullPath: '/area-professor/pratica'
-      preLoaderRoute: typeof AreaProfessorPraticaRouteImport
-      parentRoute: typeof AreaProfessorRoute
-    }
     '/area-professor/tarefas': {
       id: '/area-professor/tarefas'
       path: '/tarefas'
@@ -2188,7 +2169,6 @@ interface AreaProfessorRouteChildren {
   AreaProfessorApostilasRoute: typeof AreaProfessorApostilasRoute
   AreaProfessorAssistentePedagogicoRoute: typeof AreaProfessorAssistentePedagogicoRoute
   AreaProfessorBibliotecaInclusivaRoute: typeof AreaProfessorBibliotecaInclusivaRoute
-  AreaProfessorPraticaRoute: typeof AreaProfessorPraticaRoute
   AreaProfessorTarefasRoute: typeof AreaProfessorTarefasRoute
   AreaProfessorIndexRoute: typeof AreaProfessorIndexRoute
   AreaProfessorAcompanhamentoLinkIdRoute: typeof AreaProfessorAcompanhamentoLinkIdRoute
@@ -2203,7 +2183,6 @@ const AreaProfessorRouteChildren: AreaProfessorRouteChildren = {
   AreaProfessorAssistentePedagogicoRoute:
     AreaProfessorAssistentePedagogicoRoute,
   AreaProfessorBibliotecaInclusivaRoute: AreaProfessorBibliotecaInclusivaRoute,
-  AreaProfessorPraticaRoute: AreaProfessorPraticaRoute,
   AreaProfessorTarefasRoute: AreaProfessorTarefasRoute,
   AreaProfessorIndexRoute: AreaProfessorIndexRoute,
   AreaProfessorAcompanhamentoLinkIdRoute:
