@@ -3,6 +3,7 @@ import { useMemo, useState } from "react";
 import { ArrowLeft, Printer, Search } from "lucide-react";
 import { TeacherShell as Shell } from "@/components/teacher/TeacherShell";
 import { listAulas } from "@/escola-brilha/registry";
+import { listarAulasEI } from "@/modules/professor/apostila/gerar-apostila-ei";
 
 export const Route = createFileRoute("/area-professor/apostilas")({
   component: Apostilas,
