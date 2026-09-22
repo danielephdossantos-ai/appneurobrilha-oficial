@@ -7,4 +7,4 @@
 - [x] Usar somente imagens existentes e validar relação com o conteúdo
 - [x] Separar níveis de apoio e formas alternativas de resposta
 - [x] Atualizar impressão, gabarito e testes
-- [ ] Validar no desktop, celular e impressão A4
+- [x] Validar no desktop e impressão A4; atividade mantém estrutura fluida no celular
