@@ -265,6 +265,7 @@ function paginasCriancaMatematica(aula: AulaEI, imagens: ApostilaImagem[]): Apos
         itens: numeros.map(String),
         repeticoes: 5,
         imagens: mapa,
+        quantidadeImagem: true,
       }),
     );
     paginas.push(
