@@ -33,7 +33,11 @@ type Filtro = "tudo" | "professor" | "estudante" | "familia";
 
 function ApostilaImprimir() {
   const { codigo } = Route.useParams();
-  const aula = useMemo(() => getAula(codigo), [codigo]);
+  const apostilaEI = useMemo(
+    () => (codigo.includes("__") ? gerarApostilaEI(codigo) : null),
+    [codigo],
+  );
+  const aula = useMemo(() => (apostilaEI ? undefined : getAula(codigo)), [codigo, apostilaEI]);
   const [extras, setExtras] = useState<ApostilaImagem[]>([]);
   const [filtro, setFiltro] = useState<Filtro>("tudo");
 
