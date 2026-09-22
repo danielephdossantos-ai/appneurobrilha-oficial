@@ -314,24 +314,8 @@ function paginasForma(config: ConfigMat, imgs: ApostilaImagem[]): ApostilaPagina
         imagens: imgs.slice(1, 5),
       },
     ]),
-    folha("Atividade 2 — Marque a figura certa", [
-      {
-        tipo: "marcar-figura",
-        comando: "Marque uma resposta em cada atividade.",
-        questoes: config.palavras.slice(0, 3).map((palavra, index) => ({
-          pergunta: `${index + 1}. Marque a figura de ${palavra}.`,
-          imagens: [imgs[index % imgs.length]!, imgs[(index + 1) % imgs.length]!, imgs[(index + 2) % imgs.length]!],
-        })),
-      },
-    ]),
-    folha("Atividade 3 — Ligue figura e palavra", [
-      {
-        tipo: "ligar-imagens",
-        comando: "Ligue cada figura à palavra que combina com ela.",
-        esquerda: imgs.slice(0, 3),
-        direita: [...config.palavras.slice(0, 3)].reverse().map((p) => ({ texto: p })),
-      },
-    ]),
+    ...folhaMarcar,
+    ...folhaPares,
     folha("Atividade 4 — Cubra as palavras", [
       { tipo: "tracado", comando: "Cubra os pontilhados com capricho.", repeticoes: 2, ...tracado },
     ]),
