@@ -31,6 +31,13 @@ export type ApostilaBloco =
       quantidade?: number;
       grupos?: Array<{ imagem: ApostilaImagem; quantidade: number; rotulo?: string }>;
     }
+  | {
+      tipo: "apoio-visual";
+      pergunta: string;
+      imagens: ApostilaImagem[];
+      quantidade?: number;
+      grupos?: Array<{ imagem: ApostilaImagem; quantidade: number; rotulo?: string }>;
+    }
   | { tipo: "contagem"; titulo?: string; imagem: string; quantidade: number; rotulo?: string }
   | { tipo: "linhas"; titulo?: string; enunciado: string; linhas: number }
   | {
@@ -146,7 +153,7 @@ export type ApostilaBloco =
 
 export type ApostilaPagina = {
   /** Cabeçalho da folha A4. */
-  etiqueta: "Guia do professor" | "Folha do estudante" | "Gabarito" | "Carta para a família";
+  etiqueta: "Guia do professor" | "Apoio visual do professor" | "Folha do estudante" | "Gabarito" | "Carta para a família";
   titulo: string;
   subtitulo?: string;
   blocos: ApostilaBloco[];
@@ -628,6 +635,27 @@ export function gerarApostila(aula: Aula, extras: ApostilaImagem[] = []): Aposti
     subtitulo: "Aula adaptada para acompanhar o conteúdo da turma",
     blocos: guia2,
   });
+
+  // ---------------- Apoios visuais do professor · folhas separadas ----------------
+  // Cada explicação recebe uma prancha própria, grande, para mostrar à turma.
+  const apoios = guia2.filter(
+    (bloco): bloco is Extract<ApostilaBloco, { tipo: "explicacao-atividade" }> =>
+      bloco.tipo === "explicacao-atividade",
+  );
+  for (const [indice, apoio] of apoios.entries()) {
+    paginas.push({
+      etiqueta: "Apoio visual do professor",
+      titulo: `Apoio visual ${indice + 1}`,
+      subtitulo: aula.titulo,
+      blocos: [{
+        tipo: "apoio-visual",
+        pergunta: apoio.atividade,
+        imagens: apoio.imagens.length ? apoio.imagens : imagens.slice(0, 4),
+        quantidade: apoio.quantidade,
+        grupos: apoio.grupos,
+      }],
+    });
+  }
 
   // ---------------- Folhas do estudante ----------------
   // Todas as aulas de Português do 1º ano usam tarefas concretas, exclusivamente no papel.

@@ -176,7 +176,7 @@ function paginasProfessor(curso: CursoEI, aula: AulaEI): ApostilaPagina[] {
       texto: adaptarTextoParaPapel(`${familia.convite}\n${familia.dicaAdulto}`),
     });
 
-  return [
+  const paginas: ApostilaPagina[] = [
     {
       etiqueta: "Guia do professor",
       titulo: historia?.titulo ?? aula.titulo,
@@ -190,6 +190,25 @@ function paginasProfessor(curso: CursoEI, aula: AulaEI): ApostilaPagina[] {
       blocos: folha2,
     },
   ];
+  const apoios = folha2.filter(
+    (bloco): bloco is Extract<ApostilaBloco, { tipo: "explicacao-atividade" }> =>
+      bloco.tipo === "explicacao-atividade",
+  );
+  for (const [indice, apoio] of apoios.entries()) {
+    paginas.push({
+      etiqueta: "Apoio visual do professor",
+      titulo: `Apoio visual ${indice + 1}`,
+      subtitulo: `${curso.serieLabel} · ${aula.titulo}`,
+      blocos: [{
+        tipo: "apoio-visual",
+        pergunta: apoio.atividade,
+        imagens: apoio.imagens.length ? apoio.imagens : imagens.slice(0, 4),
+        quantidade: apoio.quantidade,
+        grupos: apoio.grupos,
+      }],
+    });
+  }
+  return paginas;
 }
 
 /* ------------------------- folhas da criança ------------------------- */
