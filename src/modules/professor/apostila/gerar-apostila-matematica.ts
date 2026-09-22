@@ -57,11 +57,38 @@ function figuras(imagens: ApostilaImagem[]): ApostilaImagem[] {
   return usadas;
 }
 
-function opcoesNumero(certo: number): string[] {
-  const opcoes = new Set<string>([String(certo)]);
-  opcoes.add(String(certo + 1));
-  opcoes.add(String(Math.max(0, certo - 1)));
-  return [...opcoes].slice(0, 3);
+/** Três alternativas distintas contendo sempre o número certo, em posição variada. */
+function opcoesNumero(certo: number, giro = 0): string[] {
+  const lista = [certo];
+  let passo = 1;
+  while (lista.length < 3) {
+    for (const candidato of [certo + passo, certo - passo]) {
+      if (candidato >= 0 && !lista.includes(candidato) && lista.length < 3) lista.push(candidato);
+    }
+    passo += 1;
+  }
+  const deslocamento = ((giro % 3) + 3) % 3;
+  return [...lista.slice(deslocamento), ...lista.slice(0, deslocamento)].map(String);
+}
+
+/** Figura com a quantidade pedida, para ligar número ↔ grupo de figuras. */
+function grupo(imagem: ApostilaImagem, quantidade: number) {
+  return { ...imagem, quantidade };
+}
+
+/** Acha a figura cujo nome/arquivo corresponde à palavra (sem inventar pares). */
+function figuraDaPalavra(imagens: ApostilaImagem[], palavra: string): ApostilaImagem | undefined {
+  const chave = palavra
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+  return imagens.find((i) =>
+    `${i.legenda ?? ""} ${i.url}`
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .includes(chave),
+  );
 }
 
 function gradeNumeros(numeros: number[]): string[] {
@@ -85,7 +112,7 @@ function tracadoNumeros(numeros: number[], imagens: ApostilaImagem[]) {
     const imagem = imagens[index % imagens.length];
     if (imagem) mapa[item] = imagem;
   });
-  return { itens, imagens: mapa };
+  return { itens, imagens: mapa, quantidadeImagem: true };
 }
 
 function folha(titulo: string, blocos: ApostilaPagina["blocos"]): ApostilaPagina {
@@ -102,7 +129,7 @@ function paginasContagem(config: ConfigMat, imgs: ApostilaImagem[]): ApostilaPag
         itens: config.numeros.slice(0, 4).map((quantidade, index) => ({
           imagem: imgs[index % imgs.length]!,
           quantidade,
-          opcoes: opcoesNumero(quantidade),
+          opcoes: opcoesNumero(quantidade, index),
         })),
       },
     ]),
@@ -111,7 +138,9 @@ function paginasContagem(config: ConfigMat, imgs: ApostilaImagem[]): ApostilaPag
         tipo: "ligar-imagens",
         comando: "Ligue cada número ao grupo com essa quantidade de figuras.",
         esquerda: config.numeros.slice(0, 4).map((n) => ({ texto: String(n) })),
-        direita: [...config.numeros.slice(0, 4)].reverse().map((_, index) => imgs[index % imgs.length]!),
+        direita: [...config.numeros.slice(0, 4)]
+          .reverse()
+          .map((n, index) => grupo(imgs[index % imgs.length]!, n)),
       },
     ]),
     folha("Atividade 3 — Complete a sequência", [
@@ -177,12 +206,18 @@ function paginasOperacao(config: ConfigMat, imgs: ApostilaImagem[]): ApostilaPag
     ]),
     folha("Atividade 3 — Marque o resultado", [
       {
-        tipo: "marcar-som",
-        comando: "Faça a conta e marque o resultado certo.",
+        tipo: "conta-marcar",
+        comando: "Conte as figuras, faça a conta e marque o resultado certo.",
         itens: [
-          { imagem: imgs[0]!, opcoes: opcoesNumero(a + b) },
-          { imagem: imgs[1 % imgs.length]!, opcoes: opcoesNumero(b + c) },
-          { imagem: imgs[2 % imgs.length]!, opcoes: opcoesNumero(d - 2) },
+          { imagem: imgs[0]!, a, b, sinal: "+", opcoes: opcoesNumero(a + b, 0) },
+          { imagem: imgs[1 % imgs.length]!, a: b, b: c, sinal: "+", opcoes: opcoesNumero(b + c, 1) },
+          {
+            imagem: imgs[2 % imgs.length]!,
+            a: d,
+            b: 2,
+            sinal: "−",
+            opcoes: opcoesNumero(Math.max(0, d - 2), 2),
+          },
         ],
       },
     ]),
@@ -215,11 +250,61 @@ function paginasOperacao(config: ConfigMat, imgs: ApostilaImagem[]): ApostilaPag
 }
 
 function paginasForma(config: ConfigMat, imgs: ApostilaImagem[]): ApostilaPagina[] {
-  const tracado = { itens: config.palavras.slice(0, 3), imagens: {} as Record<string, ApostilaImagem> };
-  config.palavras.slice(0, 3).forEach((palavra, index) => {
-    const imagem = imgs[index % imgs.length];
-    if (imagem) tracado.imagens[palavra] = imagem;
-  });
+  const palavras = config.palavras.slice(0, 3);
+  // Só liga palavra e figura quando a figura realmente corresponde à palavra.
+  const pares = palavras
+    .map((palavra) => ({ palavra, imagem: figuraDaPalavra(imgs, palavra) }))
+    .filter((p): p is { palavra: string; imagem: ApostilaImagem } => !!p.imagem);
+  const tracado = { itens: palavras, imagens: {} as Record<string, ApostilaImagem> };
+  for (const par of pares) tracado.imagens[par.palavra] = par.imagem;
+  const folhaPares: ApostilaPagina[] =
+    pares.length >= 2
+      ? [
+          folha("Atividade 3 — Ligue figura e palavra", [
+            {
+              tipo: "ligar-imagens",
+              comando: "Ligue cada figura à palavra que combina com ela.",
+              esquerda: pares.map((p) => p.imagem),
+              direita: [...pares].reverse().map((p) => ({ texto: p.palavra })),
+            },
+          ]),
+        ]
+      : [
+          folha("Atividade 3 — Complete a sequência", [
+            {
+              tipo: "sequencia-numerica",
+              comando: "Escreva os números que faltam.",
+              linhas: sequencias(config.numeros),
+            },
+          ]),
+        ];
+  const folhaMarcar: ApostilaPagina[] =
+    pares.length >= 2
+      ? [
+          folha("Atividade 2 — Marque a figura certa", [
+            {
+              tipo: "marcar-figura",
+              comando: "Marque uma resposta em cada atividade.",
+              questoes: pares.map((par, index) => ({
+                pergunta: `${index + 1}. Marque a figura de ${par.palavra}.`,
+                imagens: [
+                  par.imagem,
+                  ...imgs.filter((i) => i.url !== par.imagem.url).slice(0, 2),
+                ],
+              })),
+            },
+          ]),
+        ]
+      : [
+          folha("Atividade 2 — Circule as figuras iguais ao modelo", [
+            {
+              tipo: "escolha-visual",
+              comando: "Olhe o modelo e circule as figuras parecidas com ele.",
+              modelo: imgs[1] ?? imgs[0]!,
+              imagens: imgs.slice(0, 4),
+            },
+          ]),
+        ];
   return [
     folha("Atividade 1 — Observe e circule", [
       {
@@ -229,24 +314,8 @@ function paginasForma(config: ConfigMat, imgs: ApostilaImagem[]): ApostilaPagina
         imagens: imgs.slice(1, 5),
       },
     ]),
-    folha("Atividade 2 — Marque a figura certa", [
-      {
-        tipo: "marcar-figura",
-        comando: "Marque uma resposta em cada atividade.",
-        questoes: config.palavras.slice(0, 3).map((palavra, index) => ({
-          pergunta: `${index + 1}. Marque a figura de ${palavra}.`,
-          imagens: [imgs[index % imgs.length]!, imgs[(index + 1) % imgs.length]!, imgs[(index + 2) % imgs.length]!],
-        })),
-      },
-    ]),
-    folha("Atividade 3 — Ligue figura e palavra", [
-      {
-        tipo: "ligar-imagens",
-        comando: "Ligue cada figura à palavra que combina com ela.",
-        esquerda: imgs.slice(0, 3),
-        direita: [...config.palavras.slice(0, 3)].reverse().map((p) => ({ texto: p })),
-      },
-    ]),
+    ...folhaMarcar,
+    ...folhaPares,
     folha("Atividade 4 — Cubra as palavras", [
       { tipo: "tracado", comando: "Cubra os pontilhados com capricho.", repeticoes: 2, ...tracado },
     ]),
@@ -257,7 +326,7 @@ function paginasForma(config: ConfigMat, imgs: ApostilaImagem[]): ApostilaPagina
         itens: config.numeros.slice(0, 3).map((quantidade, index) => ({
           imagem: imgs[index % imgs.length]!,
           quantidade,
-          opcoes: opcoesNumero(quantidade),
+          opcoes: opcoesNumero(quantidade, index),
         })),
       },
     ]),
@@ -289,7 +358,7 @@ function paginasDados(config: ConfigMat, imgs: ApostilaImagem[]): ApostilaPagina
         itens: config.numeros.slice(0, 4).map((quantidade, index) => ({
           imagem: imgs[index % imgs.length]!,
           quantidade,
-          opcoes: opcoesNumero(quantidade),
+          opcoes: opcoesNumero(quantidade, index),
         })),
       },
     ]),

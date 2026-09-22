@@ -90,7 +90,26 @@ function ItemVisual({ item }: { item: ApostilaItemVisual }) {
       </div>
     );
   }
+  if (item.quantidade && item.quantidade > 1) {
+    return (
+      <div className="flex min-h-36 flex-wrap items-center justify-center gap-2 rounded-md border border-foreground/20 p-3">
+        {Array.from({ length: item.quantidade }).map((_, i) => (
+          <img key={i} src={item.url} alt="" className="h-12 w-12 object-contain" />
+        ))}
+      </div>
+    );
+  }
   return <ImagemAtividade imagem={item} />;
+}
+
+function GrupoFiguras({ imagem, quantidade }: { imagem: { url: string }; quantidade: number }) {
+  return (
+    <span className="inline-flex flex-wrap items-center gap-1 rounded-md border border-foreground/30 p-1">
+      {Array.from({ length: Math.max(0, quantidade) }).map((_, i) => (
+        <img key={i} src={imagem.url} alt="" className="h-12 w-12 object-contain" />
+      ))}
+    </span>
+  );
 }
 
 function Bloco({ bloco }: { bloco: ApostilaBloco }) {
@@ -202,13 +221,31 @@ function Bloco({ bloco }: { bloco: ApostilaBloco }) {
                     <LetraPontilhada key={`${item}-${index}`} letra={item} />
                   ))}
                 </div>
-                {bloco.imagens?.[item] || bloco.imagem ? (
-                  <img
-                    src={(bloco.imagens?.[item] ?? bloco.imagem)?.url}
-                    alt={(bloco.imagens?.[item] ?? bloco.imagem)?.legenda ?? ""}
-                    className="mx-auto h-24 w-24 object-contain"
-                  />
-                ) : <div />}
+                {(() => {
+                  const figura = bloco.imagens?.[item] ?? bloco.imagem;
+                  if (!figura) return <div />;
+                  const numero = Number(item);
+                  if (bloco.quantidadeImagem && Number.isFinite(numero) && numero >= 1)
+                    return (
+                      <div className="flex flex-wrap items-center justify-center gap-1">
+                        {Array.from({ length: Math.min(numero, 12) }).map((_, i) => (
+                          <img
+                            key={i}
+                            src={figura.url}
+                            alt=""
+                            className="h-9 w-9 object-contain"
+                          />
+                        ))}
+                      </div>
+                    );
+                  return (
+                    <img
+                      src={figura.url}
+                      alt={figura.legenda ?? ""}
+                      className="mx-auto h-24 w-24 object-contain"
+                    />
+                  );
+                })()}
               </div>
             ))}
           </div>
@@ -408,15 +445,44 @@ function Bloco({ bloco }: { bloco: ApostilaBloco }) {
             {bloco.itens.map((item, index) => (
               <div key={`${item.imagem.url}-${index}`} className="break-inside-avoid rounded-md border-2 border-foreground/70 p-3">
                 <div className="flex flex-wrap items-center gap-2 text-[26pt] font-bold">
-                  {Array.from({ length: item.a }).map((_, i) => (
-                    <img key={`a-${i}`} src={item.imagem.url} alt="" className="h-14 w-14 object-contain" />
-                  ))}
+                  <GrupoFiguras imagem={item.imagem} quantidade={item.a} />
                   <span className="px-2">{item.sinal}</span>
-                  {Array.from({ length: item.b }).map((_, i) => (
-                    <img key={`b-${i}`} src={item.imagem.url} alt="" className="h-14 w-14 object-contain" />
-                  ))}
+                  {item.sinal === "+" ? (
+                    <GrupoFiguras imagem={item.imagem} quantidade={item.b} />
+                  ) : (
+                    <span className="px-1 text-[26pt]">{item.b}</span>
+                  )}
                   <span className="px-2">=</span>
                   <span className="inline-block h-16 w-24 border-2 border-foreground" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      {bloco.tipo === "conta-marcar" && (
+        <div className="mt-6">
+          <p className="max-w-[150mm] text-left text-[16pt] font-semibold leading-relaxed">{bloco.comando}</p>
+          <div className="mt-7 space-y-6">
+            {bloco.itens.map((item, index) => (
+              <div key={`${item.imagem.url}-${index}`} className="break-inside-avoid rounded-md border-2 border-foreground/70 p-3">
+                <div className="flex flex-wrap items-center gap-2 text-[24pt] font-bold">
+                  <GrupoFiguras imagem={item.imagem} quantidade={item.a} />
+                  <span className="px-2">{item.sinal}</span>
+                  {item.sinal === "+" ? (
+                    <GrupoFiguras imagem={item.imagem} quantidade={item.b} />
+                  ) : (
+                    <span className="px-1">{item.b}</span>
+                  )}
+                  <span className="px-2">=</span>
+                </div>
+                <div className="mt-3 grid grid-cols-3 gap-4">
+                  {item.opcoes.map((opcao) => (
+                    <div key={opcao} className="flex min-h-14 items-center justify-center gap-3 rounded-md border-2 border-foreground/60 text-[24pt] font-bold">
+                      <span className="h-6 w-6 border-2 border-foreground" />
+                      {opcao}
+                    </div>
+                  ))}
                 </div>
               </div>
             ))}

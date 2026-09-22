@@ -63,10 +63,18 @@ function imagensDaAulaEI(aula: AulaEI): ApostilaImagem[] {
   return unicas(brutas, 10);
 }
 
-function opcoesNumero(certo: number): string[] {
-  const set = new Set<number>([certo, certo + 1, Math.max(1, certo - 1)]);
-  while (set.size < 3) set.add(certo + set.size);
-  return [...set].sort(() => 0.5 - Math.random()).map(String);
+/** Três alternativas distintas com o número certo, em posição variada e estável. */
+function opcoesNumero(certo: number, giro = 0): string[] {
+  const lista: number[] = [certo];
+  let passo = 1;
+  while (lista.length < 3) {
+    for (const candidato of [certo + passo, certo - passo]) {
+      if (candidato >= 1 && !lista.includes(candidato) && lista.length < 3) lista.push(candidato);
+    }
+    passo += 1;
+  }
+  const deslocamento = ((giro % 3) + 3) % 3;
+  return [...lista.slice(deslocamento), ...lista.slice(0, deslocamento)].map(String);
 }
 
 function embaralhar<T>(lista: T[]): T[] {
@@ -178,18 +186,18 @@ function paginasCriancaMatematica(aula: AulaEI, imagens: ApostilaImagem[]): Apos
   const compreensoes = momentos(aula, "compreensaoImagem");
 
   const itensContar = contagens
-    .map((m) => {
+    .map((m, indice) => {
       const imagem = img(m.imagemUrl);
-      return imagem ? { imagem, quantidade: m.quantidade, opcoes: opcoesNumero(m.quantidade) } : null;
+      return imagem ? { imagem, quantidade: m.quantidade, opcoes: opcoesNumero(m.quantidade, indice) } : null;
     })
     .filter((i): i is { imagem: ApostilaImagem; quantidade: number; opcoes: string[] } => !!i);
 
   const itensQuantidade = compreensoes
     .flatMap((m) => m.opcoes)
-    .map((o) => {
+    .map((o, idx) => {
       const imagem = img(o.imagemUrl, o.nome);
       return imagem && o.quantidade
-        ? { imagem, quantidade: o.quantidade, opcoes: opcoesNumero(o.quantidade) }
+        ? { imagem, quantidade: o.quantidade, opcoes: opcoesNumero(o.quantidade, idx) }
         : null;
     })
     .filter((i): i is { imagem: ApostilaImagem; quantidade: number; opcoes: string[] } => !!i);
@@ -212,21 +220,34 @@ function paginasCriancaMatematica(aula: AulaEI, imagens: ApostilaImagem[]): Apos
         : null;
     })
     .filter((i): i is { imagem: ApostilaImagem; a: number; b: number; sinal: "+" | "−" } => !!i);
-  const comparados = comparacoes
-    .map((m) => {
-      const imagem = img(m.imagemUrl);
-      const maior = Math.max(...m.opcoes.map((o) => o.qtd));
-      const menor = Math.min(...m.opcoes.map((o) => o.qtd));
-      return imagem ? { imagem, a: maior, b: menor, sinal: "−" as const } : null;
-    })
-    .filter((i): i is { imagem: ApostilaImagem; a: number; b: number; sinal: "−" } => !!i);
-  const visuais = [...contas, ...comparados].slice(0, 3);
+  const visuais = contas.slice(0, 3);
   if (visuais.length)
     paginas.push(
       folha("Atividade 2 — Conte os dois grupos", {
         tipo: "conta-visual",
-        comando: "Conte cada grupo e escreva o total no quadradinho.",
+        comando: "Conte as figuras, faça a conta e escreva o total no quadradinho.",
         itens: visuais,
+      }),
+    );
+
+  // Comparar grupos não é conta: a criança conta cada grupo e marca quantos viu.
+  const contarComparado = comparacoes
+    .flatMap((m) => {
+      const imagem = img(m.imagemUrl);
+      if (!imagem) return [];
+      return m.opcoes.map((o, i) => ({
+        imagem,
+        quantidade: o.qtd,
+        opcoes: opcoesNumero(o.qtd, i),
+      }));
+    })
+    .slice(0, 4);
+  if (!visuais.length && contarComparado.length)
+    paginas.push(
+      folha("Atividade 2 — Conte cada grupo", {
+        tipo: "contar-marcar",
+        comando: "Conte as figuras de cada grupo e marque o número certo.",
+        itens: contarComparado,
       }),
     );
 
@@ -244,6 +265,7 @@ function paginasCriancaMatematica(aula: AulaEI, imagens: ApostilaImagem[]): Apos
         itens: numeros.map(String),
         repeticoes: 5,
         imagens: mapa,
+        quantidadeImagem: true,
       }),
     );
     paginas.push(
@@ -374,9 +396,9 @@ function paginasCriancaPortugues(aula: AulaEI, imagens: ApostilaImagem[]): Apost
 
   const palmas = ritmos
     .slice(0, 4)
-    .map((r) => {
+    .map((r, i) => {
       const imagem = img(r.imagemUrl);
-      return imagem ? { imagem, quantidade: r.silabas, opcoes: opcoesNumero(r.silabas) } : null;
+      return imagem ? { imagem, quantidade: r.silabas, opcoes: opcoesNumero(r.silabas, i) } : null;
     })
     .filter((i): i is { imagem: ApostilaImagem; quantidade: number; opcoes: string[] } => !!i);
   if (palmas.length)

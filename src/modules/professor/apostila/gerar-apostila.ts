@@ -12,7 +12,9 @@ import type { Aula } from "@/escola-brilha/types";
 import { paginasMatematica } from "./gerar-apostila-matematica";
 
 export type ApostilaImagem = { url: string; legenda?: string };
-export type ApostilaItemVisual = ApostilaImagem | { texto: string };
+export type ApostilaItemVisual =
+  | (ApostilaImagem & { quantidade?: number })
+  | { texto: string };
 
 export type ApostilaBloco =
   | { tipo: "texto"; titulo?: string; texto: string }
@@ -43,6 +45,20 @@ export type ApostilaBloco =
       repeticoes?: number;
       imagem?: ApostilaImagem;
       imagens?: Record<string, ApostilaImagem>;
+      /** Quando o item é número, mostra essa quantidade de figuras ao lado. */
+      quantidadeImagem?: boolean;
+    }
+  | {
+      tipo: "conta-marcar";
+      titulo?: string;
+      comando: string;
+      itens: Array<{
+        imagem: ApostilaImagem;
+        a: number;
+        b: number;
+        sinal: "+" | "−";
+        opcoes: string[];
+      }>;
     }
   | {
       tipo: "marcar-som";
