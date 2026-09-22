@@ -45,6 +45,20 @@ export type ApostilaBloco =
       repeticoes?: number;
       imagem?: ApostilaImagem;
       imagens?: Record<string, ApostilaImagem>;
+      /** Quando o item é número, mostra essa quantidade de figuras ao lado. */
+      quantidadeImagem?: boolean;
+    }
+  | {
+      tipo: "conta-marcar";
+      titulo?: string;
+      comando: string;
+      itens: Array<{
+        imagem: ApostilaImagem;
+        a: number;
+        b: number;
+        sinal: "+" | "−";
+        opcoes: string[];
+      }>;
     }
   | {
       tipo: "marcar-som";
