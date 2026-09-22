@@ -188,7 +188,7 @@ function paginasCriancaMatematica(aula: AulaEI, imagens: ApostilaImagem[]): Apos
   const itensContar = contagens
     .map((m) => {
       const imagem = img(m.imagemUrl);
-      return imagem ? { imagem, quantidade: m.quantidade, opcoes: opcoesNumero(m.quantidade) } : null;
+      return imagem ? { imagem, quantidade: m.quantidade, opcoes: opcoesNumero(m.quantidade, indice) } : null;
     })
     .filter((i): i is { imagem: ApostilaImagem; quantidade: number; opcoes: string[] } => !!i);
 
@@ -197,7 +197,7 @@ function paginasCriancaMatematica(aula: AulaEI, imagens: ApostilaImagem[]): Apos
     .map((o) => {
       const imagem = img(o.imagemUrl, o.nome);
       return imagem && o.quantidade
-        ? { imagem, quantidade: o.quantidade, opcoes: opcoesNumero(o.quantidade) }
+        ? { imagem, quantidade: o.quantidade, opcoes: opcoesNumero(o.quantidade, idx) }
         : null;
     })
     .filter((i): i is { imagem: ApostilaImagem; quantidade: number; opcoes: string[] } => !!i);
