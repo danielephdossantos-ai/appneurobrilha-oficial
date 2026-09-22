@@ -21,7 +21,7 @@ function ImagemAtividade({ imagem }: { imagem: { url: string; legenda?: string }
       <img
         src={imagem.url}
         alt={imagem.legenda ?? ""}
-        className="apostila-outline-img h-28 w-28 object-contain"
+        className="h-28 w-28 object-contain"
       />
       {imagem.legenda && <figcaption className="text-[14pt] font-semibold">{imagem.legenda}</figcaption>}
     </figure>
@@ -30,18 +30,18 @@ function ImagemAtividade({ imagem }: { imagem: { url: string; legenda?: string }
 
 function LetraPontilhada({ letra }: { letra: string }) {
   return (
-    <svg aria-label={letra} viewBox="0 0 120 120" className="h-28 w-28 text-foreground/75">
+    <svg aria-label={letra} viewBox="0 0 120 120" className="h-24 w-24 text-foreground">
       <text
         x="60"
         y="88"
         textAnchor="middle"
-        fontFamily="Arial Rounded MT Bold, Arial, sans-serif"
+        fontFamily="Arial, sans-serif"
         fontSize="88"
-        fontWeight="800"
+        fontWeight="700"
         fill="none"
         stroke="currentColor"
-        strokeWidth="3"
-        strokeDasharray="2 8"
+        strokeWidth="2.4"
+        strokeDasharray="0.1 5.2"
         strokeLinecap="round"
         strokeLinejoin="round"
       >
@@ -143,9 +143,15 @@ function Bloco({ bloco }: { bloco: ApostilaBloco }) {
           <div className="mt-10 grid grid-cols-[1fr_70mm_1fr] items-center gap-y-14">
             {bloco.esquerda.map((item, index) => (
               <div className="contents" key={`${"texto" in item ? item.texto : item.url}-${index}`}>
-                <ItemVisual item={item} />
-                <div className="border-b-2 border-dashed border-foreground/40" />
-                {bloco.direita[index] ? <ItemVisual item={bloco.direita[index]} /> : <div />}
+                <div className="relative after:absolute after:-right-3 after:top-1/2 after:h-2.5 after:w-2.5 after:-translate-y-1/2 after:rounded-full after:bg-foreground">
+                  <ItemVisual item={item} />
+                </div>
+                <div aria-hidden="true" />
+                {bloco.direita[index] ? (
+                  <div className="relative before:absolute before:-left-3 before:top-1/2 before:h-2.5 before:w-2.5 before:-translate-y-1/2 before:rounded-full before:bg-foreground">
+                    <ItemVisual item={bloco.direita[index]} />
+                  </div>
+                ) : <div />}
               </div>
             ))}
           </div>
@@ -154,13 +160,14 @@ function Bloco({ bloco }: { bloco: ApostilaBloco }) {
       {bloco.tipo === "tracado" && (
         <div className="mt-6">
           <p className="max-w-[150mm] text-left text-[16pt] font-semibold leading-relaxed">{bloco.comando}</p>
-          <div className="mt-10 space-y-12">
+          <div className="mt-10 space-y-10">
             {bloco.itens.map((item) => (
-              <div key={item} className="grid grid-cols-[40mm_1fr] items-end gap-8">
-                <div className="flex justify-center border-b-2 border-dashed border-foreground/40 pb-2">
-                  <LetraPontilhada letra={item} />
+              <div key={item} className="rounded-md border-2 border-foreground p-7">
+                <div className="grid grid-cols-5 gap-x-3 gap-y-10">
+                  {Array.from({ length: bloco.repeticoes ?? 10 }).map((_, index) => (
+                    <LetraPontilhada key={`${item}-${index}`} letra={item} />
+                  ))}
                 </div>
-                <div className="h-20 border-b-2 border-foreground/60" />
               </div>
             ))}
           </div>
@@ -317,17 +324,9 @@ export function ApostilaA4({
       </svg>
       <style>{`
         @page { size: A4; margin: 0; }
-        .apostila-outline-img {
-          filter: grayscale(1) contrast(1.85) brightness(1.9);
-          opacity: 0.72;
-        }
         @media print {
           .apostila-folha { break-after: page; min-height: 297mm; }
           .apostila-folha:last-child { break-after: auto; }
-          .apostila-outline-img {
-            filter: grayscale(1) contrast(2.15) brightness(2.05);
-            opacity: 0.68;
-          }
         }
       `}</style>
       {paginas.map((p, i) => (

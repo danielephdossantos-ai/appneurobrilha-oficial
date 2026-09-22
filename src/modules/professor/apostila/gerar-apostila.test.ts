@@ -55,6 +55,14 @@ describe("apostila A4 da área do professor", () => {
     expect(a.paginas.some((p) => p.etiqueta === "Gabarito")).toBe(false);
   });
 
+  it("gera treino pontilhado repetido de uma única letra", () => {
+    const a = gerarApostila(aula);
+    const tracado = a.paginas
+      .flatMap((p) => p.blocos)
+      .find((b) => b.tipo === "tracado");
+    expect(tracado).toMatchObject({ itens: ["G"], repeticoes: 10 });
+  });
+
   it("reaproveita apenas imagens que a aula já tem", () => {
     const imgs = imagensDaAula(aula);
     expect(imgs.length).toBeGreaterThan(0);
