@@ -104,9 +104,9 @@ function ItemVisual({ item }: { item: ApostilaItemVisual }) {
 
 function GrupoFiguras({ imagem, quantidade }: { imagem: { url: string }; quantidade: number }) {
   return (
-    <span className="inline-flex flex-wrap items-center gap-1 rounded-md border border-foreground/30 p-1">
+    <span className="apostila-grupo inline-flex flex-wrap items-center gap-1 rounded-md border border-foreground/30 p-1">
       {Array.from({ length: Math.max(0, quantidade) }).map((_, i) => (
-        <img key={i} src={imagem.url} alt="" className="h-12 w-12 object-contain" />
+        <img key={i} src={imagem.url} alt="" className="h-14 w-14 object-contain" />
       ))}
     </span>
   );
