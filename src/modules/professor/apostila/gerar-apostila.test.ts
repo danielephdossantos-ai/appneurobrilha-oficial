@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getAula } from "@/escola-brilha/registry";
+import { getAula, listAulas } from "@/escola-brilha/registry";
 import { gerarApostila, imagensDaAula, termosDaAula } from "./gerar-apostila";
 
 const aula = getAula("EF01LP01")!;
