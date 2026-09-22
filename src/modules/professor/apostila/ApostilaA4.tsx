@@ -104,9 +104,9 @@ function ItemVisual({ item }: { item: ApostilaItemVisual }) {
 
 function GrupoFiguras({ imagem, quantidade }: { imagem: { url: string }; quantidade: number }) {
   return (
-    <span className="inline-flex flex-wrap items-center gap-1 rounded-md border border-foreground/30 p-1">
+    <span className="apostila-grupo inline-flex flex-wrap items-center gap-1 rounded-md border border-foreground/30 p-1">
       {Array.from({ length: Math.max(0, quantidade) }).map((_, i) => (
-        <img key={i} src={imagem.url} alt="" className="h-12 w-12 object-contain" />
+        <img key={i} src={imagem.url} alt="" className="h-14 w-14 object-contain" />
       ))}
     </span>
   );
@@ -443,7 +443,7 @@ function Bloco({ bloco }: { bloco: ApostilaBloco }) {
           <p className="max-w-[150mm] text-left text-[16pt] font-semibold leading-relaxed">{bloco.comando}</p>
           <div className="mt-7 space-y-7">
             {bloco.itens.map((item, index) => (
-              <div key={`${item.imagem.url}-${index}`} className="break-inside-avoid rounded-md border-2 border-foreground/70 p-3">
+              <div key={`${item.imagem.url}-${index}`} className="apostila-centrar break-inside-avoid rounded-md border-2 border-foreground/70 p-3">
                 <div className="flex flex-wrap items-center gap-2 text-[26pt] font-bold">
                   <GrupoFiguras imagem={item.imagem} quantidade={item.a} />
                   <span className="px-2">{item.sinal}</span>
@@ -530,7 +530,7 @@ function Folha({ pagina, apostila }: { pagina: ApostilaPagina; apostila: Apostil
   return (
     <article
       data-etiqueta={pagina.etiqueta}
-      className="apostila-folha mx-auto flex min-h-[297mm] w-full max-w-[210mm] flex-col bg-background p-[18mm] text-foreground shadow-sm ring-1 ring-border print:bg-background print:shadow-none print:ring-0"
+      className={`apostila-folha mx-auto flex min-h-[297mm] w-full max-w-[210mm] flex-col bg-background p-[18mm] text-foreground shadow-sm ring-1 ring-border print:bg-background print:shadow-none print:ring-0 ${infantil ? "apostila-folha-crianca h-[297mm]" : ""}`}
     >
       {infantil ? (
         <header className="grid grid-cols-[1fr_42mm] gap-8 border-b border-foreground/25 pb-3 text-[11pt]">
@@ -547,7 +547,7 @@ function Folha({ pagina, apostila }: { pagina: ApostilaPagina; apostila: Apostil
       )}
       <h2 className={`${infantil ? "mt-10 text-[26pt] font-semibold" : "mt-4 text-[19pt] font-black"} leading-tight`}>{pagina.titulo}</h2>
       {pagina.subtitulo && <p className="mt-1 text-[11pt] font-semibold">{pagina.subtitulo}</p>}
-      <div className="flex-1">
+      <div className={`flex-1 ${infantil ? "apostila-preencher" : ""}`}>
         {pagina.blocos.map((b, i) => (
           <Bloco key={i} bloco={b} />
         ))}
@@ -585,6 +585,26 @@ export function ApostilaA4({
           .apostila-folha { break-after: page; min-height: 297mm; }
           .apostila-folha:last-child { break-after: auto; }
         }
+        /* Folha da criança: as atividades ocupam a folha toda, sem sobra de branco. */
+        .apostila-preencher { display: flex; flex-direction: column; gap: 4mm; }
+        .apostila-preencher > section { flex: 1 1 0%; display: flex; flex-direction: column; min-height: 0; margin-top: 0; }
+        .apostila-preencher > section > div { flex: 1 1 0%; display: flex; flex-direction: column; min-height: 0; }
+        .apostila-preencher > section > div > .grid { flex: 1 1 0%; grid-auto-rows: 1fr; align-content: stretch; }
+        .apostila-preencher > section > div > div[class*="space-y"] { flex: 1 1 0%; display: flex; flex-direction: column; justify-content: space-between; }
+        .apostila-preencher > section > div > div[class*="space-y"] > * { flex: 1 1 0%; }
+        .apostila-folha-crianca { height: 297mm; overflow: hidden; }
+        /* nada de altura mínima travada: as atividades encolhem para caber na folha */
+        .apostila-preencher figure,
+        .apostila-preencher [class*="min-h-"] { min-height: 0; }
+        .apostila-preencher figure { height: 100%; }
+        /* célula com figura + resposta: a figura cresce, a linha de resposta continua visível */
+        .apostila-preencher .grid > div:not(.contents) { display: flex; flex-direction: column; min-height: 0; }
+        .apostila-preencher .grid > div:not(.contents) > figure { flex: 1 1 0%; min-height: 0; }
+        .apostila-preencher .apostila-centrar { justify-content: center; }
+        .apostila-preencher .apostila-grupo { align-content: center; }
+        .apostila-preencher figure img { height: auto; width: auto; min-height: 12mm; max-height: 100%; max-width: 100%; }
+        .apostila-preencher img { max-height: 100%; }
+        .apostila-preencher svg { max-height: 100%; }
       `}</style>
       {paginas.map((p, i) => (
         <Folha key={i} pagina={p} apostila={apostila} />
