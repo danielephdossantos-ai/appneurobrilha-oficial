@@ -326,7 +326,7 @@ function paginasForma(config: ConfigMat, imgs: ApostilaImagem[]): ApostilaPagina
         itens: config.numeros.slice(0, 3).map((quantidade, index) => ({
           imagem: imgs[index % imgs.length]!,
           quantidade,
-          opcoes: opcoesNumero(quantidade),
+          opcoes: opcoesNumero(quantidade, index),
         })),
       },
     ]),
@@ -358,7 +358,7 @@ function paginasDados(config: ConfigMat, imgs: ApostilaImagem[]): ApostilaPagina
         itens: config.numeros.slice(0, 4).map((quantidade, index) => ({
           imagem: imgs[index % imgs.length]!,
           quantidade,
-          opcoes: opcoesNumero(quantidade),
+          opcoes: opcoesNumero(quantidade, index),
         })),
       },
     ]),
