@@ -122,6 +122,11 @@ function Bloco({ bloco }: { bloco: ApostilaBloco }) {
       {bloco.tipo === "texto" && (
         <p className="mt-2 whitespace-pre-wrap text-[12pt] leading-relaxed">{bloco.texto}</p>
       )}
+      {bloco.tipo === "historia" && (
+        <div className="apostila-historia mt-8 flex flex-1 items-center rounded-md border-2 border-foreground/30 p-8">
+          <p className="whitespace-pre-wrap text-[17pt] font-medium leading-[1.8]">{bloco.texto}</p>
+        </div>
+      )}
       {bloco.tipo === "aviso" && (
         <p className="mt-2 rounded-lg border-2 border-slate-800 p-3 text-[11.5pt] leading-relaxed">
           {bloco.texto}
@@ -618,6 +623,7 @@ export function ApostilaA4({
         .apostila-preencher .apostila-grupo img,
         .apostila-preencher div.flex.flex-wrap > img { max-width: 14mm; max-height: 14mm; }
         .apostila-preencher svg { max-width: 30mm; max-height: 30mm; }
+        .apostila-historia { min-height: 205mm; }
       `}</style>
       {paginas.map((p, i) => (
         <Folha key={i} pagina={p} apostila={apostila} />
