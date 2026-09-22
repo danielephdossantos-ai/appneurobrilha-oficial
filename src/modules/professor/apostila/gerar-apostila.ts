@@ -9,6 +9,15 @@
  */
 
 import type { Aula } from "@/escola-brilha/types";
+import bolaColorir from "@/assets/apostila/ef01lp01/bola-colorir.png";
+import casaColorir from "@/assets/apostila/ef01lp01/casa-colorir.png";
+import dadoColorir from "@/assets/apostila/ef01lp01/dado-colorir.png";
+import gatoColorir from "@/assets/apostila/ef01lp01/gato-colorir.png";
+import patoColorir from "@/assets/apostila/ef01lp01/pato-colorir.png";
+import ratoColorir from "@/assets/apostila/ef01lp01/rato-colorir.png";
+import sapoColorir from "@/assets/apostila/ef01lp01/sapo-colorir.png";
+import solColorir from "@/assets/apostila/ef01lp01/sol-colorir.png";
+import vacaColorir from "@/assets/apostila/ef01lp01/vaca-colorir.png";
 
 export type ApostilaImagem = { url: string; legenda?: string };
 export type ApostilaItemVisual = ApostilaImagem | { texto: string };
@@ -41,6 +50,7 @@ export type ApostilaBloco =
       itens: string[];
       repeticoes?: number;
       imagem?: ApostilaImagem;
+      imagens?: Record<string, ApostilaImagem>;
     }
   | {
       tipo: "marcar-som";
@@ -180,16 +190,19 @@ function imagemComLegenda(imagens: ApostilaImagem[], legenda: string): ApostilaI
 }
 
 function paginasInfantisEF01LP01(imagens: ApostilaImagem[]): ApostilaPagina[] | null {
-  const gato = imagemComLegenda(imagens, "gato");
-  const sol = imagemComLegenda(imagens, "sol");
-  const bola = imagemComLegenda(imagens, "bola");
-  const pato = imagemComLegenda(imagens, "pato");
-  const sapo = imagemComLegenda(imagens, "sapo");
-  const casa = imagemComLegenda(imagens, "casa");
-  const rato = imagemComLegenda(imagens, "rato");
-  const vaca = imagemComLegenda(imagens, "vaca");
-  const dado = imagemComLegenda(imagens, "dado");
-  if (!gato || !sol || !bola || !pato || !sapo || !casa || !rato || !vaca || !dado) return null;
+  const imagensOriginais = ["gato", "sol", "bola", "pato", "sapo", "casa", "rato", "vaca", "dado"]
+    .map((legenda) => imagemComLegenda(imagens, legenda));
+  if (imagensOriginais.some((imagem) => !imagem)) return null;
+
+  const gato = { url: gatoColorir, legenda: "gato" };
+  const sol = { url: solColorir, legenda: "sol" };
+  const bola = { url: bolaColorir, legenda: "bola" };
+  const pato = { url: patoColorir, legenda: "pato" };
+  const sapo = { url: sapoColorir, legenda: "sapo" };
+  const casa = { url: casaColorir, legenda: "casa" };
+  const rato = { url: ratoColorir, legenda: "rato" };
+  const vaca = { url: vacaColorir, legenda: "vaca" };
+  const dado = { url: dadoColorir, legenda: "dado" };
 
   return [
     {
@@ -238,9 +251,9 @@ function paginasInfantisEF01LP01(imagens: ApostilaImagem[]): ApostilaPagina[] | 
         {
           tipo: "tracado",
           comando: "Cubra os pontilhados e pinte o desenho.",
-          itens: ["G"],
+          itens: ["G", "B", "P"],
           repeticoes: 5,
-          imagem: gato,
+          imagens: { G: gato, B: bola, P: pato },
         },
       ],
     },
