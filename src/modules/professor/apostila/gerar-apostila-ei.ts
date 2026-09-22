@@ -63,10 +63,18 @@ function imagensDaAulaEI(aula: AulaEI): ApostilaImagem[] {
   return unicas(brutas, 10);
 }
 
-function opcoesNumero(certo: number): string[] {
-  const set = new Set<number>([certo, certo + 1, Math.max(1, certo - 1)]);
-  while (set.size < 3) set.add(certo + set.size);
-  return [...set].sort(() => 0.5 - Math.random()).map(String);
+/** Três alternativas distintas com o número certo, em posição variada e estável. */
+function opcoesNumero(certo: number, giro = 0): string[] {
+  const lista: number[] = [certo];
+  let passo = 1;
+  while (lista.length < 3) {
+    for (const candidato of [certo + passo, certo - passo]) {
+      if (candidato >= 1 && !lista.includes(candidato) && lista.length < 3) lista.push(candidato);
+    }
+    passo += 1;
+  }
+  const deslocamento = ((giro % 3) + 3) % 3;
+  return [...lista.slice(deslocamento), ...lista.slice(0, deslocamento)].map(String);
 }
 
 function embaralhar<T>(lista: T[]): T[] {
