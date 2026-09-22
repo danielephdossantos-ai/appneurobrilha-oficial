@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { getAula } from "@/escola-brilha/registry";
 import { ApostilaA4 } from "@/modules/professor/apostila/ApostilaA4";
 import { gerarApostila, termosDaAula, type ApostilaImagem } from "@/modules/professor/apostila/gerar-apostila";
+import { gerarApostilaEI } from "@/modules/professor/apostila/gerar-apostila-ei";
 
 export const Route = createFileRoute("/area-professor/apostila/$codigo")({
   component: ApostilaImprimir,
