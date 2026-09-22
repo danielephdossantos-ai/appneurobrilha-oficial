@@ -212,21 +212,34 @@ function paginasCriancaMatematica(aula: AulaEI, imagens: ApostilaImagem[]): Apos
         : null;
     })
     .filter((i): i is { imagem: ApostilaImagem; a: number; b: number; sinal: "+" | "−" } => !!i);
-  const comparados = comparacoes
-    .map((m) => {
-      const imagem = img(m.imagemUrl);
-      const maior = Math.max(...m.opcoes.map((o) => o.qtd));
-      const menor = Math.min(...m.opcoes.map((o) => o.qtd));
-      return imagem ? { imagem, a: maior, b: menor, sinal: "−" as const } : null;
-    })
-    .filter((i): i is { imagem: ApostilaImagem; a: number; b: number; sinal: "−" } => !!i);
-  const visuais = [...contas, ...comparados].slice(0, 3);
+  const visuais = contas.slice(0, 3);
   if (visuais.length)
     paginas.push(
       folha("Atividade 2 — Conte os dois grupos", {
         tipo: "conta-visual",
-        comando: "Conte cada grupo e escreva o total no quadradinho.",
+        comando: "Conte as figuras, faça a conta e escreva o total no quadradinho.",
         itens: visuais,
+      }),
+    );
+
+  // Comparar grupos não é conta: a criança conta cada grupo e marca quantos viu.
+  const contarComparado = comparacoes
+    .flatMap((m) => {
+      const imagem = img(m.imagemUrl);
+      if (!imagem) return [];
+      return m.opcoes.map((o, i) => ({
+        imagem,
+        quantidade: o.qtd,
+        opcoes: opcoesNumero(o.qtd, i),
+      }));
+    })
+    .slice(0, 4);
+  if (!visuais.length && contarComparado.length)
+    paginas.push(
+      folha("Atividade 2 — Conte cada grupo", {
+        tipo: "contar-marcar",
+        comando: "Conte as figuras de cada grupo e marque o número certo.",
+        itens: contarComparado,
       }),
     );
 
