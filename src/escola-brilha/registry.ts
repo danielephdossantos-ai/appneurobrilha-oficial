@@ -4,7 +4,7 @@ import type { Aula } from "./types";
  * Auto-registro de todas as aulas escritas à mão em src/escola-brilha/data/*.ts.
  * Cada arquivo deve fazer `export default { ... } satisfies Aula`.
  */
-const modules = import.meta.glob<{ default: Aula }>("./data/*.ts", { eager: true });
+const modules = import.meta.glob<{ default: Aula }>(["./data/*.ts", "!./data/*.test.ts"], { eager: true });
 
 const registry: Record<string, Aula> = {};
 for (const path in modules) {

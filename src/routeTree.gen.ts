@@ -61,6 +61,7 @@ import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as AdminProfessoresRouteImport } from './routes/admin.professores'
 import { Route as AjusteDificuldadesChildIdRouteImport } from './routes/ajuste-dificuldades.$childId'
 import { Route as AnamneseChildIdRouteImport } from './routes/anamnese.$childId'
+import { Route as AreaProfessorIndexRouteImport } from './routes/area-professor.index'
 import { Route as AreaProfessorAlfabetizacaoRouteImport } from './routes/area-professor.alfabetizacao'
 import { Route as AreaProfessorApostilasRouteImport } from './routes/area-professor.apostilas'
 import { Route as AreaProfessorAssistentePedagogicoRouteImport } from './routes/area-professor.assistente-pedagogico'
@@ -377,6 +378,11 @@ const AnamneseChildIdRoute = AnamneseChildIdRouteImport.update({
   id: '/anamnese/$childId',
   path: '/anamnese/$childId',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AreaProfessorIndexRoute = AreaProfessorIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AreaProfessorRoute,
 } as any)
 const AreaProfessorAlfabetizacaoRoute =
   AreaProfessorAlfabetizacaoRouteImport.update({
@@ -748,6 +754,7 @@ export interface FileRoutesByFullPath {
   '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
   '/painel-pais/documentos': typeof PainelPaisDocumentosRoute
   '/admin/': typeof AdminIndexRoute
+  '/area-professor/': typeof AreaProfessorIndexRoute
   '/escola-brilha/': typeof EscolaBrilhaIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
@@ -796,7 +803,6 @@ export interface FileRoutesByTo {
   '/alfabetizacao': typeof AlfabetizacaoRoute
   '/analytics': typeof AnalyticsRoute
   '/apoio-escolar': typeof ApoioEscolarRoute
-  '/area-professor': typeof AreaProfessorRouteWithChildren
   '/auditoria-pedagogica': typeof AuditoriaPedagogicaRoute
   '/auth': typeof AuthRoute
   '/banco-midias': typeof BancoMidiasRoute
@@ -854,6 +860,7 @@ export interface FileRoutesByTo {
   '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
   '/painel-pais/documentos': typeof PainelPaisDocumentosRoute
   '/admin': typeof AdminIndexRoute
+  '/area-professor': typeof AreaProfessorIndexRoute
   '/escola-brilha': typeof EscolaBrilhaIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
@@ -962,6 +969,7 @@ export interface FileRoutesById {
   '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
   '/painel-pais/documentos': typeof PainelPaisDocumentosRoute
   '/admin/': typeof AdminIndexRoute
+  '/area-professor/': typeof AreaProfessorIndexRoute
   '/escola-brilha/': typeof EscolaBrilhaIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
@@ -1071,6 +1079,7 @@ export interface FileRouteTypes {
     | '/neuro-treino/configurar'
     | '/painel-pais/documentos'
     | '/admin/'
+    | '/area-professor/'
     | '/escola-brilha/'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
@@ -1119,7 +1128,6 @@ export interface FileRouteTypes {
     | '/alfabetizacao'
     | '/analytics'
     | '/apoio-escolar'
-    | '/area-professor'
     | '/auditoria-pedagogica'
     | '/auth'
     | '/banco-midias'
@@ -1177,6 +1185,7 @@ export interface FileRouteTypes {
     | '/neuro-treino/configurar'
     | '/painel-pais/documentos'
     | '/admin'
+    | '/area-professor'
     | '/escola-brilha'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
@@ -1284,6 +1293,7 @@ export interface FileRouteTypes {
     | '/neuro-treino/configurar'
     | '/painel-pais/documentos'
     | '/admin/'
+    | '/area-professor/'
     | '/escola-brilha/'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
@@ -1780,6 +1790,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AnamneseChildIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/area-professor/': {
+      id: '/area-professor/'
+      path: '/'
+      fullPath: '/area-professor/'
+      preLoaderRoute: typeof AreaProfessorIndexRouteImport
+      parentRoute: typeof AreaProfessorRoute
+    }
     '/area-professor/alfabetizacao': {
       id: '/area-professor/alfabetizacao'
       path: '/alfabetizacao'
@@ -2173,6 +2190,7 @@ interface AreaProfessorRouteChildren {
   AreaProfessorBibliotecaInclusivaRoute: typeof AreaProfessorBibliotecaInclusivaRoute
   AreaProfessorPraticaRoute: typeof AreaProfessorPraticaRoute
   AreaProfessorTarefasRoute: typeof AreaProfessorTarefasRoute
+  AreaProfessorIndexRoute: typeof AreaProfessorIndexRoute
   AreaProfessorAcompanhamentoLinkIdRoute: typeof AreaProfessorAcompanhamentoLinkIdRoute
   AreaProfessorApostilaCodigoRoute: typeof AreaProfessorApostilaCodigoRoute
   AreaProfessorAulaInclusivaLessonIdRoute: typeof AreaProfessorAulaInclusivaLessonIdRoute
@@ -2187,6 +2205,7 @@ const AreaProfessorRouteChildren: AreaProfessorRouteChildren = {
   AreaProfessorBibliotecaInclusivaRoute: AreaProfessorBibliotecaInclusivaRoute,
   AreaProfessorPraticaRoute: AreaProfessorPraticaRoute,
   AreaProfessorTarefasRoute: AreaProfessorTarefasRoute,
+  AreaProfessorIndexRoute: AreaProfessorIndexRoute,
   AreaProfessorAcompanhamentoLinkIdRoute:
     AreaProfessorAcompanhamentoLinkIdRoute,
   AreaProfessorApostilaCodigoRoute: AreaProfessorApostilaCodigoRoute,
