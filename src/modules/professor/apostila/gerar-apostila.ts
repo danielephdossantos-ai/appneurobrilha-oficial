@@ -40,6 +40,7 @@ export type ApostilaBloco =
       comando: string;
       itens: string[];
       repeticoes?: number;
+      imagem?: ApostilaImagem;
     }
   | {
       tipo: "marcar-som";
@@ -236,9 +237,10 @@ function paginasInfantisEF01LP01(imagens: ApostilaImagem[]): ApostilaPagina[] | 
       blocos: [
         {
           tipo: "tracado",
-          comando: "Cubra as letras pontilhadas.",
+          comando: "Cubra os pontilhados e pinte o desenho.",
           itens: ["G"],
-          repeticoes: 10,
+          repeticoes: 5,
+          imagem: gato,
         },
       ],
     },

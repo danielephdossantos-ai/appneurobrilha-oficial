@@ -51,6 +51,39 @@ function LetraPontilhada({ letra }: { letra: string }) {
   );
 }
 
+function LetraGuia({ letra }: { letra: string }) {
+  return (
+    <svg aria-label={`Modelo da letra ${letra}`} viewBox="0 0 150 150" className="h-32 w-32 text-foreground">
+      <defs>
+        <marker id={`seta-${letra}`} markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6 Z" fill="currentColor" />
+        </marker>
+      </defs>
+      <text
+        x="82"
+        y="112"
+        textAnchor="middle"
+        fontFamily="Arial, sans-serif"
+        fontSize="112"
+        fontWeight="700"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+      >
+        {letra}
+      </text>
+      <text x="7" y="24" fontFamily="Arial, sans-serif" fontSize="15" fontWeight="700" fill="currentColor">1</text>
+      <path
+        d="M18 30 L18 112"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        markerEnd={`url(#seta-${letra})`}
+      />
+    </svg>
+  );
+}
+
 function ItemVisual({ item }: { item: ApostilaItemVisual }) {
   if ("texto" in item) {
     return (
@@ -162,12 +195,16 @@ function Bloco({ bloco }: { bloco: ApostilaBloco }) {
           <p className="max-w-[150mm] text-left text-[16pt] font-semibold leading-relaxed">{bloco.comando}</p>
           <div className="mt-10 space-y-10">
             {bloco.itens.map((item) => (
-              <div key={item} className="rounded-md border-2 border-foreground p-7">
-                <div className="grid grid-cols-5 gap-x-3 gap-y-10">
-                  {Array.from({ length: bloco.repeticoes ?? 10 }).map((_, index) => (
+              <div key={item} className="grid grid-cols-[38mm_1fr_40mm] items-center gap-5 rounded-md border-2 border-foreground p-5">
+                <div className="flex justify-center border-r border-foreground/30 pr-4">
+                  <LetraGuia letra={item} />
+                </div>
+                <div className="grid grid-cols-3 items-center justify-items-center gap-x-2 gap-y-3">
+                  {Array.from({ length: bloco.repeticoes ?? 5 }).map((_, index) => (
                     <LetraPontilhada key={`${item}-${index}`} letra={item} />
                   ))}
                 </div>
+                {bloco.imagem ? <ImagemAtividade imagem={bloco.imagem} /> : <div />}
               </div>
             ))}
           </div>
