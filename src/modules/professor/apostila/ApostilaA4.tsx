@@ -90,7 +90,26 @@ function ItemVisual({ item }: { item: ApostilaItemVisual }) {
       </div>
     );
   }
+  if (item.quantidade && item.quantidade > 1) {
+    return (
+      <div className="flex min-h-36 flex-wrap items-center justify-center gap-2 rounded-md border border-foreground/20 p-3">
+        {Array.from({ length: item.quantidade }).map((_, i) => (
+          <img key={i} src={item.url} alt="" className="h-12 w-12 object-contain" />
+        ))}
+      </div>
+    );
+  }
   return <ImagemAtividade imagem={item} />;
+}
+
+function GrupoFiguras({ imagem, quantidade }: { imagem: { url: string }; quantidade: number }) {
+  return (
+    <span className="inline-flex flex-wrap items-center gap-1 rounded-md border border-foreground/30 p-1">
+      {Array.from({ length: Math.max(0, quantidade) }).map((_, i) => (
+        <img key={i} src={imagem.url} alt="" className="h-12 w-12 object-contain" />
+      ))}
+    </span>
+  );
 }
 
 function Bloco({ bloco }: { bloco: ApostilaBloco }) {
