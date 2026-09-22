@@ -592,9 +592,14 @@ export function ApostilaA4({
         .apostila-preencher > section > div > .grid { flex: 1 1 0%; grid-auto-rows: 1fr; align-content: stretch; }
         .apostila-preencher > section > div > div[class*="space-y"] { flex: 1 1 0%; display: flex; flex-direction: column; justify-content: space-between; }
         .apostila-preencher > section > div > div[class*="space-y"] > * { flex: 1 1 0%; }
+        .apostila-folha-crianca { height: 297mm; overflow: hidden; }
+        /* nada de altura mínima travada: as atividades encolhem para caber na folha */
+        .apostila-preencher figure,
+        .apostila-preencher [class*="min-h-"] { min-height: 0; }
         .apostila-preencher figure { height: 100%; }
-        .apostila-preencher figure img { height: auto; width: auto; min-height: 16mm; max-height: 100%; max-width: 100%; }
+        .apostila-preencher figure img { height: auto; width: auto; min-height: 12mm; max-height: 100%; max-width: 100%; }
         .apostila-preencher img { max-height: 100%; }
+        .apostila-preencher svg { max-height: 100%; }
       `}</style>
       {paginas.map((p, i) => (
         <Folha key={i} pagina={p} apostila={apostila} />
