@@ -129,7 +129,7 @@ function paginasContagem(config: ConfigMat, imgs: ApostilaImagem[]): ApostilaPag
         itens: config.numeros.slice(0, 4).map((quantidade, index) => ({
           imagem: imgs[index % imgs.length]!,
           quantidade,
-          opcoes: opcoesNumero(quantidade),
+          opcoes: opcoesNumero(quantidade, index),
         })),
       },
     ]),
@@ -138,7 +138,9 @@ function paginasContagem(config: ConfigMat, imgs: ApostilaImagem[]): ApostilaPag
         tipo: "ligar-imagens",
         comando: "Ligue cada número ao grupo com essa quantidade de figuras.",
         esquerda: config.numeros.slice(0, 4).map((n) => ({ texto: String(n) })),
-        direita: [...config.numeros.slice(0, 4)].reverse().map((_, index) => imgs[index % imgs.length]!),
+        direita: [...config.numeros.slice(0, 4)]
+          .reverse()
+          .map((n, index) => grupo(imgs[index % imgs.length]!, n)),
       },
     ]),
     folha("Atividade 3 — Complete a sequência", [
