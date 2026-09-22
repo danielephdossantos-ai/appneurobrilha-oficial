@@ -30,7 +30,9 @@ function Apostilas() {
   const aulas = useMemo(
     () =>
       listAulas().filter(
-        (a) => /portugu/i.test(a.disciplina) && /1º\s*ano/i.test(a.ano),
+        (a) =>
+          (/portugu/i.test(a.disciplina) || /matem/i.test(a.disciplina)) &&
+          /[1-5]º\s*ano/i.test(a.ano),
       ),
     [],
   );
