@@ -58,4 +58,17 @@ describe("apostilas da Educação Infantil (3 a 6 anos)", () => {
       expect(primeira?.blocos).toEqual([expect.objectContaining({ tipo: "historia" })]);
     }
   });
+
+  it("coloca modelo visual e atividade da criança junto de cada explicação", () => {
+    for (const item of catalogo) {
+      const guia = gerarApostilaEI(item.chave)?.paginas.filter((pagina) => pagina.etiqueta === "Guia do professor")[1];
+      const pares = guia?.blocos.filter((bloco) => bloco.tipo === "explicacao-atividade") ?? [];
+      expect(pares.length, item.chave).toBeGreaterThanOrEqual(2);
+      for (const par of pares) {
+        if (par.tipo !== "explicacao-atividade") continue;
+        expect(par.explicacao.trim(), item.chave).not.toBe("");
+        expect(par.atividade.trim(), item.chave).not.toBe("");
+      }
+    }
+  });
 });

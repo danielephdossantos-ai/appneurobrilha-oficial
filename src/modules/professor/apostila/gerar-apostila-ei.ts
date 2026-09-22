@@ -110,6 +110,7 @@ function paginasProfessor(curso: CursoEI, aula: AulaEI): ApostilaPagina[] {
   const conversas = momentos(aula, "rodaConversa");
   const familia = momentos(aula, "missaoFamilia")[0];
   const fazDeConta = momentos(aula, "fazDeConta")[0];
+  const imagens = imagensDaAulaEI(aula);
 
   const passosEnsino: string[] = [];
   for (const m of aula.momentos) {
@@ -133,9 +134,31 @@ function paginasProfessor(curso: CursoEI, aula: AulaEI): ApostilaPagina[] {
         .join("\n\n");
   const folha1: ApostilaBloco[] = [{ tipo: "historia", texto: textoHistoria || aula.titulo }];
 
+  const explicacoes = passosEnsino.slice(0, 4).map(adaptarTextoParaPapel);
+  const atividadeVisual =
+    adaptarTextoParaPapel(
+      fazDeConta?.convite ??
+      conversas[0]?.pergunta ??
+      passosEnsino[1] ??
+      passosEnsino[0] ??
+      aula.titulo,
+    );
   const folha2: ApostilaBloco[] = [
     { tipo: "texto", titulo: "Objetivo da aula adaptada", texto: adaptarTextoParaPapel(boasVindas?.falaMascote ?? aula.titulo) },
-    { tipo: "passos", titulo: "Explique e faça junto", passos: passosEnsino.slice(0, 10).map(adaptarTextoParaPapel) },
+    {
+      tipo: "explicacao-atividade",
+      titulo: "1. Explique, mostre e faça junto",
+      explicacao: explicacoes.slice(0, 2).join(" ") || adaptarTextoParaPapel(aula.titulo),
+      atividade: atividadeVisual,
+      imagens: imagens.slice(0, 4),
+    },
+    {
+      tipo: "explicacao-atividade",
+      titulo: "2. Repita com outra atividade da criança",
+      explicacao: explicacoes.slice(2).join(" ") || explicacoes[0] || adaptarTextoParaPapel(aula.titulo),
+      atividade: adaptarTextoParaPapel(conversas[0]?.pergunta ?? passosEnsino[2] ?? atividadeVisual),
+      imagens: imagens.slice(4, 8).length ? imagens.slice(4, 8) : imagens.slice(0, 4),
+    },
   ];
   if (conversas.length)
     folha2.push({
@@ -143,8 +166,6 @@ function paginasProfessor(curso: CursoEI, aula: AulaEI): ApostilaPagina[] {
       titulo: "Perguntas de conversa (sem resposta certa)",
       itens: conversas.map((c) => adaptarTextoParaPapel(c.pergunta)),
     });
-  if (fazDeConta)
-    folha2.push({ tipo: "texto", titulo: "Faça junto antes da folha", texto: adaptarTextoParaPapel(fazDeConta.convite) });
   folha2.push({ tipo: "lista", titulo: "Apoios para esta atividade", itens: ADAPTACOES });
   if (aula.baseCientifica)
     folha2.push({ tipo: "aviso", titulo: "Base da atividade", texto: aula.baseCientifica });

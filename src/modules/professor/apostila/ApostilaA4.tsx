@@ -158,6 +158,39 @@ function Bloco({ bloco }: { bloco: ApostilaBloco }) {
           ))}
         </div>
       )}
+      {bloco.tipo === "explicacao-atividade" && (
+        <div className="mt-3 break-inside-avoid rounded-md border-2 border-foreground/70 p-4">
+          <div className="grid grid-cols-[1fr_58mm] gap-5">
+            <div>
+              <p className="text-[9pt] font-black uppercase">Como explicar</p>
+              <p className="mt-1 whitespace-pre-wrap text-[11pt] leading-relaxed">{bloco.explicacao}</p>
+            </div>
+            <div className="rounded-md border border-foreground/30 p-2">
+              <p className="text-center text-[9pt] font-black uppercase">Modelo visual</p>
+              <div className="mt-2 flex min-h-20 flex-wrap items-center justify-center gap-2">
+                {bloco.imagens.length ? bloco.imagens.flatMap((imagem, imagemIndex) =>
+                  Array.from({ length: Math.max(1, bloco.quantidade ?? 1) }, (_, repeticao) => (
+                    <img
+                      key={`${imagem.url}-${imagemIndex}-${repeticao}`}
+                      src={imagem.url}
+                      alt={imagem.legenda ?? ""}
+                      className="h-14 w-14 object-contain"
+                    />
+                  )),
+                ) : <span className="text-[10pt] font-semibold">Use o material concreto da sala.</span>}
+              </div>
+            </div>
+          </div>
+          <div className="mt-3 border-t-2 border-foreground/40 pt-3">
+            <p className="text-[9pt] font-black uppercase">Atividade correspondente da criança</p>
+            <p className="mt-1 text-[12pt] font-semibold leading-relaxed">{bloco.atividade}</p>
+            <div className="mt-3 flex items-center gap-3">
+              <span className="h-7 w-7 border-2 border-foreground" />
+              <span className="h-7 flex-1 border-b-2 border-foreground/60" />
+            </div>
+          </div>
+        </div>
+      )}
       {bloco.tipo === "contagem" && (
         <div className="mt-3 rounded-lg border-2 border-slate-800 p-3">
           <p className="text-[12pt] font-bold">{bloco.rotulo}</p>

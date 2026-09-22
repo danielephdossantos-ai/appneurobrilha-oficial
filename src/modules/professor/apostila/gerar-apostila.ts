@@ -22,6 +22,14 @@ export type ApostilaBloco =
   | { tipo: "lista"; titulo?: string; itens: string[] }
   | { tipo: "passos"; titulo?: string; passos: string[] }
   | { tipo: "imagens"; titulo?: string; imagens: ApostilaImagem[] }
+  | {
+      tipo: "explicacao-atividade";
+      titulo: string;
+      explicacao: string;
+      atividade: string;
+      imagens: ApostilaImagem[];
+      quantidade?: number;
+    }
   | { tipo: "contagem"; titulo?: string; imagem: string; quantidade: number; rotulo?: string }
   | { tipo: "linhas"; titulo?: string; enunciado: string; linhas: number }
   | {
@@ -544,9 +552,28 @@ export function gerarApostila(aula: Aula, extras: ApostilaImagem[] = []): Aposti
   });
 
   // ---------------- Guia do professor · folha 2: aula adaptada ----------------
+  const imagemExemplo = aula.exemploResolvido.interativo?.imagemUrl
+    ? { url: aula.exemploResolvido.interativo.imagemUrl, legenda: aula.exemploResolvido.interativo.nomeItem }
+    : imagens[0];
+  const quantidadeExemplo = aula.exemploResolvido.interativo?.quantidade;
+  const atividadeIndependente = aula.exercicios?.[0]?.enunciado ?? aula.desafio.enunciado;
   const guia2: ApostilaBloco[] = [
     { tipo: "texto", titulo: "Objetivo da aula adaptada", texto: adaptarTextoParaPapel(aula.missao) },
-    { tipo: "passos", titulo: "Explique com linguagem simples", passos: paragrafos(adaptarTextoParaPapel(aula.explicacao)) },
+    {
+      tipo: "explicacao-atividade",
+      titulo: "1. Explique, mostre e faça junto",
+      explicacao: adaptarTextoParaPapel(aula.explicacao),
+      atividade: adaptarTextoParaPapel(aula.atividadeGuiada.enunciado),
+      imagens: imagens.slice(0, 4),
+    },
+    {
+      tipo: "explicacao-atividade",
+      titulo: "2. Mostre o exemplo e deixe a criança responder",
+      explicacao: `${adaptarTextoParaPapel(aula.exemploResolvido.enunciado)}\n${aula.exemploResolvido.passos.map(adaptarTextoParaPapel).join(" ")}`,
+      atividade: adaptarTextoParaPapel(atividadeIndependente),
+      imagens: imagemExemplo ? [imagemExemplo] : imagens.slice(0, 1),
+      quantidade: quantidadeExemplo,
+    },
   ];
   const niveis = aula.explicacoesNiveis ?? {};
   const outrosJeitos = [niveis.nivel2, niveis.nivel3, niveis.nivel4].filter(
@@ -554,16 +581,6 @@ export function gerarApostila(aula: Aula, extras: ApostilaImagem[] = []): Aposti
   );
   if (outrosJeitos.length)
     guia2.push({ tipo: "lista", titulo: "Se a criança precisar de outro jeito", itens: outrosJeitos.map(adaptarTextoParaPapel) });
-  guia2.push({
-    tipo: "passos",
-    titulo: `Mostre um exemplo no papel — ${adaptarTextoParaPapel(aula.exemploResolvido.enunciado)}`,
-    passos: [...aula.exemploResolvido.passos.map(adaptarTextoParaPapel), `Resposta explicada: ${adaptarTextoParaPapel(aula.exemploResolvido.resposta)}`],
-  });
-  guia2.push({
-    tipo: "texto",
-    titulo: "Faça junto antes de entregar as atividades",
-    texto: `${adaptarTextoParaPapel(aula.atividadeGuiada.enunciado)}\n\nResposta esperada: ${adaptarTextoParaPapel(aula.atividadeGuiada.resposta)}\n\nSe precisar, explique assim: ${adaptarTextoParaPapel(aula.atividadeGuiada.explicacao)}`,
-  });
   guia2.push({ tipo: "lista", titulo: "Apoios para esta atividade", itens: ADAPTACOES });
   paginas.push({
     etiqueta: "Guia do professor",

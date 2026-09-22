@@ -73,6 +73,19 @@ describe("apostila A4 da área do professor", () => {
     expect(primeira?.blocos).toEqual([expect.objectContaining({ tipo: "historia" })]);
   });
 
+  it("acompanha cada explicação do professor com modelo visual e atividade da criança", () => {
+    for (const aulaAtual of listAulas().filter((item) => /1º\s*ano/i.test(item.ano) && /(matem|portugu)/i.test(item.disciplina))) {
+      const guia = gerarApostila(aulaAtual).paginas.filter((pagina) => pagina.etiqueta === "Guia do professor")[1];
+      const pares = guia?.blocos.filter((bloco) => bloco.tipo === "explicacao-atividade") ?? [];
+      expect(pares.length, aulaAtual.codigo).toBeGreaterThanOrEqual(2);
+      for (const par of pares) {
+        if (par.tipo !== "explicacao-atividade") continue;
+        expect(par.explicacao.trim(), aulaAtual.codigo).not.toBe("");
+        expect(par.atividade.trim(), aulaAtual.codigo).not.toBe("");
+      }
+    }
+  });
+
   it("gera treino pontilhado para G, B, P e S com cinco repetições", () => {
     const a = gerarApostila(aula);
     const tracado = a.paginas
