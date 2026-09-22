@@ -14,9 +14,9 @@ describe("apostila A4 da área do professor", () => {
     const a = gerarApostila(aula);
     const etiquetas = new Set(a.paginas.map((p) => p.etiqueta));
     expect(etiquetas).toEqual(
-      new Set(["Guia do professor", "Folha do estudante", "Gabarito", "Carta para a família"]),
+      new Set(["Guia do professor", "Folha do estudante"]),
     );
-    expect(a.paginas.length).toBeGreaterThanOrEqual(5);
+    expect(a.paginas.length).toBeGreaterThanOrEqual(9);
   });
 
   it("não coloca gabarito na folha da criança", () => {
@@ -37,12 +37,22 @@ describe("apostila A4 da área do professor", () => {
   it("gera no piloto apenas tarefas respondidas no papel", () => {
     const a = gerarApostila(aula);
     const folhas = a.paginas.filter((p) => p.etiqueta === "Folha do estudante");
-    expect(folhas).toHaveLength(3);
+    expect(folhas).toHaveLength(7);
     expect(folhas.flatMap((p) => p.blocos).map((b) => b.tipo)).toEqual([
       "escolha-visual",
+      "marcar-som",
       "ligar-imagens",
       "tracado",
+      "marcar-figura",
+      "procurar-letras",
+      "colorir-inicial",
     ]);
+  });
+
+  it("mantém só duas folhas de explicação para o professor no piloto", () => {
+    const a = gerarApostila(aula);
+    expect(a.paginas.filter((p) => p.etiqueta === "Guia do professor")).toHaveLength(2);
+    expect(a.paginas.some((p) => p.etiqueta === "Gabarito")).toBe(false);
   });
 
   it("reaproveita apenas imagens que a aula já tem", () => {

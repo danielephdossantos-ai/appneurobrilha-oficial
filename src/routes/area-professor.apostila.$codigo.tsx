@@ -117,8 +117,8 @@ function ApostilaImprimir() {
           </div>
         </div>
         <p className="print:hidden rounded-xl bg-slate-100 p-4 text-sm text-muted-foreground">
-          {apostila.paginas.length} folhas A4. O gabarito sai apenas em “Guia + gabarito” e na
-          apostila completa — nunca nas folhas da criança.
+          {apostila.paginas.length} folhas A4. As primeiras folhas são do professor; o restante é
+          atividade impressa da criança, sem gabarito junto.
         </p>
         <ApostilaA4 apostila={apostila} filtro={filtro} />
       </main>
