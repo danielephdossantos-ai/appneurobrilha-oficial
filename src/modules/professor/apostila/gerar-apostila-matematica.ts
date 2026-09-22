@@ -112,7 +112,7 @@ function tracadoNumeros(numeros: number[], imagens: ApostilaImagem[]) {
     const imagem = imagens[index % imagens.length];
     if (imagem) mapa[item] = imagem;
   });
-  return { itens, imagens: mapa };
+  return { itens, imagens: mapa, quantidadeImagem: true };
 }
 
 function folha(titulo: string, blocos: ApostilaPagina["blocos"]): ApostilaPagina {
