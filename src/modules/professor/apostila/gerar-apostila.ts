@@ -246,6 +246,8 @@ export function adaptarTextoParaPapel(texto: string): string {
     .replace(/na tela/gi, "na folha")
     .replace(/toque na figura/gi, "marque a figura")
     .replace(/toque (?:em|no|na|nos|nas)/gi, "aponte para")
+    .replace(/toque para/gi, "aponte e")
+    .replace(/toque/gi, "aponte")
     .replace(/clique em/gi, "marque")
     .replace(/arraste cada item para/gi, "ligue cada item a")
     .replace(/arraste do/gi, "numere do")
