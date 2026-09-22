@@ -44,6 +44,17 @@ function Apostilas() {
       (a) => a.titulo.toLowerCase().includes(q) || a.codigo.toLowerCase().includes(q),
     );
   }, [aulas, busca]);
+  const infantis = useMemo(() => {
+    const q = busca.trim().toLowerCase();
+    const todas = listarAulasEI();
+    if (!q) return todas;
+    return todas.filter(
+      (a) =>
+        a.titulo.toLowerCase().includes(q) ||
+        a.serieLabel.toLowerCase().includes(q) ||
+        a.disciplina.toLowerCase().includes(q),
+    );
+  }, [busca]);
 
   return (
     <Shell>
