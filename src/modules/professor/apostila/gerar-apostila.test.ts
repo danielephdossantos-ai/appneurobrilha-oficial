@@ -15,7 +15,7 @@ describe("apostila A4 da área do professor", () => {
     const a = gerarApostila(aula);
     const etiquetas = new Set(a.paginas.map((p) => p.etiqueta));
     expect(etiquetas).toEqual(
-      new Set(["Guia do professor", "Folha do estudante"]),
+      new Set(["Guia do professor", "Apoio visual do professor", "Folha do estudante"]),
     );
     expect(a.paginas.length).toBeGreaterThanOrEqual(9);
   });
