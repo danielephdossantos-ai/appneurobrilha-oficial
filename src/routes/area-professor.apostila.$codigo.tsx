@@ -100,7 +100,7 @@ function ApostilaImprimir() {
           <div className="flex flex-wrap gap-2">
             <Button variant="outline" onClick={() => imprimir("professor")}>
               <GraduationCap className="mr-2 h-4 w-4" />
-              Guia + gabarito
+              Guia do professor
             </Button>
             <Button variant="outline" onClick={() => imprimir("estudante")}>
               <BookOpenCheck className="mr-2 h-4 w-4" />

@@ -134,7 +134,7 @@ function Bloco({ bloco }: { bloco: ApostilaBloco }) {
           <div className="mt-10 space-y-12">
             {bloco.itens.map((item) => (
               <div key={item} className="grid grid-cols-[40mm_1fr] items-end gap-8">
-                <span className="select-none border-b-2 border-dashed border-foreground/40 pb-2 text-center text-[64pt] font-bold text-transparent [-webkit-text-stroke:1.5px_currentColor] [color:var(--foreground)] opacity-35">
+                <span className="select-none border-b-2 border-dashed border-foreground/40 pb-2 text-center text-[64pt] font-bold text-foreground/70 [-webkit-text-fill-color:transparent] [-webkit-text-stroke:1.5px_currentColor]">
                   {item}
                 </span>
                 <div className="h-20 border-b-2 border-foreground/60" />

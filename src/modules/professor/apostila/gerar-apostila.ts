@@ -179,7 +179,6 @@ function imagemComLegenda(imagens: ApostilaImagem[], legenda: string): ApostilaI
 
 function paginasInfantisEF01LP01(imagens: ApostilaImagem[]): ApostilaPagina[] | null {
   const gato = imagemComLegenda(imagens, "gato");
-  const cachorro = imagemComLegenda(imagens, "cachorro");
   const sol = imagemComLegenda(imagens, "sol");
   const bola = imagemComLegenda(imagens, "bola");
   const pato = imagemComLegenda(imagens, "pato");
@@ -188,7 +187,7 @@ function paginasInfantisEF01LP01(imagens: ApostilaImagem[]): ApostilaPagina[] | 
   const rato = imagemComLegenda(imagens, "rato");
   const vaca = imagemComLegenda(imagens, "vaca");
   const dado = imagemComLegenda(imagens, "dado");
-  if (!gato || !cachorro || !sol || !bola || !pato || !sapo || !casa || !rato || !vaca || !dado) return null;
+  if (!gato || !sol || !bola || !pato || !sapo || !casa || !rato || !vaca || !dado) return null;
 
   return [
     {
@@ -251,7 +250,7 @@ function paginasInfantisEF01LP01(imagens: ApostilaImagem[]): ApostilaPagina[] | 
           questoes: [
             { pergunta: "1. Qual figura começa com G?", imagens: [gato, sol, bola] },
             { pergunta: "2. Qual figura começa com P?", imagens: [casa, pato, rato] },
-            { pergunta: "3. Qual figura começa como SAPO?", imagens: [sol, cachorro, dado] },
+            { pergunta: "3. Qual figura começa como SAPO?", imagens: [sol, rato, dado] },
           ],
         },
       ],
