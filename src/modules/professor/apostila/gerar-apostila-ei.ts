@@ -186,7 +186,7 @@ function paginasCriancaMatematica(aula: AulaEI, imagens: ApostilaImagem[]): Apos
   const compreensoes = momentos(aula, "compreensaoImagem");
 
   const itensContar = contagens
-    .map((m) => {
+    .map((m, indice) => {
       const imagem = img(m.imagemUrl);
       return imagem ? { imagem, quantidade: m.quantidade, opcoes: opcoesNumero(m.quantidade, indice) } : null;
     })
@@ -194,7 +194,7 @@ function paginasCriancaMatematica(aula: AulaEI, imagens: ApostilaImagem[]): Apos
 
   const itensQuantidade = compreensoes
     .flatMap((m) => m.opcoes)
-    .map((o) => {
+    .map((o, idx) => {
       const imagem = img(o.imagemUrl, o.nome);
       return imagem && o.quantidade
         ? { imagem, quantidade: o.quantidade, opcoes: opcoesNumero(o.quantidade, idx) }
@@ -396,9 +396,9 @@ function paginasCriancaPortugues(aula: AulaEI, imagens: ApostilaImagem[]): Apost
 
   const palmas = ritmos
     .slice(0, 4)
-    .map((r) => {
+    .map((r, i) => {
       const imagem = img(r.imagemUrl);
-      return imagem ? { imagem, quantidade: r.silabas, opcoes: opcoesNumero(r.silabas) } : null;
+      return imagem ? { imagem, quantidade: r.silabas, opcoes: opcoesNumero(r.silabas, i) } : null;
     })
     .filter((i): i is { imagem: ApostilaImagem; quantidade: number; opcoes: string[] } => !!i);
   if (palmas.length)
