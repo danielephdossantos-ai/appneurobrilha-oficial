@@ -57,11 +57,38 @@ function figuras(imagens: ApostilaImagem[]): ApostilaImagem[] {
   return usadas;
 }
 
-function opcoesNumero(certo: number): string[] {
-  const opcoes = new Set<string>([String(certo)]);
-  opcoes.add(String(certo + 1));
-  opcoes.add(String(Math.max(0, certo - 1)));
-  return [...opcoes].slice(0, 3);
+/** Três alternativas distintas contendo sempre o número certo, em posição variada. */
+function opcoesNumero(certo: number, giro = 0): string[] {
+  const lista = [certo];
+  let passo = 1;
+  while (lista.length < 3) {
+    for (const candidato of [certo + passo, certo - passo]) {
+      if (candidato >= 0 && !lista.includes(candidato) && lista.length < 3) lista.push(candidato);
+    }
+    passo += 1;
+  }
+  const deslocamento = ((giro % 3) + 3) % 3;
+  return [...lista.slice(deslocamento), ...lista.slice(0, deslocamento)].map(String);
+}
+
+/** Figura com a quantidade pedida, para ligar número ↔ grupo de figuras. */
+function grupo(imagem: ApostilaImagem, quantidade: number) {
+  return { ...imagem, quantidade };
+}
+
+/** Acha a figura cujo nome/arquivo corresponde à palavra (sem inventar pares). */
+function figuraDaPalavra(imagens: ApostilaImagem[], palavra: string): ApostilaImagem | undefined {
+  const chave = palavra
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+  return imagens.find((i) =>
+    `${i.legenda ?? ""} ${i.url}`
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .includes(chave),
+  );
 }
 
 function gradeNumeros(numeros: number[]): string[] {
