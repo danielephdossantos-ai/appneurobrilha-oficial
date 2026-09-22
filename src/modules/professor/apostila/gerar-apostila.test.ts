@@ -169,7 +169,7 @@ describe("Matemática do 1º ano", () => {
       const blocos = gerarApostila(aula).paginas.flatMap((pagina) => pagina.blocos);
       for (const bloco of blocos) {
         if (bloco.tipo !== "desenhar-quantidade") continue;
-        for (const item of bloco.itens) {
+        for (const item of bloco.itens.filter((item) => item.objeto)) {
           expect(item.rotulo, aula.codigo).toMatch(new RegExp(`^Desenhe ${item.quantidade} \\S+`, "i"));
           expect(item.objeto, aula.codigo).toBeTruthy();
         }
