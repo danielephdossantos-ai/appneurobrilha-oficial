@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+﻿import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { ArrowLeft, BookOpenCheck, Search } from "lucide-react";
 import { supabase } from "@/database/supabase/client";
@@ -28,12 +28,12 @@ const profileLabel: Record<string, string> = {
   tdah: "TDAH",
   dislexia: "Dislexia",
   discalculia: "Discalculia",
-  deficiencia_intelectual: "Deficiência intelectual",
-  deficiencia_auditiva: "Deficiência auditiva",
-  deficiencia_visual: "Deficiência visual",
-  comunicacao: "Comunicação",
+  deficiencia_intelectual: "DeficiÃªncia intelectual",
+  deficiencia_auditiva: "DeficiÃªncia auditiva",
+  deficiencia_visual: "DeficiÃªncia visual",
+  comunicacao: "ComunicaÃ§Ã£o",
   motora_escrita: "Motora/escrita",
-  alfabetizacao_tardia: "Alfabetização tardia",
+  alfabetizacao_tardia: "AlfabetizaÃ§Ã£o tardia",
 };
 
 function InclusiveLibrary() {
@@ -60,11 +60,11 @@ function InclusiveLibrary() {
         details: error.details,
         hint: error.hint,
       });
-      toast.error("Não foi possível pesquisar a biblioteca inclusiva.");
+      toast.error("NÃ£o foi possÃ­vel pesquisar a biblioteca inclusiva.");
       return;
     }
     const resultRows = data ?? [];
-    console.info("[Biblioteca Inclusiva] RPC teacher_search_inclusive_lessons concluída", {
+    console.info("[Biblioteca Inclusiva] RPC teacher_search_inclusive_lessons concluÃ­da", {
       count: resultRows.length,
     });
     setRows(resultRows);
@@ -88,7 +88,7 @@ function InclusiveLibrary() {
             Biblioteca Inclusiva do Professor
           </h1>
           <p className="mt-2 text-muted-foreground">
-            Materiais adaptados e revisados para atendimento individualizado. Pesquise pelo código
+            Materiais adaptados e revisados para atendimento individualizado. Pesquise pelo cÃ³digo
             BNCC ou pelo assunto.
           </p>
         </header>
@@ -99,12 +99,12 @@ function InclusiveLibrary() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && search()}
-              placeholder="Ex.: EF02MA05 ou adição"
+              placeholder="Ex.: EF02MA05 ou adiÃ§Ã£o"
             />
             <Input
               value={year}
               onChange={(e) => setYear(e.target.value)}
-              placeholder="Ano: 2º Ano"
+              placeholder="Ano: 2Âº Ano"
             />
             <Input
               value={subject}
@@ -128,7 +128,7 @@ function InclusiveLibrary() {
               ))}
             </select>
             <p className="self-center text-sm text-muted-foreground md:col-span-3">
-              Só aparecem aulas aprovadas nas revisões curricular, pedagógica e técnica.
+              SÃ³ aparecem aulas aprovadas nas revisÃµes curricular, pedagÃ³gica e tÃ©cnica.
             </p>
           </CardContent>
         </Card>
@@ -157,7 +157,7 @@ function InclusiveLibrary() {
                   <div className="flex flex-wrap gap-1">
                     {row.supported_profiles.map((p) => (
                       <Badge key={p} variant="secondary">
-                        {profileLabel[p] ?? p}
+                        {p === "tea" ? <span translate="no" className="notranslate">TEA</span> : (profileLabel[p] ?? p)}
                       </Badge>
                     ))}
                   </div>
@@ -170,3 +170,4 @@ function InclusiveLibrary() {
     </Shell>
   );
 }
+
