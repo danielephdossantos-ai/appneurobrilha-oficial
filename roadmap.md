@@ -10,3 +10,5 @@
 - [x] Validar no desktop e impressão A4; atividade mantém estrutura fluida no celular
 - [x] Replicar o padrão premium aprovado em EF01LP02–EF01LP26
 - [x] Validar as 26 apostilas e revisar amostras em impressão A4
+- [x] Diferenciar os formatos das 26 apostilas por som, sílaba, palavra e frase
+- [x] Remover atividades de pintar das folhas da criança

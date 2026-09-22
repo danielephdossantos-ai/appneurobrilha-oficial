@@ -269,18 +269,89 @@ function Bloco({ bloco }: { bloco: ApostilaBloco }) {
           </div>
         </div>
       )}
-      {bloco.tipo === "colorir-inicial" && (
+      {bloco.tipo === "completar-unidade" && (
         <div className="mt-6">
           <p className="max-w-[150mm] text-left text-[16pt] font-semibold leading-relaxed">{bloco.comando}</p>
           <div className="mt-8 grid grid-cols-2 gap-7">
             {bloco.itens.map((item, index) => (
               <div key={`${item.imagem.url}-${index}`} className="break-inside-avoid rounded-md border border-foreground/30 p-4">
                 <ImagemAtividade imagem={item.imagem} />
-                <div className="mt-4 flex items-center gap-3 text-[15pt] font-semibold">
-                  {item.rotulo ? `${item.rotulo.charAt(0).toUpperCase()}${item.rotulo.slice(1)}:` : "Primeira letra:"}
-                  <span className="inline-flex h-14 w-14 items-center justify-center border-2 border-foreground text-[28pt] font-bold">{item.inicial}</span>
-                  <span className="h-14 flex-1 border-b-2 border-foreground/60" />
+                <div className="mt-5 flex items-center justify-center gap-2 text-[25pt] font-bold tracking-normal">
+                  {item.antes && <span>{item.antes}</span>}
+                  <span className="inline-block h-14 min-w-16 border-b-2 border-foreground" />
+                  {item.depois && <span>{item.depois}</span>}
                 </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      {bloco.tipo === "montar-palavra" && (
+        <div className="mt-6">
+          <p className="max-w-[150mm] text-left text-[16pt] font-semibold leading-relaxed">{bloco.comando}</p>
+          <div className="mt-8 space-y-7">
+            {bloco.itens.map((item, index) => (
+              <div key={`${item.imagem.url}-${index}`} className="grid grid-cols-[34mm_1fr] items-center gap-6 border-b border-foreground/20 pb-5">
+                <ImagemAtividade imagem={item.imagem} />
+                <div>
+                  <div className="flex flex-wrap gap-3">
+                    {item.partes.map((parte, parteIndex) => (
+                      <span key={`${parte}-${parteIndex}`} className="inline-flex h-12 min-w-12 items-center justify-center rounded-md border-2 border-foreground px-3 text-[21pt] font-bold">
+                        {parte}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="mt-5 flex gap-2">
+                    {Array.from({ length: item.espacos }).map((_, espacoIndex) => (
+                      <span key={espacoIndex} className="h-12 flex-1 border-b-2 border-foreground/70" />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      {bloco.tipo === "separar-partes" && (
+        <div className="mt-6">
+          <p className="max-w-[150mm] text-left text-[16pt] font-semibold leading-relaxed">{bloco.comando}</p>
+          <div className="mt-8 space-y-7">
+            {bloco.itens.map((item, index) => (
+              <div key={`${item.imagem.url}-${index}`} className="grid grid-cols-[36mm_1fr] items-center gap-6 border-b border-foreground/20 pb-5">
+                <ImagemAtividade imagem={item.imagem} />
+                <div>
+                  <p className="text-[24pt] font-bold">{item.palavra}</p>
+                  <div className="mt-4 grid grid-cols-3 gap-4">
+                    {item.opcoes.map((opcao) => (
+                      <div key={opcao} className="flex min-h-16 items-center justify-center gap-3 rounded-md border-2 border-foreground/60 text-[24pt] font-bold">
+                        <span className="h-6 w-6 border-2 border-foreground" />
+                        {opcao}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      {bloco.tipo === "ordenar-frase" && (
+        <div className="mt-6">
+          <p className="max-w-[150mm] text-left text-[16pt] font-semibold leading-relaxed">{bloco.comando}</p>
+          <div className="mt-8 space-y-8">
+            {bloco.itens.map((item, index) => (
+              <div key={`${item.imagem.url}-${index}`} className="break-inside-avoid border-b border-foreground/20 pb-6">
+                <div className="grid grid-cols-[34mm_1fr] items-center gap-6">
+                  <ImagemAtividade imagem={item.imagem} />
+                  <div className="flex flex-wrap gap-3">
+                    {item.palavras.map((palavra, palavraIndex) => (
+                      <span key={`${palavra}-${palavraIndex}`} className="rounded-md border-2 border-foreground px-4 py-2 text-[18pt] font-bold">
+                        {palavra}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <Linhas quantidade={2} />
               </div>
             ))}
           </div>
