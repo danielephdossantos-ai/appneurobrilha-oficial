@@ -443,7 +443,7 @@ function Bloco({ bloco }: { bloco: ApostilaBloco }) {
           <p className="max-w-[150mm] text-left text-[16pt] font-semibold leading-relaxed">{bloco.comando}</p>
           <div className="mt-7 space-y-7">
             {bloco.itens.map((item, index) => (
-              <div key={`${item.imagem.url}-${index}`} className="break-inside-avoid rounded-md border-2 border-foreground/70 p-3">
+              <div key={`${item.imagem.url}-${index}`} className="apostila-centrar break-inside-avoid rounded-md border-2 border-foreground/70 p-3">
                 <div className="flex flex-wrap items-center gap-2 text-[26pt] font-bold">
                   <GrupoFiguras imagem={item.imagem} quantidade={item.a} />
                   <span className="px-2">{item.sinal}</span>
