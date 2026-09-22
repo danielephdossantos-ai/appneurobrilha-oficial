@@ -314,24 +314,20 @@ export function ApostilaA4({
   return (
     <div className="apostila space-y-6 print:space-y-0">
       <svg aria-hidden="true" className="absolute h-0 w-0 overflow-hidden">
-        <filter id="apostila-contorno-img" colorInterpolationFilters="sRGB">
-          <feColorMatrix type="saturate" values="0" />
-          <feConvolveMatrix order="3" kernelMatrix="-1 -1 -1 -1 8 -1 -1 -1 -1" preserveAlpha="true" />
-          <feComponentTransfer>
-            <feFuncR type="linear" slope="2.2" intercept="0" />
-            <feFuncG type="linear" slope="2.2" intercept="0" />
-            <feFuncB type="linear" slope="2.2" intercept="0" />
-          </feComponentTransfer>
-        </filter>
       </svg>
       <style>{`
         @page { size: A4; margin: 0; }
         .apostila-outline-img {
-          filter: url(#apostila-contorno-img) grayscale(1) contrast(2.4) brightness(1.35);
+          filter: grayscale(1) contrast(1.85) brightness(1.9);
+          opacity: 0.72;
         }
         @media print {
           .apostila-folha { break-after: page; min-height: 297mm; }
           .apostila-folha:last-child { break-after: auto; }
+          .apostila-outline-img {
+            filter: grayscale(1) contrast(2.15) brightness(2.05);
+            opacity: 0.68;
+          }
         }
       `}</style>
       {paginas.map((p, i) => (
