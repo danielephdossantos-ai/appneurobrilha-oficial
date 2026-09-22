@@ -154,9 +154,7 @@ function paginasInfantisEF01LP01(imagens: ApostilaImagem[]): ApostilaPagina[] | 
   const bola = imagemComLegenda(imagens, "bola");
   const pato = imagemComLegenda(imagens, "pato");
   const sapo = imagemComLegenda(imagens, "sapo");
-  const casa = imagemComLegenda(imagens, "casa");
-  const cachorro = imagemComLegenda(imagens, "cachorro");
-  if (!gato || !sol || !bola || !pato || !sapo || !casa || !cachorro) return null;
+  if (!gato || !sol || !bola || !pato || !sapo) return null;
 
   return [
     {
@@ -178,8 +176,8 @@ function paginasInfantisEF01LP01(imagens: ApostilaImagem[]): ApostilaPagina[] | 
         {
           tipo: "ligar-imagens",
           comando: "Ligue cada figura à que começa do mesmo jeito.",
-          esquerda: [sol, casa],
-          direita: [cachorro, sapo],
+          esquerda: [sol],
+          direita: [sapo],
         },
       ],
     },
