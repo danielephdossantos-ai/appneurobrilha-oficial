@@ -55,15 +55,19 @@ describe("apostila A4 da área do professor", () => {
     expect(a.paginas.some((p) => p.etiqueta === "Gabarito")).toBe(false);
   });
 
-  it("gera treino pontilhado repetido de uma única letra", () => {
+  it("gera treino pontilhado para G, B e P com cinco repetições", () => {
     const a = gerarApostila(aula);
     const tracado = a.paginas
       .flatMap((p) => p.blocos)
       .find((b) => b.tipo === "tracado");
     expect(tracado).toMatchObject({
-      itens: ["G"],
+      itens: ["G", "B", "P"],
       repeticoes: 5,
-      imagem: expect.objectContaining({ legenda: expect.stringMatching(/gato/i) }),
+      imagens: {
+        G: expect.objectContaining({ legenda: "gato" }),
+        B: expect.objectContaining({ legenda: "bola" }),
+        P: expect.objectContaining({ legenda: "pato" }),
+      },
     });
   });
 

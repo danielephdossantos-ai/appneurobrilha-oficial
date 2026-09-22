@@ -30,7 +30,7 @@ function ImagemAtividade({ imagem }: { imagem: { url: string; legenda?: string }
 
 function LetraPontilhada({ letra }: { letra: string }) {
   return (
-    <svg aria-label={letra} viewBox="0 0 120 120" className="h-24 w-24 text-foreground">
+    <svg aria-label={letra} viewBox="0 0 120 120" className="h-16 w-16 text-foreground">
       <text
         x="60"
         y="88"
@@ -193,18 +193,24 @@ function Bloco({ bloco }: { bloco: ApostilaBloco }) {
       {bloco.tipo === "tracado" && (
         <div className="mt-6">
           <p className="max-w-[150mm] text-left text-[16pt] font-semibold leading-relaxed">{bloco.comando}</p>
-          <div className="mt-10 space-y-10">
+          <div className="mt-7 space-y-4">
             {bloco.itens.map((item) => (
-              <div key={item} className="grid grid-cols-[38mm_1fr_40mm] items-center gap-5 rounded-md border-2 border-foreground p-5">
-                <div className="flex justify-center border-r border-foreground/30 pr-4">
+              <div key={item} className="grid grid-cols-[30mm_1fr_30mm] items-center gap-3 rounded-md border-2 border-foreground p-3">
+                <div className="flex justify-center border-r border-foreground/30 pr-2">
                   <LetraGuia letra={item} />
                 </div>
-                <div className="grid grid-cols-3 items-center justify-items-center gap-x-2 gap-y-3">
+                <div className="grid grid-cols-5 items-center justify-items-center gap-1">
                   {Array.from({ length: bloco.repeticoes ?? 5 }).map((_, index) => (
                     <LetraPontilhada key={`${item}-${index}`} letra={item} />
                   ))}
                 </div>
-                {bloco.imagem ? <ImagemAtividade imagem={bloco.imagem} /> : <div />}
+                {bloco.imagens?.[item] || bloco.imagem ? (
+                  <img
+                    src={(bloco.imagens?.[item] ?? bloco.imagem)?.url}
+                    alt={(bloco.imagens?.[item] ?? bloco.imagem)?.legenda ?? ""}
+                    className="mx-auto h-24 w-24 object-contain"
+                  />
+                ) : <div />}
               </div>
             ))}
           </div>
