@@ -3,6 +3,7 @@ import { getAula } from "@/escola-brilha/registry";
 import { gerarApostila, imagensDaAula, termosDaAula } from "./gerar-apostila";
 
 const aula = getAula("EF01LP01")!;
+const codigosPrimeiroAno = Array.from({ length: 26 }, (_, index) => `EF01LP${String(index + 1).padStart(2, "0")}`);
 
 describe("apostila A4 da área do professor", () => {
   it("usa uma aula real de Português do 1º ano", () => {
@@ -87,5 +88,28 @@ describe("apostila A4 da área do professor", () => {
 
   it("extrai termos de busca do tema da aula", () => {
     expect(termosDaAula(aula).length).toBeGreaterThan(0);
+  });
+
+  it("replica o padrão premium nas 26 aulas de Português do 1º ano", () => {
+    for (const codigo of codigosPrimeiroAno) {
+      const aulaAtual = getAula(codigo);
+      expect(aulaAtual, codigo).toBeTruthy();
+      if (!aulaAtual) continue;
+      const apostila = gerarApostila(aulaAtual);
+      expect(apostila.paginas.filter((pagina) => pagina.etiqueta === "Guia do professor"), codigo).toHaveLength(2);
+      expect(apostila.paginas.filter((pagina) => pagina.etiqueta === "Folha do estudante"), codigo).toHaveLength(7);
+      expect(apostila.paginas.some((pagina) => pagina.etiqueta === "Gabarito"), codigo).toBe(false);
+      expect(apostila.paginas.some((pagina) => pagina.etiqueta === "Carta para a família"), codigo).toBe(false);
+    }
+  });
+
+  it("mantém linguagem de aplicativo fora das 26 apostilas infantis", () => {
+    for (const codigo of codigosPrimeiroAno) {
+      const aulaAtual = getAula(codigo);
+      if (!aulaAtual) continue;
+      const folhas = JSON.stringify(gerarApostila(aulaAtual).paginas.filter((pagina) => pagina.etiqueta === "Folha do estudante"));
+      expect(folhas, codigo).not.toContain(codigo);
+      expect(folhas, codigo).not.toMatch(/BNCC|NeuroBrilha|escute|ouça|toque na|aplicativo|gabarito/i);
+    }
   });
 });

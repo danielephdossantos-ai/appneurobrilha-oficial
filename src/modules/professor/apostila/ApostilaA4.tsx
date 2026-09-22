@@ -16,19 +16,33 @@ function Linhas({ quantidade }: { quantidade: number }) {
 }
 
 function ImagemAtividade({ imagem }: { imagem: { url: string; legenda?: string } }) {
+  const prontaParaColorir = /-colorir\.(png|webp|jpe?g)$/i.test(imagem.url);
   return (
     <figure className="flex min-h-44 flex-col items-center justify-center gap-3 rounded-md border border-foreground/20 p-4 text-center">
-      <img
-        src={imagem.url}
-        alt={imagem.legenda ?? ""}
-        className="h-28 w-28 object-contain"
-      />
+      {prontaParaColorir ? (
+        <img src={imagem.url} alt={imagem.legenda ?? ""} className="h-28 w-28 object-contain" />
+      ) : (
+        <svg viewBox="0 0 512 512" role="img" aria-label={imagem.legenda ?? ""} className="h-28 w-28 overflow-visible bg-background">
+          <filter id={`contorno-${imagem.url.replace(/\W/g, "").slice(-20)}`} colorInterpolationFilters="sRGB">
+            <feColorMatrix type="saturate" values="0" />
+            <feConvolveMatrix order="3" kernelMatrix="-1 -1 -1 -1 8 -1 -1 -1 -1" divisor="1" bias="1" />
+            <feComponentTransfer>
+              <feFuncR type="gamma" amplitude="1" exponent="0.55" offset="0" />
+              <feFuncG type="gamma" amplitude="1" exponent="0.55" offset="0" />
+              <feFuncB type="gamma" amplitude="1" exponent="0.55" offset="0" />
+            </feComponentTransfer>
+          </filter>
+          <rect width="512" height="512" fill="white" />
+          <image href={imagem.url} width="512" height="512" preserveAspectRatio="xMidYMid meet" filter={`url(#contorno-${imagem.url.replace(/\W/g, "").slice(-20)})`} />
+        </svg>
+      )}
       {imagem.legenda && <figcaption className="text-[14pt] font-semibold">{imagem.legenda}</figcaption>}
     </figure>
   );
 }
 
 function LetraPontilhada({ letra }: { letra: string }) {
+  const tamanho = letra.length > 12 ? 18 : letra.length > 7 ? 25 : letra.length > 3 ? 38 : letra.length > 1 ? 58 : 88;
   return (
     <svg aria-label={letra} viewBox="0 0 120 120" className="h-16 w-16 text-foreground">
       <text
@@ -36,7 +50,7 @@ function LetraPontilhada({ letra }: { letra: string }) {
         y="88"
         textAnchor="middle"
         fontFamily="Arial, sans-serif"
-        fontSize="88"
+        fontSize={tamanho}
         fontWeight="700"
         fill="none"
         stroke="currentColor"
@@ -52,6 +66,7 @@ function LetraPontilhada({ letra }: { letra: string }) {
 }
 
 function LetraGuia({ letra }: { letra: string }) {
+  const tamanho = letra.length > 12 ? 16 : letra.length > 7 ? 22 : letra.length > 3 ? 34 : letra.length > 1 ? 56 : 112;
   return (
     <svg aria-label={`Modelo da letra ${letra}`} viewBox="0 0 150 150" className="h-32 w-32 text-foreground">
       <defs>
@@ -64,7 +79,7 @@ function LetraGuia({ letra }: { letra: string }) {
         y="112"
         textAnchor="middle"
         fontFamily="Arial, sans-serif"
-        fontSize="112"
+        fontSize={tamanho}
         fontWeight="700"
         fill="none"
         stroke="currentColor"
@@ -279,7 +294,7 @@ function Bloco({ bloco }: { bloco: ApostilaBloco }) {
               <div key={`${item.imagem.url}-${index}`} className="break-inside-avoid rounded-md border border-foreground/30 p-4">
                 <ImagemAtividade imagem={item.imagem} />
                 <div className="mt-4 flex items-center gap-3 text-[15pt] font-semibold">
-                  Primeira letra:
+                  {item.rotulo ? `${item.rotulo.charAt(0).toUpperCase()}${item.rotulo.slice(1)}:` : "Primeira letra:"}
                   <span className="inline-flex h-14 w-14 items-center justify-center border-2 border-foreground text-[28pt] font-bold">{item.inicial}</span>
                   <span className="h-14 flex-1 border-b-2 border-foreground/60" />
                 </div>
