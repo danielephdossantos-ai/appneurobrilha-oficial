@@ -75,7 +75,7 @@ export type ApostilaBloco =
       tipo: "colorir-inicial";
       titulo?: string;
       comando: string;
-      itens: Array<{ imagem: ApostilaImagem; inicial: string }>;
+      itens: Array<{ imagem: ApostilaImagem; inicial: string; rotulo?: string }>;
     }
   | {
       tipo: "alternativas";
@@ -303,6 +303,117 @@ function paginasInfantisEF01LP01(imagens: ApostilaImagem[]): ApostilaPagina[] | 
   ];
 }
 
+type ItemConteudo = { unidade: string; figura: string };
+type ConfigApostila = {
+  itens: ItemConteudo[];
+  distratores: string[];
+  grade: string[];
+  foco: "som" | "silaba" | "palavra" | "frase";
+};
+
+const CONFIGS_APOSTILA: Record<string, ConfigApostila> = {
+  EF01LP02: { foco: "som", itens: [{ unidade: "S", figura: "sapo" }, { unidade: "S", figura: "sopa" }, { unidade: "P", figura: "pato" }, { unidade: "G", figura: "gato" }], distratores: ["M", "L", "B"], grade: ["S", "P", "G"] },
+  EF01LP03: { foco: "som", itens: [{ unidade: "A", figura: "abelha" }, { unidade: "E", figura: "escola" }, { unidade: "I", figura: "ioio" }, { unidade: "O", figura: "ovelha" }, { unidade: "U", figura: "ursinho" }], distratores: ["M", "S", "P"], grade: ["A", "E", "I", "O", "U"] },
+  EF01LP04: { foco: "som", itens: [{ unidade: "M", figura: "mae" }, { unidade: "M", figura: "maca" }, { unidade: "M", figura: "mapa" }, { unidade: "M", figura: "mochila" }], distratores: ["S", "B", "G"], grade: ["M"] },
+  EF01LP05: { foco: "som", itens: [{ unidade: "S", figura: "sol" }, { unidade: "S", figura: "sapo" }, { unidade: "S", figura: "sopa" }, { unidade: "S", figura: "suco" }], distratores: ["M", "B", "P"], grade: ["S"] },
+  EF01LP06: { foco: "som", itens: [{ unidade: "P", figura: "pato" }, { unidade: "P", figura: "pipa" }, { unidade: "P", figura: "pente" }, { unidade: "P", figura: "panda" }], distratores: ["S", "B", "G"], grade: ["P"] },
+  EF01LP07: { foco: "som", itens: [{ unidade: "T", figura: "tigre" }, { unidade: "T", figura: "trem" }, { unidade: "T", figura: "tambor" }, { unidade: "T", figura: "telefone" }], distratores: ["P", "S", "M"], grade: ["T"] },
+  EF01LP08: { foco: "som", itens: [{ unidade: "L", figura: "leao" }, { unidade: "L", figura: "lua" }, { unidade: "L", figura: "livro" }, { unidade: "L", figura: "lapis" }], distratores: ["T", "P", "S"], grade: ["L"] },
+  EF01LP09: { foco: "som", itens: [{ unidade: "F", figura: "flor" }, { unidade: "F", figura: "festa" }, { unidade: "F", figura: "fogo" }, { unidade: "F", figura: "futebol" }], distratores: ["S", "P", "M"], grade: ["F"] },
+  EF01LP10: { foco: "som", itens: [{ unidade: "N", figura: "navio" }, { unidade: "N", figura: "ninho" }, { unidade: "N", figura: "noite" }, { unidade: "N", figura: "nuvem" }], distratores: ["M", "P", "S"], grade: ["N"] },
+  EF01LP11: { foco: "silaba", itens: [{ unidade: "MA", figura: "mapa" }, { unidade: "SA", figura: "sapo" }, { unidade: "PA", figura: "pato" }, { unidade: "TA", figura: "lata" }], distratores: ["LA", "BA", "NA"], grade: ["MA", "SA", "PA", "TA"] },
+  EF01LP12: { foco: "silaba", itens: [{ unidade: "PI", figura: "pipa" }, { unidade: "PE", figura: "peixe" }, { unidade: "ME", figura: "menino" }, { unidade: "NI", figura: "ninho" }], distratores: ["PA", "SA", "BO"], grade: ["PE", "ME", "PI", "NI", "LI"] },
+  EF01LP13: { foco: "silaba", itens: [{ unidade: "BO", figura: "bolo" }, { unidade: "LU", figura: "lua" }, { unidade: "SO", figura: "sopa" }, { unidade: "SU", figura: "suco" }], distratores: ["PA", "NI", "ME"], grade: ["BO", "SO", "LU", "SU"] },
+  EF01LP14: { foco: "palavra", itens: [{ unidade: "PATO", figura: "pato" }, { unidade: "SAPO", figura: "sapo" }, { unidade: "MAPA", figura: "mapa" }, { unidade: "CASA", figura: "casa" }], distratores: ["RATO", "LATA", "BOLO"], grade: ["PATO", "SAPO", "MAPA"] },
+  EF01LP15: { foco: "palavra", itens: [{ unidade: "BOLA", figura: "bola" }, { unidade: "BOLO", figura: "bolo" }, { unidade: "DADO", figura: "dado" }, { unidade: "PIPA", figura: "pipa" }], distratores: ["PATO", "SAPO", "LUA"], grade: ["BOLA", "BOLO", "DADO"] },
+  EF01LP16: { foco: "frase", itens: [{ unidade: "O GATO DORME", figura: "gato" }, { unidade: "O PATO NADA", figura: "pato" }, { unidade: "O SAPO PULA", figura: "sapo" }], distratores: ["OGATODORME", "OPATONADA", "OSAPOPULA"], grade: ["GATO", "PATO", "SAPO"] },
+  EF01LP17: { foco: "frase", itens: [{ unidade: "O GATO BEBE LEITE", figura: "gato" }, { unidade: "O PATO NADA NO LAGO", figura: "pato" }, { unidade: "O SAPO PULA ALTO", figura: "sapo" }], distratores: ["GATO", "PATO", "SAPO"], grade: ["GATO", "PATO", "SAPO", "FLOR"] },
+  EF01LP18: { foco: "frase", itens: [{ unidade: "O GATO DORME.", figura: "gato" }, { unidade: "O PATO NADA.", figura: "pato" }, { unidade: "O SAPO PULA.", figura: "sapo" }], distratores: ["o gato dorme", "O PATO NADA", "osapopula"], grade: ["O", "."] },
+  EF01LP19: { foco: "frase", itens: [{ unidade: "O PATO NADA.", figura: "pato" }, { unidade: "O SAPO PULA.", figura: "sapo" }, { unidade: "O GATO DORME.", figura: "gato" }], distratores: ["1 FRASE", "2 FRASES", "3 FRASES"], grade: ["PATO", "SAPO", "GATO"] },
+  EF01LP20: { foco: "frase", itens: [{ unidade: "O SOL BRILHA.", figura: "sol" }, { unidade: "A NUVEM PASSA.", figura: "nuvem" }, { unidade: "A FLOR ABRE.", figura: "flor" }], distratores: ["PASSA", "BRILHA", "ABRE"], grade: ["SOL", "NUVEM", "FLOR"] },
+  EF01LP21: { foco: "palavra", itens: [{ unidade: "CHUVA", figura: "chuva" }, { unidade: "CH", figura: "coracao" }, { unidade: "SOL", figura: "sol" }, { unidade: "LUA", figura: "lua" }], distratores: ["CUVA", "SUVA", "XUVA"], grade: ["CH"] },
+  EF01LP22: { foco: "palavra", itens: [{ unidade: "FOLHA", figura: "arvore" }, { unidade: "LH", figura: "familia" }, { unidade: "SOL", figura: "sol" }, { unidade: "BOLA", figura: "bola" }], distratores: ["FOLA", "FOIA", "FOLIA"], grade: ["LH"] },
+  EF01LP23: { foco: "palavra", itens: [{ unidade: "NINHO", figura: "ninho" }, { unidade: "GALINHA", figura: "galinha" }, { unidade: "BANHO", figura: "banho" }, { unidade: "JOANINHA", figura: "joaninha" }], distratores: ["NINO", "BAN0", "BAIO"], grade: ["NH"] },
+  EF01LP24: { foco: "palavra", itens: [{ unidade: "CARRO", figura: "carro" }, { unidade: "CASA", figura: "casa" }, { unidade: "SOL", figura: "sol" }, { unidade: "RATO", figura: "rato" }], distratores: ["CARO", "CASA", "RATO"], grade: ["RR", "SS"] },
+  EF01LP25: { foco: "palavra", itens: [{ unidade: "TREM", figura: "trem" }, { unidade: "FLOR", figura: "flor" }, { unidade: "BOLA", figura: "bola" }, { unidade: "SOL", figura: "sol" }], distratores: ["TEM", "FOR", "PRATO"], grade: ["BR", "PR", "TR", "CR", "FR", "GR"] },
+  EF01LP26: { foco: "frase", itens: [{ unidade: "O SAPO PULA.", figura: "sapo" }, { unidade: "O GATO OLHA.", figura: "gato" }, { unidade: "O SOL BRILHA.", figura: "sol" }], distratores: ["SAPO", "GATO", "SOL"], grade: ["SAPO", "GATO", "SOL"] },
+};
+
+function imagemNomeada(imagens: ApostilaImagem[], nome: string): ApostilaImagem | undefined {
+  const exata = imagens.find((imagem) => normalizar(imagem.legenda ?? "") === normalizar(nome));
+  return exata ?? imagemComLegenda(imagens, nome);
+}
+
+function misturarGrade(alvos: string[], distratores: string[]): string[] {
+  const base = [...alvos, ...distratores].filter(Boolean);
+  const grade: string[] = [];
+  for (let i = 0; i < 16; i += 1) grade.push(base[(i * 3 + Math.floor(i / 4)) % base.length] ?? "A");
+  return grade;
+}
+
+function paginasInfantisPadrao(aula: Aula, imagens: ApostilaImagem[]): ApostilaPagina[] | null {
+  const config = CONFIGS_APOSTILA[aula.codigo];
+  if (!config) return null;
+  const itens = config.itens
+    .map((item) => ({ ...item, imagem: imagemNomeada(imagens, item.figura) }))
+    .filter((item): item is ItemConteudo & { imagem: ApostilaImagem } => Boolean(item.imagem));
+  if (itens.length < 3) return null;
+
+  const rotuloUnidade = config.foco === "som" ? "letra" : config.foco === "silaba" ? "sílaba" : config.foco === "palavra" ? "palavra" : "frase";
+  const alvosUnicos = [...new Set(config.grade)];
+  const escolhas = itens.slice(0, 4);
+  const perguntasFigura = escolhas.slice(0, 3).map((item, index) => ({
+    pergunta: `${index + 1}. Marque a figura de ${item.unidade}.`,
+    imagens: [item.imagem, ...escolhas.filter((outro) => outro.figura !== item.figura).slice(0, 2).map((outro) => outro.imagem)],
+  }));
+  const opcoes = (certa: string, indice: number) => [certa, config.distratores[indice % config.distratores.length] ?? "A", config.distratores[(indice + 1) % config.distratores.length] ?? "O"];
+
+  const imagensTracado = Object.fromEntries(
+    alvosUnicos.slice(0, 4).flatMap((alvo) => {
+      const imagem = itens.find((item) => item.unidade === alvo)?.imagem;
+      return imagem ? [[alvo, imagem] as const] : [];
+    }),
+  );
+
+  return [
+    {
+      etiqueta: "Folha do estudante",
+      titulo: "Atividade 1 — Observe e marque",
+      blocos: [{ tipo: "escolha-visual", comando: config.foco === "som" ? "Circule todas as figuras que começam como o modelo." : `Circule a figura de ${escolhas[1]?.unidade ?? escolhas[0].unidade}.`, modelo: escolhas[0].imagem, imagens: escolhas.slice(1).map((item) => item.imagem) }],
+    },
+    {
+      etiqueta: "Folha do estudante",
+      titulo: `Atividade 2 — Marque a ${rotuloUnidade}`,
+      blocos: [{ tipo: "marcar-som", comando: `Marque a ${rotuloUnidade} que combina com cada figura.`, itens: escolhas.slice(0, 3).map((item, index) => ({ imagem: item.imagem, opcoes: opcoes(item.unidade, index) })) }],
+    },
+    {
+      etiqueta: "Folha do estudante",
+      titulo: "Atividade 3 — Ligue cada figura",
+      blocos: [{ tipo: "ligar-imagens", comando: `Ligue cada ${rotuloUnidade} à figura correspondente.`, esquerda: escolhas.map((item) => ({ texto: item.unidade })), direita: [...escolhas].reverse().map((item) => item.imagem) }],
+    },
+    {
+      etiqueta: "Folha do estudante",
+      titulo: "Atividade 4 — Cubra o pontilhado",
+      blocos: [{ tipo: "tracado", comando: "Cubra os pontilhados e pinte os desenhos.", itens: alvosUnicos.slice(0, 4), repeticoes: config.foco === "frase" ? 2 : 5, imagens: imagensTracado }],
+    },
+    {
+      etiqueta: "Folha do estudante",
+      titulo: "Atividade 5 — Marque a resposta correta",
+      blocos: [{ tipo: "marcar-figura", comando: "Marque uma resposta em cada atividade.", questoes: perguntasFigura }],
+    },
+    {
+      etiqueta: "Folha do estudante",
+      titulo: `Atividade 6 — Procure ${config.foco === "som" ? "as letras" : "as partes estudadas"}`,
+      blocos: [{ tipo: "procurar-letras", comando: `Procure e circule: ${alvosUnicos.join(", ")}.`, alvos: alvosUnicos, letras: misturarGrade(alvosUnicos, config.distratores) }],
+    },
+    {
+      etiqueta: "Folha do estudante",
+      titulo: "Atividade 7 — Pinte e escreva",
+      blocos: [{ tipo: "colorir-inicial", comando: `Pinte as figuras e escreva a ${rotuloUnidade}.`, itens: escolhas.map((item) => ({ imagem: item.imagem, inicial: item.unidade, rotulo: rotuloUnidade })) }],
+    },
+  ];
+}
+
 /** Adaptações impressas — orientação docente fixa, não gerada por IA. */
 const ADAPTACOES: string[] = [
   "TEA: antecipe a sequência da folha (mostre as etapas antes de começar), aceite resposta apontando e mantenha o mesmo comando em todas as questões.",
@@ -389,11 +500,13 @@ export function gerarApostila(aula: Aula, extras: ApostilaImagem[] = []): Aposti
   });
 
   // ---------------- Folhas do estudante ----------------
-  // O piloto EF01LP01 usa tarefas concretas, exclusivamente no papel.
-  const folhasPiloto = aula.codigo === "EF01LP01" ? paginasInfantisEF01LP01(imagens) : null;
+  // Todas as aulas de Português do 1º ano usam tarefas concretas, exclusivamente no papel.
+  const folhasPiloto = aula.codigo === "EF01LP01"
+    ? paginasInfantisEF01LP01(imagens)
+    : paginasInfantisPadrao(aula, imagens);
   if (folhasPiloto) paginas.push(...folhasPiloto);
 
-  // Compatibilidade para as demais aulas, ainda no modelo anterior.
+  // Compatibilidade para outras disciplinas e anos ainda não convertidos.
   if (!folhasPiloto) {
   const folha1: ApostilaBloco[] = [
     { tipo: "linhas", titulo: "Nome", enunciado: "Escreva seu nome:", linhas: 1 },
