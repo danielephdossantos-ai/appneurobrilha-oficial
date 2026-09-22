@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { BarChart3, BookOpen, BookOpenCheck, ClipboardList, Copy, FileCheck2, GraduationCap, Loader2, Sparkles, Users } from "lucide-react";
+import { BarChart3, BookOpen, BookOpenCheck, ClipboardList, Copy, FileCheck2, GraduationCap, Loader2, Printer, Sparkles, Users } from "lucide-react";
 import { toast } from "sonner";
 import { TeacherShell as Shell } from "@/components/teacher/TeacherShell";
 import { supabase } from "@/database/supabase/client";
