@@ -27,6 +27,24 @@ describe("apostila A4 da área do professor", () => {
     }
   });
 
+  it("mantém dados pedagógicos e linguagem de aplicativo fora da folha da criança", () => {
+    const a = gerarApostila(aula);
+    const folhas = JSON.stringify(a.paginas.filter((p) => p.etiqueta === "Folha do estudante"));
+    expect(folhas).not.toContain(aula.codigo);
+    expect(folhas).not.toMatch(/BNCC|NeuroBrilha|escute|ouça|toque na|aplicativo/i);
+  });
+
+  it("gera no piloto apenas tarefas respondidas no papel", () => {
+    const a = gerarApostila(aula);
+    const folhas = a.paginas.filter((p) => p.etiqueta === "Folha do estudante");
+    expect(folhas).toHaveLength(3);
+    expect(folhas.flatMap((p) => p.blocos).map((b) => b.tipo)).toEqual([
+      "escolha-visual",
+      "ligar-imagens",
+      "tracado",
+    ]);
+  });
+
   it("reaproveita apenas imagens que a aula já tem", () => {
     const imgs = imagensDaAula(aula);
     expect(imgs.length).toBeGreaterThan(0);

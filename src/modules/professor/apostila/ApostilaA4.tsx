@@ -15,6 +15,19 @@ function Linhas({ quantidade }: { quantidade: number }) {
   );
 }
 
+function ImagemAtividade({ imagem }: { imagem: { url: string; legenda?: string } }) {
+  return (
+    <figure className="flex min-h-44 flex-col items-center justify-center gap-3 rounded-md border border-foreground/20 p-4 text-center">
+      <img
+        src={imagem.url}
+        alt={imagem.legenda ?? ""}
+        className="h-28 w-28 object-contain grayscale contrast-125 print:grayscale print:contrast-150"
+      />
+      {imagem.legenda && <figcaption className="text-[14pt] font-semibold">{imagem.legenda}</figcaption>}
+    </figure>
+  );
+}
+
 function Bloco({ bloco }: { bloco: ApostilaBloco }) {
   const titulo = "titulo" in bloco && bloco.titulo ? bloco.titulo : null;
   return (
@@ -76,6 +89,49 @@ function Bloco({ bloco }: { bloco: ApostilaBloco }) {
           <Linhas quantidade={bloco.linhas} />
         </>
       )}
+      {bloco.tipo === "escolha-visual" && (
+        <div className="mt-6">
+          <p className="max-w-[150mm] text-left text-[16pt] font-semibold leading-relaxed">{bloco.comando}</p>
+          {bloco.modelo && (
+            <div className="mt-8 flex items-center gap-5 border-b border-foreground/20 pb-7">
+              <span className="text-[11pt] font-semibold uppercase">Modelo</span>
+              <div className="w-40"><ImagemAtividade imagem={bloco.modelo} /></div>
+            </div>
+          )}
+          <div className="mt-8 grid grid-cols-2 gap-8">
+            {bloco.imagens.map((imagem, index) => <ImagemAtividade key={`${imagem.url}-${index}`} imagem={imagem} />)}
+          </div>
+        </div>
+      )}
+      {bloco.tipo === "ligar-imagens" && (
+        <div className="mt-6">
+          <p className="max-w-[150mm] text-left text-[16pt] font-semibold leading-relaxed">{bloco.comando}</p>
+          <div className="mt-10 grid grid-cols-[1fr_70mm_1fr] items-center gap-y-14">
+            {bloco.esquerda.map((imagem, index) => (
+              <div className="contents" key={`${imagem.url}-${index}`}>
+                <ImagemAtividade imagem={imagem} />
+                <div className="border-b-2 border-dashed border-foreground/40" />
+                {bloco.direita[index] ? <ImagemAtividade imagem={bloco.direita[index]} /> : <div />}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      {bloco.tipo === "tracado" && (
+        <div className="mt-6">
+          <p className="max-w-[150mm] text-left text-[16pt] font-semibold leading-relaxed">{bloco.comando}</p>
+          <div className="mt-10 space-y-12">
+            {bloco.itens.map((item) => (
+              <div key={item} className="grid grid-cols-[40mm_1fr] items-end gap-8">
+                <span className="select-none border-b-2 border-dashed border-foreground/40 pb-2 text-center text-[54pt] font-bold text-foreground/30">
+                  {item} {item} {item}
+                </span>
+                <div className="h-20 border-b-2 border-foreground/60" />
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
       {bloco.tipo === "alternativas" && (
         <ol className="mt-2 space-y-4">
           {bloco.questoes.map((q, i) => (
@@ -100,28 +156,38 @@ function Bloco({ bloco }: { bloco: ApostilaBloco }) {
 }
 
 function Folha({ pagina, apostila }: { pagina: ApostilaPagina; apostila: Apostila }) {
+  const infantil = pagina.etiqueta === "Folha do estudante";
   return (
     <article
       data-etiqueta={pagina.etiqueta}
-      className="apostila-folha mx-auto flex w-full max-w-[210mm] flex-col bg-white p-[14mm] text-slate-900 shadow-sm ring-1 ring-slate-200 print:shadow-none print:ring-0"
+      className="apostila-folha mx-auto flex min-h-[297mm] w-full max-w-[210mm] flex-col bg-background p-[18mm] text-foreground shadow-sm ring-1 ring-border print:bg-background print:shadow-none print:ring-0"
     >
-      <header className="flex items-baseline justify-between border-b-2 border-slate-800 pb-2">
-        <p className="text-[10pt] font-black uppercase tracking-widest">{pagina.etiqueta}</p>
-        <p className="font-mono text-[10pt] font-bold">
-          {apostila.codigo} · {apostila.ano} · {apostila.disciplina}
-        </p>
-      </header>
-      <h2 className="mt-4 text-[19pt] font-black leading-tight">{pagina.titulo}</h2>
+      {infantil ? (
+        <header className="grid grid-cols-[1fr_42mm] gap-8 border-b border-foreground/25 pb-3 text-[11pt]">
+          <span>Nome: __________________________________</span>
+          <span>Data: ____/____/______</span>
+        </header>
+      ) : (
+        <header className="flex items-baseline justify-between border-b-2 border-foreground pb-2">
+          <p className="text-[10pt] font-black uppercase">{pagina.etiqueta}</p>
+          <p className="font-mono text-[10pt] font-bold">
+            {apostila.codigo} · {apostila.ano} · {apostila.disciplina}
+          </p>
+        </header>
+      )}
+      <h2 className={`${infantil ? "mt-10 text-[26pt] font-semibold" : "mt-4 text-[19pt] font-black"} leading-tight`}>{pagina.titulo}</h2>
       {pagina.subtitulo && <p className="mt-1 text-[11pt] font-semibold">{pagina.subtitulo}</p>}
       <div className="flex-1">
         {pagina.blocos.map((b, i) => (
           <Bloco key={i} bloco={b} />
         ))}
       </div>
-      <footer className="mt-6 flex items-center justify-between border-t border-slate-400 pt-2 text-[9pt] font-bold uppercase tracking-wider">
-        <span>NeuroBrilha Kids · uso pedagógico</span>
-        <span>{apostila.codigo}</span>
-      </footer>
+      {!infantil && (
+        <footer className="mt-6 flex items-center justify-between border-t border-foreground/40 pt-2 text-[9pt] font-bold uppercase">
+          <span>NeuroBrilha Kids · uso pedagógico</span>
+          <span>{apostila.codigo}</span>
+        </footer>
+      )}
     </article>
   );
 }
