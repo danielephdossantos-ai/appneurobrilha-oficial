@@ -72,7 +72,10 @@ function ApostilaImprimir() {
     return () => window.removeEventListener("afterprint", reset);
   }, []);
 
-  const apostila = useMemo(() => (aula ? gerarApostila(aula, extras) : null), [aula, extras]);
+  const apostila = useMemo(
+    () => apostilaEI ?? (aula ? gerarApostila(aula, extras) : null),
+    [apostilaEI, aula, extras],
+  );
 
   function imprimir(modo: Filtro) {
     setFiltro(modo);
