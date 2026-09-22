@@ -13,6 +13,7 @@ import { cursosEI as cursosPortuguesEI } from "@/escola-brilha/curso-portugues-e
 import { cursosMatematicaEI } from "@/escola-brilha/curso-matematica-ei/registry";
 import {
   ADAPTACOES,
+  adaptarTextoParaPapel,
   type Apostila,
   type ApostilaBloco,
   type ApostilaImagem,
@@ -123,69 +124,48 @@ function paginasProfessor(curso: CursoEI, aula: AulaEI): ApostilaPagina[] {
     if (texto) passosEnsino.push(texto);
   }
 
-  const folha1: ApostilaBloco[] = [
-    {
-      tipo: "texto",
-      titulo: "O que a criança vai aprender",
-      texto: boasVindas?.falaMascote ?? aula.titulo,
-    },
-    {
-      tipo: "lista",
-      titulo: "Como conduzir (12 a 20 minutos)",
-      itens: [
-        "1. Acolhimento: repita a fala de abertura e mostre as figuras da folha.",
-        "2. Escuta e ritmo: leia os versos batendo palmas com a turma.",
-        "3. Modelo: faça a primeira questão junto, em voz alta.",
-        "4. Folha da criança: ela responde marcando, ligando e desenhando.",
-        "5. Fechamento: conversa curta e missão em casa.",
-      ],
-    },
-  ];
-  if (ritmadas.length)
-    folha1.push({
-      tipo: "passos",
-      titulo: "Versos para ler no ritmo",
-      passos: ritmadas.flatMap((r) => r.versos),
-    });
-  if (historias.length)
-    folha1.push({
-      tipo: "passos",
-      titulo: `História para contar — ${historias[0].titulo}`,
-      passos: historias[0].cenas.map((c) => c.narracao),
-    });
+  const historia = historias[0];
+  const textoHistoria = historia
+    ? historia.cenas.map((c) => adaptarTextoParaPapel(c.narracao)).join("\n\n")
+    : [boasVindas?.falaMascote, ...ritmadas.flatMap((r) => r.versos)]
+        .filter((texto): texto is string => Boolean(texto))
+        .map(adaptarTextoParaPapel)
+        .join("\n\n");
+  const folha1: ApostilaBloco[] = [{ tipo: "historia", texto: textoHistoria || aula.titulo }];
 
   const folha2: ApostilaBloco[] = [
-    { tipo: "passos", titulo: "Falas e comandos da aula", passos: passosEnsino.slice(0, 10) },
+    { tipo: "texto", titulo: "Objetivo da aula adaptada", texto: adaptarTextoParaPapel(boasVindas?.falaMascote ?? aula.titulo) },
+    { tipo: "passos", titulo: "Explique e faça junto", passos: passosEnsino.slice(0, 10).map(adaptarTextoParaPapel) },
   ];
   if (conversas.length)
     folha2.push({
       tipo: "lista",
       titulo: "Perguntas de conversa (sem resposta certa)",
-      itens: conversas.map((c) => c.pergunta),
+      itens: conversas.map((c) => adaptarTextoParaPapel(c.pergunta)),
     });
   if (fazDeConta)
-    folha2.push({ tipo: "texto", titulo: "Brincadeira com o corpo", texto: fazDeConta.convite });
-  folha2.push({ tipo: "lista", titulo: "Adaptações para a sala de aula", itens: ADAPTACOES });
+    folha2.push({ tipo: "texto", titulo: "Faça junto antes da folha", texto: adaptarTextoParaPapel(fazDeConta.convite) });
+  folha2.push({ tipo: "lista", titulo: "Apoios para esta atividade", itens: ADAPTACOES });
   if (aula.baseCientifica)
     folha2.push({ tipo: "aviso", titulo: "Base da atividade", texto: aula.baseCientifica });
   if (familia)
     folha2.push({
       tipo: "texto",
       titulo: `Missão em família — ${familia.titulo}`,
-      texto: `${familia.convite}\n${familia.dicaAdulto}`,
+      texto: adaptarTextoParaPapel(`${familia.convite}\n${familia.dicaAdulto}`),
     });
 
   return [
     {
       etiqueta: "Guia do professor",
-      titulo: aula.titulo,
-      subtitulo: `${curso.serieLabel} · roteiro de condução`,
+      titulo: historia?.titulo ?? aula.titulo,
+      subtitulo: "História de abertura — leia devagar e mostre as figuras da atividade",
       blocos: folha1,
     },
     {
       etiqueta: "Guia do professor",
       titulo: aula.titulo,
-      subtitulo: "Falas, conversa e adaptações",
+      subtitulo: `${curso.serieLabel} · aula adaptada para acompanhar a turma`,
       blocos: folha2,
     },
   ];
@@ -226,7 +206,7 @@ function paginasCriancaMatematica(aula: AulaEI, imagens: ApostilaImagem[]): Apos
     paginas.push(
       folha("Atividade 1 — Conte e marque", {
         tipo: "contar-marcar",
-        comando: "Toque em cada figura, conte e marque o número certo.",
+        comando: "Aponte para cada figura, conte uma por vez e marque o número certo.",
         itens: contar,
       }),
     );

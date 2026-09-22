@@ -18,6 +18,7 @@ export type ApostilaItemVisual =
 
 export type ApostilaBloco =
   | { tipo: "texto"; titulo?: string; texto: string }
+  | { tipo: "historia"; titulo?: string; texto: string }
   | { tipo: "lista"; titulo?: string; itens: string[] }
   | { tipo: "passos"; titulo?: string; passos: string[] }
   | { tipo: "imagens"; titulo?: string; imagens: ApostilaImagem[] }
@@ -232,6 +233,37 @@ function paragrafos(texto: string): string[] {
     .split(/\n{2,}|\n/)
     .map((p) => p.trim())
     .filter(Boolean);
+}
+
+/** Converte comandos próprios da tela em orientação válida para papel. */
+export function adaptarTextoParaPapel(texto: string): string {
+  return (texto || "")
+    .replace(/toque em cada ([^.\n]+?)(?: da tela)?\s*[—-]\s*uma por vez/gi, "aponte e conte cada $1, uma por vez")
+    .replace(/toque em cada ([^.\n]+)/gi, "aponte e conte cada $1")
+    .replace(/para cada toque,?\s*/gi, "a cada item contado, ")
+    .replace(/quando não sobrar nenhum(?:a)? ([^.\n]+?) sem tocar/gi, "quando todos os itens tiverem sido contados")
+    .replace(/na tela aparecem?/gi, "na folha aparecem")
+    .replace(/na tela/gi, "na folha")
+    .replace(/toque na figura/gi, "marque a figura")
+    .replace(/toque (?:em|no|na|nos|nas)/gi, "aponte para")
+    .replace(/toque para/gi, "aponte e")
+    .replace(/toque/gi, "aponte")
+    .replace(/clique em/gi, "marque")
+    .replace(/arraste cada item para/gi, "ligue cada item a")
+    .replace(/arraste do/gi, "numere do")
+    .replace(/arraste/gi, "ligue")
+    .replace(/(?:escute|ouça)(?: o áudio)?/gi, "acompanhe a leitura do professor")
+    .replace(/aperte o botão[^.\n]*/gi, "acompanhe a leitura do professor")
+    .replace(/\s{2,}/g, " ")
+    .trim();
+}
+
+function textoNarrativa(aula: Aula): string {
+  if (!aula.narrativa) return adaptarTextoParaPapel(aula.motivacao || aula.missao);
+  return [aula.narrativa.contexto, aula.narrativa.problema, aula.narrativa.convite]
+    .map(adaptarTextoParaPapel)
+    .filter(Boolean)
+    .join("\n\n");
 }
 
 function imagemComLegenda(imagens: ApostilaImagem[], legenda: string): ApostilaImagem | undefined {
@@ -502,69 +534,41 @@ export function gerarApostila(aula: Aula, extras: ApostilaImagem[] = []): Aposti
 
   const paginas: ApostilaPagina[] = [];
 
-  // ---------------- Guia do professor · folha 1 ----------------
-  const guia1: ApostilaBloco[] = [
-    { tipo: "texto", titulo: "O que a criança vai aprender", texto: aula.missao },
-    { tipo: "lista", titulo: "Objetivos da aula", itens: aula.objetivos ?? [] },
-  ];
-  if (aula.conhecimentosPrevios?.length)
-    guia1.push({ tipo: "lista", titulo: "O que a criança já precisa saber", itens: aula.conhecimentosPrevios });
-  guia1.push({
-    tipo: "lista",
-    titulo: "Como conduzir (30 a 40 minutos)",
-    itens: [
-      "1. Acolhimento e história de abertura — 5 min (leia o roteiro de fala).",
-      "2. Explicação com material concreto — 8 min.",
-      "3. Exemplo resolvido junto com a turma — 5 min.",
-      "4. Prática guiada: a criança tenta, o professor acompanha — 7 min.",
-      "5. Folha do estudante: prática independente — 10 min.",
-      "6. Fechamento: retomar o resumo e entregar a carta da família — 5 min.",
-    ],
-  });
-  if (aula.narrativa)
-    guia1.push({
-      tipo: "passos",
-      titulo: `Roteiro de fala — ${aula.narrativa.titulo}`,
-      passos: [aula.narrativa.contexto, aula.narrativa.problema, aula.narrativa.convite],
-    });
+  // ---------------- Guia do professor · folha 1: história integral ----------------
+  const tituloHistoria = aula.narrativa?.titulo ?? aula.titulo;
   paginas.push({
     etiqueta: "Guia do professor",
-    titulo: aula.titulo,
-    subtitulo: "Plano de aula e roteiro de condução",
-    blocos: guia1,
+    titulo: tituloHistoria,
+    subtitulo: "História de abertura — leia devagar e mostre as figuras da atividade",
+    blocos: [{ tipo: "historia", texto: textoNarrativa(aula) }],
   });
 
-  // ---------------- Guia do professor · folha 2 ----------------
+  // ---------------- Guia do professor · folha 2: aula adaptada ----------------
   const guia2: ApostilaBloco[] = [
-    { tipo: "passos", titulo: "Explicação passo a passo", passos: paragrafos(aula.explicacao) },
+    { tipo: "texto", titulo: "Objetivo da aula adaptada", texto: adaptarTextoParaPapel(aula.missao) },
+    { tipo: "passos", titulo: "Explique com linguagem simples", passos: paragrafos(adaptarTextoParaPapel(aula.explicacao)) },
   ];
   const niveis = aula.explicacoesNiveis ?? {};
   const outrosJeitos = [niveis.nivel2, niveis.nivel3, niveis.nivel4].filter(
     (t): t is string => !!t && t.trim().length > 0,
   );
   if (outrosJeitos.length)
-    guia2.push({ tipo: "lista", titulo: "Se a criança não entendeu, explique assim", itens: outrosJeitos });
+    guia2.push({ tipo: "lista", titulo: "Se a criança precisar de outro jeito", itens: outrosJeitos.map(adaptarTextoParaPapel) });
   guia2.push({
     tipo: "passos",
-    titulo: `Exemplo resolvido — ${aula.exemploResolvido.enunciado}`,
-    passos: [...aula.exemploResolvido.passos, `Resposta: ${aula.exemploResolvido.resposta}`],
+    titulo: `Mostre um exemplo no papel — ${adaptarTextoParaPapel(aula.exemploResolvido.enunciado)}`,
+    passos: [...aula.exemploResolvido.passos.map(adaptarTextoParaPapel), `Resposta explicada: ${adaptarTextoParaPapel(aula.exemploResolvido.resposta)}`],
   });
   guia2.push({
     tipo: "texto",
-    titulo: "Prática guiada (faça junto antes da folha)",
-    texto: `${aula.atividadeGuiada.enunciado}\nResposta: ${aula.atividadeGuiada.resposta}\nComo explicar: ${aula.atividadeGuiada.explicacao}`,
+    titulo: "Faça junto antes de entregar as atividades",
+    texto: `${adaptarTextoParaPapel(aula.atividadeGuiada.enunciado)}\n\nResposta esperada: ${adaptarTextoParaPapel(aula.atividadeGuiada.resposta)}\n\nSe precisar, explique assim: ${adaptarTextoParaPapel(aula.atividadeGuiada.explicacao)}`,
   });
-  guia2.push({ tipo: "lista", titulo: "Adaptações para a sala de aula", itens: ADAPTACOES });
-  guia2.push({
-    tipo: "aviso",
-    titulo: "Feedback que ensina",
-    texto:
-      "Nunca responda só “certo” ou “errado”. Diga o que a criança fez e por que funciona: “Você acertou porque contou um por um e não repetiu nenhum.”",
-  });
+  guia2.push({ tipo: "lista", titulo: "Apoios para esta atividade", itens: ADAPTACOES });
   paginas.push({
     etiqueta: "Guia do professor",
     titulo: aula.titulo,
-    subtitulo: "Como ensinar, como explicar de novo e como adaptar",
+    subtitulo: "Aula adaptada para acompanhar o conteúdo da turma",
     blocos: guia2,
   });
 

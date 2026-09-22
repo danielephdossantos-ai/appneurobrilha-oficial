@@ -56,6 +56,23 @@ describe("apostila A4 da área do professor", () => {
     expect(a.paginas.some((p) => p.etiqueta === "Gabarito")).toBe(false);
   });
 
+  it("transforma comandos do aplicativo em linguagem de atividade impressa", () => {
+    const aulasConvertidas = listAulas().filter((item) =>
+      /1º\s*ano/i.test(item.ano) && /(matem|portugu)/i.test(item.disciplina),
+    );
+    for (const aulaAtual of aulasConvertidas) {
+      const texto = JSON.stringify(gerarApostila(aulaAtual).paginas).toLowerCase();
+      expect(texto, aulaAtual.codigo).not.toMatch(/toque|clique|arraste|na tela|aplicativo|ouça o áudio|escute/);
+    }
+  });
+
+  it("reserva a primeira folha do professor para a história", () => {
+    const apostila = gerarApostila(getAula("EF01MA01")!);
+    const primeira = apostila.paginas[0];
+    expect(primeira?.etiqueta).toBe("Guia do professor");
+    expect(primeira?.blocos).toEqual([expect.objectContaining({ tipo: "historia" })]);
+  });
+
   it("gera treino pontilhado para G, B, P e S com cinco repetições", () => {
     const a = gerarApostila(aula);
     const tracado = a.paginas

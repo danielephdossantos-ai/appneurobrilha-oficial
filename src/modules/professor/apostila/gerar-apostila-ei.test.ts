@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { gerarApostilaEI, listarAulasEI } from "./gerar-apostila-ei";
 
-const PROIBIDAS = ["bncc", "neurobrilha", "escute", "gabarito", "tea", "tdah"];
+const PROIBIDAS = ["bncc", "neurobrilha", "escute", "gabarito", "tea", "tdah", "toque", "na tela", "arraste"];
 
 describe("apostilas da Educação Infantil (3 a 6 anos)", () => {
   const catalogo = listarAulasEI();
@@ -50,5 +50,12 @@ describe("apostilas da Educação Infantil (3 a 6 anos)", () => {
 
   it("devolve null para chave inexistente", () => {
     expect(gerarApostilaEI("curso-inexistente__aula-x")).toBeNull();
+  });
+
+  it("usa a primeira folha do professor somente para a história", () => {
+    for (const item of catalogo) {
+      const primeira = gerarApostilaEI(item.chave)?.paginas[0];
+      expect(primeira?.blocos).toEqual([expect.objectContaining({ tipo: "historia" })]);
+    }
   });
 });
