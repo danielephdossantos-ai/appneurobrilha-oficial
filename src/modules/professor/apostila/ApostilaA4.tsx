@@ -160,40 +160,9 @@ function Bloco({ bloco }: { bloco: ApostilaBloco }) {
       )}
       {bloco.tipo === "explicacao-atividade" && (
         <div className="mt-3 break-inside-avoid rounded-md border-2 border-foreground/70 p-4">
-          <div className="grid grid-cols-[1fr_58mm] gap-5">
-            <div>
-              <p className="text-[9pt] font-black uppercase">Como explicar</p>
-              <p className="mt-1 whitespace-pre-wrap text-[11pt] leading-relaxed">{bloco.explicacao}</p>
-            </div>
-            <div className="rounded-md border border-foreground/30 p-2">
-              <p className="text-center text-[9pt] font-black uppercase">Modelo visual</p>
-              <div className="mt-2 flex min-h-20 flex-wrap items-center justify-center gap-2">
-                {bloco.grupos?.length ? bloco.grupos.map((grupo, grupoIndex) => (
-                  <div key={`${grupo.imagem.url}-${grupoIndex}`} className="rounded border border-foreground/30 p-1 text-center">
-                    {grupo.rotulo && <p className="text-[8pt] font-bold">{grupo.rotulo}</p>}
-                    <div className="mt-1 flex max-w-[48mm] flex-wrap justify-center gap-1">
-                      {Array.from({ length: grupo.quantidade }, (_, repeticao) => (
-                        <img
-                          key={repeticao}
-                          src={grupo.imagem.url}
-                          alt={grupo.imagem.legenda ?? ""}
-                          className="h-9 w-9 object-contain"
-                        />
-                      ))}
-                    </div>
-                  </div>
-                )) : bloco.imagens.length ? bloco.imagens.flatMap((imagem, imagemIndex) =>
-                  Array.from({ length: Math.max(1, bloco.quantidade ?? 1) }, (_, repeticao) => (
-                    <img
-                      key={`${imagem.url}-${imagemIndex}-${repeticao}`}
-                      src={imagem.url}
-                      alt={imagem.legenda ?? ""}
-                      className="h-14 w-14 object-contain"
-                    />
-                  )),
-                ) : <span className="text-[10pt] font-semibold">Use o material concreto da sala.</span>}
-              </div>
-            </div>
+          <div>
+            <p className="text-[9pt] font-black uppercase">Como explicar</p>
+            <p className="mt-1 whitespace-pre-wrap text-[11pt] leading-relaxed">{bloco.explicacao}</p>
           </div>
           <div className="mt-3 border-t-2 border-foreground/40 pt-3">
             <p className="text-[9pt] font-black uppercase">Atividade correspondente da criança</p>
@@ -202,6 +171,50 @@ function Bloco({ bloco }: { bloco: ApostilaBloco }) {
               <span className="h-7 w-7 border-2 border-foreground" />
               <span className="h-7 flex-1 border-b-2 border-foreground/60" />
             </div>
+          </div>
+        </div>
+      )}
+      {bloco.tipo === "apoio-visual" && (
+        <div className="apostila-apoio-visual mt-7 flex flex-1 flex-col">
+          <p className="rounded-md border-2 border-foreground p-5 text-center text-[20pt] font-black leading-relaxed">
+            {bloco.pergunta}
+          </p>
+          <div className="mt-8 flex flex-1 items-center justify-center">
+            {bloco.grupos?.length ? (
+              <div className="grid w-full grid-cols-2 gap-7">
+                {bloco.grupos.map((grupo, grupoIndex) => (
+                  <div key={`${grupo.imagem.url}-${grupoIndex}`} className="flex min-h-52 flex-col items-center justify-center rounded-md border-2 border-foreground p-5 text-center">
+                    {grupo.rotulo && <p className="mb-4 text-[15pt] font-black">{grupo.rotulo}</p>}
+                    <div className="flex flex-wrap justify-center gap-4">
+                      {Array.from({ length: grupo.quantidade }, (_, repeticao) => (
+                        <img key={repeticao} src={grupo.imagem.url} alt={grupo.imagem.legenda ?? ""} className="h-20 w-20 object-contain" />
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : bloco.imagens.length ? (
+              <div className="grid w-full grid-cols-2 gap-8">
+                {bloco.imagens.map((imagem, imagemIndex) => (
+                  <figure key={`${imagem.url}-${imagemIndex}`} className="flex min-h-64 flex-col items-center justify-center rounded-md border-2 border-foreground p-6 text-center">
+                    <div className="flex flex-wrap justify-center gap-3">
+                      {Array.from({ length: Math.max(1, bloco.quantidade ?? 1) }, (_, repeticao) => (
+                        <img key={repeticao} src={imagem.url} alt={imagem.legenda ?? ""} className="h-28 w-28 object-contain" />
+                      ))}
+                    </div>
+                    {imagem.legenda && <figcaption className="mt-5 text-[17pt] font-bold">{imagem.legenda}</figcaption>}
+                  </figure>
+                ))}
+              </div>
+            ) : (
+              <div className="flex min-h-72 w-full items-center justify-center rounded-md border-2 border-foreground p-8 text-center text-[22pt] font-bold">
+                {bloco.pergunta}
+              </div>
+            )}
+          </div>
+          <div className="mt-8 flex items-center gap-4 text-[17pt] font-black">
+            <span>Resposta:</span>
+            <span className="h-14 flex-1 border-b-2 border-foreground" />
           </div>
         </div>
       )}
@@ -631,7 +644,7 @@ export function ApostilaA4({
 }) {
   const paginas = apostila.paginas.filter((p) => {
     if (filtro === "tudo") return true;
-    if (filtro === "professor") return p.etiqueta === "Guia do professor" || p.etiqueta === "Gabarito";
+    if (filtro === "professor") return p.etiqueta === "Guia do professor" || p.etiqueta === "Apoio visual do professor" || p.etiqueta === "Gabarito";
     if (filtro === "estudante") return p.etiqueta === "Folha do estudante";
     return p.etiqueta === "Carta para a família";
   });

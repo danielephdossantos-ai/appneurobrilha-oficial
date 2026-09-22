@@ -15,7 +15,7 @@ describe("apostila A4 da área do professor", () => {
     const a = gerarApostila(aula);
     const etiquetas = new Set(a.paginas.map((p) => p.etiqueta));
     expect(etiquetas).toEqual(
-      new Set(["Guia do professor", "Folha do estudante"]),
+      new Set(["Guia do professor", "Apoio visual do professor", "Folha do estudante"]),
     );
     expect(a.paginas.length).toBeGreaterThanOrEqual(9);
   });
@@ -56,6 +56,24 @@ describe("apostila A4 da área do professor", () => {
     expect(a.paginas.some((p) => p.etiqueta === "Gabarito")).toBe(false);
   });
 
+  it("coloca cada modelo visual em uma folha separada de apoio ao professor", () => {
+    for (const aulaAtual of listAulas().filter((item) => /1º\s*ano/i.test(item.ano) && /(matem|portugu)/i.test(item.disciplina))) {
+      const apostila = gerarApostila(aulaAtual);
+      const explicacoes = apostila.paginas
+        .filter((pagina) => pagina.etiqueta === "Guia do professor")
+        .flatMap((pagina) => pagina.blocos)
+        .filter((bloco) => bloco.tipo === "explicacao-atividade");
+      const apoios = apostila.paginas.filter((pagina) => pagina.etiqueta === "Apoio visual do professor");
+      expect(apoios, aulaAtual.codigo).toHaveLength(explicacoes.length);
+      expect(apoios.length, aulaAtual.codigo).toBeGreaterThanOrEqual(2);
+      for (const pagina of apoios) {
+        expect(pagina.blocos).toEqual([
+          expect.objectContaining({ tipo: "apoio-visual", pergunta: expect.any(String) }),
+        ]);
+      }
+    }
+  });
+
   it("transforma comandos do aplicativo em linguagem de atividade impressa", () => {
     const aulasConvertidas = listAulas().filter((item) =>
       /1º\s*ano/i.test(item.ano) && /(matem|portugu)/i.test(item.disciplina),
@@ -91,6 +109,7 @@ describe("apostila A4 da área do professor", () => {
     const visual = aulaContagem.atividadeGuiada.visual;
     const guia = gerarApostila(aulaContagem).paginas.filter((pagina) => pagina.etiqueta === "Guia do professor")[1];
     const primeiro = guia?.blocos.find((bloco) => bloco.tipo === "explicacao-atividade");
+    const apoio = gerarApostila(aulaContagem).paginas.find((pagina) => pagina.etiqueta === "Apoio visual do professor");
     expect(visual?.tipo).toBe("grupos");
     expect(primeiro).toMatchObject({
       tipo: "explicacao-atividade",
@@ -103,6 +122,10 @@ describe("apostila A4 da área do professor", () => {
     if (visual?.tipo === "grupos" && primeiro?.tipo === "explicacao-atividade") {
       expect(primeiro.grupos?.every((grupo) => grupo.imagem.url === visual.imagemUrl)).toBe(true);
     }
+    expect(apoio?.blocos[0]).toMatchObject({
+      tipo: "apoio-visual",
+      grupos: [{ quantidade: 3 }, { quantidade: 3 }, { quantidade: 3 }],
+    });
   });
 
   it("gera treino pontilhado para G, B, P e S com cinco repetições", () => {
