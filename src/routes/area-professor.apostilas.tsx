@@ -26,8 +26,12 @@ export const Route = createFileRoute("/area-professor/apostilas")({
   }),
 });
 
+type PastaItem = { chave: string; titulo: string; detalhe: string; codigo?: string };
+type Pasta = { nome: string; cor: "emerald" | "indigo"; itens: PastaItem[] };
+
 function Apostilas() {
   const [busca, setBusca] = useState("");
+  const [abertas, setAbertas] = useState<string[]>([]);
   const aulas = useMemo(
     () =>
       listAulas().filter(
