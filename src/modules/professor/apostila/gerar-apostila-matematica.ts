@@ -42,13 +42,18 @@ const CONFIGS_MATEMATICA: Record<string, ConfigMat> = {
 const IMAGEM_IGNORADA = /(pip-|mascot|brilha|aurora|logo|fundo|mapa)/i;
 
 function figuras(imagens: ApostilaImagem[]): ApostilaImagem[] {
+  const juntar = (lista: ApostilaImagem[], filtrar: boolean) => {
+    for (const imagem of lista) {
+      if (filtrar && IMAGEM_IGNORADA.test(imagem.url)) continue;
+      if (usadas.some((u) => u.url === imagem.url)) continue;
+      usadas.push(imagem);
+      if (usadas.length >= 5) return;
+    }
+  };
   const usadas: ApostilaImagem[] = [];
-  for (const imagem of imagens) {
-    if (IMAGEM_IGNORADA.test(imagem.url)) continue;
-    if (usadas.some((u) => u.url === imagem.url)) continue;
-    usadas.push(imagem);
-    if (usadas.length >= 5) break;
-  }
+  juntar(imagens, true);
+  // Se a aula só tem figuras de personagem, usa mesmo assim: nenhuma imagem nova é criada.
+  if (usadas.length < 2) juntar(imagens, false);
   return usadas;
 }
 
