@@ -16,3 +16,4 @@
 - [x] Abrir a lista de apostilas para Português e Matemática do 1º ao 5º ano
 - [x] Curso de alfabetização e anos iniciais (3 a 6 anos) em apostila (42 aulas)
 - [x] Converter falas do aplicativo em aulas e atividades próprias para impressão em todas as apostilas
+- [x] Acompanhar cada explicação docente com modelo visual e atividade correspondente da criança
