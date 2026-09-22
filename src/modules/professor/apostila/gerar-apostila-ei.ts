@@ -81,6 +81,25 @@ function embaralhar<T>(lista: T[]): T[] {
   return [...lista].sort(() => 0.5 - Math.random());
 }
 
+function nomeNoPlural(imagem: ApostilaImagem | undefined): string {
+  const nome = (imagem?.legenda ?? "bolinha").trim().toLowerCase();
+  const nomesCorretos: Record<string, string> = {
+    arvore: "árvores",
+    balao: "balões",
+    coracao: "corações",
+    maca: "maçãs",
+    passaro: "pássaros",
+  };
+  if (nomesCorretos[nome]) return nomesCorretos[nome];
+  if (!nome) return "bolinhas";
+  if (/ões$|ães$|ãos$|ais$|eis$|ois$|uis$|is$|ns$|res$|zes$|s$/i.test(nome)) return nome;
+  if (nome.endsWith("ão")) return `${nome.slice(0, -2)}ões`;
+  if (nome.endsWith("ã")) return `${nome}s`;
+  if (nome.endsWith("m")) return `${nome.slice(0, -1)}ns`;
+  if (/[rz]$/.test(nome)) return `${nome}es`;
+  return `${nome}s`;
+}
+
 /* ------------------------- folhas do professor ------------------------- */
 
 function paginasProfessor(curso: CursoEI, aula: AulaEI): ApostilaPagina[] {
@@ -271,8 +290,11 @@ function paginasCriancaMatematica(aula: AulaEI, imagens: ApostilaImagem[]): Apos
     paginas.push(
       folha("Atividade 4 — Desenhe a quantidade", {
         tipo: "desenhar-quantidade",
-        comando: "Desenhe dentro do quadro a quantidade pedida.",
-        itens: numeros.map((n) => ({ quantidade: n, rotulo: `Desenhe ${n}` })),
+        comando: "Veja o número e desenhe exatamente a quantidade pedida em cada quadro.",
+        itens: numeros.map((n, index) => {
+          const objeto = nomeNoPlural(contar.find((item) => item.quantidade === n)?.imagem ?? imagens[index % imagens.length]);
+          return { quantidade: n, objeto, rotulo: `Desenhe ${n} ${objeto}` };
+        }),
       }),
     );
     paginas.push(

@@ -35,6 +35,19 @@ describe("apostilas da Educação Infantil (3 a 6 anos)", () => {
     }
   });
 
+  it("informa o número e o que desenhar nas atividades de quantidade", () => {
+    for (const itemCatalogo of catalogo.filter((item) => item.disciplina === "Matemática")) {
+      const apostila = gerarApostilaEI(itemCatalogo.chave)!;
+      for (const bloco of apostila.paginas.flatMap((pagina) => pagina.blocos)) {
+        if (bloco.tipo !== "desenhar-quantidade" || !bloco.itens.some((item) => item.quantidade > 1)) continue;
+        for (const item of bloco.itens) {
+          expect(item.rotulo, itemCatalogo.chave).toMatch(new RegExp(`^Desenhe ${item.quantidade} \\S+`, "i"));
+          expect(item.objeto, itemCatalogo.chave).toBeTruthy();
+        }
+      }
+    }
+  });
+
   it("devolve null para chave inexistente", () => {
     expect(gerarApostilaEI("curso-inexistente__aula-x")).toBeNull();
   });
