@@ -80,6 +80,7 @@ import { Route as AnamneseChildIdEscalasRouteImport } from './routes/anamnese.$c
 import { Route as AnamneseChildIdResultadoRouteImport } from './routes/anamnese.$childId.resultado'
 import { Route as ApiPublicSendPushRouteImport } from './routes/api/public/send-push'
 import { Route as AreaProfessorAcompanhamentoLinkIdRouteImport } from './routes/area-professor.acompanhamento.$linkId'
+import { Route as AreaProfessorApostilaCodigoRouteImport } from './routes/area-professor.apostila.$codigo'
 import { Route as AreaProfessorAulaInclusivaLessonIdRouteImport } from './routes/area-professor.aula-inclusiva.$lessonId'
 import { Route as AreaProfessorPerfilPedagogicoLinkIdRouteImport } from './routes/area-professor.perfil-pedagogico.$linkId'
 import { Route as EscolaBrilhaAtlasFinalCursoRouteImport } from './routes/escola-brilha.atlas-final.$curso'
@@ -478,6 +479,12 @@ const AreaProfessorAcompanhamentoLinkIdRoute =
     path: '/acompanhamento/$linkId',
     getParentRoute: () => AreaProfessorRoute,
   } as any)
+const AreaProfessorApostilaCodigoRoute =
+  AreaProfessorApostilaCodigoRouteImport.update({
+    id: '/apostila/$codigo',
+    path: '/apostila/$codigo',
+    getParentRoute: () => AreaProfessorRoute,
+  } as any)
 const AreaProfessorAulaInclusivaLessonIdRoute =
   AreaProfessorAulaInclusivaLessonIdRouteImport.update({
     id: '/aula-inclusiva/$lessonId',
@@ -748,6 +755,7 @@ export interface FileRoutesByFullPath {
   '/anamnese/$childId/resultado': typeof AnamneseChildIdResultadoRoute
   '/api/public/send-push': typeof ApiPublicSendPushRoute
   '/area-professor/acompanhamento/$linkId': typeof AreaProfessorAcompanhamentoLinkIdRoute
+  '/area-professor/apostila/$codigo': typeof AreaProfessorApostilaCodigoRoute
   '/area-professor/aula-inclusiva/$lessonId': typeof AreaProfessorAulaInclusivaLessonIdRoute
   '/area-professor/perfil-pedagogico/$linkId': typeof AreaProfessorPerfilPedagogicoLinkIdRoute
   '/escola-brilha/atlas-final/$curso': typeof EscolaBrilhaAtlasFinalCursoRoute
@@ -853,6 +861,7 @@ export interface FileRoutesByTo {
   '/anamnese/$childId/resultado': typeof AnamneseChildIdResultadoRoute
   '/api/public/send-push': typeof ApiPublicSendPushRoute
   '/area-professor/acompanhamento/$linkId': typeof AreaProfessorAcompanhamentoLinkIdRoute
+  '/area-professor/apostila/$codigo': typeof AreaProfessorApostilaCodigoRoute
   '/area-professor/aula-inclusiva/$lessonId': typeof AreaProfessorAulaInclusivaLessonIdRoute
   '/area-professor/perfil-pedagogico/$linkId': typeof AreaProfessorPerfilPedagogicoLinkIdRoute
   '/escola-brilha/atlas-final/$curso': typeof EscolaBrilhaAtlasFinalCursoRoute
@@ -960,6 +969,7 @@ export interface FileRoutesById {
   '/anamnese/$childId/resultado': typeof AnamneseChildIdResultadoRoute
   '/api/public/send-push': typeof ApiPublicSendPushRoute
   '/area-professor/acompanhamento/$linkId': typeof AreaProfessorAcompanhamentoLinkIdRoute
+  '/area-professor/apostila/$codigo': typeof AreaProfessorApostilaCodigoRoute
   '/area-professor/aula-inclusiva/$lessonId': typeof AreaProfessorAulaInclusivaLessonIdRoute
   '/area-professor/perfil-pedagogico/$linkId': typeof AreaProfessorPerfilPedagogicoLinkIdRoute
   '/escola-brilha/atlas-final/$curso': typeof EscolaBrilhaAtlasFinalCursoRoute
@@ -1068,6 +1078,7 @@ export interface FileRouteTypes {
     | '/anamnese/$childId/resultado'
     | '/api/public/send-push'
     | '/area-professor/acompanhamento/$linkId'
+    | '/area-professor/apostila/$codigo'
     | '/area-professor/aula-inclusiva/$lessonId'
     | '/area-professor/perfil-pedagogico/$linkId'
     | '/escola-brilha/atlas-final/$curso'
@@ -1173,6 +1184,7 @@ export interface FileRouteTypes {
     | '/anamnese/$childId/resultado'
     | '/api/public/send-push'
     | '/area-professor/acompanhamento/$linkId'
+    | '/area-professor/apostila/$codigo'
     | '/area-professor/aula-inclusiva/$lessonId'
     | '/area-professor/perfil-pedagogico/$linkId'
     | '/escola-brilha/atlas-final/$curso'
@@ -1279,6 +1291,7 @@ export interface FileRouteTypes {
     | '/anamnese/$childId/resultado'
     | '/api/public/send-push'
     | '/area-professor/acompanhamento/$linkId'
+    | '/area-professor/apostila/$codigo'
     | '/area-professor/aula-inclusiva/$lessonId'
     | '/area-professor/perfil-pedagogico/$linkId'
     | '/escola-brilha/atlas-final/$curso'
@@ -1900,6 +1913,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AreaProfessorAcompanhamentoLinkIdRouteImport
       parentRoute: typeof AreaProfessorRoute
     }
+    '/area-professor/apostila/$codigo': {
+      id: '/area-professor/apostila/$codigo'
+      path: '/apostila/$codigo'
+      fullPath: '/area-professor/apostila/$codigo'
+      preLoaderRoute: typeof AreaProfessorApostilaCodigoRouteImport
+      parentRoute: typeof AreaProfessorRoute
+    }
     '/area-professor/aula-inclusiva/$lessonId': {
       id: '/area-professor/aula-inclusiva/$lessonId'
       path: '/aula-inclusiva/$lessonId'
@@ -2154,6 +2174,7 @@ interface AreaProfessorRouteChildren {
   AreaProfessorPraticaRoute: typeof AreaProfessorPraticaRoute
   AreaProfessorTarefasRoute: typeof AreaProfessorTarefasRoute
   AreaProfessorAcompanhamentoLinkIdRoute: typeof AreaProfessorAcompanhamentoLinkIdRoute
+  AreaProfessorApostilaCodigoRoute: typeof AreaProfessorApostilaCodigoRoute
   AreaProfessorAulaInclusivaLessonIdRoute: typeof AreaProfessorAulaInclusivaLessonIdRoute
   AreaProfessorPerfilPedagogicoLinkIdRoute: typeof AreaProfessorPerfilPedagogicoLinkIdRoute
 }
@@ -2168,6 +2189,7 @@ const AreaProfessorRouteChildren: AreaProfessorRouteChildren = {
   AreaProfessorTarefasRoute: AreaProfessorTarefasRoute,
   AreaProfessorAcompanhamentoLinkIdRoute:
     AreaProfessorAcompanhamentoLinkIdRoute,
+  AreaProfessorApostilaCodigoRoute: AreaProfessorApostilaCodigoRoute,
   AreaProfessorAulaInclusivaLessonIdRoute:
     AreaProfessorAulaInclusivaLessonIdRoute,
   AreaProfessorPerfilPedagogicoLinkIdRoute:
