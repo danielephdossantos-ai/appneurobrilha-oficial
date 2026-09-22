@@ -250,11 +250,61 @@ function paginasOperacao(config: ConfigMat, imgs: ApostilaImagem[]): ApostilaPag
 }
 
 function paginasForma(config: ConfigMat, imgs: ApostilaImagem[]): ApostilaPagina[] {
-  const tracado = { itens: config.palavras.slice(0, 3), imagens: {} as Record<string, ApostilaImagem> };
-  config.palavras.slice(0, 3).forEach((palavra, index) => {
-    const imagem = imgs[index % imgs.length];
-    if (imagem) tracado.imagens[palavra] = imagem;
-  });
+  const palavras = config.palavras.slice(0, 3);
+  // Só liga palavra e figura quando a figura realmente corresponde à palavra.
+  const pares = palavras
+    .map((palavra) => ({ palavra, imagem: figuraDaPalavra(imgs, palavra) }))
+    .filter((p): p is { palavra: string; imagem: ApostilaImagem } => !!p.imagem);
+  const tracado = { itens: palavras, imagens: {} as Record<string, ApostilaImagem> };
+  for (const par of pares) tracado.imagens[par.palavra] = par.imagem;
+  const folhaPares: ApostilaPagina[] =
+    pares.length >= 2
+      ? [
+          folha("Atividade 3 — Ligue figura e palavra", [
+            {
+              tipo: "ligar-imagens",
+              comando: "Ligue cada figura à palavra que combina com ela.",
+              esquerda: pares.map((p) => p.imagem),
+              direita: [...pares].reverse().map((p) => ({ texto: p.palavra })),
+            },
+          ]),
+        ]
+      : [
+          folha("Atividade 3 — Complete a sequência", [
+            {
+              tipo: "sequencia-numerica",
+              comando: "Escreva os números que faltam.",
+              linhas: sequencias(config.numeros),
+            },
+          ]),
+        ];
+  const folhaMarcar: ApostilaPagina[] =
+    pares.length >= 2
+      ? [
+          folha("Atividade 2 — Marque a figura certa", [
+            {
+              tipo: "marcar-figura",
+              comando: "Marque uma resposta em cada atividade.",
+              questoes: pares.map((par, index) => ({
+                pergunta: `${index + 1}. Marque a figura de ${par.palavra}.`,
+                imagens: [
+                  par.imagem,
+                  ...imgs.filter((i) => i.url !== par.imagem.url).slice(0, 2),
+                ],
+              })),
+            },
+          ]),
+        ]
+      : [
+          folha("Atividade 2 — Circule as figuras iguais ao modelo", [
+            {
+              tipo: "escolha-visual",
+              comando: "Olhe o modelo e circule as figuras parecidas com ele.",
+              modelo: imgs[1] ?? imgs[0]!,
+              imagens: imgs.slice(0, 4),
+            },
+          ]),
+        ];
   return [
     folha("Atividade 1 — Observe e circule", [
       {
