@@ -252,7 +252,7 @@ export function adaptarTextoParaPapel(texto: string): string {
     .replace(/arraste cada item para/gi, "ligue cada item a")
     .replace(/arraste do/gi, "numere do")
     .replace(/arraste/gi, "ligue")
-    .replace(/escute/gi, "ouça a leitura do professor")
+    .replace(/(?:escute|ouça)(?: o áudio)?/gi, "acompanhe a leitura do professor")
     .replace(/aperte o botão[^.\n]*/gi, "acompanhe a leitura do professor")
     .replace(/\s{2,}/g, " ")
     .trim();

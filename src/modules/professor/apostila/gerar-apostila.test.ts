@@ -57,10 +57,12 @@ describe("apostila A4 da área do professor", () => {
   });
 
   it("transforma comandos do aplicativo em linguagem de atividade impressa", () => {
-    const matematicas = listAulas().filter((item) => /matem/i.test(item.disciplina) && /1º\s*ano/i.test(item.ano));
-    for (const aulaAtual of matematicas) {
+    const aulasConvertidas = listAulas().filter((item) =>
+      /1º\s*ano/i.test(item.ano) && /(matem|portugu)/i.test(item.disciplina),
+    );
+    for (const aulaAtual of aulasConvertidas) {
       const texto = JSON.stringify(gerarApostila(aulaAtual).paginas).toLowerCase();
-      expect(texto, aulaAtual.codigo).not.toMatch(/toque|clique|arraste|na tela|aplicativo/);
+      expect(texto, aulaAtual.codigo).not.toMatch(/toque|clique|arraste|na tela|aplicativo|ouça o áudio|escute/);
     }
   });
 
