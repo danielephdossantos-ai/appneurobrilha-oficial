@@ -547,7 +547,7 @@ function Folha({ pagina, apostila }: { pagina: ApostilaPagina; apostila: Apostil
       )}
       <h2 className={`${infantil ? "mt-10 text-[26pt] font-semibold" : "mt-4 text-[19pt] font-black"} leading-tight`}>{pagina.titulo}</h2>
       {pagina.subtitulo && <p className="mt-1 text-[11pt] font-semibold">{pagina.subtitulo}</p>}
-      <div className="flex-1">
+      <div className={`flex-1 ${infantil ? "apostila-preencher" : ""}`}>
         {pagina.blocos.map((b, i) => (
           <Bloco key={i} bloco={b} />
         ))}
