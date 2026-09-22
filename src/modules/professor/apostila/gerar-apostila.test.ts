@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getAula } from "@/escola-brilha/registry";
+import { getAula, listAulas } from "@/escola-brilha/registry";
 import { gerarApostila, imagensDaAula, termosDaAula } from "./gerar-apostila";
 
 const aula = getAula("EF01LP01")!;
@@ -135,5 +135,32 @@ describe("apostila A4 da área do professor", () => {
       tiposPorAula.add(tipos);
     }
     expect(tiposPorAula.size).toBeGreaterThan(1);
+  });
+});
+
+describe("Matemática do 1º ano", () => {
+  const aulasMat = listAulas().filter((a) => /matem/i.test(a.disciplina) && /1º\s*ano/i.test(a.ano));
+
+  it("converte todas as aulas de Matemática do 1º ano", () => {
+    expect(aulasMat.length).toBeGreaterThanOrEqual(20);
+    for (const aula of aulasMat) {
+      const apostila = gerarApostila(aula);
+      const guias = apostila.paginas.filter((p) => p.etiqueta === "Guia do professor");
+      const estudante = apostila.paginas.filter((p) => p.etiqueta === "Folha do estudante");
+      expect(guias).toHaveLength(2);
+      expect(estudante.length).toBeGreaterThanOrEqual(7);
+      expect(apostila.paginas.some((p) => p.etiqueta === "Gabarito")).toBe(false);
+    }
+  });
+
+  it("mantém linguagem de aplicativo e pintura fora das folhas de Matemática", () => {
+    for (const aula of aulasMat) {
+      const texto = JSON.stringify(
+        gerarApostila(aula).paginas.filter((p) => p.etiqueta === "Folha do estudante"),
+      ).toLowerCase();
+      for (const proibido of ["bncc", "neurobrilha", "escute", "ouça", "toque na", "aplicativo", "gabarito", "pinte", "colorir"]) {
+        expect(texto).not.toContain(proibido);
+      }
+    }
   });
 });

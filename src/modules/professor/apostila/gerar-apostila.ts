@@ -9,6 +9,7 @@
  */
 
 import type { Aula } from "@/escola-brilha/types";
+import { paginasMatematica } from "./gerar-apostila-matematica";
 
 export type ApostilaImagem = { url: string; legenda?: string };
 export type ApostilaItemVisual = ApostilaImagem | { texto: string };
@@ -85,6 +86,30 @@ export type ApostilaBloco =
       titulo?: string;
       comando: string;
       itens: Array<{ imagem: ApostilaImagem; palavras: string[] }>;
+    }
+  | {
+      tipo: "contar-marcar";
+      titulo?: string;
+      comando: string;
+      itens: Array<{ imagem: ApostilaImagem; quantidade: number; opcoes: string[] }>;
+    }
+  | {
+      tipo: "sequencia-numerica";
+      titulo?: string;
+      comando: string;
+      linhas: string[][];
+    }
+  | {
+      tipo: "conta-visual";
+      titulo?: string;
+      comando: string;
+      itens: Array<{ imagem: ApostilaImagem; a: number; b: number; sinal: "+" | "−" }>;
+    }
+  | {
+      tipo: "desenhar-quantidade";
+      titulo?: string;
+      comando: string;
+      itens: Array<{ quantidade: number; rotulo?: string }>;
     }
   | {
       tipo: "alternativas";
@@ -531,7 +556,7 @@ export function gerarApostila(aula: Aula, extras: ApostilaImagem[] = []): Aposti
   // Todas as aulas de Português do 1º ano usam tarefas concretas, exclusivamente no papel.
   const folhasPiloto = aula.codigo === "EF01LP01"
     ? paginasInfantisEF01LP01(imagens)
-    : paginasInfantisPadrao(aula, imagens);
+    : (paginasInfantisPadrao(aula, imagens) ?? paginasMatematica(aula, imagens));
   if (folhasPiloto) paginas.push(...folhasPiloto);
 
   // Compatibilidade para outras disciplinas e anos ainda não convertidos.

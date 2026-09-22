@@ -30,7 +30,9 @@ function Apostilas() {
   const aulas = useMemo(
     () =>
       listAulas().filter(
-        (a) => /portugu/i.test(a.disciplina) && /1º\s*ano/i.test(a.ano),
+        (a) =>
+          (/portugu/i.test(a.disciplina) || /matem/i.test(a.disciplina)) &&
+          /[1-5]º\s*ano/i.test(a.ano),
       ),
     [],
   );
@@ -56,7 +58,7 @@ function Apostilas() {
           <h1 className="text-3xl font-black">Apostilas para imprimir</h1>
           <p className="mt-2">
             As aulas do app viram folha A4: guia do professor, folhas do estudante, gabarito e carta
-            para a família. Piloto: Português do 1º ano ({aulas.length} aulas).
+            para a família. Português e Matemática, 1º ao 5º ano ({aulas.length} aulas).
           </p>
         </header>
         <label className="flex items-center gap-2 rounded-xl border-2 bg-white px-4">
