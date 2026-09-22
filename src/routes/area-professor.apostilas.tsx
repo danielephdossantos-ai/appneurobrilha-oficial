@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { ArrowLeft, Printer, Search } from "lucide-react";
+import { ArrowLeft, ChevronDown, Folder, FolderOpen, Printer, Search } from "lucide-react";
 import { TeacherShell as Shell } from "@/components/teacher/TeacherShell";
 import { listAulas } from "@/escola-brilha/registry";
 import { listarAulasEI } from "@/modules/professor/apostila/gerar-apostila-ei";
@@ -26,8 +26,12 @@ export const Route = createFileRoute("/area-professor/apostilas")({
   }),
 });
 
+type PastaItem = { chave: string; titulo: string; detalhe: string; codigo?: string };
+type Pasta = { nome: string; cor: "emerald" | "indigo"; itens: PastaItem[] };
+
 function Apostilas() {
   const [busca, setBusca] = useState("");
+  const [abertas, setAbertas] = useState<string[]>([]);
   const aulas = useMemo(
     () =>
       listAulas().filter(
@@ -56,6 +60,31 @@ function Apostilas() {
     );
   }, [busca]);
 
+  const pastas = useMemo<Pasta[]>(() => {
+    const mapa = new Map<string, Pasta>();
+    const add = (nome: string, cor: Pasta["cor"], item: PastaItem) => {
+      const atual = mapa.get(nome) ?? { nome, cor, itens: [] };
+      atual.itens.push(item);
+      mapa.set(nome, atual);
+    };
+    for (const a of infantis)
+      add(`${a.disciplina} · ${a.serieLabel}`, "emerald", {
+        chave: a.chave,
+        titulo: a.titulo,
+        detalhe: a.resumo,
+      });
+    for (const a of filtradas)
+      add(`${a.disciplina} · ${a.ano}`, "indigo", {
+        chave: a.codigo,
+        titulo: a.titulo,
+        detalhe: a.missao,
+        codigo: a.codigo,
+      });
+    return [...mapa.values()].sort((a, b) => a.nome.localeCompare(b.nome, "pt-BR"));
+  }, [infantis, filtradas]);
+
+  const total = infantis.length + filtradas.length;
+
   return (
     <Shell>
       <main className="mx-auto max-w-4xl space-y-5 p-4 md:p-6">
@@ -69,8 +98,8 @@ function Apostilas() {
         <header className="rounded-2xl bg-indigo-700 p-6 text-white">
           <h1 className="text-3xl font-black">Apostilas para imprimir</h1>
           <p className="mt-2">
-            As aulas do app viram folha A4: guia do professor, folhas do estudante, gabarito e carta
-            para a família. Português e Matemática, 1º ao 5º ano ({aulas.length} aulas).
+            As aulas do app viram folha A4: 2 folhas do professor e o restante em atividades
+            impressas da criança. Escolha a pasta da turma para ver as aulas ({total} no total).
           </p>
         </header>
         <label className="flex items-center gap-2 rounded-xl border-2 bg-white px-4">
@@ -82,49 +111,86 @@ function Apostilas() {
             className="min-h-12 w-full bg-transparent font-semibold outline-none"
           />
         </label>
-        <section className="space-y-3">
-          <h2 className="text-xl font-black">Alfabetização e anos iniciais (3 a 6 anos)</h2>
-          <div className="grid gap-3 sm:grid-cols-2">
-            {infantis.map((a) => (
-              <Link
-                key={a.chave}
-                to="/area-professor/apostila/$codigo"
-                params={{ codigo: a.chave }}
-                className="rounded-2xl border-2 border-emerald-100 bg-white p-5 hover:border-emerald-300"
+        <div className="space-y-3">
+          {pastas.map((pasta) => {
+            const aberta = abertas.includes(pasta.nome) || busca.trim().length > 0;
+            const emerald = pasta.cor === "emerald";
+            return (
+              <section
+                key={pasta.nome}
+                className={`overflow-hidden rounded-2xl border-2 bg-white ${
+                  emerald ? "border-emerald-100" : "border-indigo-100"
+                }`}
               >
-                <p className="text-xs font-black uppercase text-emerald-700">
-                  {a.serieLabel} · {a.disciplina}
-                </p>
-                <h3 className="mt-1 text-lg font-black">{a.titulo}</h3>
-                <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">{a.resumo}</p>
-                <span className="mt-3 inline-flex items-center gap-2 text-sm font-black text-emerald-700">
-                  <Printer className="h-4 w-4" />
-                  Abrir apostila
-                </span>
-              </Link>
-            ))}
-          </div>
-        </section>
-        <h2 className="text-xl font-black">Ensino Fundamental</h2>
-        <div className="grid gap-3 sm:grid-cols-2">
-          {filtradas.map((a) => (
-            <Link
-              key={a.codigo}
-              to="/area-professor/apostila/$codigo"
-              params={{ codigo: a.codigo }}
-              className="rounded-2xl border-2 border-indigo-100 bg-white p-5 hover:border-indigo-300"
-            >
-              <p className="font-mono text-xs font-black text-indigo-600">{a.codigo}</p>
-              <h2 className="mt-1 text-lg font-black">{a.titulo}</h2>
-              <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">{a.missao}</p>
-              <span className="mt-3 inline-flex items-center gap-2 text-sm font-black text-indigo-700">
-                <Printer className="h-4 w-4" />
-                Abrir apostila
-              </span>
-            </Link>
-          ))}
+                <button
+                  type="button"
+                  onClick={() =>
+                    setAbertas((prev) =>
+                      prev.includes(pasta.nome)
+                        ? prev.filter((n) => n !== pasta.nome)
+                        : [...prev, pasta.nome],
+                    )
+                  }
+                  className="flex min-h-14 w-full items-center gap-3 px-5 py-4 text-left"
+                >
+                  {aberta ? (
+                    <FolderOpen
+                      className={`h-5 w-5 ${emerald ? "text-emerald-600" : "text-indigo-600"}`}
+                    />
+                  ) : (
+                    <Folder
+                      className={`h-5 w-5 ${emerald ? "text-emerald-600" : "text-indigo-600"}`}
+                    />
+                  )}
+                  <span className="flex-1 text-lg font-black">{pasta.nome}</span>
+                  <span className="text-sm font-bold text-muted-foreground">
+                    {pasta.itens.length} aulas
+                  </span>
+                  <ChevronDown
+                    className={`h-5 w-5 text-muted-foreground transition-transform ${
+                      aberta ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+                {aberta && (
+                  <div className="grid gap-3 border-t-2 border-slate-100 p-4 sm:grid-cols-2">
+                    {pasta.itens.map((item) => (
+                      <Link
+                        key={item.chave}
+                        to="/area-professor/apostila/$codigo"
+                        params={{ codigo: item.chave }}
+                        className={`rounded-2xl border-2 p-4 ${
+                          emerald
+                            ? "border-emerald-100 hover:border-emerald-300"
+                            : "border-indigo-100 hover:border-indigo-300"
+                        }`}
+                      >
+                        {item.codigo && (
+                          <p className="font-mono text-xs font-black text-indigo-600">
+                            {item.codigo}
+                          </p>
+                        )}
+                        <h3 className="mt-1 text-base font-black">{item.titulo}</h3>
+                        <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">
+                          {item.detalhe}
+                        </p>
+                        <span
+                          className={`mt-3 inline-flex items-center gap-2 text-sm font-black ${
+                            emerald ? "text-emerald-700" : "text-indigo-700"
+                          }`}
+                        >
+                          <Printer className="h-4 w-4" />
+                          Abrir apostila
+                        </span>
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </section>
+            );
+          })}
         </div>
-        {filtradas.length === 0 && (
+        {pastas.length === 0 && (
           <p className="rounded-xl bg-slate-100 p-4 text-muted-foreground">
             Nenhuma aula encontrada com esse termo.
           </p>
