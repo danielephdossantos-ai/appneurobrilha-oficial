@@ -105,7 +105,12 @@ export function imagensDaAula(aula: Aula, limite = 12): ApostilaImagem[] {
   const add = (url: string, legenda?: string) => {
     if (vistos.has(url) || urls.length >= limite) return;
     vistos.add(url);
-    urls.push(legenda ? { url, legenda } : { url });
+    const arquivo = decodeURIComponent(url.split("/").pop() ?? "")
+      .replace(/\.asset\.json$/i, "")
+      .replace(/\.[a-z0-9]+$/i, "")
+      .replace(/[-_]+/g, " ")
+      .trim();
+    urls.push({ url, legenda: arquivo || legenda });
   };
   const visitar = (no: unknown, rotulo?: string) => {
     if (!no || urls.length >= limite) return;
