@@ -221,13 +221,31 @@ function Bloco({ bloco }: { bloco: ApostilaBloco }) {
                     <LetraPontilhada key={`${item}-${index}`} letra={item} />
                   ))}
                 </div>
-                {bloco.imagens?.[item] || bloco.imagem ? (
-                  <img
-                    src={(bloco.imagens?.[item] ?? bloco.imagem)?.url}
-                    alt={(bloco.imagens?.[item] ?? bloco.imagem)?.legenda ?? ""}
-                    className="mx-auto h-24 w-24 object-contain"
-                  />
-                ) : <div />}
+                {(() => {
+                  const figura = bloco.imagens?.[item] ?? bloco.imagem;
+                  if (!figura) return <div />;
+                  const numero = Number(item);
+                  if (bloco.quantidadeImagem && Number.isFinite(numero) && numero >= 1)
+                    return (
+                      <div className="flex flex-wrap items-center justify-center gap-1">
+                        {Array.from({ length: Math.min(numero, 12) }).map((_, i) => (
+                          <img
+                            key={i}
+                            src={figura.url}
+                            alt=""
+                            className="h-9 w-9 object-contain"
+                          />
+                        ))}
+                      </div>
+                    );
+                  return (
+                    <img
+                      src={figura.url}
+                      alt={figura.legenda ?? ""}
+                      className="mx-auto h-24 w-24 object-contain"
+                    />
+                  );
+                })()}
               </div>
             ))}
           </div>
