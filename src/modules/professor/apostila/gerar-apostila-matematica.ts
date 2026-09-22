@@ -206,12 +206,18 @@ function paginasOperacao(config: ConfigMat, imgs: ApostilaImagem[]): ApostilaPag
     ]),
     folha("Atividade 3 — Marque o resultado", [
       {
-        tipo: "marcar-som",
-        comando: "Faça a conta e marque o resultado certo.",
+        tipo: "conta-marcar",
+        comando: "Conte as figuras, faça a conta e marque o resultado certo.",
         itens: [
-          { imagem: imgs[0]!, opcoes: opcoesNumero(a + b) },
-          { imagem: imgs[1 % imgs.length]!, opcoes: opcoesNumero(b + c) },
-          { imagem: imgs[2 % imgs.length]!, opcoes: opcoesNumero(d - 2) },
+          { imagem: imgs[0]!, a, b, sinal: "+", opcoes: opcoesNumero(a + b, 0) },
+          { imagem: imgs[1 % imgs.length]!, a: b, b: c, sinal: "+", opcoes: opcoesNumero(b + c, 1) },
+          {
+            imagem: imgs[2 % imgs.length]!,
+            a: d,
+            b: 2,
+            sinal: "−",
+            opcoes: opcoesNumero(Math.max(0, d - 2), 2),
+          },
         ],
       },
     ]),
