@@ -9,7 +9,7 @@
  */
 
 import type { AulaEI, CursoEI, MomentoEI } from "@/escola-brilha/curso-portugues-ei/types";
-import { cursosPortuguesEI } from "@/escola-brilha/curso-portugues-ei/registry";
+import { cursosEI as cursosPortuguesEI } from "@/escola-brilha/curso-portugues-ei/registry";
 import { cursosMatematicaEI } from "@/escola-brilha/curso-matematica-ei/registry";
 import {
   ADAPTACOES,
