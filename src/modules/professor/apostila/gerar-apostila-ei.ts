@@ -83,6 +83,14 @@ function embaralhar<T>(lista: T[]): T[] {
 
 function nomeNoPlural(imagem: ApostilaImagem | undefined): string {
   const nome = (imagem?.legenda ?? "bolinha").trim().toLowerCase();
+  const nomesCorretos: Record<string, string> = {
+    arvore: "árvores",
+    balao: "balões",
+    coracao: "corações",
+    maca: "maçãs",
+    passaro: "pássaros",
+  };
+  if (nomesCorretos[nome]) return nomesCorretos[nome];
   if (!nome) return "bolinhas";
   if (/ões$|ães$|ãos$|ais$|eis$|ois$|uis$|is$|ns$|res$|zes$|s$/i.test(nome)) return nome;
   if (nome.endsWith("ão")) return `${nome.slice(0, -2)}ões`;
