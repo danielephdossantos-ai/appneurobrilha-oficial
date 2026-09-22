@@ -600,6 +600,9 @@ export function ApostilaA4({
         /* célula com figura + resposta: a figura cresce, a linha de resposta continua visível */
         .apostila-preencher .grid > div:not(.contents) { display: flex; flex-direction: column; min-height: 0; }
         .apostila-preencher .grid > div:not(.contents) > figure { flex: 1 1 0%; min-height: 0; }
+        .apostila-preencher .apostila-centrar { justify-content: center; }
+        .apostila-preencher .apostila-grupo { align-content: center; }
+        .apostila-preencher .apostila-grupo img { height: auto; min-height: 13mm; max-height: 24mm; width: auto; }
         .apostila-preencher figure img { height: auto; width: auto; min-height: 12mm; max-height: 100%; max-width: 100%; }
         .apostila-preencher img { max-height: 100%; }
         .apostila-preencher svg { max-height: 100%; }
