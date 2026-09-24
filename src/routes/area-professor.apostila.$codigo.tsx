@@ -87,8 +87,8 @@ function ApostilaImprimir() {
       <Shell>
         <main className="p-8 text-center">
           <p className="font-bold">Aula não encontrada: {codigo}</p>
-          <Link to="/area-professor/apostilas" className="mt-3 inline-block font-bold text-primary">
-            Voltar para as apostilas
+          <Link to="/area-professor/biblioteca-inclusiva" className="mt-3 inline-block font-bold text-primary">
+            Voltar para a Biblioteca
           </Link>
         </main>
       </Shell>
@@ -99,11 +99,11 @@ function ApostilaImprimir() {
       <main className="mx-auto max-w-5xl space-y-5 p-4 md:p-6 print:max-w-none print:p-0">
         <div className="print:hidden flex flex-wrap items-center justify-between gap-3">
           <Link
-            to="/area-professor/apostilas"
+            to="/area-professor/biblioteca-inclusiva"
             className="inline-flex min-h-11 items-center gap-2 font-bold text-primary"
           >
             <ArrowLeft className="h-4 w-4" />
-            Apostilas
+            Biblioteca Inclusiva
           </Link>
           <div className="flex flex-wrap gap-2">
             <Button variant="outline" onClick={() => imprimir("professor")}>
