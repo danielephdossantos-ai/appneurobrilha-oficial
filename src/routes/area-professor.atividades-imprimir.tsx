@@ -8,9 +8,9 @@ export const Route = createFileRoute("/area-professor/atividades-imprimir")({
   component: AtividadesImprimir,
   head: () => ({
     meta: [
-      { title: "Atividades para Imprimir · Área do Professor | NeuroBrilha Kids" },
+      { title: "Jogos para Imprimir · Área do Professor | NeuroBrilha Kids" },
       { name: "description", content: "Atividades adaptadas prontas em A4 para baixar ou imprimir." },
-      { property: "og:title", content: "Atividades para Imprimir · NeuroBrilha Kids" },
+      { property: "og:title", content: "Jogos para Imprimir · NeuroBrilha Kids" },
       { property: "og:description", content: "Folhas A4 coloridas e adaptadas para a sala de aula." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -42,7 +42,7 @@ function AtividadesImprimir() {
           <ArrowLeft className="h-4 w-4" />Área do Professor
         </Link>
         <header className="rounded-2xl bg-rose-600 p-6 text-white">
-          <h1 className="text-3xl font-black">Atividades para Imprimir</h1>
+          <h1 className="text-3xl font-black">Jogos para Imprimir</h1>
           <p className="mt-2">Folhas A4 prontas. Escolha a pasta, depois imprima ou baixe.</p>
         </header>
         {pastas.map((p) => {
