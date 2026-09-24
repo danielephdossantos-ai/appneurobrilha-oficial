@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { ArrowLeft, ChevronDown, Download, Folder, FolderOpen, Printer } from "lucide-react";
+import { ArrowLeft, BookOpen, ChevronDown, Download, Folder, FolderOpen, Printer } from "lucide-react";
+import { DICAS_GERAIS, guiaDoJogo } from "@/modules/professor/jogos-imprimir/guia-jogos";
 import { TeacherShell as Shell } from "@/components/teacher/TeacherShell";
 import profissoes from "@/assets/atividades-imprimir/jogo-50-profissoes.jpg.asset.json";
 
@@ -30,6 +31,27 @@ function imprimir(url: string, nome: string) {
   if (!w) return;
   w.document.write(`<html><head><title>${nome}</title><style>@page{size:A4;margin:0}body{margin:0}img{width:210mm;height:297mm;object-fit:contain;display:block}</style></head><body><img src="${url}" onload="setTimeout(()=>{window.print()},200)"/></body></html>`);
   w.document.close();
+}
+
+function ComoUsar({ id }: { id: number }) {
+  const [aberto, setAberto] = useState(false);
+  const guia = guiaDoJogo(id);
+  if (!guia) return null;
+  return (
+    <div className="mt-2">
+      <button type="button" onClick={() => setAberto((v) => !v)} className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl border-2 border-rose-200 font-bold text-rose-700">
+        <BookOpen className="h-4 w-4" />Como usar
+        <ChevronDown className={`h-4 w-4 transition-transform ${aberto ? "rotate-180" : ""}`} />
+      </button>
+      {aberto && (
+        <div className="mt-2 space-y-2 rounded-xl bg-rose-50 p-3 text-sm">
+          <p className="font-black">{guia.titulo}</p>
+          {guia.paragrafos.map((t) => <p key={t}>{t}</p>)}
+          {DICAS_GERAIS.map((t) => <p key={t} className="text-muted-foreground">{t}</p>)}
+        </div>
+      )}
+    </div>
+  );
 }
 
 function AtividadesImprimir() {
@@ -66,6 +88,7 @@ function AtividadesImprimir() {
                         <button onClick={() => imprimir(a.url, a.nome)} className="inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-xl bg-rose-600 font-bold text-white"><Printer className="h-4 w-4" />Imprimir</button>
                         <a href={a.url} download={`${a.nome}.jpg`} className="inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-xl border-2 font-bold"><Download className="h-4 w-4" />Baixar</a>
                       </div>
+                      <ComoUsar id={a.id} />
                     </div>
                   ))}
                 </div>
