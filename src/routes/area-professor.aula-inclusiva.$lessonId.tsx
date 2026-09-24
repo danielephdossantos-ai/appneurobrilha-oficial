@@ -4,6 +4,15 @@ import { ArrowLeft, BookOpenCheck, GraduationCap, Printer } from "lucide-react";
 import { supabase } from "@/database/supabase/client";
 import { TeacherShell as Shell } from "@/components/teacher/TeacherShell";
 import { Button } from "@/components/ui/button";
+import { getAula } from "@/escola-brilha/registry";
+
+const temApostila = (codigo: string) => {
+  try {
+    return !!codigo && !!getAula(codigo);
+  } catch {
+    return false;
+  }
+};
 
 export const Route = createFileRoute("/area-professor/aula-inclusiva/$lessonId")({
   component: InclusiveLesson,
@@ -153,6 +162,14 @@ function InclusiveLesson() {
             Biblioteca
           </Link>
           <div className="flex flex-wrap gap-2">
+            {temApostila(lesson.codigo_bncc) && (
+              <Button asChild variant="secondary">
+                <Link to="/area-professor/apostila/$codigo" params={{ codigo: lesson.codigo_bncc }}>
+                  <Printer className="mr-2 h-4 w-4" />
+                  Abrir apostila A4
+                </Link>
+              </Button>
+            )}
             <Button variant="outline" onClick={() => print("teacher")}>
               <GraduationCap className="mr-2 h-4 w-4" />
               Professor
