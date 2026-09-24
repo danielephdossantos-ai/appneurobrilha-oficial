@@ -36,6 +36,35 @@ type Lesson = {
 };
 type PrintMode = "all" | "teacher" | "student";
 
+const ROTULOS: Record<string, string> = {
+  step: "Etapa", detail: "Detalhe", question: "Pergunta", answer: "Resposta", why: "Por quê",
+  resolution: "Resolução", line: "", examples: "Exemplos", title: "", content: "",
+  criteria: "Critérios", teacher_note: "Nota docente", accepted_answers: "Aceitar também",
+};
+
+function Valor({ v }: { v: unknown }) {
+  if (v == null || v === "") return null;
+  if (typeof v !== "object") return <p className="mt-2 whitespace-pre-wrap leading-relaxed">{String(v)}</p>;
+  if (Array.isArray(v))
+    return (
+      <ul className="mt-2 list-disc space-y-2 pl-6">
+        {v.map((x, i) => (
+          <li key={i}>{typeof x === "object" && x !== null ? <Valor v={x} /> : String(x)}</li>
+        ))}
+      </ul>
+    );
+  return (
+    <div className="mt-1 space-y-1">
+      {Object.entries(v as Record<string, unknown>).map(([k, x]) => {
+        const r = ROTULOS[k] ?? k;
+        if (typeof x !== "object" || x === null)
+          return <p key={k}>{r && <b>{r}: </b>}{String(x ?? "")}</p>;
+        return <div key={k}>{r && <b>{r}:</b>}<Valor v={x} /></div>;
+      })}
+    </div>
+  );
+}
+
 function InclusiveLesson() {
   const { lessonId } = Route.useParams();
   const [lesson, setLesson] = useState<Lesson | null>(null);
@@ -90,31 +119,21 @@ function InclusiveLesson() {
       <h2 className="mt-3 text-2xl font-black">{page.title || lesson.title}</h2>
       {page.purpose && (
         <p className="mt-3 rounded-xl bg-indigo-50 p-4 font-semibold print:border print:bg-white">
-          {page.purpose}
+          {String(page.purpose)}
         </p>
       )}
-      {page.instruction && <p className="mt-5 text-lg font-bold">{page.instruction}</p>}
-      {page.content && (
-        <p className="mt-4 whitespace-pre-wrap text-lg leading-relaxed">{page.content}</p>
-      )}
-      {page.activity && <div className="mt-6 rounded-xl border-2 p-5 text-lg">{page.activity}</div>}
-      {page.support && (
-        <p className="mt-4 rounded-xl bg-amber-50 p-4 text-sm print:border print:bg-white">
-          <b>Apoio:</b> {page.support}
-        </p>
+      {page.instruction && <p className="mt-5 text-lg font-bold">{String(page.instruction)}</p>}
+      {page.content != null && <div className="mt-4 text-lg"><Valor v={page.content} /></div>}
+      {page.activity != null && <div className="mt-6 rounded-xl border-2 p-5 text-lg"><Valor v={page.activity} /></div>}
+      {page.support != null && (
+        <div className="mt-4 rounded-xl bg-amber-50 p-4 text-sm print:border print:bg-white">
+          <b>Apoio:</b> <Valor v={page.support} />
+        </div>
       )}
       {page.sections?.map((s, i) => (
         <section key={i} className="mt-6">
           <h3 className="text-lg font-black">{s.heading}</h3>
-          {Array.isArray(s.content) ? (
-            <ul className="mt-2 list-disc space-y-2 pl-6">
-              {s.content.map((x, j) => (
-                <li key={j}>{x}</li>
-              ))}
-            </ul>
-          ) : (
-            <p className="mt-2 whitespace-pre-wrap leading-relaxed">{s.content}</p>
-          )}
+          <Valor v={s.content} />
         </section>
       ))}
       {brand}
@@ -157,8 +176,8 @@ function InclusiveLesson() {
         </header>
         {showTeacher && (
           <section data-print-bundle="teacher" className="space-y-5">
-            {lesson.teacher_pages.map((p, i) => renderPage(p, i, "teacher"))}
-            {lesson.answer_key.length > 0 && (
+            {(lesson.teacher_pages ?? []).map((p, i) => renderPage(p, i, "teacher"))}
+            {(lesson.answer_key ?? []).length > 0 && (
               <article
                 data-print-section="answer-key"
                 className="print:break-before-page rounded-2xl border-2 border-emerald-200 bg-emerald-50 p-6 print:border-slate-700 print:bg-white"
@@ -168,17 +187,18 @@ function InclusiveLesson() {
                 </p>
                 <h2 className="mt-2 text-2xl font-black">Gabarito e critérios de observação</h2>
                 <ol className="mt-5 space-y-5">
-                  {lesson.answer_key.map((item, i) => (
+                  {(lesson.answer_key ?? []).map((item, i) => (
                     <li key={i} className="rounded-xl border bg-white p-4">
                       <b>
-                        {i + 1}. {item.question || "Item da atividade"}
+                        {i + 1}. {item.question || (item as any).title || "Item da atividade"}
                       </b>
+                      {!item.question && <Valor v={Object.fromEntries(Object.entries(item).filter(([k]) => k !== "title"))} />}
                       {item.answer && (
                         <p className="mt-2">
                           <b>Resposta esperada:</b> {item.answer}
                         </p>
                       )}
-                      {item.accepted_answers?.length ? (
+                      {Array.isArray(item.accepted_answers) && item.accepted_answers.length ? (
                         <p className="mt-2">
                           <b>Aceitar também:</b> {item.accepted_answers.join("; ")}
                         </p>
@@ -193,7 +213,7 @@ function InclusiveLesson() {
                               ))}
                             </ul>
                           ) : (
-                            <span> {item.criteria}</span>
+                            <span> {String(item.criteria)}</span>
                           )}
                         </div>
                       )}
@@ -212,7 +232,7 @@ function InclusiveLesson() {
         )}
         {showStudent && (
           <section data-print-bundle="student" className="space-y-5">
-            {lesson.student_pages.map((p, i) => renderPage(p, i, "student"))}
+            {(lesson.student_pages ?? []).map((p, i) => renderPage(p, i, "student"))}
           </section>
         )}
         <p className="print:hidden rounded-xl bg-slate-100 p-4 text-sm text-muted-foreground">
