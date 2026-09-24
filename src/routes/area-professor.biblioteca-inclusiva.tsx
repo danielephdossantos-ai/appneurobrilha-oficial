@@ -1,6 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
-import { ArrowLeft, BookOpenCheck, Search } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { ArrowLeft, BookOpenCheck, Printer, Search } from "lucide-react";
+import { listAulas } from "@/escola-brilha/registry";
+import { listarAulasEI } from "@/modules/professor/apostila/gerar-apostila-ei";
 import { supabase } from "@/database/supabase/client";
 import { TeacherShell as Shell } from "@/components/teacher/TeacherShell";
 import { Button } from "@/components/ui/button";
@@ -62,6 +64,42 @@ function InclusiveLibrary() {
   useEffect(() => {
     void search();
   }, []);
+  const todasApostilas = useMemo(() => {
+    const ef = listAulas()
+      .filter(
+        (a) =>
+          (/portugu/i.test(a.disciplina) || /matem/i.test(a.disciplina)) &&
+          /[1-5]º\s*ano/i.test(a.ano),
+      )
+      .map((a) => ({
+        chave: a.codigo,
+        codigo: a.codigo as string | undefined,
+        titulo: a.titulo,
+        turma: a.ano,
+        disciplina: a.disciplina,
+      }));
+    const ei = listarAulasEI().map((a) => ({
+      chave: a.chave,
+      codigo: undefined as string | undefined,
+      titulo: a.titulo,
+      turma: a.serieLabel,
+      disciplina: a.disciplina,
+    }));
+    return [...ei, ...ef];
+  }, []);
+  const apostilas = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    const y = year.trim().toLowerCase().replace(/\s*ano/, "");
+    const s = subject.trim().toLowerCase();
+    return todasApostilas.filter(
+      (a) =>
+        (!q ||
+          a.titulo.toLowerCase().includes(q) ||
+          (a.codigo ?? "").toLowerCase().includes(q)) &&
+        (!y || a.turma.toLowerCase().includes(y)) &&
+        (!s || a.disciplina.toLowerCase().includes(s.slice(0, 5))),
+    );
+  }, [todasApostilas, query, year, subject]);
   return (
     <Shell>
       <main className="mx-auto max-w-6xl space-y-6 p-4 md:p-6">
@@ -122,6 +160,41 @@ function InclusiveLibrary() {
             </p>
           </CardContent>
         </Card>
+        {apostilas.length > 0 && (
+          <section className="space-y-3">
+            <h2 className="flex items-center gap-2 text-xl font-black">
+              <Printer className="h-5 w-5 text-indigo-600" />
+              Apostilas A4 para imprimir ({apostilas.length})
+            </h2>
+            <div className="grid gap-3 md:grid-cols-2">
+              {apostilas.slice(0, 60).map((a) => (
+                <Link
+                  key={a.chave}
+                  to="/area-professor/apostila/$codigo"
+                  params={{ codigo: a.chave }}
+                  className="block"
+                >
+                  <Card className="h-full transition hover:border-indigo-400">
+                    <CardContent className="space-y-2 p-4">
+                      <div className="flex flex-wrap gap-2">
+                        <Badge variant="secondary">Apostila A4</Badge>
+                        {a.codigo && <Badge className="font-mono">{a.codigo}</Badge>}
+                        <Badge variant="outline">{a.turma}</Badge>
+                        <Badge variant="outline">{a.disciplina}</Badge>
+                      </div>
+                      <h3 className="text-lg font-black">{a.titulo}</h3>
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))}
+            </div>
+            {apostilas.length > 60 && (
+              <p className="text-sm text-muted-foreground">
+                Mostrando 60 de {apostilas.length}. Use a pesquisa para encontrar outras.
+              </p>
+            )}
+          </section>
+        )}
         <section className="grid gap-4 md:grid-cols-2">
           {!loading && rows.length === 0 && (
             <div className="md:col-span-2 rounded-2xl border border-dashed p-10 text-center text-muted-foreground">
