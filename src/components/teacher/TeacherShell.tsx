@@ -1,13 +1,23 @@
 import type { ReactNode } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
-import { BookOpenCheck, ClipboardList, GraduationCap, LogOut, Sparkles } from "lucide-react";
+import { Baby, BookOpenCheck, ClipboardList, GraduationCap, LogOut, Sparkles } from "lucide-react";
 import { supabase } from "@/database/supabase/client";
+import { saveAccountType } from "@/lib/account-routing";
+import { toast } from "sonner";
 
 export function TeacherShell({ children }: { children: ReactNode }) {
   const navigate = useNavigate();
   const logout = async () => {
     await supabase.auth.signOut();
     navigate({ to: "/auth", replace: true });
+  };
+  const irParaCrianca = async () => {
+    try {
+      await saveAccountType("family");
+      navigate({ to: "/", replace: true });
+    } catch {
+      toast.error("Não foi possível abrir a área da criança. Tente de novo.");
+    }
   };
 
   return (
@@ -23,7 +33,10 @@ export function TeacherShell({ children }: { children: ReactNode }) {
             <Link to="/area-professor/assistente-pedagogico" className="rounded-xl px-3 py-2 text-sm font-bold text-slate-700 hover:bg-indigo-50"><Sparkles className="mr-1 inline h-4 w-4" />Assistente</Link>
             <Link to="/area-professor/tarefas" className="rounded-xl px-3 py-2 text-sm font-bold text-slate-700 hover:bg-indigo-50"><ClipboardList className="mr-1 inline h-4 w-4" />Tarefas</Link>
           </nav>
-          <button onClick={logout} className="inline-flex min-h-11 items-center gap-2 rounded-xl border px-3 text-sm font-bold text-slate-700 hover:bg-slate-50"><LogOut className="h-4 w-4" />Sair</button>
+          <div className="flex items-center gap-2">
+            <button onClick={irParaCrianca} className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-gradient-to-r from-pink-500 to-orange-400 px-3 text-sm font-bold text-white shadow hover:opacity-90"><Baby className="h-4 w-4" />Área da criança</button>
+            <button onClick={logout} className="inline-flex min-h-11 items-center gap-2 rounded-xl border px-3 text-sm font-bold text-slate-700 hover:bg-slate-50"><LogOut className="h-4 w-4" />Sair</button>
+          </div>
         </div>
       </header>
       <div className="mx-auto max-w-7xl px-3 py-5 md:px-6">{children}</div>

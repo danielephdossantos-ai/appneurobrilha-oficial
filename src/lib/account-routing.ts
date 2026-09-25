@@ -31,7 +31,8 @@ export async function resolveAccountDestination(
     return "/admin";
   }
 
-  if (teacherProfile || accountType === "teacher") return "/area-professor";
+  // Escolha explícita de "Família" vale mesmo para quem também é professor.
+  if (accountType === "teacher" || (teacherProfile && accountType !== "family")) return "/area-professor";
 
   if (requestedNext && !requestedNext.startsWith("/area-professor") && !requestedNext.startsWith("/admin")) {
     return requestedNext;
