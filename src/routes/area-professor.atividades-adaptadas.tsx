@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { ArrowLeft, ChevronDown, Download, Folder, FolderOpen, Printer } from "lucide-react";
+import { ArrowLeft, ChevronDown, Download, Folder, FolderOpen, Printer, Search } from "lucide-react";
 import { TeacherShell as Shell } from "@/components/teacher/TeacherShell";
 import aulas from "@/modules/professor/atividades-adaptadas.json";
 
@@ -36,7 +36,12 @@ function imprimir(urls: string[], nome: string) {
 
 function AtividadesAdaptadas() {
   const [aberta, setAberta] = useState<string | null>(null);
-  const campos = Object.entries(CAMPOS).map(([sigla, nome]) => ({ sigla, nome, aulas: aulas.filter((a) => a.codigo.slice(4, 6) === sigla) }));
+  const [busca, setBusca] = useState("");
+  const norm = (t: string) => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+  const q = norm(busca.trim());
+  const campos = Object.entries(CAMPOS)
+    .map(([sigla, nome]) => ({ sigla, nome, aulas: aulas.filter((a) => a.codigo.slice(4, 6) === sigla && (!q || norm(`${a.codigo} ${a.titulo} ${nome}`).includes(q))) }))
+    .filter((c) => c.aulas.length > 0);
   return (
     <Shell>
       <div className="mx-auto max-w-5xl space-y-6">
@@ -45,12 +50,17 @@ function AtividadesAdaptadas() {
           <h1 className="text-3xl font-black">Atividades BNCC Adaptadas</h1>
           <p className="mt-2">Educação Infantil · Pré II (EI03). Cada aula traz explicações, atividades da criança e o guia do professor.</p>
         </header>
+        <label className="flex items-center gap-2 rounded-2xl border-2 border-teal-200 bg-white px-4">
+          <Search className="h-5 w-5 text-teal-700" />
+          <input value={busca} onChange={(e) => setBusca(e.target.value)} placeholder="Pesquisar por código BNCC ou tema (ex.: EI03ET01, cores, emoções)" className="min-h-12 w-full bg-transparent outline-none" aria-label="Pesquisar atividades" />
+        </label>
+        {q && campos.length === 0 && <p className="font-bold text-muted-foreground">Nenhuma atividade encontrada.</p>}
         {campos.map((c) => (
           <section key={c.sigla} className="space-y-3">
             <h2 className="text-xl font-black">{c.nome}</h2>
             {c.aulas.map((a, idx) => {
               const chave = `${a.codigo}-${idx}-${c.sigla}`;
-              const open = aberta === chave;
+              const open = aberta === chave || (!!q && campos.reduce((n, x) => n + x.aulas.length, 0) <= 3);
               return (
                 <div key={chave} className="rounded-2xl border-2 border-teal-200 bg-white">
                   <button type="button" onClick={() => setAberta(open ? null : chave)} className="flex min-h-14 w-full items-center gap-3 p-4 text-left">
