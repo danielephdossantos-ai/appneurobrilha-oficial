@@ -1,3 +1,4 @@
+import { useAcessoTotal, rankSerie } from "@/hooks/useIsAdmin";
 import { useEffect } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { UniversalPlayer } from "@/escola-brilha/player/UniversalPlayer";
@@ -30,11 +31,13 @@ function AulaRoute() {
   const { codigo } = Route.useParams();
   const navigate = useNavigate();
   const { activeChild, session } = useAppState();
+  const acesso = useAcessoTotal();
 
   // Bloqueio de série para Player Universal (BNCC)
   useEffect(() => {
     if (activeChild && codigo) {
-      const isAdmin = session?.user?.user_metadata?.role === "admin" || (session?.user as any)?.role === "admin";
+      if (!acesso.pronto) return;
+      const isAdmin = acesso.liberado || session?.user?.user_metadata?.role === "admin";
       if (!isAdmin) {
         // Extrai o ano do código BNCC (ex: EF02MA01 -> 02)
         const match = codigo.match(/EF(\d{2})/);
@@ -42,13 +45,13 @@ function AulaRoute() {
           const anoCodigo = parseInt(match[1]);
           const childGrade = parseInt(activeChild.serie?.match(/\d/)?.[0] || "0");
           
-          if (childGrade > 0 && anoCodigo !== childGrade) {
+          if (childGrade > 0 && anoCodigo > childGrade) {
             navigate({ to: "/escola-brilha" });
           }
         }
       }
     }
-  }, [activeChild, session, navigate, codigo]);
+  }, [acesso.pronto, acesso.liberado, activeChild, session, navigate, codigo]);
 
   return <UniversalPlayer codigo={codigo} childId={activeChild?.id} serie={activeChild?.serie} />;
 }

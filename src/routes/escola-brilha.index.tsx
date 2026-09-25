@@ -1,4 +1,4 @@
-import { useIsAdmin } from "@/hooks/useIsAdmin";
+import { useIsAdmin, rankSerie } from "@/hooks/useIsAdmin";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
@@ -249,7 +249,7 @@ function EscolaBrilhaCatalogo() {
           }}
           className={cn(
             "mb-2 mt-2 flex items-center justify-between gap-3 rounded-2xl p-4 text-white font-black active:scale-[0.98] shadow-lg",
-            (session?.user?.user_metadata?.role !== "admin" && (session?.user as any)?.role !== "admin") && "opacity-50 cursor-not-allowed"
+            !adminReal && session?.user?.user_metadata?.role !== "admin" && "opacity-50 cursor-not-allowed"
           )}
           style={{ background: "linear-gradient(135deg, #1a1033, #f59e0b)" }}
         >
@@ -329,7 +329,7 @@ function EscolaBrilhaCatalogo() {
               const aberta = serieAberta === serie;
               
               const childSerie = activeChild?.serie || "";
-              const isMyGrade = (childSerie === (serie as string)) || 
+              const isMyGrade = rankSerie(serie as string) <= rankSerie(childSerie) || (childSerie === (serie as string)) || 
                                ((serie as string) === "Educação Infantil" && (childSerie.includes("Infantil") || childSerie.includes("Pré")));
               
               const isAdmin = adminReal || session?.user?.user_metadata?.role === "admin";

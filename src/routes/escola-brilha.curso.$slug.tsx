@@ -1,3 +1,4 @@
+import { useAcessoTotal, rankSerie } from "@/hooks/useIsAdmin";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState, useMemo } from "react";
 import { useAppState } from "@/core/store";
@@ -42,15 +43,17 @@ function TrilhaCurso() {
   const { slug } = Route.useParams();
   const navigate = useNavigate();
   const { activeChild, session } = useAppState();
+  const acesso = useAcessoTotal();
   const curso = getCursoAny(slug);
 
   // Bloqueio de série para Cursos v4
   useEffect(() => {
     if (activeChild && curso) {
-      const isAdmin = session?.user?.user_metadata?.role === "admin" || (session?.user as any)?.role === "admin";
+      if (!acesso.pronto) return;
+      const isAdmin = acesso.liberado || session?.user?.user_metadata?.role === "admin";
       if (!isAdmin) {
         // Se o curso tem um ano definido (ex: "2º Ano") e não bate com a criança
-        if (curso.ano && curso.ano !== activeChild.serie) {
+        if (curso.ano && rankSerie(curso.ano) > rankSerie(activeChild.serie)) {
           // Exceção: Educação Infantil pode ver cursos marcados como tal
           const isEI = activeChild.serie.includes("Infantil") || activeChild.serie.includes("Pré");
           if (isEI && curso.ano === "Educação Infantil") return;
@@ -59,7 +62,7 @@ function TrilhaCurso() {
         }
       }
     }
-  }, [activeChild, session, navigate, curso]);
+  }, [acesso.pronto, acesso.liberado, activeChild, session, navigate, curso]);
   const aulas = listAulasFlat(slug);
   const perfilPedagogico = curso ? getPerfilPedagogico(curso) : undefined;
   const ehPortugues = curso?.tipoAula === "portugues";

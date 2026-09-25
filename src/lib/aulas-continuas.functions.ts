@@ -311,7 +311,6 @@ Retorne APENAS o JSON.`;
         hiperfoco: hiperfoco,
         compatibilidade_hiperfoco: !!hiperfoco,
         status: validacao.status,
-        metadata_validacao: validacao // Salvando log completo da validação
       } as any)
 
       .select()

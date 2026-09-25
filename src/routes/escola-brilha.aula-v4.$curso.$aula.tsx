@@ -1,3 +1,4 @@
+import { useAcessoTotal, rankSerie } from "@/hooks/useIsAdmin";
 import { useEffect } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useNavigationStore, useBackNavigation } from "@/lib/navigation-context";
@@ -34,22 +35,24 @@ function AulaV4Route() {
   const navigate = useNavigate();
   const { handleBack, context: navContext } = useBackNavigation();
   const { activeChild, session } = useAppState();
+  const acesso = useAcessoTotal();
   const found = getAulaFromCurso(cursoSlug, aulaSlug);
 
   // Bloqueio de série para Player v4
   useEffect(() => {
     if (activeChild && found && (found as any).curso) {
-      const isAdmin = session?.user?.user_metadata?.role === "admin" || (session?.user as any)?.role === "admin";
+      if (!acesso.pronto) return;
+      const isAdmin = acesso.liberado || session?.user?.user_metadata?.role === "admin";
       if (!isAdmin) {
         const cursoAno = (found as any).curso.ano;
-        if (cursoAno && cursoAno !== activeChild.serie) {
+        if (cursoAno && rankSerie(cursoAno) > rankSerie(activeChild.serie)) {
            const isEI = activeChild.serie.includes("Infantil") || activeChild.serie.includes("Pré");
            if (isEI && cursoAno === "Educação Infantil") return;
            navigate({ to: "/escola-brilha" });
         }
       }
     }
-  }, [activeChild, session, navigate, found]);
+  }, [acesso.pronto, acesso.liberado, activeChild, session, navigate, found]);
 
   if (!found) {
     return (

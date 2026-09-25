@@ -4,7 +4,7 @@ import { useLocation, Navigate } from "@tanstack/react-router";
 import React from "react";
 import { Lock, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useIsAdmin } from "@/hooks/useIsAdmin";
+import { useAcessoTotal, rankSerie } from "@/hooks/useIsAdmin";
 
 /**
  * Normaliza a string de série para comparação.
@@ -63,10 +63,12 @@ export const GradeGuard: React.FC<GradeGuardProps> = ({ children }) => {
   const location = useLocation();
   
   // 1. Administrador tem acesso total
-  const adminReal = useIsAdmin();
-  const isAdmin = adminReal || session?.user?.user_metadata?.role === "admin";
+  const acesso = useAcessoTotal();
+  const isAdmin = acesso.liberado || session?.user?.user_metadata?.role === "admin";
                   
   if (isAdmin) return <>{children}</>;
+  // Espera reconhecer a conta antes de mostrar qualquer cadeado.
+  if (!acesso.pronto && location.pathname.startsWith("/escola-brilha")) return null;
 
   // 2. Se não estiver em uma rota da Escola Brilha, não aplica o bloqueio aqui
   const isEscolaBrilha = location.pathname.startsWith("/escola-brilha");
@@ -87,7 +89,7 @@ export const GradeGuard: React.FC<GradeGuardProps> = ({ children }) => {
   const targetSerieSlug = SERIES_SLUGS.find(s => isRouteOfSerie(location.pathname, s));
 
   // Se achou uma série na URL e não é a da criança -> BLOQUEIA
-  if (targetSerieSlug && targetSerieSlug !== childSerieSlug) {
+  if (targetSerieSlug && rankSerie(targetSerieSlug) > rankSerie(activeChild.serie)) {
     return (
       <div className="min-h-screen bg-[#0d1f55] flex items-center justify-center p-6 text-white text-center">
         <div className="max-w-md space-y-6">
