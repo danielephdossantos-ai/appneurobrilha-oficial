@@ -37,6 +37,7 @@ function imprimir(urls: string[], nome: string) {
 function AtividadesAdaptadas() {
   const [aberta, setAberta] = useState<string | null>(null);
   const [busca, setBusca] = useState("");
+  const [etapaAberta, setEtapaAberta] = useState<string | null>(null);
   const norm = (t: string) => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
   const q = norm(busca.trim());
   const campos = Object.entries(CAMPOS)
@@ -48,13 +49,21 @@ function AtividadesAdaptadas() {
         <Link to="/area-professor" className="inline-flex items-center gap-2 font-bold text-teal-700"><ArrowLeft className="h-4 w-4" />Área do Professor</Link>
         <header className="rounded-3xl bg-teal-700 p-6 text-white">
           <h1 className="text-3xl font-black">Atividades BNCC Adaptadas</h1>
-          <p className="mt-2">Educação Infantil · Pré II (EI03). Cada aula traz explicações, atividades da criança e o guia do professor.</p>
+          <p className="mt-2">Organizadas por etapa e ano. Cada aula traz explicações, atividades da criança e o guia do professor.</p>
         </header>
         <label className="flex items-center gap-2 rounded-2xl border-2 border-teal-200 bg-white px-4">
           <Search className="h-5 w-5 text-teal-700" />
           <input value={busca} onChange={(e) => setBusca(e.target.value)} placeholder="Pesquisar por código BNCC ou tema (ex.: EI03ET01, cores, emoções)" className="min-h-12 w-full bg-transparent outline-none" aria-label="Pesquisar atividades" />
         </label>
         {q && campos.length === 0 && <p className="font-bold text-muted-foreground">Nenhuma atividade encontrada.</p>}
+        {campos.length > 0 && (
+        <div className="rounded-3xl border-2 border-teal-300 bg-teal-50">
+          <button type="button" onClick={() => setEtapaAberta(etapaAberta === "ei" ? null : "ei")} className="flex min-h-16 w-full items-center gap-3 p-5 text-left">
+            {etapaAberta === "ei" || q ? <FolderOpen className="h-7 w-7 text-teal-700" /> : <Folder className="h-7 w-7 text-teal-700" />}
+            <span className="flex-1"><span className="block text-xl font-black">Educação Infantil</span><span className="text-sm text-muted-foreground">{campos.reduce((n, c) => n + c.aulas.length, 0)} aulas · Pré II</span></span>
+            <ChevronDown className={`transition-transform ${etapaAberta === "ei" || q ? "rotate-180" : ""}`} />
+          </button>
+          {(etapaAberta === "ei" || !!q) && <div className="space-y-6 border-t-2 border-teal-200 p-4">
         {campos.map((c) => (
           <section key={c.sigla} className="space-y-3">
             <h2 className="text-xl font-black">{c.nome}</h2>
@@ -89,6 +98,10 @@ function AtividadesAdaptadas() {
             })}
           </section>
         ))}
+          </div>}
+        </div>
+        )}
+        <p className="text-sm text-muted-foreground">Pastas do 1º ao 9º ano aparecerão aqui quando as atividades forem enviadas.</p>
       </div>
     </Shell>
   );
