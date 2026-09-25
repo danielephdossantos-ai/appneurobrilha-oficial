@@ -16,7 +16,7 @@ export function NarrationPlayer({ texto, destaques = {}, charAtual, onPalavra }:
   }, [texto]);
 
   return (
-    <p className="font-display text-2xl font-semibold leading-snug text-ink sm:text-[1.7rem]">
+    <p className="font-display text-lg font-semibold leading-snug text-ink sm:text-2xl lg:text-[1.7rem]">
       {partes.map(({ p, ini }, i) => {
         const limpa = p.replace(/[.,!?:;]/g, "");
         const sil = destaques[limpa];
