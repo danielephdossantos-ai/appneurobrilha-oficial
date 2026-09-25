@@ -146,7 +146,6 @@ function criarLivro(numero: number, id: string, titulo: string, tema: string, ni
   const e = enredos[numero] ?? { onde: "no parque", problema: "surgiu um desafio no caminho", solucao: "pensou com calma e pediu ajuda" };
   const outros = Object.values(enredos).filter((o) => o !== e);
   const falsos = (k: keyof Enredo) => [outros[(numero * 7) % outros.length]![k], outros[(numero * 13 + 5) % outros.length]![k]];
-  const cap = (t: string) => t.charAt(0).toUpperCase() + t.slice(1);
   const fundos = cenarioPorTema[tema] ?? ["parque", "sala", "jardim"];
   const palavra = palavraPorTema[tema] ?? "APRENDER";
   const silabas = dividir(palavra);
@@ -156,10 +155,10 @@ function criarLivro(numero: number, id: string, titulo: string, tema: string, ni
     ["O problema", `De repente, aconteceu uma coisa: ${e.problema}.`],
     ["Uma palavra especial", `A palavra ${palavra} apareceu na história. Vamos ouvir devagar e descobrir suas partes.`],
     ["Olhar com calma", `${quem} respirou fundo e olhou tudo com muita atenção.`],
-    ["Tentar uma vez", `${quem} tentou resolver sozinho, mas na primeira vez não deu certo.`],
+    ["Tentar uma vez", `${quem} tentou resolver sem ajuda, mas na primeira vez não deu certo.`],
     ["Pedir ajuda", `Então ${quem} chamou um amigo. Juntos, pensaram em outro jeito.`],
     ["A boa ideia", `Veio uma boa ideia: ${e.solucao}.`],
-    ["Deu certo", `Deu certo! ${cap(e.problema)}? Agora não mais. Todos ficaram felizes.`],
+    ["Deu certo", `Deu certo! O problema foi resolvido e todos ficaram felizes.`],
     ["A descoberta", `${quem} descobriu que é importante ${objetivo}.`],
     ["Fim", `E assim terminou ${titulo}. Que tal contar essa história para alguém?`],
   ] as const;

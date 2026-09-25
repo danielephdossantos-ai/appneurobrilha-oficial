@@ -93,7 +93,7 @@ export function InteractiveScene({ cenario, ambiente = [], atores, falar, onToqu
   children?: ReactNode;
 }) {
   return (
-    <div className="relative mx-auto aspect-[5/3] max-h-[42vh] w-full max-w-[70vh] lg:max-h-none lg:max-w-none overflow-hidden rounded-[26px] bg-sky/20">
+    <div className="relative mx-auto aspect-[5/3] max-h-[36vh] w-full max-w-[60vh] sm:max-h-[42vh] sm:max-w-[70vh] lg:max-h-none lg:max-w-none overflow-hidden rounded-[26px] bg-sky/20">
       <img src={cenarios[cenario]} alt="" width={1280} height={768} className="absolute inset-0 h-full w-full object-cover" />
       {ambiente.map((a) => <CamadaAmbiente key={a} tipo={a} />)}
       {atores.map((a) => (

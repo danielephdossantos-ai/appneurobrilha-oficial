@@ -189,12 +189,12 @@ export function LivroPlayer({ livro }: { livro: Livro }) {
 
         <div className="flex flex-col gap-3">
 
-          <div className="flex-1 rounded-3xl bg-card/80 p-4 ring-1 ring-line">
+          <div className="flex-1 rounded-3xl bg-card/80 p-3 ring-1 ring-line sm:p-4">
             {etapa === "explorar" && (
               <div className="animate-rise">
                 <p className="font-display text-xl font-bold text-ink">Explore a cena!</p>
                 <p className="text-base font-semibold text-soft">{cena.atores.length > 0 ? `Toque nos personagens e nas palavras coloridas. (${tocados.length}/${cena.atores.length})` : "Observe o cenário e toque nas palavras coloridas."}</p>
-                <button onClick={brincar} disabled={cena.atores.length > 0 && tocados.length === 0} className="mt-4 w-full rounded-3xl bg-peach py-4 font-display text-2xl font-bold text-cream active:animate-b-tap disabled:bg-line disabled:text-soft">
+                <button onClick={brincar} disabled={cena.atores.length > 0 && tocados.length === 0} className="mt-3 w-full rounded-3xl bg-peach py-3 font-display text-xl sm:py-4 sm:text-2xl font-bold text-cream active:animate-b-tap disabled:bg-line disabled:text-soft">
                   {cena.atores.length > 0 && tocados.length === 0 ? "Toque em alguém primeiro" : "Brincar ▶"}
                 </button>
               </div>
@@ -223,7 +223,7 @@ export function LivroPlayer({ livro }: { livro: Livro }) {
         </div>
       </div>
 
-      <nav className="mt-3 flex items-center justify-between gap-1 rounded-3xl bg-card p-2 ring-1 ring-line">
+      <nav className="sticky bottom-2 z-30 mt-3 flex shadow-lg items-center justify-between gap-1 rounded-3xl bg-card p-2 ring-1 ring-line">
         <button onClick={() => irPara(indice - 1)} disabled={indice === 0} className={btnBarra}><span className="text-2xl">◀</span>Voltar</button>
         <button onClick={narrar} className={btnBarra}><span className="text-2xl">🔊</span>Ouvir</button>
         <button onClick={() => (pausado ? continuar() : falando ? pausar() : narrar())} className={btnBarra}>
