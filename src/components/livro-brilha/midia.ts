@@ -16,7 +16,7 @@ function doGlob(g: Record<string, Ponteiro>, nome: string) {
   return url(Object.fromEntries(Object.entries(g).filter(([k]) => k.endsWith(`/${nome}.png.asset.json`))));
 }
 
-const imagens: Record<string, string> = {
+const imagens: Record<string, string | Partial<Record<Expressao, string>>> = {
   fofa: doGlob(objetos, "raposa"),
   tico: doGlob(objetos, "passaro"),
   sapo: doGlob(objetos, "sapo"),
@@ -26,10 +26,20 @@ const imagens: Record<string, string> = {
 };
 for (const nome of ["coruja", "coelho", "gato", "cachorro", "pato", "abelha"]) imagens[nome] = doGlob(objetos, nome);
 for (const nome of ["pip-mascot", "pip-girl-mascot", "pip-animais", "pip-girl-arte", "pip-musica", "pip-girl-musica", "pip-fazendinha", "pip-girl-bailarina", "pip-dinossauros", "pip-girl-unicornio", "pip-carros", "pip-girl-sereia"]) imagens[nome] = doGlob(mascotes, nome);
+const emocoesVida = import.meta.glob("@/assets/brilha-vida/emocoes/*.png.asset.json", { eager: true, import: "default" }) as Record<string, Ponteiro>;
+const palavras = import.meta.glob("@/assets/dislexia/palavras/*.png.asset.json", { eager: true, import: "default" }) as Record<string, Ponteiro>;
+imagens.menina = doGlob(objetos, "menina");
+imagens.menino = { alegre: doGlob(emocoesVida, "feliz"), triste: doGlob(emocoesVida, "triste"), curiosa: doGlob(emocoesVida, "confuso") };
+imagens.avo = doGlob(objetos, "avo-mulher");
+imagens.joaninha = doGlob(objetos, "joaninha");
+imagens.lagarta = doGlob(palavras, "lagarta");
+imagens.urso = doGlob(palavras, "urso");
 
 export function imagem(chave: string, expressao: Expressao = "alegre"): string {
-  void expressao;
-  return imagens[chave] ?? "";
+  const v = imagens[chave];
+  if (!v) return "";
+  if (typeof v === "string") return v;
+  return v[expressao] ?? v.alegre ?? "";
 }
 
 /** Voz de cada personagem: altura e velocidade. */

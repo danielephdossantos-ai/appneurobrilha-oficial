@@ -153,16 +153,37 @@ const amigos = [
   { img: "tico", nome: "Passarinho", vida: "voar" as const }, { img: "sapo", nome: "Sapo" }, { img: "fofa", nome: "Raposa" },
 ];
 
+type Pers = { img: string; nome: string; vida?: "voar" };
+/** Protagonista ligado ao texto: nome de menina = figura de menina; nunca menino no lugar. */
+const elencoPorHistoria: Record<string, [Pers, Pers]> = {
+  "abraco-quentinho": [{ img: "menina", nome: "Bia" }, { img: "urso", nome: "Urso Pipo" }],
+  "semente-de-lu": [{ img: "menina", nome: "Lú" }, { img: "joaninha", nome: "Dona Joaninha", vida: "voar" }],
+  "o-sapo-que-contava-saltos": [{ img: "sapo", nome: "Sapo" }, { img: "coruja", nome: "Coruja" }],
+  "a-lagarta-devagarinho": [{ img: "lagarta", nome: "Lagarta" }, { img: "borboleta", nome: "Borboleta", vida: "voar" }],
+  "tuca-tem-medo-do-escuro": [{ img: "menino", nome: "Tuca" }, { img: "coruja", nome: "Coruja" }],
+  "o-prato-colorido-do-teo": [{ img: "menino", nome: "Téo" }, { img: "coelho", nome: "Coelho" }],
+  "vovo-conta-e-reconta": [{ img: "avo", nome: "Vovó" }, { img: "menina", nome: "Neta" }],
+  "a-cadeira-de-rodas-do-nico": [{ img: "menino", nome: "Nico" }, { img: "cachorro", nome: "Cachorro" }],
+  "o-primeiro-dia-do-bento": [{ img: "menino", nome: "Bento" }, { img: "gato", nome: "Gato" }],
+  "o-tambor-do-zeze": [{ img: "menino", nome: "Zezé" }, { img: "tico", nome: "Passarinho", vida: "voar" }],
+  "a-feira-da-dona-rita": [{ img: "avo", nome: "Dona Rita" }, { img: "menina", nome: "Menina" }],
+  "quando-fico-bravo": [{ img: "menino", nome: "Menino" }, { img: "gato", nome: "Gato" }],
+  "o-pincel-magico-da-nina": [{ img: "menina", nome: "Nina" }, { img: "borboleta", nome: "Borboleta", vida: "voar" }],
+};
+const semAcento = (t: string) => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
 function comElenco(livro: Livro, n: number): Livro {
-  const guia = guias[n % guias.length]!;
-  const amigo = amigos[(n * 3) % amigos.length]!;
+  const fixo = elencoPorHistoria[livro.id] ?? elencoPorHistoria[semAcento(livro.titulo)];
+  const guia: Pers = fixo?.[0] ?? guias[n % guias.length]!;
+  const amigo: Pers = fixo?.[1] ?? amigos[(n * 3) % amigos.length]!;
+  const humor = (i: number, texto: string) => /trist|chor|medo|bravo|cinz|sozinh/i.test(texto) ? "triste" as const : i === 4 ? "curiosa" as const : "alegre" as const;
   return {
     ...livro,
     ficha: { ...livro.ficha, personagens: [guia.nome, amigo.nome] },
     cenas: livro.cenas.map((c, i) => c.atores.length ? c : {
       ...c,
       atores: [
-        { img: guia.img, nome: guia.nome, x: 26, y: 92, tamanho: 26, vida: "respirar" as const, voz: "narrador" as const,
+        { img: guia.img, nome: guia.nome, expressao: humor(i, c.narracao), x: 26, y: 92, tamanho: 26, vida: "respirar" as const, voz: "narrador" as const,
           falas: [`Oi! Eu sou ${guia.nome}.`, c.ensinar?.[0] ?? "Vamos ouvir a história juntos?"] },
         ...(i % 2 === 0 ? [{ img: amigo.img, nome: amigo.nome, x: 74, y: amigo.vida ? 55 : 92, tamanho: 18, vida: amigo.vida ?? ("balancar" as const), voz: "objeto" as const,
           falas: [`Oi! Eu me chamo ${amigo.nome}.`, "Observe o cenário com calma."] }] : []),
