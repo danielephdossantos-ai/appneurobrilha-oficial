@@ -4,6 +4,7 @@ import { useLocation, Navigate } from "@tanstack/react-router";
 import React from "react";
 import { Lock, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useIsAdmin } from "@/hooks/useIsAdmin";
 
 /**
  * Normaliza a string de série para comparação.
@@ -62,8 +63,8 @@ export const GradeGuard: React.FC<GradeGuardProps> = ({ children }) => {
   const location = useLocation();
   
   // 1. Administrador tem acesso total
-  const isAdmin = session?.user?.user_metadata?.role === "admin" || 
-                  (session?.user as any)?.role === "admin";
+  const adminReal = useIsAdmin();
+  const isAdmin = adminReal || session?.user?.user_metadata?.role === "admin";
                   
   if (isAdmin) return <>{children}</>;
 

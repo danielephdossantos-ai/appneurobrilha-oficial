@@ -175,6 +175,7 @@ function AtlasFinal() {
   const aulas = listAulasFlat(cursoSlug);
   const paginas = PAGINAS_POR_CURSO[cursoSlug] ?? [];
   const { activeChild } = useAppState();
+  const adminReal = useIsAdmin();
 
   const [concluidas, setConcluidas] = useState<Set<string>>(new Set());
   const [pagIdx, setPagIdx] = useState(0);
@@ -184,7 +185,7 @@ function AtlasFinal() {
   useEffect(() => {
     if (typeof window === "undefined") return;
     const p = new URLSearchParams(window.location.search);
-    setModoLivre(p.has("livre") || p.has("preview"));
+    setModoLivre(adminReal || p.has("livre") || p.has("preview"));
     try {
       const raw = localStorage.getItem(CHAVE_PROGRESSO(cursoSlug));
       if (raw) setConcluidas(new Set(JSON.parse(raw)));
