@@ -19,7 +19,7 @@ function salvarProgresso(id: string, dados: object) {
   } catch { /* armazenamento indisponível */ }
 }
 
-const btnBarra = "flex min-w-[76px] flex-col items-center gap-0.5 rounded-2xl px-3 py-2 font-display text-sm font-bold text-ink active:animate-b-tap disabled:opacity-35";
+const btnBarra = "flex min-w-0 flex-1 flex-col items-center gap-0.5 rounded-2xl px-1 py-1.5 font-display text-xs sm:min-w-[76px] sm:flex-none sm:px-3 sm:py-2 sm:text-sm font-bold text-ink active:animate-b-tap disabled:opacity-35";
 
 export function LivroPlayer({ livro }: { livro: Livro }) {
   const { falar, parar, pausar, continuar, falando, pausado } = useNarracao();
