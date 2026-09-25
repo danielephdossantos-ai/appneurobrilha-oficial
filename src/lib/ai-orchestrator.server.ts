@@ -1,5 +1,6 @@
 import { callGemini } from "@/lib/gemini.server";
 import { chatCompletionFallback, type ChatMsg } from "@/lib/ai-chat-fallback";
+import { prepararConversaMentor } from "@/lib/mentor-pedagogico.server";
 
 export type AIProvider = "gemini" | "groq" | "lovable";
 
@@ -23,7 +24,9 @@ export interface AIOrchestratorResult {
  * Motor canônico: Gemini -> Groq -> Lovable Gateway.
  * Uma falha técnica ou uma resposta vazia sempre tenta o próximo provedor.
  */
-export async function chamarProfessorMentorIA(input: AIOrchestratorInput): Promise<AIOrchestratorResult> {
+export async function chamarProfessorMentorIA(original: AIOrchestratorInput): Promise<AIOrchestratorResult> {
+  // Conversas (não-JSON) recebem as regras do Professor Mentor Pedagógico + fontes públicas.
+  const input = original.json ? original : { ...original, messages: await prepararConversaMentor(original.messages) };
   try {
     const text = await callGemini({
       model: input.geminiModel ?? "gemini-2.5-flash",

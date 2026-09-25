@@ -99,7 +99,9 @@ async function callGroq(opts: ChatCallOptions): Promise<
  * Chama chat completion tentando Groq primeiro; se falhar por
  * limite/créditos/erro, cai pro Lovable AI Gateway automaticamente.
  */
-export async function chatCompletionFallback(opts: ChatCallOptions): Promise<ChatCallResult> {
+export async function chatCompletionFallback(original: ChatCallOptions): Promise<ChatCallResult> {
+  const { prepararConversaMentor } = await import("./mentor-pedagogico.server");
+  const opts: ChatCallOptions = original.json ? original : { ...original, messages: await prepararConversaMentor(original.messages) };
   const primaria = await callGroq(opts);
   if (primaria.ok) return { ok: true, text: primaria.text, fonte: "groq" };
   console.warn(
