@@ -62,7 +62,6 @@ import { Route as AdminProfessoresRouteImport } from './routes/admin.professores
 import { Route as AjusteDificuldadesChildIdRouteImport } from './routes/ajuste-dificuldades.$childId'
 import { Route as AnamneseChildIdRouteImport } from './routes/anamnese.$childId'
 import { Route as AreaProfessorIndexRouteImport } from './routes/area-professor.index'
-import { Route as AreaProfessorAlfabetizacaoRouteImport } from './routes/area-professor.alfabetizacao'
 import { Route as AreaProfessorAssistentePedagogicoRouteImport } from './routes/area-professor.assistente-pedagogico'
 import { Route as AreaProfessorAtividadesAdaptadasRouteImport } from './routes/area-professor.atividades-adaptadas'
 import { Route as AreaProfessorAtividadesImprimirRouteImport } from './routes/area-professor.atividades-imprimir'
@@ -386,12 +385,6 @@ const AreaProfessorIndexRoute = AreaProfessorIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AreaProfessorRoute,
 } as any)
-const AreaProfessorAlfabetizacaoRoute =
-  AreaProfessorAlfabetizacaoRouteImport.update({
-    id: '/alfabetizacao',
-    path: '/alfabetizacao',
-    getParentRoute: () => AreaProfessorRoute,
-  } as any)
 const AreaProfessorAssistentePedagogicoRoute =
   AreaProfessorAssistentePedagogicoRouteImport.update({
     id: '/assistente-pedagogico',
@@ -755,7 +748,6 @@ export interface FileRoutesByFullPath {
   '/admin/professores': typeof AdminProfessoresRoute
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
-  '/area-professor/alfabetizacao': typeof AreaProfessorAlfabetizacaoRoute
   '/area-professor/assistente-pedagogico': typeof AreaProfessorAssistentePedagogicoRoute
   '/area-professor/atividades-adaptadas': typeof AreaProfessorAtividadesAdaptadasRoute
   '/area-professor/atividades-imprimir': typeof AreaProfessorAtividadesImprimirRoute
@@ -862,7 +854,6 @@ export interface FileRoutesByTo {
   '/admin/professores': typeof AdminProfessoresRoute
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
-  '/area-professor/alfabetizacao': typeof AreaProfessorAlfabetizacaoRoute
   '/area-professor/assistente-pedagogico': typeof AreaProfessorAssistentePedagogicoRoute
   '/area-professor/atividades-adaptadas': typeof AreaProfessorAtividadesAdaptadasRoute
   '/area-professor/atividades-imprimir': typeof AreaProfessorAtividadesImprimirRoute
@@ -973,7 +964,6 @@ export interface FileRoutesById {
   '/admin/professores': typeof AdminProfessoresRoute
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
-  '/area-professor/alfabetizacao': typeof AreaProfessorAlfabetizacaoRoute
   '/area-professor/assistente-pedagogico': typeof AreaProfessorAssistentePedagogicoRoute
   '/area-professor/atividades-adaptadas': typeof AreaProfessorAtividadesAdaptadasRoute
   '/area-professor/atividades-imprimir': typeof AreaProfessorAtividadesImprimirRoute
@@ -1085,7 +1075,6 @@ export interface FileRouteTypes {
     | '/admin/professores'
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
-    | '/area-professor/alfabetizacao'
     | '/area-professor/assistente-pedagogico'
     | '/area-professor/atividades-adaptadas'
     | '/area-professor/atividades-imprimir'
@@ -1192,7 +1181,6 @@ export interface FileRouteTypes {
     | '/admin/professores'
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
-    | '/area-professor/alfabetizacao'
     | '/area-professor/assistente-pedagogico'
     | '/area-professor/atividades-adaptadas'
     | '/area-professor/atividades-imprimir'
@@ -1302,7 +1290,6 @@ export interface FileRouteTypes {
     | '/admin/professores'
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
-    | '/area-professor/alfabetizacao'
     | '/area-professor/assistente-pedagogico'
     | '/area-professor/atividades-adaptadas'
     | '/area-professor/atividades-imprimir'
@@ -1821,13 +1808,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AreaProfessorIndexRouteImport
       parentRoute: typeof AreaProfessorRoute
     }
-    '/area-professor/alfabetizacao': {
-      id: '/area-professor/alfabetizacao'
-      path: '/alfabetizacao'
-      fullPath: '/area-professor/alfabetizacao'
-      preLoaderRoute: typeof AreaProfessorAlfabetizacaoRouteImport
-      parentRoute: typeof AreaProfessorRoute
-    }
     '/area-professor/assistente-pedagogico': {
       id: '/area-professor/assistente-pedagogico'
       path: '/assistente-pedagogico'
@@ -2222,7 +2202,6 @@ const AdminRouteChildren: AdminRouteChildren = {
 const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
 interface AreaProfessorRouteChildren {
-  AreaProfessorAlfabetizacaoRoute: typeof AreaProfessorAlfabetizacaoRoute
   AreaProfessorAssistentePedagogicoRoute: typeof AreaProfessorAssistentePedagogicoRoute
   AreaProfessorAtividadesAdaptadasRoute: typeof AreaProfessorAtividadesAdaptadasRoute
   AreaProfessorAtividadesImprimirRoute: typeof AreaProfessorAtividadesImprimirRoute
@@ -2236,7 +2215,6 @@ interface AreaProfessorRouteChildren {
 }
 
 const AreaProfessorRouteChildren: AreaProfessorRouteChildren = {
-  AreaProfessorAlfabetizacaoRoute: AreaProfessorAlfabetizacaoRoute,
   AreaProfessorAssistentePedagogicoRoute:
     AreaProfessorAssistentePedagogicoRoute,
   AreaProfessorAtividadesAdaptadasRoute: AreaProfessorAtividadesAdaptadasRoute,
