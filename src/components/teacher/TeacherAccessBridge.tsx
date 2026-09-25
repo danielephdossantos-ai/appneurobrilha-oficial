@@ -33,7 +33,7 @@ export function TeacherAccessBridge() {
     if (acesso === "familia" && naAreaProfessor) navigate({ to: "/", replace: true });
   }, [acesso, naAreaProfessor, navigate]);
 
-  if (acesso !== "professor" || naAreaProfessor || pathname.startsWith("/auth") || pathname.startsWith("/admin")) return null;
+  if (acesso !== "professor" || pathname !== "/") return null;
   return (
     <button
       type="button"
