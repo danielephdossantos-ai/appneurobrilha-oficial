@@ -1,0 +1,70 @@
+import type { HistoriaResumo, Nivel } from "./tipos";
+import { historias } from "./historias";
+
+type Bruta = [numero: number, titulo: string, tema: string, nivel: Nivel, emoji: string, id?: string];
+
+const brutas: Bruta[] = [
+  [1, "A Raposa que Aprendeu a Ouvir", "Amizade", "Descobrir", "🦊", "raposa-ouvir"],
+  [2, "O Abraço que Esquentou o Dia", "Emoções", "Descobrir", "🧸", "abraco-quentinho"],
+  [3, "A Semente de Lú", "Natureza", "Aprender", "🌱", "semente-de-lu"],
+  [4, "Bom Dia, Mesa Redonda", "Rotina", "Descobrir", "🥣"],
+  [5, "Pinguim e Raposa no Gelo", "Amizade", "Descobrir", "🐧"],
+  [6, "O Sapo que Contava Saltos", "Números", "Aprender", "🐸"],
+  [7, "A Lagarta Devagarinho", "Animais", "Descobrir", "🐛"],
+  [8, "Tuca Tem Medo do Escuro", "Coragem", "Aprender", "🌙"],
+  [9, "A Festa das Cores", "Cores", "Descobrir", "🎨"],
+  [10, "Quadrado, Círculo e Amigos", "Formas", "Aprender", "🔷"],
+  [11, "O Banho da Girafa", "Higiene", "Descobrir", "🦒"],
+  [12, "A Escova Dançarina", "Higiene", "Descobrir", "🪥"],
+  [13, "O Prato Colorido do Téo", "Alimentação", "Aprender", "🥕"],
+  [14, "Meu Corpo Fala", "Corpo humano", "Aprender", "🖐️"],
+  [15, "A Escola do Bosque", "Escola", "Descobrir", "🏫"],
+  [16, "Vovó Conta e Reconta", "Família", "Descobrir", "👵"],
+  [17, "O Tatu que Rimava", "Rimas", "Aprender", "🪘"],
+  [18, "Pá, Pé, Pi, Pó", "Sílabas", "Aprender", "🔤"],
+  [19, "A Letra Perdida", "Letras", "Aprender", "🅰️"],
+  [20, "Palavras na Mochila", "Palavras", "Desafiar", "🎒"],
+  [21, "Sons da Floresta", "Sons", "Descobrir", "🌳"],
+  [22, "A Chuva que Cantou", "Natureza", "Descobrir", "🌧️"],
+  [23, "O Rio Pediu Ajuda", "Meio ambiente", "Aprender", "🏞️"],
+  [24, "Lixo no Lugar Certo", "Meio ambiente", "Aprender", "♻️"],
+  [25, "Cada Um de um Jeito", "Diferenças", "Aprender", "🌈"],
+  [26, "A Cadeira de Rodas do Nico", "Inclusão", "Aprender", "🧑‍🦽"],
+  [27, "Juntos a Gente Consegue", "Cooperação", "Aprender", "🤝"],
+  [28, "O Primeiro Dia do Bento", "Coragem", "Descobrir", "🎈"],
+  [29, "O Nó da Corda", "Resolução de problemas", "Desafiar", "🪢"],
+  [30, "A Caixa que Virou Nave", "Imaginação", "Descobrir", "🚀"],
+  [31, "O Tambor do Zezé", "Música", "Descobrir", "🥁"],
+  [32, "Pula, Corre, Para!", "Movimento", "Descobrir", "🏃"],
+  [33, "Em Cima, Embaixo, Dentro", "Espaço", "Aprender", "📦"],
+  [34, "A Onça e o Mico do Cerrado", "Animais brasileiros", "Aprender", "🐆"],
+  [35, "Quem Trabalha na Minha Rua?", "Profissões", "Aprender", "👩‍🚒"],
+  [36, "A Feira da Dona Rita", "Comunidade", "Aprender", "🍅"],
+  [37, "Da Manhã até a Noite", "Rotina", "Descobrir", "⏰"],
+  [38, "Quando Fico Bravo", "Sentimentos", "Aprender", "😤"],
+  [39, "A Plantinha é Minha", "Responsabilidade", "Aprender", "🪴"],
+  [40, "Por Favor, Obrigado", "Gentileza", "Descobrir", "💛"],
+  [41, "O Pincel Mágico da Nina", "Criatividade", "Aprender", "🖌️"],
+  [42, "A Fruta Mais Doce", "Alimentação saudável", "Aprender", "🍎"],
+  [43, "Atravessar com Cuidado", "Segurança", "Aprender", "🚦"],
+  [44, "A Horta da Turma", "Sustentabilidade", "Desafiar", "🥬"],
+  [45, "O Mapa do Tesouro Pequeno", "Aventura", "Desafiar", "🗺️"],
+  [46, "Quem Comeu o Bolo?", "Mistério leve", "Desafiar", "🍰"],
+  [47, "A Canção que Não Acabava", "Histórias musicais", "Aprender", "🎵"],
+  [48, "De Novo, de Novo!", "Repetição", "Descobrir", "🔁"],
+  [49, "Lembra de Mim?", "Memória", "Desafiar", "🧠"],
+  [50, "A Grande Aventura NeuroBrilha", "Revisão", "Desafiar", "✨"],
+];
+
+export const catalogo: HistoriaResumo[] = brutas.map(([numero, titulo, tema, nivel, emoji, id]) => ({
+  numero,
+  titulo,
+  tema,
+  nivel,
+  emoji,
+  id: id ?? `historia-${numero}`,
+  pronta: true,
+}));
+
+export const temas = ["Todos", ...Array.from(new Set(catalogo.map((h) => h.tema)))];
+export const niveis: Nivel[] = ["Descobrir", "Aprender", "Desafiar"];
