@@ -4,6 +4,7 @@ import { ArrowLeft, ClipboardList, Loader2, Send, Trash2 } from "lucide-react";
 import { TeacherShell as Shell } from "@/components/teacher/TeacherShell";
 import { supabase } from "@/database/supabase/client";
 import { toast } from "sonner";
+import { CalendarioTarefas } from "@/components/teacher/CalendarioTarefas";
 export const Route = createFileRoute("/area-professor/tarefas")({ component: TeacherHomework });
 type Student = { link_id: string; child_name: string; school_year: string | null };
 type Task = {
@@ -92,6 +93,7 @@ function TeacherHomework() {
             desta tarefa.
           </p>
         </header>
+        <CalendarioTarefas students={students} onEnviado={() => void load()} />
         <section className="grid gap-4 rounded-2xl border bg-white p-5 md:grid-cols-2">
           <label className="md:col-span-2">
             <b>Aluno autorizado</b>
