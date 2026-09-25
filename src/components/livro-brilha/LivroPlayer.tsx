@@ -169,12 +169,6 @@ export function LivroPlayer({ livro }: { livro: Livro }) {
 
       <div className="grid gap-3 lg:grid-cols-[1.45fr_1fr] lg:gap-4">
         <div className="flex min-w-0 flex-col gap-3">
-          <div className="rounded-3xl bg-card p-3 sm:p-4 ring-1 ring-line">
-            <p className="text-xs font-bold uppercase tracking-wide text-soft">{cena.titulo}</p>
-            <div className="mt-1">
-              <NarrationPlayer texto={cena.narracao} destaques={cena.destaques} charAtual={charAtual} onPalavra={palavraTocada} />
-            </div>
-          </div>
         <InteractiveScene
           key={indice}
           cenario={cena.cenario}
@@ -183,6 +177,11 @@ export function LivroPlayer({ livro }: { livro: Livro }) {
           falar={falar}
           onToque={(n) => setTocados((t) => (t.includes(n) ? t : [...t, n]))}
         >
+          <div className="absolute inset-x-2 top-2 z-20 rounded-2xl bg-card/90 px-3 py-1.5 ring-1 ring-line backdrop-blur-sm sm:inset-x-3 sm:top-3">
+            <div className="max-h-[3.3em] overflow-y-auto text-base leading-snug sm:text-lg [&_p]:!text-[length:inherit] [&_p]:!leading-snug">
+              <NarrationPlayer texto={cena.narracao} destaques={cena.destaques} charAtual={charAtual} onPalavra={palavraTocada} />
+            </div>
+          </div>
           {jogo?.tipo === "encontre" && etapa !== "explorar" && <FindGameLayer jogo={jogo} achados={achados} onAchar={acharFlor} />}
         </InteractiveScene>
         </div>
