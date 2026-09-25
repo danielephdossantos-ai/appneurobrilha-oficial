@@ -51,7 +51,7 @@ function Biblioteca() {
             <Link to="/" className="grid size-12 place-items-center rounded-2xl bg-peach font-display text-2xl font-bold text-cream" aria-label="Voltar ao início">←</Link>
             <div>
               <p className="font-display text-2xl font-semibold leading-none text-ink">
-                NeuroBrilha Kids
+                Histórias Brilha
               </p>
               <p className="text-xs font-medium text-soft">
                 Biblioteca de histórias para pequenos leitores
