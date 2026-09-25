@@ -13,6 +13,15 @@ import { useMascot } from "@/contexts/MascotContext";
 import { url as pipaDoutora } from "@/assets/pip-girl-doutora.png.asset.json";
 import { url as pipaProfessora } from "@/assets/pip-girl-professora.png.asset.json";
 import { url as pipaAstronauta } from "@/assets/pip-girl-astronauta.png.asset.json";
+import { url as pipBaby } from "@/assets/pip-baby.png.asset.json";
+import { url as pipRobos } from "@/assets/pip-robos.png.asset.json";
+import { url as pipMascot } from "@/assets/pip-mascot.png.asset.json";
+import { url as pipaHeroina } from "@/assets/pip-girl-super-heroina.png.asset.json";
+import { url as pipaVet } from "@/assets/pip-girl-veterinaria.png.asset.json";
+import { url as pipTrens } from "@/assets/pip-trens.png.asset.json";
+import { url as pipaConfeiteira } from "@/assets/pip-girl-confeiteira.png.asset.json";
+import { url as pipaFada } from "@/assets/pip-girl-fada.png.asset.json";
+import { url as pipEspaco } from "@/assets/pip-espaco.png.asset.json";
 import { resolveAccountDestination } from "@/lib/account-routing";
 
 export const Route = createFileRoute("/")({
@@ -67,6 +76,7 @@ const DESTINOS_KIDS: Destino[] = [
     gradient: "from-[#34D399] via-[#10B981] to-[#047857]",
     glow: "rgba(52,211,153,0.7)",
     emoji: "🌱",
+    characterImage: pipBaby,
     shine: "rgba(255,255,255,0.15)",
   },
   {
@@ -87,6 +97,7 @@ const DESTINOS_KIDS: Destino[] = [
     gradient: "from-[#F472B6] via-[#EC4899] to-[#9D174D]",
     glow: "rgba(244,114,182,0.7)",
     emoji: "🧠",
+    characterImage: pipRobos,
     shine: "rgba(255,255,255,0.15)",
   },
   {
@@ -97,6 +108,7 @@ const DESTINOS_KIDS: Destino[] = [
     gradient: "from-[#4C9EFF] via-[#3B82F6] to-[#1D4ED8]",
     glow: "rgba(76,158,255,0.7)",
     emoji: "📚",
+    characterImage: pipMascot,
     shine: "rgba(255,255,255,0.15)",
   },
   {
@@ -106,6 +118,7 @@ const DESTINOS_KIDS: Destino[] = [
     gradient: "from-[#FF8C4B] via-[#7C3AED] to-[#2563EB]",
     glow: "rgba(124,58,237,0.55)",
     emoji: "🎓",
+    characterImage: pipaHeroina,
     shine: "rgba(255,255,255,0.14)",
   },
   {
@@ -115,6 +128,7 @@ const DESTINOS_KIDS: Destino[] = [
     gradient: "from-[#22C55E] via-[#16A34A] to-[#15803D]",
     glow: "rgba(34,197,94,0.7)",
     emoji: "💚",
+    characterImage: pipaVet,
     shine: "rgba(255,255,255,0.15)",
   },
   {
@@ -124,6 +138,7 @@ const DESTINOS_KIDS: Destino[] = [
     gradient: "from-[#14B8A6] via-[#0D9488] to-[#0F766E]",
     glow: "rgba(20,184,166,0.7)",
     emoji: "⏰",
+    characterImage: pipTrens,
     shine: "rgba(255,255,255,0.12)",
   },
   {
@@ -133,6 +148,7 @@ const DESTINOS_KIDS: Destino[] = [
     gradient: "from-[#FFC93C] via-[#F59E0B] to-[#D97706]",
     glow: "rgba(255,201,60,0.7)",
     emoji: "🛍️",
+    characterImage: pipaConfeiteira,
     shine: "rgba(255,255,255,0.18)",
   },
   {
@@ -142,6 +158,7 @@ const DESTINOS_KIDS: Destino[] = [
     gradient: "from-[#7C3AED] via-[#6366F1] to-[#0284C7]",
     glow: "rgba(124,58,237,0.7)",
     emoji: "📖",
+    characterImage: pipaFada,
     shine: "rgba(255,255,255,0.16)",
   },
   {
@@ -151,6 +168,7 @@ const DESTINOS_KIDS: Destino[] = [
     gradient: "from-[#06B6D4] via-[#2563EB] to-[#4F46E5]",
     glow: "rgba(37,99,235,0.7)",
     emoji: "✖️",
+    characterImage: pipEspaco,
     shine: "rgba(255,255,255,0.16)",
   },
   {
