@@ -2,8 +2,6 @@ import type { ReactNode } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { Baby, BookOpenCheck, ClipboardList, GraduationCap, LogOut, Sparkles } from "lucide-react";
 import { supabase } from "@/database/supabase/client";
-import { saveAccountType } from "@/lib/account-routing";
-import { toast } from "sonner";
 
 export function TeacherShell({ children }: { children: ReactNode }) {
   const navigate = useNavigate();
