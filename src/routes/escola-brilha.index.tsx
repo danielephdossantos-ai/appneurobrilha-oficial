@@ -1,3 +1,4 @@
+import { useIsAdmin } from "@/hooks/useIsAdmin";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
@@ -94,6 +95,7 @@ function EscolaBrilhaCatalogo() {
 
   const navigate = useNavigate();
   const { activeChild, session } = useAppState();
+  const adminReal = useIsAdmin();
   const [habilidades, setHabilidades] = useState<HabRow[]>([]);
   const [progresso, setProgresso] = useState<Record<string, boolean>>({});
   const [dominio, setDominio] = useState<Record<string, NivelDominio>>({});
