@@ -140,4 +140,35 @@ const todos: Livro[] = catalogo.filter((h) => h.id !== "raposa-ouvir").map((h) =
   return adaptarHistoria(h.id, fundos) ?? criarLivro(h.numero, h.id, h.titulo, h.tema, h.nivel);
 });
 
-export const livrosDoCatalogo: Record<string, Livro> = Object.fromEntries(todos.map((livro) => [livro.id, livro]));
+/** Personagens do app (sem criar imagens novas) para as histórias sem elenco. */
+const guias = [
+  { img: "pip-mascot", nome: "Pip" }, { img: "pip-girl-mascot", nome: "Pipa" }, { img: "pip-animais", nome: "Pip explorador" },
+  { img: "pip-girl-arte", nome: "Pipa artista" }, { img: "pip-musica", nome: "Pip músico" }, { img: "pip-girl-musica", nome: "Pipa cantora" },
+  { img: "pip-fazendinha", nome: "Pip fazendeiro" }, { img: "pip-girl-bailarina", nome: "Pipa bailarina" }, { img: "pip-dinossauros", nome: "Pip dino" },
+  { img: "pip-girl-unicornio", nome: "Pipa unicórnio" }, { img: "pip-carros", nome: "Pip piloto" }, { img: "pip-girl-sereia", nome: "Pipa sereia" },
+];
+const amigos = [
+  { img: "coruja", nome: "Coruja" }, { img: "coelho", nome: "Coelho" }, { img: "gato", nome: "Gato" }, { img: "cachorro", nome: "Cachorro" },
+  { img: "pato", nome: "Pato" }, { img: "abelha", nome: "Abelha", vida: "voar" as const }, { img: "borboleta", nome: "Borboleta", vida: "voar" as const },
+  { img: "tico", nome: "Passarinho", vida: "voar" as const }, { img: "sapo", nome: "Sapo" }, { img: "fofa", nome: "Raposa" },
+];
+
+function comElenco(livro: Livro, n: number): Livro {
+  const guia = guias[n % guias.length]!;
+  const amigo = amigos[(n * 3) % amigos.length]!;
+  return {
+    ...livro,
+    ficha: { ...livro.ficha, personagens: [guia.nome, amigo.nome] },
+    cenas: livro.cenas.map((c, i) => c.atores.length ? c : {
+      ...c,
+      atores: [
+        { img: guia.img, nome: guia.nome, x: 26, y: 92, tamanho: 26, vida: "respirar" as const, voz: "narrador" as const,
+          falas: [`Oi! Eu sou ${guia.nome}.`, c.ensinar?.[0] ?? "Vamos ouvir a história juntos?"] },
+        ...(i % 2 === 0 ? [{ img: amigo.img, nome: amigo.nome, x: 74, y: amigo.vida ? 55 : 92, tamanho: 18, vida: amigo.vida ?? ("balancar" as const), voz: "objeto" as const,
+          falas: [`Eu sou ${amigo.nome.toLowerCase().startsWith("a") ? "a" : "o"} ${amigo.nome}!`, "Observe o cenário com calma."] }] : []),
+      ],
+    }),
+  };
+}
+
+export const livrosDoCatalogo: Record<string, Livro> = Object.fromEntries(todos.map((livro, n) => [livro.id, comElenco(livro, n)]));
