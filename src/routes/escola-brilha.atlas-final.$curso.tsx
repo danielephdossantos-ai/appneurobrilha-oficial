@@ -193,7 +193,7 @@ function AtlasFinal() {
     } catch {
       /* ignore */
     }
-  }, [cursoSlug]);
+  }, [cursoSlug, adminReal]);
 
   const totalAulas = aulas.length;
   const slugsValidos = new Set(aulas.map((aula) => aula.slug));
