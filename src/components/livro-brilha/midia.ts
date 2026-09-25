@@ -1,39 +1,35 @@
-import toca from "@/assets/livro/cen-toca.jpg";
-import floresta from "@/assets/livro/cen-floresta.jpg";
-import lagoa from "@/assets/livro/cen-lagoa.jpg";
-import colina from "@/assets/livro/cen-colina.jpg";
-import fofaAlegre from "@/assets/livro/fofa-alegre.png";
-import fofaTriste from "@/assets/livro/fofa-triste.png";
-import fofaCuriosa from "@/assets/livro/fofa-curiosa.png";
-import tico from "@/assets/livro/tico.png";
-import sapo from "@/assets/livro/sapo.png";
-import borboleta from "@/assets/livro/borboleta.png";
-import bola from "@/assets/livro/bola.png";
-import flor from "@/assets/livro/flor.png";
 import type { Expressao, Som, Voz } from "./tipos";
 
-/** Biblioteca de cenários — cresce conforme novas histórias. */
-const todosCenarios = import.meta.glob("@/assets/livro/cen-*.jpg", { eager: true, import: "default" }) as Record<string, string>;
-/** Biblioteca de cenários: chave = nome do arquivo sem "cen-" (ex.: "fundo-mar"). */
-export const cenarios: Record<string, string> = {
-  ...Object.fromEntries(Object.entries(todosCenarios).map(([k, v]) => [k.split("/cen-")[1]!.replace(".jpg", ""), v])),
-  toca, floresta, lagoa, colina,
-};
+type Ponteiro = { url: string };
+const url = (m: Record<string, Ponteiro>) => Object.values(m)[0]?.url ?? "";
 
-const imagens: Record<string, string | Partial<Record<Expressao, string>>> = {
-  fofa: { alegre: fofaAlegre, triste: fofaTriste, curiosa: fofaCuriosa },
-  tico,
-  sapo,
-  borboleta,
-  bola,
-  flor,
+/** Cenários da biblioteca (chave = nome do arquivo sem "cen-"). */
+const todosCenarios = import.meta.glob("@/assets/livro-brilha/cen-*.jpg.asset.json", { eager: true, import: "default" }) as Record<string, Ponteiro>;
+export const cenarios: Record<string, string> = Object.fromEntries(
+  Object.entries(todosCenarios).map(([k, v]) => [k.split("/cen-")[1]!.replace(".jpg.asset.json", ""), v.url]),
+);
+
+/** Personagens e objetos: somente imagens que o app já tem. */
+const objetos = import.meta.glob("@/assets/neuro-treino/objetos/*.png.asset.json", { eager: true, import: "default" }) as Record<string, Ponteiro>;
+const mascotes = import.meta.glob("@/assets/pip-*.png.asset.json", { eager: true, import: "default" }) as Record<string, Ponteiro>;
+function doGlob(g: Record<string, Ponteiro>, nome: string) {
+  return url(Object.fromEntries(Object.entries(g).filter(([k]) => k.endsWith(`/${nome}.png.asset.json`))));
+}
+
+const imagens: Record<string, string> = {
+  fofa: doGlob(objetos, "raposa"),
+  tico: doGlob(objetos, "passaro"),
+  sapo: doGlob(objetos, "sapo"),
+  borboleta: doGlob(objetos, "borboleta"),
+  bola: doGlob(objetos, "bola"),
+  flor: doGlob(objetos, "flor"),
 };
+for (const nome of ["coruja", "coelho", "gato", "cachorro", "pato", "abelha"]) imagens[nome] = doGlob(objetos, nome);
+for (const nome of ["pip-mascot", "pip-girl-mascot", "pip-animais", "pip-girl-arte", "pip-musica", "pip-girl-musica", "pip-fazendinha", "pip-girl-bailarina", "pip-dinossauros", "pip-girl-unicornio", "pip-carros", "pip-girl-sereia"]) imagens[nome] = doGlob(mascotes, nome);
 
 export function imagem(chave: string, expressao: Expressao = "alegre"): string {
-  const v = imagens[chave];
-  if (!v) return "";
-  if (typeof v === "string") return v;
-  return v[expressao] ?? v.alegre ?? "";
+  void expressao;
+  return imagens[chave] ?? "";
 }
 
 /** Voz de cada personagem: altura e velocidade. */
