@@ -156,7 +156,7 @@ export function LivroPlayer({ livro }: { livro: Livro }) {
   // ---------- Cena ----------
   const jogo = cena.jogo;
   return (
-    <div className="rounded-[36px] bg-white/65 p-3 ring-1 ring-black/5 backdrop-blur-xl sm:p-4">
+    <div className="rounded-[36px] bg-white/65 p-3 pb-24 ring-1 ring-black/5 backdrop-blur-xl sm:p-4 sm:pb-24 lg:pb-4">
       <div className="mb-3 flex items-center gap-3 px-1">
         <div className="h-3 flex-1 overflow-hidden rounded-full bg-line">
           <div className="h-full rounded-full bg-peach transition-all" style={{ width: `${((indice + (etapa === "feito" ? 1 : 0)) / livro.cenas.length) * 100}%` }} />
@@ -223,7 +223,7 @@ export function LivroPlayer({ livro }: { livro: Livro }) {
         </div>
       </div>
 
-      <nav className="sticky bottom-2 z-30 mt-3 flex shadow-lg items-center justify-between gap-1 rounded-3xl bg-card p-2 ring-1 ring-line">
+      <nav className="fixed inset-x-2 bottom-2 z-40 mx-auto flex max-w-[640px] shadow-lg lg:static lg:mt-3 lg:max-w-none lg:shadow-none items-center justify-between gap-1 rounded-3xl bg-card p-2 ring-1 ring-line">
         <button onClick={() => irPara(indice - 1)} disabled={indice === 0} className={btnBarra}><span className="text-2xl">◀</span>Voltar</button>
         <button onClick={narrar} className={btnBarra}><span className="text-2xl">🔊</span>Ouvir</button>
         <button onClick={() => (pausado ? continuar() : falando ? pausar() : narrar())} className={btnBarra}>
