@@ -89,23 +89,85 @@ function adaptarHistoria(id: string, cenarios: string[]): Livro | null {
   };
 }
 
-function criarLivro(numero: number, id: string, titulo: string, tema: string, nivel: string): Livro {
+
+/** Enredo próprio de cada história: quem, onde, problema e solução (usados no texto e nas perguntas). */
+type Enredo = { onde: string; problema: string; solucao: string };
+const enredos: Record<number, Enredo> = {
+  4: { onde: "na cozinha, na hora do café", problema: "cada um queria comer num lugar diferente e a mesa ficou vazia", solucao: "todos sentaram juntos na mesa redonda e dividiram o pão" },
+  5: { onde: "no gelo, bem longe de casa", problema: "o gelo era escorregadio e ninguém conseguia andar", solucao: "deram as mãos e andaram devagar, um passinho de cada vez" },
+  6: { onde: "na beira da lagoa", problema: "o sapo esquecia quantos saltos já tinha dado", solucao: "contou em voz alta: um, dois, três, quatro, cinco" },
+  7: { onde: "numa folha do jardim", problema: "os outros bichos eram rápidos e a lagarta ficava para trás", solucao: "seguiu no seu tempo e virou uma linda borboleta" },
+  8: { onde: "no quarto, quando a luz apagou", problema: "o escuro deu medo e o coração bateu forte", solucao: "acendeu a lanterna, abraçou o travesseiro e viu que era só a sombra da cadeira" },
+  9: { onde: "no ateliê de cores", problema: "as tintas se misturaram e ninguém sabia o nome das cores", solucao: "separaram as cores: vermelho, azul, amarelo e verde" },
+  10: { onde: "na sala de aula", problema: "as peças de montar caíram todas misturadas", solucao: "separaram os quadrados, os círculos e os triângulos" },
+  11: { onde: "no banheiro", problema: "a girafa era tão alta que o chuveiro não alcançava o pescoço", solucao: "usou um regador comprido para lavar tudo, de cima a baixo" },
+  12: { onde: "no banheiro, antes de dormir", problema: "a escova ficou esquecida e os dentes ficaram sujos", solucao: "escovou dançando: em cima, embaixo, na frente e atrás" },
+  13: { onde: "na cozinha, na hora do almoço", problema: "o prato só tinha comida de uma cor", solucao: "colocou cenoura laranja, alface verde e tomate vermelho" },
+  14: { onde: "no consultório", problema: "a barriga roncava e ninguém sabia o que o corpo queria dizer", solucao: "percebeu que era fome e comeu uma fruta" },
+  15: { onde: "na escola do bosque", problema: "era o primeiro dia e ninguém sabia onde ficava a sala", solucao: "seguiu as placas com desenhos e chegou à sala certa" },
+  16: { onde: "na sala da vovó", problema: "a história ficou toda misturada, sem começo nem fim", solucao: "a vovó contou de novo, em ordem: começo, meio e fim" },
+  17: { onde: "na floresta, perto do tambor", problema: "o tatu não achava uma palavra que rimasse com mão", solucao: "descobriu que mão rima com pão, feijão e balão" },
+  18: { onde: "na sala das letras", problema: "as sílabas PA, PE, PI e PO fugiram do cartaz", solucao: "chamou cada sílaba pelo som e todas voltaram ao lugar" },
+  19: { onde: "na biblioteca", problema: "a letra A sumiu da palavra CASA", solucao: "procurou nos livros e colocou a letra A de volta" },
+  20: { onde: "na escola", problema: "a mochila ficou pesada de tantas palavras", solucao: "separou as palavras em grupos e escreveu cada uma no caderno" },
+  21: { onde: "na floresta", problema: "havia muitos sons ao mesmo tempo e era difícil ouvir", solucao: "fechou os olhos e ouviu um som de cada vez: pássaro, água e vento" },
+  22: { onde: "no jardim, num dia nublado", problema: "a chuva começou e a brincadeira parou", solucao: "ouviu o barulho da chuva e inventou uma música com as gotas" },
+  23: { onde: "na beira do rio", problema: "o rio estava cheio de lixo e os peixes estavam tristes", solucao: "os amigos recolheram o lixo e o rio voltou a brilhar" },
+  24: { onde: "no parque", problema: "o lixo estava todo misturado no chão", solucao: "colocou papel, plástico e resto de comida no lixo certo" },
+  25: { onde: "no pátio da escola", problema: "um amigo riu porque o outro era diferente", solucao: "todos descobriram que cada um tem um jeito especial" },
+  26: { onde: "na escola", problema: "a porta da sala tinha um degrau e a cadeira de rodas não passava", solucao: "a turma pediu uma rampa e todos entraram juntos" },
+  27: { onde: "no parque de aventuras", problema: "a caixa de brinquedos era pesada demais para uma pessoa só", solucao: "cada amigo segurou um lado e carregaram juntos" },
+  28: { onde: "no portão da escola", problema: "era o primeiro dia e a vontade era voltar para casa", solucao: "segurou o balão, respirou fundo e fez um amigo novo" },
+  29: { onde: "na trilha", problema: "a corda da mochila deu um nó bem apertado", solucao: "puxou uma ponta devagar, depois a outra, até o nó abrir" },
+  30: { onde: "no quintal", problema: "a caixa grande de papelão ia para o lixo", solucao: "pintou a caixa e ela virou uma nave espacial" },
+  31: { onde: "na praça", problema: "o tambor estava fazendo barulho alto demais", solucao: "tocou forte e depois fraquinho, no ritmo da música" },
+  32: { onde: "no parque", problema: "na brincadeira, ninguém ouvia quando era hora de parar", solucao: "combinaram um sinal: mão para cima quer dizer parar" },
+  33: { onde: "no quarto", problema: "o brinquedo favorito sumiu", solucao: "procurou em cima da cama, embaixo da mesa e achou dentro da caixa" },
+  34: { onde: "no cerrado", problema: "o mico se perdeu da família", solucao: "a onça mostrou o caminho até a árvore dos micos" },
+  35: { onde: "na rua do bairro", problema: "o lixo acumulou e a rua ficou suja", solucao: "o gari passou, limpou a rua e todos agradeceram" },
+  36: { onde: "na feira", problema: "as frutas caíram da banca e rolaram pelo chão", solucao: "todos ajudaram a juntar as frutas e a Dona Rita deu uma laranja para cada um" },
+  37: { onde: "em casa", problema: "era difícil lembrar o que vinha primeiro no dia", solucao: "fez um cartaz: acordar, escola, almoço, brincar e dormir" },
+  38: { onde: "no quarto", problema: "o amigo pegou o brinquedo sem pedir e a raiva veio forte", solucao: "contou até cinco, respirou fundo e disse como se sentia" },
+  39: { onde: "no jardim", problema: "a plantinha ficou murcha porque ninguém deu água", solucao: "regou a plantinha todos os dias e ela voltou a crescer" },
+  40: { onde: "na escola", problema: "alguém pegou o lápis sem pedir e o amigo ficou chateado", solucao: "pediu desculpas, disse por favor e depois obrigado" },
+  41: { onde: "no ateliê de arte", problema: "o desenho ficou sem cor e sem graça", solucao: "usou o pincel mágico e encheu o papel de cores" },
+  42: { onde: "no supermercado", problema: "queria comprar só doce de chocolate", solucao: "provou a manga madura e descobriu que a fruta também é doce" },
+  43: { onde: "na esquina da rua", problema: "a bola rolou para a rua cheia de carros", solucao: "esperou o sinal verde para pedestre e atravessou de mão dada" },
+  44: { onde: "na horta da escola", problema: "as sementes não nasciam porque a terra estava seca", solucao: "a turma regou a horta e as folhas de alface cresceram" },
+  45: { onde: "no acampamento", problema: "o mapa do tesouro estava rasgado ao meio", solucao: "juntaram as duas partes e seguiram as setas até o tesouro" },
+  46: { onde: "na cozinha", problema: "o bolo da festa sumiu da mesa", solucao: "seguiram as migalhas e acharam o cachorro com a boca suja de bolo" },
+  47: { onde: "na praça da música", problema: "a canção não acabava e todos já estavam cansados", solucao: "criaram um final: bater palmas três vezes e sentar" },
+  48: { onde: "na sala de aula", problema: "o desenho não ficou bom na primeira vez", solucao: "tentou de novo, e de novo, até ficar do jeito que queria" },
+  49: { onde: "na biblioteca", problema: "esqueceu o nome do amigo novo", solucao: "lembrou da cor da camiseta dele e o nome voltou: Leo" },
+  50: { onde: "no castelo da fantasia", problema: "a porta do castelo só abria com tudo o que foi aprendido", solucao: "lembrou dos sons, das cores e dos amigos, e a porta abriu" },
+};
+
+function criarLivro(numero: number, id: string, titulo: string, tema: string, nivel: string, quem: string): Livro {
+  const e = enredos[numero] ?? { onde: "no parque", problema: "surgiu um desafio no caminho", solucao: "pensou com calma e pediu ajuda" };
+  const outros = Object.values(enredos).filter((o) => o !== e);
+  const falsos = (k: keyof Enredo) => [outros[(numero * 7) % outros.length]![k], outros[(numero * 13 + 5) % outros.length]![k]];
+  const cap = (t: string) => t.charAt(0).toUpperCase() + t.slice(1);
   const fundos = cenarioPorTema[tema] ?? ["parque", "sala", "jardim"];
   const palavra = palavraPorTema[tema] ?? "APRENDER";
   const silabas = dividir(palavra);
   const objetivo = objetivoPorTema[tema] ?? "aprender brincando";
   const etapas = [
-    ["O convite", `Uma nova aventura começou: ${titulo}. Tudo parecia comum, até surgir um convite para descobrir algo importante.`],
-    ["Primeira pista", `No caminho, apareceu uma pista ligada a ${tema.toLowerCase()}. Era preciso olhar com calma e prestar atenção.`],
-    ["Uma palavra especial", `A palavra ${palavra} apareceu na aventura. Vamos ouvi-la devagar e descobrir suas partes.`],
-    ["Hora de observar", `Cada detalhe do cenário podia ajudar. Observar antes de escolher tornou o caminho mais seguro.`],
-    ["Um pequeno desafio", `O desafio parecia difícil no começo, mas pensar com calma abriu uma nova possibilidade.`],
-    ["Aprender fazendo", `A descoberta ficou mais clara quando a ideia foi colocada em prática dentro da aventura.`],
-    ["Uma escolha importante", `Chegou a hora de escolher. A melhor pista era lembrar tudo o que já tinha acontecido.`],
-    ["Juntos fica melhor", `Com atenção, cuidado e ajuda, a aventura continuou. Cada tentativa ensinou alguma coisa.`],
-    ["A descoberta", `A resposta apareceu: ${objetivo} pode transformar uma dificuldade em uma conquista.`],
-    ["Missão cumprida", `A aventura de ${titulo} chegou ao fim. Ficou uma descoberta para levar para outros dias.`],
+    ["O começo", `${quem} estava ${e.onde}. Era um dia bonito para brincar e aprender.`],
+    ["O problema", `De repente, aconteceu uma coisa: ${e.problema}.`],
+    ["Uma palavra especial", `A palavra ${palavra} apareceu na história. Vamos ouvir devagar e descobrir suas partes.`],
+    ["Olhar com calma", `${quem} respirou fundo e olhou tudo com muita atenção.`],
+    ["Tentar uma vez", `${quem} tentou resolver sozinho, mas na primeira vez não deu certo.`],
+    ["Pedir ajuda", `Então ${quem} chamou um amigo. Juntos, pensaram em outro jeito.`],
+    ["A boa ideia", `Veio uma boa ideia: ${e.solucao}.`],
+    ["Deu certo", `Deu certo! ${cap(e.problema)}? Agora não mais. Todos ficaram felizes.`],
+    ["A descoberta", `${quem} descobriu que é importante ${objetivo}.`],
+    ["Fim", `E assim terminou ${titulo}. Que tal contar essa história para alguém?`],
   ] as const;
+  const perguntas: Record<number, { pergunta: string; certa: string; erradas: string[] }> = {
+    0: { pergunta: "Onde a história começou?", certa: e.onde, erradas: falsos("onde") },
+    1: { pergunta: "Qual foi o problema?", certa: e.problema, erradas: falsos("problema") },
+    6: { pergunta: "Como o problema foi resolvido?", certa: e.solucao, erradas: falsos("solucao") },
+  };
   return {
     id, titulo,
     ficha: {
@@ -122,7 +184,9 @@ function criarLivro(numero: number, id: string, titulo: string, tema: string, ni
       ensinar: i === 2 ? [`Escute: ${palavra}.`, `${silabas.join("... ")}.`, `Agora diga a palavra inteira: ${palavra}.`] : [`Nesta parte, vamos ${objetivo}.`, "Observe a cena e escute a pista antes de responder."],
       jogo: i === 2
         ? { tipo: "silaba", habilidade: "Consciência silábica", palavra, silabas, acerto: `Muito bem! Você ouviu as partes de ${palavra}.` }
-        : { tipo: "escolha", habilidade: i === 9 ? "Compreensão global" : "Atenção e interpretação", pergunta: i === 9 ? "O que esta aventura nos ensinou?" : "O que ajuda a continuar esta aventura?", opcoes: [{ texto: i === 9 ? objetivo : "Observar e pensar com calma", correta: true }, { texto: "Desistir na primeira tentativa" }, { texto: "Ignorar todas as pistas" }], acerto: "Ótima escolha! Você usou a pista para continuar.", dicas: ["Vamos pensar juntos: qual opção ajuda a aprender e seguir em frente?"] },
+        : perguntas[i]
+          ? { tipo: "escolha", habilidade: "Compreensão do texto", pergunta: perguntas[i]!.pergunta, opcoes: [{ texto: perguntas[i]!.certa, correta: true }, ...perguntas[i]!.erradas.map((t) => ({ texto: t }))].sort((a, b) => (a.texto.length % 3) - (b.texto.length % 3)), acerto: "Isso mesmo! A história conta exatamente isso.", dicas: ["Leia de novo o texto em cima do cenário. A resposta está nele."] }
+          : { tipo: "escolha", habilidade: i === 9 ? "Compreensão global" : "Atenção e interpretação", pergunta: i === 9 ? "O que esta aventura nos ensinou?" : "O que ajuda a continuar esta aventura?", opcoes: [{ texto: i === 9 ? objetivo : "Observar e pensar com calma", correta: true }, { texto: "Desistir na primeira tentativa" }, { texto: "Ignorar todas as pistas" }], acerto: "Ótima escolha! Você usou a pista para continuar.", dicas: ["Vamos pensar juntos: qual opção ajuda a aprender e seguir em frente?"] },
       objetivo: i === 9 ? objetivo : "Participar da narrativa com atenção.",
     })),
     aprendemos: [
@@ -134,11 +198,6 @@ function criarLivro(numero: number, id: string, titulo: string, tema: string, ni
     desafioFinal: { tipo: "escolha", habilidade: "Revisão", pergunta: `Qual palavra especial apareceu em ${titulo}?`, opcoes: [{ texto: palavra, correta: true }, { texto: "ESQUECER" }, { texto: "PARAR" }], acerto: `Isso! ${palavra} fez parte desta aventura.`, dicas: [`Lembre da palavra que apareceu em destaque na terceira cena.`] },
   };
 }
-
-const todos: Livro[] = catalogo.filter((h) => h.id !== "raposa-ouvir").map((h) => {
-  const fundos = cenarioPorTema[h.tema] ?? ["parque", "sala", "jardim"];
-  return adaptarHistoria(h.id, fundos) ?? criarLivro(h.numero, h.id, h.titulo, h.tema, h.nivel);
-});
 
 /** Personagens do app (sem criar imagens novas) para as histórias sem elenco. */
 const guias = [
@@ -191,5 +250,11 @@ function comElenco(livro: Livro, n: number): Livro {
     }),
   };
 }
+
+const todos: Livro[] = catalogo.filter((h) => h.id !== "raposa-ouvir").map((h, n) => {
+  const fundos = cenarioPorTema[h.tema] ?? ["parque", "sala", "jardim"];
+  const quem = (elencoPorHistoria[h.id] ?? elencoPorHistoria[semAcento(h.titulo)])?.[0].nome ?? guias[n % guias.length]!.nome;
+  return adaptarHistoria(h.id, fundos) ?? criarLivro(h.numero, h.id, h.titulo, h.tema, h.nivel, quem);
+});
 
 export const livrosDoCatalogo: Record<string, Livro> = Object.fromEntries(todos.map((livro, n) => [livro.id, comElenco(livro, n)]));
