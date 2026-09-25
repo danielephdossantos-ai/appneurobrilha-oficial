@@ -71,6 +71,8 @@ import { Route as BnccCodigoRouteImport } from './routes/bncc.$codigo'
 import { Route as EscolaBrilhaIndexRouteImport } from './routes/escola-brilha.index'
 import { Route as EscolaBrilhaCodigoRouteImport } from './routes/escola-brilha.$codigo'
 import { Route as EscolaBrilhaProfessoresRouteImport } from './routes/escola-brilha.professores'
+import { Route as HistoriasBrilhaIndexRouteImport } from './routes/historias-brilha.index'
+import { Route as HistoriasBrilhaIdRouteImport } from './routes/historias-brilha.$id'
 import { Route as NeuroTreinoSlugRouteImport } from './routes/neuro-treino.$slug'
 import { Route as NeuroTreinoConfigurarRouteImport } from './routes/neuro-treino.configurar'
 import { Route as PainelPaisDocumentosRouteImport } from './routes/painel-pais/documentos'
@@ -432,6 +434,16 @@ const EscolaBrilhaProfessoresRoute = EscolaBrilhaProfessoresRouteImport.update({
   path: '/escola-brilha/professores',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HistoriasBrilhaIndexRoute = HistoriasBrilhaIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => HistoriasBrilhaRoute,
+} as any)
+const HistoriasBrilhaIdRoute = HistoriasBrilhaIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => HistoriasBrilhaRoute,
+} as any)
 const NeuroTreinoSlugRoute = NeuroTreinoSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -704,7 +716,7 @@ export interface FileRoutesByFullPath {
   '/curadoria-aulas': typeof CuradoriaAulasRoute
   '/curriculo-anual': typeof CurriculoAnualRoute
   '/gerador-procedural': typeof GeradorProceduralRoute
-  '/historias-brilha': typeof HistoriasBrilhaRoute
+  '/historias-brilha': typeof HistoriasBrilhaRouteWithChildren
   '/loja-mascotes': typeof LojaMascotesRoute
   '/mascotes': typeof MascotesRoute
   '/matriz-pedagogica': typeof MatrizPedagogicaRoute
@@ -744,12 +756,14 @@ export interface FileRoutesByFullPath {
   '/bncc/$codigo': typeof BnccCodigoRoute
   '/escola-brilha/$codigo': typeof EscolaBrilhaCodigoRoute
   '/escola-brilha/professores': typeof EscolaBrilhaProfessoresRoute
+  '/historias-brilha/$id': typeof HistoriasBrilhaIdRoute
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
   '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
   '/painel-pais/documentos': typeof PainelPaisDocumentosRoute
   '/admin/': typeof AdminIndexRoute
   '/area-professor/': typeof AreaProfessorIndexRoute
   '/escola-brilha/': typeof EscolaBrilhaIndexRoute
+  '/historias-brilha/': typeof HistoriasBrilhaIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/anamnese/$childId/escalas': typeof AnamneseChildIdEscalasRoute
@@ -809,7 +823,6 @@ export interface FileRoutesByTo {
   '/curadoria-aulas': typeof CuradoriaAulasRoute
   '/curriculo-anual': typeof CurriculoAnualRoute
   '/gerador-procedural': typeof GeradorProceduralRoute
-  '/historias-brilha': typeof HistoriasBrilhaRoute
   '/loja-mascotes': typeof LojaMascotesRoute
   '/mascotes': typeof MascotesRoute
   '/matriz-pedagogica': typeof MatrizPedagogicaRoute
@@ -849,12 +862,14 @@ export interface FileRoutesByTo {
   '/bncc/$codigo': typeof BnccCodigoRoute
   '/escola-brilha/$codigo': typeof EscolaBrilhaCodigoRoute
   '/escola-brilha/professores': typeof EscolaBrilhaProfessoresRoute
+  '/historias-brilha/$id': typeof HistoriasBrilhaIdRoute
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
   '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
   '/painel-pais/documentos': typeof PainelPaisDocumentosRoute
   '/admin': typeof AdminIndexRoute
   '/area-professor': typeof AreaProfessorIndexRoute
   '/escola-brilha': typeof EscolaBrilhaIndexRoute
+  '/historias-brilha': typeof HistoriasBrilhaIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/anamnese/$childId/escalas': typeof AnamneseChildIdEscalasRoute
@@ -917,7 +932,7 @@ export interface FileRoutesById {
   '/curadoria-aulas': typeof CuradoriaAulasRoute
   '/curriculo-anual': typeof CurriculoAnualRoute
   '/gerador-procedural': typeof GeradorProceduralRoute
-  '/historias-brilha': typeof HistoriasBrilhaRoute
+  '/historias-brilha': typeof HistoriasBrilhaRouteWithChildren
   '/loja-mascotes': typeof LojaMascotesRoute
   '/mascotes': typeof MascotesRoute
   '/matriz-pedagogica': typeof MatrizPedagogicaRoute
@@ -957,12 +972,14 @@ export interface FileRoutesById {
   '/bncc/$codigo': typeof BnccCodigoRoute
   '/escola-brilha/$codigo': typeof EscolaBrilhaCodigoRoute
   '/escola-brilha/professores': typeof EscolaBrilhaProfessoresRoute
+  '/historias-brilha/$id': typeof HistoriasBrilhaIdRoute
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
   '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
   '/painel-pais/documentos': typeof PainelPaisDocumentosRoute
   '/admin/': typeof AdminIndexRoute
   '/area-professor/': typeof AreaProfessorIndexRoute
   '/escola-brilha/': typeof EscolaBrilhaIndexRoute
+  '/historias-brilha/': typeof HistoriasBrilhaIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/anamnese/$childId/escalas': typeof AnamneseChildIdEscalasRoute
@@ -1066,12 +1083,14 @@ export interface FileRouteTypes {
     | '/bncc/$codigo'
     | '/escola-brilha/$codigo'
     | '/escola-brilha/professores'
+    | '/historias-brilha/$id'
     | '/neuro-treino/$slug'
     | '/neuro-treino/configurar'
     | '/painel-pais/documentos'
     | '/admin/'
     | '/area-professor/'
     | '/escola-brilha/'
+    | '/historias-brilha/'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
     | '/anamnese/$childId/escalas'
@@ -1131,7 +1150,6 @@ export interface FileRouteTypes {
     | '/curadoria-aulas'
     | '/curriculo-anual'
     | '/gerador-procedural'
-    | '/historias-brilha'
     | '/loja-mascotes'
     | '/mascotes'
     | '/matriz-pedagogica'
@@ -1171,12 +1189,14 @@ export interface FileRouteTypes {
     | '/bncc/$codigo'
     | '/escola-brilha/$codigo'
     | '/escola-brilha/professores'
+    | '/historias-brilha/$id'
     | '/neuro-treino/$slug'
     | '/neuro-treino/configurar'
     | '/painel-pais/documentos'
     | '/admin'
     | '/area-professor'
     | '/escola-brilha'
+    | '/historias-brilha'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
     | '/anamnese/$childId/escalas'
@@ -1278,12 +1298,14 @@ export interface FileRouteTypes {
     | '/bncc/$codigo'
     | '/escola-brilha/$codigo'
     | '/escola-brilha/professores'
+    | '/historias-brilha/$id'
     | '/neuro-treino/$slug'
     | '/neuro-treino/configurar'
     | '/painel-pais/documentos'
     | '/admin/'
     | '/area-professor/'
     | '/escola-brilha/'
+    | '/historias-brilha/'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
     | '/anamnese/$childId/escalas'
@@ -1346,7 +1368,7 @@ export interface RootRouteChildren {
   CuradoriaAulasRoute: typeof CuradoriaAulasRoute
   CurriculoAnualRoute: typeof CurriculoAnualRoute
   GeradorProceduralRoute: typeof GeradorProceduralRoute
-  HistoriasBrilhaRoute: typeof HistoriasBrilhaRoute
+  HistoriasBrilhaRoute: typeof HistoriasBrilhaRouteWithChildren
   LojaMascotesRoute: typeof LojaMascotesRoute
   MascotesRoute: typeof MascotesRoute
   MatrizPedagogicaRoute: typeof MatrizPedagogicaRoute
@@ -1849,6 +1871,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EscolaBrilhaProfessoresRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/historias-brilha/': {
+      id: '/historias-brilha/'
+      path: '/'
+      fullPath: '/historias-brilha/'
+      preLoaderRoute: typeof HistoriasBrilhaIndexRouteImport
+      parentRoute: typeof HistoriasBrilhaRoute
+    }
+    '/historias-brilha/$id': {
+      id: '/historias-brilha/$id'
+      path: '/$id'
+      fullPath: '/historias-brilha/$id'
+      preLoaderRoute: typeof HistoriasBrilhaIdRouteImport
+      parentRoute: typeof HistoriasBrilhaRoute
+    }
     '/neuro-treino/$slug': {
       id: '/neuro-treino/$slug'
       path: '/$slug'
@@ -2199,6 +2235,20 @@ const AreaProfessorRouteWithChildren = AreaProfessorRoute._addFileChildren(
   AreaProfessorRouteChildren,
 )
 
+interface HistoriasBrilhaRouteChildren {
+  HistoriasBrilhaIdRoute: typeof HistoriasBrilhaIdRoute
+  HistoriasBrilhaIndexRoute: typeof HistoriasBrilhaIndexRoute
+}
+
+const HistoriasBrilhaRouteChildren: HistoriasBrilhaRouteChildren = {
+  HistoriasBrilhaIdRoute: HistoriasBrilhaIdRoute,
+  HistoriasBrilhaIndexRoute: HistoriasBrilhaIndexRoute,
+}
+
+const HistoriasBrilhaRouteWithChildren = HistoriasBrilhaRoute._addFileChildren(
+  HistoriasBrilhaRouteChildren,
+)
+
 interface NeuroTreinoRouteChildren {
   NeuroTreinoSlugRoute: typeof NeuroTreinoSlugRoute
   NeuroTreinoConfigurarRoute: typeof NeuroTreinoConfigurarRoute
@@ -2268,7 +2318,7 @@ const rootRouteChildren: RootRouteChildren = {
   CuradoriaAulasRoute: CuradoriaAulasRoute,
   CurriculoAnualRoute: CurriculoAnualRoute,
   GeradorProceduralRoute: GeradorProceduralRoute,
-  HistoriasBrilhaRoute: HistoriasBrilhaRoute,
+  HistoriasBrilhaRoute: HistoriasBrilhaRouteWithChildren,
   LojaMascotesRoute: LojaMascotesRoute,
   MascotesRoute: MascotesRoute,
   MatrizPedagogicaRoute: MatrizPedagogicaRoute,
