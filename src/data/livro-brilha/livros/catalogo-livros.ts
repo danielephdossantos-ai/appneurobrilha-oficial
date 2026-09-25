@@ -200,10 +200,10 @@ function criarLivro(numero: number, id: string, titulo: string, tema: string, ni
 
 /** Personagens do app (sem criar imagens novas) para as histórias sem elenco. */
 const guias = [
-  { img: "pip-mascot", nome: "Pip" }, { img: "pip-girl-mascot", nome: "Pipa" }, { img: "pip-animais", nome: "Pip explorador" },
-  { img: "pip-girl-arte", nome: "Pipa artista" }, { img: "pip-musica", nome: "Pip músico" }, { img: "pip-girl-musica", nome: "Pipa cantora" },
-  { img: "pip-fazendinha", nome: "Pip fazendeiro" }, { img: "pip-girl-bailarina", nome: "Pipa bailarina" }, { img: "pip-dinossauros", nome: "Pip dino" },
-  { img: "pip-girl-unicornio", nome: "Pipa unicórnio" }, { img: "pip-carros", nome: "Pip piloto" }, { img: "pip-girl-sereia", nome: "Pipa sereia" },
+  { img: "pip-mascot", nome: "Pip" }, { img: "pip-girl-mascot", nome: "Pipa" }, { img: "pip-animais", nome: "Léo" },
+  { img: "pip-girl-arte", nome: "Clara" }, { img: "pip-musica", nome: "Beto" }, { img: "pip-girl-musica", nome: "Mel" },
+  { img: "pip-fazendinha", nome: "Pedrinho" }, { img: "pip-girl-bailarina", nome: "Lia" }, { img: "pip-dinossauros", nome: "Dudu" },
+  { img: "pip-girl-unicornio", nome: "Bela" }, { img: "pip-carros", nome: "Rafa" }, { img: "pip-girl-sereia", nome: "Luna" },
 ];
 const amigos = [
   { img: "coruja", nome: "Coruja" }, { img: "coelho", nome: "Coelho" }, { img: "gato", nome: "Gato" }, { img: "cachorro", nome: "Cachorro" },
