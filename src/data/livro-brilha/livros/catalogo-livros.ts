@@ -165,7 +165,7 @@ function comElenco(livro: Livro, n: number): Livro {
         { img: guia.img, nome: guia.nome, x: 26, y: 92, tamanho: 26, vida: "respirar" as const, voz: "narrador" as const,
           falas: [`Oi! Eu sou ${guia.nome}.`, c.ensinar?.[0] ?? "Vamos ouvir a história juntos?"] },
         ...(i % 2 === 0 ? [{ img: amigo.img, nome: amigo.nome, x: 74, y: amigo.vida ? 55 : 92, tamanho: 18, vida: amigo.vida ?? ("balancar" as const), voz: "objeto" as const,
-          falas: [`Eu sou ${amigo.nome.toLowerCase().startsWith("a") ? "a" : "o"} ${amigo.nome}!`, "Observe o cenário com calma."] }] : []),
+          falas: [`Oi! Eu me chamo ${amigo.nome}.`, "Observe o cenário com calma."] }] : []),
       ],
     }),
   };
