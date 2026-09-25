@@ -156,7 +156,7 @@ export function LivroPlayer({ livro }: { livro: Livro }) {
   // ---------- Cena ----------
   const jogo = cena.jogo;
   return (
-    <div className="rounded-[36px] bg-white/65 p-3 pb-24 ring-1 ring-black/5 backdrop-blur-xl sm:p-4 sm:pb-24 lg:pb-4">
+    <div className="rounded-[36px] bg-white/65 p-3 pb-24 ring-1 ring-black/5 lg:backdrop-blur-xl sm:p-4 sm:pb-24 lg:pb-4">
       <div className="mb-3 flex items-center gap-3 px-1">
         <div className="h-3 flex-1 overflow-hidden rounded-full bg-line">
           <div className="h-full rounded-full bg-peach transition-all" style={{ width: `${((indice + (etapa === "feito" ? 1 : 0)) / livro.cenas.length) * 100}%` }} />
