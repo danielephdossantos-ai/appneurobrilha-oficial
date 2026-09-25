@@ -168,6 +168,7 @@ function RootComponent() {
                 {!isProfessionalArea && <LGPDConsent />}
                 <ConnectivityStatus />
                 <TeacherAccessBridge />
+                {!isProfessionalArea && <VoltarTelaAnterior />}
                 {!isProfessionalArea && <MascotGlobalContainer />}
                 {!isProfessionalArea && <ParentPinGate />}
                 {!isProfessionalArea && <ProfessorBrilhoMount />}
@@ -235,3 +236,4 @@ import { HiperfocoProvider } from "@/context/HiperfocoContext";
 import { AuthGuard } from "@/modules/auth/components/AuthGuard";
 import { GradeGuard } from "@/modules/auth/components/GradeGuard";
 import { ProfessorBrilhoMount } from "@/components/professor/ProfessorBrilhoMount";
+import { VoltarTelaAnterior } from "@/components/VoltarTelaAnterior";
