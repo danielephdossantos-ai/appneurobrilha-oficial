@@ -1,0 +1,85 @@
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState } from "react";
+import { ArrowLeft, ChevronDown, Download, Folder, FolderOpen, Printer } from "lucide-react";
+import { TeacherShell as Shell } from "@/components/teacher/TeacherShell";
+import aulas from "@/modules/professor/atividades-adaptadas.json";
+
+export const Route = createFileRoute("/area-professor/atividades-adaptadas")({
+  component: AtividadesAdaptadas,
+  head: () => ({
+    meta: [
+      { title: "Atividades BNCC Adaptadas · Área do Professor | NeuroBrilha Kids" },
+      { name: "description", content: "Aulas BNCC da Educação Infantil adaptadas, prontas em A4 para imprimir ou baixar." },
+      { property: "og:title", content: "Atividades BNCC Adaptadas · NeuroBrilha Kids" },
+      { property: "og:description", content: "Explicações, atividades da criança e guia do professor por código BNCC." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
+    ],
+  }),
+});
+
+const CAMPOS: Record<string, string> = {
+  EO: "O eu, o outro e o nós",
+  CG: "Corpo, gestos e movimentos",
+  TS: "Traços, sons, cores e formas",
+  EF: "Escuta, fala, pensamento e imaginação",
+  ET: "Espaços, tempos, quantidades e relações",
+};
+
+function imprimir(urls: string[], nome: string) {
+  const w = window.open("", "_blank");
+  if (!w) return;
+  const imgs = urls.map((u) => `<img src="${u}"/>`).join("");
+  w.document.write(`<html><head><title>${nome}</title><style>@page{size:A4;margin:0}body{margin:0}img{width:210mm;height:297mm;object-fit:contain;display:block;page-break-after:always}</style></head><body>${imgs}<script>Promise.all([...document.images].map(i=>i.complete?1:new Promise(r=>i.onload=i.onerror=r))).then(()=>setTimeout(()=>print(),300))</script></body></html>`);
+  w.document.close();
+}
+
+function AtividadesAdaptadas() {
+  const [aberta, setAberta] = useState<string | null>(null);
+  const campos = Object.entries(CAMPOS).map(([sigla, nome]) => ({ sigla, nome, aulas: aulas.filter((a) => a.codigo.slice(4, 6) === sigla) }));
+  return (
+    <Shell>
+      <div className="mx-auto max-w-5xl space-y-6">
+        <Link to="/area-professor" className="inline-flex items-center gap-2 font-bold text-teal-700"><ArrowLeft className="h-4 w-4" />Área do Professor</Link>
+        <header className="rounded-3xl bg-teal-700 p-6 text-white">
+          <h1 className="text-3xl font-black">Atividades BNCC Adaptadas</h1>
+          <p className="mt-2">Educação Infantil · Pré II (EI03). Cada aula traz explicações, atividades da criança e o guia do professor.</p>
+        </header>
+        {campos.map((c) => (
+          <section key={c.sigla} className="space-y-3">
+            <h2 className="text-xl font-black">{c.nome}</h2>
+            {c.aulas.map((a, idx) => {
+              const chave = `${a.codigo}-${idx}-${c.sigla}`;
+              const open = aberta === chave;
+              return (
+                <div key={chave} className="rounded-2xl border-2 border-teal-200 bg-white">
+                  <button type="button" onClick={() => setAberta(open ? null : chave)} className="flex min-h-14 w-full items-center gap-3 p-4 text-left">
+                    {open ? <FolderOpen className="text-teal-700" /> : <Folder className="text-teal-700" />}
+                    <span className="flex-1"><span className="block text-xs font-black text-teal-700">{a.codigo}</span><span className="font-black">{a.titulo}</span> <span className="text-sm text-muted-foreground">· {a.folhas.length} folhas</span></span>
+                    <ChevronDown className={`transition-transform ${open ? "rotate-180" : ""}`} />
+                  </button>
+                  {open && (
+                    <div className="space-y-4 border-t p-4">
+                      <button type="button" onClick={() => imprimir(a.folhas, a.titulo)} className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-teal-700 px-4 font-bold text-white"><Printer className="h-4 w-4" />Imprimir aula inteira</button>
+                      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
+                        {a.folhas.map((u, i) => (
+                          <div key={u} className="rounded-xl border p-2">
+                            <img src={u} alt={`${a.titulo} — folha ${i + 1}`} loading="lazy" className="aspect-[210/297] w-full rounded object-contain" />
+                            <div className="mt-2 grid grid-cols-2 gap-1">
+                              <button type="button" onClick={() => imprimir([u], a.titulo)} className="inline-flex min-h-10 items-center justify-center rounded-lg border-2 border-teal-200 text-teal-700" aria-label="Imprimir folha"><Printer className="h-4 w-4" /></button>
+                              <a href={u} download={`${a.codigo}-folha-${i + 1}`} className="inline-flex min-h-10 items-center justify-center rounded-lg border-2 border-teal-200 text-teal-700" aria-label="Baixar folha"><Download className="h-4 w-4" /></a>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </section>
+        ))}
+      </div>
+    </Shell>
+  );
+}
