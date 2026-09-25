@@ -1,6 +1,6 @@
-import type { Livro } from "@/components/livro/tipos";
-import { catalogo } from "@/data/catalogo";
-import { historias } from "@/data/historias";
+import type { Livro } from "@/components/livro-brilha/tipos";
+import { catalogo } from "@/data/livro-brilha/catalogo";
+import { historias } from "@/data/livro-brilha/historias";
 
 const cenarioPorTema: Record<string, string[]> = {
   Amizade: ["parque", "bosque", "praca"], Emoções: ["quarto", "sala", "jardim"], Natureza: ["jardim", "horta", "bosque"],

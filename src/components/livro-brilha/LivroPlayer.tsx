@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useCallback, useEffect, useState } from "react";
 
-import { useNarracao } from "@/hooks/use-narracao";
+import { useNarracao } from "@/hooks/use-narracao-livro";
 import { InteractiveScene } from "./InteractiveScene";
 import { NarrationPlayer } from "./NarrationPlayer";
 import { ChoiceGame, FindGameLayer, FindGamePanel, MemoryGame, SequenceGame, SyllableGame, TheaterActivity } from "./jogos";
@@ -145,7 +145,7 @@ export function LivroPlayer({ livro }: { livro: Livro }) {
             </div>
             <div className="mt-6 flex flex-wrap justify-center gap-3">
               <button onClick={() => { setFinal(null); setRespostas({}); irPara(0); }} className="rounded-3xl bg-teal px-6 py-4 font-display text-xl font-bold text-cream active:animate-b-tap">Ler de novo</button>
-              <Link to="/" className="rounded-3xl bg-card px-6 py-4 font-display text-xl font-bold text-ink ring-2 ring-line">Outra história</Link>
+              <Link to="/historias-brilha" className="rounded-3xl bg-card px-6 py-4 font-display text-xl font-bold text-ink ring-2 ring-line">Outra história</Link>
             </div>
           </div>
         )}

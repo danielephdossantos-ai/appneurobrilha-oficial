@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { FeedbackPanel } from "./FeedbackPanel";
 import { imagem, tocarSom } from "./midia";
 import type { Jogo } from "./tipos";
-import type { OpcoesFala } from "@/hooks/use-narracao";
+import type { OpcoesFala } from "@/hooks/use-narracao-livro";
 
 type Falar = (t: string, op?: OpcoesFala) => void;
 export interface JogoProps<T extends Jogo["tipo"]> {

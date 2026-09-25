@@ -1,4 +1,4 @@
-import type { Livro } from "@/components/livro/tipos";
+import type { Livro } from "@/components/livro-brilha/tipos";
 
 /** MODELO OFICIAL — A Raposa que Aprendeu a Ouvir */
 export const raposaOuvirLivro: Livro = {

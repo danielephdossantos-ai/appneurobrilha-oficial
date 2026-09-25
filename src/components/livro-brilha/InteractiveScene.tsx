@@ -2,7 +2,7 @@ import { useState, type ReactNode } from "react";
 
 import { cenarios, imagem, tocarSom, vozes } from "./midia";
 import type { Ambiente, Ator, Expressao } from "./tipos";
-import type { OpcoesFala } from "@/hooks/use-narracao";
+import type { OpcoesFala } from "@/hooks/use-narracao-livro";
 
 type Falar = (t: string, op?: OpcoesFala) => void;
 
