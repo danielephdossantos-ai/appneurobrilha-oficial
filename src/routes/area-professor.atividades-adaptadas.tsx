@@ -3,6 +3,7 @@ import { useState } from "react";
 import { ArrowLeft, ChevronDown, Download, Folder, FolderOpen, Printer, Search } from "lucide-react";
 import { TeacherShell as Shell } from "@/components/teacher/TeacherShell";
 import aulas from "@/modules/professor/atividades-adaptadas.json";
+import aulas1ano from "@/modules/professor/atividades-adaptadas-1ano.json";
 
 export const Route = createFileRoute("/area-professor/atividades-adaptadas")({
   component: AtividadesAdaptadas,
@@ -43,6 +44,7 @@ function AtividadesAdaptadas() {
   const campos = Object.entries(CAMPOS)
     .map(([sigla, nome]) => ({ sigla, nome, aulas: aulas.filter((a) => a.codigo.slice(4, 6) === sigla && (!q || norm(`${a.codigo} ${a.titulo} ${nome}`).includes(q))) }))
     .filter((c) => c.aulas.length > 0);
+  const aulas1 = aulas1ano.filter((a) => !q || norm(`${a.codigo} ${a.titulo} ${a.busca}`).includes(q));
   return (
     <Shell>
       <div className="mx-auto max-w-5xl space-y-6">
@@ -101,7 +103,48 @@ function AtividadesAdaptadas() {
           </div>}
         </div>
         )}
-        <p className="text-sm text-muted-foreground">Pastas do 1º ao 9º ano aparecerão aqui quando as atividades forem enviadas.</p>
+        {aulas1.length > 0 && (
+        <div className="rounded-3xl border-2 border-teal-300 bg-teal-50">
+          <button type="button" onClick={() => setEtapaAberta(etapaAberta === "1ano" ? null : "1ano")} className="flex min-h-16 w-full items-center gap-3 p-5 text-left">
+            {etapaAberta === "1ano" || q ? <FolderOpen className="h-7 w-7 text-teal-700" /> : <Folder className="h-7 w-7 text-teal-700" />}
+            <span className="flex-1"><span className="block text-xl font-black">1º Ano</span><span className="text-sm text-muted-foreground">{aulas1.length} pastas · {aulas1.reduce((n, a) => n + a.folhas.length, 0)} folhas</span></span>
+            <ChevronDown className={`transition-transform ${etapaAberta === "1ano" || q ? "rotate-180" : ""}`} />
+          </button>
+          {(etapaAberta === "1ano" || !!q) && <div className="space-y-3 border-t-2 border-teal-200 p-4">
+            {aulas1.map((a, idx) => {
+              const chave = `1ano-${idx}`;
+              const open = aberta === chave || (!!q && aulas1.length <= 3);
+              return (
+                <div key={chave} className="rounded-2xl border-2 border-teal-200 bg-white">
+                  <button type="button" onClick={() => setAberta(open ? null : chave)} className="flex min-h-14 w-full items-center gap-3 p-4 text-left">
+                    {open ? <FolderOpen className="text-teal-700" /> : <Folder className="text-teal-700" />}
+                    <span className="flex-1">{a.codigo.startsWith("EF") && <span className="block text-xs font-black text-teal-700">{a.codigo}</span>}<span className="font-black">{a.titulo}</span> <span className="text-sm text-muted-foreground">· {a.folhas.length} folhas</span></span>
+                    <ChevronDown className={`transition-transform ${open ? "rotate-180" : ""}`} />
+                  </button>
+                  {open && (
+                    <div className="space-y-4 border-t p-4">
+                      <button type="button" onClick={() => imprimir(a.folhas, a.titulo)} className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-teal-700 px-4 font-bold text-white"><Printer className="h-4 w-4" />Imprimir pasta inteira</button>
+                      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
+                        {a.folhas.map((u, i) => (
+                          <div key={u} className="rounded-xl border p-2">
+                            <img src={u} alt={`${a.titulo} — folha ${i + 1}`} loading="lazy" className="aspect-[210/297] w-full rounded object-contain" />
+                            <div className="mt-2 grid grid-cols-2 gap-1">
+                              <button type="button" onClick={() => imprimir([u], a.titulo)} className="inline-flex min-h-10 items-center justify-center rounded-lg border-2 border-teal-200 text-teal-700" aria-label="Imprimir folha"><Printer className="h-4 w-4" /></button>
+                              <a href={u} download={`1ano-folha-${i + 1}`} className="inline-flex min-h-10 items-center justify-center rounded-lg border-2 border-teal-200 text-teal-700" aria-label="Baixar folha"><Download className="h-4 w-4" /></a>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>}
+        </div>
+        )}
+        {q && campos.length === 0 && aulas1.length === 0 && <p className="font-bold text-muted-foreground">Nenhuma atividade encontrada.</p>}
+        <p className="text-sm text-muted-foreground">Pastas do 2º ao 9º ano aparecerão aqui quando as atividades forem enviadas.</p>
       </div>
     </Shell>
   );
