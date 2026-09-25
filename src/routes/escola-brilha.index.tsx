@@ -1,3 +1,4 @@
+import { useIsAdmin } from "@/hooks/useIsAdmin";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
@@ -94,6 +95,7 @@ function EscolaBrilhaCatalogo() {
 
   const navigate = useNavigate();
   const { activeChild, session } = useAppState();
+  const adminReal = useIsAdmin();
   const [habilidades, setHabilidades] = useState<HabRow[]>([]);
   const [progresso, setProgresso] = useState<Record<string, boolean>>({});
   const [dominio, setDominio] = useState<Record<string, NivelDominio>>({});
@@ -239,7 +241,7 @@ function EscolaBrilhaCatalogo() {
           to="/escola-brilha/curso/$slug"
           params={{ slug: "portugues-aulas-extras" }}
           onClick={(e) => {
-            const isAdmin = session?.user?.user_metadata?.role === "admin" || (session?.user as any)?.role === "admin";
+            const isAdmin = adminReal || session?.user?.user_metadata?.role === "admin";
             if (!isAdmin) {
               e.preventDefault();
               toast.error("Acesso restrito");
@@ -330,7 +332,7 @@ function EscolaBrilhaCatalogo() {
               const isMyGrade = (childSerie === (serie as string)) || 
                                ((serie as string) === "Educação Infantil" && (childSerie.includes("Infantil") || childSerie.includes("Pré")));
               
-              const isAdmin = session?.user?.user_metadata?.role === "admin" || (session?.user as any)?.role === "admin";
+              const isAdmin = adminReal || session?.user?.user_metadata?.role === "admin";
               const locked = !isAdmin && !isMyGrade;
 
               return (
@@ -654,7 +656,7 @@ function EscolaBrilhaCatalogo() {
                             {discAtiva && (
                               <div className="border-t border-[#0d1f55]/10 p-2 space-y-2">
                                 {lista.map((h, idx) => {
-                                  const disponivel = escritasSet.has(h.codigo);
+                                  const disponivel = adminReal || escritasSet.has(h.codigo);
                                   const concluida = progresso[h.codigo];
                                   const Card = (
                                     <div
