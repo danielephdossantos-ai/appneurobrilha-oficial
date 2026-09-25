@@ -167,7 +167,14 @@ export function LivroPlayer({ livro }: { livro: Livro }) {
 
       {verFicha && <FichaTecnica livro={livro} />}
 
-      <div className="grid gap-4 lg:grid-cols-[1.45fr_1fr]">
+      <div className="grid gap-3 lg:grid-cols-[1.45fr_1fr] lg:gap-4">
+        <div className="flex min-w-0 flex-col gap-3">
+          <div className="rounded-3xl bg-card p-3 sm:p-4 ring-1 ring-line">
+            <p className="text-xs font-bold uppercase tracking-wide text-soft">{cena.titulo}</p>
+            <div className="mt-1">
+              <NarrationPlayer texto={cena.narracao} destaques={cena.destaques} charAtual={charAtual} onPalavra={palavraTocada} />
+            </div>
+          </div>
         <InteractiveScene
           key={indice}
           cenario={cena.cenario}
@@ -178,14 +185,9 @@ export function LivroPlayer({ livro }: { livro: Livro }) {
         >
           {jogo?.tipo === "encontre" && etapa !== "explorar" && <FindGameLayer jogo={jogo} achados={achados} onAchar={acharFlor} />}
         </InteractiveScene>
+        </div>
 
         <div className="flex flex-col gap-3">
-          <div className="rounded-3xl bg-card p-4 ring-1 ring-line">
-            <p className="text-xs font-bold uppercase tracking-wide text-soft">{cena.titulo}</p>
-            <div className="mt-1">
-              <NarrationPlayer texto={cena.narracao} destaques={cena.destaques} charAtual={charAtual} onPalavra={palavraTocada} />
-            </div>
-          </div>
 
           <div className="flex-1 rounded-3xl bg-card/80 p-4 ring-1 ring-line">
             {etapa === "explorar" && (
