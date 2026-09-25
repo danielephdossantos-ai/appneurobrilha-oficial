@@ -22,6 +22,8 @@ import { url as pipTrens } from "@/assets/pip-trens.png.asset.json";
 import { url as pipaConfeiteira } from "@/assets/pip-girl-confeiteira.png.asset.json";
 import { url as pipaFada } from "@/assets/pip-girl-fada.png.asset.json";
 import { url as pipEspaco } from "@/assets/pip-espaco.png.asset.json";
+import { url as pipaProfessoraTeen } from "@/assets/pipa-teen-princesa.png.asset.json";
+import { url as pipUrsinho } from "@/assets/pip-teen-ursinho.png.asset.json";
 import { resolveAccountDestination } from "@/lib/account-routing";
 
 export const Route = createFileRoute("/")({
@@ -178,6 +180,7 @@ const DESTINOS_KIDS: Destino[] = [
     gradient: "from-[#EC4899] via-[#A855F7] to-[#6366F1]",
     glow: "rgba(168,85,247,0.7)",
     emoji: "🔤",
+    characterImage: pipaProfessoraTeen,
     shine: "rgba(255,255,255,0.16)",
   },
   {
@@ -187,6 +190,7 @@ const DESTINOS_KIDS: Destino[] = [
     gradient: "from-[#FF6FA8] via-[#EC4899] to-[#C73774]",
     glow: "rgba(255,111,168,0.7)",
     emoji: "👨‍👩‍👧",
+    characterImage: pipUrsinho,
     shine: "rgba(255,255,255,0.12)",
   },
 ];
