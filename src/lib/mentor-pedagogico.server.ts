@@ -83,6 +83,7 @@ export function linkYoutube(pergunta: string) {
 
 /** Aplica as regras do mentor e as fontes públicas a uma conversa. */
 export async function prepararConversaMentor(messages: ChatMsg[]): Promise<ChatMsg[]> {
+  if (messages.some((m) => m.role === "system" && String(m.content).includes("Professor Mentor Pedagógico do NeuroBrilha"))) return messages;
   const ultima = [...messages].reverse().find((m) => m.role === "user");
   const pergunta = String(ultima?.content ?? "");
   const extras: string[] = [];

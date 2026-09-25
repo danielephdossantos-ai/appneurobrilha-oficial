@@ -15,7 +15,9 @@ export type GeminiOptions = {
   json?: boolean;
 };
 
-export async function callGemini(opts: GeminiOptions) {
+export async function callGemini(original: GeminiOptions) {
+  const { prepararConversaMentor } = await import("./mentor-pedagogico.server");
+  const opts: GeminiOptions = original.json ? original : { ...original, messages: (await prepararConversaMentor(original.messages as any)) as any };
   const key = process.env.GEMINI_API_KEY;
   if (!key) throw new Error("GEMINI_API_KEY is not configured in environment variables.");
 
