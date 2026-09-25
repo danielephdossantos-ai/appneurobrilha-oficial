@@ -57,7 +57,6 @@ function AtividadesAdaptadas() {
           <Search className="h-5 w-5 text-teal-700" />
           <input value={busca} onChange={(e) => setBusca(e.target.value)} placeholder="Pesquisar por código BNCC ou tema (ex.: EI03ET01, cores, emoções)" className="min-h-12 w-full bg-transparent outline-none" aria-label="Pesquisar atividades" />
         </label>
-        {q && campos.length === 0 && <p className="font-bold text-muted-foreground">Nenhuma atividade encontrada.</p>}
         {campos.length > 0 && (
         <div className="rounded-3xl border-2 border-teal-300 bg-teal-50">
           <button type="button" onClick={() => setEtapaAberta(etapaAberta === "ei" ? null : "ei")} className="flex min-h-16 w-full items-center gap-3 p-5 text-left">
