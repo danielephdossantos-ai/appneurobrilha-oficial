@@ -1,46 +1,160 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, Calculator, CheckCircle2, Lightbulb, RotateCcw } from "lucide-react";
-import { useMemo, useState } from "react";
-import { CONFIG_TABUADA, criarQuestaoTabuada, type NivelTabuada } from "@/lib/tabuada-brilha";
+import { ArrowLeft, Check, Lock, RotateCw } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useAppState } from "@/core/store";
+import { url as pipEspaco } from "@/assets/pip-espaco.png.asset.json";
+import { ESTRATEGIAS, JOGOS, ORDEM_TABUADAS, lerProgresso, salvarProgresso, tabuadaLiberada, type Jogo, type ProgressoTabuada } from "@/lib/tabuada-brilha";
+import { Baloes, BotaoOuvir, ExplicaAntes, Grupos, Memoria, PulaPula, Sequencia, falar } from "@/components/tabuada/TabuadaJogos";
 
-export const Route = createFileRoute("/tabuada-brilha")({ component: TabuadaBrilha });
+export const Route = createFileRoute("/tabuada-brilha")({
+  head: () => ({ meta: [
+    { title: "Tabuada Brilha — aprender multiplicação de verdade" },
+    { name: "description", content: "Tabuada ensinada passo a passo com grupos, figuras, estratégias e jogos adaptados." },
+    { property: "og:title", content: "Tabuada Brilha" },
+    { property: "og:description", content: "Entenda a multiplicação antes de decorar, com jogos adaptados." },
+  ] }),
+  component: TabuadaBrilha,
+});
+
+const NOMES_JOGO: Record<Jogo, { nome: string; explica: (n: number) => string }> = {
+  pula: { nome: "Pula-Pula", explica: (n) => `O sapinho pula na reta dos números. Cada pulo anda ${n} casas. Conte em voz alta junto com cada pulo.` },
+  sequencia: { nome: "Complete a Sequência", explica: (n) => `Os números estão contando de ${n} em ${n}. Um número sumiu. Descubra qual somando ${n} ao número de antes.` },
+  baloes: { nome: "Balões", explica: (n) => `Aparece uma conta da tabuada do ${n} com os grupos desenhados. Conte os grupos se precisar e toque no balão certo.` },
+  memoria: { nome: "Memória da Tabuada", explica: () => `Vire duas cartas. Se a conta combinar com o resultado, você ganha o par. Se não, elas viram de novo.` },
+};
+
+type Tela = { t: "mapa" } | { t: "entender" | "ver" | "estrategia" | "jogos"; n: number } | { t: "jogo"; n: number; jogo: Jogo; jogando: boolean; tempo?: boolean };
 
 function TabuadaBrilha() {
-  const [nivel, setNivel] = useState<NivelTabuada>("facil");
-  const [rodada, setRodada] = useState(0);
-  const [valor, setValor] = useState("");
-  const [resultado, setResultado] = useState<"certo" | "tente" | null>(null);
-  const [pontos, setPontos] = useState(0);
-  const questao = useMemo(() => criarQuestaoTabuada(nivel, rodada), [nivel, rodada]);
-  const grupos = Array.from({ length: questao.a }, (_, i) => i);
+  const { activeChild } = useAppState();
+  const childId = activeChild?.id;
+  const [prog, setProg] = useState<ProgressoTabuada>({ concluidas: [], jogos: {}, revisar: [] });
+  const [tela, setTela] = useState<Tela>({ t: "mapa" });
+  const [seed, setSeed] = useState(1);
+  useEffect(() => setProg(lerProgresso(childId)), [childId]);
+  const atualizar = (f: (p: ProgressoTabuada) => ProgressoTabuada) => setProg((p) => { const np = f(p); salvarProgresso(childId, np); return np; });
 
-  function conferir() {
-    const certo = Number(valor) === questao.resposta;
-    setResultado(certo ? "certo" : "tente");
-    if (certo) setPontos((p) => p + 1);
-  }
-  function proxima() { setRodada((r) => r + 1); setValor(""); setResultado(null); }
+  const concluirJogo = (n: number, jogo: Jogo) => {
+    atualizar((p) => {
+      const feitos = [...new Set([...(p.jogos[n] ?? []), jogo])];
+      const concluidas = feitos.length >= JOGOS.length && !p.concluidas.includes(n) ? [...p.concluidas, n] : p.concluidas;
+      return { ...p, jogos: { ...p.jogos, [n]: feitos }, concluidas };
+    });
+    setTela({ t: "jogos", n });
+  };
+  const erro = (k: string) => atualizar((p) => ({ ...p, revisar: [...new Set([k, ...p.revisar])].slice(0, 30) }));
+  const acerto = (k: string) => atualizar((p) => ({ ...p, revisar: p.revisar.filter((x) => x !== k) }));
 
-  return <main className="min-h-screen bg-gradient-to-br from-cyan-950 via-blue-900 to-violet-900 px-4 py-7 text-white">
-    <div className="mx-auto max-w-5xl">
-      <Link to="/" className="inline-flex items-center gap-2 font-bold text-white/80"><ArrowLeft/> Cidade NeuroBrilha</Link>
-      <header className="py-7 text-center"><Calculator className="mx-auto" size={56}/><h1 className="mt-2 text-4xl font-black md:text-6xl">Tabuada Brilha</h1><p className="mt-2 text-white/75">Entenda a multiplicação antes de decorar.</p></header>
-      <nav className="mx-auto mb-6 grid max-w-2xl grid-cols-3 gap-2">
-        {(Object.keys(CONFIG_TABUADA) as NivelTabuada[]).map((item) => <button key={item} onClick={() => { setNivel(item); setRodada(0); setResultado(null); setValor(""); }} className={`rounded-2xl p-3 font-black ${nivel === item ? "bg-amber-400 text-blue-950" : "bg-white/15"}`}>{CONFIG_TABUADA[item].nome}</button>)}
-      </nav>
-      <section className="mx-auto max-w-3xl rounded-[2rem] bg-white p-5 text-slate-900 shadow-2xl md:p-9">
-        <div className="flex items-center justify-between"><span className="rounded-full bg-blue-100 px-4 py-2 font-black text-blue-800">{CONFIG_TABUADA[nivel].nome}</span><span className="font-black text-amber-600">⭐ {pontos} acertos</span></div>
-        <div className="my-6 rounded-2xl bg-amber-50 p-4"><div className="flex gap-2 font-black text-amber-800"><Lightbulb/> Estratégia</div><p className="mt-1">{CONFIG_TABUADA[nivel].dica}</p></div>
-        <div aria-label={`${questao.a} grupos de ${questao.b}`} className="mb-6 flex flex-wrap justify-center gap-3">
-          {grupos.map((grupo) => <div key={grupo} className="flex min-h-12 min-w-12 flex-wrap items-center justify-center gap-1 rounded-xl border-2 border-blue-200 bg-blue-50 p-2">{Array.from({ length: Math.min(questao.b, 10) }, (_, i) => <i key={i} className="h-2.5 w-2.5 rounded-full bg-blue-600" />)}</div>)}
-        </div>
-        <h2 className="text-center text-5xl font-black">{questao.a} × {questao.b} = ?</h2>
-        <div className="mx-auto mt-6 flex max-w-sm gap-2"><input aria-label="Sua resposta" inputMode="numeric" value={valor} onChange={(e) => setValor(e.target.value.replace(/\D/g, ""))} className="w-full rounded-2xl border-2 border-blue-200 px-5 py-3 text-center text-2xl font-black"/><button onClick={conferir} className="rounded-2xl bg-blue-600 px-5 font-black text-white">Conferir</button></div>
-        {resultado && <div className={`mt-5 rounded-2xl p-4 ${resultado === "certo" ? "bg-emerald-100 text-emerald-800" : "bg-orange-100 text-orange-900"}`}>
-          <div className="flex items-center gap-2 text-lg font-black">{resultado === "certo" ? <CheckCircle2/> : <RotateCcw/>}{resultado === "certo" ? "Você entendeu!" : "Observe os grupos e tente outra vez."}</div>
-          <p className="mt-1">{questao.estrategia}</p>{resultado === "certo" && <button onClick={proxima} className="mt-3 rounded-xl bg-emerald-700 px-4 py-2 font-black text-white">Próxima conta</button>}
-        </div>}
+  return <main className="min-h-screen bg-gradient-to-br from-cyan-950 via-blue-900 to-violet-900 px-4 py-6 text-white">
+    <div className="mx-auto max-w-4xl">
+      <div className="flex items-center justify-between">
+        {tela.t === "mapa" ? <Link to="/" className="inline-flex min-h-11 items-center gap-2 font-bold text-white/80"><ArrowLeft /> Cidade NeuroBrilha</Link>
+          : <button onClick={() => setTela(tela.t === "jogo" ? { t: "jogos", n: tela.n } : { t: "mapa" })} className="inline-flex min-h-11 items-center gap-2 font-bold text-white/80"><ArrowLeft /> Voltar</button>}
+      </div>
+      <header className="flex items-center justify-center gap-4 py-4">
+        <img src={pipEspaco} alt="Pip astronauta" className="h-24 w-24 object-contain drop-shadow-xl" />
+        <div><h1 className="text-4xl font-black md:text-5xl">Tabuada Brilha</h1><p className="text-white/80">Primeiro entender, depois jogar.</p></div>
+      </header>
+
+      <section className="rounded-[2rem] bg-white p-5 text-slate-900 shadow-2xl md:p-8">
+        {tela.t === "mapa" && <Mapa prog={prog} onAbrir={(n) => { setTela({ t: "entender", n }); falar(`Vamos aprender a tabuada do ${n}.`); }} />}
+        {tela.t === "entender" && <Entender n={tela.n} onNext={() => setTela({ t: "ver", n: tela.n })} />}
+        {tela.t === "ver" && <Ver n={tela.n} onNext={() => setTela({ t: "estrategia", n: tela.n })} />}
+        {tela.t === "estrategia" && <EstrategiaTela n={tela.n} onNext={() => setTela({ t: "jogos", n: tela.n })} />}
+        {tela.t === "jogos" && <MenuJogos n={tela.n} feitos={prog.jogos[tela.n] ?? []} onJogo={(jogo, tempo) => { setSeed((s) => s + 1); setTela({ t: "jogo", n: tela.n, jogo, jogando: false, tempo }); }} onRever={() => setTela({ t: "entender", n: tela.n })} />}
+        {tela.t === "jogo" && (!tela.jogando
+          ? <ExplicaAntes titulo={NOMES_JOGO[tela.jogo].nome} texto={NOMES_JOGO[tela.jogo].explica(tela.n)} onJogar={() => setTela({ ...tela, jogando: true })} />
+          : (() => {
+            const p = { n: tela.n, seed, revisar: prog.revisar, onErro: erro, onAcerto: acerto, onFim: () => concluirJogo(tela.n, tela.jogo) };
+            if (tela.jogo === "pula") return <PulaPula {...p} />;
+            if (tela.jogo === "sequencia") return <Sequencia {...p} />;
+            if (tela.jogo === "memoria") return <Memoria {...p} />;
+            return <Baloes {...p} comTempo={tela.tempo} />;
+          })())}
       </section>
     </div>
   </main>;
+}
+
+function Etapa({ num, titulo }: { num: number; titulo: string }) {
+  return <div className="mb-4 flex items-center gap-3"><span className="grid h-10 w-10 place-items-center rounded-full bg-blue-600 text-lg font-black text-white">{num}</span><h2 className="text-2xl font-black">{titulo}</h2><span className="ml-auto text-sm font-bold text-slate-400">Etapa {num} de 4</span></div>;
+}
+const Proximo = ({ onClick, children = "Próximo" }: { onClick: () => void; children?: React.ReactNode }) =>
+  <div className="mt-6 text-center"><button onClick={onClick} className="min-h-12 rounded-2xl bg-emerald-600 px-8 text-lg font-black text-white">{children}</button></div>;
+
+function Mapa({ prog, onAbrir }: { prog: ProgressoTabuada; onAbrir: (n: number) => void }) {
+  return <div>
+    <h2 className="text-center text-2xl font-black">Escolha sua tabuada</h2>
+    <p className="mb-5 text-center text-slate-600">Começamos pelas mais fáceis. Quando terminar uma, a próxima abre.</p>
+    <div className="grid grid-cols-2 gap-3 sm:grid-cols-5">
+      {ORDEM_TABUADAS.map((n) => {
+        const livre = tabuadaLiberada(n, prog.concluidas), feita = prog.concluidas.includes(n);
+        return <button key={n} disabled={!livre} onClick={() => onAbrir(n)} className={`relative min-h-24 rounded-3xl text-center font-black ${feita ? "bg-emerald-500 text-white" : livre ? "bg-amber-400 text-blue-950 hover:scale-105" : "bg-slate-100 text-slate-400"}`}>
+          <span className="block text-sm">Tabuada do</span><span className="text-4xl">{n}</span>
+          {feita && <Check className="absolute right-2 top-2 h-5 w-5" />}{!livre && <Lock className="absolute right-2 top-2 h-5 w-5" />}
+        </button>;
+      })}
+    </div>
+  </div>;
+}
+
+function Entender({ n, onNext }: { n: number; onNext: () => void }) {
+  const b = 3;
+  const [rev, setRev] = useState(0);
+  const texto = `Multiplicar é juntar grupos iguais. ${n} vezes ${b} quer dizer ${n} grupo${n > 1 ? "s" : ""} com ${b} bolinhas cada. Toque nos grupos para aparecer e conte comigo.`;
+  useEffect(() => { falar(texto); }, [n]); // eslint-disable-line react-hooks/exhaustive-deps
+  const tocar = () => { if (rev < n) { const r = rev + 1; setRev(r); falar(`${r} grupo${r > 1 ? "s" : ""}: ${r * b}`); } };
+  return <div>
+    <Etapa num={1} titulo="Entender com grupos" />
+    <p className="text-xl leading-relaxed">{texto}</p>
+    <div className="mt-2"><BotaoOuvir texto={texto} /></div>
+    <button onClick={tocar} className="mt-5 w-full rounded-3xl bg-slate-50 p-5" aria-label="Mostrar mais um grupo"><Grupos a={n} b={b} revelados={rev} /></button>
+    <p className="mt-4 text-center text-3xl font-black">{rev} × {b} = {rev * b}</p>
+    {rev >= n && <><p className="mt-2 text-center text-lg">Juntando os {n} grupos de {b}, temos <b>{n * b}</b>. Então <b>{n} × {b} = {n * b}</b>.</p><Proximo onClick={onNext} /></>}
+  </div>;
+}
+
+function Ver({ n, onNext }: { n: number; onNext: () => void }) {
+  const b = Math.min(n + 2, 6);
+  const [virado, setVirado] = useState(false);
+  const [l, c] = virado ? [b, n] : [n, b];
+  const texto = `Aqui as bolinhas estão em linhas. ${l} linhas com ${c} bolinhas: ${l} vezes ${c} é ${n * b}. Agora gire a grade. ${c} linhas com ${l}: o resultado é o mesmo! Por isso, se você sabe ${n} vezes ${b}, também sabe ${b} vezes ${n}.`;
+  return <div>
+    <Etapa num={2} titulo="Ver na grade" />
+    <p className="text-xl leading-relaxed">{texto}</p>
+    <div className="mt-2"><BotaoOuvir texto={texto} /></div>
+    <div className="my-5 flex flex-col items-center gap-2">
+      {Array.from({ length: l }, (_, i) => <div key={i} className="flex gap-2">{Array.from({ length: c }, (_, j) => <i key={j} className="h-7 w-7 rounded-full bg-violet-500" />)}</div>)}
+    </div>
+    <p className="text-center text-3xl font-black">{l} × {c} = {n * b}</p>
+    <div className="mt-4 text-center"><button onClick={() => setVirado(!virado)} className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-violet-100 px-5 font-black text-violet-800"><RotateCw className="h-5 w-5" />Girar a grade</button></div>
+    <Proximo onClick={onNext} />
+  </div>;
+}
+
+function EstrategiaTela({ n, onNext }: { n: number; onNext: () => void }) {
+  const e = ESTRATEGIAS[n];
+  const texto = `${e.titulo}. ${e.explicacao} ${e.passos.join(" ")}`;
+  useEffect(() => { falar(texto); }, [n]); // eslint-disable-line react-hooks/exhaustive-deps
+  return <div>
+    <Etapa num={3} titulo={`Truque da tabuada do ${n}: ${e.titulo}`} />
+    <p className="text-xl leading-relaxed">{e.explicacao}</p>
+    <ol className="mt-4 space-y-3">{e.passos.map((p, i) => <li key={i} className="flex items-center gap-3 rounded-2xl bg-amber-50 p-4 text-xl"><span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-amber-400 font-black">{i + 1}</span>{p}</li>)}</ol>
+    <div className="mt-3"><BotaoOuvir texto={texto} /></div>
+    <Proximo onClick={onNext}>Agora vamos jogar!</Proximo>
+  </div>;
+}
+
+function MenuJogos({ n, feitos, onJogo, onRever }: { n: number; feitos: string[]; onJogo: (j: Jogo, tempo?: boolean) => void; onRever: () => void }) {
+  return <div>
+    <Etapa num={4} titulo={`Jogos da tabuada do ${n}`} />
+    <p className="mb-4 text-lg text-slate-600">Jogue os 4 jogos para completar esta tabuada. Cada jogo explica antes como jogar.</p>
+    <div className="grid gap-3 sm:grid-cols-2">
+      {JOGOS.map((j) => <button key={j} onClick={() => onJogo(j)} className={`flex min-h-20 items-center justify-between rounded-3xl p-5 text-left text-xl font-black ${feitos.includes(j) ? "bg-emerald-100 text-emerald-900" : "bg-blue-50 text-blue-900 hover:bg-blue-100"}`}>{NOMES_JOGO[j].nome}{feitos.includes(j) && <Check />}</button>)}
+    </div>
+    <div className="mt-4 flex flex-wrap gap-3">
+      <button onClick={() => onJogo("baloes", true)} className="min-h-11 rounded-xl border-2 border-slate-200 px-4 font-bold">Desafio relâmpago (mostra o tempo, opcional)</button>
+      <button onClick={onRever} className="min-h-11 rounded-xl border-2 border-slate-200 px-4 font-bold">Rever a explicação</button>
+    </div>
+  </div>;
 }
