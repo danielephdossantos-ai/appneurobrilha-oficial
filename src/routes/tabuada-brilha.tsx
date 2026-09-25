@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useAppState } from "@/core/store";
 import { url as pipEspaco } from "@/assets/pip-espaco.png.asset.json";
 import { ESTRATEGIAS, JOGOS, ORDEM_TABUADAS, lerProgresso, salvarProgresso, tabuadaLiberada, type Jogo, type ProgressoTabuada } from "@/lib/tabuada-brilha";
+import { LousaTabuada } from "@/components/tabuada/LousaTabuada";
 import { Baloes, BotaoOuvir, ExplicaAntes, Grupos, Memoria, PulaPula, Sequencia, falar } from "@/components/tabuada/TabuadaJogos";
 
 export const Route = createFileRoute("/tabuada-brilha")({
@@ -135,12 +136,14 @@ function Ver({ n, onNext }: { n: number; onNext: () => void }) {
 function EstrategiaTela({ n, onNext }: { n: number; onNext: () => void }) {
   const e = ESTRATEGIAS[n];
   const texto = `${e.titulo}. ${e.explicacao} ${e.passos.join(" ")}`;
-  useEffect(() => { falar(texto); }, [n]); // eslint-disable-line react-hooks/exhaustive-deps
   return <div>
     <Etapa num={3} titulo={`Truque da tabuada do ${n}: ${e.titulo}`} />
     <p className="text-xl leading-relaxed">{e.explicacao}</p>
     <ol className="mt-4 space-y-3">{e.passos.map((p, i) => <li key={i} className="flex items-center gap-3 rounded-2xl bg-amber-50 p-4 text-xl"><span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-amber-400 font-black">{i + 1}</span>{p}</li>)}</ol>
     <div className="mt-3"><BotaoOuvir texto={texto} /></div>
+    <h3 className="mt-6 mb-2 text-xl font-black">Lousa do Pip — veja outras formas de pensar</h3>
+    <p className="mb-3 text-slate-600">Toque em "Explicar de outro jeito" quantas vezes quiser. Sempre aparece uma nova explicação.</p>
+    <LousaTabuada n={n} />
     <Proximo onClick={onNext}>Agora vamos jogar!</Proximo>
   </div>;
 }

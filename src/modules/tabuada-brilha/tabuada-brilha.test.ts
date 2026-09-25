@@ -25,3 +25,24 @@ describe("Tabuada Brilha", () => {
     expect(tabuadaLiberada(10, [1])).toBe(true);
   });
 });
+
+import { metodosPara, paraFala, explicacao } from "@/lib/tabuada-lousa";
+describe("Lousa da tabuada", () => {
+  it("todo método termina com o resultado certo e toda conta escrita está correta", () => {
+    for (let a = 1; a <= 10; a++) for (let b = 1; b <= 10; b++) for (const m of metodosPara(a, b)) {
+      expect(m.passos.at(-1)!.linha).toContain(String(a * b));
+      for (const ps of m.passos) {
+        const x = ps.linha.match(/^(\d+) × (\d+) = (\d+)$/); if (x) expect(+x[1] * +x[2]).toBe(+x[3]);
+        const y = ps.linha.match(/^(\d+) ([+−]) (\d+) = (\d+)$/); if (y) expect(y[2] === "+" ? +y[1] + +y[3] : +y[1] - +y[3]).toBe(+y[4]);
+      }
+    }
+  });
+  it("lê a matemática corretamente", () => {
+    expect(paraFala("7 × 8 = 56")).toBe("7 vezes 8 é igual a 56");
+    expect(paraFala("90 − 9 = 81")).toBe("90 menos 9 é igual a 81");
+  });
+  it("gera explicações sem fim", () => {
+    const vistos = new Set(Array.from({ length: 40 }, (_, i) => { const e = explicacao(7, i); return `${e.b}-${e.metodo.id}`; }));
+    expect(vistos.size).toBeGreaterThan(10);
+  });
+});

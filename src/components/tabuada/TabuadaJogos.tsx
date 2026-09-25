@@ -1,9 +1,11 @@
 import { useMemo, useState } from "react";
 import { CheckCircle2, Lightbulb, Volume2 } from "lucide-react";
 import { speakChunked } from "@/lib/native-tts";
+import { paraFala } from "@/lib/tabuada-lousa";
+import { LousaTabuada } from "./LousaTabuada";
 import { criarRodada, explicarErro, opcoesPara, type Questao } from "@/lib/tabuada-brilha";
 
-export const falar = (t: string) => { void speakChunked(t, { rate: 0.9 }); };
+export const falar = (t: string) => { void speakChunked(paraFala(t), { rate: 0.9 }); };
 
 export function BotaoOuvir({ texto }: { texto: string }) {
   return <button onClick={() => falar(texto)} className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-blue-100 px-4 font-black text-blue-800"><Volume2 className="h-5 w-5" />Ouvir</button>;
@@ -30,11 +32,13 @@ export function Grupos({ a, b, revelados = a }: { a: number; b: number; revelado
 /** Feedback que ensina: nunca "errado", sempre mostra o raciocínio com os grupos. */
 function Ajuda({ a, b, onOk }: { a: number; b: number; onOk: () => void }) {
   const t = `Vamos ver juntos. ${explicarErro(a, b)}`;
+  const [lousa, setLousa] = useState(false);
+  if (lousa) return <div className="mt-5"><LousaTabuada n={a} b={b} /><div className="mt-3 text-center"><button onClick={onOk} className="min-h-11 rounded-xl bg-orange-600 px-5 font-black text-white">Entendi, tentar de novo</button></div></div>;
   return <div className="mt-5 rounded-2xl bg-orange-50 p-4 text-center">
     <p className="text-lg font-black text-orange-900">Quase! Vamos ver juntos.</p>
     <div className="my-3"><Grupos a={a} b={b} /></div>
     <p className="text-lg">{explicarErro(a, b)}</p>
-    <div className="mt-3 flex justify-center gap-2"><BotaoOuvir texto={t} /><button onClick={onOk} className="min-h-11 rounded-xl bg-orange-600 px-5 font-black text-white">Tentar de novo</button></div>
+    <div className="mt-3 flex justify-center gap-2"><BotaoOuvir texto={t} /><button onClick={() => setLousa(true)} className="min-h-11 rounded-xl bg-emerald-800 px-5 font-black text-white">Explicar na lousa</button><button onClick={onOk} className="min-h-11 rounded-xl bg-orange-600 px-5 font-black text-white">Tentar de novo</button></div>
   </div>;
 }
 
