@@ -4,6 +4,7 @@ import { ArrowLeft, ChevronDown, Download, Folder, FolderOpen, Printer, Search }
 import { TeacherShell as Shell } from "@/components/teacher/TeacherShell";
 import aulas from "@/modules/professor/atividades-adaptadas.json";
 import aulas1ano from "@/modules/professor/atividades-adaptadas-1ano.json";
+import aulas2ano from "@/modules/professor/atividades-adaptadas-2ano.json";
 
 export const Route = createFileRoute("/area-professor/atividades-adaptadas")({
   component: AtividadesAdaptadas,
@@ -44,7 +45,11 @@ function AtividadesAdaptadas() {
   const campos = Object.entries(CAMPOS)
     .map(([sigla, nome]) => ({ sigla, nome, aulas: aulas.filter((a) => a.codigo.slice(4, 6) === sigla && (!q || norm(`${a.codigo} ${a.titulo} ${nome}`).includes(q))) }))
     .filter((c) => c.aulas.length > 0);
-  const aulas1 = aulas1ano.filter((a) => !q || norm(`${a.codigo} ${a.titulo} ${a.busca}`).includes(q));
+  const filtrar = (l: typeof aulas1ano) => l.filter((a) => !q || norm(`${a.codigo} ${a.titulo} ${a.busca}`).includes(q));
+  const anos = [
+    { id: "1ano", nome: "1º Ano", lista: filtrar(aulas1ano) },
+    { id: "2ano", nome: "2º Ano · Língua Portuguesa", lista: filtrar(aulas2ano) },
+  ];
   return (
     <Shell>
       <div className="mx-auto max-w-5xl space-y-6">
@@ -102,22 +107,22 @@ function AtividadesAdaptadas() {
           </div>}
         </div>
         )}
-        {aulas1.length > 0 && (
-        <div className="rounded-3xl border-2 border-teal-300 bg-teal-50">
-          <button type="button" onClick={() => setEtapaAberta(etapaAberta === "1ano" ? null : "1ano")} className="flex min-h-16 w-full items-center gap-3 p-5 text-left">
-            {etapaAberta === "1ano" || q ? <FolderOpen className="h-7 w-7 text-teal-700" /> : <Folder className="h-7 w-7 text-teal-700" />}
-            <span className="flex-1"><span className="block text-xl font-black">1º Ano</span><span className="text-sm text-muted-foreground">{aulas1.length} pastas · {aulas1.reduce((n, a) => n + a.folhas.length, 0)} folhas</span></span>
-            <ChevronDown className={`transition-transform ${etapaAberta === "1ano" || q ? "rotate-180" : ""}`} />
+        {anos.map(({ id, nome, lista }) => lista.length > 0 && (
+        <div key={id} className="rounded-3xl border-2 border-teal-300 bg-teal-50">
+          <button type="button" onClick={() => setEtapaAberta(etapaAberta === id ? null : id)} className="flex min-h-16 w-full items-center gap-3 p-5 text-left">
+            {etapaAberta === id || q ? <FolderOpen className="h-7 w-7 text-teal-700" /> : <Folder className="h-7 w-7 text-teal-700" />}
+            <span className="flex-1"><span className="block text-xl font-black">{nome}</span><span className="text-sm text-muted-foreground">{lista.length} pastas · {lista.reduce((n, a) => n + a.folhas.length, 0)} folhas</span></span>
+            <ChevronDown className={`transition-transform ${etapaAberta === id || q ? "rotate-180" : ""}`} />
           </button>
-          {(etapaAberta === "1ano" || !!q) && <div className="space-y-3 border-t-2 border-teal-200 p-4">
-            {aulas1.map((a, idx) => {
-              const chave = `1ano-${idx}`;
-              const open = aberta === chave || (!!q && aulas1.length <= 3);
+          {(etapaAberta === id || !!q) && <div className="space-y-3 border-t-2 border-teal-200 p-4">
+            {lista.map((a, idx) => {
+              const chave = `${id}-${idx}`;
+              const open = aberta === chave || (!!q && lista.length <= 3);
               return (
                 <div key={chave} className="rounded-2xl border-2 border-teal-200 bg-white">
                   <button type="button" onClick={() => setAberta(open ? null : chave)} className="flex min-h-14 w-full items-center gap-3 p-4 text-left">
                     {open ? <FolderOpen className="text-teal-700" /> : <Folder className="text-teal-700" />}
-                    <span className="flex-1">{a.codigo.startsWith("EF") && <span className="block text-xs font-black text-teal-700">{a.codigo}</span>}<span className="font-black">{a.titulo}</span> <span className="text-sm text-muted-foreground">· {a.folhas.length} folhas</span></span>
+                    <span className="flex-1">{/^EF\d\d[A-Z]{2}\d\d$/.test(a.codigo) && <span className="block text-xs font-black text-teal-700">{a.codigo}</span>}<span className="font-black">{a.titulo}</span> <span className="text-sm text-muted-foreground">· {a.folhas.length} folhas</span></span>
                     <ChevronDown className={`transition-transform ${open ? "rotate-180" : ""}`} />
                   </button>
                   {open && (
@@ -129,7 +134,7 @@ function AtividadesAdaptadas() {
                             <img src={u} alt={`${a.titulo} — folha ${i + 1}`} loading="lazy" className="aspect-[210/297] w-full rounded object-contain" />
                             <div className="mt-2 grid grid-cols-2 gap-1">
                               <button type="button" onClick={() => imprimir([u], a.titulo)} className="inline-flex min-h-10 items-center justify-center rounded-lg border-2 border-teal-200 text-teal-700" aria-label="Imprimir folha"><Printer className="h-4 w-4" /></button>
-                              <a href={u} download={`1ano-folha-${i + 1}`} className="inline-flex min-h-10 items-center justify-center rounded-lg border-2 border-teal-200 text-teal-700" aria-label="Baixar folha"><Download className="h-4 w-4" /></a>
+                              <a href={u} download={`${id}-folha-${i + 1}`} className="inline-flex min-h-10 items-center justify-center rounded-lg border-2 border-teal-200 text-teal-700" aria-label="Baixar folha"><Download className="h-4 w-4" /></a>
                             </div>
                           </div>
                         ))}
@@ -141,9 +146,9 @@ function AtividadesAdaptadas() {
             })}
           </div>}
         </div>
-        )}
-        {q && campos.length === 0 && aulas1.length === 0 && <p className="font-bold text-muted-foreground">Nenhuma atividade encontrada.</p>}
-        <p className="text-sm text-muted-foreground">Pastas do 2º ao 9º ano aparecerão aqui quando as atividades forem enviadas.</p>
+        ))}
+        {q && campos.length === 0 && anos.every((x) => x.lista.length === 0) && <p className="font-bold text-muted-foreground">Nenhuma atividade encontrada.</p>}
+        <p className="text-sm text-muted-foreground">Pastas do 3º ao 9º ano aparecerão aqui quando as atividades forem enviadas.</p>
       </div>
     </Shell>
   );
