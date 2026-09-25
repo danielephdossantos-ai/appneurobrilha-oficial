@@ -4,6 +4,7 @@ import { ArrowLeft, BookOpen, ChevronDown, Download, Folder, FolderOpen, Printer
 import { DICAS_GERAIS, guiaDoJogo } from "@/modules/professor/jogos-imprimir/guia-jogos";
 import { TeacherShell as Shell } from "@/components/teacher/TeacherShell";
 import profissoes from "@/assets/atividades-imprimir/jogo-50-profissoes.jpg.asset.json";
+import jogosPedagogicos from "@/modules/professor/jogos-pedagogicos.json";
 
 export const Route = createFileRoute("/area-professor/atividades-imprimir")({
   component: AtividadesImprimir,
@@ -24,6 +25,7 @@ type Atividade = { id: number; nome: string; categoria: string; url: string };
 // Adicione novas atividades aqui conforme as imagens forem enviadas.
 const ATIVIDADES: Atividade[] = [
   { id: 50, nome: "Profissões - Quem faz o quê?", categoria: "Social", url: profissoes.url },
+  ...(jogosPedagogicos as Atividade[]),
 ];
 
 function imprimir(url: string, nome: string) {
