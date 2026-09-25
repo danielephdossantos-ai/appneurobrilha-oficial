@@ -11,14 +11,8 @@ export function TeacherShell({ children }: { children: ReactNode }) {
     await supabase.auth.signOut();
     navigate({ to: "/auth", replace: true });
   };
-  const irParaCrianca = async () => {
-    try {
-      await saveAccountType("family");
-      navigate({ to: "/", replace: true });
-    } catch {
-      toast.error("Não foi possível abrir a área da criança. Tente de novo.");
-    }
-  };
+  // Mantém o login como professor: o botão "Área do Professor" aparece na área da criança.
+  const irParaCrianca = () => navigate({ to: "/" });
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-indigo-50/40 to-violet-50">

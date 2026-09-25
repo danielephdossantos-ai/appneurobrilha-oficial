@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { TeacherAccessBridge } from "@/components/teacher/TeacherAccessBridge";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { stopSpeaking } from "@/lib/native-tts";
 import {
@@ -166,6 +167,7 @@ function RootComponent() {
                 <Outlet />
                 {!isProfessionalArea && <LGPDConsent />}
                 <ConnectivityStatus />
+                <TeacherAccessBridge />
                 {!isProfessionalArea && <MascotGlobalContainer />}
                 {!isProfessionalArea && <ParentPinGate />}
                 {!isProfessionalArea && <ProfessorBrilhoMount />}
