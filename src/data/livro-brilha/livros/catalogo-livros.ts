@@ -183,9 +183,9 @@ function comElenco(livro: Livro, n: number): Livro {
     cenas: livro.cenas.map((c, i) => c.atores.length ? c : {
       ...c,
       atores: [
-        { img: guia.img, nome: guia.nome, expressao: humor(i, c.narracao), x: 26, y: 92, tamanho: 26, vida: "respirar" as const, voz: "narrador" as const,
+        { img: guia.img, nome: guia.nome, expressao: humor(i, c.narracao), x: 26, y: 94, tamanho: 34, vida: "respirar" as const, voz: "narrador" as const,
           falas: [`Oi! Eu sou ${guia.nome}.`, c.ensinar?.[0] ?? "Vamos ouvir a história juntos?"] },
-        ...(i % 2 === 0 ? [{ img: amigo.img, nome: amigo.nome, x: 74, y: amigo.vida ? 55 : 92, tamanho: 18, vida: amigo.vida ?? ("balancar" as const), voz: "objeto" as const,
+        ...(i % 2 === 0 ? [{ img: amigo.img, nome: amigo.nome, x: 74, y: amigo.vida ? 55 : 94, tamanho: 25, vida: amigo.vida ?? ("balancar" as const), voz: "objeto" as const,
           falas: [`Oi! Eu me chamo ${amigo.nome}.`, "Observe o cenário com calma."] }] : []),
       ],
     }),
