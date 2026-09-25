@@ -666,7 +666,6 @@
     radial-gradient(circle at 50% 100%, rgb(255 107 91 / 0.14), transparent 40%);
 }
 
-@layer base {
 /* ===== Livro interativo: microanimações ===== */
 @keyframes nb-respirar { 0%,100% { transform: scale(1,1); } 50% { transform: scale(1.015,1.035); } }
 @keyframes nb-pular { 0%,100% { transform: translateY(0); } 35% { transform: translateY(-18%) rotate(-4deg); } 60% { transform: translateY(0) scale(1.06,.94); } }
