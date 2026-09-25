@@ -5,6 +5,7 @@ import { TeacherShell as Shell } from "@/components/teacher/TeacherShell";
 import aulas from "@/modules/professor/atividades-adaptadas.json";
 import aulas1ano from "@/modules/professor/atividades-adaptadas-1ano.json";
 import aulas2ano from "@/modules/professor/atividades-adaptadas-2ano.json";
+import aulas2anoMat from "@/modules/professor/atividades-adaptadas-2ano-mat.json";
 
 export const Route = createFileRoute("/area-professor/atividades-adaptadas")({
   component: AtividadesAdaptadas,
@@ -49,6 +50,7 @@ function AtividadesAdaptadas() {
   const anos = [
     { id: "1ano", nome: "1º Ano", lista: filtrar(aulas1ano) },
     { id: "2ano", nome: "2º Ano · Língua Portuguesa", lista: filtrar(aulas2ano) },
+    { id: "2ano-mat", nome: "2º Ano · Matemática", lista: filtrar(aulas2anoMat as typeof aulas1ano) },
   ];
   return (
     <Shell>
