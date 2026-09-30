@@ -17,6 +17,7 @@ import { url as pipaPrincesa } from "@/assets/pip-girl-princesas.png.asset.json"
 import { url as pipaUnicornio } from "@/assets/pip-girl-unicornio.png.asset.json";
 import { url as pipaSuperHeroina } from "@/assets/pip-girl-super-heroina.png.asset.json";
 import { useAppState } from "@/core/store";
+import { IMAGEM_POR_FANTASIA } from "@/lib/guarda-roupa";
 
 import { url as pipMascot } from "@/assets/pip-mascot.png.asset.json";
 import { url as pipEgg } from "@/assets/pip-egg.png.asset.json";
@@ -85,6 +86,7 @@ const LiveMascot = ({
     : { ovo: pipEgg, nascendo: pipHatching, bebe: pipBaby, crianca: pipMascot };
   const equipped = profile?.equipped_skin ?? (isPipa ? "pipa-original" : "original");
   const equippedImages: Record<string,string> = {
+    ...IMAGEM_POR_FANTASIA,
     ...PIP_SKINS,
     original: pipMascot,
     "pipa-original": pipaMascot,
