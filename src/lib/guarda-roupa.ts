@@ -17,7 +17,7 @@ import { url as pipCarros } from "@/assets/pip-carros.png.asset.json";
 import { url as pipTrens } from "@/assets/pip-trens.png.asset.json";
 import { url as pipRobos } from "@/assets/pip-robos.png.asset.json";
 import { url as pipVeiculos } from "@/assets/pip-veiculos.png.asset.json";
-import { url as pipTeenBola } from "@/assets/pip-teen-bola.png.asset.json";
+import { url as pipTeenBola } from "@/assets/pip-teen-bola-v2.png.asset.json";
 import { url as pipTeenCarrinho } from "@/assets/pip-teen-carrinho.png.asset.json";
 import { url as pipTeenCyber } from "@/assets/pip-teen-cyber.png.asset.json";
 import { url as pipTeenPrincipe } from "@/assets/pip-teen-principe.png.asset.json";
