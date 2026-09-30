@@ -15,6 +15,27 @@ import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 
 type MascotChoice = "pip" | "pipa";
 
+// Casca dividida em 3 colunas x 4 linhas; ordem de cima para baixo, intercalada.
+const PECA_INTERVALO = 0.45;
+const PECAS = (() => {
+  const cols = 3, rows = 4;
+  const ordem = [1, 0, 2, 4, 3, 5, 7, 6, 8, 10, 9, 11];
+  return ordem.map((idx) => {
+    const c = idx % cols, r = Math.floor(idx / cols);
+    const top = (r * 100) / rows, left = (c * 100) / cols;
+    const bottom = 100 - top - 100 / rows, right = 100 - left - 100 / cols;
+    const dir = c === 0 ? -1 : c === 2 ? 1 : (r % 2 ? 1 : -1);
+    return {
+      clip: `inset(${top}% ${right}% ${bottom}% ${left}%)`,
+      x: dir * (80 + r * 15),
+      y: 120 + r * 30,
+      r: dir * 45,
+      cx: `${left + 100 / cols / 2 - 4}%`,
+      cy: `${top + 100 / rows / 2 - 4}%`,
+    };
+  });
+})();
+
 interface Props {
   childId: string;
   childName: string;
@@ -55,8 +76,7 @@ export function EggHatchCinematic({ childId, childName, onClose }: Props) {
       return () => clearTimeout(t);
     }
     if (phase === "crack") {
-      // Topo abre (1.6s) + 3 pedaços de baixo caem (3 x 0.7s) + margem
-      const t = setTimeout(() => setPhase("open"), 4200);
+      const t = setTimeout(() => setPhase("open"), 1400 + PECAS.length * PECA_INTERVALO * 1000 + 600);
       return () => clearTimeout(t);
     }
 
@@ -145,9 +165,8 @@ export function EggHatchCinematic({ childId, childName, onClose }: Props) {
   // Play small pops when shell cracks and when the hatch opens
   useEffect(() => {
     if (phase === "crack") {
-      playPopSound();
-      const t = setTimeout(() => playPopSound(), 220);
-      return () => clearTimeout(t);
+      const ts = PECAS.map((_, i) => setTimeout(() => playPopSound(), 450 + i * PECA_INTERVALO * 1000));
+      return () => ts.forEach(clearTimeout);
     }
     if (phase === "open") {
       const t = setTimeout(() => playPopSound(), 120);
@@ -401,44 +420,42 @@ export function EggHatchCinematic({ childId, childName, onClose }: Props) {
                   transition={{ duration: 4, times: [0, 0.25, 0.5, 1], ease: "easeOut" }}
                 />
 
-                {/* Topo da casca: abre como tampinha (sobe e tomba) */}
-                <motion.img
-                  src={eggImg}
-                  alt=""
-                  aria-hidden
-                  className="absolute inset-0 w-full h-full object-contain drop-shadow-lg"
-                  style={{ clipPath: "inset(0 0 55% 0)", WebkitClipPath: "inset(0 0 55% 0)", transformOrigin: "50% 45%" }}
-                  initial={{ y: 0, rotate: 0, opacity: 1 }}
-                  animate={{ y: [0, -40, -120], rotate: [0, -18, -55], opacity: [1, 1, 0] }}
-                  transition={{ duration: 1.6, times: [0, 0.5, 1], ease: "easeOut" }}
-                />
-
-                {/* 3 pedaços da parte de baixo caem depois que o topo abriu */}
-                {[
-                  { clip: "inset(45% 66% 0 0)", x: -90, y: 100, r: -30, delay: 1.8 },
-                  { clip: "inset(45% 33% 0 33%)", x: 0, y: 130, r: 8, delay: 2.5 },
-                  { clip: "inset(45% 0 0 66%)", x: 90, y: 100, r: 30, delay: 3.2 },
-                ].map((p, i) => (
+                {/* Casca vira quebra-cabeça: cada peça solta uma por uma */}
+                {PECAS.map((p, i) => (
                   <motion.img
                     key={i}
                     src={eggImg}
                     alt=""
                     aria-hidden
-                    className="absolute inset-0 w-full h-full object-contain drop-shadow-lg"
-                    style={{ clipPath: p.clip, WebkitClipPath: p.clip }}
-                    initial={{ x: 0, y: 0, rotate: 0, opacity: 1 }}
+                    className="absolute inset-0 w-full h-full object-contain"
+                    style={{ clipPath: p.clip, WebkitClipPath: p.clip, filter: "drop-shadow(0 0 1.5px rgba(255,255,255,0.95))" }}
+                    initial={{ x: 0, y: 0, rotate: 0, scale: 1, opacity: 1 }}
                     animate={{
-                      x: [0, 0, p.x],
-                      y: [0, -4, p.y],
-                      rotate: [0, 0, p.r],
-                      opacity: [1, 1, 0],
+                      x: [0, 0, 0, p.x],
+                      y: [0, -6, -14, p.y],
+                      rotate: [0, -6, 6, p.r],
+                      scale: [1, 1.08, 1.12, 0.6],
+                      opacity: [1, 1, 1, 0],
                     }}
-                    transition={{ duration: 0.9, delay: p.delay, times: [0, 0.25, 1], ease: "easeIn" }}
+                    transition={{ duration: 1, delay: 0.4 + i * PECA_INTERVALO, times: [0, 0.2, 0.35, 1], ease: "easeIn" }}
                   />
+                ))}
+                {PECAS.map((p, i) => (
+                  <motion.span
+                    key={`b${i}`}
+                    aria-hidden
+                    className="absolute text-2xl pointer-events-none"
+                    style={{ left: p.cx, top: p.cy }}
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={{ opacity: [0, 1, 0], scale: [0, 1.4, 0.4] }}
+                    transition={{ duration: 0.6, delay: 0.55 + i * PECA_INTERVALO }}
+                  >
+                    ✨
+                  </motion.span>
                 ))}
               </div>
               <p className="text-white/80 text-lg">
-                Primeiro a tampinha... depois cada pedacinho da casca!
+                Cada pecinha do quebra-cabeça vai se soltando... uma por uma!
               </p>
 
             </motion.div>
