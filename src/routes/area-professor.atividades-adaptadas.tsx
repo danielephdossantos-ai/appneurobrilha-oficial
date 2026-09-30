@@ -44,7 +44,8 @@ function AtividadesAdaptadas() {
   const norm = (t: string) => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
   const q = norm(busca.trim());
   const campos = Object.entries(CAMPOS)
-    .map(([sigla, nome]) => ({ sigla, nome, aulas: aulas.filter((a) => a.codigo.slice(4, 6) === sigla && (!q || norm(`${a.codigo} ${a.titulo} ${nome}`).includes(q))) }))
+    // Educação Infantil removida a pedido (novas atividades virão separadas por pastas).
+    .map(([sigla, nome]) => ({ sigla, nome, aulas: ([] as typeof aulas).filter((a) => a.codigo.slice(4, 6) === sigla && (!q || norm(`${a.codigo} ${a.titulo} ${nome}`).includes(q))) }))
     .filter((c) => c.aulas.length > 0);
   const filtrar = (l: typeof aulas1ano) => l.filter((a) => !q || norm(`${a.codigo} ${a.titulo} ${a.busca}`).includes(q));
   const anos = [
