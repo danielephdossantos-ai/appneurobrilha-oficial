@@ -4,372 +4,156 @@ import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
 import { Shell } from "@/components/Layout";
-import { KidCard } from "@/components/ui/KidCard";
-import { Sparkles, Lock, Check } from "lucide-react";
-import { PIP_SKINS } from "@/components/ui/KidLiveMascot";
-import { url as pipMascot } from "@/assets/pip-mascot.png.asset.json";
-import { url as pipaMascot } from "@/assets/pip-girl-mascot.png.asset.json";
-import { url as pipaPrincesa } from "@/assets/pip-girl-princesas.png.asset.json";
-import { url as pipaUnicornio } from "@/assets/pip-girl-unicornio.png.asset.json";
-import { url as pipaDoutora } from "@/assets/pip-girl-doutora.png.asset.json";
-import { url as pipaAstronauta } from "@/assets/pip-girl-astronauta.png.asset.json";
-import { url as pipaBailarina } from "@/assets/pip-girl-bailarina.png.asset.json";
-import { url as pipaFada } from "@/assets/pip-girl-fada.png.asset.json";
-import { url as pipaSereia } from "@/assets/pip-girl-sereia.png.asset.json";
-import { url as pipaConfeiteira } from "@/assets/pip-girl-confeiteira.png.asset.json";
-import { url as pipaVeterinaria } from "@/assets/pip-girl-veterinaria.png.asset.json";
-import { url as pipaProfessora } from "@/assets/pip-girl-professora.png.asset.json";
-import { url as pipaArte } from "@/assets/pip-girl-arte.png.asset.json";
-import { url as pipaMusica } from "@/assets/pip-girl-musica.png.asset.json";
-import { url as pipaSuperHeroina } from "@/assets/pip-girl-super-heroina.png.asset.json";
+import { Lock, Check, Sparkles } from "lucide-react";
 import { useAppState } from "@/core/store";
 import { cn } from "@/utils/utils";
-import { PipEvolution } from "@/components/pip/PipEvolution";
 import { equipChildSkin, listChildUnlocks, purchaseMascotItem } from "@/lib/child-mascot";
 import { useMascot } from "@/contexts/MascotContext";
+import { FANTASIAS, precoFantasia, type Fantasia, type Mascote, type Tamanho } from "@/lib/guarda-roupa";
 
 export const Route = createFileRoute("/colecao-pip")({
-  component: ColecaoPipPage,
+  head: () => ({
+    meta: [
+      { title: "Guarda-Roupa do Pip e da Pipa · NeuroBrilha Kids" },
+      { name: "description", content: "Fantasias e acessórios do Pip e da Pipa nos tamanhos Baby, Grande e Teen." },
+      { property: "og:title", content: "Guarda-Roupa do Pip e da Pipa" },
+      { property: "og:description", content: "Jogue, ganhe BrilhoCoins e libere fantasias." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
+    ],
+  }),
+  component: GuardaRoupaPage,
 });
 
-const SKINS = [
-  {
-    key: "original",
-    name: "Pip Clássico",
-    title: "O Guardião dos Desafios",
-    image: pipMascot,
-    description: "A forma original do Pip, sempre pronto pra aventura.",
-  },
-  {
-    key: "dinossauros",
-    name: "Pip Explorador",
-    title: "Dinossauros",
-    image: PIP_SKINS.dinossauros,
-    description: "Vamos rugir e descobrir o mundo jurássico!",
-  },
-  {
-    key: "espaco",
-    name: "Pip Astronauta",
-    title: "Espaço",
-    image: PIP_SKINS.espaco,
-    description: "Pronto para decolar até as estrelas!",
-  },
-  {
-    key: "arte",
-    name: "Pip Artista",
-    title: "Arte",
-    image: PIP_SKINS.arte,
-    description: "Pincel na mão e muita cor pra criar.",
-  },
-  {
-    key: "animais",
-    name: "Pip Veterinário",
-    title: "Animais",
-    image: PIP_SKINS.animais,
-    description: "Cuidando dos amiguinhos com muito carinho.",
-  },
-  {
-    key: "musica",
-    name: "Pip Maestro",
-    title: "Música",
-    image: PIP_SKINS.musica,
-    description: "Vamos reger uma sinfonia de aprendizado!",
-  },
-  {
-    key: "fazendinha",
-    name: "Pip Fazendeiro",
-    title: "Fazendinha",
-    image: PIP_SKINS.fazendinha,
-    description: "Plantando aprendizado e colhendo conquistas.",
-  },
-  {
-    key: "super-herois",
-    name: "Pip Super",
-    title: "Super-Heróis",
-    image: PIP_SKINS["super-herois"],
-    description: "Salvando o dia com o poder do estudo!",
-  },
-  {
-    key: "princesas",
-    name: "Pip Realeza",
-    title: "Princesas",
-    image: PIP_SKINS.princesas,
-    description: "Coroado de gentileza e sabedoria.",
-  },
-  {
-    key: "minecraft",
-    name: "Pip Builder",
-    title: "Minecraft",
-    image: PIP_SKINS.minecraft,
-    description: "Construindo aventuras bloco a bloco.",
-  },
-  {
-    key: "carros",
-    name: "Pip Piloto",
-    title: "Carros",
-    image: PIP_SKINS.carros,
-    description: "Acelerando rumo a novas conquistas.",
-  },
-  {
-    key: "trens",
-    name: "Pip Maquinista",
-    title: "Trens",
-    image: PIP_SKINS.trens,
-    description: "Tchu-tchuuu! Bora pra próxima estação.",
-  },
-  {
-    key: "robos",
-    name: "Pip Robô",
-    title: "Robôs",
-    image: PIP_SKINS.robos,
-    description: "Tecnologia e curiosidade juntos.",
-  },
-  {
-    key: "veiculos",
-    name: "Pip Aventureiro",
-    title: "Veículos",
-    image: PIP_SKINS.veiculos,
-    description: "Mapa, binóculos e muita exploração.",
-  },
-  // Coleção Pipa (menina)
-  {
-    key: "pipa-original",
-    name: "Pipa Clássica",
-    title: "A Guardiã dos Sonhos",
-    image: pipaMascot,
-    description: "A forma original da Pipa, doce e cheia de coragem.",
-  },
-  {
-    key: "pipa-princesa",
-    name: "Pipa Princesa",
-    title: "Realeza",
-    image: pipaPrincesa,
-    description: "Coroada de gentileza, sabedoria e brilho próprio.",
-  },
-  {
-    key: "pipa-unicornio",
-    name: "Pipa Unicórnio",
-    title: "Mágica",
-    image: pipaUnicornio,
-    description: "Asas, chifre brilhante e muita magia.",
-  },
-  {
-    key: "pipa-doutora",
-    name: "Pipa Doutora",
-    title: "Saúde",
-    image: pipaDoutora,
-    description: "Cuidando de todos com carinho e ciência.",
-  },
-  {
-    key: "pipa-astronauta",
-    name: "Pipa Astronauta",
-    title: "Espaço",
-    image: pipaAstronauta,
-    description: "Pronta para explorar galáxias inteiras.",
-  },
-  {
-    key: "pipa-bailarina",
-    name: "Pipa Bailarina",
-    title: "Dança",
-    image: pipaBailarina,
-    description: "Cada passo é uma poesia em movimento.",
-  },
-  {
-    key: "pipa-fada",
-    name: "Pipa Fada",
-    title: "Encanto",
-    image: pipaFada,
-    description: "Espalhando pó mágico e desejos pelo caminho.",
-  },
-  {
-    key: "pipa-sereia",
-    name: "Pipa Sereia",
-    title: "Oceano",
-    image: pipaSereia,
-    description: "Mergulhando em aventuras submarinas.",
-  },
-  {
-    key: "pipa-confeiteira",
-    name: "Pipa Confeiteira",
-    title: "Doces",
-    image: pipaConfeiteira,
-    description: "Receitas cheias de afeto e criatividade.",
-  },
-  {
-    key: "pipa-veterinaria",
-    name: "Pipa Veterinária",
-    title: "Animais",
-    image: pipaVeterinaria,
-    description: "Amando e cuidando de todos os bichinhos.",
-  },
-  {
-    key: "pipa-professora",
-    name: "Pipa Professora",
-    title: "Educação",
-    image: pipaProfessora,
-    description: "Ensinando com paciência e muito carinho.",
-  },
-  {
-    key: "pipa-arte",
-    name: "Pipa Artista",
-    title: "Arte",
-    image: pipaArte,
-    description: "Pincel na mão, sonhos no papel.",
-  },
-  {
-    key: "pipa-musica",
-    name: "Pipa Musicista",
-    title: "Música",
-    image: pipaMusica,
-    description: "Cantando e dançando ao som do coração.",
-  },
-  {
-    key: "pipa-super-heroina",
-    name: "Pipa Super",
-    title: "Super-Heroína",
-    image: pipaSuperHeroina,
-    description: "Salvando o dia com coragem e gentileza.",
-  },
-  // Novos personagens integrados à coleção
+const GRATIS = new Set(["original", "pipa-original", "baby", "pipa-baby"]);
+const TAMANHOS: { id: Tamanho; label: string }[] = [
+  { id: "baby", label: "Baby" },
+  { id: "grande", label: "Grande" },
+  { id: "teen", label: "Teen" },
 ];
 
-const PIPA_HIGHLIGHTS = [
-  { name: "Pipa Clássica", image: pipaMascot },
-  { name: "Pipa Princesa", image: pipaPrincesa },
-  { name: "Pipa Unicórnio", image: pipaUnicornio },
-  { name: "Pipa Doutora", image: pipaDoutora },
-  { name: "Pipa Astronauta", image: pipaAstronauta },
-];
-
-function ColecaoPipPage() {
+function GuardaRoupaPage() {
   const { activeChild } = useAppState();
   const { childMascotProfile, refreshMascot } = useMascot();
   const queryClient = useQueryClient();
-  const [cloudUnlocks,setCloudUnlocks] = useState<string[]>([]);
-  const activeType = childMascotProfile?.active_mascot ?? "pip";
-  const starterKey = activeType === "pipa" ? "pipa-original" : "original";
-  const unlocked = useMemo(()=>new Set([starterKey,...cloudUnlocks]),[starterKey,cloudUnlocks]);
-  const visibleSkins = useMemo(()=>SKINS.filter((x)=>activeType === "pipa" ? x.key.startsWith("pipa-") : !x.key.startsWith("pipa-")),[activeType]);
-  const skinCost = (key:string) => key === starterKey ? 0 : 120 + (Math.abs(key.split("").reduce((a,c)=>a+c.charCodeAt(0),0)) % 5)*40;
+  const [cloudUnlocks, setCloudUnlocks] = useState<string[]>([]);
+  const [mascote, setMascote] = useState<Mascote>((childMascotProfile?.active_mascot as Mascote) ?? "pip");
+  const [tamanho, setTamanho] = useState<Tamanho>("grande");
+  const equipada = childMascotProfile?.equipped_skin;
+  const unlocked = useMemo(() => new Set([...GRATIS, ...cloudUnlocks]), [cloudUnlocks]);
+  const itens = FANTASIAS.filter((x) => x.mascote === mascote && x.tamanho === tamanho);
+  const atual = FANTASIAS.find((x) => x.key === equipada) ?? itens[0];
+  const [selecionada, setSelecionada] = useState<Fantasia | undefined>(undefined);
+  const vitrine = selecionada ?? atual;
 
-  const loadUnlocks = async () => { if (!activeChild?.id) return; setCloudUnlocks(await listChildUnlocks(activeChild.id,"skin")); };
-  useEffect(()=>{ loadUnlocks().catch(console.error); },[activeChild?.id]);
+  useEffect(() => {
+    if (childMascotProfile?.active_mascot) setMascote(childMascotProfile.active_mascot as Mascote);
+  }, [childMascotProfile?.active_mascot]);
 
-  const handleSkin = async (key:string) => {
-    if (!activeChild) return;
-    if (!unlocked.has(key)) {
-      const cost=skinCost(key);
+  const loadUnlocks = async () => {
+    if (!activeChild?.id) return;
+    setCloudUnlocks(await listChildUnlocks(activeChild.id, "skin"));
+  };
+  useEffect(() => { loadUnlocks().catch(console.error); }, [activeChild?.id]);
+
+  const custo = (k: string) => (GRATIS.has(k) ? 0 : precoFantasia(k, ""));
+
+  const vestir = async (item: Fantasia) => {
+    if (!activeChild) { toast.error("Escolha uma criança primeiro."); return; }
+    if (!unlocked.has(item.key)) {
       try {
-        const result:any=await purchaseMascotItem(activeChild.id,"skin",key,cost);
-        if (!result?.ok) { toast.error("BrilhoCoins insuficientes"); return; }
-        await queryClient.invalidateQueries({queryKey:["children"]});
+        const r: any = await purchaseMascotItem(activeChild.id, "skin", item.key, custo(item.key));
+        if (!r?.ok) { toast.error("Jogue mais um pouco para ganhar BrilhoCoins!"); return; }
+        await queryClient.invalidateQueries({ queryKey: ["children"] });
         await loadUnlocks();
-        toast.success("Nova fantasia desbloqueada! ✨");
-      } catch(e) { console.error(e); toast.error("Não foi possível desbloquear agora."); return; }
+        toast.success("Fantasia liberada! ✨");
+      } catch (e) { console.error(e); toast.error("Não foi possível liberar agora."); return; }
     }
-    await equipChildSkin(activeChild.id,key);
+    await equipChildSkin(activeChild.id, item.key);
     await refreshMascot();
-    toast.success("Visual equipado! Seu companheiro vai usar essa fantasia na jornada.");
+    toast.success(`${item.nome} vestido!`);
   };
 
   return (
     <Shell>
-      <div className="container mx-auto py-10 px-4">
-        <header className="text-center mb-12">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="inline-flex items-center gap-2 bg-sun/20 px-4 py-2 rounded-full text-primary font-black uppercase tracking-widest text-xs mb-4"
-          >
-            <Sparkles size={14} className="text-sun" />
-            Coleção NeuroBrilha Kids
-          </motion.div>
-          <motion.h1
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-6xl font-black text-primary mb-3"
-          >
-            Nossos Amiguinhos
-          </motion.h1>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Acompanhe seu companheiro desde o nascimento, desbloqueie fantasias e leve o visual escolhido para toda a jornada.
-          </p>
+      <div className="container mx-auto max-w-6xl px-4 py-8">
+        <header className="mb-6 text-center">
+          <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-sun/20 px-4 py-2 text-xs font-black uppercase tracking-widest text-primary">
+            <Sparkles size={14} className="text-sun" /> Guarda-Roupa
+          </div>
+          <h1 className="text-4xl font-black text-primary md:text-5xl">Vista seu amigo!</h1>
+          <p className="mt-2 text-muted-foreground">Jogue, ganhe BrilhoCoins e libere novas fantasias.</p>
+          <p className="mt-1 font-black text-primary">{activeChild?.coins ?? 0} BrilhoCoins ✨</p>
         </header>
 
-        <section className="mb-10 rounded-[2.5rem] border-4 border-pink/20 bg-pink/10 p-5 md:p-7 shadow-xl">
-          <div className="mb-5 flex flex-col gap-1 text-center">
-            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-primary/50">
-              Nova coleção menina
-            </span>
-            <h2 className="text-3xl font-black text-primary">Pipa e suas fantasias</h2>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-            {PIPA_HIGHLIGHTS.map((pipa) => (
-              <div
-                key={pipa.name}
-                className="rounded-[2rem] border-4 border-white bg-white/80 p-4 text-center shadow-md"
-              >
-                <div className="mx-auto mb-3 flex h-28 w-28 items-center justify-center rounded-full bg-pink/10">
-                  <img
-                    src={pipa.image}
-                    alt={pipa.name}
-                    className="h-full w-full object-contain drop-shadow-xl"
-                    loading="lazy"
-                  />
-                </div>
-                <h3 className="text-sm font-black text-primary">{pipa.name}</h3>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Evolução do mascote */}
-        <div className="mb-16">
-          <PipEvolution />
+        <div className="mb-4 flex justify-center gap-3">
+          {(["pip", "pipa"] as Mascote[]).map((m) => (
+            <button key={m} onClick={() => { setMascote(m); setSelecionada(undefined); }}
+              className={cn("rounded-2xl px-8 py-3 text-lg font-black transition-all",
+                mascote === m ? "bg-primary text-primary-foreground shadow-lg" : "bg-muted text-muted-foreground")}>
+              {m === "pip" ? "Pip" : "Pipa"}
+            </button>
+          ))}
+        </div>
+        <div className="mb-6 flex justify-center gap-2">
+          {TAMANHOS.map((t) => (
+            <button key={t.id} onClick={() => { setTamanho(t.id); setSelecionada(undefined); }}
+              className={cn("rounded-full border-2 px-5 py-2 text-sm font-black",
+                tamanho === t.id ? "border-sun bg-sun/20 text-primary" : "border-border text-muted-foreground")}>
+              {t.label}
+            </button>
+          ))}
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-          {visibleSkins.map((skin, i) => (
-            <motion.div
-              key={skin.key}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: i * 0.05 }}
-              className="relative group"
-            >
-              <div className="bg-white rounded-[2.5rem] p-6 shadow-xl border-4 border-primary/10 hover:border-primary/30 transition-all h-full flex flex-col items-center text-center">
-                <div className="relative w-40 h-40 mb-4 flex items-center justify-center bg-gradient-to-b from-primary/5 to-transparent rounded-full">
-                  <img
-                    src={skin.image}
-                    alt={skin.name}
-                    className="w-full h-full object-contain drop-shadow-2xl transition-transform group-hover:scale-110"
-                  />
-                  {childMascotProfile?.equipped_skin === skin.key ? (
-                    <div className="absolute -top-2 -right-2 bg-emerald-500 text-white p-2 rounded-full shadow-lg" title="Em uso">
-                      <Check size={16} strokeWidth={4} />
-                    </div>
-                  ) : !unlocked.has(skin.key) ? (
-                    <div className="absolute -top-2 -right-2 bg-slate-700 text-white p-2 rounded-full shadow-lg">
-                      <Lock size={16} strokeWidth={4} />
-                    </div>
-                  ) : null}
-                </div>
-
-                <span className="text-[10px] font-black text-primary/40 uppercase tracking-[0.2em] mb-1">
-                  {skin.title}
-                </span>
-                <h3 className="text-xl font-black text-primary mb-2">{skin.name}</h3>
-                <p className="text-xs text-muted-foreground leading-relaxed">{skin.description}</p>
-                <button
-                  onClick={() => handleSkin(skin.key)}
-                  className="mt-4 w-full rounded-2xl bg-primary px-4 py-2 text-sm font-black text-white disabled:opacity-50"
-                  disabled={childMascotProfile?.equipped_skin === skin.key}
-                >
-                  {childMascotProfile?.equipped_skin === skin.key ? "Em uso" : unlocked.has(skin.key) ? "Usar fantasia" : `Desbloquear · ${skinCost(skin.key)} ✨`}
-                </button>
+        <div className="grid gap-6 lg:grid-cols-[320px_1fr]">
+          {/* Espelho / provador */}
+          {vitrine && (
+            <div className="flex flex-col items-center rounded-[2rem] border-4 border-primary/10 bg-card p-5 shadow-xl lg:sticky lg:top-4 lg:self-start">
+              <motion.img key={vitrine.key} initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
+                src={vitrine.image} alt={vitrine.nome} className="h-56 w-56 object-contain drop-shadow-2xl" />
+              <h2 className="mt-3 text-2xl font-black text-primary">{vitrine.nome}</h2>
+              <p className="mt-3 text-xs font-black uppercase tracking-widest text-muted-foreground">Acessórios</p>
+              <div className="mt-2 flex flex-wrap justify-center gap-2">
+                {vitrine.acessorios.map((a) => (
+                  <span key={a} className="rounded-full bg-sun/20 px-3 py-1 text-sm font-bold text-primary">{a}</span>
+                ))}
               </div>
-            </motion.div>
-          ))}
+              <button onClick={() => vestir(vitrine)} disabled={equipada === vitrine.key}
+                className="mt-5 w-full rounded-2xl bg-primary px-4 py-3 font-black text-primary-foreground disabled:opacity-60">
+                {equipada === vitrine.key ? "Vestindo agora" : unlocked.has(vitrine.key) ? "Vestir" : `Liberar · ${custo(vitrine.key)} ✨`}
+              </button>
+            </div>
+          )}
+
+          {/* Armário com cabides */}
+          <div className="rounded-[2rem] border-8 border-amber-800/70 bg-amber-100/60 p-4 shadow-inner">
+            <div className="mx-2 mb-2 h-2 rounded-full bg-amber-900/60" />
+            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 xl:grid-cols-4">
+              {itens.map((item, i) => {
+                const livre = unlocked.has(item.key);
+                return (
+                  <motion.button key={item.key} initial={{ rotate: -4, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }}
+                    transition={{ delay: i * 0.04, type: "spring" }} onClick={() => setSelecionada(item)}
+                    className={cn("relative flex flex-col items-center origin-top", vitrine?.key === item.key && "scale-105")}>
+                    <svg viewBox="0 0 60 24" className="h-6 w-14 text-amber-900/70" aria-hidden>
+                      <path d="M30 2 q6 0 6 5 q0 4 -6 6 L4 22 h52 L30 13" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+                    </svg>
+                    <div className={cn("relative w-full rounded-3xl border-4 bg-card p-2 shadow-md",
+                      equipada === item.key ? "border-emerald-500" : vitrine?.key === item.key ? "border-sun" : "border-card")}>
+                      <img src={item.image} alt={item.nome} loading="lazy"
+                        className={cn("mx-auto h-28 w-28 object-contain", !livre && "opacity-40 grayscale")} />
+                      {equipada === item.key ? (
+                        <span className="absolute right-1 top-1 rounded-full bg-emerald-500 p-1 text-primary-foreground"><Check size={14} strokeWidth={4} /></span>
+                      ) : !livre ? (
+                        <span className="absolute right-1 top-1 rounded-full bg-foreground/70 p-1 text-background"><Lock size={14} strokeWidth={3} /></span>
+                      ) : null}
+                      <p className="mt-1 text-center text-xs font-black text-primary">{item.nome}</p>
+                    </div>
+                  </motion.button>
+                );
+              })}
+            </div>
+          </div>
         </div>
       </div>
     </Shell>
