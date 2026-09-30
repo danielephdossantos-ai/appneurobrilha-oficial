@@ -127,7 +127,7 @@ function AtividadesAdaptadas() {
                 <div key={chave} className="rounded-2xl border-2 border-teal-200 bg-white">
                   <button type="button" onClick={() => setAberta(open ? null : chave)} className="flex min-h-14 w-full items-center gap-3 p-4 text-left">
                     {open ? <FolderOpen className="text-teal-700" /> : <Folder className="text-teal-700" />}
-                    <span className="flex-1">{/^EF\d\d[A-Z]{2}\d\d$/.test(a.codigo) && <span className="block text-xs font-black text-teal-700">{a.codigo}</span>}<span className="font-black">{a.titulo}</span> <span className="text-sm text-muted-foreground">· {a.folhas.length} folhas</span></span>
+                    <span className="flex-1">{/^E[FI]\d\d[A-Z]{2}\d\d$/.test(a.codigo) && <span className="block text-xs font-black text-teal-700">{a.codigo}</span>}<span className="font-black">{a.titulo}</span> <span className="text-sm text-muted-foreground">· {a.folhas.length} folhas</span></span>
                     <ChevronDown className={`transition-transform ${open ? "rotate-180" : ""}`} />
                   </button>
                   {open && (
