@@ -89,7 +89,6 @@ export const FANTASIAS: Fantasia[] = [
   f("pip", "teen", "teen-roqueiro", "Pip Teen Roqueiro", pipTeenRoqueiro, ["Guitarra", "Jaqueta"]),
   f("pip", "teen", "teen-super-heroi", "Pip Teen Super-Herói", pipTeenSuperHeroi, ["Capa", "Máscara"]),
   f("pip", "teen", "teen-trator", "Pip Teen Fazendeiro", pipTeenTrator, ["Trator", "Chapéu"]),
-  f("pip", "teen", "teen-ursinho", "Pip Teen Ursinho", pipTeenUrsinho, ["Ursinho de pelúcia"]),
   // Pipa · Baby
   f("pipa", "baby", "pipa-baby", "Pipa Bebê", pipaBaby, ["Chupeta", "Roupinha de bebê"]),
   // Pipa · Grande
