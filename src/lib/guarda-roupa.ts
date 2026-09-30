@@ -24,7 +24,6 @@ import { url as pipTeenPrincipe } from "@/assets/pip-teen-principe.png.asset.jso
 import { url as pipTeenRoqueiro } from "@/assets/pip-teen-roqueiro.png.asset.json";
 import { url as pipTeenSuperHeroi } from "@/assets/pip-teen-super-heroi.png.asset.json";
 import { url as pipTeenTrator } from "@/assets/pip-teen-trator.png.asset.json";
-import { url as pipTeenUrsinho } from "@/assets/pip-teen-ursinho.png.asset.json";
 import { url as pipaMascot } from "@/assets/pip-girl-mascot.png.asset.json";
 import { url as pipaBaby } from "@/assets/pipa-baby.png.asset.json";
 import { url as pipaPrincesa } from "@/assets/pip-girl-princesas.png.asset.json";
@@ -89,7 +88,6 @@ export const FANTASIAS: Fantasia[] = [
   f("pip", "teen", "teen-roqueiro", "Pip Teen Roqueiro", pipTeenRoqueiro, ["Guitarra", "Jaqueta"]),
   f("pip", "teen", "teen-super-heroi", "Pip Teen Super-Herói", pipTeenSuperHeroi, ["Capa", "Máscara"]),
   f("pip", "teen", "teen-trator", "Pip Teen Fazendeiro", pipTeenTrator, ["Trator", "Chapéu"]),
-  f("pip", "teen", "teen-ursinho", "Pip Teen Ursinho", pipTeenUrsinho, ["Ursinho de pelúcia"]),
   // Pipa · Baby
   f("pipa", "baby", "pipa-baby", "Pipa Bebê", pipaBaby, ["Chupeta", "Roupinha de bebê"]),
   // Pipa · Grande
