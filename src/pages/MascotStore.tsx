@@ -8,6 +8,7 @@ import { supabase } from "@/database/supabase/client";
 import { useAppState } from "@/core/store";
 import { Link } from "@tanstack/react-router";
 import { PipEvolution } from "@/components/pip/PipEvolution";
+import { ColecaoMascotes } from "@/components/ColecaoMascotes";
 import { cn } from "@/utils/utils";
 import { useHiperfoco } from "@/context/HiperfocoContext";
 import { toast } from "sonner";
@@ -126,25 +127,7 @@ const MascotStore = () => {
                 <PipEvolution />
               </div>
 
-              <Link
-                to="/colecao-pip"
-                className="group flex flex-col gap-4 rounded-[2rem] border-4 border-sun/30 bg-gradient-to-br from-amber-50 via-white to-sky-50 p-6 shadow-lg transition-all hover:-translate-y-1 hover:border-sun hover:shadow-xl md:flex-row md:items-center md:justify-between"
-              >
-                <div className="flex items-center gap-4">
-                  <div className="rounded-2xl bg-sun/20 p-4 transition-transform group-hover:rotate-6 group-hover:scale-105">
-                    <Sparkles className="h-8 w-8 text-sun" />
-                  </div>
-                  <div>
-                    <h2 className="text-xl font-black uppercase text-primary">Trocar fantasia</h2>
-                    <p className="mt-1 text-sm font-medium text-muted-foreground">
-                      Desbloqueie novos visuais com BrilhoCoins e escolha a roupa do seu companheiro.
-                    </p>
-                  </div>
-                </div>
-                <span className="rounded-2xl bg-primary px-6 py-3 text-center text-sm font-black text-white shadow-md transition-colors group-hover:bg-primary/90">
-                  ABRIR GUARDA-ROUPA
-                </span>
-              </Link>
+              <ColecaoMascotes semCabecalho />
               
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                  {/* Aqui entrarão os outros mascotes mentor IA se existirem no futuro */}
