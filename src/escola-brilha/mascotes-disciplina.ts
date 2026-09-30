@@ -16,7 +16,7 @@ import { url as pipaDoutora } from "@/assets/pip-girl-doutora.png.asset.json";
 import { url as pipTeenPrincipe } from "@/assets/pip-teen-principe.png.asset.json";
 import { url as pipVeiculos } from "@/assets/pip-veiculos.png.asset.json";
 import { url as pipaArte } from "@/assets/pip-girl-arte.png.asset.json";
-import { url as pipTeenBola } from "@/assets/pip-teen-bola.png.asset.json";
+import { url as pipTeenBola } from "@/assets/pip-teen-bola-v2.png.asset.json";
 import { url as pipTeenCyber } from "@/assets/pip-teen-cyber.png.asset.json";
 import { url as pipaFada } from "@/assets/pip-girl-fada.png.asset.json";
 import { url as pipMascot } from "@/assets/pip-mascot.png.asset.json";
