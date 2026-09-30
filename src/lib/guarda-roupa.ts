@@ -24,7 +24,6 @@ import { url as pipTeenPrincipe } from "@/assets/pip-teen-principe.png.asset.jso
 import { url as pipTeenRoqueiro } from "@/assets/pip-teen-roqueiro.png.asset.json";
 import { url as pipTeenSuperHeroi } from "@/assets/pip-teen-super-heroi.png.asset.json";
 import { url as pipTeenTrator } from "@/assets/pip-teen-trator.png.asset.json";
-import { url as pipTeenUrsinho } from "@/assets/pip-teen-ursinho.png.asset.json";
 import { url as pipaMascot } from "@/assets/pip-girl-mascot.png.asset.json";
 import { url as pipaBaby } from "@/assets/pipa-baby.png.asset.json";
 import { url as pipaPrincesa } from "@/assets/pip-girl-princesas.png.asset.json";
