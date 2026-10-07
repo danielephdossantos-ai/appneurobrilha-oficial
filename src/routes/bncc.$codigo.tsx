@@ -43,7 +43,7 @@ export const Route = createFileRoute("/bncc/$codigo")({
   component: BnccCodigoPage,
   errorComponent: ({ error }) => (
     <div className="p-8 text-center" role="alert">
-      <p className="text-destructive">{error.message}</p>
+      <p className="text-destructive">{(error as Error).message}</p>
     </div>
   ),
   notFoundComponent: () => (

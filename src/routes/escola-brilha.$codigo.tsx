@@ -22,7 +22,7 @@ export const Route = createFileRoute("/escola-brilha/$codigo")({
   ),
   errorComponent: ({ error }) => (
     <div className="min-h-screen grid place-items-center p-8 text-center text-white bg-[#0d1f55]">
-      <div className="text-sm">{error.message}</div>
+      <div className="text-sm">{(error as Error).message}</div>
     </div>
   ),
 });
