@@ -112,7 +112,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
-  errorComponent: ErrorComponent,
+  errorComponent: createFileRoute("/").options.errorComponent ?? ErrorComponent,
 });
 
 function RootShell({ children }: { children: React.ReactNode }) {
