@@ -6,6 +6,7 @@ import aulas from "@/modules/professor/atividades-adaptadas.json";
 import aulas2ano from "@/modules/professor/atividades-adaptadas-2ano.json";
 import aulas2anoMat from "@/modules/professor/atividades-adaptadas-2ano-mat.json";
 import aulasInfantil from "@/modules/professor/atividades-adaptadas-infantil.json";
+import aulas1anoPortugues from "@/modules/professor/atividades-adaptadas-1ano.json";
 
 export const Route = createFileRoute("/area-professor/atividades-adaptadas")({
   component: AtividadesAdaptadas,
@@ -50,6 +51,7 @@ function AtividadesAdaptadas() {
   const filtrar = (l: typeof aulas2ano) => l.filter((a) => !q || norm(`${a.codigo} ${a.titulo} ${a.busca}`).includes(q));
   const anos = [
     { id: "infantil", nome: "Educação Infantil · Pré II", lista: filtrar(aulasInfantil as typeof aulas2ano) },
+    { id: "1ano-portugues", nome: "1º Ano · Língua Portuguesa", lista: filtrar(aulas1anoPortugues as typeof aulas2ano) },
     { id: "2ano", nome: "2º Ano · Língua Portuguesa", lista: filtrar(aulas2ano) },
     { id: "2ano-mat", nome: "2º Ano · Matemática", lista: filtrar(aulas2anoMat as typeof aulas2ano) },
   ];
